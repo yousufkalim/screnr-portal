@@ -1,15 +1,15 @@
 {
-  "name": "React-Js",
+  "name": "Screnr-Admin",
   "version": "0.1.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/falconitconsultant/React-JS.git"
+    "url": "git+https://github.com/falconitconsultant/screnr-admin.git"
   },
   "author": "Yousuf Kalim",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/falconitconsultant/React-JS/issues"
+    "url": "https://github.com/falconitconsultant/screnr-admin/issues"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
