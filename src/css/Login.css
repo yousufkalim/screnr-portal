@@ -1,0 +1,74 @@
+.mainLoginDiv {
+  height: 150px;
+}
+.logoHeading {
+  color: #fba622;
+  font-weight: 600 !important;
+  font-size: 32px;
+  padding: 0px 12px;
+}
+.logoDiv {
+  margin-left: 9%;
+}
+.loginPgImg {
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+}
+.loginForm {
+  background-color: white;
+  padding: 10% 6.2%;
+  width: 65%;
+  height: 100%;
+  border-radius: 20px;
+}
+.loginformSubHeading {
+  color: #919b9b;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+}
+.loginformHeading {
+  font-weight: 500;
+  font-size: 32px;
+  text-align: center;
+}
+.forgetPasswordTxt {
+  color: #136773;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+.logInBtn {
+  background-color: #fba622 !important;
+  width: 100% !important;
+  border-radius: 20px !important;
+  padding: 3% 0px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+}
+@media only screen and (min-width: 992px) and (max-width: 1919px) {
+  .mainLoginDiv {
+    height: 90px;
+  }
+  .loginPgImg {
+    width: 40%;
+  }
+  .loginPglogo {
+    width: 50%;
+  }
+  .logoHeading {
+    font-size: 22px;
+  }
+  .loginForm {
+    width: 76%;
+    /* padding:10% 6.2%; */
+  }
+  .loginformSubHeading {
+    font-size: 16px;
+  }
+}
