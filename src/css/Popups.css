@@ -1,0 +1,27 @@
+.resetPasswordBtn {
+  background-color: #fba622 !important;
+  width: 100% !important;
+  border-radius: 20px !important;
+  padding: 2% 0px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+}
+.enterEmailTxt {
+  color: #919b9b;
+  font-size: 14px;
+  font-weight: 500;
+}
+.loginClearIcon {
+  position: absolute;
+  right: 72px;
+  top: 50px;
+  cursor: pointer;
+  color: #919b9b;
+}
+.resetPasswordBtn:hover,
+.logInBtn:hover {
+  background-color: #faa017 !important;
+  box-shadow: 0 2px 20px -5px rgb(190, 124, 37) !important;
+}
