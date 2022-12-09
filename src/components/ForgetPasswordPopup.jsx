@@ -87,7 +87,7 @@ export default function ForgetPasswordPopup({ open, setOpen }) {
             >
               Forgot Password
             </h1>
-            <p className="enterEmailTxt">Enter your email so we can send you reset instructions</p>
+            <p className="enterEmailTxt">Enter your email so we can send you a verification code</p>
 
             <FormControl sx={{ mb: 1, mt: 3, width: '85%' }} variant="outlined">
               <TextField
