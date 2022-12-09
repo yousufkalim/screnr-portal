@@ -4,6 +4,7 @@
 /* Importing all CSS files */
 @import url('./Header.css');
 @import url('./Login.css');
+@import url('./Popups.css');
 /* Defaults */
 * {
   padding: 0;

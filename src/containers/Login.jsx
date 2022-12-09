@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-computed-key */
+import { useState } from 'react';
 import { Grid, IconButton, InputLabel } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
@@ -8,8 +10,9 @@ import Button from '@mui/material/Button';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Logo from '../assets/Logo.svg';
 import Vector from '../assets/loginPgImg.svg';
+import ForgetPasswordPopup from '../components/ForgetPasswordPopup';
 
-const useOutlinedInputStyles = makeStyles(() => ({
+const useOutlinedInputStyles = makeStyles({
   root: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -18,26 +21,23 @@ const useOutlinedInputStyles = makeStyles(() => ({
         fontSize: 16,
         width: '100%',
         height: '100%',
+        ['@media (max-width: 1900px)']: {
+          height: 50,
+        },
       },
       '&:hover fieldset': {
         borderColor: '#FBA622',
       },
-      '&::placeholder fieldset': {
-        fontWeight: 500,
-      },
-      input: {
-        '&::placeholder': {
-          color: 'red',
-        },
-      },
+
       '&.Mui-focused fieldset': {
         borderColor: '#FBA622',
       },
     },
   },
-}));
+});
 export default function Login() {
   const outlinedInputStyles = useOutlinedInputStyles();
+  const [open, setOpen] = useState(false);
 
   return (
     <div style={{ background: '#F6FAFB', height: '100vh' }}>
@@ -68,8 +68,11 @@ export default function Login() {
                     input: {
                       color: '#1b1b1b',
                       fontSize: '16px',
+                      marginLeft: '15px',
                       fontWeight: '500',
-                      fontFamily: 'Poppins, sans-serif',
+                      ['@media (max-width: 1900px)']: {
+                        padding: '13px',
+                      },
                     },
                   }}
                   id="outlined-email"
@@ -97,7 +100,11 @@ export default function Login() {
                       color: '#1b1b1b',
                       fontSize: '16px',
                       fontWeight: '500',
+                      marginLeft: '15px',
                       fontFamily: 'Poppins, sans-serif',
+                      ['@media (max-width: 1900px)']: {
+                        padding: '13px',
+                      },
                     },
                   }}
                   id="outlined-password"
@@ -135,8 +142,7 @@ export default function Login() {
                 >
                   <p
                     className="forgetPasswordTxt"
-                    // onClick={() => setOpen(true)}
-                    // onKeyDown={() => setOpen(true)}
+                    onClick={() => setOpen(true)}
                     role="presentation"
                     aria-hidden
                   >
@@ -152,6 +158,7 @@ export default function Login() {
                 Login
               </Button>
             </Grid>
+            {open && <ForgetPasswordPopup open={open} setOpen={setOpen} />}
           </div>
         </Grid>
       </Grid>
