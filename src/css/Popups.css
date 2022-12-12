@@ -39,3 +39,35 @@
   width: 100%;
   outline: none;
 }
+
+.closeBtn {
+  border: 2px solid #136773 !important;
+  color: #136773 !important;
+  font-size: 16px !important;
+  border-radius: 14px !important;
+  text-transform: none !important;
+  padding: 6px 30px !important;
+  cursor: pointer !important;
+  margin: 10px !important;
+  font-weight: 600 !important;
+}
+.delBtn {
+  background-color: #ff5151 !important;
+  color: white !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  border-radius: 14px !important;
+  text-transform: none !important;
+  padding: 8px 40px !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+}
+
+.closeBtn:hover {
+  background-color: #136773 !important;
+  color: white !important;
+}
+.delBtn:hover {
+  background-color: rgb(222, 0, 0) !important;
+}
