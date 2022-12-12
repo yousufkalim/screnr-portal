@@ -8,8 +8,8 @@ import { makeStyles } from '@mui/styles';
 // import Visibility from '@mui/icons-material/Visibility';
 import Button from '@mui/material/Button';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Logo from '../assets/Logo.svg';
-import Vector from '../assets/loginPgImg.svg';
+import Logo from '../assets/icons/Logo.svg';
+import Vector from '../assets/images/loginPgImg.svg';
 import ForgetPasswordPopup from '../components/ForgetPasswordPopup';
 
 const useOutlinedInputStyles = makeStyles({
