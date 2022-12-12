@@ -3,7 +3,10 @@
 
 /* Importing all CSS files */
 @import url('./Header.css');
+@import url('./cardsWithIcons.css');
 @import url('./Login.css');
+/* pages */
+@import url('./Pages/Dashboard.css');
 /* Defaults */
 * {
   padding: 0;
@@ -16,3 +19,27 @@
 :root {
   --primary: 'green';
 }
+
+/* DEFAULT MEDIA QUERIES (copy from here)
+@media only screen and (max-width: 1600px) {
+} 
+
+@media only screen and (max-width: 1440px) {
+}
+
+@media only screen and (max-width: 1366px) {
+}
+
+@media only screen and (max-width: 992px) {
+}
+
+@media only screen and (max-width: 768px) {
+}
+
+@media only screen and (max-width: 600px) {
+}
+
+@media only screen and (max-width: 480px) {
+}
+
+*/
