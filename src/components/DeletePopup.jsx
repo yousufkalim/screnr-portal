@@ -12,10 +12,7 @@ import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
 
 // assets import
-// import api from '../api/index';
 import delConfirm from '../assets/images/deletePopup/delConfirm.svg';
-
-// eslint-disable-next-line object-curly-newline
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -33,17 +30,11 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function DeleteModal({
-  open,
-  setOpen,
-  //  item, getData, txt, selectedDate
-}) {
+export default function DeleteModal({ openDeletePopup, setOpenDeletePopup }) {
   const handleClose = () => {
-    setOpen(false);
+    setOpenDeletePopup(false);
   };
   const handleDelete = async () => {
-    // await api('delete', `/${txt}/${item._id}`);
-    // getData();
     toast.success('Deleted successfully');
     handleClose();
   };
@@ -53,8 +44,8 @@ export default function DeleteModal({
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={open}
-        setOpen={setOpen}
+        open={openDeletePopup}
+        setOpen={setOpenDeletePopup}
         width="30.7%"
         minWidth="400px"
         PaperProps={{

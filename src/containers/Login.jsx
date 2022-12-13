@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-computed-key */
 import { useState } from 'react';
 
 // mui imports
@@ -12,7 +11,7 @@ import Button from '@mui/material/Button';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 // assets import
-import Logo from '../assets/icons/Logo.svg';
+import Logo from '../assets/icons/logo.svg';
 import Vector from '../assets/images/login/loginPgImg.svg';
 
 // child component import
@@ -27,7 +26,7 @@ const useOutlinedInputStyles = makeStyles({
         fontSize: 16,
         width: '100%',
         height: '100%',
-        ['@media (max-width: 1900px)']: {
+        '@media (max-width: 1900px)': {
           height: 50,
         },
       },
@@ -42,8 +41,8 @@ const useOutlinedInputStyles = makeStyles({
   },
 });
 export default function Login() {
+  const [openForgetPasswordPopup, setOpenForgetPasswordPopup] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
-  const [open, setOpen] = useState(false);
 
   return (
     <div style={{ background: '#F6FAFB', height: '100vh' }}>
@@ -78,7 +77,7 @@ export default function Login() {
                       fontSize: '16px',
                       marginLeft: '15px',
                       fontWeight: '500',
-                      ['@media (max-width: 1900px)']: {
+                      '@media (max-width: 1900px)': {
                         padding: '13px',
                       },
                     },
@@ -88,9 +87,6 @@ export default function Login() {
                   placeholder="Enter Email"
                   size="normal"
                   name="email"
-
-                  // value={user.email}
-                  // onChange={handleChange}
                 />
               </FormControl>
             </Grid>
@@ -112,7 +108,7 @@ export default function Login() {
                       fontWeight: '500',
                       marginLeft: '15px',
                       fontFamily: 'Poppins, sans-serif',
-                      ['@media (max-width: 1900px)']: {
+                      '@media (max-width: 1900px)': {
                         padding: '13px',
                       },
                     },
@@ -122,23 +118,15 @@ export default function Login() {
                   placeholder="Enter password"
                   size="normal"
                   name="password"
-                  //   value={user.password}
-                  //   type={showPassword ? 'text' : 'password'}
-                  //   onChange={handleChange}
                   InputProps={{
                     endAdornment: (
-                      // eslint-disable-next-line react/jsx-wrap-multilines
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          //   onClick={handleClickShowPassword}
-                          //   onMouseDown={() => setShowPassword(true)}
                           edge="end"
                           sx={{ color: '#FBA622', mr: 1 }}
                         >
-                          {/* {showPassword ? ( */}
                           <VisibilityOff />
-                          {/* : <Visibility /> */}
                         </IconButton>
                       </InputAdornment>
                     ),
@@ -152,7 +140,7 @@ export default function Login() {
                 >
                   <p
                     className="forgetPasswordTxt"
-                    onClick={() => setOpen(true)}
+                    onClick={() => setOpenForgetPasswordPopup(true)}
                     role="presentation"
                     aria-hidden
                   >
@@ -160,15 +148,16 @@ export default function Login() {
                   </p>
                 </div>
               </FormControl>
-              <Button
-                className="logInBtn"
-                variant="contained"
-                // onClick={handleSubmit}
-              >
+              <Button className="logInBtn" variant="contained">
                 Login
               </Button>
             </Grid>
-            {open && <ForgetPasswordPopup open={open} setOpen={setOpen} />}
+            {openForgetPasswordPopup && (
+              <ForgetPasswordPopup
+                openForgetPasswordPopup={openForgetPasswordPopup}
+                setOpenForgetPasswordPopup={setOpenForgetPasswordPopup}
+              />
+            )}
           </div>
         </Grid>
       </Grid>

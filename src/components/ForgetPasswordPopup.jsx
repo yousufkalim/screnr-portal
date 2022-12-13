@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-computed-key */
-/* eslint-disable consistent-return */
 import { React, useState } from 'react';
 
 // mui imports
@@ -52,14 +50,18 @@ const useOutlinedInputStyles = makeStyles({
   },
 });
 
-export default function ForgetPasswordPopup({ open, setOpen }) {
+export default function ForgetPasswordPopup({
+  openForgetPasswordPopup,
+  setOpenForgetPasswordPopup,
+}) {
   const [email, setEmail] = useState('');
   const outlinedInputStyles = useOutlinedInputStyles();
+
   const handleInput = (e) => {
     setEmail(e.target.value);
   };
   const handleClose = () => {
-    setOpen(false);
+    setOpenForgetPasswordPopup(false);
   };
 
   const handleForgetPassword = () => {
@@ -72,8 +74,8 @@ export default function ForgetPasswordPopup({ open, setOpen }) {
       <CustomMuiDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={open}
-        setOpen={setOpen}
+        open={openForgetPasswordPopup}
+        setOpen={setOpenForgetPasswordPopup}
         fullWidth
         width="35%"
         minWidth="300px"
@@ -120,7 +122,7 @@ export default function ForgetPasswordPopup({ open, setOpen }) {
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleForgetPassword} className="resetPasswordBtn" variant="contained">
-            {window.innerWidth < 768 ? 'Reset' : ' Send Reset Instructions'}
+            Send Reset Instructions
           </Button>
         </DialogActions>
       </CustomMuiDialog>

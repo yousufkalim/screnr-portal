@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { React, useState } from 'react';
 
 // mui imports
@@ -15,9 +13,6 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
 
-// react-avatar import
-import Avatar from 'react-avatar';
-
 // react-toastify import
 import { toast } from 'react-toastify';
 
@@ -26,10 +21,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
-import arrow from '../assets/icons/RightArrow.svg';
-import edit from '../assets/icons/edit.svg';
-import profiles from '../assets/icons/Profiles.svg';
-// import api from '../api/index';
+import arrow from '../assets/icons/rightArrow.svg';
+import profiles from '../assets/icons/profiles.svg';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -68,28 +61,18 @@ const useOutlinedInputStyles = makeStyles({
     },
   },
 });
-export default function AddStaffMember({ open, setOpen }) {
-  const [editing, setEditing] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
+export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMember }) {
+  const [setChecked] = useState(true);
+  const outlinedInputStyles = useOutlinedInputStyles();
 
-  //   const onChangeEvent = (e) => {
-  //     setValues({
-  //       ...values,
-  //       [e.target.name]: e.target.value,
-  //     });
-  //   };
-  //   const handleSelectedFile = async (e) => {
-  //     const myFile = e.target.files[0];
-  //   };
+  const handleClose = () => {
+    setOpenAddStaffMember(false);
+  };
 
   const handleSubmit = async () => {
     toast.success('Profile edited successfully');
     handleClose();
   };
-  const outlinedInputStyles = useOutlinedInputStyles();
-  const [checked, setChecked] = useState(true);
 
   const handleCheck = (event) => {
     setChecked(event.target.checked);
@@ -100,8 +83,8 @@ export default function AddStaffMember({ open, setOpen }) {
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={open}
-        setOpen={setOpen}
+        open={openAddStaffMember}
+        setOpen={setOpenAddStaffMember}
         fullWidth
         width="40.8%"
         minWidth="90%"
@@ -113,7 +96,7 @@ export default function AddStaffMember({ open, setOpen }) {
         <DialogContent>
           <Typography gutterBottom>
             <h1 style={{ fontSize: '22px', fontWeight: '600', color: '#FBA622', lineHeight: 2 }}>
-              {editing ? 'Edit Staff Member' : ' Add Staff Member'}
+              Add Staff Member
             </h1>
             <p className="enterEmailTxt" style={{ fontWeight: '400', marginBottom: '40px' }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -126,63 +109,23 @@ export default function AddStaffMember({ open, setOpen }) {
                   margin: 'auto',
                 }}
               >
-                {editing ? (
-                  <>
-                    <Avatar
-                      name="Arooj Ishfaq"
-                      color="#919B9B"
-                      style={{
-                        width: 'fit-content',
-                        height: 'fit-content',
-                        borderRadius: '50%',
-                      }}
-                      round
-                      size="140"
-                      alt="profile_pic"
-                    />
-                    <label>
-                      <input
-                        style={{
-                          display: 'none',
-                        }}
-                        name="profile_pic"
-                        type="file"
-                        accept="image/*"
-                        //   onChange={handleSelectedFile}
-                      />
-
-                      <img
-                        src={edit}
-                        style={{
-                          position: 'relative',
-                          top: '43%',
-                          right: '20%',
-                          cursor: 'pointer',
-                        }}
-                        alt=""
-                      />
-                    </label>
-                  </>
-                ) : (
-                  <label>
-                    <input
-                      style={{
-                        display: 'none',
-                      }}
-                      name="profile_pic"
-                      type="file"
-                      accept="image/*"
-                      //   onChange={handleSelectedFile}
-                    />{' '}
-                    <img
-                      src={profiles}
-                      style={{
-                        cursor: 'pointer',
-                      }}
-                      alt=""
-                    />
-                  </label>
-                )}
+                <label htmlFor="profilePic">
+                  <input
+                    style={{
+                      display: 'none',
+                    }}
+                    name="profile_pic"
+                    type="file"
+                    accept="image/*"
+                  />{' '}
+                  <img
+                    src={profiles}
+                    style={{
+                      cursor: 'pointer',
+                    }}
+                    alt=""
+                  />
+                </label>
               </div>
             </div>
             <FormControl sx={{ mb: 1, mt: 3, width: '48%', mr: 2 }} variant="outlined">
@@ -200,8 +143,6 @@ export default function AddStaffMember({ open, setOpen }) {
                 placeholder="First Name"
                 size="normal"
                 name="first_name"
-                // value={name}
-                // onChange={onChangeEvent}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 3, width: '48%' }} variant="outlined">
@@ -219,9 +160,6 @@ export default function AddStaffMember({ open, setOpen }) {
                 placeholder="Last Name"
                 size="normal"
                 name="last_name"
-                // value={name}
-
-                // onChange={onChangeEvent}
               />
             </FormControl>
             <FormControl sx={{ mb: 2, mt: 1, width: '48%', mr: 2 }} variant="outlined">
@@ -239,9 +177,6 @@ export default function AddStaffMember({ open, setOpen }) {
                 placeholder="Email"
                 size="normal"
                 type="email"
-                // value={email}
-                name="email"
-                // onChange={onChangeEvent}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 1, width: '48%' }} variant="outlined">
@@ -262,9 +197,6 @@ export default function AddStaffMember({ open, setOpen }) {
                 inputProps={{
                   maxLength: 10,
                 }}
-                // value={phone_number}
-                // name="phone_number"
-                // onChange={onChangeEvent}
               />
             </FormControl>
             <FormControl
@@ -303,11 +235,8 @@ export default function AddStaffMember({ open, setOpen }) {
                   dateFormat="dd/MMMM/yyyy"
                   name="date"
                   placeholderText="DD/MM/YYYY"
-                  // value={date}
-                  // selected={date}
                   popperPlacement="bottom-start"
                   showYearDropdown
-                  // onChange={dateChange}
                 />
               </div>
             </FormControl>
@@ -315,13 +244,7 @@ export default function AddStaffMember({ open, setOpen }) {
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            {editing ? (
-              ' Save Changes'
-            ) : (
-              <>
-                <p>Send Invite &nbsp;</p> <img src={arrow} style={{ width: '20px' }} alt="" />
-              </>
-            )}
+            <p>Send Invite &nbsp;</p> <img src={arrow} style={{ width: '20px' }} alt="" />
           </Button>
         </DialogActions>
       </BootstrapDialog>
