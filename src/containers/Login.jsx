@@ -1,5 +1,7 @@
 /* eslint-disable no-useless-computed-key */
 import { useState } from 'react';
+
+// mui imports
 import { Grid, IconButton, InputLabel } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
@@ -8,15 +10,19 @@ import { makeStyles } from '@mui/styles';
 // import Visibility from '@mui/icons-material/Visibility';
 import Button from '@mui/material/Button';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+// assets import
 import Logo from '../assets/icons/Logo.svg';
-import Vector from '../assets/images/loginPgImg.svg';
+import Vector from '../assets/images/login/loginPgImg.svg';
+
+// child component import
 import ForgetPasswordPopup from '../components/ForgetPasswordPopup';
 
 const useOutlinedInputStyles = makeStyles({
   root: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        border: '2px solid black ',
+        border: '2px solid #454238 ',
         borderRadius: '20px',
         fontSize: 16,
         width: '100%',
@@ -57,7 +63,9 @@ export default function Login() {
               Lorem ipsum dolor sit amet, consectetur adipiscing
             </p>
             <Grid item xs={12}>
-              <InputLabel sx={{ mt: 4, mb: 1.3, fontWeight: '600', fontSize: '14px' }}>
+              <InputLabel
+                sx={{ mt: 4, mb: 1.3, fontWeight: '600', fontSize: '14px', color: '#454238' }}
+              >
                 Email
               </InputLabel>
               <FormControl sx={{ mb: 2.5, width: '100%' }} variant="outlined">
@@ -87,7 +95,9 @@ export default function Login() {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <InputLabel sx={{ mt: 1, mb: 1.3, fontWeight: '600', fontSize: '14px' }}>
+              <InputLabel
+                sx={{ mt: 1, mb: 1.3, fontWeight: '600', fontSize: '14px', color: '#454238' }}
+              >
                 Password
               </InputLabel>
               <FormControl sx={{ mb: 5, width: '100%' }} variant="outlined">
@@ -124,7 +134,7 @@ export default function Login() {
                           //   onClick={handleClickShowPassword}
                           //   onMouseDown={() => setShowPassword(true)}
                           edge="end"
-                          sx={{ color: '#FBA622' }}
+                          sx={{ color: '#FBA622', mr: 1 }}
                         >
                           {/* {showPassword ? ( */}
                           <VisibilityOff />
