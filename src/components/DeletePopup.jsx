@@ -1,13 +1,19 @@
 import * as React from 'react';
+
+// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
+
+// react-toastify import
 import { toast } from 'react-toastify';
+
+// assets import
 // import api from '../api/index';
-import delConfirm from '../assets/images/delConfirm.svg';
+import delConfirm from '../assets/images/deletePopup/delConfirm.svg';
 
 // eslint-disable-next-line object-curly-newline
 
@@ -49,6 +55,8 @@ export default function DeleteModal({
         aria-labelledby="customized-dialog-title"
         open={open}
         setOpen={setOpen}
+        width="30.7%"
+        minWidth="400px"
         PaperProps={{
           style: {
             borderRadius: 25,
