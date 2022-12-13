@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { React, useState } from 'react';
+
+// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -8,14 +10,22 @@ import { makeStyles } from '@mui/styles';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
-import { toast } from 'react-toastify';
 import { FormControl, TextField } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Avatar from 'react-avatar';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
+
+// react-avatar import
+import Avatar from 'react-avatar';
+
+// react-toastify import
+import { toast } from 'react-toastify';
+
+// react-datepicker import
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
+// assets import
 import arrow from '../assets/icons/RightArrow.svg';
 import edit from '../assets/icons/edit.svg';
 import profiles from '../assets/icons/Profiles.svg';
@@ -31,8 +41,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     textAlign: 'center',
   },
   '& .MuiDialogActions-root': {
-    paddingLeft: theme.spacing(6.9),
-    paddingRight: theme.spacing(6.9),
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
     paddingBottom: theme.spacing(7),
     margin: 'auto',
   },
@@ -47,13 +57,13 @@ const useOutlinedInputStyles = makeStyles({
         height: 55,
       },
       '&:hover fieldset': {
-        borderColor: 'black',
+        borderColor: '#454238',
       },
       '&::placeholder fieldset': {
         fontWeight: 800,
       },
       '&.Mui-focused fieldset': {
-        borderColor: 'black',
+        borderColor: '#454238',
       },
     },
   },
@@ -93,7 +103,8 @@ export default function AddStaffMember({ open, setOpen }) {
         open={open}
         setOpen={setOpen}
         fullWidth
-        maxWidth="md"
+        width="40.8%"
+        minWidth="90%"
         PaperProps={{
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
@@ -174,7 +185,7 @@ export default function AddStaffMember({ open, setOpen }) {
                 )}
               </div>
             </div>
-            <FormControl sx={{ mb: 1, mt: 3, width: '45%', mr: 5 }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 3, width: '48%', mr: 2 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -193,7 +204,7 @@ export default function AddStaffMember({ open, setOpen }) {
                 // onChange={onChangeEvent}
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, mt: 3, width: '45%' }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 3, width: '48%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -213,7 +224,7 @@ export default function AddStaffMember({ open, setOpen }) {
                 // onChange={onChangeEvent}
               />
             </FormControl>
-            <FormControl sx={{ mb: 2, mt: 1, width: '45%', mr: 5 }} variant="outlined">
+            <FormControl sx={{ mb: 2, mt: 1, width: '48%', mr: 2 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -233,7 +244,7 @@ export default function AddStaffMember({ open, setOpen }) {
                 // onChange={onChangeEvent}
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, mt: 1, width: '45%' }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 1, width: '48%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -260,7 +271,7 @@ export default function AddStaffMember({ open, setOpen }) {
               sx={{
                 textAlign: 'left',
                 width: '100%',
-                ml: 3,
+                ml: 0.6,
               }}
             >
               <FormControlLabel
@@ -283,7 +294,7 @@ export default function AddStaffMember({ open, setOpen }) {
               sx={{
                 textAlign: 'left',
                 width: '100%',
-                ml: 3,
+                ml: 0.6,
               }}
             >
               <div className="date-div">
