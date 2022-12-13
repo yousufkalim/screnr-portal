@@ -43,19 +43,19 @@ const useOutlinedInputStyles = makeStyles({
   root: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        border: '1px solid #E1E1E1 ',
+        border: '1px solid #454238',
         borderRadius: '20px',
         fontSize: 16,
         height: 55,
       },
       '&:hover fieldset': {
-        borderColor: '#454238',
+        borderColor: '#FBA622',
       },
       '&::placeholder fieldset': {
         fontWeight: 800,
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#454238',
+        borderColor: '#FBA622',
       },
     },
   },
@@ -116,6 +116,7 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                     }}
                     name="profile_pic"
                     type="file"
+                    id="profilePic"
                     accept="image/*"
                   />
 
@@ -132,7 +133,7 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                 </label>
               </div>
             </div>
-            <FormControl sx={{ mb: 1, mt: 3, width: '48%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%', mr: 2 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -149,7 +150,7 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                 name="first_name"
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, mt: 3, width: '48%' }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -166,7 +167,7 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                 name="last_name"
               />
             </FormControl>
-            <FormControl sx={{ mb: 2, mt: 1, width: '48%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -183,7 +184,7 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                 type="email"
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, mt: 1, width: '48%' }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -207,7 +208,6 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
               sx={{
                 textAlign: 'left',
                 width: '100%',
-                ml: 0.6,
               }}
             >
               <FormControlLabel
@@ -230,7 +230,6 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
               sx={{
                 textAlign: 'left',
                 width: '100%',
-                ml: 0.6,
               }}
             >
               <div className="date-div">
@@ -238,7 +237,7 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                   showPopperArrow
                   dateFormat="dd/MMMM/yyyy"
                   name="date"
-                  placeholderText="DD/MM/YYYY"
+                  placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
                 />
