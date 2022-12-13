@@ -21,7 +21,7 @@ const useOutlinedInputStyles = makeStyles({
   root: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        border: '2px solid #454238 ',
+        border: '2px solid #454238',
         borderRadius: '20px',
         fontSize: 16,
         width: '100%',

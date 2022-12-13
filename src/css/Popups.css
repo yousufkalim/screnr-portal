@@ -33,9 +33,13 @@
   border: 1px solid #e1e1e1 !important;
   background-color: white;
   border-radius: 14px;
-  margin-top: 20px;
+  margin-top: 9px;
   padding: 2%;
-  width: 99%;
+  width: 100%;
+}
+
+.date-div {
+  height: 20%;
 }
 
 .react-datepicker-wrapper .react-datepicker__input-container input {
@@ -77,4 +81,33 @@
 
 .delBtn:hover {
   background-color: rgb(222, 0, 0) !important;
+}
+
+.genderBtn {
+  border: 1px solid #e1e1e1 !important;
+  background-color: white !important;
+  color: #919b9b !important;
+  font-size: 14px !important;
+  border-radius: 14px !important;
+  text-transform: none !important;
+  padding: 12px 36px !important;
+  cursor: pointer !important;
+  margin-right: 15px !important;
+  margin-bottom: 15px !important;
+  box-shadow: none !important;
+  font-weight: 500 !important;
+}
+
+.genderBtn:hover {
+  border: 1px solid #136773 !important;
+  background-color: #136773 !important;
+  color: white !important;
+}
+
+.genderTxt {
+  color: #8c8c8c;
+  font-family: 'Helvetica Neue';
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
 }
