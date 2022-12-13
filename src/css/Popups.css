@@ -2,7 +2,7 @@
   background-color: #fba622 !important;
   width: 100% !important;
   border-radius: 20px !important;
-  padding: 1.8% 0px !important;
+  padding: 2.2% 0px !important;
   box-shadow: none !important;
   font-weight: 600 !important;
   font-size: 16px !important;
@@ -15,8 +15,8 @@
 }
 .loginClearIcon {
   position: absolute;
-  right: 72px;
-  top: 50px;
+  right: 30px;
+  top: 30px;
   cursor: pointer;
   color: #919b9b;
 }
@@ -28,10 +28,10 @@
 .date-div .react-datepicker-wrapper {
   border: 1px solid #e1e1e1 !important;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 14px;
   margin-top: 20px;
-  padding: 1.5%;
-  width: 95%;
+  padding: 2%;
+  width: 99%;
 }
 .react-datepicker-wrapper .react-datepicker__input-container input {
   border: none;
