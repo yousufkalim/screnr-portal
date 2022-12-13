@@ -70,7 +70,7 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
   };
 
   const handleSubmit = async () => {
-    toast.success('Profile edited successfully');
+    toast.success('Profile added successfully');
     handleClose();
   };
 
@@ -116,6 +116,7 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                     }}
                     name="profile_pic"
                     type="file"
+                    id="profilePic"
                     accept="image/*"
                   />{' '}
                   <img
@@ -128,7 +129,7 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                 </label>
               </div>
             </div>
-            <FormControl sx={{ mb: 1, mt: 3, width: '48%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%', mr: 2 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -145,7 +146,7 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                 name="first_name"
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, mt: 3, width: '48%' }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -162,7 +163,7 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                 name="last_name"
               />
             </FormControl>
-            <FormControl sx={{ mb: 2, mt: 1, width: '48%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -179,7 +180,7 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                 type="email"
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, mt: 1, width: '48%' }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -203,7 +204,6 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
               sx={{
                 textAlign: 'left',
                 width: '100%',
-                ml: 0.6,
               }}
             >
               <FormControlLabel
@@ -226,7 +226,6 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
               sx={{
                 textAlign: 'left',
                 width: '100%',
-                ml: 0.6,
               }}
             >
               <div className="date-div">
@@ -234,7 +233,7 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                   showPopperArrow
                   dateFormat="dd/MMMM/yyyy"
                   name="date"
-                  placeholderText="DD/MM/YYYY"
+                  placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
                 />
