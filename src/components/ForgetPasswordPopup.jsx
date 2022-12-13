@@ -1,6 +1,8 @@
 /* eslint-disable no-useless-computed-key */
 /* eslint-disable consistent-return */
 import { React, useState } from 'react';
+
+// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -9,21 +11,24 @@ import ClearIcon from '@mui/icons-material/Clear';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
-import { toast } from 'react-toastify';
 import { FormControl, TextField } from '@mui/material';
+
+// react-toastify import
+import { toast } from 'react-toastify';
 
 const CustomMuiDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
     borderRadius: '20px',
   },
   '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
-    paddingTop: theme.spacing(9),
+    paddingLeft: theme.spacing(5.2),
+    paddingRight: theme.spacing(5.2),
+    paddingTop: theme.spacing(10),
     textAlign: 'center',
   },
   '& .MuiDialogActions-root': {
-    paddingLeft: theme.spacing(10),
-    paddingRight: theme.spacing(10),
+    paddingLeft: theme.spacing(5.2),
+    paddingRight: theme.spacing(5.2),
     paddingBottom: theme.spacing(8),
     margin: 'auto',
   },
@@ -70,7 +75,8 @@ export default function ForgetPasswordPopup({ open, setOpen }) {
         open={open}
         setOpen={setOpen}
         fullWidth
-        maxWidth="md"
+        width="35%"
+        minWidth="300px"
         PaperProps={{
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
@@ -83,13 +89,14 @@ export default function ForgetPasswordPopup({ open, setOpen }) {
                 fontSize: '20px',
                 fontWeight: '600',
                 lineHeight: 2,
+                color: '#454238',
               }}
             >
               Forgot Password
             </h1>
             <p className="enterEmailTxt">Enter your email so we can send you a verification code</p>
 
-            <FormControl sx={{ mb: 1, mt: 3, width: '85%' }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 4, width: '100%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
