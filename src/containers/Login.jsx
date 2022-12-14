@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 // assets import
-import Logo from '../assets/icons/logo.svg';
+import Logo from '../assets/icons/Logo.svg';
 import Vector from '../assets/images/login/loginPgImg.svg';
 
 // child component import

@@ -21,8 +21,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
-import arrow from '../assets/icons/rightArrow.svg';
-import profiles from '../assets/icons/profiles.svg';
+import arrow from '../assets/icons/RightArrow.svg';
+import profiles from '../assets/icons/Profiles.svg';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
