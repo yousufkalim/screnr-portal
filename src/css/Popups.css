@@ -1,0 +1,113 @@
+.resetPasswordBtn {
+  background-color: #fba622 !important;
+  width: 100% !important;
+  border-radius: 20px !important;
+  padding: 2.2% 0px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+}
+
+.enterEmailTxt {
+  color: #919b9b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.loginClearIcon {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  cursor: pointer;
+  color: #919b9b;
+}
+
+.resetPasswordBtn:hover,
+.logInBtn:hover {
+  background-color: #faa017 !important;
+  box-shadow: 0 2px 20px -5px rgb(190, 124, 37) !important;
+}
+
+.date-div .react-datepicker-wrapper {
+  border: 1px solid #e1e1e1 !important;
+  background-color: white;
+  border-radius: 14px;
+  margin-top: 9px;
+  padding: 2%;
+  width: 100%;
+}
+
+.date-div {
+  height: 20%;
+}
+
+.react-datepicker-wrapper .react-datepicker__input-container input {
+  border: none;
+  font-size: 15px;
+  width: 100%;
+  outline: none;
+}
+
+.closeBtn {
+  border: 2px solid #136773 !important;
+  color: #136773 !important;
+  font-size: 16px !important;
+  border-radius: 14px !important;
+  text-transform: none !important;
+  padding: 6px 30px !important;
+  cursor: pointer !important;
+  margin: 10px !important;
+  font-weight: 600 !important;
+}
+
+.delBtn {
+  background-color: #ff5151 !important;
+  color: white !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  border-radius: 14px !important;
+  text-transform: none !important;
+  padding: 8px 40px !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+}
+
+.closeBtn:hover {
+  background-color: #136773 !important;
+  color: white !important;
+}
+
+.delBtn:hover {
+  background-color: rgb(222, 0, 0) !important;
+}
+
+.genderBtn {
+  border: 1px solid #e1e1e1 !important;
+  background-color: white !important;
+  color: #919b9b !important;
+  font-size: 14px !important;
+  border-radius: 14px !important;
+  text-transform: none !important;
+  padding: 12px 36px !important;
+  cursor: pointer !important;
+  margin-right: 15px !important;
+  margin-bottom: 15px !important;
+  box-shadow: none !important;
+  font-weight: 500 !important;
+}
+
+.genderBtn:hover {
+  border: 1px solid #136773 !important;
+  background-color: #136773 !important;
+  color: white !important;
+}
+
+.genderTxt {
+  color: #8c8c8c;
+  font-family: 'Helvetica Neue';
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
