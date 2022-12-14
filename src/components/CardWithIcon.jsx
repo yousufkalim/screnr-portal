@@ -1,8 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 
-export default function CardWithIcon(props) {
-  const { Icon, amount, title, CircleIcon, LeftCircleClassName } = props;
+export default function CardWithIcon({ Icon, amount, title, CircleIcon, LeftCircleClassName }) {
   return (
     <div className="card_main_div">
       <Icon />

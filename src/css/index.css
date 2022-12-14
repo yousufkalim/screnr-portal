@@ -7,17 +7,19 @@
 @import url('./Login.css');
 /* pages */
 @import url('./Pages/Dashboard.css');
+@import url('./Pages/Staff.css');
 /* Defaults */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif !important;
+  /* background-color: #F6FAFB; */
 }
 
 /* Primary Variables */
 :root {
-  --primary: 'green';
+  --primary: '#136773';
 }
 
 /* DEFAULT MEDIA QUERIES (copy from here)

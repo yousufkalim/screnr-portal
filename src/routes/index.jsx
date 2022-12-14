@@ -4,8 +4,9 @@ import { Routes, Route } from 'react-router-dom';
 
 // Routes
 import Home from '../containers/Home';
-import Dashboard from '../containers/Dashboard';
-import Header from '../components/Header';
+import Dashboard from '../containers/Dashboard/index';
+import Staff from '../containers/Dashboard/Staff';
+import Header from '../components/header';
 
 function Index() {
   return (
@@ -14,6 +15,7 @@ function Index() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/staff" element={<Staff />} />
       </Routes>
     </>
   );

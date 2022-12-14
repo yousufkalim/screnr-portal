@@ -12,7 +12,7 @@ import {
 } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-export const options = {
+const options = {
   elements: {
     bar: {
       barPercentage: 0.4,
@@ -40,7 +40,7 @@ export const options = {
 
 const labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
-export const data = {
+const data = {
   labels,
   datasets: [
     {
@@ -52,5 +52,16 @@ export const data = {
 };
 
 export default function Chart() {
-  return <Bar options={options} data={data} />;
+  return (
+    <>
+      <div className="chart_header_div">
+        <span style={{ fontWeight: '500' }}>Clinics Addition</span>
+        <span className="chart_header_span">
+          <div className="chart_header_orange_dot" />
+          Clinics Counter
+        </span>
+      </div>
+      <Bar options={options} data={data} />;
+    </>
+  );
 }

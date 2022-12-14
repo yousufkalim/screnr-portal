@@ -1,3 +1,4 @@
+// mui imports
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,9 +7,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import AvatarComponent from './Avatar';
-import { ReactComponent as Edit } from '../assets/components/Dashboard_Table/Alert.svg';
-import { ReactComponent as Delete } from '../assets/components/Dashboard_Table/Alert1.svg';
+// component import
+import AvatarComponent from './avatar';
+// images import
+import { ReactComponent as Edit } from '../assets/components/dashboardTable/alert.svg';
+import { ReactComponent as Delete } from '../assets/components/dashboardTable/alert1.svg';
 
 export default function TableComponent() {
   function createData(id, fullName, phone, email) {
@@ -22,12 +25,15 @@ export default function TableComponent() {
     createData('05', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
     createData('06', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
   ];
+
   const handleEditIcon = () => {
     console.log('Edit');
   };
+
   const handleDeleteIcon = () => {
     console.log('Delete');
   };
+
   return (
     <TableContainer component={Paper} sx={{ borderRadius: '20px' }}>
       <div className="table_title">
