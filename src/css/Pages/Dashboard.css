@@ -1,0 +1,156 @@
+.dashboard_main_div {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f6fafb;
+  padding: 0 2rem 0 2rem;
+}
+
+.navigation {
+  padding: 0.7rem 0 0.7rem 0;
+  color: #919b9b;
+  width: 100%;
+  font-size: 15px;
+}
+
+.cards_div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.dashboard_table_div {
+  width: 55%;
+  margin-top: 2rem;
+}
+
+.dashboard_table_head_btn {
+  cursor: pointer !important;
+  font-size: 0.8rem !important;
+  color: #fba622 !important;
+  background-color: #f6fafb !important;
+  border: 2px solid #fba622 !important;
+  border-radius: 20px !important;
+  padding: 0 15px 0 15px !important;
+}
+
+.table_header {
+  font-size: 0.8rem !important;
+  color: #919b9b !important;
+}
+
+.table_action_div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.table_icons {
+  cursor: pointer;
+}
+
+.dashboard_div_2 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.chart_main_div {
+  height: 350px;
+  width: 35%;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.chart_header_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.chart_header_span {
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.chart_header_orange_dot {
+  width: 7.87px;
+  height: 7.87px;
+  background: #fabb18;
+  border-radius: 50%;
+}
+
+.table_cells {
+  font-size: 1rem !important;
+}
+
+.table_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+@media only screen and (max-width: 1400px) {
+  .table_cells {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .navigation {
+    font-size: 13px;
+  }
+
+  .dashboard_div_2 {
+    flex-direction: column;
+  }
+
+  .dashboard_table_div {
+    width: 100%;
+  }
+
+  .chart_main_div {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .navigation {
+    font-size: 11px;
+  }
+
+  .cards_div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .table_title h3 {
+    font-size: 1rem;
+  }
+
+  .dashboard_table_head_btn {
+    font-size: 0.9rem;
+  }
+
+  .chart_header_div span {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  .table_title h3 {
+    font-size: 0.9rem;
+  }
+}

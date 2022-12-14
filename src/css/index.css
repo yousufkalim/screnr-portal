@@ -2,8 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* Importing all CSS files */
+@import url('./Header.css');
+@import url('./cardsWithIcons.css');
 @import url('./Login.css');
 @import url('./Popups.css');
+/* pages */
+@import url('./Pages/Dashboard.css');
+@import url('./Pages/Staff.css');
 /* Defaults */
 * {
   padding: 0;
@@ -14,5 +19,29 @@
 
 /* Primary Variables */
 :root {
-  --primary: 'green';
+  --primary: '#136773';
 }
+
+/* DEFAULT MEDIA QUERIES (copy from here)
+@media only screen and (max-width: 1600px) {
+}
+
+@media only screen and (max-width: 1440px) {
+}
+
+@media only screen and (max-width: 1366px) {
+}
+
+@media only screen and (max-width: 992px) {
+}
+
+@media only screen and (max-width: 768px) {
+}
+
+@media only screen and (max-width: 600px) {
+}
+
+@media only screen and (max-width: 480px) {
+}
+
+*/
