@@ -21,8 +21,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
-import arrow from '../assets/icons/RightArrow.svg';
-import profiles from '../assets/icons/Profiles.svg';
+import add from '../../assets/icons/add.svg';
+import profiles from '../../assets/icons/Profiles.svg';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -61,16 +61,16 @@ const useOutlinedInputStyles = makeStyles({
     },
   },
 });
-export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMember }) {
+export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdmin }) {
   const [setChecked] = useState(true);
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
-    setOpenAddStaffMember(false);
+    setOpenAddClinicAdmin(false);
   };
 
   const handleSubmit = async () => {
-    toast.success('Profile added successfully');
+    toast.success('Clinic Admin added successfully');
     handleClose();
   };
 
@@ -83,8 +83,8 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={openAddStaffMember}
-        setOpen={setOpenAddStaffMember}
+        open={openAddClinicAdmin}
+        setOpen={setOpenAddClinicAdmin}
         fullWidth
         width="40.8%"
         minWidth="90%"
@@ -96,7 +96,7 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
         <DialogContent>
           <Typography gutterBottom>
             <h1 style={{ fontSize: '22px', fontWeight: '600', color: '#FBA622', lineHeight: 2 }}>
-              Add Staff Member
+              Add New Clinic Admin
             </h1>
             <p className="enterEmailTxt" style={{ fontWeight: '400', marginBottom: '40px' }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -129,7 +129,7 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                 </label>
               </div>
             </div>
-            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mt: 3, width: '100%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -137,16 +137,17 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                     color: 'black',
                     fontSize: '14px',
                     fontWeight: '500',
+                    ml: 1,
                   },
                 }}
                 id="outlined-fname"
                 classes={outlinedInputStyles}
-                placeholder="First Name"
+                placeholder="Clinic Name"
                 size="normal"
-                name="first_name"
+                name="clinic_name"
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%' }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 2 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -154,16 +155,18 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                     color: 'black',
                     fontSize: '14px',
                     fontWeight: '500',
+                    ml: 1,
                   },
                 }}
                 id="outlined-fname"
                 classes={outlinedInputStyles}
-                placeholder="Last Name"
+                placeholder="Manager Name"
                 size="normal"
-                name="last_name"
+                name="manager_name"
               />
             </FormControl>
-            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
+
+            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -171,23 +174,7 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                     color: 'black',
                     fontSize: '14px',
                     fontWeight: '500',
-                  },
-                }}
-                id="outlined-password"
-                classes={outlinedInputStyles}
-                placeholder="Email"
-                size="normal"
-                type="email"
-              />
-            </FormControl>
-            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
+                    ml: 1,
                   },
                 }}
                 id="outlined-password"
@@ -200,10 +187,65 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                 }}
               />
             </FormControl>
+
+            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
+              <TextField
+                sx={{
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 1,
+                  },
+                }}
+                id="outlined-password"
+                classes={outlinedInputStyles}
+                placeholder="Email"
+                size="normal"
+                type="email"
+              />
+            </FormControl>
+
+            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
+              <TextField
+                sx={{
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 1,
+                  },
+                }}
+                id="outlined-fname"
+                classes={outlinedInputStyles}
+                placeholder="Address"
+                size="normal"
+                name="address"
+              />
+            </FormControl>
+
+            <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
+              <p className="genderTxt"> Gender</p>
+              <span>
+                <Button className="genderBtn" variant="contained">
+                  Male
+                </Button>
+                <Button className="genderBtn" variant="contained">
+                  Female
+                </Button>
+                <Button className="genderBtn" variant="contained">
+                  Non-binary
+                </Button>
+              </span>
+            </FormControl>
+
             <FormControl
               sx={{
                 textAlign: 'left',
                 width: '100%',
+                ml: 0.6,
               }}
             >
               <FormControlLabel
@@ -243,7 +285,8 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p>Send Invite &nbsp;</p> <img src={arrow} style={{ width: '20px' }} alt="" />
+            <p style={{ fontWeight: '500', fontSize: '14px' }}>Send Invite &nbsp;</p>{' '}
+            <img src={add} alt="" />
           </Button>
         </DialogActions>
       </BootstrapDialog>

@@ -61,7 +61,7 @@ export default function Chart() {
           Clinics Counter
         </span>
       </div>
-      <Bar options={options} data={data} />;
+      <Bar options={options} data={data} />
     </>
   );
 }

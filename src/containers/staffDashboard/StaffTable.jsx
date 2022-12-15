@@ -1,3 +1,4 @@
+import { useState } from 'react';
 // mui imports
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,12 +9,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 // component import
-import AvatarComponent from './avatar';
+import AvatarComponent from '../../components/Avatar';
 // images import
-import { ReactComponent as Edit } from '../assets/components/dashboardTable/alert.svg';
-import { ReactComponent as Delete } from '../assets/components/dashboardTable/alert1.svg';
+import { ReactComponent as Edit } from '../../assets/components/dashboardTable/alert.svg';
+import { ReactComponent as Delete } from '../../assets/components/dashboardTable/alert1.svg';
+// child import
+import DeleteModal from '../../components/DeletePopup';
+import EditStaffMember from './EditStaffMember';
 
 export default function TableComponent() {
+  const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
+  const [openDeletePopup, setOpenDeletePopup] = useState(false);
+
   function createData(id, fullName, phone, email) {
     return { id, fullName, phone, email };
   }
@@ -25,14 +32,6 @@ export default function TableComponent() {
     createData('05', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
     createData('06', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
   ];
-
-  const handleEditIcon = () => {
-    console.log('Edit');
-  };
-
-  const handleDeleteIcon = () => {
-    console.log('Delete');
-  };
 
   return (
     <TableContainer component={Paper} sx={{ borderRadius: '20px' }}>
@@ -75,13 +74,22 @@ export default function TableComponent() {
               </TableCell>
               <TableCell align="right">
                 <div className="table_action_div">
-                  <Edit className="table_icons" onClick={() => handleEditIcon()} />
-                  <Delete className="table_icons" onClick={() => handleDeleteIcon()} />
+                  <Edit className="table_icons" onClick={() => setOpenEditStaffMember(true)} />
+                  <Delete className="table_icons" onClick={() => setOpenDeletePopup(true)} />
                 </div>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
+        {openEditStaffMember && (
+          <EditStaffMember
+            openEditStaffMember={openEditStaffMember}
+            setOpenEditStaffMember={setOpenEditStaffMember}
+          />
+        )}
+        {openDeletePopup && (
+          <DeleteModal openDeletePopup={openDeletePopup} setOpenDeletePopup={setOpenDeletePopup} />
+        )}
       </Table>
     </TableContainer>
   );

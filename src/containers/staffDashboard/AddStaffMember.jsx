@@ -21,7 +21,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
-import edit from '../assets/icons/edit.svg';
+import arrow from '../../assets/icons/RightArrow.svg';
+import profiles from '../../assets/icons/Profiles.svg';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -43,33 +44,33 @@ const useOutlinedInputStyles = makeStyles({
   root: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        border: '1px solid #454238',
+        border: '1px solid #E1E1E1 ',
         borderRadius: '20px',
         fontSize: 16,
         height: 55,
       },
       '&:hover fieldset': {
-        borderColor: '#FBA622',
+        borderColor: '#454238',
       },
       '&::placeholder fieldset': {
         fontWeight: 800,
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#FBA622',
+        borderColor: '#454238',
       },
     },
   },
 });
-export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffMember }) {
+export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMember }) {
   const [setChecked] = useState(true);
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
-    setOpenEditStaffMember(false);
+    setOpenAddStaffMember(false);
   };
 
   const handleSubmit = async () => {
-    toast.success('Profile edited successfully');
+    toast.success('Profile added successfully');
     handleClose();
   };
 
@@ -82,8 +83,8 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={openEditStaffMember}
-        setOpen={setOpenEditStaffMember}
+        open={openAddStaffMember}
+        setOpen={setOpenAddStaffMember}
         fullWidth
         width="40.8%"
         minWidth="90%"
@@ -95,7 +96,7 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
         <DialogContent>
           <Typography gutterBottom>
             <h1 style={{ fontSize: '22px', fontWeight: '600', color: '#FBA622', lineHeight: 2 }}>
-              Edit Staff Member
+              Add Staff Member
             </h1>
             <p className="enterEmailTxt" style={{ fontWeight: '400', marginBottom: '40px' }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -108,7 +109,6 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                   margin: 'auto',
                 }}
               >
-                {/* Avatar to be used */}
                 <label htmlFor="profilePic">
                   <input
                     style={{
@@ -118,14 +118,10 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                     type="file"
                     id="profilePic"
                     accept="image/*"
-                  />
-
+                  />{' '}
                   <img
-                    src={edit}
+                    src={profiles}
                     style={{
-                      position: 'relative',
-                      top: '43%',
-                      right: '20%',
                       cursor: 'pointer',
                     }}
                     alt=""
@@ -247,7 +243,7 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            Save Changes
+            <p>Send Invite &nbsp;</p> <img src={arrow} style={{ width: '20px' }} alt="" />
           </Button>
         </DialogActions>
       </BootstrapDialog>

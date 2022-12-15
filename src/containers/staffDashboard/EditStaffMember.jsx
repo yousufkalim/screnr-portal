@@ -21,8 +21,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
-import add from '../assets/icons/add.svg';
-import profiles from '../assets/icons/profiles.svg';
+import edit from '../../assets/icons/edit.svg';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -44,33 +43,33 @@ const useOutlinedInputStyles = makeStyles({
   root: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        border: '1px solid #E1E1E1 ',
+        border: '1px solid #454238',
         borderRadius: '20px',
         fontSize: 16,
         height: 55,
       },
       '&:hover fieldset': {
-        borderColor: '#454238',
+        borderColor: '#FBA622',
       },
       '&::placeholder fieldset': {
         fontWeight: 800,
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#454238',
+        borderColor: '#FBA622',
       },
     },
   },
 });
-export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdmin }) {
+export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffMember }) {
   const [setChecked] = useState(true);
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
-    setOpenAddClinicAdmin(false);
+    setOpenEditStaffMember(false);
   };
 
   const handleSubmit = async () => {
-    toast.success('Clinic Admin added successfully');
+    toast.success('Profile edited successfully');
     handleClose();
   };
 
@@ -83,8 +82,8 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={openAddClinicAdmin}
-        setOpen={setOpenAddClinicAdmin}
+        open={openEditStaffMember}
+        setOpen={setOpenEditStaffMember}
         fullWidth
         width="40.8%"
         minWidth="90%"
@@ -96,7 +95,7 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
         <DialogContent>
           <Typography gutterBottom>
             <h1 style={{ fontSize: '22px', fontWeight: '600', color: '#FBA622', lineHeight: 2 }}>
-              Add New Clinic Admin
+              Edit Staff Member
             </h1>
             <p className="enterEmailTxt" style={{ fontWeight: '400', marginBottom: '40px' }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -109,6 +108,7 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                   margin: 'auto',
                 }}
               >
+                {/* Avatar to be used */}
                 <label htmlFor="profilePic">
                   <input
                     style={{
@@ -118,10 +118,14 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                     type="file"
                     id="profilePic"
                     accept="image/*"
-                  />{' '}
+                  />
+
                   <img
-                    src={profiles}
+                    src={edit}
                     style={{
+                      position: 'relative',
+                      top: '43%',
+                      right: '20%',
                       cursor: 'pointer',
                     }}
                     alt=""
@@ -129,7 +133,7 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                 </label>
               </div>
             </div>
-            <FormControl sx={{ mt: 3, width: '100%' }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%', mr: 2 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -137,17 +141,16 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                     color: 'black',
                     fontSize: '14px',
                     fontWeight: '500',
-                    ml: 1,
                   },
                 }}
                 id="outlined-fname"
                 classes={outlinedInputStyles}
-                placeholder="Clinic Name"
+                placeholder="First Name"
                 size="normal"
-                name="clinic_name"
+                name="first_name"
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -155,18 +158,16 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                     color: 'black',
                     fontSize: '14px',
                     fontWeight: '500',
-                    ml: 1,
                   },
                 }}
                 id="outlined-fname"
                 classes={outlinedInputStyles}
-                placeholder="Manager Name"
+                placeholder="Last Name"
                 size="normal"
-                name="manager_name"
+                name="last_name"
               />
             </FormControl>
-
-            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%' }} variant="outlined">
+            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -174,7 +175,23 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                     color: 'black',
                     fontSize: '14px',
                     fontWeight: '500',
-                    ml: 1,
+                  },
+                }}
+                id="outlined-password"
+                classes={outlinedInputStyles}
+                placeholder="Email"
+                size="normal"
+                type="email"
+              />
+            </FormControl>
+            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
+              <TextField
+                sx={{
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
                   },
                 }}
                 id="outlined-password"
@@ -187,65 +204,10 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                 }}
               />
             </FormControl>
-
-            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-password"
-                classes={outlinedInputStyles}
-                placeholder="Email"
-                size="normal"
-                type="email"
-              />
-            </FormControl>
-
-            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-fname"
-                classes={outlinedInputStyles}
-                placeholder="Address"
-                size="normal"
-                name="address"
-              />
-            </FormControl>
-
-            <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
-              <p className="genderTxt"> Gender</p>
-              <span>
-                <Button className="genderBtn" variant="contained">
-                  Male
-                </Button>
-                <Button className="genderBtn" variant="contained">
-                  Female
-                </Button>
-                <Button className="genderBtn" variant="contained">
-                  Non-binary
-                </Button>
-              </span>
-            </FormControl>
-
             <FormControl
               sx={{
                 textAlign: 'left',
                 width: '100%',
-                ml: 0.6,
               }}
             >
               <FormControlLabel
@@ -285,8 +247,7 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p style={{ fontWeight: '500', fontSize: '14px' }}>Send Invite &nbsp;</p>{' '}
-            <img src={add} alt="" />
+            Save Changes
           </Button>
         </DialogActions>
       </BootstrapDialog>
