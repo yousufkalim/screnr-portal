@@ -1,0 +1,13 @@
+.cards_div_clinician_pg {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  justify-content: space-between;
+  margin-top: 8%;
+  margin-left: 5%;
+}
+
+.bgClinicianTable {
+  background-color: rgb(246, 250, 251);
+  height: 67vh;
+}

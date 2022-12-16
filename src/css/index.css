@@ -9,6 +9,7 @@
 /* pages */
 @import url('./Pages/Dashboard.css');
 @import url('./Pages/Staff.css');
+@import url('./Pages/Clinician.css');
 /* Defaults */
 * {
   padding: 0;

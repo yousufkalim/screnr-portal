@@ -61,6 +61,7 @@ export default function Dashboard() {
             title={item.title}
             CircleIcon={item.icon2}
             LeftCircleClassName={item.className}
+            cardClassName="card_main_div"
           />
         ))}
       </div>
