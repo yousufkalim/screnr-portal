@@ -1,11 +1,6 @@
-.main_staff_div {
-  height: 100vh;
-  background-color: #f6fafb;
-  display: flex;
-}
-
 .left_side {
-  width: 20%;
+  width: 100%;
+  height: 100%;
   background-color: #ffffff;
   display: flex;
   align-items: center;
@@ -45,7 +40,39 @@
   font-size: 0.9rem;
 }
 
-.right_side {
-  width: 80%;
-  background-color: transparent;
+.bg {
+  background-color: rgb(246, 250, 251);
+  height: 90vh;
+}
+
+.clientTableHead {
+  font-weight: 600;
+  padding: 30px !important;
+  font-size: 20px;
+  /* line-height: 30px; */
+  color: #136773;
+}
+
+.clientTableRow {
+  margin-top: 20px !important;
+}
+.clientTableRow:hover {
+  background-color: #f6cf6437 !important;
+  animation-name: fadeInOpacity;
+  animation-timing-function: fade-in;
+  animation-duration: 1s;
+}
+
+@keyframes fadeInOpacity {
+  from {
+    background-color: rgba(255, 255, 255, 0);
+  }
+  to {
+    background-color: #f6cf6437 !important;
+  }
+}
+
+.table_head {
+  font-size: 14px !important;
+  color: #919b9b !important;
 }
