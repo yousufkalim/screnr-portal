@@ -1,9 +1,16 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 
-export default function CardWithIcon({ Icon, amount, title, CircleIcon, LeftCircleClassName }) {
+export default function CardWithIcon({
+  Icon,
+  amount,
+  title,
+  CircleIcon,
+  LeftCircleClassName,
+  cardClassName,
+}) {
   return (
-    <div className="card_main_div">
+    <div className={cardClassName}>
       <Icon />
       <div className="card_content_div">
         <span className="amount">{amount}</span>
