@@ -12,7 +12,14 @@ import Clinician from '../containers/Clinician';
 function Index() {
   return (
     <>
-      <Header />
+      {window.location.pathname === '/dashboard' ||
+      window.location.pathname === '/dashboard/staff' ||
+      window.location.pathname === '/dashboard/staff/clinician' ? (
+        <Header />
+      ) : (
+        ''
+      )}
+
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
