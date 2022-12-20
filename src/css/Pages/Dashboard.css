@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   background-color: #f6fafb;
-  padding: 0 2rem 0 2rem;
+  padding: 0 4rem;
 }
 
 .navigation {
@@ -25,6 +25,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  margin-top: 2.2rem;
 }
 .dashboard-table-txt {
   color: #136773;
@@ -65,7 +66,8 @@
 .dashboard_div_2 {
   display: flex;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-top: 1.5rem;
 }
 
 .chart_main_div {
