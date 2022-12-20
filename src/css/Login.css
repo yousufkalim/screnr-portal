@@ -13,6 +13,15 @@
   margin-left: 9%;
 }
 
+.loginScreenBG {
+  background: #f6fafb;
+  height: 100vh;
+}
+.forget-txt {
+  width: fit-content;
+  margin-left: auto;
+}
+
 .loginPgImg {
   position: absolute;
   bottom: 0;

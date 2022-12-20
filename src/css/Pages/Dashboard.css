@@ -12,10 +12,23 @@
   font-size: 15px;
 }
 
+.name_cell_dasdboard {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  color: #454238 !important ;
+  margin-left: 8px;
+}
+.dashboardChartTxt {
+  font-weight: 500;
+}
 .cards_div {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+}
+.dashboard-table-txt {
+  color: #136773;
+  font-weight: 500;
 }
 
 .dashboard_table_div {
@@ -108,7 +121,8 @@
 }
 
 @media only screen and (max-width: 1400px) {
-  .table_cells {
+  .table_cells,
+  .name_cell_dasdboard {
     font-size: 0.8rem !important;
   }
 }

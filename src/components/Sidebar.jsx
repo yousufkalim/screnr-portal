@@ -8,19 +8,13 @@ export default function Sidebar() {
   return (
     <div className="left_side">
       <div className="profile">RH</div>
-      <div style={{ textAlign: 'center' }}>
+      <div className="sideBarInfo">
         <div className="user_name">Rana Hamza</div>
         <div className="staff_id">
           Staff ID: <span className="staff_id_2">12345</span>
         </div>
       </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-        }}
-      >
+      <div className="sidebarSubDiv">
         <div className="user_detail">
           <Phone />
           &nbsp;&nbsp;+123456734

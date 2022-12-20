@@ -4,12 +4,12 @@ import { React, useState } from 'react';
 import { Grid } from '@mui/material';
 
 // assets import
-import addBtn from '../../assets/icons/addBtn.svg';
+import addBtn from '../assets/icons/addBtn.svg';
 
 // child components import
-import Sidebar from '../../components/Sidebar';
-import ClinicAdminTable from './ClinicAdminsTable';
-import AddClinicAdmin from './AddNewClinicAdmin';
+import Sidebar from '../components/Sidebar';
+import ClinicAdminTable from '../components/tables/clinicAdmin/ClinicAdminsTable';
+import AddClinicAdmin from '../components/popups/clinicAdmin/AddNewClinicAdmin';
 
 export default function ClinicAdmin() {
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
@@ -26,18 +26,16 @@ export default function ClinicAdmin() {
       <div className="addBtn">
         <img
           src={addBtn}
-          style={{ cursor: 'pointer' }}
+          className="pointer"
           onClick={() => setOpenAddClinicAdmin(true)}
           role="presentation"
           alt=""
         />
       </div>
-      {openAddClinicAdmin && (
-        <AddClinicAdmin
-          openAddClinicAdmin={openAddClinicAdmin}
-          setOpenAddClinicAdmin={setOpenAddClinicAdmin}
-        />
-      )}
+      <AddClinicAdmin
+        openAddClinicAdmin={openAddClinicAdmin}
+        setOpenAddClinicAdmin={setOpenAddClinicAdmin}
+      />
     </Grid>
   );
 }

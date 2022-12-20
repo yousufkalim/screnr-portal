@@ -4,10 +4,10 @@ import { Routes, Route } from 'react-router-dom';
 
 // Routes
 import Login from '../containers/Login';
-import Dashboard from '../containers/staffDashboard/Staff';
+import Dashboard from '../containers/Dashboard';
 import Header from '../components/Header';
-import ClinicAdmin from '../containers/clinicAdmin/ClinicAdmin';
-import Clinician from '../containers/clinician/Clinician';
+import ClinicAdmin from '../containers/ClinicAdmin';
+import Clinician from '../containers/Clinician';
 
 function Index() {
   return (

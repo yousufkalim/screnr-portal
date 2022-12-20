@@ -8,14 +8,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-// component import
-import AvatarComponent from '../../components/Avatar';
-// images import
-import { ReactComponent as Edit } from '../../assets/components/dashboardTable/alert.svg';
-import { ReactComponent as Delete } from '../../assets/components/dashboardTable/alert1.svg';
+
+// assets import
+import { ReactComponent as Edit } from '../../../assets/components/dashboardTable/alert.svg';
+import { ReactComponent as Delete } from '../../../assets/components/dashboardTable/alert1.svg';
+
 // child import
-import DeleteModal from '../../components/DeletePopup';
-import EditStaffMember from './EditStaffMember';
+import AvatarComponent from '../../Avatar';
+import DeleteModal from '../../DeletePopup';
+import EditStaffMember from '../../popups/dashboard/EditStaffMember';
 
 export default function TableComponent() {
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
@@ -36,7 +37,7 @@ export default function TableComponent() {
   return (
     <TableContainer component={Paper} sx={{ borderRadius: '20px' }}>
       <div className="table_title">
-        <h3 style={{ color: '#136773', fontWeight: '500' }}>List of staff members</h3>
+        <h3 className="dashboard-table-txt">List of staff members</h3>
         <Button className="dashboard_table_head_btn">Invite member</Button>
       </div>
       <Table aria-label="simple table">
@@ -64,7 +65,7 @@ export default function TableComponent() {
               </TableCell>
               <TableCell align="left" sx={{ display: 'flex' }}>
                 <AvatarComponent alt="Rana Hamza" className="header_avatar" />
-                <div style={{ marginLeft: 8 }} className="table_cells">
+                <div className="name_cell_dasdboard">
                   {row.fullName} <br />
                   {row.email}
                 </div>
@@ -81,15 +82,13 @@ export default function TableComponent() {
             </TableRow>
           ))}
         </TableBody>
-        {openEditStaffMember && (
-          <EditStaffMember
-            openEditStaffMember={openEditStaffMember}
-            setOpenEditStaffMember={setOpenEditStaffMember}
-          />
-        )}
-        {openDeletePopup && (
-          <DeleteModal openDeletePopup={openDeletePopup} setOpenDeletePopup={setOpenDeletePopup} />
-        )}
+
+        <EditStaffMember
+          openEditStaffMember={openEditStaffMember}
+          setOpenEditStaffMember={setOpenEditStaffMember}
+        />
+
+        <DeleteModal openDeletePopup={openDeletePopup} setOpenDeletePopup={setOpenDeletePopup} />
       </Table>
     </TableContainer>
   );

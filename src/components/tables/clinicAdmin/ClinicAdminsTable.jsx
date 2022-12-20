@@ -11,11 +11,11 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 
 // assets import
-import { ReactComponent as Edit } from '../../assets/components/dashboardTable/alert.svg';
+import { ReactComponent as Edit } from '../../../assets/components/dashboardTable/alert.svg';
 
 // child component imports
-import EditClinicAdmin from './EditClinicAdmin';
-import AvatarComponent from '../../components/Avatar';
+import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin';
+import AvatarComponent from '../../Avatar';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
@@ -63,7 +63,7 @@ export default function ClinicAdminTable() {
   ];
 
   return (
-    <div className="bg" style={{ padding: '5% 3% 3% 3% ' }}>
+    <div className="bg" id="clinicAdminTable">
       <TableContainer
         component={Paper}
         style={{
@@ -106,10 +106,10 @@ export default function ClinicAdminTable() {
                 <TableCell />
                 <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
                   <AvatarComponent alt="Rana Hamza" className="header_avatar" />
-                  <div style={{ marginLeft: 8, alignSelf: 'center' }} className="table_cells">
+                  <div className="clinic_cell">
                     {row.name} <br />
-                    <span style={{ fontSize: '14px' }}>
-                      Clinic: <span style={{ color: '#fba622' }}>Line Pvt.</span>
+                    <span className="clinicNametxt">
+                      Clinic: <span className="clinicNameSubtxt">Line Pvt.</span>
                     </span>
                   </div>
                 </TableCell>
@@ -134,12 +134,11 @@ export default function ClinicAdminTable() {
             ))}
           </TableBody>
         </Table>
-        {openEditClinicAdmin && (
-          <EditClinicAdmin
-            openEditClinicAdmin={openEditClinicAdmin}
-            setOpenEditClinicAdmin={setOpenEditClinicAdmin}
-          />
-        )}
+
+        <EditClinicAdmin
+          openEditClinicAdmin={openEditClinicAdmin}
+          setOpenEditClinicAdmin={setOpenEditClinicAdmin}
+        />
       </TableContainer>
     </div>
   );

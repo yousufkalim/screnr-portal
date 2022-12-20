@@ -45,7 +45,7 @@ export default function Login() {
   const outlinedInputStyles = useOutlinedInputStyles();
 
   return (
-    <div style={{ background: '#F6FAFB', height: '100vh' }}>
+    <div className="loginScreenBG">
       <Grid container>
         <Grid lg={12} xl={12} className="mainLoginDiv" />
         <Grid lg={6.5} xl={6.5}>
@@ -132,12 +132,7 @@ export default function Login() {
                     ),
                   }}
                 />
-                <div
-                  style={{
-                    width: 'fit-content',
-                    marginLeft: 'auto',
-                  }}
-                >
+                <div className="forget-txt">
                   <p
                     className="forgetPasswordTxt"
                     onClick={() => setOpenForgetPasswordPopup(true)}

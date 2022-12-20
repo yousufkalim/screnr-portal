@@ -12,6 +12,8 @@ import { FormControl, TextField } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 // react-toastify import
 import { toast } from 'react-toastify';
@@ -21,8 +23,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
-import add from '../../assets/icons/add.svg';
-import profiles from '../../assets/icons/Profiles.svg';
+import dropdown from '../../../assets/icons/downArrow.svg';
+import profiles from '../../../assets/icons/Profiles.svg';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -44,33 +46,33 @@ const useOutlinedInputStyles = makeStyles({
   root: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        border: '1px solid #E1E1E1 ',
+        border: '1px solid #454238 ',
         borderRadius: '20px',
         fontSize: 16,
         height: 55,
       },
       '&:hover fieldset': {
-        borderColor: '#454238',
+        borderColor: '#FBA622',
       },
       '&::placeholder fieldset': {
         fontWeight: 800,
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#454238',
+        borderColor: '#FBA622',
       },
     },
   },
 });
-export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdmin }) {
+export default function EditClinician({ openEditClinican, setOpenEditClinican }) {
   const [setChecked] = useState(true);
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
-    setOpenAddClinicAdmin(false);
+    setOpenEditClinican(false);
   };
 
   const handleSubmit = async () => {
-    toast.success('Clinic Admin added successfully');
+    toast.success('Clinic Admin edited successfully');
     handleClose();
   };
 
@@ -83,8 +85,8 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={openAddClinicAdmin}
-        setOpen={setOpenAddClinicAdmin}
+        open={openEditClinican}
+        setOpen={setOpenEditClinican}
         fullWidth
         width="40.8%"
         minWidth="90%"
@@ -95,58 +97,48 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
         <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
           <Typography gutterBottom>
-            <h1 style={{ fontSize: '22px', fontWeight: '600', color: '#FBA622', lineHeight: 2 }}>
-              Add New Clinic Admin
-            </h1>
-            <p className="enterEmailTxt" style={{ fontWeight: '400', marginBottom: '40px' }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing
-            </p>
+            <h1 className="clinicianPopupTxt">Edit Clinician</h1>
+            <p className="clinicianSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             <div>
-              <div
-                style={{
-                  width: '26%',
-                  height: '145px',
-                  margin: 'auto',
-                }}
-              >
+              <div className="imgDivPopup">
                 <label htmlFor="profilePic">
-                  <input
-                    style={{
-                      display: 'none',
-                    }}
-                    name="profile_pic"
-                    type="file"
-                    id="profilePic"
-                    accept="image/*"
-                  />{' '}
-                  <img
-                    src={profiles}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                    alt=""
-                  />
+                  {/* avatar to be added */}
+                  <input name="profile_pic" type="file" id="profilePic" accept="image/*" />{' '}
+                  <img src={profiles} className="pointer" alt="" />
                 </label>
               </div>
             </div>
             <FormControl sx={{ mt: 3, width: '100%' }} variant="outlined">
-              <TextField
+              <Select
+                // eslint-disable-next-line react/no-unstable-nested-components
+                IconComponent={(props) => (
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
+                )}
+                displayEmpty
                 sx={{
+                  border: '1px solid #454238 ',
                   borderRadius: '20px',
                   input: {
                     color: 'black',
                     fontSize: '14px',
                     fontWeight: '500',
-                    ml: 1,
+                    ml: 2,
                   },
                 }}
-                id="outlined-fname"
-                classes={outlinedInputStyles}
-                placeholder="Clinic Name"
-                size="normal"
-                name="clinic_name"
-              />
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                name="client"
+                placeholder="Title"
+                inputProps={{
+                  sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
+                }}
+              >
+                <MenuItem value="">West</MenuItem>
+                <MenuItem>East</MenuItem>
+              </Select>
             </FormControl>
+
             <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 2 }} variant="outlined">
               <TextField
                 sx={{
@@ -158,11 +150,11 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                     ml: 1,
                   },
                 }}
-                id="outlined-fname"
+                id="outlined-name"
                 classes={outlinedInputStyles}
-                placeholder="Manager Name"
+                placeholder="First Name"
                 size="normal"
-                name="manager_name"
+                name="first_name"
               />
             </FormControl>
 
@@ -177,14 +169,11 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                     ml: 1,
                   },
                 }}
-                id="outlined-password"
+                id="outlined-name"
                 classes={outlinedInputStyles}
-                placeholder="Phone Number"
+                placeholder="Last Name"
                 size="normal"
-                type="text"
-                inputProps={{
-                  maxLength: 10,
-                }}
+                name="Last_name"
               />
             </FormControl>
 
@@ -199,7 +188,7 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                     ml: 1,
                   },
                 }}
-                id="outlined-password"
+                id="outlined-email"
                 classes={outlinedInputStyles}
                 placeholder="Email"
                 size="normal"
@@ -218,11 +207,14 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                     ml: 1,
                   },
                 }}
-                id="outlined-fname"
+                id="outlined-password"
                 classes={outlinedInputStyles}
-                placeholder="Address"
+                placeholder="Phone Number"
                 size="normal"
-                name="address"
+                type="text"
+                inputProps={{
+                  maxLength: 10,
+                }}
               />
             </FormControl>
 
@@ -285,8 +277,7 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p style={{ fontWeight: '500', fontSize: '14px' }}>Send Invite &nbsp;</p>{' '}
-            <img src={add} alt="" />
+            <p className="sendInviteTxt">Save Changes</p>{' '}
           </Button>
         </DialogActions>
       </BootstrapDialog>

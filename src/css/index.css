@@ -6,9 +6,10 @@
 @import url('./cardsWithIcons.css');
 @import url('./Login.css');
 @import url('./Popups.css');
+@import url('./Sidebar.css');
 /* pages */
 @import url('./Pages/Dashboard.css');
-@import url('./Pages/Staff.css');
+@import url('./Pages/ClinicAdmin.css');
 @import url('./Pages/Clinician.css');
 /* Defaults */
 * {

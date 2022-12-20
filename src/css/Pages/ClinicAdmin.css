@@ -35,6 +35,10 @@
   color: #fba622;
 }
 
+#clinicAdminTable {
+  padding: 5% 3% 3% 3%;
+}
+
 .user_detail {
   color: #919b9b;
   font-size: 0.9rem;

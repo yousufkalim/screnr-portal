@@ -11,11 +11,11 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 
 // assets import
-import { ReactComponent as Edit } from '../../assets/components/dashboardTable/alert.svg';
+import { ReactComponent as Edit } from '../../../assets/components/dashboardTable/alert.svg';
 
 // child component imports
-import EditClinician from './EditClinician';
-import AvatarComponent from '../../components/Avatar';
+import EditClinician from '../../popups/clinician/EditClinician';
+import AvatarComponent from '../../Avatar';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
@@ -38,37 +38,37 @@ export default function ClinicianTable() {
     createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
     createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
     createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    // createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
   ];
 
   return (
-    <div className="bgClinicianTable" style={{ padding: '2% 3% 0px 3% ' }}>
+    <div className="bgClinicianTable" id="clinicianTable">
       <TableContainer
         component={Paper}
         style={{
           borderRadius: '20px',
-          maxHeight: '70%',
+          maxHeight: '93%',
           overflowX: 'hidden',
           width: '77vw',
         }}
@@ -109,11 +109,9 @@ export default function ClinicianTable() {
                 <TableCell />
                 <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
                   <AvatarComponent alt="Rana Hamza" className="header_avatar" />
-                  <div style={{ marginLeft: 8, alignSelf: 'center' }} className="table_cells">
+                  <div className="clinic_cell">
                     {row.name} <br />
-                    <span style={{ fontSize: '14px' }}>
-                      Clinic: <span style={{ color: '#fba622' }}>Line Pvt.</span>
-                    </span>
+                    <span className="clinicNametxt">Clinic: Line Pvt.</span>
                   </div>
                 </TableCell>
 
@@ -140,12 +138,11 @@ export default function ClinicianTable() {
             ))}
           </TableBody>
         </Table>
-        {openEditClinican && (
-          <EditClinician
-            openEditClinican={openEditClinican}
-            setOpenEditClinican={setOpenEditClinican}
-          />
-        )}
+
+        <EditClinician
+          openEditClinican={openEditClinican}
+          setOpenEditClinican={setOpenEditClinican}
+        />
       </TableContainer>
     </div>
   );
