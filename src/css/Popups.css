@@ -15,6 +15,13 @@
   font-weight: 500;
 }
 
+.addPopupSubTxt {
+  font-weight: 400;
+  margin-bottom: 40px;
+  color: #919b9b;
+  font-size: 14px;
+}
+
 .loginClearIcon {
   position: absolute;
   right: 30px;
@@ -110,4 +117,65 @@
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 10px;
+}
+.delPopuptxt {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 40px;
+}
+
+.forgetPaswdTxt {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 2;
+  color: #454238;
+}
+.addPopupTxt {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fba622;
+  line-height: 2;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.imgDivPopup {
+  width: 26%;
+  height: 145px;
+  margin: auto;
+}
+
+#profilePic {
+  display: none;
+}
+
+.clinicianPopupTxt {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fba622;
+  line-height: 2;
+}
+
+.clinicianSubTxt {
+  color: #919b9b;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.sendInviteTxt {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.arrowIcon {
+  width: 20px;
+}
+
+.addImgIcon {
+  position: relative;
+  top: 43%;
+  right: 20%;
+  cursor: pointer;
 }

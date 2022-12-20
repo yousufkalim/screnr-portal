@@ -23,6 +23,19 @@
   border-radius: 20px;
   width: 20%;
   border: 0.5px solid #e5ebeb;
+  overflow: hidden;
+}
+
+.card_main_div2 {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1rem;
+  border-radius: 20px;
+  width: 48%;
+  border: 0.5px solid #e5ebeb;
+  overflow: hidden;
 }
 
 .card_content_div {

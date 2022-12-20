@@ -86,16 +86,7 @@ export default function ForgetPasswordPopup({
         <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
           <Typography>
-            <h1
-              style={{
-                fontSize: '20px',
-                fontWeight: '600',
-                lineHeight: 2,
-                color: '#454238',
-              }}
-            >
-              Forgot Password
-            </h1>
+            <h1 className="forgetPaswdTxt">Forgot Password</h1>
             <p className="enterEmailTxt">Enter your email so we can send you a verification code</p>
 
             <FormControl sx={{ mb: 1, mt: 4, width: '100%' }} variant="outlined">

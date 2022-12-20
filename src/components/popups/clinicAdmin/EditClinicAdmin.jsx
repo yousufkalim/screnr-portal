@@ -21,8 +21,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
-import add from '../assets/icons/add.svg';
-import profiles from '../assets/icons/profiles.svg';
+import profiles from '../../../assets/icons/Profiles.svg';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -44,33 +43,33 @@ const useOutlinedInputStyles = makeStyles({
   root: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        border: '1px solid #E1E1E1 ',
+        border: '1px solid #454238 ',
         borderRadius: '20px',
         fontSize: 16,
         height: 55,
       },
       '&:hover fieldset': {
-        borderColor: '#454238',
+        borderColor: '#FBA622',
       },
       '&::placeholder fieldset': {
         fontWeight: 800,
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#454238',
+        borderColor: '#FBA622',
       },
     },
   },
 });
-export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdmin }) {
+export default function EditClinicAdmin({ openEditClinicAdmin, setOpenEditClinicAdmin }) {
   const [setChecked] = useState(true);
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
-    setOpenAddClinicAdmin(false);
+    setOpenEditClinicAdmin(false);
   };
 
   const handleSubmit = async () => {
-    toast.success('Clinic Admin added successfully');
+    toast.success('Clinic Admin edited successfully');
     handleClose();
   };
 
@@ -83,8 +82,8 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={openAddClinicAdmin}
-        setOpen={setOpenAddClinicAdmin}
+        open={openEditClinicAdmin}
+        setOpen={setOpenEditClinicAdmin}
         fullWidth
         width="40.8%"
         minWidth="90%"
@@ -95,37 +94,14 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
         <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
           <Typography gutterBottom>
-            <h1 style={{ fontSize: '22px', fontWeight: '600', color: '#FBA622', lineHeight: 2 }}>
-              Add New Clinic Admin
-            </h1>
-            <p className="enterEmailTxt" style={{ fontWeight: '400', marginBottom: '40px' }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing
-            </p>
+            <h1 className="addPopupTxt">Edit Clinic Admin</h1>
+            <p className="addPopupSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             <div>
-              <div
-                style={{
-                  width: '26%',
-                  height: '145px',
-                  margin: 'auto',
-                }}
-              >
+              <div className="imgDivPopup">
                 <label htmlFor="profilePic">
-                  <input
-                    style={{
-                      display: 'none',
-                    }}
-                    name="profile_pic"
-                    type="file"
-                    id="profilePic"
-                    accept="image/*"
-                  />{' '}
-                  <img
-                    src={profiles}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                    alt=""
-                  />
+                  {/* avatar to be added */}
+                  <input name="profile_pic" type="file" id="profilePic" accept="image/*" />{' '}
+                  <img src={profiles} className="pointer" alt="" />
                 </label>
               </div>
             </div>
@@ -285,8 +261,7 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p style={{ fontWeight: '500', fontSize: '14px' }}>Send Invite &nbsp;</p>{' '}
-            <img src={add} alt="" />
+            <p className="sendInviteTxt">Save Changes</p>{' '}
           </Button>
         </DialogActions>
       </BootstrapDialog>

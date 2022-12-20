@@ -3,12 +3,12 @@ import { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import MenuIcon from '@mui/icons-material/Menu';
 // components imports
-import AvatarComponent from './avatar';
+import AvatarComponent from './Avatar';
 import HeaderTab2 from './headerMainTab';
 // images imports
-import { ReactComponent as Logo } from '../assets/components/headerIcons/logo.svg';
-import { ReactComponent as BellIcon } from '../assets/components/headerIcons/bell.svg';
-import { ReactComponent as SearchIcon } from '../assets/components/headerIcons/search.svg';
+import { ReactComponent as Logo } from '../assets/components/HeaderIcons/Logo.svg';
+import { ReactComponent as BellIcon } from '../assets/components/HeaderIcons/Bell.svg';
+import { ReactComponent as SearchIcon } from '../assets/components/HeaderIcons/Search.svg';
 
 export default function Header() {
   const [activeTab, setActiveTab] = useState('Dashboard');

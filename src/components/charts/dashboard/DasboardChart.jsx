@@ -55,13 +55,13 @@ export default function Chart() {
   return (
     <>
       <div className="chart_header_div">
-        <span style={{ fontWeight: '500' }}>Clinics Addition</span>
+        <span className="dashboardChartTxt">Clinics Addition</span>
         <span className="chart_header_span">
           <div className="chart_header_orange_dot" />
           Clinics Counter
         </span>
       </div>
-      <Bar options={options} data={data} />;
+      <Bar options={options} data={data} />
     </>
   );
 }

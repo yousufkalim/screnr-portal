@@ -58,15 +58,7 @@ export default function DeleteModal({ openDeletePopup, setOpenDeletePopup }) {
         <DialogContent>
           <Typography gutterBottom>
             <img src={delConfirm} alt="" />
-            <h1
-              style={{
-                fontSize: '20px',
-                fontWeight: 600,
-                marginTop: '40px',
-              }}
-            >
-              Are you sure?
-            </h1>
+            <h1 className="delPopuptxt">Are you sure?</h1>
 
             <p className="enterEmailTxt">You won’t be able to revert this!</p>
             <div className="hl-del" />
