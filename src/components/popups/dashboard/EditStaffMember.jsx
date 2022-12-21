@@ -205,7 +205,7 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                 width: '100%',
               }}
             >
-              <div className="date-div">
+              <div className="date-div2">
                 <DatePicker
                   showPopperArrow
                   dateFormat="dd/MMMM/yyyy"
