@@ -9,6 +9,10 @@
   padding: 0px 12px;
 }
 
+.link {
+  text-decoration: none !important;
+}
+
 .logoDiv {
   margin-left: 9%;
 }

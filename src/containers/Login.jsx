@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+// rr imports
+import { Link } from 'react-router-dom';
+
 // mui imports
 import { Grid, IconButton, InputLabel } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -143,9 +146,12 @@ export default function Login() {
                   </p>
                 </div>
               </FormControl>
-              <Button className="logInBtn" variant="contained">
-                Login
-              </Button>
+
+              <Link to="/dashboard" className="link">
+                <Button className="logInBtn" variant="contained">
+                  Login
+                </Button>
+              </Link>
             </Grid>
             {openForgetPasswordPopup && (
               <ForgetPasswordPopup
