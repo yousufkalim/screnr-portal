@@ -117,6 +117,15 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                 )}
                 displayEmpty
                 sx={{
+                  '.MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#E1E1E1',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
                   borderRadius: '20px',
                   input: {
                     color: 'black',

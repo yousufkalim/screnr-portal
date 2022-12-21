@@ -63,6 +63,7 @@ const useOutlinedInputStyles = makeStyles({
     },
   },
 });
+
 export default function EditClinician({ openEditClinican, setOpenEditClinican }) {
   const [setChecked] = useState(true);
   const outlinedInputStyles = useOutlinedInputStyles();
@@ -117,7 +118,16 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
                 )}
                 displayEmpty
                 sx={{
-                  border: '1px solid #454238 ',
+                  '.MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#454238',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#FBA622',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#FBA622',
+                  },
+
                   borderRadius: '20px',
                   input: {
                     color: 'black',
@@ -221,13 +231,13 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <p className="genderTxt"> Gender</p>
               <span>
-                <Button className="genderBtn" variant="contained">
+                <Button className="genderBtn2" variant="contained">
                   Male
                 </Button>
-                <Button className="genderBtn" variant="contained">
+                <Button className="genderBtn2" variant="contained">
                   Female
                 </Button>
-                <Button className="genderBtn" variant="contained">
+                <Button className="genderBtn2" variant="contained">
                   Non-binary
                 </Button>
               </span>
@@ -262,7 +272,7 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
                 width: '100%',
               }}
             >
-              <div className="date-div">
+              <div className="date-div2">
                 <DatePicker
                   showPopperArrow
                   dateFormat="dd/MMMM/yyyy"

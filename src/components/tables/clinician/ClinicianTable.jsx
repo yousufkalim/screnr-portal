@@ -68,7 +68,7 @@ export default function ClinicianTable() {
         component={Paper}
         style={{
           borderRadius: '20px',
-          maxHeight: '93%',
+          maxHeight: '92%',
           overflowX: 'hidden',
           width: '77vw',
         }}
