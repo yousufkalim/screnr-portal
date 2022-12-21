@@ -31,7 +31,7 @@ export default function Dashboard() {
     {
       icon: Clinic,
       amount: '65',
-      title: 'Total Clinician',
+      title: 'Total Clinics',
       icon2: RedCircle,
       className: 'red_circle',
     },
@@ -53,7 +53,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard_main_div">
-      <div className="navigation">Dashboard </div>
+      <div className="navigation">Dashboard &gt; </div>
       <div className="cards_div">
         {cardsData.map((item) => (
           <CardWithIcon
@@ -68,12 +68,12 @@ export default function Dashboard() {
       </div>
       <div className="dashboard_div_2">
         <div className="dashboard_table_div">
-          <TableComponent />
+          <TableComponent setOpenAddStaffMember={setOpenAddStaffMember} />
         </div>
         <div className="chart_main_div">
           <Chart />
         </div>
-        <div className="addBtn">
+        <div className="addBtn2">
           <img
             src={addBtn}
             className="pointer"

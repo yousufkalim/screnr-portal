@@ -12,6 +12,7 @@ import {
 } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.defaults.borderColor = '#655B96';
 const options = {
   elements: {
     bar: {
@@ -29,6 +30,11 @@ const options = {
       grid: {
         display: false,
       },
+      max: 1000,
+      min: 200,
+      ticks: {
+        stepSize: 200,
+      },
     },
     x: {
       grid: {
@@ -45,8 +51,9 @@ const data = {
   datasets: [
     {
       label: '',
-      data: [550, 100, 200, 300, 400, 500, 600, 450, 200, 300, 400, 500],
+      data: [550, 700, 600, 600, 400, 900, 800, 450, 800, 1000, 900, 1000],
       backgroundColor: 'rgb(251, 166, 34)',
+      barPercentage: 0.2,
     },
   ],
 };

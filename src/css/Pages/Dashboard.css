@@ -1,23 +1,28 @@
 .dashboard_main_div {
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   background-color: #f6fafb;
   padding: 0 4rem;
 }
 
 .navigation {
-  padding: 0.7rem 0 0.7rem 0;
+  padding: 2rem 0;
   color: #919b9b;
   width: 100%;
   font-size: 15px;
 }
 
 .name_cell_dasdboard {
-  font-size: 1rem !important;
-  font-weight: 400 !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
   color: #454238 !important ;
   margin-left: 8px;
 }
+.staffEmailCell {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
 .dashboardChartTxt {
   font-weight: 500;
 }
@@ -25,7 +30,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-top: 2.2rem;
+  margin-top: 0.7rem;
 }
 .dashboard-table-txt {
   color: #136773;
@@ -35,16 +40,17 @@
 .dashboard_table_div {
   width: 55%;
   margin-top: 2rem;
+  height: 60vh;
 }
 
 .dashboard_table_head_btn {
   cursor: pointer !important;
-  font-size: 0.8rem !important;
+  font-size: 0.9rem !important;
   color: #fba622 !important;
-  background-color: #f6fafb !important;
+  background-color: white !important;
   border: 2px solid #fba622 !important;
   border-radius: 20px !important;
-  padding: 0 15px 0 15px !important;
+  padding: 1px 15px !important;
 }
 
 .table_header {
@@ -71,7 +77,7 @@
 }
 
 .chart_main_div {
-  height: 350px;
+  height: 423px;
   width: 35%;
   background-color: #fff;
   border-radius: 20px;
@@ -84,7 +90,8 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 3rem;
+  /* height: 200px; */
+  margin-bottom: 2.7rem;
 }
 
 .chart_header_span {
@@ -117,15 +124,28 @@
 
 .addBtn {
   position: absolute;
-  right: 30px;
-  bottom: 60px;
+  right: 62px;
+  bottom: 80px;
+  z-index: 1300 !important;
+}
+.addBtn2 {
+  position: absolute;
+  right: 62px;
+  bottom: 37px;
   z-index: 1300 !important;
 }
 
-@media only screen and (max-width: 1400px) {
-  .table_cells,
-  .name_cell_dasdboard {
-    font-size: 0.8rem !important;
+@media only screen and (max-width: 1440px) {
+  .name_cell_dasdboard,
+  .table_cells {
+    font-size: 0.9rem !important;
+  }
+  .dashboard_table_div {
+    height: 53vh;
+  }
+  .chart_main_div {
+    width: 38%;
+    height: 350px;
   }
 }
 
