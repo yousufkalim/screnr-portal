@@ -66,11 +66,15 @@ export default function ClinicianTable() {
     <div className="bgClinicianTable" id="clinicianTable">
       <TableContainer
         component={Paper}
-        style={{
+        sx={{
           borderRadius: '20px',
           maxHeight: '92%',
           overflowX: 'hidden',
-          width: '77vw',
+          width: '77.8vw',
+          '@media (max-width: 1900px)': {
+            maxHeight: '95%',
+            width: '76.8vw',
+          },
         }}
       >
         <h1 className="clientTableHead">List of Clinicians</h1>
