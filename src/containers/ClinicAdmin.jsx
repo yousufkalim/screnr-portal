@@ -21,6 +21,7 @@ export default function ClinicAdmin() {
       </Grid>
 
       <Grid className="bg" xl={10} lg={10}>
+        <div className="breadCrumb">Dashboard &gt; &nbsp;Staff &gt;</div>
         <ClinicAdminTable />
       </Grid>
       <div className="addBtn">

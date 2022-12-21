@@ -66,11 +66,15 @@ export default function ClinicAdminTable() {
     <div className="bg" id="clinicAdminTable">
       <TableContainer
         component={Paper}
-        style={{
+        sx={{
           borderRadius: '20px',
           maxHeight: '100%',
           overflowX: 'hidden',
-          width: '77vw',
+          width: '77.8vw',
+          '@media (max-width: 1900px)': {
+            maxHeight: '98%',
+            width: '76.8vw',
+          },
         }}
       >
         <h1 className="clientTableHead">List of Clinic Admins</h1>

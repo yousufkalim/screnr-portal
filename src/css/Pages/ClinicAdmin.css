@@ -36,7 +36,7 @@
 }
 
 #clinicAdminTable {
-  padding: 5% 3% 3% 3%;
+  padding: 3% 3% 1% 3%;
 }
 
 .user_detail {
@@ -46,7 +46,7 @@
 
 .bg {
   background-color: rgb(246, 250, 251);
-  height: 90vh;
+  height: 86vh;
 }
 
 .clientTableHead {
@@ -79,4 +79,10 @@
 .table_head {
   font-size: 14px !important;
   color: #919b9b !important;
+}
+
+@media only screen and (max-width: 1640px) {
+  .bg {
+    height: 83.5vh;
+  }
 }

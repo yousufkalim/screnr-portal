@@ -205,13 +205,13 @@ export default function EditClinicAdmin({ openEditClinicAdmin, setOpenEditClinic
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <p className="genderTxt"> Gender</p>
               <span>
-                <Button className="genderBtn" variant="contained">
+                <Button className="genderBtn2" variant="contained">
                   Male
                 </Button>
-                <Button className="genderBtn" variant="contained">
+                <Button className="genderBtn2" variant="contained">
                   Female
                 </Button>
-                <Button className="genderBtn" variant="contained">
+                <Button className="genderBtn2" variant="contained">
                   Non-binary
                 </Button>
               </span>
@@ -246,7 +246,7 @@ export default function EditClinicAdmin({ openEditClinicAdmin, setOpenEditClinic
                 width: '100%',
               }}
             >
-              <div className="date-div">
+              <div className="date-div2">
                 <DatePicker
                   showPopperArrow
                   dateFormat="dd/MMMM/yyyy"
