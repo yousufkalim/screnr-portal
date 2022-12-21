@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-// rr imports
-import { Link } from 'react-router-dom';
+// navigator import
+import { useNavigate } from 'react-router-dom';
 
 // mui imports
 import { Grid, IconButton, InputLabel } from '@mui/material';
@@ -45,6 +45,8 @@ const useOutlinedInputStyles = makeStyles({
 });
 export default function Login() {
   const [openForgetPasswordPopup, setOpenForgetPasswordPopup] = useState(false);
+  const navigate = useNavigate();
+
   const outlinedInputStyles = useOutlinedInputStyles();
 
   return (
@@ -147,11 +149,16 @@ export default function Login() {
                 </div>
               </FormControl>
 
-              <Link to="/dashboard" className="link">
-                <Button className="logInBtn" variant="contained">
-                  Login
-                </Button>
-              </Link>
+              <Button
+                className="logInBtn"
+                variant="contained"
+                onClick={() => {
+                  navigate('/dashboard');
+                  window.location.reload();
+                }}
+              >
+                Login
+              </Button>
             </Grid>
             {openForgetPasswordPopup && (
               <ForgetPasswordPopup
