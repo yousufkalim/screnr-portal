@@ -13,8 +13,11 @@ function Index() {
   return (
     <>
       {window.location.pathname === '/dashboard' ||
-      window.location.pathname === '/dashboard/staff' ||
-      window.location.pathname === '/dashboard/staff/clinician' ? (
+      '/dashboard/' ||
+      '/dashboard/staff' ||
+      '/dashboard/staff/' ||
+      '/dashboard/staff/clinician' ||
+      '/dashboard/staff/clinician/' ? (
         <Header />
       ) : (
         ''

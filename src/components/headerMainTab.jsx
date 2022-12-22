@@ -2,9 +2,6 @@ import React from 'react';
 // mui imports
 import Stack from '@mui/material/Stack';
 
-// navigator import
-import { useNavigate } from 'react-router-dom';
-
 // images import
 import { ReactComponent as DashboardIcon } from '../assets/components/HeaderIcons/Dashboard.svg';
 import { ReactComponent as ClinicAdminIcon } from '../assets/components/HeaderIcons/ClinicAdminIcon.svg';
@@ -13,48 +10,43 @@ import { ReactComponent as PatientIcon } from '../assets/components/HeaderIcons/
 import { ReactComponent as PatientStatsIcon } from '../assets/components/HeaderIcons/PatientStatsIcon.svg';
 
 export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
-  const navigate = useNavigate();
-
   return (
     <Stack direction="row" spacing={6} alignItems="center">
-      {activeTab === 'Dashboard' ? (
+      {activeTab === '/dashboard' || activeTab === '/dashboard/' ? (
         <div className="tab2_div">
           <DashboardIcon />
-          <span>{activeTab}</span>
+          <span>Dashboard</span>
         </div>
       ) : (
         <DashboardIcon
           onClick={() => {
-            HandleTabsSwitch('Dashboard');
-            navigate('/dashboard');
+            HandleTabsSwitch('/dashboard');
           }}
           className="tab_icon"
         />
       )}
-      {activeTab === 'Clinic Admin' ? (
+      {activeTab === '/dashboard/staff' || activeTab === '/dashboard/staff/' ? (
         <div className="tab2_div">
           <ClinicAdminIcon />
-          <span>{activeTab}</span>
+          <span>Clinic Admin</span>
         </div>
       ) : (
         <ClinicAdminIcon
           onClick={() => {
-            HandleTabsSwitch('Clinic Admin');
-            navigate('/dashboard/staff');
+            HandleTabsSwitch('/dashboard/staff');
           }}
           className="tab_icon"
         />
       )}
-      {activeTab === 'Clinician' ? (
+      {activeTab === '/dashboard/staff/clinician' || activeTab === '/dashboard/staff/clinician/' ? (
         <div className="tab2_div">
           <ClinicalIcon />
-          <span>{activeTab}</span>
+          <span>Clinician</span>
         </div>
       ) : (
         <ClinicalIcon
           onClick={() => {
-            HandleTabsSwitch('Clinician');
-            navigate('/dashboard/staff/clinician');
+            HandleTabsSwitch('/dashboard/staff/clinician');
           }}
           className="tab_icon"
         />
@@ -62,7 +54,7 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
       {activeTab === 'Patients' ? (
         <div className="tab2_div">
           <PatientIcon />
-          <span>{activeTab}</span>
+          <span>Patients</span>
         </div>
       ) : (
         <PatientIcon onClick={() => HandleTabsSwitch('Patients')} className="tab_icon" />
@@ -70,7 +62,7 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
       {activeTab === 'Patient Stats' ? (
         <div className="tab2_div">
           <PatientStatsIcon />
-          <span>{activeTab}</span>
+          <span>Patient Stats</span>
         </div>
       ) : (
         <PatientStatsIcon onClick={() => HandleTabsSwitch('Patient Stats')} className="tab_icon" />
