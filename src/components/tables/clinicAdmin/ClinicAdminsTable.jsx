@@ -71,9 +71,9 @@ export default function ClinicAdminTable() {
           maxHeight: '100%',
           overflowX: 'hidden',
           width: '77.8vw',
-          '@media (max-width: 1900px)': {
+          '@media (max-width: 1600px)': {
             maxHeight: '98%',
-            width: '76.8vw',
+            width: '73vw',
           },
         }}
       >
@@ -109,7 +109,7 @@ export default function ClinicAdminTable() {
               <StyledTableRow key={row.name} className="clientTableRow">
                 <TableCell />
                 <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                  <AvatarComponent alt="Rana Hamza" className="header_avatar" />
+                  <AvatarComponent alt="Ameer Hamza" className="header_avatar" />
                   <div className="clinic_cell">
                     {row.name} <br />
                     <span className="clinicNametxt">

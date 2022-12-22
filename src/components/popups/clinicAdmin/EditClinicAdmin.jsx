@@ -21,7 +21,10 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
-import profiles from '../../../assets/icons/Profiles.svg';
+import edit from '../../../assets/icons/edit.svg';
+
+// child import
+import AvatarComponent from '../../Avatar';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -101,7 +104,8 @@ export default function EditClinicAdmin({ openEditClinicAdmin, setOpenEditClinic
                 <label htmlFor="profilePic">
                   {/* avatar to be added */}
                   <input name="profile_pic" type="file" id="profilePic" accept="image/*" />{' '}
-                  <img src={profiles} className="pointer" alt="" />
+                  <AvatarComponent alt="Ameer Hmza" className="popups_avatar" />
+                  <img src={edit} className="addImgIcon" alt="" />
                 </label>
               </div>
             </div>
