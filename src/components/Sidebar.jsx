@@ -3,11 +3,17 @@ import React from 'react';
 import { ReactComponent as Phone } from '../assets/images/staffScreen/phone.svg';
 import { ReactComponent as Email } from '../assets/images/staffScreen/email.svg';
 import { ReactComponent as Expiry } from '../assets/images/staffScreen/expiryDate.svg';
+import edit from '../assets/icons/sidebarEdit.svg';
+
+import AvatarComponent from './Avatar';
 
 export default function Sidebar() {
   return (
     <div className="left_side">
-      <div className="profile">RH</div>
+      <div>
+        <AvatarComponent alt="Rana Hamza" className="sidebar_avatar" />
+        <img src={edit} alt="" className="editIconSidebar" />
+      </div>
       <div className="sideBarInfo">
         <div className="user_name">Rana Hamza</div>
         <div className="staff_id">
@@ -17,16 +23,20 @@ export default function Sidebar() {
       <div className="sidebarSubDiv">
         <div className="user_detail">
           <Phone />
-          &nbsp;&nbsp;+123456734
+          &nbsp;&nbsp; +123456734
         </div>
         <div className="user_detail">
           <Email />
-          &nbsp;&nbsp;Screner@gmail.com
+          &nbsp;&nbsp; &nbsp;Screner@gmail.com
         </div>
-        <div className="user_detail">
+      </div>
+      <div className="user_exp_detail">
+        <span className="detail_expiry">
           <Expiry />
-          &nbsp;&nbsp;Expiry Date&nbsp;&nbsp;&nbsp;&nbsp;12-050-2023
-        </div>
+          &nbsp;&nbsp;
+          <p>Expiry Date</p>
+        </span>
+        <p> &nbsp;&nbsp;12-05-2023</p>
       </div>
     </div>
   );

@@ -4,6 +4,74 @@
 
 .sidebarSubDiv {
   display: flex;
+  padding: 5% 0px;
   flex-direction: column;
   gap: 1rem;
+  width: 68%;
+}
+.left_side {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 8% 1%;
+}
+
+.sidebar_avatar {
+  background-color: #136773 !important;
+  width: 111px !important;
+  height: 111px !important;
+  font-size: 32px !important;
+}
+
+.user_detail {
+  color: #919b9b;
+  font-size: 0.9rem;
+}
+
+.user_exp_detail {
+  width: 68%;
+  font-size: 0.9rem;
+  margin: 0 auto;
+  color: #ff5151;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail_expiry {
+  display: flex;
+  justify-content: space-between;
+}
+
+.editIconSidebar {
+  position: absolute;
+  left: 9.5%;
+  top: 20.5%;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1700px) {
+  .editIconSidebar {
+    top: 19%;
+  }
+}
+
+@media only screen and (max-width: 1640px) {
+  .editIconSidebar {
+    left: 11.5%;
+    top: 24%;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .editIconSidebar {
+    left: 11.5%;
+    top: 28%;
+  }
+  .user_exp_detail {
+    width: 73%;
+  }
 }
