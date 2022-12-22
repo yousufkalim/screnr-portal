@@ -9,7 +9,7 @@
 
 .bgClinicianTable {
   background-color: rgb(246, 250, 251);
-  height: 71.5vh;
+  height: 71.2vh;
 }
 
 .clinicianScreenCardsDiv {
@@ -51,6 +51,6 @@
     width: 57%;
   }
   .bgClinicianTable {
-    height: 68vh;
+    height: 67.2vh;
   }
 }

@@ -39,11 +39,11 @@ export default function ClinicAdmin() {
 
   return (
     <Grid container>
-      <Grid xl={2} lg={2}>
+      <Grid xl={2} lg={2.5}>
         <Sidebar />
       </Grid>
 
-      <Grid className="bgClinicianTable" xl={10} lg={10}>
+      <Grid className="bgClinicianTable" xl={10} lg={9.5}>
         <div className="breadCrumb">
           Dashboard &gt; &nbsp;Staff &gt; &nbsp;Lifeline Clinic &gt;{' '}
         </div>

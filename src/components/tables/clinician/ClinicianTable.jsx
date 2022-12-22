@@ -35,31 +35,31 @@ export default function ClinicianTable() {
   }
 
   const rows = [
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
   ];
 
   return (
@@ -68,12 +68,12 @@ export default function ClinicianTable() {
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '92%',
+          maxHeight: '96%',
           overflowX: 'hidden',
           width: '77.8vw',
-          '@media (max-width: 1900px)': {
-            maxHeight: '95%',
-            width: '76.8vw',
+          '@media (max-width: 1600px)': {
+            maxHeight: '96.3%',
+            width: '73vw',
           },
         }}
       >
@@ -112,7 +112,7 @@ export default function ClinicianTable() {
               <StyledTableRow key={row.name} className="clientTableRow">
                 <TableCell />
                 <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                  <AvatarComponent alt="Rana Hamza" className="header_avatar" />
+                  <AvatarComponent alt="Arooj Ishfaq" className="header_avatar" />
                   <div className="clinic_cell">
                     {row.name} <br />
                     <span className="clinicNametxt">Clinic: Line Pvt.</span>
