@@ -123,13 +123,13 @@
 }
 
 .addBtn {
-  position: absolute;
+  position: absolute !important;
   right: 62px;
   bottom: 80px;
   z-index: 1300 !important;
 }
 .addBtn2 {
-  position: absolute;
+  position: absolute !important;
   right: 62px;
   bottom: 37px;
   z-index: 1300 !important;

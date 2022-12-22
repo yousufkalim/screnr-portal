@@ -58,7 +58,7 @@ export default function TableComponent({ setOpenAddStaffMember }) {
         overflowX: 'hidden',
         padding: '1% 2%',
         width: '58vw',
-        '@media (max-width: 1400px)': {
+        '@media (max-width: 1600px)': {
           width: '54vw',
         },
       }}
@@ -100,7 +100,7 @@ export default function TableComponent({ setOpenAddStaffMember }) {
                 {row.id}
               </TableCell>
               <TableCell align="left" sx={{ display: 'flex' }}>
-                <AvatarComponent alt="Rana Hamza" className="header_avatar" />
+                <AvatarComponent alt="Ameer Hamza" className="header_avatar" />
                 <div className="name_cell_dasdboard">
                   {row.fullName} <br />
                   <span className="staffEmailCell"> {row.email}</span>

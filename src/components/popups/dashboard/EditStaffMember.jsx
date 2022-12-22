@@ -23,6 +23,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 // assets import
 import edit from '../../../assets/icons/edit.svg';
 
+// child component imports
+import AvatarComponent from '../../Avatar';
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
     borderRadius: '20px',
@@ -101,7 +104,7 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                 {/* Avatar to be used */}
                 <label htmlFor="profilePic">
                   <input name="profile_pic" type="file" id="profilePic" accept="image/*" />
-
+                  <AvatarComponent alt="Arooj Ishfaq" className="popups_avatar" />
                   <img src={edit} className="addImgIcon" alt="" />
                 </label>
               </div>
