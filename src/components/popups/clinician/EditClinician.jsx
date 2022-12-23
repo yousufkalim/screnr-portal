@@ -235,13 +235,13 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <p className="genderTxt"> Gender</p>
               <span>
-                <Button className="genderBtn2" variant="contained">
+                <Button className="genderBtn" variant="contained">
                   Male
                 </Button>
-                <Button className="genderBtn2" variant="contained">
+                <Button className="genderBtn" variant="contained">
                   Female
                 </Button>
-                <Button className="genderBtn2" variant="contained">
+                <Button className="genderBtn" variant="contained">
                   Non-binary
                 </Button>
               </span>
