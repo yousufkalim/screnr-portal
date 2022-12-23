@@ -51,13 +51,17 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
           className="tab_icon"
         />
       )}
-      {activeTab === 'Patients' ? (
+      {activeTab === '/dashboard/staff/clinician/doctor' ||
+      activeTab === '/dashboard/staff/clinician/doctor/' ? (
         <div className="tab2_div">
           <PatientIcon />
           <span>Patients</span>
         </div>
       ) : (
-        <PatientIcon onClick={() => HandleTabsSwitch('Patients')} className="tab_icon" />
+        <PatientIcon
+          onClick={() => HandleTabsSwitch('/dashboard/staff/clinician/doctor')}
+          className="tab_icon"
+        />
       )}
       {activeTab === 'Patient Stats' ? (
         <div className="tab2_div">
