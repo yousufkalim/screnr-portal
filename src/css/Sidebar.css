@@ -66,12 +66,12 @@
     top: 24.5%;
   }
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1340px) {
   .editIconSidebar {
     left: 11.5%;
-    top: 28%;
+    top: 27%;
   }
   .user_exp_detail {
-    width: 73%;
+    width: 73% !important;
   }
 }
