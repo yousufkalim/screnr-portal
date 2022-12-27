@@ -1,0 +1,180 @@
+.patientScreenCardsDiv {
+  width: 97%;
+}
+
+.cards_div_patient_pg {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  justify-content: space-between;
+  margin-top: 4%;
+  margin-left: 3.2%;
+}
+
+.right_sidebar_container {
+  background-color: rgb(246, 250, 251);
+}
+
+.right_sidebar {
+  width: 17vw;
+  height: 98vh;
+  padding: 23% 0;
+}
+
+.right_sidebar_cards {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 20px;
+  /* justify-content: center; */
+  padding: 10px;
+  margin-bottom: 3%;
+}
+
+.patientListChart {
+  background-color: white;
+  height: max-content;
+  padding: 10% 6%;
+  margin: 8% 0;
+  border-radius: 20px;
+}
+
+.timeChartDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chartTime {
+  color: #fba622;
+  font-weight: 500;
+  font-size: 29.1025px;
+}
+
+.chartSubtxt {
+  color: #136773;
+  font-weight: 400;
+  font-size: 10px;
+}
+
+.chartTimeTxt {
+  color: #919b9b;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.currentTimeStatsDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 4% 0;
+}
+
+.currentTimeSubDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.chartDayTxt {
+  color: #fba622;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.chartCurrentTime {
+  color: #136773;
+  font-weight: 400;
+  font-size: 11px;
+}
+
+.statsPercentage {
+  color: #136773;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.periodDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 3%;
+}
+
+.periodSelect {
+  color: #fba622;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 3%;
+}
+
+.periodSelect:hover {
+  color: white;
+  background-color: #fba622;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.circularBarCell {
+  display: flex;
+  flex-direction: column;
+}
+
+.circularProgress {
+  transform: rotate(90deg) !important;
+  position: absolute;
+  bottom: 39%;
+  right: 53%;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  color: #454238;
+}
+
+.linearProgress {
+  font-size: 12px;
+  font-weight: 400;
+  color: #454238;
+}
+
+.patient_cell {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #454238 !important ;
+  margin-left: 8px;
+  align-self: center;
+}
+
+#completion_cell {
+  color: #fba622 !important;
+  font-weight: 500 !important;
+}
+
+@media only screen and (max-width: 1600px) {
+  .periodSelect {
+    color: #fba622;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 3%;
+  }
+  .patientChart {
+    padding-right: 6%;
+  }
+  .patient_cell {
+    font-size: 0.9rem !important;
+  }
+  .circularProgress {
+    right: 40%;
+  }
+}
+@media only screen and (max-width: 1440px) {
+  .right_sidebar {
+    height: 97vh;
+  }
+}
+
+@media only screen and (max-width: 1338px) {
+  .right_sidebar {
+    height: 99vh;
+  }
+}
