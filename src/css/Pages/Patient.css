@@ -150,6 +150,37 @@
   font-weight: 500 !important;
 }
 
+.notiCell {
+  display: flex !important;
+  flex-direction: row !important;
+  text-align: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.reportTxt {
+  color: #ff5151;
+  margin-left: 5%;
+}
+
+.statusTxt {
+  color: #11a283;
+  margin-left: 5%;
+}
+
+.msgTxt {
+  color: #fba622;
+  margin-left: 2%;
+}
+
+.clrTableRow {
+  background-color: #f6cf6437 !important;
+  animation-name: fadeInOpacity;
+  animation-timing-function: fade-in;
+  animation-duration: 1s;
+}
+
 @media only screen and (max-width: 1600px) {
   .periodSelect {
     color: #fba622;
@@ -157,19 +188,27 @@
     font-size: 12px;
     padding: 3%;
   }
+
   .patientChart {
     padding-right: 6%;
   }
+
   .patient_cell {
     font-size: 0.9rem !important;
   }
+
   .circularProgress {
     right: 40%;
   }
 }
+
 @media only screen and (max-width: 1440px) {
   .right_sidebar {
     height: 97vh;
+  }
+
+  .notiCell {
+    font-size: 12px;
   }
 }
 

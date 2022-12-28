@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { React, useState } from 'react';
+import { React, useState, Fragment } from 'react';
 
 // mui imports
 import { styled } from '@mui/material/styles';
@@ -14,7 +14,10 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 
 // // assets import
-// import { ReactComponent as Edit } from '../../../assets/components/dashboardTable/alert.svg';
+import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
+import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
+import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
+import { ReactComponent as Tick } from '../../../assets/components/Table/tick.svg';
 
 // child component imports
 import AvatarComponent from '../../Avatar';
@@ -32,6 +35,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 export default function PatientTable() {
   const [openEditPatient, setOpenEditPatient] = useState(false);
+  const [patient, setPatient] = useState('');
 
   function createData(id, name, diagnosis, exercises, completion, performance) {
     return { id, name, diagnosis, exercises, completion, performance };
@@ -110,7 +114,7 @@ export default function PatientTable() {
               <TableCell
                 align="left"
                 className="table_head"
-                sx={{ width: '20%', '@media (max-width: 1600px)': { width: '33%' } }}
+                sx={{ width: '20%', '@media (max-width: 1600px)': { width: '34%' } }}
               >
                 Name
               </TableCell>
@@ -137,66 +141,103 @@ export default function PatientTable() {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <StyledTableRow key={row.name} className="clientTableRow">
-                <TableCell align="left"> {row.id} </TableCell>
-                <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                  <AvatarComponent alt="Arooj Ishfaq" className="header_avatar" />
-                  <div className="patient_cell">{row.name}</div>
-                </TableCell>
-
-                <TableCell align="center" className="table_cells">
-                  {row.diagnosis}
-                </TableCell>
-                <TableCell align="center" className="table_cells">
-                  {row.exercises}
-                </TableCell>
-                <TableCell
-                  align="center"
-                  className="table_cells"
-                  id="completion_cell"
-                  sx={{
-                    padding: '3%',
+              <>
+                <StyledTableRow
+                  key={row.name}
+                  className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
+                  onClick={() => {
+                    setPatient(row);
                   }}
                 >
-                  {row.completion}
-                </TableCell>
+                  <TableCell align="left"> {row.id} </TableCell>
+                  <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
+                    <AvatarComponent alt="Arooj Ishfaq" className="header_avatar" />
+                    <div className="patient_cell">{row.name}</div>
+                  </TableCell>
 
-                <TableCell align="center">
-                  <span className="linearProgress">{`${row.performance}%`}</span>
-                  {row.performance <= 30 ? (
-                    <RedLinearProgress
-                      variant="determinate"
-                      value={row.performance}
-                      thickness="40"
-                    />
-                  ) : row.performance > 30 && row.performance <= 79 ? (
-                    <YellowLinearProgress
-                      variant="determinate"
-                      value={row.performance}
-                      thickness="40"
-                    />
-                  ) : (
-                    <GreenLinearProgress
-                      variant="determinate"
-                      value={row.performance}
-                      thickness="40"
-                    />
-                  )}
-                </TableCell>
-                <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
-                  <div className="circularBarCell">
-                    <CircularProgress
-                      variant="determinate"
-                      thickness="4.5"
-                      value={50}
-                      size={55}
-                      sx={{ color: '#FABB18' }}
-                    />
+                  <TableCell align="center" className="table_cells">
+                    {row.diagnosis}
+                  </TableCell>
+                  <TableCell align="center" className="table_cells">
+                    {row.exercises}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    className="table_cells"
+                    id="completion_cell"
+                    sx={{
+                      padding: '3%',
+                    }}
+                  >
+                    {row.completion}
+                  </TableCell>
 
-                    <span className="circularProgress">55%</span>
-                  </div>
-                </TableCell>
-              </StyledTableRow>
+                  <TableCell align="center">
+                    <span className="linearProgress">{`${row.performance}%`}</span>
+                    {row.performance <= 30 ? (
+                      <RedLinearProgress
+                        variant="determinate"
+                        value={row.performance}
+                        thickness="40"
+                      />
+                    ) : row.performance > 30 && row.performance <= 79 ? (
+                      <YellowLinearProgress
+                        variant="determinate"
+                        value={row.performance}
+                        thickness="40"
+                      />
+                    ) : (
+                      <GreenLinearProgress
+                        variant="determinate"
+                        value={row.performance}
+                        thickness="40"
+                      />
+                    )}
+                  </TableCell>
+                  <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
+                    <div className="circularBarCell">
+                      <CircularProgress
+                        variant="determinate"
+                        thickness="4.5"
+                        value={50}
+                        size={55}
+                        sx={{ color: '#FABB18' }}
+                      />
+
+                      <span className="circularProgress">55%</span>
+                    </div>
+                  </TableCell>
+                </StyledTableRow>
+                {patient.id === row.id ? (
+                  <TableRow className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}>
+                    <TableCell width="2%" />
+
+                    <TableCell>
+                      <div className="notiCell">
+                        <Report /> <p className="reportTxt"> 2 Reports</p>
+                      </div>
+                    </TableCell>
+                    <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
+                      <div className="notiCell">
+                        <Message />
+                        <p className="msgTxt"> 3 Messages</p>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="notiCell">
+                        <Tick /> <p className="statusTxt">reviewed</p>
+                      </div>
+                    </TableCell>
+                    <TableCell />
+                    <TableCell />
+                    <TableCell align="left">
+                      <Edit className="table_icons" onClick={() => setOpenEditPatient(true)} />
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  ''
+                )}
+              </>
             ))}
           </TableBody>
         </Table>
