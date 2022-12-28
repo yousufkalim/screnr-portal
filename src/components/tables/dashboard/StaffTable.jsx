@@ -10,8 +10,8 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
 // assets import
-import { ReactComponent as Edit } from '../../../assets/components/dashboardTable/alert.svg';
-import { ReactComponent as Delete } from '../../../assets/components/dashboardTable/alert1.svg';
+import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
+import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 
 // child import
 import AvatarComponent from '../../Avatar';

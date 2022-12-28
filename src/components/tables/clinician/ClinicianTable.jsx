@@ -11,7 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 
 // assets import
-import { ReactComponent as Edit } from '../../../assets/components/dashboardTable/alert.svg';
+import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 
 // child component imports
 import EditClinician from '../../popups/clinician/EditClinician';
@@ -109,7 +109,7 @@ export default function ClinicianTable() {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <StyledTableRow key={row.name} className="clientTableRow">
+              <StyledTableRow key={row.name} className="tableRow">
                 <TableCell />
                 <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
                   <AvatarComponent alt="Arooj Ishfaq" className="header_avatar" />
