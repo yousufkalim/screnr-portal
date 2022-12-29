@@ -13,18 +13,7 @@ import Patient from '../containers/Patient';
 function Index() {
   return (
     <>
-      {window.location.pathname === '/dashboard' ||
-      '/dashboard/' ||
-      '/dashboard/staff' ||
-      '/dashboard/staff/' ||
-      '/dashboard/staff/clinician' ||
-      '/dashboard/staff/clinician/' ||
-      '/dashboard/staff/clinician/doctor' ||
-      '/dashboard/staff/clinician/doctor/' ? (
-        <Header />
-      ) : (
-        ''
-      )}
+      {window.location.pathname !== '/' ? <Header /> : ''}
 
       <Routes>
         <Route path="/" element={<Login />} />

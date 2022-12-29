@@ -62,7 +62,6 @@ export default function Patient() {
                 amount={item.amount}
                 title={item.title}
                 BottomStats={item.icon2}
-                bottomStatsClassName={item.className}
                 statsCardClassName="stats_card_main_div"
               />
             ))}

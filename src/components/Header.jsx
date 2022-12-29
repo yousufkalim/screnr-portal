@@ -22,10 +22,7 @@ export default function Header() {
 
   useEffect(() => {
     setActiveTab(window.location.pathname);
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem('activeTab', activeTab);
+    localStorage.setItem('activeTab', activeTab);
   }, [activeTab]);
 
   const HandleTabsSwitch = (targetTab) => {

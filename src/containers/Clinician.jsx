@@ -24,7 +24,7 @@ export default function ClinicAdmin() {
     {
       icon: Clinician,
       amount: '65',
-      title: 'Total Clinician',
+      title: 'Total Clinicians',
       icon2: GreenCircle,
       className: 'green_circle',
     },

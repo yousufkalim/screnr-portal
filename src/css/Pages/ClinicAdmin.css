@@ -31,10 +31,18 @@
   color: #136773;
 }
 
+#disabledDate .react-datepicker-wrapper {
+  cursor: not-allowed !important;
+}
+#disabledDate .react-datepicker__input-container input {
+  cursor: not-allowed !important;
+}
+
 .tableRow {
   margin-top: 20px !important;
   cursor: pointer;
 }
+
 .tableRow:hover {
   background-color: #f6cf6437 !important;
   animation-name: fadeInOpacity;

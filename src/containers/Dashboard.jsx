@@ -38,7 +38,7 @@ export default function Dashboard() {
     {
       icon: Clinician,
       amount: '65',
-      title: 'Total Clinician',
+      title: 'Total Clinicians',
       icon2: GreenCircle,
       className: 'green_circle',
     },

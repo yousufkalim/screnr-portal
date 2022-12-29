@@ -2,7 +2,7 @@
   background-color: #fff;
   align-items: center;
   border-radius: 20px;
-  width: 300px !important;
+  width: 342px !important;
   border: 0.5px solid #e5ebeb;
   overflow: hidden;
 }
@@ -36,8 +36,26 @@
   font-size: 12px;
 }
 
+@media only screen and (max-width: 1680px) {
+  .stats_card_main_div {
+    width: 317px !important;
+  }
+}
+
 @media only screen and (max-width: 1440px) {
   .stats_card_main_div {
     width: 240px !important;
+    height: 146px !important;
+  }
+
+  .bottomStats {
+    width: 239px !important;
+    height: 52px !important;
+  }
+}
+
+@media only screen and (max-width: 1338px) {
+  .stats_card_main_div {
+    width: 230px !important;
   }
 }

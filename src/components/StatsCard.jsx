@@ -1,13 +1,6 @@
 import React from 'react';
 
-export default function StatsCard({
-  Icon,
-  amount,
-  title,
-  BottomStats,
-  bottomStatsClassName,
-  statsCardClassName,
-}) {
+export default function StatsCard({ Icon, amount, title, BottomStats, statsCardClassName }) {
   return (
     <div className={statsCardClassName}>
       <div className="stats_card_content_div">
@@ -18,7 +11,7 @@ export default function StatsCard({
         </div>
       </div>
       <div>
-        <BottomStats className={bottomStatsClassName} />
+        <BottomStats className="bottomStats" />
       </div>
     </div>
   );
