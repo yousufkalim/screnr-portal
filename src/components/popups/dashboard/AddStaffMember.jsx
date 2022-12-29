@@ -62,7 +62,7 @@ const useOutlinedInputStyles = makeStyles({
   },
 });
 export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMember }) {
-  const [setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
@@ -187,12 +187,17 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                   color: '#136773',
                   textAlign: 'left',
                   fontSize: '40px',
+                  width: 'fit-content',
                 }}
-                control={
-                  <Checkbox defaultChecked onChange={handleCheck} style={{ color: '#136773' }} />
-                }
+                control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
                 label={
-                  <Typography style={{ color: '#136773', textAlign: 'left', fontWeight: '500' }}>
+                  <Typography
+                    style={{
+                      color: '#136773',
+                      textAlign: 'left',
+                      fontWeight: '500',
+                    }}
+                  >
                     Want to Add expiry date
                   </Typography>
                 }
@@ -204,11 +209,12 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                 width: '100%',
               }}
             >
-              <div className="date-div">
+              <div className="date-div" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
                   dateFormat="dd/MMMM/yyyy"
                   name="date"
+                  disabled={!checked}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown

@@ -21,7 +21,10 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
-import profiles from '../../../assets/icons/Profiles.svg';
+import edit from '../../../assets/icons/edit.svg';
+
+// child import
+import AvatarComponent from '../../Avatar';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -61,7 +64,7 @@ const useOutlinedInputStyles = makeStyles({
   },
 });
 export default function EditClinicAdmin({ openEditClinicAdmin, setOpenEditClinicAdmin }) {
-  const [setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
@@ -101,7 +104,8 @@ export default function EditClinicAdmin({ openEditClinicAdmin, setOpenEditClinic
                 <label htmlFor="profilePic">
                   {/* avatar to be added */}
                   <input name="profile_pic" type="file" id="profilePic" accept="image/*" />{' '}
-                  <img src={profiles} className="pointer" alt="" />
+                  <AvatarComponent alt="Ameer Hmza" className="popups_avatar" />
+                  <img src={edit} className="addImgIcon" alt="" />
                 </label>
               </div>
             </div>
@@ -229,12 +233,17 @@ export default function EditClinicAdmin({ openEditClinicAdmin, setOpenEditClinic
                   color: '#136773',
                   textAlign: 'left',
                   fontSize: '40px',
+                  width: 'fit-content',
                 }}
-                control={
-                  <Checkbox defaultChecked onChange={handleCheck} style={{ color: '#136773' }} />
-                }
+                control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
                 label={
-                  <Typography style={{ color: '#136773', textAlign: 'left', fontWeight: '500' }}>
+                  <Typography
+                    style={{
+                      color: '#136773',
+                      textAlign: 'left',
+                      fontWeight: '500',
+                    }}
+                  >
                     Want to Add expiry date
                   </Typography>
                 }
@@ -246,11 +255,12 @@ export default function EditClinicAdmin({ openEditClinicAdmin, setOpenEditClinic
                 width: '100%',
               }}
             >
-              <div className="date-div">
+              <div className="date-div2" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
                   dateFormat="dd/MMMM/yyyy"
                   name="date"
+                  disabled={!checked}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown

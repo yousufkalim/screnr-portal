@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // mui imports
 import Stack from '@mui/material/Stack';
 import MenuIcon from '@mui/icons-material/Menu';
+// navigator import
+import { useNavigate } from 'react-router-dom';
 // components imports
 import AvatarComponent from './Avatar';
 import HeaderTab2 from './headerMainTab';
@@ -11,12 +13,26 @@ import { ReactComponent as BellIcon } from '../assets/components/HeaderIcons/Bel
 import { ReactComponent as SearchIcon } from '../assets/components/HeaderIcons/Search.svg';
 
 export default function Header() {
-  const [activeTab, setActiveTab] = useState('Dashboard');
+  const [activeTab, setActiveTab] = useState(window.location.pathname);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setActiveTab(window.localStorage.getItem('activeTab'));
+  }, []);
+
+  useEffect(() => {
+    setActiveTab(window.location.pathname);
+    localStorage.setItem('activeTab', activeTab);
+  }, [activeTab]);
+
   const HandleTabsSwitch = (targetTab) => {
-    setActiveTab(targetTab);
+    navigate(targetTab);
+    setActiveTab(window.location.pathname);
   };
 
   const handleLogoClick = () => {
+    navigate('/');
+    window.location.reload();
     console.log('logo clicked');
   };
 

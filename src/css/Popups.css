@@ -44,9 +44,26 @@
   padding: 2%;
   width: 100%;
 }
+.date-div2 .react-datepicker-wrapper {
+  border: 1px solid #454238 !important;
+  background-color: white;
+  border-radius: 14px;
+  margin-top: 9px;
+  padding: 2%;
+  width: 100%;
+}
 
-.date-div {
+.date-div,
+.date-div2 {
   height: 20%;
+}
+
+.date-div2 .react-datepicker-wrapper:hover {
+  border: 1px solid #fba622 !important;
+}
+
+.date-div .react-datepicker-wrapper:hover {
+  border: 1px solid #454238 !important;
 }
 
 .react-datepicker-wrapper .react-datepicker__input-container input {
@@ -175,7 +192,14 @@
 
 .addImgIcon {
   position: relative;
-  top: 43%;
-  right: 20%;
+  top: -25px;
+  right: -20px;
   cursor: pointer;
+}
+
+.popups_avatar {
+  background-color: #919b9b !important;
+  width: 120px !important;
+  height: 120px !important;
+  font-size: 32px !important;
 }

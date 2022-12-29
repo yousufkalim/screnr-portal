@@ -65,7 +65,7 @@ const useOutlinedInputStyles = makeStyles({
   },
 });
 export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
-  const [setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
@@ -117,6 +117,15 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                 )}
                 displayEmpty
                 sx={{
+                  '.MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#E1E1E1',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
                   borderRadius: '20px',
                   input: {
                     color: 'black',
@@ -244,12 +253,17 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                   color: '#136773',
                   textAlign: 'left',
                   fontSize: '40px',
+                  width: 'fit-content',
                 }}
-                control={
-                  <Checkbox defaultChecked onChange={handleCheck} style={{ color: '#136773' }} />
-                }
+                control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
                 label={
-                  <Typography style={{ color: '#136773', textAlign: 'left', fontWeight: '500' }}>
+                  <Typography
+                    style={{
+                      color: '#136773',
+                      textAlign: 'left',
+                      fontWeight: '500',
+                    }}
+                  >
                     Want to Add expiry date
                   </Typography>
                 }
@@ -261,11 +275,12 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                 width: '100%',
               }}
             >
-              <div className="date-div">
+              <div className="date-div" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
                   dateFormat="dd/MMMM/yyyy"
                   name="date"
+                  disabled={!checked}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown

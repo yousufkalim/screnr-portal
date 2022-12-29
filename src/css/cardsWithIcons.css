@@ -21,7 +21,7 @@
   justify-content: space-between;
   padding-left: 1rem;
   border-radius: 20px;
-  width: 20%;
+  width: 21%;
   border: 0.5px solid #e5ebeb;
   overflow: hidden;
 }
@@ -52,7 +52,7 @@
 }
 
 .title {
-  font-size: 1.2rem;
+  font-size: 14px;
   color: #919b9b;
 }
 
@@ -63,14 +63,22 @@
   }
 
   .title {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #919b9b;
+  }
+
+  .yellow_circle,
+  .red_circle,
+  .green_circle,
+  .blue_circle {
+    height: 100px;
+    width: 96px;
   }
 }
 
 @media only screen and (max-width: 1440px) {
   .card_main_div {
-    width: 23.5%;
+    width: 22%;
   }
 }
 

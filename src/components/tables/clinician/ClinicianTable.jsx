@@ -11,7 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 
 // assets import
-import { ReactComponent as Edit } from '../../../assets/components/dashboardTable/alert.svg';
+import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 
 // child component imports
 import EditClinician from '../../popups/clinician/EditClinician';
@@ -35,42 +35,46 @@ export default function ClinicianTable() {
   }
 
   const rows = [
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Ameer Hamza', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
+    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
   ];
 
   return (
     <div className="bgClinicianTable" id="clinicianTable">
       <TableContainer
         component={Paper}
-        style={{
+        sx={{
           borderRadius: '20px',
-          maxHeight: '93%',
+          maxHeight: '96%',
           overflowX: 'hidden',
-          width: '77vw',
+          width: '77.8vw',
+          '@media (max-width: 1600px)': {
+            maxHeight: '96.3%',
+            width: '73vw',
+          },
         }}
       >
         <h1 className="clientTableHead">List of Clinicians</h1>
@@ -105,10 +109,10 @@ export default function ClinicianTable() {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <StyledTableRow key={row.name} className="clientTableRow">
+              <StyledTableRow key={row.name} className="tableRow">
                 <TableCell />
                 <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                  <AvatarComponent alt="Rana Hamza" className="header_avatar" />
+                  <AvatarComponent alt="Arooj Ishfaq" className="header_avatar" />
                   <div className="clinic_cell">
                     {row.name} <br />
                     <span className="clinicNametxt">Clinic: Line Pvt.</span>

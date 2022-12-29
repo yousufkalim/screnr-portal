@@ -3,30 +3,32 @@
   flex-direction: row;
   text-align: left;
   justify-content: space-between;
-  margin-top: 8%;
+  margin-top: 4%;
   margin-left: 5%;
 }
 
 .bgClinicianTable {
   background-color: rgb(246, 250, 251);
-  height: 70vh;
+  height: 71.2vh;
 }
 
 .clinicianScreenCardsDiv {
-  width: 55%;
+  width: 53%;
 }
 
 .clinicNametxt {
   font-size: 14px;
+  font-weight: 400;
 }
 
 .clinicNameSubtxt {
   color: #fba622;
+  font-weight: 700;
 }
 
 .clinic_cell {
   font-size: 1rem !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   color: #454238 !important ;
   margin-left: 8px;
   align-self: center;
@@ -34,4 +36,21 @@
 
 #clinicianTable {
   padding: 2% 3% 0px 3%;
+}
+
+.breadCrumb {
+  padding: 1.3rem 0 0rem 3rem;
+  color: #919b9b;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@media only screen and (max-width: 1440px) {
+  .clinicianScreenCardsDiv {
+    width: 57%;
+  }
+  .bgClinicianTable {
+    height: 67.2vh;
+  }
 }

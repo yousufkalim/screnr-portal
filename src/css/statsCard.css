@@ -1,0 +1,61 @@
+.stats_card_main_div {
+  background-color: #fff;
+  align-items: center;
+  border-radius: 20px;
+  width: 342px !important;
+  border: 0.5px solid #e5ebeb;
+  overflow: hidden;
+}
+
+.stats_card_content_div {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
+  padding: 9% 0 5% 0;
+}
+
+.card_content_div2 {
+  margin-left: 15px;
+  margin-top: 5px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.timeLog {
+  color: #454238;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.lastLog {
+  color: #919b9b;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+@media only screen and (max-width: 1680px) {
+  .stats_card_main_div {
+    width: 317px !important;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .stats_card_main_div {
+    width: 240px !important;
+    height: 146px !important;
+  }
+
+  .bottomStats {
+    width: 239px !important;
+    height: 52px !important;
+  }
+}
+
+@media only screen and (max-width: 1338px) {
+  .stats_card_main_div {
+    width: 230px !important;
+  }
+}

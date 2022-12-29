@@ -24,7 +24,7 @@ export default function ClinicAdmin() {
     {
       icon: Clinician,
       amount: '65',
-      title: 'Total Clinician',
+      title: 'Total Clinicians',
       icon2: GreenCircle,
       className: 'green_circle',
     },
@@ -39,11 +39,14 @@ export default function ClinicAdmin() {
 
   return (
     <Grid container>
-      <Grid xl={2} lg={2}>
+      <Grid xl={2} lg={2.5}>
         <Sidebar />
       </Grid>
 
-      <Grid className="bgClinicianTable" xl={10} lg={10}>
+      <Grid className="bgClinicianTable" xl={10} lg={9.5}>
+        <div className="breadCrumb">
+          Dashboard &gt; &nbsp;Staff &gt; &nbsp;Lifeline Clinic &gt;{' '}
+        </div>
         <div className="clinicianScreenCardsDiv">
           <div className="cards_div_clinician_pg">
             {cardsData.map((item) => (
