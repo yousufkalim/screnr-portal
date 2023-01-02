@@ -9,9 +9,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles';
-// import Visibility from '@mui/icons-material/Visibility';
-import Button from '@mui/material/Button';
+import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Button from '@mui/material/Button';
 
 // assets import
 import Logo from '../assets/icons/Logo.svg';
@@ -19,6 +19,8 @@ import Vector from '../assets/images/login/loginPgImg.svg';
 
 // child component import
 import ForgetPasswordPopup from '../components/ForgetPasswordPopup';
+import { UpdateStore } from '../StoreContext';
+import api from '../api/index';
 
 const useOutlinedInputStyles = makeStyles({
   root: {
@@ -45,10 +47,28 @@ const useOutlinedInputStyles = makeStyles({
 });
 export default function Login() {
   const [openForgetPasswordPopup, setOpenForgetPasswordPopup] = useState(false);
-  const navigate = useNavigate();
+  const [user, setUser] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+  const updateStore = UpdateStore();
   const outlinedInputStyles = useOutlinedInputStyles();
 
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async () => {
+    const { data } = await api('post', '/auth/login', user);
+    updateStore({ admin: data.admin, loggedIn: true });
+    localStorage.setItem('token', data.token);
+    navigate('/dashboard');
+    window.location.reload();
+  };
   return (
     <div className="loginScreenBG">
       <Grid container>
@@ -87,11 +107,14 @@ export default function Login() {
                       },
                     },
                   }}
+                  value={user.email}
+                  onChange={handleChange}
                   id="outlined-email"
                   classes={outlinedInputStyles}
                   placeholder="Enter Email"
                   size="normal"
                   name="email"
+                  type="email"
                 />
               </FormControl>
             </Grid>
@@ -123,15 +146,20 @@ export default function Login() {
                   placeholder="Enter password"
                   size="normal"
                   name="password"
+                  onChange={handleChange}
+                  value={user.password}
+                  type={showPassword ? 'text' : 'password'}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
+                          onClick={handleClickShowPassword}
+                          onMouseDown={() => setShowPassword(true)}
                           aria-label="toggle password visibility"
                           edge="end"
                           sx={{ color: '#FBA622', mr: 1 }}
                         >
-                          <VisibilityOff />
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>
                     ),
@@ -153,8 +181,7 @@ export default function Login() {
                 className="logInBtn"
                 variant="contained"
                 onClick={() => {
-                  navigate('/dashboard');
-                  window.location.reload();
+                  handleSubmit();
                 }}
               >
                 Login
