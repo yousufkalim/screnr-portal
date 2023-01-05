@@ -33,7 +33,6 @@ export default function Header() {
   const handleLogoClick = () => {
     navigate('/');
     window.location.reload();
-    console.log('logo clicked');
   };
 
   return (

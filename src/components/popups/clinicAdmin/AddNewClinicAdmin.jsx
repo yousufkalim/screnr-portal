@@ -100,18 +100,12 @@ export default function AddClinicAdmin({
   const handleSubmit = async () => {
     const formData = new FormData();
     setClinicAdmin({ ...clinicAdmin, gender: selectedGender });
-    console.log('clinicAdmin', clinicAdmin);
-
     Object.keys(clinicAdmin).map((key) => formData.append(key, clinicAdmin[key]));
-    console.log('formData', formData);
-
-    // formData = { ...formData, selectedGender };
     const { data } = await api('post', '/admins/clinics', formData);
     if (data) {
       toast.success('Clinic Admin added successfully');
       getClinicAdmins();
       handleClose();
-      console.log('formData', formData);
     }
   };
 

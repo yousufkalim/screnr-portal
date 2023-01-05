@@ -22,7 +22,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
 import edit from '../../../assets/icons/edit.svg';
-// import fushi from '../../../assets/12fushi.webp';
 
 // child component imports
 import AvatarComponent from '../../Avatar';
