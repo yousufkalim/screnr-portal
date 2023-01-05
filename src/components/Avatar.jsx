@@ -35,7 +35,12 @@ export default function AvatarComponent({ alt, src, className, onClick }) {
     //   anchorOrigin={{ vertical: 'bottom', horizontal: 'right', display: 'none' }}
     //   variant="dot"
     // >
-    <Avatar {...stringAvatar(alt)} src={src} className={className} onClick={onClick} />
+    <Avatar
+      {...stringAvatar(alt.toUpperCase())}
+      src={src}
+      className={className}
+      onClick={onClick}
+    />
     // </StyledBadge>
   );
 }

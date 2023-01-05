@@ -33,19 +33,9 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function PatientTable() {
+export default function PatientTable({ patients }) {
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
-
-  function createData(id, name, diagnosis, exercises, completion, performance) {
-    return { id, name, diagnosis, exercises, completion, performance };
-  }
-
-  const rows = [
-    createData('01', 'Arooj Ishfaq', 'Back Pain', 'Strengthening', '100%', '97'),
-    createData('02', 'Arooj Ishfaq', 'Muscular dystrophy', 'Strengthening', '100%', '7'),
-    createData('03', 'Arooj Ishfaq', 'Muscular Pain', 'Strengthening', '100%', '55'),
-  ];
 
   const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 6,
@@ -140,7 +130,7 @@ export default function PatientTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {patients.map((row) => (
               <>
                 <StyledTableRow
                   key={row.name}

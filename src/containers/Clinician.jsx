@@ -1,7 +1,10 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import { Grid } from '@mui/material';
+
+// import useParams
+import { useParams } from 'react-router-dom';
 
 // assets import
 import addBtn from '../assets/icons/addBtn.svg';
@@ -16,9 +19,31 @@ import Sidebar from '../components/Sidebar';
 import CardWithIcon from '../components/CardWithIcon';
 import ClinicianTable from '../components/tables/clinician/ClinicianTable';
 import AddClinician from '../components/popups/clinician/AddNewClinician';
+import api from '../api/index';
 
 export default function ClinicAdmin() {
   const [openAddClinican, setOpenAddClinican] = useState(false);
+  const [clinicians, setClinicians] = useState([]);
+  const { id } = useParams();
+
+  const getClinicians = async () => {
+    if (window.location.pathname === '/dashboard/staff/clinician') {
+      const { data } = await api('get', '/admins/therapist/all/');
+      if (data) {
+        setClinicians(data.users);
+      }
+    } else {
+      const { data } = await api('get', `/admins/therapist/all/${id}`);
+      if (data) {
+        setClinicians(data.users);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getClinicians();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const cardsData = [
     {
@@ -61,7 +86,7 @@ export default function ClinicAdmin() {
             ))}
           </div>
         </div>
-        <ClinicianTable />
+        <ClinicianTable clinicians={clinicians} />
       </Grid>
       <div className="addBtn">
         <img

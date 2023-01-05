@@ -22,7 +22,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
 import arrow from '../../../assets/icons/RightArrow.svg';
+import edit from '../../../assets/icons/edit.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
+import api from '../../../api/index';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -61,17 +63,54 @@ const useOutlinedInputStyles = makeStyles({
     },
   },
 });
-export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMember }) {
+export default function AddStaffMember({
+  openAddStaffMember,
+  setOpenAddStaffMember,
+  getStaffMembers,
+}) {
   const [checked, setChecked] = useState(false);
+  const [staffMember, setStaffMember] = useState({
+    role: 'staff',
+  });
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
     setOpenAddStaffMember(false);
   };
 
+  const handleChange = (e) => {
+    setStaffMember({ ...staffMember, [e.target.name]: e.target.value });
+  };
+
+  const dateChange = (e) => {
+    setStaffMember({
+      ...staffMember,
+      expiry: e,
+    });
+  };
+
+  const handleSelectedFile = (e) => {
+    const myFile = e.target.files[0];
+
+    if (myFile) {
+      document.getElementById('selectedImg').src = URL.createObjectURL(myFile);
+    }
+
+    setStaffMember({ ...staffMember, photo: myFile });
+  };
+
   const handleSubmit = async () => {
-    toast.success('Profile added successfully');
-    handleClose();
+    const formData = new FormData();
+
+    Object.keys(staffMember).map((key) => formData.append(key, staffMember[key]));
+
+    const { data } = await api('post', '/admins/staffs', formData);
+    if (data) {
+      toast.success('Staff Member added successfully');
+      getStaffMembers();
+      handleClose();
+    }
+    setStaffMember({ role: 'staff' });
   };
 
   const handleCheck = (event) => {
@@ -100,8 +139,27 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
             <div>
               <div className="imgDivPopup">
                 <label htmlFor="profilePic">
-                  <input name="profile_pic" type="file" id="profilePic" accept="image/*" />{' '}
-                  <img src={profiles} className="pointer" alt="" />
+                  <input
+                    name="profile_pic"
+                    type="file"
+                    id="profilePic"
+                    accept="image/*"
+                    onChange={handleSelectedFile}
+                  />
+
+                  <img
+                    src={profiles}
+                    className="pointer"
+                    id="selectedImg"
+                    style={{
+                      width: '100%',
+                      borderRadius: '100px',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                    alt=""
+                  />
+                  <img src={edit} className="addImgIcon" alt="" />
                 </label>
               </div>
             </div>
@@ -120,6 +178,8 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                 placeholder="First Name"
                 size="normal"
                 name="first_name"
+                value={staffMember.first_name}
+                onChange={handleChange}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 3, width: '48.5%' }} variant="outlined">
@@ -137,6 +197,8 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                 placeholder="Last Name"
                 size="normal"
                 name="last_name"
+                onChange={handleChange}
+                value={staffMember.last_name}
               />
             </FormControl>
             <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
@@ -153,7 +215,9 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                 classes={outlinedInputStyles}
                 placeholder="Email"
                 size="normal"
-                type="email"
+                name="email"
+                onChange={handleChange}
+                value={staffMember.email}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
@@ -166,14 +230,16 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
                     fontWeight: '500',
                   },
                 }}
-                id="outlined-password"
+                id="outlined-phone"
                 classes={outlinedInputStyles}
                 placeholder="Phone Number"
                 size="normal"
-                type="text"
-                inputProps={{
-                  maxLength: 10,
-                }}
+                name="phone"
+                onChange={handleChange}
+                value={staffMember.phone}
+                // inputProps={{
+                //   maxLength: 10,
+                // }}
               />
             </FormControl>
             <FormControl
@@ -212,9 +278,12 @@ export default function AddStaffMember({ openAddStaffMember, setOpenAddStaffMemb
               <div className="date-div" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
-                  dateFormat="dd/MMMM/yyyy"
-                  name="date"
+                  dateFormat="dd/MM/yyyy"
+                  name="expiry"
+                  // value={staffMember.expiry}
+                  onChange={dateChange}
                   disabled={!checked}
+                  selected={staffMember.expiry}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown

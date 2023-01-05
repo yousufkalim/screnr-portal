@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 
 // assets import
 import delConfirm from '../assets/images/deletePopup/delConfirm.svg';
+import api from '../api/index';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -30,11 +31,13 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function DeleteModal({ openDeletePopup, setOpenDeletePopup }) {
+export default function DeleteModal({ openDeletePopup, setOpenDeletePopup, item, txt, getData }) {
   const handleClose = () => {
     setOpenDeletePopup(false);
   };
   const handleDelete = async () => {
+    await api('delete', `/${txt}/${item._id}`);
+    getData();
     toast.success('Deleted successfully');
     handleClose();
   };

@@ -8,28 +8,39 @@ import Patient from '../containers/Patient';
 const superadminRoutes = [
   {
     path: '/',
+    navigate: '/login',
+  },
+  {
+    path: '/login',
     element: <Login />,
   },
   {
     path: '/dashboard',
     element: <Dashboard />,
-    children: [
-      {
-        path: '/staff',
-        element: <ClinicAdmin />,
-        children: [
-          {
-            path: '/clinician',
-            element: <Clinician />,
-            children: [{ path: '/doctor', element: <Patient /> }],
-          },
-        ],
-      },
-    ],
   },
   {
-    path: '*',
-    navigate: '/',
+    path: '/dashboard/staff/:id',
+    element: <ClinicAdmin />,
+  },
+  {
+    path: '/dashboard/staff',
+    element: <ClinicAdmin />,
+  },
+  {
+    path: '/dashboard/staff/clinician/:id',
+    element: <Clinician />,
+  },
+  {
+    path: '/dashboard/staff/clinician',
+    element: <Clinician />,
+  },
+  {
+    path: '/dashboard/staff/clinician/doctor/:id',
+    element: <Patient />,
+  },
+  {
+    path: '/dashboard/staff/clinician/doctor',
+    element: <Patient />,
   },
 ];
 

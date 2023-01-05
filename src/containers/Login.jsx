@@ -65,7 +65,6 @@ export default function Login() {
   const handleSubmit = async () => {
     const { data } = await api('post', '/auth/login', user);
     updateStore({ admin: data.admin, loggedIn: true });
-    localStorage.setItem('token', data.token);
     navigate('/dashboard');
     window.location.reload();
   };

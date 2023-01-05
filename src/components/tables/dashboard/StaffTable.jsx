@@ -9,6 +9,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
+// navigation
+import { useNavigate } from 'react-router-dom';
+
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
@@ -17,37 +20,14 @@ import { ReactComponent as Delete } from '../../../assets/components/Table/alert
 import AvatarComponent from '../../Avatar';
 import DeleteModal from '../../DeletePopup';
 import EditStaffMember from '../../popups/dashboard/EditStaffMember';
+import { getMediaUrl } from '../../../config';
 
-export default function TableComponent({ setOpenAddStaffMember }) {
+export default function TableComponent({ setOpenAddStaffMember, staffMembers, getStaffMembers }) {
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
   const [openDeletePopup, setOpenDeletePopup] = useState(false);
-
-  function createData(id, fullName, phone, email) {
-    return { id, fullName, phone, email };
-  }
-
-  const rows = [
-    createData('02', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('03', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('04', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('05', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('06', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('02', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('03', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('04', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('05', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('06', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('02', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('03', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('04', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('05', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('06', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('02', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('03', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('04', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('05', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-    createData('06', 'Ameer Hamza', '+1(223) 123-4463', 'ameerhamza@gmail.com'),
-  ];
+  const [staffMember, setStaffMember] = useState();
+  const navigate = useNavigate();
+  let counter = '1';
 
   return (
     <TableContainer
@@ -79,10 +59,15 @@ export default function TableComponent({ setOpenAddStaffMember }) {
       >
         <TableHead>
           <TableRow>
-            <TableCell align="center" size="small" className="table_header">
+            <TableCell
+              align="left"
+              size="small"
+              className="table_header"
+              sx={{ width: 'fit-content' }}
+            >
               ID
             </TableCell>
-            <TableCell align="left" size="small" className="table_header">
+            <TableCell align="left" size="small" className="table_header" sx={{ width: '43%' }}>
               Full Name
             </TableCell>
             <TableCell align="left" size="small" className="table_header">
@@ -94,37 +79,95 @@ export default function TableComponent({ setOpenAddStaffMember }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell align="center" className="table_cells">
-                {row.id}
+          {staffMembers.map((row) => (
+            <TableRow
+              key={row.name}
+              className="tableRow"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
+            >
+              <TableCell
+                align="left"
+                className="table_cells"
+                onClick={() => navigate(`/dashboard/staff/${row._id}`)}
+              >
+                {counter < 10 ? `0${counter++}` : counter++}
               </TableCell>
-              <TableCell align="left" sx={{ display: 'flex' }}>
-                <AvatarComponent alt="Ameer Hamza" className="header_avatar" />
+              <TableCell
+                align="left"
+                sx={{ display: 'flex' }}
+                onClick={() => navigate(`/dashboard/staff/${row._id}`)}
+              >
+                {row.photo ? (
+                  <div style={{ width: '10%' }}>
+                    <img
+                      src={getMediaUrl(row.photo)}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        borderRadius: '100px',
+                        objectFit: 'cover',
+                      }}
+                      alt=""
+                    />
+                  </div>
+                ) : (
+                  <AvatarComponent
+                    alt={`${row.first_name} ${row.last_name}`}
+                    className="header_avatar"
+                  />
+                )}
                 <div className="name_cell_dasdboard">
-                  {row.fullName} <br />
+                  {`${row.first_name} ${row.last_name}`} <br />
                   <span className="staffEmailCell"> {row.email}</span>
                 </div>
               </TableCell>
-              <TableCell align="left" className="table_cells">
+              <TableCell
+                align="left"
+                className="table_cells"
+                onClick={() => navigate(`/dashboard/staff/${row._id}`)}
+              >
                 {row.phone}
               </TableCell>
               <TableCell align="left">
                 <div className="table_action_div">
-                  <Edit className="table_icons" onClick={() => setOpenEditStaffMember(true)} />
-                  <Delete className="table_icons" onClick={() => setOpenDeletePopup(true)} />
+                  <Edit
+                    className="table_icons"
+                    onClick={() => {
+                      setStaffMember(row);
+                      setOpenEditStaffMember(true);
+                    }}
+                  />
+                  <Delete
+                    className="table_icons"
+                    onClick={() => {
+                      setStaffMember(row);
+                      setOpenDeletePopup(true);
+                    }}
+                  />
                 </div>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
 
-        <EditStaffMember
-          openEditStaffMember={openEditStaffMember}
-          setOpenEditStaffMember={setOpenEditStaffMember}
-        />
+        {openEditStaffMember && (
+          <EditStaffMember
+            openEditStaffMember={openEditStaffMember}
+            setOpenEditStaffMember={setOpenEditStaffMember}
+            staffMemberDetails={staffMember}
+            getStaffMembers={getStaffMembers}
+          />
+        )}
 
-        <DeleteModal openDeletePopup={openDeletePopup} setOpenDeletePopup={setOpenDeletePopup} />
+        {openDeletePopup && (
+          <DeleteModal
+            openDeletePopup={openDeletePopup}
+            setOpenDeletePopup={setOpenDeletePopup}
+            item={staffMember}
+            txt="admins/staffs"
+            getData={getStaffMembers}
+          />
+        )}
       </Table>
     </TableContainer>
   );

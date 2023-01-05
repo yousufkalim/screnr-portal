@@ -1,7 +1,10 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import { Grid } from '@mui/material';
+
+// import useParams
+import { useParams } from 'react-router-dom';
 
 // assets import
 import addBtn from '../assets/icons/addBtn.svg';
@@ -10,9 +13,31 @@ import addBtn from '../assets/icons/addBtn.svg';
 import Sidebar from '../components/Sidebar';
 import ClinicAdminTable from '../components/tables/clinicAdmin/ClinicAdminsTable';
 import AddClinicAdmin from '../components/popups/clinicAdmin/AddNewClinicAdmin';
+import api from '../api/index';
 
 export default function ClinicAdmin() {
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
+  const [clinicAdmins, setClinicAdmins] = useState([]);
+  const { id } = useParams();
+
+  const getClinicAdmins = async () => {
+    if (window.location.pathname === '/dashboard/staff') {
+      const { data } = await api('get', '/admins/clinics/all/');
+      if (data) {
+        setClinicAdmins(data.users);
+      }
+    } else {
+      const { data } = await api('get', `/admins/clinics/all/${id}`);
+      if (data) {
+        setClinicAdmins(data.users);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getClinicAdmins();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Grid container>
@@ -22,7 +47,7 @@ export default function ClinicAdmin() {
 
       <Grid className="bg" xl={10} lg={9.5}>
         <div className="breadCrumb">Dashboard &gt; &nbsp;Staff &gt;</div>
-        <ClinicAdminTable />
+        <ClinicAdminTable clinicAdmins={clinicAdmins} getClinicAdmins={getClinicAdmins} />
       </Grid>
       <div className="addBtn">
         <img
@@ -36,6 +61,7 @@ export default function ClinicAdmin() {
       <AddClinicAdmin
         openAddClinicAdmin={openAddClinicAdmin}
         setOpenAddClinicAdmin={setOpenAddClinicAdmin}
+        getClinicAdmins={getClinicAdmins}
       />
     </Grid>
   );

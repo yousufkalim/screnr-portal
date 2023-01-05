@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 // components import
 import CardWithIcon from '../components/CardWithIcon';
 import Chart from '../components/charts/dashboard/DasboardChart';
@@ -16,9 +16,22 @@ import addBtn from '../assets/icons/addBtn.svg';
 // child import
 import AddStaffMember from '../components/popups/dashboard/AddStaffMember';
 import TableComponent from '../components/tables/dashboard/StaffTable';
+import api from '../api/index';
 
 export default function Dashboard() {
   const [openAddStaffMember, setOpenAddStaffMember] = useState(false);
+  const [staffMembers, setStaffMembers] = useState([]);
+
+  const getStaffMembers = async () => {
+    const { data } = await api('get', '/admins/staffs/');
+    if (data) {
+      setStaffMembers(data?.users);
+    }
+  };
+
+  useEffect(() => {
+    getStaffMembers();
+  }, []);
 
   const cardsData = [
     {
@@ -68,7 +81,11 @@ export default function Dashboard() {
       </div>
       <div className="dashboard_div_2">
         <div className="dashboard_table_div">
-          <TableComponent setOpenAddStaffMember={setOpenAddStaffMember} />
+          <TableComponent
+            setOpenAddStaffMember={setOpenAddStaffMember}
+            staffMembers={staffMembers}
+            getStaffMembers={getStaffMembers}
+          />
         </div>
         <div className="chart_main_div">
           <Chart />
@@ -87,6 +104,7 @@ export default function Dashboard() {
       <AddStaffMember
         openAddStaffMember={openAddStaffMember}
         setOpenAddStaffMember={setOpenAddStaffMember}
+        getStaffMembers={getStaffMembers}
       />
     </div>
   );

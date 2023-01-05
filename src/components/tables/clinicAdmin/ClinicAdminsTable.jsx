@@ -10,6 +10,9 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 
+// navigation
+import { useNavigate } from 'react-router-dom';
+
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 
@@ -27,40 +30,11 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function ClinicAdminTable() {
+export default function ClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
   const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
+  const [clinicAdmin, setClinicAdmin] = useState({});
 
-  function createData(name, clinicians, patients) {
-    return { name, clinicians, patients };
-  }
-
-  const rows = [
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-    createData('Ameer Hamza', '12', '3'),
-  ];
+  const navigate = useNavigate();
 
   return (
     <div className="bg" id="clinicAdminTable">
@@ -105,43 +79,71 @@ export default function ClinicAdminTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name} className="tableRow">
-                <TableCell />
-                <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                  <AvatarComponent alt="Ameer Hamza" className="header_avatar" />
-                  <div className="clinic_cell">
-                    {row.name} <br />
-                    <span className="clinicNametxt">
-                      Clinic: <span className="clinicNameSubtxt">Line Pvt.</span>
-                    </span>
-                  </div>
-                </TableCell>
+            {clinicAdmins.length > 0 ? (
+              clinicAdmins.map((row) => (
+                <StyledTableRow key={row.first_name} className="tableRow">
+                  <TableCell />
+                  <TableCell
+                    align="left"
+                    sx={{ display: 'flex', paddingTop: '12%' }}
+                    onClick={() => navigate(`/dashboard/staff/clinician/${row._id}`)}
+                  >
+                    <AvatarComponent
+                      alt={`${row.first_name} ${row.last_name}`}
+                      className="header_avatar"
+                    />
+                    <div className="clinic_cell">
+                      {`${row.first_name} ${row.last_name}`} <br />
+                      <span className="clinicNametxt">
+                        Clinic: <span className="clinicNameSubtxt">{row.clinic_name}</span>
+                      </span>
+                    </div>
+                  </TableCell>
 
-                <TableCell align="center" className="table_cells">
-                  {`${row.clinicians}`}
-                </TableCell>
-                <TableCell
-                  align="center"
-                  className="table_cells"
-                  sx={{
-                    padding: '3%',
-                  }}
-                >
-                  {`${row.patients}`}
-                </TableCell>
+                  <TableCell
+                    align="center"
+                    className="table_cells"
+                    onClick={() => navigate(`/dashboard/staff/clinician/${row._id}`)}
+                  >
+                    {row.therapist_count}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    className="table_cells"
+                    sx={{
+                      padding: '3%',
+                    }}
+                    onClick={() => navigate(`/dashboard/staff/clinician/${row._id}`)}
+                  >
+                    {row.patient_count}
+                  </TableCell>
 
-                <TableCell align="center">
-                  <Edit className="table_icons" onClick={() => setOpenEditClinicAdmin(true)} />
-                </TableCell>
-              </StyledTableRow>
-            ))}
+                  <TableCell align="center">
+                    <Edit
+                      className="table_icons"
+                      onClick={() => {
+                        setOpenEditClinicAdmin(true);
+                        setClinicAdmin(row);
+                      }}
+                    />
+                  </TableCell>
+                </StyledTableRow>
+              ))
+            ) : (
+              <>
+                {' '}
+                <TableCell align="center" />
+                <TableCell align="left">No Clinic Admins found</TableCell>
+              </>
+            )}
           </TableBody>
         </Table>
 
         <EditClinicAdmin
           openEditClinicAdmin={openEditClinicAdmin}
           setOpenEditClinicAdmin={setOpenEditClinicAdmin}
+          getClinicAdmins={getClinicAdmins}
+          clinicAdminDetails={clinicAdmin}
         />
       </TableContainer>
     </div>

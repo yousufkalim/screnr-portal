@@ -23,6 +23,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 // assets import
 import add from '../../../assets/icons/add.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
+import api from '../../../api/index';
+import edit from '../../../assets/icons/edit.svg';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -61,17 +63,56 @@ const useOutlinedInputStyles = makeStyles({
     },
   },
 });
-export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdmin }) {
+export default function AddClinicAdmin({
+  openAddClinicAdmin,
+  setOpenAddClinicAdmin,
+  getClinicAdmins,
+}) {
   const [checked, setChecked] = useState(false);
+  const [clinicAdmin, setClinicAdmin] = useState({
+    role: 'clinicadmin',
+    first_name: 'a',
+    last_name: 'b',
+    password: '12345678',
+    confirmPassword: '12345678',
+  });
+  const [selectedGender, setSelectedGender] = useState('');
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
     setOpenAddClinicAdmin(false);
   };
 
+  const handleSelectedFile = (e) => {
+    const myFile = e.target.files[0];
+    const [file] = document.getElementById('profilePic').files;
+
+    if (file) {
+      document.getElementById('selectedImg').src = URL.createObjectURL(file);
+    }
+    setClinicAdmin({ ...clinicAdmin, image: myFile });
+  };
+
+  const handleChange = (e) => {
+    setClinicAdmin({ ...clinicAdmin, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async () => {
-    toast.success('Clinic Admin added successfully');
-    handleClose();
+    const formData = new FormData();
+    setClinicAdmin({ ...clinicAdmin, gender: selectedGender });
+    console.log('clinicAdmin', clinicAdmin);
+
+    Object.keys(clinicAdmin).map((key) => formData.append(key, clinicAdmin[key]));
+    console.log('formData', formData);
+
+    // formData = { ...formData, selectedGender };
+    const { data } = await api('post', '/admins/clinics', formData);
+    if (data) {
+      toast.success('Clinic Admin added successfully');
+      getClinicAdmins();
+      handleClose();
+      console.log('formData', formData);
+    }
   };
 
   const handleCheck = (event) => {
@@ -100,8 +141,26 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
             <div>
               <div className="imgDivPopup">
                 <label htmlFor="profilePic">
-                  <input name="profile_pic" type="file" id="profilePic" accept="image/*" />{' '}
-                  <img src={profiles} className="pointer" alt="" />
+                  <input
+                    name="profile_pic"
+                    type="file"
+                    id="profilePic"
+                    accept="image/*"
+                    onChange={handleSelectedFile}
+                  />
+                  <img
+                    src={profiles}
+                    className="pointer"
+                    id="selectedImg"
+                    style={{
+                      width: '100%',
+                      borderRadius: '100px',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                    alt=""
+                  />
+                  <img src={edit} className="addImgIcon" alt="" />
                 </label>
               </div>
             </div>
@@ -121,6 +180,8 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                 placeholder="Clinic Name"
                 size="normal"
                 name="clinic_name"
+                value={clinicAdmin.clinic_name}
+                onChange={handleChange}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 2 }} variant="outlined">
@@ -139,6 +200,8 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                 placeholder="Manager Name"
                 size="normal"
                 name="manager_name"
+                value={clinicAdmin.manager_name}
+                onChange={handleChange}
               />
             </FormControl>
 
@@ -158,6 +221,9 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                 placeholder="Phone Number"
                 size="normal"
                 type="text"
+                name="phone"
+                value={clinicAdmin.phone}
+                onChange={handleChange}
                 inputProps={{
                   maxLength: 10,
                 }}
@@ -180,6 +246,9 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                 placeholder="Email"
                 size="normal"
                 type="email"
+                name="email"
+                value={clinicAdmin.email}
+                onChange={handleChange}
               />
             </FormControl>
 
@@ -199,19 +268,39 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                 placeholder="Address"
                 size="normal"
                 name="address"
+                value={clinicAdmin.address}
+                onChange={handleChange}
               />
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <p className="genderTxt"> Gender</p>
               <span>
-                <Button className="genderBtn" variant="contained">
+                <Button
+                  className={selectedGender === 'male' ? 'selectGender' : 'genderBtn'}
+                  variant="contained"
+                  onClick={() => {
+                    setSelectedGender('male');
+                  }}
+                >
                   Male
                 </Button>
-                <Button className="genderBtn" variant="contained">
+                <Button
+                  className={selectedGender === 'female' ? 'selectGender' : 'genderBtn'}
+                  variant="contained"
+                  onClick={() => {
+                    setSelectedGender('female');
+                  }}
+                >
                   Female
                 </Button>
-                <Button className="genderBtn" variant="contained">
+                <Button
+                  className={selectedGender === 'other' ? 'selectGender' : 'genderBtn'}
+                  variant="contained"
+                  onClick={() => {
+                    setSelectedGender('other');
+                  }}
+                >
                   Non-binary
                 </Button>
               </span>
@@ -231,7 +320,9 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                   fontSize: '40px',
                   width: 'fit-content',
                 }}
-                control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
+                control={
+                  <Checkbox onChange={handleCheck} checked={checked} style={{ color: '#136773' }} />
+                }
                 label={
                   <Typography
                     style={{
@@ -255,7 +346,9 @@ export default function AddClinicAdmin({ openAddClinicAdmin, setOpenAddClinicAdm
                 <DatePicker
                   showPopperArrow
                   dateFormat="dd/MMMM/yyyy"
-                  name="date"
+                  name="expiry"
+                  value={clinicAdmin.expiry}
+                  onChange={handleChange}
                   disabled={!checked}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"

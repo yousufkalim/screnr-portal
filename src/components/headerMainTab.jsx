@@ -7,7 +7,7 @@ import { ReactComponent as DashboardIcon } from '../assets/components/HeaderIcon
 import { ReactComponent as ClinicAdminIcon } from '../assets/components/HeaderIcons/ClinicAdminIcon.svg';
 import { ReactComponent as ClinicalIcon } from '../assets/components/HeaderIcons/Clinical.svg';
 import { ReactComponent as PatientIcon } from '../assets/components/HeaderIcons/Patient.svg';
-import { ReactComponent as PatientStatsIcon } from '../assets/components/HeaderIcons/PatientStatsIcon.svg';
+// import { ReactComponent as PatientStatsIcon } from '../assets/components/HeaderIcons/PatientStatsIcon.svg';
 
 export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
   return (
@@ -63,14 +63,14 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
           className="tab_icon"
         />
       )}
-      {activeTab === 'Patient Stats' ? (
+      {/* {activeTab === 'Patient Stats' ? (
         <div className="tab2_div">
           <PatientStatsIcon />
           <span>Patient Stats</span>
         </div>
       ) : (
         <PatientStatsIcon onClick={() => HandleTabsSwitch('Patient Stats')} className="tab_icon" />
-      )}
+      )} */}
     </Stack>
   );
 }

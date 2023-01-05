@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import Button from '@mui/material/Button';
@@ -22,9 +22,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
 import edit from '../../../assets/icons/edit.svg';
+// import fushi from '../../../assets/12fushi.webp';
 
 // child component imports
 import AvatarComponent from '../../Avatar';
+import api from '../../../api/index';
+import { getMediaUrl } from '../../../config';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -63,21 +66,68 @@ const useOutlinedInputStyles = makeStyles({
     },
   },
 });
-export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffMember }) {
+export default function EditStaffMember({
+  openEditStaffMember,
+  setOpenEditStaffMember,
+  getStaffMembers,
+  staffMemberDetails,
+}) {
   const [checked, setChecked] = useState(false);
+  const [staffMember, setStaffMember] = useState({
+    role: 'staff',
+  });
+
+  useEffect(() => {
+    if (!staffMemberDetails.expiry) {
+      setStaffMember({ ...staffMemberDetails, expiry: '' });
+    } else {
+      setStaffMember({
+        ...staffMemberDetails,
+        expiry: new Date(staffMemberDetails.expiry),
+      });
+      setChecked(true);
+    }
+  }, [staffMemberDetails]);
+
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
     setOpenEditStaffMember(false);
   };
 
-  const handleSubmit = async () => {
-    toast.success('Profile edited successfully');
-    handleClose();
-  };
-
   const handleCheck = (event) => {
     setChecked(event.target.checked);
+  };
+
+  const handleChange = (e) => {
+    setStaffMember({ ...staffMember, [e.target.name]: e.target.value });
+  };
+
+  const dateChange = (e) => {
+    setStaffMember({
+      ...staffMember,
+      expiry: new Date(e),
+    });
+  };
+
+  const handleSelectedFile = async (e) => {
+    const myFile = e.target.files[0];
+    if (myFile) {
+      document.getElementById('selectedImg').src = URL.createObjectURL(myFile);
+    }
+
+    setStaffMember({ ...staffMember, photo: myFile });
+  };
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    Object.keys(staffMember).map((key) => formData.append(key, staffMember[key]));
+    const { data } = await api('put', `/admins/staffs/${staffMemberDetails._id}`, formData);
+    if (data) {
+      toast.success('Staff Member edited successfully');
+      getStaffMembers();
+      handleClose();
+    }
   };
 
   return (
@@ -103,8 +153,33 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
               <div className="imgDivPopup">
                 {/* Avatar to be used */}
                 <label htmlFor="profilePic">
-                  <input name="profile_pic" type="file" id="profilePic" accept="image/*" />
-                  <AvatarComponent alt="Arooj Ishfaq" className="popups_avatar" />
+                  <input
+                    name="profile_pic"
+                    type="file"
+                    id="profilePic"
+                    accept="image/*"
+                    onChange={handleSelectedFile}
+                  />
+
+                  {staffMember.photo ? (
+                    <img
+                      src={getMediaUrl(staffMember.photo)}
+                      className="pointer"
+                      id="selectedImg"
+                      style={{
+                        width: '100%',
+                        borderRadius: '100px',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                      alt=""
+                    />
+                  ) : (
+                    <AvatarComponent
+                      alt={`${staffMember?.first_name} ${staffMember?.last_name}`}
+                      className="popups_avatar"
+                    />
+                  )}
                   <img src={edit} className="addImgIcon" alt="" />
                 </label>
               </div>
@@ -124,6 +199,8 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                 placeholder="First Name"
                 size="normal"
                 name="first_name"
+                value={staffMember?.first_name}
+                onChange={handleChange}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 3, width: '48.5%' }} variant="outlined">
@@ -141,6 +218,8 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                 placeholder="Last Name"
                 size="normal"
                 name="last_name"
+                onChange={handleChange}
+                value={staffMember?.last_name}
               />
             </FormControl>
             <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
@@ -158,6 +237,9 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                 placeholder="Email"
                 size="normal"
                 type="email"
+                name="email"
+                onChange={handleChange}
+                value={staffMember?.email}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
@@ -175,9 +257,9 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                 placeholder="Phone Number"
                 size="normal"
                 type="text"
-                inputProps={{
-                  maxLength: 10,
-                }}
+                name="phone"
+                onChange={handleChange}
+                value={staffMember?.phone}
               />
             </FormControl>
             <FormControl
@@ -193,7 +275,9 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
                   fontSize: '40px',
                   width: 'fit-content',
                 }}
-                control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
+                control={
+                  <Checkbox checked={checked} onChange={handleCheck} style={{ color: '#136773' }} />
+                }
                 label={
                   <Typography
                     style={{
@@ -216,9 +300,12 @@ export default function EditStaffMember({ openEditStaffMember, setOpenEditStaffM
               <div className="date-div2" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
-                  dateFormat="dd/MMMM/yyyy"
-                  name="date"
+                  // dateFormat="dd/MMMM/yyyy"
+                  name="expiry"
+                  // value={staffMember.expiry}
+                  onChange={dateChange}
                   disabled={!checked}
+                  selected={staffMember?.expiry}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown

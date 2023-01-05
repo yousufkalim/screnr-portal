@@ -50,20 +50,20 @@
 .editIconSidebar {
   position: absolute;
   left: 9.5%;
-  top: 20.5%;
+  top: 19.5%;
   cursor: pointer;
 }
 
-@media only screen and (max-width: 1700px) {
+/* @media only screen and (max-width: 1700px) {
   .editIconSidebar {
     top: 20.5%;
   }
-}
+} */
 
-@media only screen and (max-width: 1640px) {
+@media only screen and (max-width: 1500px) {
   .editIconSidebar {
     left: 11.5%;
-    top: 24.5%;
+    top: 23.5%;
   }
 }
 @media only screen and (max-width: 1340px) {
