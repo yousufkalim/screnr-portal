@@ -11,10 +11,10 @@ if (window.location.host === 'screnr-admin-dev.falconweb.app') {
 }
 
 const getMediaUrl = (url) => {
-  if (url) {
+  if (typeof url === 'string') {
     return baseUrl.replace('/api', '/') + url;
   }
-  return null;
+  return URL.createObjectURL(url);
 };
 
 module.exports = { baseUrl, getMediaUrl };
