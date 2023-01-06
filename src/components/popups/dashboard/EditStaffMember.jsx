@@ -78,7 +78,7 @@ export default function EditStaffMember({
 
   useEffect(() => {
     if (!staffMemberDetails.expiry) {
-      setStaffMember({ ...staffMemberDetails, expiry: '' });
+      setStaffMember(staffMemberDetails);
     } else {
       setStaffMember({
         ...staffMemberDetails,
@@ -111,23 +111,27 @@ export default function EditStaffMember({
 
   const handleSelectedFile = async (e) => {
     const myFile = e.target.files[0];
-    if (myFile) {
-      document.getElementById('selectedImg').src = URL.createObjectURL(myFile);
-    }
-
     setStaffMember({ ...staffMember, photo: myFile });
   };
 
   const handleSubmit = async () => {
+    const staffMemberCopy = { ...staffMember };
     const formData = new FormData();
-    Object.keys(staffMember).map((key) => formData.append(key, staffMember[key]));
+    if (staffMemberCopy.expiry && !checked) {
+      staffMemberCopy.expiry = '';
+      setStaffMember({ ...staffMemberCopy });
+    }
+
+    Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
     const { data } = await api('put', `/admins/staffs/${staffMemberDetails._id}`, formData);
     if (data) {
       toast.success('Staff Member edited successfully');
       getStaffMembers();
       handleClose();
     }
+    console.log('staffMemberin', staffMember);
   };
+  console.log('staffMemberout', staffMember);
 
   return (
     <div>
@@ -156,7 +160,7 @@ export default function EditStaffMember({
                     name="profile_pic"
                     type="file"
                     id="profilePic"
-                    accept="image/*"
+                    accept=".png, .jpg, .jpeg"
                     onChange={handleSelectedFile}
                   />
 
@@ -200,6 +204,9 @@ export default function EditStaffMember({
                 name="first_name"
                 value={staffMember?.first_name}
                 onChange={handleChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 3, width: '48.5%' }} variant="outlined">
@@ -219,6 +226,9 @@ export default function EditStaffMember({
                 name="last_name"
                 onChange={handleChange}
                 value={staffMember?.last_name}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
             <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
@@ -254,6 +264,9 @@ export default function EditStaffMember({
                 id="outlined-password"
                 classes={outlinedInputStyles}
                 placeholder="Phone Number"
+                inputProps={{
+                  maxLength: 10,
+                }}
                 size="normal"
                 type="text"
                 name="phone"

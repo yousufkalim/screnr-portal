@@ -21,6 +21,7 @@ import AvatarComponent from '../../Avatar';
 import DeleteModal from '../../DeletePopup';
 import EditStaffMember from '../../popups/dashboard/EditStaffMember';
 import { getMediaUrl } from '../../../config';
+import PhoneFormat from '../../PhoneFormat';
 
 export default function TableComponent({ setOpenAddStaffMember, staffMembers, getStaffMembers }) {
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
@@ -67,7 +68,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
             >
               ID
             </TableCell>
-            <TableCell align="left" size="small" className="table_header" sx={{ width: '43%' }}>
+            <TableCell align="left" size="small" className="table_header" sx={{ width: '40%' }}>
               Full Name
             </TableCell>
             <TableCell align="left" size="small" className="table_header">
@@ -98,7 +99,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
                 onClick={() => navigate(`/dashboard/staff/${row._id}`)}
               >
                 {row.photo ? (
-                  <div style={{ width: '10%' }}>
+                  <div className="imgDiv">
                     <img
                       src={getMediaUrl(row.photo)}
                       style={{
@@ -126,7 +127,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
                 className="table_cells"
                 onClick={() => navigate(`/dashboard/staff/${row._id}`)}
               >
-                {row.phone}
+                {PhoneFormat(row.phone)}
               </TableCell>
               <TableCell align="left">
                 <div className="table_action_div">

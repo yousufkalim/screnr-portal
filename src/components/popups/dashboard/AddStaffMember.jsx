@@ -100,9 +100,15 @@ export default function AddStaffMember({
   };
 
   const handleSubmit = async () => {
+    const staffMemberCopy = { ...staffMember };
     const formData = new FormData();
 
-    Object.keys(staffMember).map((key) => formData.append(key, staffMember[key]));
+    if (staffMemberCopy.expiry && !checked) {
+      delete staffMemberCopy.expiry;
+      setStaffMember({ ...staffMemberCopy });
+    }
+
+    Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
 
     const { data } = await api('post', '/admins/staffs', formData);
     if (data) {
@@ -143,7 +149,7 @@ export default function AddStaffMember({
                     name="profile_pic"
                     type="file"
                     id="profilePic"
-                    accept="image/*"
+                    accept=".png, .jpg, .jpeg"
                     onChange={handleSelectedFile}
                   />
 
@@ -180,6 +186,9 @@ export default function AddStaffMember({
                 name="first_name"
                 value={staffMember.first_name}
                 onChange={handleChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 3, width: '48.5%' }} variant="outlined">
@@ -192,13 +201,16 @@ export default function AddStaffMember({
                     fontWeight: '500',
                   },
                 }}
-                id="outlined-fname"
+                id="outlined-name"
                 classes={outlinedInputStyles}
                 placeholder="Last Name"
                 size="normal"
                 name="last_name"
                 onChange={handleChange}
                 value={staffMember.last_name}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
             <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
@@ -211,7 +223,7 @@ export default function AddStaffMember({
                     fontWeight: '500',
                   },
                 }}
-                id="outlined-password"
+                id="outlined-email"
                 classes={outlinedInputStyles}
                 placeholder="Email"
                 size="normal"
@@ -237,9 +249,9 @@ export default function AddStaffMember({
                 name="phone"
                 onChange={handleChange}
                 value={staffMember.phone}
-                // inputProps={{
-                //   maxLength: 10,
-                // }}
+                inputProps={{
+                  maxLength: 10,
+                }}
               />
             </FormControl>
             <FormControl

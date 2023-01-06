@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CardWithIcon({
   Icon,
@@ -8,9 +9,16 @@ export default function CardWithIcon({
   CircleIcon,
   LeftCircleClassName,
   cardClassName,
+  link,
 }) {
+  const navigate = useNavigate();
   return (
-    <div className={cardClassName}>
+    <div
+      className={cardClassName}
+      onClick={() => navigate(link || '')}
+      role="presentation"
+      style={{ cursor: 'pointer' }}
+    >
       <Icon />
       <div className="card_content_div">
         <span className="amount">{amount}</span>
