@@ -49,14 +49,14 @@ export default function ClinicAdmin() {
     {
       icon: Clinician,
       amount: '65',
-      title: 'Total Clinicians',
+      title: 'New Patients (last 7 days)',
       icon2: GreenCircle,
       className: 'green_circle',
     },
     {
       icon: Patients2,
       amount: '54',
-      title: 'Total Patients',
+      title: 'Total Active Patients',
       icon2: BlueCircle,
       className: 'blue_circle',
     },

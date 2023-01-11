@@ -21,8 +21,10 @@ export default function CardWithIcon({
     >
       <Icon />
       <div className="card_content_div">
-        <span className="amount">{amount}</span>
-        <span className="title">{title}</span>
+        <p className="amount">{amount}</p>
+        <p className="title" id="title">
+          {title}
+        </p>
       </div>
       <CircleIcon className={LeftCircleClassName} />
     </div>
