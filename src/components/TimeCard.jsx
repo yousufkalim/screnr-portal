@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function TimeCard({ Icon, time, text }) {
+export default function TimeCard({ Icon, time, text, classname }) {
   return (
-    <div className="right_sidebar_cards">
+    <div className={classname}>
       <Icon />
       <div className="card_content_div2">
         <span className="timeLog">{time}</span>
