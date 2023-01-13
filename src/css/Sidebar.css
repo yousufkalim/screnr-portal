@@ -47,6 +47,20 @@
   justify-content: space-between;
 }
 
+.activityTxt {
+  margin-left: 10%;
+  font-weight: 600;
+  font-size: 16px;
+  color: #919b9b;
+}
+
+.clickedActivity {
+  margin-left: 10%;
+  font-weight: 600;
+  font-size: 16px;
+  color: #136773;
+}
+
 .editIconSidebar {
   position: absolute;
   left: 9.5%;
@@ -54,11 +68,41 @@
   cursor: pointer;
 }
 
+.totalActivity {
+  font-weight: 600;
+  font-size: 16px;
+  color: #919b9b;
+  margin-right: auto;
+  margin-left: 15%;
+  margin-top: 10%;
+}
+
+.hrsTxt {
+  font-weight: 500;
+  font-size: 14px;
+  color: #fba622;
+  margin-right: auto;
+  padding: 0;
+  margin-left: 15%;
+  line-height: 1px;
+}
+
 /* @media only screen and (max-width: 1700px) {
   .editIconSidebar {
     top: 20.5%;
   }
 } */
+
+.activityLeft {
+  display: flex;
+  width: 70%;
+  cursor: pointer;
+}
+
+.iconActivity {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(22%) saturate(1780%) hue-rotate(140deg)
+    brightness(96%) contrast(85%);
+}
 
 @media only screen and (max-width: 1500px) {
   .editIconSidebar {
