@@ -4,6 +4,7 @@ import Dashboard from '../containers/Dashboard';
 import ClinicAdmin from '../containers/ClinicAdmin';
 import Clinician from '../containers/Clinician';
 import Patient from '../containers/Patient';
+import Activity from '../containers/Activity';
 
 const superadminRoutes = [
   {
@@ -41,6 +42,10 @@ const superadminRoutes = [
   {
     path: '/dashboard/staff/clinician/doctor',
     element: <Patient />,
+  },
+  {
+    path: '/dashboard/staff/clinician/doctor/activity',
+    element: <Activity />,
   },
 ];
 

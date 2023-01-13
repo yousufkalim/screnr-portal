@@ -22,7 +22,7 @@ export default function ClinicAdmin() {
 
   const getClinicAdmins = async () => {
     if (window.location.pathname === '/dashboard/staff') {
-      const { data } = await api('get', '/admins/clinics/all/');
+      const { data } = await api('get', `/admins/clinics/all/`);
       if (data) {
         setClinicAdmins(data.users);
       }
