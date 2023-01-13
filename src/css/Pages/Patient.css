@@ -21,13 +21,22 @@
   padding: 23% 0;
 }
 
-.right_sidebar_cards {
+.right_sidebar_card {
   background-color: white;
   display: flex;
   align-items: center;
   flex-direction: row;
   border-radius: 20px;
-  /* justify-content: center; */
+  padding: 10px;
+  margin-bottom: 3%;
+}
+.top_activity_cards {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 20px;
+  width: 23%;
   padding: 10px;
   margin-bottom: 3%;
 }
@@ -36,7 +45,7 @@
   background-color: white;
   height: max-content;
   padding: 10% 6%;
-  margin: 8% 0;
+  margin: 0 0 8% 0;
   border-radius: 20px;
 }
 
@@ -74,6 +83,9 @@
 .currentTimeSubDiv {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
 }
 
 .chartDayTxt {
@@ -85,12 +97,6 @@
 .chartCurrentTime {
   color: #136773;
   font-weight: 400;
-  font-size: 11px;
-}
-
-.statsPercentage {
-  color: #136773;
-  font-weight: 600;
   font-size: 11px;
 }
 
@@ -179,6 +185,12 @@
   animation-name: fadeInOpacity;
   animation-timing-function: fade-in;
   animation-duration: 1s;
+}
+
+.filter__multi-value.css-1p3m7a8-multiValue {
+  border-radius: 20px !important;
+  padding: 3px 0 !important;
+  background-color: #f4f4f4 !important;
 }
 
 @media only screen and (max-width: 1600px) {

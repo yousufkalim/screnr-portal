@@ -112,7 +112,7 @@ export default function PatientTable({ patients }) {
                 Diagnosis
               </TableCell>
               <TableCell className="table_head" align="center">
-                Exercises
+                Prescription
               </TableCell>
               <TableCell className="table_head" align="center">
                 Completion
