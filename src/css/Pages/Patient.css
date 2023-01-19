@@ -137,10 +137,33 @@
   color: #454238;
 }
 
+.circularProgressPrescription {
+  transform: rotate(90deg) !important;
+  position: absolute;
+  bottom: 40%;
+  right: 43%;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  color: #454238;
+}
+
+.bgPrescription {
+  background-color: rgb(246, 250, 251);
+  height: 100vh;
+}
+
 .linearProgress {
   font-size: 12px;
   font-weight: 400;
   color: #454238;
+}
+
+.linearPresProgress {
+  font-size: 12px;
+  font-weight: 400;
+  color: #454238;
+  margin-left: -14px;
 }
 
 .patient_cell {
@@ -191,6 +214,140 @@
   border-radius: 20px !important;
   padding: 3px 0 !important;
   background-color: #f4f4f4 !important;
+}
+
+.addMore {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 9%;
+  color: #919b9b;
+  cursor: pointer;
+}
+
+#prescriptionTable {
+  margin: auto;
+  padding: 2% 3% 0px 3%;
+  height: 79vh;
+  overflow-y: scroll;
+  margin-top: 20px;
+}
+
+.scoreRed {
+  color: #ff5151;
+  width: max-content;
+  padding: 8px 20px !important;
+  background-color: #ff51511a;
+  border-radius: 20px;
+}
+
+.scoreYellow {
+  color: #fabb18;
+  width: max-content;
+  padding: 8px 20px !important;
+  background-color: #fabb181a;
+  border-radius: 20px;
+}
+
+.scoreGreen {
+  color: #25cc7c;
+  width: max-content;
+  padding: 8px 20px !important;
+  background-color: #25cc7c1a;
+  border-radius: 20px;
+}
+
+.prescription_header {
+  color: #136773;
+  font-weight: 500;
+  padding: 1.2% 2%;
+}
+
+.prescription_head {
+  font-size: 15px !important;
+  color: #454238 !important;
+  padding-top: 4px;
+}
+
+.prescription_cell {
+  color: #136773;
+  font-weight: 500;
+  font-size: 12px;
+  margin-left: 10px;
+  line-height: 14px;
+}
+
+.presSubtxt {
+  color: #fba622;
+  font-weight: 400;
+  font-size: 10px;
+}
+
+.PatientSubTopSection {
+  display: flex;
+  flex-direction: row;
+  width: calc(100% / 1.2);
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.PatientTopSection {
+  height: max-content;
+  width: 76vw;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 3%;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2%;
+}
+
+.topSec {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin-right: 40px;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+.top_sec_avatar {
+  background-color: #136773 !important;
+  height: 70px !important;
+  width: 70px !important;
+}
+
+.topSecDocName {
+  font-weight: 600;
+  font-size: 18px;
+  color: #136773;
+}
+
+.topSecExpertise {
+  font-weight: 500;
+  font-size: 12px;
+  color: #fba622;
+}
+
+.topSecActions {
+  font-weight: 400;
+  font-size: 12px;
+  color: #919b9b;
+}
+
+.topSecDetails {
+  margin-left: 15px;
+}
+
+.exerciseItems li {
+  list-style: none;
+  color: #454238;
+  font-weight: 400;
 }
 
 @media only screen and (max-width: 1600px) {
