@@ -29,6 +29,7 @@ import dropdown from '../../../assets/icons/downArrow.svg';
 
 // child component imports
 import AvatarComponent from '../../Avatar';
+import ReactSelect from '../../ReactSelect';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -152,21 +153,7 @@ export default function EditPatient({ openEditPatient, setOpenEditPatient }) {
             </FormControl>
 
             <FormControl sx={{ mt: 2, width: '100%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-name"
-                classes={outlinedInputStyles}
-                placeholder="Doctor"
-                size="normal"
-              />
+              <ReactSelect />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 2, width: '100%' }} variant="outlined">
               <TextField
@@ -254,7 +241,7 @@ export default function EditPatient({ openEditPatient, setOpenEditPatient }) {
                     ml: 1,
                   },
                 }}
-                id="outlined-password"
+                id="outlined-phone"
                 classes={outlinedInputStyles}
                 placeholder="Phone Number"
                 size="normal"
@@ -284,34 +271,7 @@ export default function EditPatient({ openEditPatient, setOpenEditPatient }) {
               </div>
             </FormControl>
 
-            <FormControl sx={{ mb: 1, mt: 2, width: '100%', textAlign: 'left' }} variant="outlined">
-              <p className="genderTxt"> Gender</p>
-              <span>
-                <Button className="genderBtn" variant="contained">
-                  Male
-                </Button>
-                <Button className="genderBtn" variant="contained">
-                  Female
-                </Button>
-                <Button className="genderBtn" variant="contained">
-                  Non-binary
-                </Button>
-              </span>
-            </FormControl>
-
-            <FormControl sx={{ mb: 1, width: '100%', textAlign: 'left' }} variant="outlined">
-              <p className="genderTxt"> Diagnosis</p>
-              <span>
-                <Button className="genderBtn" variant="contained">
-                  ICD
-                </Button>
-                <Button className="genderBtn" variant="contained">
-                  Code
-                </Button>
-              </span>
-            </FormControl>
-
-            <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
+            <FormControl sx={{ mb: 2, width: '100%' }} variant="outlined">
               <Select
                 // eslint-disable-next-line react/no-unstable-nested-components
                 IconComponent={(props) => (
@@ -321,17 +281,17 @@ export default function EditPatient({ openEditPatient, setOpenEditPatient }) {
                 displayEmpty
                 sx={{
                   '.MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#454238',
+                    borderColor: '#E1E1E1',
                   },
                   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#FBA622',
+                    borderColor: ' #454238',
                   },
                   '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#FBA622',
+                    borderColor: ' #454238',
                   },
                   borderRadius: '20px',
                   input: {
-                    color: 'black',
+                    color: 'red',
                     fontSize: '14px',
                     fontWeight: '500',
                     ml: 2,
@@ -341,12 +301,79 @@ export default function EditPatient({ openEditPatient, setOpenEditPatient }) {
                 id="demo-simple-select"
                 name="client"
                 placeholder="Title"
+                value=""
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
               >
-                <MenuItem value="">Cancer</MenuItem>
-                <MenuItem>Typhoid</MenuItem>
+                <MenuItem value="">
+                  <span style={{ color: '#949494' }}>Select Diagnosis</span>
+                </MenuItem>
+                <MenuItem> Cancer</MenuItem>
+                <MenuItem> Typhoid</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                displayEmpty
+                inputProps={{
+                  sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
+                  'aria-label': 'Without label',
+                }}
+                // eslint-disable-next-line react/no-unstable-nested-components
+                IconComponent={(props) => (
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
+                )}
+                sx={{
+                  '.MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#E1E1E1',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
+                  borderRadius: '20px',
+                  input: {
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 2,
+                  },
+                }}
+                name="location"
+                value=""
+              >
+                <MenuItem disabled selected value="">
+                  <span style={{ color: '#949494' }}>Location</span>{' '}
+                </MenuItem>
+                <MenuItem value="Left">
+                  {' '}
+                  <span style={{ color: '#949494' }}>Left</span>{' '}
+                </MenuItem>
+                <MenuItem value="Right">
+                  {' '}
+                  <span style={{ color: '#949494' }}>Right</span>{' '}
+                </MenuItem>
+                <MenuItem value="Posterior">
+                  {' '}
+                  <span style={{ color: '#949494' }}>Posterior</span>{' '}
+                </MenuItem>
+                <MenuItem value="Anterior">
+                  {' '}
+                  <span style={{ color: '#949494' }}>Anterior</span>{' '}
+                </MenuItem>
+                <MenuItem value="Medial">
+                  {' '}
+                  <span style={{ color: '#949494' }}>Medial</span>{' '}
+                </MenuItem>
+                <MenuItem value="Lateral">
+                  {' '}
+                  <span style={{ color: '#949494' }}>Lateral</span>{' '}
+                </MenuItem>
               </Select>
             </FormControl>
 

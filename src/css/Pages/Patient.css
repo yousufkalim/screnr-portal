@@ -350,6 +350,54 @@
   font-weight: 400;
 }
 
+.customOptions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: max-content;
+  background-color: #f4f4f4;
+  border-radius: 20px;
+  padding: 8px 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.customOptions:hover {
+  background-color: #cbcbcb76;
+}
+
+.opt_avatar {
+  background-color: #136773 !important;
+  height: 20px !important;
+  width: 20px !important;
+  font-size: 12px !important;
+}
+
+.optName {
+  font-weight: 500;
+  font-size: 12px;
+  color: #919b9b;
+  margin-left: 6px;
+}
+
+.OptNames {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.customSelect {
+  border: 1px solid #e1e1e1;
+  color: #919b9b;
+  padding: 3% 2% 2% 3%;
+  border-radius: 18px;
+  text-align: left;
+  height: max-content;
+  margin-bottom: 2%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 @media only screen and (max-width: 1600px) {
   .periodSelect {
     color: #fba622;
