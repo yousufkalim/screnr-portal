@@ -104,14 +104,13 @@ export default function ClinicianTable({ clinicians }) {
                   onClick={() => navigate(`/dashboard/staff/clinician/doctor/${row._id}`)}
                 >
                   Muscular dystrophy
-                  {/* {`${row.expertise}` || 'Muscular dystrophy'} */}
                 </TableCell>
                 <TableCell
                   align="center"
                   className="table_cells"
                   onClick={() => navigate(`/dashboard/staff/clinician/doctor/${row._id}`)}
                 >
-                  {`${row.phone}`}
+                  {row.phone}
                 </TableCell>
                 <TableCell
                   onClick={() => navigate(`/dashboard/staff/clinician/doctor/${row._id}`)}
@@ -121,7 +120,7 @@ export default function ClinicianTable({ clinicians }) {
                     padding: '3%',
                   }}
                 >
-                  {`${row.patient_count}`}
+                  {row.patient_count}
                 </TableCell>
 
                 <TableCell align="center">
