@@ -215,7 +215,7 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                     ml: 1,
                   },
                 }}
-                id="outlined-password"
+                id="outlined-phone"
                 classes={outlinedInputStyles}
                 placeholder="Phone Number"
                 size="normal"

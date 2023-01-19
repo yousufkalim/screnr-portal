@@ -219,7 +219,7 @@ export default function EditClinicAdmin({
                     ml: 1,
                   },
                 }}
-                id="outlined-password"
+                id="outlined-phone"
                 classes={outlinedInputStyles}
                 placeholder="Phone Number"
                 size="normal"
@@ -244,7 +244,7 @@ export default function EditClinicAdmin({
                     ml: 1,
                   },
                 }}
-                id="outlined-password"
+                id="outlined-email"
                 classes={outlinedInputStyles}
                 placeholder="Email"
                 size="normal"
