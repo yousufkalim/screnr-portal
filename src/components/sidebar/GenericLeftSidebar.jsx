@@ -3,15 +3,15 @@ import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // images import
-import { ReactComponent as Phone } from '../assets/images/staffScreen/phone.svg';
-import { ReactComponent as Email } from '../assets/images/staffScreen/email.svg';
-import { ReactComponent as Expiry } from '../assets/images/staffScreen/expiryDate.svg';
-import { ReactComponent as Activity } from '../assets/components/TimeCard/activity.svg';
-import edit from '../assets/icons/sidebarEdit.svg';
+import { ReactComponent as Phone } from '../../assets/images/staffScreen/phone.svg';
+import { ReactComponent as Email } from '../../assets/images/staffScreen/email.svg';
+import { ReactComponent as Expiry } from '../../assets/images/staffScreen/expiryDate.svg';
+import { ReactComponent as Activity } from '../../assets/components/TimeCard/activity.svg';
+import edit from '../../assets/icons/sidebarEdit.svg';
 
-import AvatarComponent from './Avatar';
+import AvatarComponent from '../Avatar';
 
-export default function Sidebar() {
+export default function LeftSidebar() {
   const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   return (
