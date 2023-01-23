@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import addBtn from '../assets/icons/addBtn.svg';
 
 // child components import
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/sidebar/GenericLeftSidebar';
 import ClinicAdminTable from '../components/tables/clinicAdmin/ClinicAdminsTable';
 import AddClinicAdmin from '../components/popups/clinicAdmin/AddNewClinicAdmin';
 import api from '../api/index';

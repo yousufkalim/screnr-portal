@@ -32,6 +32,16 @@ export default function PrescriptionTable() {
     });
   };
 
+  const StyledTableRow = styled(TableRow)(() => ({
+    '&:nth-of-type(even)': {
+      backgroundColor: '#F6F6F6',
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      borderBottom: '1px solid transparent',
+    },
+  }));
+
   const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 6,
     borderRadius: 5,
@@ -181,7 +191,7 @@ export default function PrescriptionTable() {
                     <p className="prescription_head"> 11/05/2022</p>
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell align="right">
                   <Action />
                 </TableCell>
               </TableRow>
@@ -248,7 +258,7 @@ export default function PrescriptionTable() {
                 </TableHead>
                 <TableBody>
                   {subPrescription.map((row) => (
-                    <TableRow className="tableRow">
+                    <StyledTableRow className="tableRow">
                       <TableCell align="left">{row.date}</TableCell>
 
                       <TableCell align="left" className="table_cells">
@@ -331,7 +341,7 @@ export default function PrescriptionTable() {
                       <TableCell align="center">
                         {row.status === 'check' ? <Check /> : <Uncheck />}
                       </TableCell>
-                    </TableRow>
+                    </StyledTableRow>
                   ))}
                 </TableBody>
               </>

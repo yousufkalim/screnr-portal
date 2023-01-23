@@ -8,10 +8,10 @@ import { ReactComponent as LoginCount } from '../assets/components/TimeCard/logi
 import { ReactComponent as Logoff } from '../assets/components/TimeCard/logoff.svg';
 
 // child components import
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/sidebar/GenericLeftSidebar';
 import TimeCard from '../components/TimeCard';
 import ActivityTable from '../components/tables/activityLog/ActivityTable';
-import RightSidebar from '../components/rightSidebar/patient/PatientListRightSidebar';
+import RightSidebar from '../components/sidebar/patient/PatientListRightSidebar';
 
 export default function Activity() {
   const cardsData = [

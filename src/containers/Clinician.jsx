@@ -15,7 +15,7 @@ import { ReactComponent as GreenCircle } from '../assets/components/CardWithIcon
 import { ReactComponent as BlueCircle } from '../assets/components/CardWithIcon/blueCircle.svg';
 
 // child components import
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/sidebar/GenericLeftSidebar';
 import CardWithIcon from '../components/CardWithIcon';
 import ClinicianTable from '../components/tables/clinician/ClinicianTable';
 import AddClinician from '../components/popups/clinician/AddNewClinician';

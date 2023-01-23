@@ -17,11 +17,11 @@ import { ReactComponent as RedStats } from '../assets/components/StatsCard/redSt
 import { ReactComponent as YellowStats } from '../assets/components/StatsCard/yellowStats.svg';
 
 // child components import
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/sidebar/GenericLeftSidebar';
 import StatsCard from '../components/StatsCard';
 import PatientTable from '../components/tables/patient/PatientTable';
 import AddNewPatient from '../components/popups/patient/AddNewPatient';
-import RightSidebar from '../components/rightSidebar/patient/PatientListRightSidebar';
+import RightSidebar from '../components/sidebar/patient/PatientListRightSidebar';
 import api from '../api/index';
 
 export default function Patient() {
