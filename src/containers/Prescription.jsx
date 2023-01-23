@@ -7,7 +7,7 @@ import { Grid } from '@mui/material';
 import addBtn from '../assets/icons/addBtn.svg';
 
 // child components import
-import Sidebar from '../components/PatientSidebar';
+import Sidebar from '../components/sidebar/patient/PatientSidebar';
 import AddNewPatient from '../components/popups/patient/AddNewPatient';
 import PatientTopSection from '../components/PatientTopSection';
 import PrescriptionTable from '../components/tables/prescription/PrescriptionTable';
