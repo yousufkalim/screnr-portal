@@ -30,6 +30,44 @@
   padding: 10px;
   margin-bottom: 3%;
 }
+
+.prescription_table_cells {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  color: #919b9b !important ;
+}
+
+.prescriptionBtns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.thresholdsBtn {
+  border: 5px solid #ff5151 !important;
+  padding: 12px 45px !important;
+  border-radius: 20px !important;
+  color: #ff5151 !important;
+  background-color: white !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  margin-right: 20px !important;
+}
+
+.listBtn {
+  padding: 12px 45px !important;
+  border-radius: 20px !important;
+  color: white !important;
+  background-color: #136773 !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+}
+
+.listTxtBtn {
+  margin-right: 10px;
+}
+
 .top_activity_cards {
   background-color: white;
   display: flex;
@@ -150,13 +188,65 @@
 
 .bgPrescription {
   background-color: rgb(246, 250, 251);
-  height: 100vh;
+  height: max-content;
+}
+
+.bgAddPrescription {
+  padding: 2rem 1.5rem 0rem 1.5rem;
+  width: 97%;
+}
+
+.prescriptionHead {
+  color: #136773;
+  font-weight: 500;
+  font-size: 20px;
+  padding-bottom: 13px !important;
+}
+
+.optColor {
+  color: #919b9b;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.selctedPresChoice {
+  display: flex;
+  align-items: center;
+  background-color: #f6fafb;
+  color: #136773;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#prescriptionTableHead {
+  font-weight: 400 !important;
+}
+
+.PrescriptionTableHead {
+  font-weight: 500;
+  padding: 20px !important;
+  font-size: 18px;
+  color: #919b9b;
+  text-align: center;
 }
 
 .linearProgress {
   font-size: 12px;
   font-weight: 400;
   color: #454238;
+}
+
+.actionIcon {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(22%) saturate(1780%) hue-rotate(140deg)
+    brightness(96%) contrast(85%);
+  margin-right: 8px;
+}
+
+.actionDiv {
+  display: flex;
+  align-items: center;
 }
 
 .linearPresProgress {
@@ -223,7 +313,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 9%;
+  width: 6.5%;
   color: #919b9b;
   cursor: pointer;
 }
@@ -398,7 +488,126 @@
   flex-wrap: wrap;
 }
 
+.generatePrescriptionBtn {
+  background-color: #fba622 !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  text-transform: none !important;
+  border-radius: 15px !important;
+  border: none !important;
+  padding: 8px 20px !important;
+}
+
+.dateDivPrescription .react-datepicker-wrapper {
+  border: 1px solid #e1e1e1 !important;
+  background-color: white;
+  border-radius: 20px;
+  margin-top: 10px;
+  padding: 1.8%;
+  width: 100%;
+}
+
+.addPrescription {
+  padding: 2rem 1.5rem 2rem 1.5rem;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.addPrescriptionBtn {
+  position: absolute !important;
+  right: 90px;
+  bottom: 10px;
+  z-index: 1300 !important;
+}
+
+.calenderIcon {
+  position: absolute;
+  top: 6px;
+  bottom: 0;
+  margin: auto 0;
+  right: 15px;
+}
+
+.prescriptionChoiceSec {
+  margin-top: 2%;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.presChoice {
+  display: flex;
+  align-items: center;
+  color: #919b9b;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.iconClicked {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(22%) saturate(1780%) hue-rotate(140deg)
+    brightness(96%) contrast(85%);
+  margin-right: 8px;
+}
+
+.choiceIcon {
+  margin-right: 8px;
+}
 @media only screen and (max-width: 1600px) {
+  .addMore {
+    width: 9%;
+  }
+
+  .bgPrescription {
+    padding-bottom: 40px;
+  }
+
+  .dateDivPrescription .react-datepicker-wrapper {
+    margin-top: 11px;
+    padding: 2.5%;
+  }
+
+  .prescriptionChoiceSec {
+    width: 70%;
+  }
+
+  .bgAddPrescription {
+    width: 100%;
+  }
+
+  .actionIcon {
+    margin-right: 6px;
+  }
+
+  .actionDiv,
+  .prescription_table_cells {
+    font-size: 12px !important;
+  }
+
+  .addPrescriptionBtn {
+    position: absolute !important;
+    right: 30px;
+    bottom: -19%;
+    z-index: 1300 !important;
+  }
+
+  .generatePrescriptionBtn {
+    font-size: 12px !important;
+    padding: 13px 20px !important;
+  }
+
+  #prescriptionTableHead {
+    font-size: 13px !important;
+  }
+
+  .listBtn,
+  .thresholdsBtn {
+    padding: 12px 25px !important;
+    font-size: 12px !important;
+  }
+
   .periodSelect {
     color: #fba622;
     font-weight: 600;

@@ -37,7 +37,7 @@ export default function Sidebar() {
     <div className="left_side">
       <div>
         <AvatarComponent alt="Rana Hamza" className="sidebar_avatar" />
-        <img src={edit} alt="" className="editIconSidebar" />
+        <img src={edit} alt="" className="editIconSidebar" id="editIconPatientSidebar" />
       </div>
       <div className="sideBarInfo">
         <div className="user_name">Rana Hamza</div>

@@ -1,7 +1,7 @@
 .resetPasswordBtn {
   background-color: #fba622 !important;
   width: 100% !important;
-  border-radius: 20px !important;
+  border-radius: 15px !important;
   padding: 2.2% 0px !important;
   box-shadow: none !important;
   font-weight: 600 !important;
@@ -34,6 +34,17 @@
 .logInBtn:hover {
   background-color: #faa017 !important;
   box-shadow: 0 2px 20px -5px rgb(190, 124, 37) !important;
+}
+
+.rangeBtn {
+  background-color: #fba622 !important;
+  width: 100% !important;
+  border-radius: 15px !important;
+  padding: 5% 0px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  text-transform: none !important;
 }
 
 .date-div .react-datepicker-wrapper {
@@ -101,6 +112,20 @@
 .closeBtn:hover {
   background-color: #136773 !important;
   color: white !important;
+}
+
+.genPresTxt {
+  font-weight: 600;
+  font-size: 20px;
+  color: #454238;
+  margin-top: 30px;
+}
+
+.genSubTxt {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 25px;
+  color: #919b9b;
 }
 
 .delBtn:hover {
@@ -201,6 +226,56 @@
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 40px;
+}
+
+.rangePopupTxt {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fba622;
+  line-height: 2;
+  text-align: center;
+  padding-top: 5%;
+}
+
+.rangeSubTxt {
+  color: #919b9b;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.rangeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.rangeRow p {
+  width: 35%;
+  text-align: left;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.rangeTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.rangeTopRow p {
+  width: 35%;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  color: #919b9b;
+}
+
+.jointImg {
+  margin-top: 35px;
 }
 
 .sendInviteTxt {
