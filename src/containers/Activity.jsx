@@ -8,7 +8,8 @@ import { ReactComponent as LoginCount } from '../assets/components/TimeCard/logi
 import { ReactComponent as Logoff } from '../assets/components/TimeCard/logoff.svg';
 
 // child components import
-import Sidebar from '../components/sidebar/GenericLeftSidebar';
+import GenericSidebar from '../components/sidebar/GenericLeftSidebar';
+import PatientSidebar from '../components/sidebar/patient/PatientSidebar';
 import TimeCard from '../components/TimeCard';
 import ActivityTable from '../components/tables/activityLog/ActivityTable';
 import RightSidebar from '../components/sidebar/patient/PatientListRightSidebar';
@@ -41,7 +42,11 @@ export default function Activity() {
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>
-        <Sidebar />
+        {window.location.pathname.split('/')[5] === 'activity' ? (
+          <PatientSidebar />
+        ) : (
+          <GenericSidebar />
+        )}
       </Grid>
 
       <Grid className="bgClinicianTable" xl={7.5} lg={7}>
