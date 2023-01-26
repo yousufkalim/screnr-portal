@@ -189,6 +189,7 @@
 .bgPrescription {
   background-color: rgb(246, 250, 251);
   height: max-content;
+  padding-bottom: 90px;
 }
 
 .bgAddPrescription {
