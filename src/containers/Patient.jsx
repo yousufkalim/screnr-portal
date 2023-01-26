@@ -30,7 +30,7 @@ export default function Patient() {
   const { id } = useParams();
 
   const getPatients = async () => {
-    if (window.location.pathname === '/dashboard/staff/clinician/doctor') {
+    if (window.location.pathname === '/dashboard/staff/clinician/patient') {
       const { data } = await api('get', '/admins/patient/all/');
       if (data) {
         setPatients(data.users);

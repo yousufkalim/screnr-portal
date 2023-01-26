@@ -7,6 +7,7 @@ import Patient from '../containers/Patient';
 import Activity from '../containers/Activity';
 import Prescription from '../containers/Prescription';
 import AddPatientPrescription from '../containers/AddPrescription';
+import PatientMessageBox from '../containers/PatientMessageBox';
 
 const superadminRoutes = [
   {
@@ -38,15 +39,16 @@ const superadminRoutes = [
     element: <Clinician />,
   },
   {
-    path: '/dashboard/staff/clinician/doctor/:id',
+    path: '/dashboard/staff/clinician/patient/:id',
     element: <Patient />,
   },
   {
-    path: '/dashboard/staff/clinician/doctor',
+    path: '/dashboard/staff/clinician/patient',
     element: <Patient />,
   },
+
   {
-    path: '/dashboard/staff/clinician/doctor/activity',
+    path: '/dashboard/staff/clinician/activity',
     element: <Activity />,
   },
   {
@@ -56,6 +58,14 @@ const superadminRoutes = [
   {
     path: '/dashboard/staff/clinician/patient/addPrescription',
     element: <AddPatientPrescription />,
+  },
+  {
+    path: '/dashboard/staff/clinician/patient/messages',
+    element: <PatientMessageBox />,
+  },
+  {
+    path: '/dashboard/staff/clinician/patient/activity',
+    element: <Activity />,
   },
 ];
 

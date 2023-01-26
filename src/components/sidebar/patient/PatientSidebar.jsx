@@ -111,13 +111,13 @@ export default function Sidebar() {
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate('/dashboard/staff/clinician/doctor/activity');
+          navigate('/dashboard/staff/clinician/patient/addPrescription');
           setActivityClicked(true);
         }}
       >
         <Completed
           className={
-            activityClicked || window.location.pathname.split('/')[5] === 'activity'
+            activityClicked || window.location.pathname.split('/')[5] === 'addPrescription'
               ? 'iconActivity'
               : ''
           }
@@ -125,7 +125,7 @@ export default function Sidebar() {
 
         <p
           className={
-            activityClicked || window.location.pathname.split('/')[5] === 'activity'
+            activityClicked || window.location.pathname.split('/')[5] === 'addPrescription'
               ? 'clickedActivity'
               : 'activityTxt'
           }
@@ -137,13 +137,13 @@ export default function Sidebar() {
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate('/dashboard/staff/clinician/doctor/activity');
+          navigate('/dashboard/staff/clinician/patient/messages');
           setActivityClicked(true);
         }}
       >
         <Msg
           className={
-            activityClicked || window.location.pathname.split('/')[5] === 'activity'
+            activityClicked || window.location.pathname.split('/')[5] === 'messages'
               ? 'iconActivity'
               : ''
           }
@@ -151,7 +151,7 @@ export default function Sidebar() {
 
         <p
           className={
-            activityClicked || window.location.pathname.split('/')[5] === 'activity'
+            activityClicked || window.location.pathname.split('/')[5] === 'messages'
               ? 'clickedActivity'
               : 'activityTxt'
           }
@@ -163,7 +163,7 @@ export default function Sidebar() {
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate('/dashboard/staff/clinician/doctor/activity');
+          navigate('/dashboard/staff/clinician/patient/activity');
           setActivityClicked(true);
         }}
       >

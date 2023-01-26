@@ -82,7 +82,7 @@ export default function Dashboard() {
       title: 'Total Patients',
       icon2: BlueCircle,
       className: 'blue_circle',
-      link: '/dashboard/staff/clinician/doctor',
+      link: '/dashboard/staff/clinician/patient',
     },
   ];
 
