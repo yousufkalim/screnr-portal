@@ -10,7 +10,7 @@ import { ReactComponent as Logoff } from '../assets/components/TimeCard/logoff.s
 // child components import
 import GenericSidebar from '../components/sidebar/GenericLeftSidebar';
 import PatientSidebar from '../components/sidebar/patient/PatientSidebar';
-import TimeCard from '../components/TimeCard';
+import TimeCard from '../components/cards/TimeCard';
 import ActivityTable from '../components/tables/activityLog/ActivityTable';
 import RightSidebar from '../components/sidebar/patient/PatientListRightSidebar';
 

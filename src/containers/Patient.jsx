@@ -18,7 +18,7 @@ import { ReactComponent as YellowStats } from '../assets/components/StatsCard/ye
 
 // child components import
 import Sidebar from '../components/sidebar/GenericLeftSidebar';
-import StatsCard from '../components/StatsCard';
+import StatsCard from '../components/cards/StatsCard';
 import PatientTable from '../components/tables/patient/PatientTable';
 import AddNewPatient from '../components/popups/patient/AddNewPatient';
 import RightSidebar from '../components/sidebar/patient/PatientListRightSidebar';

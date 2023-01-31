@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 // components import
-import CardWithIcon from '../components/CardWithIcon';
+import CardWithIcon from '../components/cards/CardWithIcon';
 import Chart from '../components/charts/dashboard/DasboardChart';
 // images import
 import { ReactComponent as Patients } from '../assets/components/CardWithIcon/patientsIcon.svg';

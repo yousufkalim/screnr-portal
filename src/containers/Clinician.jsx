@@ -16,7 +16,7 @@ import { ReactComponent as BlueCircle } from '../assets/components/CardWithIcon/
 
 // child components import
 import Sidebar from '../components/sidebar/GenericLeftSidebar';
-import CardWithIcon from '../components/CardWithIcon';
+import CardWithIcon from '../components/cards/CardWithIcon';
 import ClinicianTable from '../components/tables/clinician/ClinicianTable';
 import AddClinician from '../components/popups/clinician/AddNewClinician';
 import api from '../api/index';
