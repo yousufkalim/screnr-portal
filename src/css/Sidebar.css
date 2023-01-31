@@ -106,22 +106,105 @@
   line-height: 1px;
 }
 
-/* @media only screen and (max-width: 1700px) {
-  .editIconSidebar {
-    top: 20.5%;
-  }
-} */
+.exerciseList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  width: 62%;
+  list-style: none;
+}
+
+.actionListIcon {
+  margin-right: 20px;
+}
+
+.selectedItemExercise .actionListIcon {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(22%) saturate(1780%) hue-rotate(140deg)
+    brightness(96%) contrast(85%);
+  margin-right: 20px;
+}
+
+.divider {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(22%) saturate(1780%) hue-rotate(140deg)
+    brightness(96%) contrast(85%);
+}
+
+.itemExercise {
+  line-height: 40px;
+  color: #919b9b;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.selectedItemExercise {
+  line-height: 40px;
+  color: #136773;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.dropdownIcons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.listDiv {
+  width: 100%;
+  margin-top: -13px;
+}
 
 .activityLeft {
   display: flex;
   width: 70%;
   cursor: pointer;
   align-items: center;
+  text-decoration: none;
 }
 
 .iconActivity {
   filter: brightness(0) saturate(100%) invert(31%) sepia(22%) saturate(1780%) hue-rotate(140deg)
     brightness(96%) contrast(85%);
+}
+
+.selectedExActivity {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(22%) saturate(1780%) hue-rotate(140deg)
+    brightness(96%) contrast(85%);
+  font-weight: 600;
+  font-size: 16px;
+  color: #136773;
+  display: flex;
+  width: 70%;
+  align-items: center;
+  text-decoration: none;
+  cursor: default;
+}
+
+.activityEx {
+  display: flex;
+  width: 70%;
+  align-items: center;
+  text-decoration: none;
+  cursor: default;
+  font-weight: 600;
+  font-size: 16px;
+  color: #919b9b;
+}
+
+.activityEx .exIcon,
+.selectedExActivity .exIcon {
+  margin-right: 10%;
+  cursor: pointer;
+}
+
+.exTxt {
+  cursor: pointer;
+  width: fit-content;
 }
 
 @media only screen and (max-width: 1500px) {

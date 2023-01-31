@@ -17,7 +17,7 @@
 
 .right_sidebar {
   width: 17vw;
-  height: 98vh;
+  height: 100vh;
   padding: 23% 0;
 }
 
@@ -630,17 +630,7 @@
 }
 
 @media only screen and (max-width: 1440px) {
-  .right_sidebar {
-    height: 97vh;
-  }
-
   .notiCell {
     font-size: 12px;
-  }
-}
-
-@media only screen and (max-width: 1338px) {
-  .right_sidebar {
-    height: 99vh;
   }
 }

@@ -8,6 +8,9 @@ import Activity from '../containers/Activity';
 import Prescription from '../containers/Prescription';
 import AddPatientPrescription from '../containers/AddPrescription';
 import PatientMessageBox from '../containers/PatientMessageBox';
+import Reports from '../containers/PatientStats/Reports';
+import PainSurvey from '../containers/PatientStats/PainSurvey';
+import Session from '../containers/PatientStats/Session';
 
 const superadminRoutes = [
   {
@@ -66,6 +69,26 @@ const superadminRoutes = [
   {
     path: '/dashboard/staff/clinician/patient/activity',
     element: <Activity />,
+  },
+  {
+    path: '/dashboard/staff/clinician/patient/prescription/reports',
+    element: <Reports />,
+  },
+  {
+    path: '/dashboard/staff/clinician/patient/prescription/painSurvey',
+    element: <PainSurvey />,
+  },
+  {
+    path: '/dashboard/staff/clinician/patient/prescription/session/Supine Bridge',
+    element: <Session />,
+  },
+  {
+    path: '/dashboard/staff/clinician/patient/prescription/session/Bird Dog',
+    element: <Session />,
+  },
+  {
+    path: '/dashboard/staff/clinician/patient/prescription/session/Cat Camel',
+    element: <Session />,
   },
 ];
 

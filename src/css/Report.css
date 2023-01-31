@@ -1,0 +1,83 @@
+.reply-box {
+  height: max-content;
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.__replies {
+  height: max-content;
+}
+
+.msgTimeStamp {
+  color: #fba622;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  margin-left: 15px;
+}
+
+.exerciseReportTxt {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #919b9b;
+  padding: 15px 0px 35px 0px;
+}
+
+.exerciseReportName {
+  color: #136773;
+}
+
+.replySnt {
+  margin-top: 10px;
+  margin-right: 21px;
+}
+
+.reply_avatar {
+  background-color: #136773 !important;
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.reportBoxHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.replyBtn {
+  background-color: white !important;
+  border-radius: 15px !important;
+  border: 2px solid #fba622 !important;
+  padding: 3px 50px !important;
+  box-shadow: none !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+  color: #fba622 !important;
+}
+
+.reportReply {
+  text-align: right;
+}
+
+.bgReport {
+  background-color: rgb(246, 250, 251);
+  height: 100vh;
+}
+
+.bgReportCard {
+  padding: 2rem 1rem 0rem 2.5rem;
+  width: 97%;
+  overflow-y: scroll;
+  height: 95%;
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 1600px) {
+  .bgReportCard {
+    height: 93%;
+  }
+}
