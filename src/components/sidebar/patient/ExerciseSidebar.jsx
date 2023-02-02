@@ -99,7 +99,7 @@ export default function Sidebar() {
       </div>
 
       <NavLink
-        to="/dashboard/staff/clinician/patient/prescription/painSurvey"
+        to="/dashboard/staff/clinician/patient/prescription/exercise/painSurvey"
         className={({ isActive }) => (isActive ? 'selectedExActivity' : 'activityEx')}
       >
         <Survey className="exIcon" />
@@ -107,7 +107,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink
-        to="/dashboard/staff/clinician/patient/prescription/reports"
+        to="/dashboard/staff/clinician/patient/prescription/exercise/reports"
         className={({ isActive }) => (isActive ? 'selectedExActivity' : 'activityEx')}
       >
         <Msg className="exIcon" />
