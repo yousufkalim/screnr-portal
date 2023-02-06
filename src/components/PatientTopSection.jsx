@@ -1,28 +1,11 @@
-import AvatarComponent from './Avatar';
+// assets import
 import AddMore from '../assets/icons/AddMore.svg';
+
+// child imports
+import AvatarComponent from './Avatar';
 
 export default function PatientTopSection() {
   const docData = [
-    // {
-    //   name: 'Dr Sameer',
-    //   expert: 'Muscular dystrophy',
-    //   actions: 'Created Sabbir’s profile',
-    // },
-    // {
-    //   name: 'Dr Usman Ali',
-    //   expert: 'Muscular dystrophy',
-    //   actions: 'Created Saleh’s profile',
-    // },
-    // {
-    //   name: 'Dr Sameer',
-    //   expert: 'Muscular dystrophy',
-    //   actions: 'Created Sabbir’s profile',
-    // },
-    // {
-    //   name: 'Dr Usman Ali',
-    //   expert: 'Muscular dystrophy',
-    //   actions: 'Created Saleh’s profile',
-    // },
     {
       name: 'Dr Sameer',
       expert: 'Muscular dystrophy',

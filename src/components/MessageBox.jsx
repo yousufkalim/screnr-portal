@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react';
 // mui imports
 import { TextField } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
-import { makeStyles } from '@mui/styles';
 
 // emoji picker
 import EmojiPicker from 'emoji-picker-react';
@@ -14,27 +13,11 @@ import { ReactComponent as Emoji } from '../assets/icons/emoji.svg';
 import { ReactComponent as Dummy } from '../assets/images/dummyprsn.svg';
 import { ReactComponent as Dots } from '../assets/icons/threedots.svg';
 import { ReactComponent as Back } from '../assets/icons/backBtn.svg';
-import AvatarComponent from './Avatar';
 
-const useOutlinedInputStyles = makeStyles({
-  root: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        border: 'none',
-        borderTop: '2px solid #E1E1E1 ',
-        borderRadius: 0,
-        fontSize: 16,
-        width: 'auto',
-      },
-      '&:hover fieldset': {
-        borderColor: '#FBA622',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#FBA622',
-      },
-    },
-  },
-});
+// child imports
+import AvatarComponent from './Avatar';
+import useOutlinedInputStyles from '../utils/TextMessageInput';
+
 function MessageBox() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');

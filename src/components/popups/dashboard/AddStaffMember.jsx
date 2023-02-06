@@ -4,7 +4,6 @@ import { React, useState } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import { makeStyles } from '@mui/styles';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
@@ -24,6 +23,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import arrow from '../../../assets/icons/RightArrow.svg';
 import edit from '../../../assets/icons/edit.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
+
+// child imports
+import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import api from '../../../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -42,27 +44,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     margin: 'auto',
   },
 }));
-const useOutlinedInputStyles = makeStyles({
-  root: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        border: '1px solid #E1E1E1 ',
-        borderRadius: '20px',
-        fontSize: 16,
-        height: 55,
-      },
-      '&:hover fieldset': {
-        borderColor: '#454238',
-      },
-      '&::placeholder fieldset': {
-        fontWeight: 800,
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#454238',
-      },
-    },
-  },
-});
+
 export default function AddStaffMember({
   openAddStaffMember,
   setOpenAddStaffMember,

@@ -4,7 +4,6 @@ import { React, useState } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import { makeStyles } from '@mui/styles';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
@@ -28,6 +27,7 @@ import edit from '../../../assets/icons/edit.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
 
 // child component imports
+import useOutlinedInputStyles from '../../../utils/EditFormInput';
 import AvatarComponent from '../../Avatar';
 import ReactSelect from '../../ReactSelect';
 
@@ -47,27 +47,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     margin: 'auto',
   },
 }));
-const useOutlinedInputStyles = makeStyles({
-  root: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        border: '1px solid #454238',
-        borderRadius: '20px',
-        fontSize: 16,
-        height: 55,
-      },
-      '&:hover fieldset': {
-        borderColor: '#FBA622',
-      },
-      '&::placeholder fieldset': {
-        fontWeight: 800,
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#FBA622',
-      },
-    },
-  },
-});
+
 export default function EditPatient({ openEditPatient, setOpenEditPatient }) {
   const [checked, setChecked] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();

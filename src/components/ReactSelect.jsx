@@ -1,6 +1,8 @@
 // multi select component
 
 import { useState } from 'react';
+
+// child imports
 import AvatarComponent from './Avatar';
 
 export default function ReactSelect() {

@@ -2,7 +2,6 @@
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
 import DialogContent from '@mui/material/DialogContent';
@@ -16,6 +15,9 @@ import { toast } from 'react-toastify';
 
 // assets import
 import { ReactComponent as Joints } from '../../../assets/icons/joints.svg';
+
+// child imports
+import useOutlinedInputStyles from '../../../utils/AddFormInput';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -32,27 +34,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     paddingBottom: theme.spacing(9),
   },
 }));
-const useOutlinedInputStyles = makeStyles({
-  root: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        border: '1px solid #E1E1E1 ',
-        borderRadius: '20px',
-        fontSize: 16,
-        height: 55,
-      },
-      '&:hover fieldset': {
-        borderColor: '#454238',
-      },
-      '&::placeholder fieldset': {
-        fontWeight: 800,
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#454238',
-      },
-    },
-  },
-});
+
 export default function AdjustRange({ openAdjustRange, setOpenAdjustRange }) {
   const outlinedInputStyles = useOutlinedInputStyles();
 

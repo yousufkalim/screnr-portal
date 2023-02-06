@@ -4,7 +4,7 @@ import { React, useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import { makeStyles } from '@mui/styles';
+
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
@@ -27,6 +27,9 @@ import add from '../../../assets/icons/add.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
 import ReactSelect from '../../ReactSelect';
+
+// child imports
+import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import api from '../../../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -45,27 +48,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     margin: 'auto',
   },
 }));
-const useOutlinedInputStyles = makeStyles({
-  root: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        border: '1px solid #E1E1E1 ',
-        borderRadius: '20px',
-        fontSize: 16,
-        height: 55,
-      },
-      '&:hover fieldset': {
-        borderColor: '#454238',
-      },
-      '&::placeholder fieldset': {
-        fontWeight: 800,
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#454238',
-      },
-    },
-  },
-});
+
 export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
   const [checked, setChecked] = useState(false);
   const [clinician, setClinician] = useState([]);

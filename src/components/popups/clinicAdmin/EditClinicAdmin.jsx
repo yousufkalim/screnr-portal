@@ -4,7 +4,6 @@ import { React, useState } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import { makeStyles } from '@mui/styles';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
@@ -26,6 +25,7 @@ import edit from '../../../assets/icons/edit.svg';
 // child import
 import AvatarComponent from '../../Avatar';
 import api from '../../../api';
+import useOutlinedInputStyles from '../../../utils/EditFormInput';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -43,27 +43,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     margin: 'auto',
   },
 }));
-const useOutlinedInputStyles = makeStyles({
-  root: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        border: '1px solid #454238 ',
-        borderRadius: '20px',
-        fontSize: 16,
-        height: 55,
-      },
-      '&:hover fieldset': {
-        borderColor: '#FBA622',
-      },
-      '&::placeholder fieldset': {
-        fontWeight: 800,
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#FBA622',
-      },
-    },
-  },
-});
+
 export default function EditClinicAdmin({
   openEditClinicAdmin,
   setOpenEditClinicAdmin,

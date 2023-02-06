@@ -3,7 +3,6 @@ import { useState } from 'react';
 // mui imports
 import Grid from '@mui/material/Grid';
 import { FormControl, TextField } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
@@ -21,26 +20,12 @@ import { ReactComponent as ExpiryDate } from '../../../assets/icons/expiryDate.s
 import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
 import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 import { ReactComponent as List } from '../../../assets/icons/list.svg';
+
+// child imports
 import AddPrescriptionTable from '../../tables/prescription/AddPrescriptionTable';
+import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import AdjustRange from '../../popups/prescription/AdjustMotionRange';
 
-const useOutlinedInputStyles = makeStyles({
-  root: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        border: '1px solid #E1E1E1 ',
-        borderRadius: '20px',
-        fontSize: 16,
-      },
-      '&:hover fieldset': {
-        borderColor: '#454238',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#454238',
-      },
-    },
-  },
-});
 export default function AddPrescription() {
   const outlinedInputStyles = useOutlinedInputStyles();
   const [selected, setSelected] = useState('motionCapture');

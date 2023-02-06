@@ -21,7 +21,7 @@ import AvatarComponent from '../../Avatar';
 import DeleteModal from '../../DeletePopup';
 import EditStaffMember from '../../popups/dashboard/EditStaffMember';
 import { getMediaUrl } from '../../../config';
-import PhoneFormat from '../../PhoneFormat';
+import PhoneFormat from '../../../utils/PhoneFormat';
 
 export default function TableComponent({ setOpenAddStaffMember, staffMembers, getStaffMembers }) {
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
