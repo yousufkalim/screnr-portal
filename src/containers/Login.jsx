@@ -20,7 +20,7 @@ import Vector from '../assets/images/login/loginPgImg.svg';
 // child component import
 import ForgetPasswordPopup from '../components/ForgetPasswordPopup';
 import { UpdateStore } from '../StoreContext';
-import api from '../api/index';
+import api from '../api';
 
 const useOutlinedInputStyles = makeStyles({
   root: {

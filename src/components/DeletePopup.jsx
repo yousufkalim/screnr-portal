@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 
 // assets import
 import delConfirm from '../assets/images/deletePopup/delConfirm.svg';
-import api from '../api/index';
+import api from '../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {

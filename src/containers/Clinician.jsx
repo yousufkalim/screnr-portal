@@ -19,7 +19,7 @@ import Sidebar from '../components/sidebar/GenericLeftSidebar';
 import CardWithIcon from '../components/cards/CardWithIcon';
 import ClinicianTable from '../components/tables/clinician/ClinicianTable';
 import AddClinician from '../components/popups/clinician/AddNewClinician';
-import api from '../api/index';
+import api from '../api';
 
 export default function ClinicAdmin() {
   const [openAddClinican, setOpenAddClinican] = useState(false);

@@ -25,7 +25,7 @@ import edit from '../../../assets/icons/edit.svg';
 
 // child component imports
 import AvatarComponent from '../../Avatar';
-import api from '../../../api/index';
+import api from '../../../api';
 import { getMediaUrl } from '../../../config';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({

@@ -13,7 +13,7 @@ import addBtn from '../assets/icons/addBtn.svg';
 import Sidebar from '../components/sidebar/GenericLeftSidebar';
 import ClinicAdminTable from '../components/tables/clinicAdmin/ClinicAdminsTable';
 import AddClinicAdmin from '../components/popups/clinicAdmin/AddNewClinicAdmin';
-import api from '../api/index';
+import api from '../api';
 
 export default function ClinicAdmin() {
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);

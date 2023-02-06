@@ -27,7 +27,7 @@ import add from '../../../assets/icons/add.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
 import ReactSelect from '../../ReactSelect';
-import api from '../../../api/index';
+import api from '../../../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {

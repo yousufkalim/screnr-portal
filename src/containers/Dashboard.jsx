@@ -16,7 +16,7 @@ import addBtn from '../assets/icons/addBtn.svg';
 // child import
 import AddStaffMember from '../components/popups/dashboard/AddStaffMember';
 import TableComponent from '../components/tables/dashboard/StaffTable';
-import api from '../api/index';
+import api from '../api';
 
 export default function Dashboard() {
   const [openAddStaffMember, setOpenAddStaffMember] = useState(false);

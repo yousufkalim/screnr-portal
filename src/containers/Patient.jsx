@@ -22,7 +22,7 @@ import StatsCard from '../components/cards/StatsCard';
 import PatientTable from '../components/tables/patient/PatientTable';
 import AddNewPatient from '../components/popups/patient/AddNewPatient';
 import RightSidebar from '../components/sidebar/patient/PatientListRightSidebar';
-import api from '../api/index';
+import api from '../api';
 
 export default function Patient() {
   const [openAddPatient, setOpenAddPatient] = useState(false);

@@ -25,7 +25,7 @@ import edit from '../../../assets/icons/edit.svg';
 
 // child import
 import AvatarComponent from '../../Avatar';
-import api from '../../../api/index';
+import api from '../../../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {

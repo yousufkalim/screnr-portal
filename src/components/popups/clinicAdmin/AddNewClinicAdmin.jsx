@@ -23,7 +23,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 // assets import
 import add from '../../../assets/icons/add.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
-import api from '../../../api/index';
+import api from '../../../api';
 import edit from '../../../assets/icons/edit.svg';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
