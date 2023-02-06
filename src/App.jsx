@@ -17,8 +17,12 @@ function App() {
     <div className="App">
       {/* toastify Container for Notification */}
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar transition={Flip} />
+
       {/* Routes */}
+
+      {/* All Superadmin routes should have header except for login page */}
       {window.location.pathname !== '/' ? <Header /> : ''}
+      {/* Superadmin routes alongwith header */}
       <Router routes={superadminRoutes} />
     </div>
   );
