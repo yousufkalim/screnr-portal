@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 // mui imports
 import { TextField } from '@mui/material';
@@ -42,12 +42,18 @@ export default function ReportCard() {
   const click = useRef(null);
   const outlinedInputStyles = useOutlinedInputStyles();
 
-  const handleCloseEmojiSection = (e) => {
-    if (click.current && open && !click.current.contains(e.target)) {
-      setOpen(false);
-    }
-  };
-  document.addEventListener('mousedown', handleCloseEmojiSection);
+  useEffect(() => {
+    const handleCloseEmojiSection = (e) => {
+      if (click.current && open && !click.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleCloseEmojiSection);
+
+    return () => {
+      document.removeEventListener('mousedown', handleCloseEmojiSection);
+    };
+  }, [open]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
