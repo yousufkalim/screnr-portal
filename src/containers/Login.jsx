@@ -153,7 +153,7 @@ export default function Login() {
                       <InputAdornment position="end">
                         <IconButton
                           onClick={handleClickShowPassword}
-                          onMouseDown={() => setShowPassword(true)}
+                          onMouseDown={handleClickShowPassword}
                           aria-label="toggle password visibility"
                           edge="end"
                           sx={{ color: '#FBA622', mr: 1 }}
