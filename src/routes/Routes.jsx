@@ -69,14 +69,6 @@ const superadminRoutes = [
     element: <Activity />,
   },
 
-  // {
-  //   path: '/dashboard/staff/clinician/patient/prescription/session/Bird Dog',
-  //   element: <Session />,
-  // },
-  // {
-  //   path: '/dashboard/staff/clinician/patient/prescription/session/Cat Camel',
-  //   element: <Session />,
-  // },
   {
     path: '/dashboard/staff/clinician/patient/prescription/exercise',
     element: <Index />,

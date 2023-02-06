@@ -556,6 +556,13 @@
 .choiceIcon {
   margin-right: 8px;
 }
+
+@media only screen and (max-width: 1810px) {
+  .periodSelect {
+    padding: 1%;
+  }
+}
+
 @media only screen and (max-width: 1600px) {
   .addMore {
     width: 9%;

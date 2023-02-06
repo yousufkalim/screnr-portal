@@ -129,9 +129,7 @@ export default function EditStaffMember({
       getStaffMembers();
       handleClose();
     }
-    console.log('staffMemberin', staffMember);
   };
-  console.log('staffMemberout', staffMember);
 
   return (
     <div>
