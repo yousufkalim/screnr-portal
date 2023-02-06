@@ -69,9 +69,7 @@ export default function ClinicAdmin() {
       </Grid>
 
       <Grid className="bgClinicianTable" xl={10} lg={9.5}>
-        <div className="breadCrumb">
-          Dashboard &gt; &nbsp;Staff &gt; &nbsp;Lifeline Clinic &gt;{' '}
-        </div>
+        <div className="breadCrumb">Dashboard &gt; Staff &gt; Lifeline Clinic &gt; </div>
         <div className="clinicianScreenCardsDiv">
           <div className="cards_div_clinician_pg">
             {cardsData.map((item) => (

@@ -20,8 +20,8 @@ export default function AddPatientPrescription() {
 
       <Grid className="bgPrescription" xl={10} lg={9.5}>
         <div className="breadCrumb">
-          Dashboard &gt; &nbsp;Staff &gt; &nbsp; Clinic Admin &gt; &nbsp; Clinician &gt; &nbsp;
-          Patient &gt; &nbsp; Prescribe Exercise &gt; &nbsp;
+          Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescribe Exercise
+          &gt;
         </div>
         <div className="bgAddPrescription">
           <AddPrescription />

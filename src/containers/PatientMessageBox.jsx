@@ -16,8 +16,7 @@ export default function PatientMessageBox() {
 
       <Grid className="bgMsg" xl={10} lg={9.5}>
         <div className="breadCrumb">
-          Dashboard &gt; &nbsp;Staff &gt; &nbsp; Clinic Admin &gt; &nbsp; Clinician &gt; &nbsp;
-          Patient &gt; &nbsp;Messages &gt; &nbsp;
+          Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Messages &gt;
         </div>
         <div className="bgAddPrescription">
           <MessageBox />

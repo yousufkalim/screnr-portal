@@ -12,8 +12,8 @@ export default function Reports() {
     <Grid container>
       <Grid className="bgReport" xl={9} lg={9}>
         <div className="breadCrumb">
-          Dashboard &gt; &nbsp;Staff &gt; &nbsp; Clinic Admin &gt; &nbsp; Clinician &gt; &nbsp;
-          Patient &gt; &nbsp;Prescription &gt; &nbsp;Reports &gt; &nbsp;
+          Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
+          Reports &gt;
         </div>
         <div className="bgReportCard">
           <ReportCard />

@@ -40,45 +40,37 @@ export default function PatientSidebarSection() {
       </div>
       <div className="sidebarSubDiv">
         <div className="user_detail">
-          <Counter />
-          &nbsp;&nbsp; 25
+          <Counter className="spaceOnRight" />
+          25
         </div>
         <div className="user_detail">
-          <Medical />
-          &nbsp;&nbsp;Backpain
+          <Medical className="spaceOnRight" />
+          Backpain
         </div>
         <div className="user_detail">
-          <Body />
-          &nbsp;&nbsp;Anterior
+          <Body className="spaceOnRight" />
+          Anterior
         </div>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <div className="sidebarSubDiv2">
           <div className="user_detail">
-            <Phone />
-            &nbsp;&nbsp; +123456734
+            <Phone className="spaceOnRight" />
+            +123456734
           </div>
           <div className="user_detail">
-            <Email />
-            &nbsp;&nbsp; &nbsp;Screner@gmail.com
+            <Email className="spaceOnRight" />
+            Screner@gmail.com
           </div>
-          {/* <div className="user_detail">
-            <Up />
-            &nbsp;&nbsp;5&apos;5
-          </div>
-          <div className="user_detail">
-            <RightArrow />
-            &nbsp;&nbsp; &nbsp;111.2–149.7
-          </div> */}
         </div>
         <br />
         <div className="patient_exp_detail">
           <span className="detail_expiry">
-            <Expiry />
-            &nbsp;&nbsp;
-            <p>Expiry Date</p>
+            <Expiry className="spaceOnRight" />
+
+            <p className="spaceOnRight">Expiry Date</p>
           </span>
-          <p> &nbsp;&nbsp;12-05-2023</p>
+          <p>12-05-2023</p>
         </div>
       </Collapse>
       {toggleIcon ? (

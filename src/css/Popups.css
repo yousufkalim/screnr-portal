@@ -47,6 +47,10 @@
   text-transform: none !important;
 }
 
+.spaceOnLeft {
+  margin-left: 7px;
+}
+
 .date-div .react-datepicker-wrapper {
   border: 1px solid #e1e1e1 !important;
   background-color: white;
@@ -55,6 +59,7 @@
   padding: 2%;
   width: 100%;
 }
+
 .date-div2 .react-datepicker-wrapper {
   border: 1px solid #454238 !important;
   background-color: white;
@@ -278,6 +283,14 @@
   margin-top: 35px;
 }
 
+.spaceOnRight {
+  margin-right: 15px;
+}
+
+.spaceRight {
+  margin-right: 15px;
+}
+
 .sendInviteTxt {
   font-weight: 500;
   font-size: 14px;
@@ -285,6 +298,7 @@
 
 .arrowIcon {
   width: 20px;
+  margin-left: 7px;
 }
 
 .addImgIcon {

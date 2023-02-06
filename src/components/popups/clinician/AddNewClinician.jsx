@@ -292,7 +292,8 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p className="sendInviteTxt">Send Invite &nbsp;</p> <img src={add} alt="" />
+            <p className="sendInviteTxt">Send Invite</p>{' '}
+            <img src={add} className="spaceOnLeft" alt="" />
           </Button>
         </DialogActions>
       </BootstrapDialog>

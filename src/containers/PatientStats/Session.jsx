@@ -10,8 +10,8 @@ export default function Session() {
 
       <Grid className="bgMsg" xl={10} lg={9.5}>
         <div className="breadCrumb">
-          Dashboard &gt; &nbsp;Staff &gt; &nbsp; Clinic Admin &gt; &nbsp; Clinician &gt; &nbsp;
-          Patient &gt; &nbsp;Prescription &gt; &nbsp;Session &gt; &nbsp;
+          Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
+          Session &gt;
         </div>
         <div className="bgAddPrescription">{/* <MessageBox /> */}</div>
       </Grid>

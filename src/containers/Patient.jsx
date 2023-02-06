@@ -76,9 +76,7 @@ export default function Patient() {
       </Grid>
 
       <Grid className="bgClinicianTable" xl={7.5} lg={7}>
-        <div className="breadCrumb">
-          Dashboard &gt; &nbsp;Staff &gt; &nbsp;Lifeline Clinic &gt;&nbsp;Doctor&gt;
-        </div>
+        <div className="breadCrumb">Dashboard &gt; Staff &gt; Lifeline Clinic &gt; Doctor &gt;</div>
         <div className="patientScreenCardsDiv">
           <div className="cards_div_patient_pg">
             {cardsData.map((item) => (

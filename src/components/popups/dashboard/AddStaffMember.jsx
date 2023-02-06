@@ -307,7 +307,7 @@ export default function AddStaffMember({
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p>Send Invite &nbsp;</p> <img src={arrow} className="arrowIcon" alt="" />
+            <p>Send Invite</p> <img src={arrow} className="arrowIcon" alt="" />
           </Button>
         </DialogActions>
       </BootstrapDialog>

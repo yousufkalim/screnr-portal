@@ -46,7 +46,7 @@ export default function ClinicAdmin() {
       </Grid>
 
       <Grid className="bg" xl={10} lg={9.5}>
-        <div className="breadCrumb">Dashboard &gt; &nbsp;Staff &gt;</div>
+        <div className="breadCrumb">Dashboard &gt; Staff &gt;</div>
         <ClinicAdminTable clinicAdmins={clinicAdmins} getClinicAdmins={getClinicAdmins} />
       </Grid>
       <div className="addBtn">
