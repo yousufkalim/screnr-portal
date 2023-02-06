@@ -97,7 +97,8 @@ export default function AddClinicAdmin({
     setClinicAdmin({ ...clinicAdmin, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const formData = new FormData();
     setClinicAdmin({ ...clinicAdmin, gender: selectedGender });
     Object.keys(clinicAdmin).map((key) => formData.append(key, clinicAdmin[key]));

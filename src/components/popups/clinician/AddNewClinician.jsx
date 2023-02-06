@@ -72,7 +72,8 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
     setOpenAddClinican(false);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(e);
     toast.success('Clinic Admin added successfully');
     handleClose();
   };

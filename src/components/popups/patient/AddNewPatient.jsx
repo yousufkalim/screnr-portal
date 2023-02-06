@@ -75,7 +75,8 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
     setOpenAddPatient(false);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     toast.success('Patient added successfully');
     handleClose();
   };

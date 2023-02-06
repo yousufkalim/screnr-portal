@@ -60,7 +60,8 @@ export default function AdjustRange({ openAdjustRange, setOpenAdjustRange }) {
     setOpenAdjustRange(false);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     toast.success('Prescription added successfully');
     handleClose();
   };

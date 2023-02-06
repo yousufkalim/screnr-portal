@@ -75,7 +75,8 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
     setOpenEditClinican(false);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     toast.success('Clinic Admin edited successfully');
     handleClose();
   };

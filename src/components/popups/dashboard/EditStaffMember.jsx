@@ -114,7 +114,8 @@ export default function EditStaffMember({
     setStaffMember({ ...staffMember, photo: myFile });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const staffMemberCopy = { ...staffMember };
     const formData = new FormData();
     if (staffMemberCopy.expiry && !checked) {

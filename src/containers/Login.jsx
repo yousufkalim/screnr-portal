@@ -62,7 +62,8 @@ export default function Login() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const { data } = await api('post', '/auth/login', user);
     updateStore({ admin: data.admin, loggedIn: true });
     navigate('/dashboard');

@@ -99,7 +99,8 @@ export default function AddStaffMember({
     setStaffMember({ ...staffMember, photo: myFile });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const staffMemberCopy = { ...staffMember };
     const formData = new FormData();
 
