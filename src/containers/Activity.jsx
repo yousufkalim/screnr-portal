@@ -42,7 +42,7 @@ export default function Activity() {
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>
-        {window.location.pathname.split('/')[5] === 'activity' ? (
+        {window.location.pathname === 'clinician/:id/activity' ? (
           <PatientSidebar />
         ) : (
           <GenericSidebar />

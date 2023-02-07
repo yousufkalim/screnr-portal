@@ -37,15 +37,11 @@ export default function Sidebar() {
     <div className="left_side">
       <PatientSidebarSection />
       <div className="activityLeft" role="presentation">
-        <Exercise
-          className={window.location.pathname.split('/')[6] === 'session' ? 'iconActivity' : ''}
-        />
+        <Exercise className={window.location.pathname.includes('session') ? 'iconActivity' : ''} />
         <div className="dropdownIcons">
           <p
             className={
-              window.location.pathname.split('/')[6] === 'session'
-                ? 'clickedActivity'
-                : 'activityTxt'
+              window.location.pathname.includes('session') ? 'clickedActivity' : 'activityTxt'
             }
           >
             Exercise{' '}
@@ -56,7 +52,7 @@ export default function Sidebar() {
               style={{
                 cursor: 'pointer',
               }}
-              className={window.location.pathname.split('/')[6] === 'session' ? 'divider' : ''}
+              className={window.location.pathname.includes('session') ? 'divider' : ''}
             />
           ) : (
             <Dropdown
@@ -65,7 +61,7 @@ export default function Sidebar() {
                 transform: 'rotateX(180deg)',
                 cursor: 'pointer',
               }}
-              className={window.location.pathname.split('/')[6] === 'session' ? 'divider' : ''}
+              className={window.location.pathname.includes('session') ? 'divider' : ''}
             />
           )}
         </div>
@@ -73,14 +69,12 @@ export default function Sidebar() {
       <div className="listDiv">
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <div className="exerciseList">
-            <Divider
-              className={window.location.pathname.split('/')[6] === 'session' ? 'divider' : ''}
-            />
+            <Divider className={window.location.pathname.includes('session') ? 'divider' : ''} />
             <div>
               {data.map((row) => (
                 <NavLink
                   key={row.name}
-                  to={`/dashboard/staff/clinician/patient/prescription/session/${row.name}`}
+                  to={`/session/${row.name}`}
                   className={({ isActive }) => (isActive ? 'selectedItemExercise' : 'itemExercise')}
                 >
                   <div className="actionDiv" style={{ cursor: 'pointer' }}>
@@ -99,7 +93,7 @@ export default function Sidebar() {
       </div>
 
       <NavLink
-        to="/dashboard/staff/clinician/patient/prescription/exercise/painSurvey"
+        to="/patients/:id/exercise/painSurvey"
         className={({ isActive }) => (isActive ? 'selectedExActivity' : 'activityEx')}
       >
         <Survey className="exIcon" />
@@ -107,7 +101,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink
-        to="/dashboard/staff/clinician/patient/prescription/exercise/reports"
+        to="/patients/:id/exercise/reports"
         className={({ isActive }) => (isActive ? 'selectedExActivity' : 'activityEx')}
       >
         <Msg className="exIcon" />

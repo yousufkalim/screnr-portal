@@ -5,9 +5,9 @@ import { Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 
 // child components import
-import Sidebar from '../components/sidebar/patient/PatientSidebar';
-import AddPrescription from '../components/forms/prescription/AddPrescription';
-import GeneratePrescription from '../components/popups/prescription/PrescriptionGenerated';
+import Sidebar from '../../components/sidebar/patient/PatientSidebar';
+import AddPrescription from '../../components/forms/prescription/AddPrescription';
+import GeneratePrescription from '../../components/popups/prescription/PrescriptionGenerated';
 
 export default function AddPatientPrescription() {
   const [openGeneratePrescription, setOpenGeneratePrescription] = useState(false);

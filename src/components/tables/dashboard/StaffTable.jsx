@@ -89,14 +89,14 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
               <TableCell
                 align="left"
                 className="table_cells"
-                onClick={() => navigate(`/dashboard/staff/${row._id}`)}
+                onClick={() => navigate(`/staff/${row._id}`)}
               >
                 {counter < 10 ? `0${counter++}` : counter++}
               </TableCell>
               <TableCell
                 align="left"
                 sx={{ display: 'flex' }}
-                onClick={() => navigate(`/dashboard/staff/${row._id}`)}
+                onClick={() => navigate(`/staff/${row._id}`)}
               >
                 {row.photo ? (
                   <div className="imgDiv">
@@ -125,7 +125,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
               <TableCell
                 align="left"
                 className="table_cells"
-                onClick={() => navigate(`/dashboard/staff/${row._id}`)}
+                onClick={() => navigate(`/staff/${row._id}`)}
               >
                 {PhoneFormat(row.phone)}
               </TableCell>

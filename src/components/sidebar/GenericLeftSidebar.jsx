@@ -45,19 +45,19 @@ export default function LeftSidebar() {
         <p> 12-05-2023</p>
       </div>
       <br />
-      {window.location.pathname.split('/')[4] === 'patient' ? (
+      {window.location.pathname.includes('clinician') ? (
         <>
           <div
             className="activityLeft"
             role="presentation"
             onClick={() => {
-              navigate('/dashboard/staff/clinician/activity');
+              navigate('/clinicians/:id/activity');
               setActivityClicked(true);
             }}
           >
             <Activity
               className={
-                activityClicked || window.location.pathname.split('/')[4] === 'activity'
+                activityClicked || window.location.pathname.includes('activity')
                   ? 'iconActivity'
                   : ''
               }
@@ -65,7 +65,7 @@ export default function LeftSidebar() {
 
             <p
               className={
-                activityClicked || window.location.pathname.split('/')[4] === 'activity'
+                activityClicked || window.location.pathname.includes('activity')
                   ? 'clickedActivity'
                   : 'activityTxt'
               }

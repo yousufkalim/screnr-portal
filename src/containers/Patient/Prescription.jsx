@@ -7,12 +7,12 @@ import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 // assets import
-import addBtn from '../assets/icons/addBtn.svg';
+import addBtn from '../../assets/icons/addBtn.svg';
 
 // child components import
-import Sidebar from '../components/sidebar/patient/PatientSidebar';
-import PatientTopSection from '../components/PatientTopSection';
-import PrescriptionTable from '../components/tables/prescription/PrescriptionTable';
+import Sidebar from '../../components/sidebar/patient/PatientSidebar';
+import PatientTopSection from '../../components/PatientTopSection';
+import PrescriptionTable from '../../components/tables/prescription/PrescriptionTable';
 
 export default function Prescription() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function Prescription() {
         <img
           src={addBtn}
           className="pointer"
-          onClick={() => navigate('/dashboard/staff/clinician/patient/addPrescription')}
+          onClick={() => navigate('/addPrescription')}
           role="presentation"
           alt=""
         />

@@ -23,6 +23,11 @@
   height: 86vh;
 }
 
+.allClinicAdminTable {
+  background-color: rgb(246, 250, 251);
+  height: 91vh;
+}
+
 .activityTable {
   background-color: rgb(246, 250, 251);
   height: 82vh;
@@ -73,6 +78,11 @@
 @media only screen and (max-width: 1640px) {
   .bg {
     height: 83.5vh;
+  }
+
+  .allClinicAdminTable {
+    background-color: rgb(246, 250, 251);
+    height: 89vh;
   }
 
   .activityTable {

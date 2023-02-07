@@ -5,7 +5,7 @@ import { React } from 'react';
 import { Grid } from '@mui/material';
 
 // child components import
-import Sidebar from '../../components/sidebar/patient/ExerciseSidebar';
+import Sidebar from '../../../components/sidebar/patient/ExerciseSidebar';
 // import MessageBox from '../components/MessageBox';
 import Reports from './Reports';
 import PainSurvey from './PainSurvey';
@@ -18,11 +18,9 @@ export default function Index() {
       </Grid>
       <Grid xl={10} lg={9.5}>
         {/* <Reports /> */}
-        {window.location.pathname ===
-        '/dashboard/staff/clinician/patient/prescription/exercise/reports' ? (
+        {window.location.pathname.includes('/exercise/reports') ? (
           <Reports />
-        ) : window.location.pathname ===
-          '/dashboard/staff/clinician/patient/prescription/exercise/painSurvey' ? (
+        ) : window.location.pathname.includes('/exercise/painSurvey') ? (
           <PainSurvey />
         ) : (
           ''

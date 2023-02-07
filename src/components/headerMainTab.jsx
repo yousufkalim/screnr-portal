@@ -7,7 +7,7 @@ import { ReactComponent as DashboardIcon } from '../assets/components/HeaderIcon
 import { ReactComponent as ClinicAdminIcon } from '../assets/components/HeaderIcons/ClinicAdminIcon.svg';
 import { ReactComponent as ClinicalIcon } from '../assets/components/HeaderIcons/Clinical.svg';
 import { ReactComponent as PatientIcon } from '../assets/components/HeaderIcons/Patient.svg';
-// import { ReactComponent as PatientStatsIcon } from '../assets/components/HeaderIcons/PatientStatsIcon.svg';
+import { ReactComponent as PatientStatsIcon } from '../assets/components/HeaderIcons/PatientStatsIcon.svg';
 
 export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
   return (
@@ -25,7 +25,7 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
           className="tab_icon"
         />
       )}
-      {activeTab === '/dashboard/staff' || activeTab === '/dashboard/staff/' ? (
+      {activeTab === '/clinics' ? (
         <div className="tab2_div">
           <ClinicAdminIcon />
           <span>Clinic Admin</span>
@@ -33,12 +33,12 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
       ) : (
         <ClinicAdminIcon
           onClick={() => {
-            HandleTabsSwitch('/dashboard/staff');
+            HandleTabsSwitch('/clinics');
           }}
           className="tab_icon"
         />
       )}
-      {activeTab === '/dashboard/staff/clinician' || activeTab === '/dashboard/staff/clinician/' ? (
+      {activeTab === '/clinicians' ? (
         <div className="tab2_div">
           <ClinicalIcon />
           <span>Clinician</span>
@@ -46,31 +46,30 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
       ) : (
         <ClinicalIcon
           onClick={() => {
-            HandleTabsSwitch('/dashboard/staff/clinician');
+            HandleTabsSwitch('/clinicians');
           }}
           className="tab_icon"
         />
       )}
-      {activeTab === '/dashboard/staff/clinician/patient' ||
-      activeTab === '/dashboard/staff/clinician/patient/' ? (
+      {activeTab === '/patients' ? (
         <div className="tab2_div">
           <PatientIcon />
           <span>Patients</span>
         </div>
       ) : (
-        <PatientIcon
-          onClick={() => HandleTabsSwitch('/dashboard/staff/clinician/patient')}
-          className="tab_icon"
-        />
+        <PatientIcon onClick={() => HandleTabsSwitch('/patients')} className="tab_icon" />
       )}
-      {/* {activeTab === 'Patient Stats' ? (
+      {activeTab === '/patients/:id/exercise/reports' ? (
         <div className="tab2_div">
           <PatientStatsIcon />
           <span>Patient Stats</span>
         </div>
       ) : (
-        <PatientStatsIcon onClick={() => HandleTabsSwitch('Patient Stats')} className="tab_icon" />
-      )} */}
+        <PatientStatsIcon
+          onClick={() => HandleTabsSwitch('/patients/:id/exercise/reports')}
+          className="tab_icon"
+        />
+      )}
     </Stack>
   );
 }

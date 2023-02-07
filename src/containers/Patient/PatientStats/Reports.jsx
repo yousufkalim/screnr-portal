@@ -4,8 +4,8 @@ import { React } from 'react';
 import { Grid } from '@mui/material';
 
 // child components import
-import RightSidebar from '../../components/sidebar/patient/PatientListRightSidebar';
-import ReportCard from '../../components/cards/PatientReportCard';
+import RightSidebar from '../../../components/sidebar/patient/PatientListRightSidebar';
+import ReportCard from '../../../components/cards/PatientReportCard';
 
 export default function Reports() {
   return (

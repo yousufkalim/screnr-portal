@@ -28,9 +28,9 @@ export default function PatientSidebarSection() {
   return (
     <>
       {' '}
-      <div>
+      <div className="mainAvatarDiv">
         <AvatarComponent alt="Rana Hamza" className="sidebar_avatar" />
-        <img src={edit} alt="" className="editIconSidebar" id="editIconPatientSidebar" />
+        <img src={edit} alt="" className="editIconSidebar" />
       </div>
       <div className="sideBarInfo">
         <div className="user_name">Rana Hamza</div>

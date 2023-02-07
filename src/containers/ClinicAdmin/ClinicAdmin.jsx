@@ -7,13 +7,13 @@ import { Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 // assets import
-import addBtn from '../assets/icons/addBtn.svg';
+import addBtn from '../../assets/icons/addBtn.svg';
 
 // child components import
-import Sidebar from '../components/sidebar/GenericLeftSidebar';
-import ClinicAdminTable from '../components/tables/clinicAdmin/ClinicAdminsTable';
-import AddClinicAdmin from '../components/popups/clinicAdmin/AddNewClinicAdmin';
-import api from '../api';
+import Sidebar from '../../components/sidebar/GenericLeftSidebar';
+import ClinicAdminTable from '../../components/tables/clinicAdmin/ClinicAdminsTable';
+import AddClinicAdmin from '../../components/popups/clinicAdmin/AddNewClinicAdmin';
+import api from '../../api';
 
 export default function ClinicAdmin() {
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
@@ -21,7 +21,7 @@ export default function ClinicAdmin() {
   const { id } = useParams();
 
   const getClinicAdmins = async () => {
-    if (window.location.pathname === '/dashboard/staff') {
+    if (window.location.pathname.includes('staff')) {
       const { data } = await api('get', `/admins/clinics/all/`);
       if (data) {
         setClinicAdmins(data.users);

@@ -86,7 +86,7 @@ export default function ClinicianTable({ clinicians }) {
                 <TableCell
                   align="left"
                   sx={{ display: 'flex', paddingTop: '12%' }}
-                  onClick={() => navigate(`/dashboard/staff/clinician/patient/${row._id}`)}
+                  onClick={() => navigate(`/patient/${row._id}`)}
                 >
                   <AvatarComponent
                     alt={`${row.first_name} ${row.last_name}`}
@@ -101,19 +101,19 @@ export default function ClinicianTable({ clinicians }) {
                 <TableCell
                   align="center"
                   className="table_cells"
-                  onClick={() => navigate(`/dashboard/staff/clinician/patient/${row._id}`)}
+                  onClick={() => navigate(`/patient/${row._id}`)}
                 >
                   Muscular dystrophy
                 </TableCell>
                 <TableCell
                   align="center"
                   className="table_cells"
-                  onClick={() => navigate(`/dashboard/staff/clinician/patient/${row._id}`)}
+                  onClick={() => navigate(`/patient/${row._id}`)}
                 >
                   {row.phone}
                 </TableCell>
                 <TableCell
-                  onClick={() => navigate(`/dashboard/staff/clinician/patient/${row._id}`)}
+                  onClick={() => navigate(`/patient/${row._id}`)}
                   align="center"
                   className="table_cells"
                   sx={{

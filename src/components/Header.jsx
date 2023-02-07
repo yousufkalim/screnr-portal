@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import MenuIcon from '@mui/icons-material/Menu';
 // navigator import
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 // components imports
 import AvatarComponent from './Avatar';
 import HeaderTab2 from './headerMainTab';
@@ -13,21 +13,16 @@ import { ReactComponent as BellIcon } from '../assets/components/HeaderIcons/Bel
 import { ReactComponent as SearchIcon } from '../assets/components/HeaderIcons/Search.svg';
 
 export default function Header() {
-  const [activeTab, setActiveTab] = useState(window.location.pathname);
+  const { pathname } = useLocation();
+  const [activeTab, setActiveTab] = useState(pathname);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setActiveTab(window.localStorage.getItem('activeTab'));
-  }, []);
-
-  useEffect(() => {
-    setActiveTab(window.location.pathname);
-    localStorage.setItem('activeTab', activeTab);
-  }, [activeTab]);
+    setActiveTab(pathname);
+  }, [pathname]);
 
   const HandleTabsSwitch = (targetTab) => {
     navigate(targetTab);
-    setActiveTab(window.location.pathname);
   };
 
   const handleLogoClick = () => {

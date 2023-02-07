@@ -86,7 +86,7 @@ export default function ClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
                   <TableCell
                     align="left"
                     sx={{ display: 'flex', paddingTop: '12%' }}
-                    onClick={() => navigate(`/dashboard/staff/clinician/${row._id}`)}
+                    onClick={() => navigate(`/clinician/${row._id}`)}
                   >
                     <AvatarComponent
                       alt={`${row.first_name} ${row.last_name}`}
@@ -103,7 +103,7 @@ export default function ClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
                   <TableCell
                     align="center"
                     className="table_cells"
-                    onClick={() => navigate(`/dashboard/staff/clinician/${row._id}`)}
+                    onClick={() => navigate(`/clinician/${row._id}`)}
                   >
                     {row.therapist_count}
                   </TableCell>
@@ -113,7 +113,7 @@ export default function ClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
                     sx={{
                       padding: '3%',
                     }}
-                    onClick={() => navigate(`/dashboard/staff/clinician/${row._id}`)}
+                    onClick={() => navigate(`/clinician/${row._id}`)}
                   >
                     {row.patient_count}
                   </TableCell>

@@ -54,7 +54,7 @@ export default function Dashboard() {
   const cardsData = [
     {
       icon: Patients,
-      amount: staffCount < 10 ? `0${staffCount}` : staffCount,
+      amount: staffCount < 10 ? `0${staffCount}` : staffCount || 0,
       title: 'Total Staff',
       icon2: Circle,
       className: 'yellow_circle',
@@ -62,19 +62,19 @@ export default function Dashboard() {
     },
     {
       icon: Clinic,
-      amount: clinicsCount < 10 ? `0${clinicsCount}` : clinicsCount,
+      amount: clinicsCount < 10 ? `0${clinicsCount}` : clinicsCount || 0,
       title: 'Total Clinics',
       icon2: RedCircle,
       className: 'red_circle',
-      link: '/dashboard/staff',
+      link: '/staff',
     },
     {
       icon: Clinician,
-      amount: clinicianCount < 10 ? `0${clinicianCount}` : clinicianCount,
+      amount: clinicianCount < 10 ? `0${clinicianCount}` : clinicianCount || 0,
       title: 'Total Clinicians',
       icon2: GreenCircle,
       className: 'green_circle',
-      link: '/dashboard/staff/clinician',
+      link: '/clinician',
     },
     {
       icon: Patients2,
@@ -82,7 +82,7 @@ export default function Dashboard() {
       title: 'Total Patients',
       icon2: BlueCircle,
       className: 'blue_circle',
-      link: '/dashboard/staff/clinician/patient',
+      link: '/patient',
     },
   ];
 

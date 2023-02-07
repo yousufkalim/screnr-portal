@@ -4,8 +4,8 @@ import { React } from 'react';
 import { Grid } from '@mui/material';
 
 // child components import
-import Sidebar from '../components/sidebar/patient/PatientSidebar';
-import MessageBox from '../components/MessageBox';
+import Sidebar from '../../components/sidebar/patient/PatientSidebar';
+import MessageBox from '../../components/MessageBox';
 
 export default function PatientMessageBox() {
   return (

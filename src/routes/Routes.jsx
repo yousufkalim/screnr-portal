@@ -1,14 +1,17 @@
 // Routes
 import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
-import ClinicAdmin from '../containers/ClinicAdmin';
-import Clinician from '../containers/Clinician';
-import Patient from '../containers/Patient';
+import ClinicAdmin from '../containers/ClinicAdmin/ClinicAdmin';
+import AllClinicAdmins from '../containers/ClinicAdmin/AllClinicAdmins';
+import Clinician from '../containers/Clinician/Clinician';
+import AllClinicians from '../containers/Clinician/AllClinicians';
+import Patient from '../containers/Patient/Patient';
+import AllPatients from '../containers/Patient/AllPatients';
 import Activity from '../containers/Activity';
-import Prescription from '../containers/Prescription';
-import AddPatientPrescription from '../containers/AddPrescription';
-import PatientMessageBox from '../containers/PatientMessageBox';
-import Index from '../containers/PatientStats/Index';
+import Prescription from '../containers/Patient/Prescription';
+import AddPatientPrescription from '../containers/Patient/AddPrescription';
+import PatientMessageBox from '../containers/Patient/PatientMessageBox';
+import Index from '../containers/Patient/PatientStats/Index';
 
 const superadminRoutes = [
   {
@@ -19,58 +22,64 @@ const superadminRoutes = [
     path: '/login',
     element: <Login />,
   },
+
+  // routes for all data
   {
     path: '/dashboard',
     element: <Dashboard />,
   },
   {
-    path: '/dashboard/staff/:id',
+    path: '/clinics',
+    element: <AllClinicAdmins />,
+  },
+  {
+    path: '/clinicians',
+    element: <AllClinicians />,
+  },
+  {
+    path: '/patients',
+    element: <AllPatients />,
+  },
+
+  // routes for getting data by a specific id
+  {
+    path: '/staff/:id',
     element: <ClinicAdmin />,
-  },
-  {
-    path: '/dashboard/staff',
-    element: <ClinicAdmin />,
-  },
-  {
-    path: '/dashboard/staff/clinician/:id',
-    element: <Clinician />,
-  },
-  {
-    path: '/dashboard/staff/clinician',
-    element: <Clinician />,
-  },
-  {
-    path: '/dashboard/staff/clinician/patient/:id',
-    element: <Patient />,
-  },
-  {
-    path: '/dashboard/staff/clinician/patient',
-    element: <Patient />,
   },
 
   {
-    path: '/dashboard/staff/clinician/activity',
-    element: <Activity />,
+    path: '/clinics/:id',
+    element: <Clinician />,
+  },
+
+  {
+    path: '/clinicians/:id',
+    element: <Patient />,
   },
   {
-    path: '/dashboard/staff/clinician/patient/prescription',
+    path: '/clinicians/:id/activity',
+    element: <Activity />,
+  },
+
+  {
+    path: '/patients/:id/prescription',
     element: <Prescription />,
   },
   {
-    path: '/dashboard/staff/clinician/patient/addPrescription',
+    path: '/patients/:id/addPrescription',
     element: <AddPatientPrescription />,
   },
   {
-    path: '/dashboard/staff/clinician/patient/messages',
+    path: '/patients/:id/messages',
     element: <PatientMessageBox />,
   },
   {
-    path: '/dashboard/staff/clinician/patient/activity',
+    path: '/patients/:id/activity',
     element: <Activity />,
   },
 
   {
-    path: '/dashboard/staff/clinician/patient/prescription/exercise',
+    path: '/patients/:id/exercise',
     element: <Index />,
     children: [
       {
@@ -82,7 +91,7 @@ const superadminRoutes = [
         element: <Index />,
       },
       {
-        path: '/dashboard/staff/clinician/patient/prescription/session/Supine Bridge',
+        path: '/Supine Bridge',
         element: <Index />,
       },
     ],

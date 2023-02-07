@@ -7,19 +7,19 @@ import { Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 // assets import
-import addBtn from '../assets/icons/addBtn.svg';
+import addBtn from '../../assets/icons/addBtn.svg';
 
-import { ReactComponent as Clinician } from '../assets/components/CardWithIcon/clinician.svg';
-import { ReactComponent as Patients2 } from '../assets/components/CardWithIcon/patients.svg';
-import { ReactComponent as GreenCircle } from '../assets/components/CardWithIcon/greenCircle.svg';
-import { ReactComponent as BlueCircle } from '../assets/components/CardWithIcon/blueCircle.svg';
+import { ReactComponent as Clinician } from '../../assets/components/CardWithIcon/clinician.svg';
+import { ReactComponent as Patients2 } from '../../assets/components/CardWithIcon/patients.svg';
+import { ReactComponent as GreenCircle } from '../../assets/components/CardWithIcon/greenCircle.svg';
+import { ReactComponent as BlueCircle } from '../../assets/components/CardWithIcon/blueCircle.svg';
 
 // child components import
-import Sidebar from '../components/sidebar/GenericLeftSidebar';
-import CardWithIcon from '../components/cards/CardWithIcon';
-import ClinicianTable from '../components/tables/clinician/ClinicianTable';
-import AddClinician from '../components/popups/clinician/AddNewClinician';
-import api from '../api';
+import Sidebar from '../../components/sidebar/GenericLeftSidebar';
+import CardWithIcon from '../../components/cards/CardWithIcon';
+import ClinicianTable from '../../components/tables/clinician/ClinicianTable';
+import AddClinician from '../../components/popups/clinician/AddNewClinician';
+import api from '../../api';
 
 export default function ClinicAdmin() {
   const [openAddClinican, setOpenAddClinican] = useState(false);
@@ -27,7 +27,7 @@ export default function ClinicAdmin() {
   const { id } = useParams();
 
   const getClinicians = async () => {
-    if (window.location.pathname === '/dashboard/staff/clinician') {
+    if (window.location.pathname.includes('clinician')) {
       const { data } = await api('get', '/admins/therapist/all/');
       if (data) {
         setClinicians(data.users);

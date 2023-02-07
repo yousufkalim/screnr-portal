@@ -19,13 +19,13 @@ export default function Sidebar() {
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate('/dashboard/staff/clinician/patient/addPrescription');
+          navigate('/patients/:id/addPrescription');
           setActivityClicked(true);
         }}
       >
         <Completed
           className={
-            activityClicked || window.location.pathname.split('/')[5] === 'addPrescription'
+            activityClicked || window.location.pathname === '/patients/:id/addPrescription'
               ? 'iconActivity'
               : ''
           }
@@ -33,7 +33,7 @@ export default function Sidebar() {
 
         <p
           className={
-            activityClicked || window.location.pathname.split('/')[5] === 'addPrescription'
+            activityClicked || window.location.pathname === '/patients/:id/addPrescription'
               ? 'clickedActivity'
               : 'activityTxt'
           }
@@ -45,13 +45,13 @@ export default function Sidebar() {
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate('/dashboard/staff/clinician/patient/messages');
+          navigate('/patients/:id/messages');
           setActivityClicked(true);
         }}
       >
         <Msg
           className={
-            activityClicked || window.location.pathname.split('/')[5] === 'messages'
+            activityClicked || window.location.pathname === '/patients/:id/messages'
               ? 'iconActivity'
               : ''
           }
@@ -59,7 +59,7 @@ export default function Sidebar() {
 
         <p
           className={
-            activityClicked || window.location.pathname.split('/')[5] === 'messages'
+            activityClicked || window.location.pathname === '/patients/:id/messages'
               ? 'clickedActivity'
               : 'activityTxt'
           }
@@ -71,13 +71,13 @@ export default function Sidebar() {
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate('/dashboard/staff/clinician/patient/activity');
+          navigate('/patients/:id/activity');
           setActivityClicked(true);
         }}
       >
         <Activity
           className={
-            activityClicked || window.location.pathname.split('/')[5] === 'activity'
+            activityClicked || window.location.pathname === '/patients/:id/activity'
               ? 'iconActivity'
               : ''
           }
@@ -85,7 +85,7 @@ export default function Sidebar() {
 
         <p
           className={
-            activityClicked || window.location.pathname.split('/')[5] === 'activity'
+            activityClicked || window.location.pathname === '/patients/:id/activity'
               ? 'clickedActivity'
               : 'activityTxt'
           }
