@@ -557,6 +557,21 @@
   margin-right: 8px;
 }
 
+.patientFilterPoper {
+  position: absolute;
+  background-color: white;
+  width: 24%;
+  padding: 40px;
+  border-radius: 20px;
+  top: 23%;
+  right: 15%;
+  font-weight: 500;
+  font-size: 14px;
+  color: #454238;
+  height: 70vh;
+  overflow-y: scroll;
+}
+
 @media only screen and (max-width: 1810px) {
   .periodSelect {
     padding: 1%;
