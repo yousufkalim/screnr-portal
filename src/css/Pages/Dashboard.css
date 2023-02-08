@@ -51,6 +51,7 @@
   border: 2px solid #fba622 !important;
   border-radius: 20px !important;
   padding: 1px 15px !important;
+  text-transform: capitalize !important;
 }
 
 .table_header {
