@@ -42,19 +42,31 @@ export default function AllClinicAdminTable({
   getClinicAdmins,
 }) {
   const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
-  const [openFilter, setOpenFilter] = useState(false);
   const [clinicAdmin, setClinicAdmin] = useState({});
+  const [openFilter, setOpenFilter] = useState(false);
+  const navigate = useNavigate();
   const [filter, setFilter] = useState('');
   const click = useRef(null);
+  const filterRef = useRef(null);
   const classes = useStyles();
+  const isSafari =
+    navigator.vendor.match(/apple/i) &&
+    !navigator.userAgent.match(/crios/i) &&
+    !navigator.userAgent.match(/fxios/i) &&
+    !navigator.userAgent.match(/Opera|OPT\//);
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
-  const navigate = useNavigate();
   useEffect(() => {
     const handleCloseFilter = (e) => {
-      if (click.current && openFilter && !click.current.contains(e.target)) {
+      if (
+        openFilter &&
+        click.current &&
+        filterRef.current &&
+        !filterRef.current.contains(e.target) &&
+        !click.current.contains(e.target)
+      ) {
         setOpenFilter(false);
       }
     };
@@ -77,8 +89,11 @@ export default function AllClinicAdminTable({
         }}
       >
         <div className="allTableHead">
-          <h1 className="clientTableHead">List of Clinic Admins</h1>
-          <div className="allTableTitle">
+          <h1 className="clientTableHead">
+            List of Clinic Admins <span className="countStyle">120</span>
+          </h1>
+
+          <div className="allTableTitle" style={{ flexGrow: !isSafari ? '0.15' : 'none' }}>
             <IconTextField />
             {filter && (
               <div className="selectedFilter">
@@ -92,7 +107,11 @@ export default function AllClinicAdminTable({
                 />
               </div>
             )}
-            <Filter className="pointer" onClick={() => setOpenFilter(!openFilter)} />
+            <Filter
+              className="pointer"
+              onClick={() => setOpenFilter(!openFilter)}
+              ref={filterRef}
+            />
             {openFilter && (
               <div className="filterPoper" ref={click}>
                 <div className="filterHead">
@@ -116,17 +135,8 @@ export default function AllClinicAdminTable({
                   onChange={handleFilterChange}
                   value={filter}
                   sx={{
-                    fontSize: '14px',
                     '.MuiFormControlLabel-label': {
                       fontSize: '14px',
-                    },
-                    MuiIcon: {
-                      root: {
-                        color: '#136773',
-                        '&$checked': {
-                          color: '#136773',
-                        },
-                      },
                     },
                   }}
                 >
