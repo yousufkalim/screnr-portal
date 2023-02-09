@@ -1,7 +1,5 @@
 // mui imports
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
@@ -10,22 +8,8 @@ import ClearIcon from '@mui/icons-material/Clear';
 // assets import
 import { ReactComponent as Icon } from '../../../assets/icons/prescriptionIcon.svg';
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialog-root': {
-    borderRadius: '20px',
-  },
-  '& .MuiDialogContent-root': {
-    paddingLeft: theme.spacing(4),
-    paddingRight: theme.spacing(4),
-    paddingTop: theme.spacing(9),
-    textAlign: 'center',
-  },
-  '& .MuiDialogActions-root': {
-    paddingLeft: theme.spacing(5),
-    paddingRight: theme.spacing(5),
-    paddingBottom: theme.spacing(7),
-  },
-}));
+// child imports
+import BootstrapDialog from '../../../utils/GeneralPopupsStyling';
 
 export default function GeneratePrescription({
   openGeneratePrescription,
@@ -43,7 +27,7 @@ export default function GeneratePrescription({
         open={openGeneratePrescription}
         setOpen={setOpenGeneratePrescription}
         fullWidth
-        maxWidth="xs"
+        maxWidth="sm"
         PaperProps={{
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
