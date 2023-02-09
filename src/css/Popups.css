@@ -26,6 +26,7 @@
   position: absolute;
   right: 30px;
   top: 30px;
+  z-index: 1300;
   cursor: pointer;
   color: #919b9b;
 }
@@ -313,4 +314,63 @@
   width: 120px !important;
   height: 120px !important;
   font-size: 32px !important;
+}
+
+.tryAnotherBtn {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  padding: 15px 35px !important;
+  background: #ff8c39 !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  margin: auto !important;
+}
+
+.wrngBtn {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  padding: 15px 40px !important;
+  background: #ff5151 !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  margin: auto !important;
+}
+
+.usrAddedBtn {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  padding: 15px 80px !important;
+  background: #47b45f !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  margin: auto !important;
+}
+
+.inactiveBtn {
+  background-color: #fba622 !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  padding: 15px 150px !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  margin: auto !important;
+}
+
+.bgApply {
+  background-image: url('../assets/images/popups/smthingWrngBg.svg') !important;
+  z-index: 2;
+  background-size: 400px;
+  background-repeat: no-repeat;
 }
