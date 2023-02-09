@@ -41,7 +41,7 @@ export default function Patient() {
   return (
     <Grid container>
       <Grid className="bgClinicianTable" xl={12} lg={12}>
-        <AllPatientTable patients={patients} />
+        <AllPatientTable setOpenAddPatient={setOpenAddPatient} patients={patients} />
       </Grid>
 
       <div className="addBtn">
