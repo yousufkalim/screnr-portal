@@ -18,9 +18,10 @@ import Logo from '../assets/icons/Logo.svg';
 import Vector from '../assets/images/login/loginPgImg.svg';
 
 // child component import
-import ForgetPasswordPopup from '../components/ForgetPasswordPopup';
+
 import { UpdateStore } from '../StoreContext';
 import api from '../api';
+import ForgetPasswordPopup from '../components/popups/general/ForgetPasswordPopup';
 
 const useOutlinedInputStyles = makeStyles({
   root: {
@@ -45,6 +46,7 @@ const useOutlinedInputStyles = makeStyles({
     },
   },
 });
+
 export default function Login() {
   const [openForgetPasswordPopup, setOpenForgetPasswordPopup] = useState(false);
   const [user, setUser] = useState({});
