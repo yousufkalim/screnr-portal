@@ -4,7 +4,6 @@ import { React, useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
@@ -26,10 +25,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import add from '../../../assets/icons/add.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
-import ReactSelect from '../../ReactSelect';
 
 // child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
+import ReactSelect from '../../ReactSelect';
 import api from '../../../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({

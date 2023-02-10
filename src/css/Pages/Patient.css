@@ -572,6 +572,85 @@
   overflow-y: scroll;
 }
 
+.prescriptionMenu {
+  border-radius: 20px;
+  background-color: #f6fafb;
+  padding: 20px;
+  width: max-content;
+  position: relative;
+  bottom: 40px;
+  right: -70px;
+}
+
+.pIcon {
+  margin-right: 8px;
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.editMenuItem {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.clinicianDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  background-color: #f4f4f4;
+  border-radius: 30px;
+  cursor: pointer;
+  flex-basis: 30%;
+  padding: 4px;
+  margin-bottom: 13px;
+  /* width: 20%; */
+}
+.selectedClinicianDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  background-color: #136773;
+  border-radius: 30px;
+  cursor: pointer;
+  flex-basis: 30%;
+  padding: 4px;
+  margin-bottom: 13px;
+  /* width: 20%; */
+}
+
+.selectedClinicianDiv p {
+  font-weight: 500;
+  font-size: 17px;
+  color: white;
+}
+
+.clinicianDiv p {
+  font-weight: 500;
+  font-size: 17px;
+  color: #919b9b;
+}
+
+.clinicianParentDiv {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.clinicianDP {
+  margin-right: 10px;
+  width: 25%;
+}
+
 @media only screen and (max-width: 1810px) {
   .periodSelect {
     padding: 1%;
@@ -654,5 +733,8 @@
 @media only screen and (max-width: 1440px) {
   .notiCell {
     font-size: 12px;
+  }
+  .prescriptionMenu {
+    right: 5px;
   }
 }

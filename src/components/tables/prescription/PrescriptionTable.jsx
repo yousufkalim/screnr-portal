@@ -18,12 +18,17 @@ import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as Check } from '../../../assets/components/Table/check.svg';
 import { ReactComponent as Uncheck } from '../../../assets/components/Table/uncheck.svg';
+import { ReactComponent as Edit } from '../../../assets/icons/editIcon.svg';
+import { ReactComponent as Tick } from '../../../assets/components/Table/tick.svg';
 
 // child import
 import AvatarComponent from '../../Avatar';
+import EditPrescription from '../../popups/prescription/EditPrescription';
 
 export default function PrescriptionTable() {
   const [isOpen, setIsOpen] = useState({});
+  const [openPrescriptionMenu, setOpenPrescriptionMenu] = useState(false);
+  const [openEditPrescription, setOpenEditPrescription] = useState(false);
 
   const toggleOpen = (category) => {
     setIsOpen({
@@ -89,17 +94,6 @@ export default function PrescriptionTable() {
       'Prescription Name 1',
       ['Supine Bridge', 'Cat and Camel', 'Bird and Dog'],
       '1 / 05 / 2022',
-    ),
-
-    createPrescription(
-      'Prescription Name 2',
-      ['Supine Bridge', 'Cat and Camel', 'Bird and Dog', 'Exercise Name', 'Exercise Name'],
-      '21 / 05 / 2022',
-    ),
-    createPrescription(
-      'Prescription Name 3',
-      ['Supine Bridge', 'Cat and Camel', 'Exercise Name', 'Exercise Name'],
-      '11 / 05 / 2022',
     ),
   ];
 
@@ -192,7 +186,43 @@ export default function PrescriptionTable() {
                   </div>
                 </TableCell>
                 <TableCell align="right">
-                  <Action />
+                  <Action
+                    className="pointer"
+                    onClick={() => setOpenPrescriptionMenu(!openPrescriptionMenu)}
+                  />
+                  {openPrescriptionMenu ? (
+                    <div className="prescriptionMenu">
+                      <div
+                        className="editMenuItem"
+                        role="presentation"
+                        onClick={() => {
+                          setOpenEditPrescription(true);
+                          setOpenPrescriptionMenu(false);
+                        }}
+                      >
+                        <Edit
+                          className="pIcon"
+                          style={{
+                            filter:
+                              'brightness(0) saturate(100%) invert(66%) sepia(69%) saturate(1538%) hue-rotate(344deg) brightness(107%) contrast(97%)',
+                          }}
+                        />{' '}
+                        <p>Edit Prescription</p>
+                      </div>
+                      <div
+                        className="menuItem"
+                        role="presentation"
+                        onClick={() => {
+                          setOpenPrescriptionMenu(false);
+                        }}
+                      >
+                        <Tick className="pIcon" />
+                        <p>Mark as Completeted</p>
+                      </div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -347,6 +377,12 @@ export default function PrescriptionTable() {
               </>
             )}
           </Table>
+          {openEditPrescription && (
+            <EditPrescription
+              openEditPrescription={openEditPrescription}
+              setOpenEditPrescription={setOpenEditPrescription}
+            />
+          )}
         </TableContainer>
       ))}
     </div>

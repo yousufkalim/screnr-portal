@@ -368,6 +368,21 @@
   margin: auto !important;
 }
 
+.savePBtn {
+  border: 1px solid #fba622 !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: center !important;
+  color: #fba622 !important;
+  background: white !important;
+  width: 100% !important;
+  padding: 15px 150px !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  margin: auto !important;
+}
+
 .bgApply {
   background-image: url('../assets/images/popups/smthingWrngBg.svg') !important;
   z-index: 2;

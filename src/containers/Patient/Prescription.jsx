@@ -31,7 +31,7 @@ export default function Prescription() {
         <img
           src={addBtn}
           className="pointer"
-          onClick={() => navigate('/addPrescription')}
+          onClick={() => navigate('/patients/:id/addPrescription')}
           role="presentation"
           alt=""
         />
