@@ -66,7 +66,7 @@ export default function Dashboard() {
       title: 'Total Clinics',
       icon2: RedCircle,
       className: 'red_circle',
-      link: '/staff',
+      link: '/clinics',
     },
     {
       icon: Clinician,
@@ -74,7 +74,7 @@ export default function Dashboard() {
       title: 'Total Clinicians',
       icon2: GreenCircle,
       className: 'green_circle',
-      link: '/clinician',
+      link: '/clinicians',
     },
     {
       icon: Patients2,
@@ -82,7 +82,7 @@ export default function Dashboard() {
       title: 'Total Patients',
       icon2: BlueCircle,
       className: 'blue_circle',
-      link: '/patient',
+      link: '/patients',
     },
   ];
 
