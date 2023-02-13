@@ -1,7 +1,7 @@
 .resetPasswordBtn {
   background-color: #fba622 !important;
   width: 100% !important;
-  border-radius: 15px !important;
+  border-radius: 20px !important;
   padding: 2.2% 0px !important;
   box-shadow: none !important;
   font-weight: 600 !important;
@@ -212,8 +212,14 @@
   width: 26%;
   height: 140px;
   margin: auto;
-  /* background-color: red;
-  border-radius: 100px; */
+}
+
+.imgDivPopupProfile {
+  width: 26%;
+  height: 140px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 #profilePic {
@@ -309,11 +315,26 @@
   cursor: pointer;
 }
 
+.addDPIcon {
+  position: relative;
+  top: -24px;
+  right: -34px;
+  cursor: pointer;
+}
+
 .popups_avatar {
   background-color: #919b9b !important;
   width: 120px !important;
   height: 120px !important;
   font-size: 32px !important;
+}
+
+.profile_popups_avatar {
+  background-color: #919b9b !important;
+  width: 120px !important;
+  height: 120px !important;
+  font-size: 32px !important;
+  border: 3px solid #faa017 !important;
 }
 
 .tryAnotherBtn {
@@ -388,4 +409,51 @@
   z-index: 2;
   background-size: 400px;
   background-repeat: no-repeat;
+}
+
+.pswdChangeTrack {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #e1e1e1;
+  border-radius: 25px;
+  padding: 17px;
+  color: #919b9b;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.blktxt {
+  color: #454238;
+}
+
+.passwordChangeTxt {
+  color: #fba622;
+  cursor: pointer;
+}
+
+.inputDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.customInput {
+  border: none;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  color: #454238;
+}
+
+.customFieldIcon {
+  margin-right: 10px;
+}
+
+.customInput:focus {
+  outline: none;
+}
+
+#fontWeight {
+  font-size: 14px;
+  font-weight: 500;
 }
