@@ -3,19 +3,20 @@ import { React } from 'react';
 // mui imports
 import { Grid } from '@mui/material';
 
-// child components import
-
-// import MessageBox from '../components/MessageBox';
+// child imports
+import SurveyPain from '../../../components/PainSurvey';
 
 export default function PainSurvey() {
   return (
     <Grid container>
-      <Grid className="bgMsg" xl={10} lg={9.5}>
+      <Grid className="bgMsg" xl={12} lg={12}>
         <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
           Pain Survey &gt;
         </div>
-        <div className="bgAddPrescription">{/* <MessageBox /> */}</div>
+        <div className="bgPainSurvey">
+          <SurveyPain />
+        </div>
       </Grid>
     </Grid>
   );
