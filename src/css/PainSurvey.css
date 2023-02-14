@@ -1,14 +1,17 @@
 #painSurveyHeader {
   background-color: white;
-  padding: 30px;
+  padding: 25px;
   border-radius: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 }
 
 .questionaire {
   background-color: white;
   padding: 30px;
   border-radius: 20px;
+  height: fit-content;
+  max-height: 63vh;
+  overflow: scroll;
 }
 
 .quesDiv {
@@ -16,6 +19,7 @@
   border-radius: 20px;
   padding: 20px 0px;
   margin-bottom: 30px;
+  overflow: scroll;
 }
 
 .quesSec {
@@ -108,10 +112,34 @@
 .bgPainSurvey {
   padding: 2rem 1.5rem 0rem 1.5rem;
   width: 97%;
+  height: 87vh;
+}
+
+.painSurveyArrow {
+  margin-top: 19px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.arowDownTxt {
+  color: red;
+  width: fit-content;
+  justify-content: center;
+  margin: auto;
+  padding: 10px 30px;
+  border-radius: 20px;
+  background-color: rgba(255, 184, 184, 0.169);
 }
 
 @media only screen and (max-width: 1899px) {
   .topSessionSec {
     width: 33%;
+  }
+
+  #painSurveyHeader {
+    padding: 20px;
+    margin-bottom: 20px;
   }
 }
