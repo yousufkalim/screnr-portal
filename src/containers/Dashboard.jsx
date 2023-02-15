@@ -23,32 +23,22 @@ export default function Dashboard() {
   const [staffCount, setStaffCount] = useState();
   const [clinicianCount, setClinicianCount] = useState();
   const [clinicsCount, setClinicsCount] = useState();
+  const [patientsCount, setPatientsCount] = useState();
   const [staffMembers, setStaffMembers] = useState([]);
 
   const getStaffMembers = async () => {
-    const { data } = await api('get', '/admins/staffs/');
+    const { data } = await api('get', '/admins/staff/');
     if (data) {
       setStaffMembers(data?.users);
-      setStaffCount(data?.users.length);
-    }
-  };
-  const getCliniciansLength = async () => {
-    const { data } = await api('get', '/admins/therapist/activecount');
-    if (data) {
-      setClinicianCount(data?.count);
-    }
-  };
-  const getClinicsLength = async () => {
-    const { data } = await api('get', '/admins/clinics/count');
-    if (data) {
-      setClinicsCount(data?.count);
+      setStaffCount(data?.count.staffCount.count);
+      setClinicianCount(data?.count.clinicianCount.count);
+      setClinicsCount(data?.count.clinicCount.count);
+      setPatientsCount(data?.count.patientCount.count);
     }
   };
 
   useEffect(() => {
     getStaffMembers();
-    getCliniciansLength();
-    getClinicsLength();
   }, []);
 
   const cardsData = [
@@ -78,7 +68,7 @@ export default function Dashboard() {
     },
     {
       icon: Patients2,
-      amount: '54',
+      amount: patientsCount < 10 ? `0${patientsCount}` : patientsCount || 0,
       title: 'Total Patients',
       icon2: BlueCircle,
       className: 'blue_circle',
