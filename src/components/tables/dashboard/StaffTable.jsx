@@ -81,7 +81,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
           </TableRow>
         </TableHead>
         <TableBody>
-          {staffMembers.map((row) => (
+          {staffMembers?.map((row) => (
             <TableRow
               key={row.name}
               className="tableRow"
@@ -97,12 +97,13 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
               <TableCell
                 align="left"
                 sx={{ display: 'flex' }}
-                onClick={() => navigate(`/staff/${row._id}`)}
+                onClick={() => navigate(`/staff/${row.id}`)}
               >
-                {row.photo ? (
+                {console.log('AJHHS', row._id)}
+                {row.profile_pic ? (
                   <div className="imgDiv">
                     <img
-                      src={getMediaUrl(row.photo)}
+                      src={getMediaUrl(row.profile_pic)}
                       style={{
                         width: '100%',
                         height: '100%',
@@ -128,7 +129,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
                 className="table_cells"
                 onClick={() => navigate(`/staff/${row._id}`)}
               >
-                {PhoneFormat(row.phone)}
+                {row.phone_number && PhoneFormat(row.phone_number)}
               </TableCell>
               <TableCell align="left">
                 <div className="table_action_div">
@@ -166,7 +167,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
             openDeletePopup={openDeletePopup}
             setOpenDeletePopup={setOpenDeletePopup}
             item={staffMember}
-            txt="admins/staffs"
+            txt="admins/staff"
             getData={getStaffMembers}
           />
         )}

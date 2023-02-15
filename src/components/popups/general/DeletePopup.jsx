@@ -36,7 +36,7 @@ export default function DeleteModal({ openDeletePopup, setOpenDeletePopup, item,
     setOpenDeletePopup(false);
   };
   const handleDelete = async () => {
-    await api('delete', `/${txt}/${item._id}`);
+    await api('delete', `/${txt}/${item.id}`);
     getData();
     toast.success('Deleted successfully');
     handleClose();

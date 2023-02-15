@@ -10,9 +10,19 @@ import Router from 'react-easy-router';
 import superadminRoutes from './routes/Routes';
 import Header from './components/Header';
 import './css/index.css';
+import api from './api/index';
+import { UpdateStore } from './StoreContext';
 
 // Component
 function App() {
+  const updateStore = UpdateStore();
+
+  const isAuthenticated = async () => {
+    const { data } = await api('get', '/auth');
+    updateStore({ loggedIn: true, user: data.user });
+    return true;
+  };
+
   return (
     <div className="App">
       {/* toastify Container for Notification */}
@@ -23,7 +33,7 @@ function App() {
       {/* All Superadmin routes should have header except for login page */}
       {window.location.pathname !== '/' ? <Header /> : ''}
       {/* Superadmin routes alongwith header */}
-      <Router routes={superadminRoutes} />
+      <Router routes={superadminRoutes} isAuthenticated={isAuthenticated} />
     </div>
   );
 }

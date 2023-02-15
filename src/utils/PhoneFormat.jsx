@@ -1,5 +1,5 @@
 const PhoneFormat = (num) => {
-  const match = num.match(/(\d{3})(\d{3})(\d{4})$/);
+  const match = num?.match(/(\d{3})(\d{3})(\d{4})$/);
 
   if (match) {
     // eslint-disable-next-line no-param-reassign

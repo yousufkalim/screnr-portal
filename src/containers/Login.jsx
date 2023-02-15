@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-// navigator import
-import { useNavigate } from 'react-router-dom';
-
 // mui imports
 import { Grid, IconButton, InputLabel } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -52,7 +49,6 @@ export default function Login() {
   const [user, setUser] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
-  const navigate = useNavigate();
   const updateStore = UpdateStore();
   const outlinedInputStyles = useOutlinedInputStyles();
 
@@ -68,8 +64,8 @@ export default function Login() {
     e.preventDefault();
     const { data } = await api('post', '/auth/login', user);
     updateStore({ admin: data.admin, loggedIn: true });
-    navigate('/dashboard');
-    window.location.reload();
+    window.location = '/dashboard';
+    setUser({ email: '', password: '' });
   };
   return (
     <div className="loginScreenBG">
@@ -179,13 +175,7 @@ export default function Login() {
                 </div>
               </FormControl>
 
-              <Button
-                className="logInBtn"
-                variant="contained"
-                onClick={() => {
-                  handleSubmit();
-                }}
-              >
+              <Button className="logInBtn" variant="contained" onClick={handleSubmit}>
                 Login
               </Button>
             </Grid>

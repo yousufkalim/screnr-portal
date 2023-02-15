@@ -13,6 +13,7 @@ import { FormControl, TextField } from '@mui/material';
 
 // react-toastify import
 import { toast } from 'react-toastify';
+import api from '../../../api/index';
 
 const CustomMuiDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -64,9 +65,13 @@ export default function ForgetPasswordPopup({
     setOpenForgetPasswordPopup(false);
   };
 
-  const handleForgetPassword = () => {
-    toast.success('Please check your email to reset your password');
+  const handleForgetPassword = async () => {
+    if (!email) {
+      return toast.error('Please enter your email');
+    }
+    await api('put', `/auth/forgot/${email}`);
     handleClose();
+    return toast.success('Please check your email to reset your password');
   };
 
   return (

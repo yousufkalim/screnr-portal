@@ -24,6 +24,7 @@ import edit from '../../../assets/icons/edit.svg';
 
 // child component imports
 import AvatarComponent from '../../Avatar';
+import formatPhoneNumber from '../../../utils/FormPhoneFormat';
 import api from '../../../api';
 import { getMediaUrl } from '../../../config';
 import useOutlinedInputStyles from '../../../utils/EditFormInput';
@@ -57,18 +58,19 @@ export default function EditStaffMember({
   });
 
   useEffect(() => {
-    if (!staffMemberDetails.expiry) {
+    if (!staffMemberDetails.expiry_date) {
       setStaffMember(staffMemberDetails);
     } else {
       setStaffMember({
         ...staffMemberDetails,
-        expiry: new Date(staffMemberDetails.expiry),
+        expiry_date: new Date(staffMemberDetails.expiry_date),
       });
       setChecked(true);
     }
   }, [staffMemberDetails]);
 
   const outlinedInputStyles = useOutlinedInputStyles();
+  const format = /^(\+1 )?(\(\d{3}\)|\d{3})[\s-]?\d{3}[\s-]?\d{4}$/;
 
   const handleClose = () => {
     setOpenEditStaffMember(false);
@@ -80,36 +82,40 @@ export default function EditStaffMember({
 
   const handleChange = (e) => {
     setStaffMember({ ...staffMember, [e.target.name]: e.target.value });
+    if (e.target.name === 'phone_number') {
+      setStaffMember({ ...staffMember, phone_number: formatPhoneNumber(e.target.value) });
+    }
   };
 
   const dateChange = (e) => {
     setStaffMember({
       ...staffMember,
-      expiry: new Date(e),
+      expiry_date: new Date(e),
     });
   };
 
   const handleSelectedFile = async (e) => {
     const myFile = e.target.files[0];
-    setStaffMember({ ...staffMember, photo: myFile });
+    setStaffMember({ ...staffMember, profile_pic: myFile });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const staffMemberCopy = { ...staffMember };
     const formData = new FormData();
-    if (staffMemberCopy.expiry && !checked) {
-      staffMemberCopy.expiry = '';
+    if (staffMemberCopy.expiry_date && !checked) {
+      staffMemberCopy.expiry_date = '';
       setStaffMember({ ...staffMemberCopy });
     }
 
     Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
-    const { data } = await api('put', `/admins/staffs/${staffMemberDetails._id}`, formData);
-    if (data) {
-      toast.success('Staff Member edited successfully');
-      getStaffMembers();
-      handleClose();
+    if (staffMemberCopy.phone_number) {
+      if (!format.test(staffMemberCopy.phone_number)) return toast.error('Invalid Phone number');
     }
+    await api('put', `/admins/staff/${staffMemberDetails.id}`, formData);
+    getStaffMembers();
+    handleClose();
+    return toast.success('Staff Member edited successfully');
   };
 
   return (
@@ -143,9 +149,9 @@ export default function EditStaffMember({
                     onChange={handleSelectedFile}
                   />
 
-                  {staffMember.photo ? (
+                  {staffMember.profile_pic ? (
                     <img
-                      src={getMediaUrl(staffMember.photo)}
+                      src={getMediaUrl(staffMember.profile_pic)}
                       className="pointer"
                       id="selectedImg"
                       style={{
@@ -244,13 +250,13 @@ export default function EditStaffMember({
                 classes={outlinedInputStyles}
                 placeholder="Phone Number"
                 inputProps={{
-                  maxLength: 10,
+                  maxLength: 14,
                 }}
                 size="normal"
                 type="text"
-                name="phone"
+                name="phone_number"
                 onChange={handleChange}
-                value={staffMember?.phone}
+                value={staffMember?.phone_number}
               />
             </FormControl>
             <FormControl
@@ -292,11 +298,10 @@ export default function EditStaffMember({
                 <DatePicker
                   showPopperArrow
                   // dateFormat="dd/MMMM/yyyy"
-                  name="expiry"
-                  // value={staffMember.expiry}
+                  name="expiry_date"
                   onChange={dateChange}
                   disabled={!checked}
-                  selected={staffMember?.expiry}
+                  selected={staffMember?.expiry_date}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
