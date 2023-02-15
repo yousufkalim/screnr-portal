@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { React, useState } from 'react';
 
 // mui imports
@@ -27,6 +28,7 @@ import profiles from '../../../assets/icons/Profiles.svg';
 // child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import api from '../../../api';
+import formatPhoneNumber from '../../../utils/FormPhoneFormat';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -54,20 +56,25 @@ export default function AddStaffMember({
   const [staffMember, setStaffMember] = useState({
     role: 'staff',
   });
+  const format = /^(\+1 )?(\(\d{3}\)|\d{3})[\s-]?\d{3}[\s-]?\d{4}$/;
+
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
     setOpenAddStaffMember(false);
+    setStaffMember({ role: 'staff' });
   };
 
   const handleChange = (e) => {
     setStaffMember({ ...staffMember, [e.target.name]: e.target.value });
+    if (e.target.name === 'phone_number') {
+      setStaffMember({ ...staffMember, phone_number: formatPhoneNumber(e.target.value) });
+    }
   };
-
   const dateChange = (e) => {
     setStaffMember({
       ...staffMember,
-      expiry: e,
+      expiry_date: e,
     });
   };
 
@@ -78,27 +85,39 @@ export default function AddStaffMember({
       document.getElementById('selectedImg').src = URL.createObjectURL(myFile);
     }
 
-    setStaffMember({ ...staffMember, photo: myFile });
+    setStaffMember({ ...staffMember, profile_pic: myFile });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // if (staffMember.expiry_date) {
+    //   const dateToSend = staffMember.expiry_date.toISOString();
+    //   setStaffMember({
+    //     ...staffMember,
+    //     expiry_date: dateToSend,
+    //   });
+    // }
     const staffMemberCopy = { ...staffMember };
     const formData = new FormData();
 
-    if (staffMemberCopy.expiry && !checked) {
-      delete staffMemberCopy.expiry;
+    if (staffMemberCopy.expiry_date && !checked) {
+      delete staffMemberCopy.expiry_date;
       setStaffMember({ ...staffMemberCopy });
     }
 
     Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
 
-    const { data } = await api('post', '/admins/staffs', formData);
+    if (staffMemberCopy.phone_number) {
+      if (!format.test(staffMemberCopy.phone_number)) return toast.error('Invalid Phone number');
+    }
+
+    const { data } = await api('post', '/admins/staff', formData);
     if (data) {
       toast.success('Staff Member added successfully');
       getStaffMembers();
       handleClose();
     }
+
     setStaffMember({ role: 'staff' });
   };
 
@@ -225,15 +244,15 @@ export default function AddStaffMember({
                     fontWeight: '500',
                   },
                 }}
-                id="outlined-phone"
                 classes={outlinedInputStyles}
                 placeholder="Phone Number"
                 size="normal"
-                name="phone"
+                name="phone_number"
+                id="myPhoneField"
                 onChange={handleChange}
-                value={staffMember.phone}
+                value={staffMember.phone_number}
                 inputProps={{
-                  maxLength: 10,
+                  maxLength: 14,
                 }}
               />
             </FormControl>
@@ -273,12 +292,11 @@ export default function AddStaffMember({
               <div className="date-div" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
-                  dateFormat="dd/MM/yyyy"
-                  name="expiry"
-                  // value={staffMember.expiry}
+                  dateFormat="MM-dd-yyyy"
+                  name="expiry_date"
                   onChange={dateChange}
                   disabled={!checked}
-                  selected={staffMember.expiry}
+                  selected={staffMember.expiry_date}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
