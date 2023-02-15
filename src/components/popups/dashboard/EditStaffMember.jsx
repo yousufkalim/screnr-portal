@@ -11,6 +11,7 @@ import { FormControl, TextField } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
+import moment from 'moment';
 
 // react-toastify import
 import { toast } from 'react-toastify';
@@ -59,14 +60,31 @@ export default function EditStaffMember({
 
   useEffect(() => {
     if (!staffMemberDetails.expiry_date) {
-      setStaffMember(staffMemberDetails);
+      setStaffMember({
+        id: staffMemberDetails.id,
+        first_name: staffMemberDetails.first_name,
+        last_name: staffMemberDetails.last_name,
+        email: staffMemberDetails.email,
+        profile_pic: staffMemberDetails.profile_pic,
+        phone_number: staffMemberDetails.phone_number,
+        active: staffMemberDetails.active,
+      });
     } else {
       setStaffMember({
-        ...staffMemberDetails,
-        expiry_date: new Date(staffMemberDetails.expiry_date),
+        id: staffMemberDetails.id,
+        first_name: staffMemberDetails.first_name,
+        last_name: staffMemberDetails.last_name,
+        email: staffMemberDetails.email,
+        profile_pic: staffMemberDetails.profile_pic,
+        phone_number: staffMemberDetails.phone_number,
+        // eslint-disable-next-line no-underscore-dangle
+        expiry_date: moment(staffMemberDetails.expiry_date)._d,
+        active: staffMemberDetails.active,
       });
       setChecked(true);
     }
+
+    console.log(staffMemberDetails.expiry_date);
   }, [staffMemberDetails]);
 
   const outlinedInputStyles = useOutlinedInputStyles();
@@ -90,7 +108,7 @@ export default function EditStaffMember({
   const dateChange = (e) => {
     setStaffMember({
       ...staffMember,
-      expiry_date: new Date(e),
+      expiry_date: e,
     });
   };
 
@@ -106,6 +124,9 @@ export default function EditStaffMember({
     if (staffMemberCopy.expiry_date && !checked) {
       staffMemberCopy.expiry_date = '';
       setStaffMember({ ...staffMemberCopy });
+    }
+    if (typeof staffMemberCopy.profile_pic === 'string') {
+      delete staffMemberCopy.profile_pic;
     }
 
     Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
@@ -297,7 +318,7 @@ export default function EditStaffMember({
               <div className="date-div2" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
-                  // dateFormat="dd/MMMM/yyyy"
+                  dateFormat="MM-dd-yyyy"
                   name="expiry_date"
                   onChange={dateChange}
                   disabled={!checked}
