@@ -25,7 +25,7 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
           className="tab_icon"
         />
       )}
-      {activeTab === '/dashboard/staff' || activeTab === '/dashboard/staff/' ? (
+      {activeTab === '/clinics' ? (
         <div className="tab2_div">
           <ClinicAdminIcon />
           <span>Clinic Admin</span>
@@ -33,12 +33,12 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
       ) : (
         <ClinicAdminIcon
           onClick={() => {
-            HandleTabsSwitch('/dashboard/staff');
+            HandleTabsSwitch('/clinics');
           }}
           className="tab_icon"
         />
       )}
-      {activeTab === '/dashboard/staff/clinician' || activeTab === '/dashboard/staff/clinician/' ? (
+      {activeTab === '/clinicians' ? (
         <div className="tab2_div">
           <ClinicalIcon />
           <span>Clinician</span>
@@ -46,30 +46,29 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
       ) : (
         <ClinicalIcon
           onClick={() => {
-            HandleTabsSwitch('/dashboard/staff/clinician');
+            HandleTabsSwitch('/clinicians');
           }}
           className="tab_icon"
         />
       )}
-      {activeTab === '/dashboard/staff/clinician/doctor' ||
-      activeTab === '/dashboard/staff/clinician/doctor/' ? (
+      {activeTab === '/patients' ? (
         <div className="tab2_div">
           <PatientIcon />
           <span>Patients</span>
         </div>
       ) : (
-        <PatientIcon
-          onClick={() => HandleTabsSwitch('/dashboard/staff/clinician/doctor')}
-          className="tab_icon"
-        />
+        <PatientIcon onClick={() => HandleTabsSwitch('/patients')} className="tab_icon" />
       )}
-      {activeTab === 'Patient Stats' ? (
+      {activeTab === '/patients/:id/exercise/reports' ? (
         <div className="tab2_div">
           <PatientStatsIcon />
           <span>Patient Stats</span>
         </div>
       ) : (
-        <PatientStatsIcon onClick={() => HandleTabsSwitch('Patient Stats')} className="tab_icon" />
+        <PatientStatsIcon
+          onClick={() => HandleTabsSwitch('/patients/:id/exercise/reports')}
+          className="tab_icon"
+        />
       )}
     </Stack>
   );

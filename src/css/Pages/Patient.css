@@ -17,17 +17,64 @@
 
 .right_sidebar {
   width: 17vw;
-  height: 98vh;
+  height: 100vh;
   padding: 23% 0;
 }
 
-.right_sidebar_cards {
+.right_sidebar_card {
   background-color: white;
   display: flex;
   align-items: center;
   flex-direction: row;
   border-radius: 20px;
-  /* justify-content: center; */
+  padding: 10px;
+  margin-bottom: 3%;
+}
+
+.prescription_table_cells {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  color: #919b9b !important ;
+}
+
+.prescriptionBtns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.thresholdsBtn {
+  border: 5px solid #ff5151 !important;
+  padding: 12px 45px !important;
+  border-radius: 20px !important;
+  color: #ff5151 !important;
+  background-color: white !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  margin-right: 20px !important;
+}
+
+.listBtn {
+  padding: 12px 45px !important;
+  border-radius: 20px !important;
+  color: white !important;
+  background-color: #136773 !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+}
+
+.listTxtBtn {
+  margin-right: 10px;
+}
+
+.top_activity_cards {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 20px;
+  width: 23%;
   padding: 10px;
   margin-bottom: 3%;
 }
@@ -36,7 +83,7 @@
   background-color: white;
   height: max-content;
   padding: 10% 6%;
-  margin: 8% 0;
+  margin: 0 0 8% 0;
   border-radius: 20px;
 }
 
@@ -74,6 +121,9 @@
 .currentTimeSubDiv {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
 }
 
 .chartDayTxt {
@@ -85,12 +135,6 @@
 .chartCurrentTime {
   color: #136773;
   font-weight: 400;
-  font-size: 11px;
-}
-
-.statsPercentage {
-  color: #136773;
-  font-weight: 600;
   font-size: 11px;
 }
 
@@ -131,10 +175,86 @@
   color: #454238;
 }
 
+.circularProgressPrescription {
+  transform: rotate(90deg) !important;
+  position: absolute;
+  bottom: 40%;
+  right: 43%;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  color: #454238;
+}
+
+.bgPrescription {
+  background-color: rgb(246, 250, 251);
+  height: max-content;
+  padding-bottom: 90px;
+}
+
+.bgAddPrescription {
+  padding: 2rem 1.5rem 0rem 1.5rem;
+  width: 97%;
+}
+
+.prescriptionHead {
+  color: #136773;
+  font-weight: 500;
+  font-size: 20px;
+  padding-bottom: 13px !important;
+}
+
+.optColor {
+  color: #919b9b;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.selctedPresChoice {
+  display: flex;
+  align-items: center;
+  background-color: #f6fafb;
+  color: #136773;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#prescriptionTableHead {
+  font-weight: 400 !important;
+}
+
+.PrescriptionTableHead {
+  font-weight: 500;
+  padding: 20px !important;
+  font-size: 18px;
+  color: #919b9b;
+  text-align: center;
+}
+
 .linearProgress {
   font-size: 12px;
   font-weight: 400;
   color: #454238;
+}
+
+.actionIcon {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(22%) saturate(1780%) hue-rotate(140deg)
+    brightness(96%) contrast(85%);
+  margin-right: 8px;
+}
+
+.actionDiv {
+  display: flex;
+  align-items: center;
+}
+
+.linearPresProgress {
+  font-size: 12px;
+  font-weight: 400;
+  color: #454238;
+  margin-left: -14px;
 }
 
 .patient_cell {
@@ -181,7 +301,415 @@
   animation-duration: 1s;
 }
 
+.filter__multi-value.css-1p3m7a8-multiValue {
+  border-radius: 20px !important;
+  padding: 3px 0 !important;
+  background-color: #f4f4f4 !important;
+}
+
+.addMore {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 6.5%;
+  color: #919b9b;
+  cursor: pointer;
+}
+
+#prescriptionTable {
+  margin: auto;
+  padding: 2% 3% 0px 3%;
+  height: 79vh;
+  overflow-y: scroll;
+  margin-top: 20px;
+}
+
+.scoreRed {
+  color: #ff5151;
+  width: max-content;
+  padding: 8px 20px !important;
+  background-color: #ff51511a;
+  border-radius: 20px;
+}
+
+.scoreYellow {
+  color: #fabb18;
+  width: max-content;
+  padding: 8px 20px !important;
+  background-color: #fabb181a;
+  border-radius: 20px;
+}
+
+.scoreGreen {
+  color: #25cc7c;
+  width: max-content;
+  padding: 8px 20px !important;
+  background-color: #25cc7c1a;
+  border-radius: 20px;
+}
+
+.prescription_header {
+  color: #136773;
+  font-weight: 500;
+  padding: 1.2% 2%;
+}
+
+.prescription_head {
+  font-size: 15px !important;
+  color: #454238 !important;
+  padding-top: 4px;
+}
+
+.prescription_cell {
+  color: #136773;
+  font-weight: 500;
+  font-size: 12px;
+  margin-left: 10px;
+  line-height: 14px;
+}
+
+.presSubtxt {
+  color: #fba622;
+  font-weight: 400;
+  font-size: 10px;
+}
+
+.PatientSubTopSection {
+  display: flex;
+  flex-direction: row;
+  width: calc(100% / 1.2);
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.PatientTopSection {
+  height: max-content;
+  width: 76vw;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 3%;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2%;
+}
+
+.topSec {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin-right: 40px;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+.top_sec_avatar {
+  background-color: #136773 !important;
+  height: 70px !important;
+  width: 70px !important;
+}
+
+.topSecDocName {
+  font-weight: 600;
+  font-size: 18px;
+  color: #136773;
+}
+
+.topSecExpertise {
+  font-weight: 500;
+  font-size: 12px;
+  color: #fba622;
+}
+
+.topSecActions {
+  font-weight: 400;
+  font-size: 12px;
+  color: #919b9b;
+}
+
+.topSecDetails {
+  margin-left: 15px;
+}
+
+.exerciseItems li {
+  list-style: none;
+  color: #454238;
+  font-weight: 400;
+}
+
+.customOptions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: max-content;
+  background-color: #f4f4f4;
+  border-radius: 20px;
+  padding: 8px 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.customOptions:hover {
+  background-color: #cbcbcb76;
+}
+
+.opt_avatar {
+  background-color: #136773 !important;
+  height: 20px !important;
+  width: 20px !important;
+  font-size: 12px !important;
+}
+
+.optName {
+  font-weight: 500;
+  font-size: 12px;
+  color: #919b9b;
+  margin-left: 6px;
+}
+
+.OptNames {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.customSelect {
+  border: 1px solid #e1e1e1;
+  color: #919b9b;
+  padding: 3% 2% 2% 3%;
+  border-radius: 18px;
+  text-align: left;
+  height: max-content;
+  margin-bottom: 2%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.generatePrescriptionBtn {
+  background-color: #fba622 !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  text-transform: none !important;
+  border-radius: 15px !important;
+  border: none !important;
+  padding: 8px 20px !important;
+}
+
+.dateDivPrescription .react-datepicker-wrapper {
+  border: 1px solid #e1e1e1 !important;
+  background-color: white;
+  border-radius: 20px;
+  margin-top: 10px;
+  padding: 1.8%;
+  width: 100%;
+}
+
+.addPrescription {
+  padding: 2rem 1.5rem 2rem 1.5rem;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.addPrescriptionBtn {
+  position: absolute !important;
+  right: 90px;
+  bottom: 10px;
+  z-index: 1300 !important;
+}
+
+.calenderIcon {
+  position: absolute;
+  top: 6px;
+  bottom: 0;
+  margin: auto 0;
+  right: 15px;
+}
+
+.prescriptionChoiceSec {
+  margin-top: 2%;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.presChoice {
+  display: flex;
+  align-items: center;
+  color: #919b9b;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.iconClicked {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(22%) saturate(1780%) hue-rotate(140deg)
+    brightness(96%) contrast(85%);
+  margin-right: 8px;
+}
+
+.choiceIcon {
+  margin-right: 8px;
+}
+
+.patientFilterPoper {
+  position: absolute;
+  background-color: white;
+  width: 24%;
+  padding: 40px;
+  border-radius: 20px;
+  top: 23%;
+  right: 15%;
+  font-weight: 500;
+  font-size: 14px;
+  color: #454238;
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+.prescriptionMenu {
+  border-radius: 20px;
+  background-color: #f6fafb;
+  padding: 20px;
+  width: max-content;
+  position: relative;
+  bottom: 40px;
+  right: -70px;
+}
+
+.pIcon {
+  margin-right: 8px;
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.editMenuItem {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.clinicianDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  background-color: #f4f4f4;
+  border-radius: 30px;
+  cursor: pointer;
+  flex-basis: 30%;
+  padding: 4px;
+  margin-bottom: 13px;
+  /* width: 20%; */
+}
+.selectedClinicianDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  background-color: #136773;
+  border-radius: 30px;
+  cursor: pointer;
+  flex-basis: 30%;
+  padding: 4px;
+  margin-bottom: 13px;
+  /* width: 20%; */
+}
+
+.selectedClinicianDiv p {
+  font-weight: 500;
+  font-size: 17px;
+  color: white;
+}
+
+.clinicianDiv p {
+  font-weight: 500;
+  font-size: 17px;
+  color: #919b9b;
+}
+
+.clinicianParentDiv {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.clinicianDP {
+  margin-right: 10px;
+  width: 25%;
+}
+
+@media only screen and (max-width: 1810px) {
+  .periodSelect {
+    padding: 1%;
+  }
+}
+
 @media only screen and (max-width: 1600px) {
+  .addMore {
+    width: 9%;
+  }
+
+  .bgPrescription {
+    padding-bottom: 40px;
+  }
+
+  .dateDivPrescription .react-datepicker-wrapper {
+    margin-top: 11px;
+    padding: 2.5%;
+  }
+
+  .prescriptionChoiceSec {
+    width: 70%;
+  }
+
+  .bgAddPrescription {
+    width: 100%;
+  }
+
+  .actionIcon {
+    margin-right: 6px;
+  }
+
+  .actionDiv,
+  .prescription_table_cells {
+    font-size: 12px !important;
+  }
+
+  .addPrescriptionBtn {
+    position: absolute !important;
+    right: 30px;
+    bottom: -19%;
+    z-index: 1300 !important;
+  }
+
+  .generatePrescriptionBtn {
+    font-size: 12px !important;
+    padding: 13px 20px !important;
+  }
+
+  #prescriptionTableHead {
+    font-size: 13px !important;
+  }
+
+  .listBtn,
+  .thresholdsBtn {
+    padding: 12px 25px !important;
+    font-size: 12px !important;
+  }
+
   .periodSelect {
     color: #fba622;
     font-weight: 600;
@@ -203,17 +731,10 @@
 }
 
 @media only screen and (max-width: 1440px) {
-  .right_sidebar {
-    height: 97vh;
-  }
-
   .notiCell {
     font-size: 12px;
   }
-}
-
-@media only screen and (max-width: 1338px) {
-  .right_sidebar {
-    height: 99vh;
+  .prescriptionMenu {
+    right: 5px;
   }
 }

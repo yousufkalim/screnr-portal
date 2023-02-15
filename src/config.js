@@ -10,4 +10,11 @@ if (window.location.host === 'screnr-admin-dev.falconweb.app') {
   baseUrl = 'https://screnr-api-prod.falconweb.app/api';
 }
 
-module.exports = { baseUrl };
+const getMediaUrl = (url) => {
+  if (typeof url === 'string') {
+    return baseUrl.replace('/api', '/') + url;
+  }
+  return URL.createObjectURL(url);
+};
+
+module.exports = { baseUrl, getMediaUrl };

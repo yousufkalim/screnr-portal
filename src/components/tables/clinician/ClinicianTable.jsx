@@ -10,6 +10,9 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 
+// navigation
+import { useNavigate } from 'react-router-dom';
+
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 
@@ -27,40 +30,9 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function ClinicianTable() {
+export default function ClinicianTable({ clinicians }) {
   const [openEditClinican, setOpenEditClinican] = useState(false);
-
-  function createData(name, title, phone, patients) {
-    return { name, title, phone, patients };
-  }
-
-  const rows = [
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-    createData('Arooj Ishfaq', 'Muscular dystrophy', '+1 (223) 123-4463', '12', '3'),
-  ];
+  const navigate = useNavigate();
 
   return (
     <div className="bgClinicianTable" id="clinicianTable">
@@ -108,31 +80,47 @@ export default function ClinicianTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {clinicians.map((row) => (
               <StyledTableRow key={row.name} className="tableRow">
                 <TableCell />
-                <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                  <AvatarComponent alt="Arooj Ishfaq" className="header_avatar" />
+                <TableCell
+                  align="left"
+                  sx={{ display: 'flex', paddingTop: '12%' }}
+                  onClick={() => navigate(`/patient/${row._id}`)}
+                >
+                  <AvatarComponent
+                    alt={`${row.first_name} ${row.last_name}`}
+                    className="header_avatar"
+                  />
                   <div className="clinic_cell">
-                    {row.name} <br />
-                    <span className="clinicNametxt">Clinic: Line Pvt.</span>
+                    {`${row.first_name} ${row.last_name}`} <br />
+                    <span className="clinicNametxt">{`Clinic: ${row.clinic_name}`}</span>
                   </div>
                 </TableCell>
 
-                <TableCell align="center" className="table_cells">
-                  {`${row.title}`}
-                </TableCell>
-                <TableCell align="center" className="table_cells">
-                  {`${row.phone}`}
+                <TableCell
+                  align="center"
+                  className="table_cells"
+                  onClick={() => navigate(`/patient/${row._id}`)}
+                >
+                  Muscular dystrophy
                 </TableCell>
                 <TableCell
+                  align="center"
+                  className="table_cells"
+                  onClick={() => navigate(`/patient/${row._id}`)}
+                >
+                  {row.phone}
+                </TableCell>
+                <TableCell
+                  onClick={() => navigate(`/patient/${row._id}`)}
                   align="center"
                   className="table_cells"
                   sx={{
                     padding: '3%',
                   }}
                 >
-                  {`${row.patients}`}
+                  {row.patient_count}
                 </TableCell>
 
                 <TableCell align="center">

@@ -24,8 +24,10 @@ import Avatar from '@mui/material/Avatar';
 
 export default function AvatarComponent({ alt, src, className, onClick }) {
   const stringAvatar = (name) => {
+    const fname = name.split(' ')[0] || '';
+    const lname = name.split(' ')[1] || '';
     return {
-      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+      children: `${fname[0] || ''}${lname[0] || ''}`,
     };
   };
 
@@ -35,7 +37,12 @@ export default function AvatarComponent({ alt, src, className, onClick }) {
     //   anchorOrigin={{ vertical: 'bottom', horizontal: 'right', display: 'none' }}
     //   variant="dot"
     // >
-    <Avatar {...stringAvatar(alt)} src={src} className={className} onClick={onClick} />
+    <Avatar
+      {...stringAvatar(alt.toUpperCase())}
+      src={src}
+      className={className}
+      onClick={onClick}
+    />
     // </StyledBadge>
   );
 }

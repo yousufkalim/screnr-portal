@@ -4,7 +4,6 @@ import { React, useState } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import { makeStyles } from '@mui/styles';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
@@ -27,6 +26,9 @@ import add from '../../../assets/icons/add.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
 
+// child imports
+import useOutlinedInputStyles from '../../../utils/AddFormInput';
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
     borderRadius: '20px',
@@ -43,27 +45,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     margin: 'auto',
   },
 }));
-const useOutlinedInputStyles = makeStyles({
-  root: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        border: '1px solid #E1E1E1 ',
-        borderRadius: '20px',
-        fontSize: 16,
-        height: 55,
-      },
-      '&:hover fieldset': {
-        borderColor: '#454238',
-      },
-      '&::placeholder fieldset': {
-        fontWeight: 800,
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#454238',
-      },
-    },
-  },
-});
+
 export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
   const [checked, setChecked] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
@@ -72,7 +54,8 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
     setOpenAddClinican(false);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(e);
     toast.success('Clinic Admin added successfully');
     handleClose();
   };
@@ -215,7 +198,7 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                     ml: 1,
                   },
                 }}
-                id="outlined-password"
+                id="outlined-phone"
                 classes={outlinedInputStyles}
                 placeholder="Phone Number"
                 size="normal"
@@ -291,7 +274,8 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p className="sendInviteTxt">Send Invite &nbsp;</p> <img src={add} alt="" />
+            <p className="sendInviteTxt">Send Invite</p>{' '}
+            <img src={add} className="spaceOnLeft" alt="" />
           </Button>
         </DialogActions>
       </BootstrapDialog>

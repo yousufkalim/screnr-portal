@@ -43,30 +43,17 @@ const options = {
   },
 };
 
-const labels = [
-  '10/05',
-  '11/05',
-  '12/05',
-  '13/05',
-  '14/05',
-  '15/05',
-  '16/05',
-  '17/05',
-  '10/05',
-  '11/05',
-  '12/05',
-  '17/05',
-];
+const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 const data = {
   labels,
   datasets: [
     {
       label: '',
-      data: [550, 700, 600, 600, 400, 900, 800, 450, 800, 1000, 900, 1000],
+      data: [700, 600, 600, 400, 900, 800, 450, 800, 1000, 900, 1000],
       backgroundColor: '#136773B2',
       borderRadius: 5,
-      barPercentage: 0.5,
+      barPercentage: 0.29,
     },
   ],
 };
@@ -83,9 +70,6 @@ export default function Chart() {
         <div className="currentTimeSubDiv">
           <span className="chartDayTxt">Today</span>
           <span className="chartCurrentTime">05:00:20</span>
-        </div>
-        <div>
-          <span className="statsPercentage">33.04%</span>
         </div>
       </div>
 

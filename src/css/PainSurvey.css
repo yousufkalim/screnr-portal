@@ -1,0 +1,145 @@
+#painSurveyHeader {
+  background-color: white;
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 40px;
+}
+
+.questionaire {
+  background-color: white;
+  padding: 30px;
+  border-radius: 20px;
+  height: fit-content;
+  max-height: 65vh;
+  overflow: scroll;
+}
+
+.quesDiv {
+  border: 1px solid #a7a7a749;
+  border-radius: 20px;
+  padding: 20px 0px;
+  margin-bottom: 30px;
+  overflow: scroll;
+}
+
+.quesSec {
+  border-bottom: 1px solid #a7a7a749;
+  padding: 20px 25px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.leftTxt {
+  color: #919b9b;
+  font-weight: 500;
+  font-size: 12px;
+  flex-basis: 8%;
+}
+
+.rightTxt {
+  flex-basis: 90%;
+  color: #454238;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.surveyHeaderName {
+  color: #fba622;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.sessionHeader {
+  color: #919b9b;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.topSessionSec {
+  width: 23%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sessionDate {
+  color: #136773;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #f6fafb;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.feedbackLeftTxt {
+  color: #fba622;
+  font-weight: 500;
+  font-size: 12px;
+  flex-basis: 8%;
+}
+
+.feedbackSec {
+  padding: 20px 25px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.feedbackInput::placeholder {
+  color: #fba622;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.feedbackInput {
+  color: #fba622;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  text-align: left;
+  flex-basis: 90%;
+}
+
+.feedbackInput:focus {
+  outline: none;
+}
+
+.bgPainSurvey {
+  padding: 2rem 1.5rem 0rem 1.5rem;
+  width: 97%;
+  height: 87vh;
+}
+
+.painSurveyArrow {
+  margin-top: 19px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.arowDownTxt {
+  color: red;
+  width: fit-content;
+  justify-content: center;
+  margin: auto;
+  padding: 10px 30px;
+  border-radius: 20px;
+  background-color: rgba(255, 184, 184, 0.169);
+}
+
+@media only screen and (max-width: 1899px) {
+  .topSessionSec {
+    width: 33%;
+  }
+
+  #painSurveyHeader {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+}

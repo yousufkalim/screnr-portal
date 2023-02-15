@@ -1,6 +1,6 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 // components import
-import CardWithIcon from '../components/CardWithIcon';
+import CardWithIcon from '../components/cards/CardWithIcon';
 import Chart from '../components/charts/dashboard/DasboardChart';
 // images import
 import { ReactComponent as Patients } from '../assets/components/CardWithIcon/patientsIcon.svg';
@@ -16,31 +16,65 @@ import addBtn from '../assets/icons/addBtn.svg';
 // child import
 import AddStaffMember from '../components/popups/dashboard/AddStaffMember';
 import TableComponent from '../components/tables/dashboard/StaffTable';
+import api from '../api';
 
 export default function Dashboard() {
   const [openAddStaffMember, setOpenAddStaffMember] = useState(false);
+  const [staffCount, setStaffCount] = useState();
+  const [clinicianCount, setClinicianCount] = useState();
+  const [clinicsCount, setClinicsCount] = useState();
+  const [staffMembers, setStaffMembers] = useState([]);
+
+  const getStaffMembers = async () => {
+    const { data } = await api('get', '/admins/staffs/');
+    if (data) {
+      setStaffMembers(data?.users);
+      setStaffCount(data?.users.length);
+    }
+  };
+  const getCliniciansLength = async () => {
+    const { data } = await api('get', '/admins/therapist/activecount');
+    if (data) {
+      setClinicianCount(data?.count);
+    }
+  };
+  const getClinicsLength = async () => {
+    const { data } = await api('get', '/admins/clinics/count');
+    if (data) {
+      setClinicsCount(data?.count);
+    }
+  };
+
+  useEffect(() => {
+    getStaffMembers();
+    getCliniciansLength();
+    getClinicsLength();
+  }, []);
 
   const cardsData = [
     {
       icon: Patients,
-      amount: '32',
+      amount: staffCount < 10 ? `0${staffCount}` : staffCount || 0,
       title: 'Total Staff',
       icon2: Circle,
       className: 'yellow_circle',
+      link: '/dashboard',
     },
     {
       icon: Clinic,
-      amount: '65',
+      amount: clinicsCount < 10 ? `0${clinicsCount}` : clinicsCount || 0,
       title: 'Total Clinics',
       icon2: RedCircle,
       className: 'red_circle',
+      link: '/clinics',
     },
     {
       icon: Clinician,
-      amount: '65',
+      amount: clinicianCount < 10 ? `0${clinicianCount}` : clinicianCount || 0,
       title: 'Total Clinicians',
       icon2: GreenCircle,
       className: 'green_circle',
+      link: '/clinicians',
     },
     {
       icon: Patients2,
@@ -48,6 +82,7 @@ export default function Dashboard() {
       title: 'Total Patients',
       icon2: BlueCircle,
       className: 'blue_circle',
+      link: '/patients',
     },
   ];
 
@@ -63,12 +98,17 @@ export default function Dashboard() {
             CircleIcon={item.icon2}
             LeftCircleClassName={item.className}
             cardClassName="card_main_div"
+            link={item.link}
           />
         ))}
       </div>
       <div className="dashboard_div_2">
         <div className="dashboard_table_div">
-          <TableComponent setOpenAddStaffMember={setOpenAddStaffMember} />
+          <TableComponent
+            setOpenAddStaffMember={setOpenAddStaffMember}
+            staffMembers={staffMembers}
+            getStaffMembers={getStaffMembers}
+          />
         </div>
         <div className="chart_main_div">
           <Chart />
@@ -87,6 +127,7 @@ export default function Dashboard() {
       <AddStaffMember
         openAddStaffMember={openAddStaffMember}
         setOpenAddStaffMember={setOpenAddStaffMember}
+        getStaffMembers={getStaffMembers}
       />
     </div>
   );

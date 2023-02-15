@@ -8,6 +8,9 @@
 @import url('./Login.css');
 @import url('./Popups.css');
 @import url('./Sidebar.css');
+@import url('./Report.css');
+@import url('./Message.css');
+@import url('./PainSurvey.css');
 /* pages */
 @import url('./Pages/Dashboard.css');
 @import url('./Pages/ClinicAdmin.css');

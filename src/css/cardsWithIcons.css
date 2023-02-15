@@ -54,6 +54,7 @@
 .title {
   font-size: 14px;
   color: #919b9b;
+  width: max-content;
 }
 
 @media only screen and (max-width: 1440px) {

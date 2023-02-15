@@ -26,6 +26,7 @@
   position: absolute;
   right: 30px;
   top: 30px;
+  z-index: 1300;
   cursor: pointer;
   color: #919b9b;
 }
@@ -36,6 +37,21 @@
   box-shadow: 0 2px 20px -5px rgb(190, 124, 37) !important;
 }
 
+.rangeBtn {
+  background-color: #fba622 !important;
+  width: 100% !important;
+  border-radius: 15px !important;
+  padding: 5% 0px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+}
+
+.spaceOnLeft {
+  margin-left: 7px;
+}
+
 .date-div .react-datepicker-wrapper {
   border: 1px solid #e1e1e1 !important;
   background-color: white;
@@ -44,6 +60,7 @@
   padding: 2%;
   width: 100%;
 }
+
 .date-div2 .react-datepicker-wrapper {
   border: 1px solid #454238 !important;
   background-color: white;
@@ -103,6 +120,20 @@
   color: white !important;
 }
 
+.genPresTxt {
+  font-weight: 600;
+  font-size: 20px;
+  color: #454238;
+  margin-top: 30px;
+}
+
+.genSubTxt {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 25px;
+  color: #919b9b;
+}
+
 .delBtn:hover {
   background-color: rgb(222, 0, 0) !important;
 }
@@ -127,6 +158,26 @@
   background-color: #136773 !important;
   color: white !important;
 }
+
+.selectGender {
+  background-color: #136773 !important;
+  color: white !important;
+  font-size: 14px !important;
+  border-radius: 14px !important;
+  text-transform: none !important;
+  padding: 12px 36px !important;
+  cursor: pointer !important;
+  margin-right: 15px !important;
+  margin-bottom: 15px !important;
+  box-shadow: none !important;
+  font-weight: 500 !important;
+}
+
+/* .selectGender:hover {
+  border: 1px solid #136773 !important;
+  background-color: #136773 !important;
+  color: white !important;
+} */
 
 .genderTxt {
   color: #8c8c8c;
@@ -159,8 +210,16 @@
 
 .imgDivPopup {
   width: 26%;
-  height: 145px;
+  height: 140px;
   margin: auto;
+}
+
+.imgDivPopupProfile {
+  width: 26%;
+  height: 140px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 #profilePic {
@@ -181,6 +240,64 @@
   margin-bottom: 40px;
 }
 
+.rangePopupTxt {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fba622;
+  line-height: 2;
+  text-align: center;
+  padding-top: 5%;
+}
+
+.rangeSubTxt {
+  color: #919b9b;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.rangeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.rangeRow p {
+  width: 35%;
+  text-align: left;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.rangeTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.rangeTopRow p {
+  width: 35%;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  color: #919b9b;
+}
+
+.jointImg {
+  margin-top: 35px;
+}
+
+.spaceOnRight {
+  margin-right: 15px;
+}
+
+.spaceRight {
+  margin-right: 15px;
+}
+
 .sendInviteTxt {
   font-weight: 500;
   font-size: 14px;
@@ -188,12 +305,20 @@
 
 .arrowIcon {
   width: 20px;
+  margin-left: 7px;
 }
 
 .addImgIcon {
   position: relative;
-  top: -25px;
-  right: -20px;
+  top: -34px;
+  right: -34px;
+  cursor: pointer;
+}
+
+.addDPIcon {
+  position: relative;
+  top: -24px;
+  right: -34px;
   cursor: pointer;
 }
 
@@ -202,4 +327,133 @@
   width: 120px !important;
   height: 120px !important;
   font-size: 32px !important;
+}
+
+.profile_popups_avatar {
+  background-color: #919b9b !important;
+  width: 120px !important;
+  height: 120px !important;
+  font-size: 32px !important;
+  border: 3px solid #faa017 !important;
+}
+
+.tryAnotherBtn {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  padding: 15px 35px !important;
+  background: #ff8c39 !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  margin: auto !important;
+}
+
+.wrngBtn {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  padding: 15px 40px !important;
+  background: #ff5151 !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  margin: auto !important;
+}
+
+.usrAddedBtn {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  padding: 15px 80px !important;
+  background: #47b45f !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  margin: auto !important;
+}
+
+.inactiveBtn {
+  background-color: #fba622 !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  padding: 15px 150px !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  margin: auto !important;
+}
+
+.savePBtn {
+  border: 1px solid #fba622 !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: center !important;
+  color: #fba622 !important;
+  background: white !important;
+  width: 100% !important;
+  padding: 15px 150px !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  margin: auto !important;
+}
+
+.bgApply {
+  background-image: url('../assets/images/popups/smthingWrngBg.svg') !important;
+  z-index: 2;
+  background-size: 400px;
+  background-repeat: no-repeat;
+}
+
+.pswdChangeTrack {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #e1e1e1;
+  border-radius: 25px;
+  padding: 17px;
+  color: #919b9b;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.blktxt {
+  color: #454238;
+}
+
+.passwordChangeTxt {
+  color: #fba622;
+  cursor: pointer;
+}
+
+.inputDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.customInput {
+  border: none;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  color: #454238;
+}
+
+.customFieldIcon {
+  margin-right: 10px;
+}
+
+.customInput:focus {
+  outline: none;
+}
+
+#fontWeight {
+  font-size: 14px;
+  font-weight: 500;
 }

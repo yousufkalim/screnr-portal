@@ -18,6 +18,11 @@
   background-color: #136773 !important;
 }
 
+.header_main_avatar {
+  background-color: #136773 !important;
+  cursor: pointer !important;
+}
+
 .tab1_div {
   cursor: pointer;
 }

@@ -7,12 +7,7 @@ const api = async (method, uri, body) => {
   // API Call
   const url = baseUrl + uri;
 
-  const token = localStorage.getItem('token');
-  if (token) {
-    axios.defaults.headers = {
-      Authorization: `Bearer ${token}`,
-    };
-  }
+  axios.defaults.withCredentials = true;
 
   return new Promise((resolve, reject) => {
     axios[method](url, body)

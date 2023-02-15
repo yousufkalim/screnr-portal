@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import MenuIcon from '@mui/icons-material/Menu';
 // navigator import
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 // components imports
 import AvatarComponent from './Avatar';
 import HeaderTab2 from './headerMainTab';
@@ -11,29 +11,30 @@ import HeaderTab2 from './headerMainTab';
 import { ReactComponent as Logo } from '../assets/components/HeaderIcons/Logo.svg';
 import { ReactComponent as BellIcon } from '../assets/components/HeaderIcons/Bell.svg';
 import { ReactComponent as SearchIcon } from '../assets/components/HeaderIcons/Search.svg';
+import ProfilePopup from './popups/general/ProfilePopup';
+import UpdatePasswordPopup from './popups/general/ChangePasswordPopup';
+import EditProfilePopup from './popups/general/EditProfilePopup';
 
 export default function Header() {
-  const [activeTab, setActiveTab] = useState(window.location.pathname);
+  const { pathname } = useLocation();
+  const [activeTab, setActiveTab] = useState(pathname);
+  const [openProfilePopup, setOpenProfilePopup] = useState(false);
+  const [openPasswordPopup, setOpenPasswordPopup] = useState(false);
+  const [openEditProfilePopup, setOpenEditProfilePopup] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    setActiveTab(window.localStorage.getItem('activeTab'));
-  }, []);
-
-  useEffect(() => {
-    setActiveTab(window.location.pathname);
-    localStorage.setItem('activeTab', activeTab);
-  }, [activeTab]);
+    setActiveTab(pathname);
+  }, [pathname]);
 
   const HandleTabsSwitch = (targetTab) => {
     navigate(targetTab);
-    setActiveTab(window.location.pathname);
   };
 
   const handleLogoClick = () => {
     navigate('/');
     window.location.reload();
-    console.log('logo clicked');
   };
 
   return (
@@ -47,7 +48,11 @@ export default function Header() {
         <Stack direction="row" spacing={4} alignItems="center" className="tab3_div">
           <SearchIcon className="search" />
           <BellIcon className="bellIcon" />
-          <AvatarComponent alt="Rana Hamza" className="header_avatar" />
+          <AvatarComponent
+            alt="Rana Hamza"
+            className="header_main_avatar"
+            onClick={() => setOpenProfilePopup(true)}
+          />
         </Stack>
       </div>
       <div className="menu_icon_div">
@@ -55,6 +60,27 @@ export default function Header() {
           <MenuIcon sx={{ fontSize: 'large' }} />
         </Stack>
       </div>
+      {openProfilePopup && (
+        <ProfilePopup
+          openProfilePopup={openProfilePopup}
+          setOpenProfilePopup={setOpenProfilePopup}
+          setOpenPasswordPopup={setOpenPasswordPopup}
+          setOpenEditProfilePopup={setOpenEditProfilePopup}
+        />
+      )}
+      {openEditProfilePopup && (
+        <EditProfilePopup
+          openEditProfilePopup={openEditProfilePopup}
+          setOpenEditProfilePopup={setOpenEditProfilePopup}
+        />
+      )}
+
+      {openPasswordPopup && (
+        <UpdatePasswordPopup
+          openUpdateModal={openPasswordPopup}
+          setOpenUpdateModal={setOpenPasswordPopup}
+        />
+      )}
     </div>
   );
 }
