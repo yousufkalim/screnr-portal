@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import { React, useState } from 'react';
 
 // mui imports
@@ -90,13 +89,6 @@ export default function AddStaffMember({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (staffMember.expiry_date) {
-    //   const dateToSend = staffMember.expiry_date.toISOString();
-    //   setStaffMember({
-    //     ...staffMember,
-    //     expiry_date: dateToSend,
-    //   });
-    // }
     const staffMemberCopy = { ...staffMember };
     const formData = new FormData();
 
@@ -111,14 +103,12 @@ export default function AddStaffMember({
       if (!format.test(staffMemberCopy.phone_number)) return toast.error('Invalid Phone number');
     }
 
-    const { data } = await api('post', '/admins/staff', formData);
-    if (data) {
-      toast.success('Staff Member added successfully');
-      getStaffMembers();
-      handleClose();
-    }
+    await api('post', '/admins/staff', formData);
 
+    getStaffMembers();
     setStaffMember({ role: 'staff' });
+    handleClose();
+    return toast.success('Staff Member added successfully');
   };
 
   const handleCheck = (event) => {

@@ -65,16 +65,13 @@ export default function ForgetPasswordPopup({
     setOpenForgetPasswordPopup(false);
   };
 
-  // eslint-disable-next-line consistent-return
   const handleForgetPassword = async () => {
     if (!email) {
       return toast.error('Please enter your email');
     }
-    const { data } = await api('put', `/auth/forgot/${email}`);
-    if (data) {
-      handleClose();
-      return toast.success('Please check your email to reset your password');
-    }
+    await api('put', `/auth/forgot/${email}`);
+    handleClose();
+    return toast.success('Please check your email to reset your password');
   };
 
   return (

@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import { React, useState, useEffect } from 'react';
 
 // mui imports
@@ -113,13 +112,10 @@ export default function EditStaffMember({
     if (staffMemberCopy.phone_number) {
       if (!format.test(staffMemberCopy.phone_number)) return toast.error('Invalid Phone number');
     }
-
-    const { data } = await api('put', `/admins/staff/${staffMemberDetails.id}`, formData);
-    if (data) {
-      toast.success('Staff Member edited successfully');
-      getStaffMembers();
-      handleClose();
-    }
+    await api('put', `/admins/staff/${staffMemberDetails.id}`, formData);
+    getStaffMembers();
+    handleClose();
+    return toast.success('Staff Member edited successfully');
   };
 
   return (
