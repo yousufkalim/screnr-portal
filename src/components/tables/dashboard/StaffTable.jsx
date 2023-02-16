@@ -32,9 +32,9 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
   const [staffMember, setStaffMember] = useState();
   const navigate = useNavigate();
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = async (event, newPage) => {
+    await getStaffMembers(newPage + 1);
     setPage(newPage);
-    getStaffMembers(newPage + 1);
   };
 
   return (

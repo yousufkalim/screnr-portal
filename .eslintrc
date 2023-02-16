@@ -18,6 +18,7 @@
     // eslint-disable-next-line quote-props
     "eqeqeq": "error",
     // eslint-disable-next-line quote-props
-    "camelcase": "error"
+    "camelcase": "error",
+    "consistent-return": "off"
   }
 }
