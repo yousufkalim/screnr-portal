@@ -30,6 +30,8 @@ import profiles from '../../../assets/icons/Profiles.svg';
 
 // child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
+import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegisteredPopup';
+import UserCreated from '../general/UserCreated';
 import api from '../../../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -47,15 +49,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     paddingBottom: theme.spacing(7),
     margin: 'auto',
   },
-  [theme.breakpoints.down(1599)]: {
-    '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
-      paddingTop: theme.spacing(4),
-    },
-    '& .MuiDialogActions-root': {
-      paddingBottom: theme.spacing(4),
-    },
-  },
 }));
 
 export default function AddStaffMember({
@@ -64,6 +57,8 @@ export default function AddStaffMember({
   getStaffMembers,
 }) {
   const [checked, setChecked] = useState(false);
+  const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
+  const [added, setAdded] = useState(false);
   const [staffMember, setStaffMember] = useState({
     role: 'staff',
   });
@@ -96,28 +91,35 @@ export default function AddStaffMember({
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const staffMemberCopy = { ...staffMember };
-    const formData = new FormData();
+    try {
+      e.preventDefault();
+      const staffMemberCopy = { ...staffMember };
+      const formData = new FormData();
 
-    if (staffMemberCopy.expiry_date && !checked) {
-      delete staffMemberCopy.expiry_date;
-      setStaffMember({ ...staffMemberCopy });
-    }
+      if (staffMemberCopy.expiry_date && !checked) {
+        delete staffMemberCopy.expiry_date;
+        setStaffMember({ ...staffMemberCopy });
+      }
 
-    Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
+      Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
 
-    if (staffMemberCopy.phone_number) {
-      if (staffMemberCopy.phone_number.length < 10)
-        return toast.error('Phone number must be contain 10 digits');
-    }
+      if (staffMemberCopy.phone_number) {
+        if (staffMemberCopy.phone_number.length < 10)
+          return toast.error('Phone number must be contain 10 digits');
+      }
 
-    const { data } = await api('post', '/admins/staff', formData);
-    if (data) {
-      getStaffMembers();
-      setStaffMember({ role: 'staff' });
-      handleClose();
-      return toast.success('Staff Member added successfully');
+      const { data } = await api('post', '/admins/staff', formData);
+
+      if (data) {
+        getStaffMembers();
+        setStaffMember({ role: 'staff' });
+        setAdded(true);
+        handleClose();
+      }
+    } catch (error) {
+      if (error.response.status) {
+        setAlreadyExisitingUser(true);
+      }
     }
   };
 
@@ -328,6 +330,15 @@ export default function AddStaffMember({
           </Button>
         </DialogActions>
       </BootstrapDialog>
+
+      {alreadyExisitingUser && (
+        <EmailAlreadyRegisteredPopup
+          openExistingEmail={alreadyExisitingUser}
+          setOpenExistingEmail={setAlreadyExisitingUser}
+        />
+      )}
+
+      {added && <UserCreated openUserCreated={added} setOpenUserCreated={setAdded} />}
     </div>
   );
 }

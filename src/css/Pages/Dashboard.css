@@ -1,6 +1,7 @@
 .dashboard_main_div {
   width: 100vw;
   height: 92vh;
+  max-height: 100vh;
   background-color: #f6fafb;
   padding: 0 4rem;
 }
@@ -139,7 +140,7 @@
 
 .imgDiv {
   width: 10%;
-  height: 42px;
+  height: 40px;
   border-radius: 100px;
 }
 
@@ -157,8 +158,8 @@
   }
 
   .imgDiv {
-    width: 14%;
-    height: 40px;
+    width: 15%;
+    height: 39px;
     border-radius: 100px;
   }
 }
