@@ -1,5 +1,6 @@
 // Init
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ToastContainer, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,12 +17,18 @@ import { UpdateStore } from './StoreContext';
 // Component
 function App() {
   const updateStore = UpdateStore();
+  const { pathname } = useLocation();
 
   const isAuthenticated = async () => {
     const { data } = await api('get', '/auth');
     updateStore({ loggedIn: true, user: data.user });
     return true;
   };
+
+  useEffect(() => {
+    isAuthenticated().then((r) => r);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   return (
     <div className="App">
