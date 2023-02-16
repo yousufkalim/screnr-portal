@@ -24,12 +24,12 @@ export default function Dashboard() {
   const [clinicianCount, setClinicianCount] = useState();
   const [clinicsCount, setClinicsCount] = useState();
   const [patientsCount, setPatientsCount] = useState();
-  const [staffMembers, setStaffMembers] = useState([]);
+  const [staffMembers, setStaffMembers] = useState({});
 
-  const getStaffMembers = async () => {
-    const { data } = await api('get', '/admins/staff/');
+  const getStaffMembers = async (page = 1) => {
+    const { data } = await api('get', `/admins/staff?page=${page}`);
     if (data) {
-      setStaffMembers(data?.users);
+      setStaffMembers(data);
       setStaffCount(data?.count.staffCount.count);
       setClinicianCount(data?.count.clinicianCount.count);
       setClinicsCount(data?.count.clinicCount.count);
