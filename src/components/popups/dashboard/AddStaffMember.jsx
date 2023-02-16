@@ -117,7 +117,7 @@ export default function AddStaffMember({
         handleClose();
       }
     } catch (error) {
-      if (error.response.status) {
+      if (error.response.status === '409') {
         setAlreadyExisitingUser(true);
       }
     }
