@@ -47,6 +47,16 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     paddingBottom: theme.spacing(7),
     margin: 'auto',
   },
+  [theme.breakpoints.down(1599)]: {
+    '& .MuiDialogContent-root': {
+      padding: theme.spacing(2),
+      background: 'red',
+      paddingTop: theme.spacing(4),
+    },
+    '& .MuiDialogActions-root': {
+      paddingBottom: theme.spacing(4),
+    },
+  },
 }));
 
 export default function EditStaffMember({
