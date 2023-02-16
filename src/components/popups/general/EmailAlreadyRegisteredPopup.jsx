@@ -35,7 +35,7 @@ export default function EmailAlreadyRegisteredPopup({ openExistingEmail, setOpen
         <DialogContent>
           <Typography>
             <Icon />
-            <h1 className="genPresTxt">This email Already Register</h1>
+            <h1 className="genPresTxt">This email is Already Register</h1>
             <p className="genSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
           </Typography>
         </DialogContent>

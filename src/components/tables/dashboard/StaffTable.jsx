@@ -11,7 +11,7 @@ import TablePagination from '@mui/material/TablePagination';
 import Button from '@mui/material/Button';
 
 // navigation
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
@@ -30,7 +30,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
   const [openDeletePopup, setOpenDeletePopup] = useState(false);
   const [page, setPage] = useState(0);
   const [staffMember, setStaffMember] = useState();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleChangePage = async (event, newPage) => {
     await getStaffMembers(newPage + 1);
@@ -97,14 +97,14 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
                 <TableCell
                   align="left"
                   className="table_cells"
-                  onClick={() => navigate(`/staff/${row._id}`)}
+                  // onClick={() => navigate(`/staff/${row._id}`)}
                 >
                   {row.id}
                 </TableCell>
                 <TableCell
                   align="left"
                   sx={{ display: 'flex' }}
-                  onClick={() => navigate(`/staff/${row.id}`)}
+                  // onClick={() => navigate(`/staff/${row.id}`)}
                 >
                   {row.profile_pic ? (
                     <div className="imgDiv">
@@ -133,7 +133,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
                 <TableCell
                   align="left"
                   className="table_cells"
-                  onClick={() => navigate(`/staff/${row._id}`)}
+                  // onClick={() => navigate(`/staff/${row._id}`)}
                 >
                   {row.phone_number && PhoneFormat(row.phone_number)}
                 </TableCell>
