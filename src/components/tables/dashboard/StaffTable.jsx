@@ -31,10 +31,10 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
   const [page, setPage] = useState(0);
   const [staffMember, setStaffMember] = useState();
   const navigate = useNavigate();
-  let counter = '1';
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    getStaffMembers(newPage + 1);
   };
 
   return (
@@ -88,7 +88,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
             </TableRow>
           </TableHead>
           <TableBody>
-            {staffMembers?.slice(page * 4, page * 4 + 4).map((row) => (
+            {staffMembers?.users?.map((row) => (
               <TableRow
                 key={row.name}
                 className="tableRow"
@@ -99,7 +99,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
                   className="table_cells"
                   onClick={() => navigate(`/staff/${row._id}`)}
                 >
-                  {counter < 10 ? `0${counter++}` : counter++}
+                  {row.id}
                 </TableCell>
                 <TableCell
                   align="left"
@@ -182,8 +182,8 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
       <TablePagination
         component="div"
         rowsPerPageOptions={[]}
-        count={staffMembers.length}
-        rowsPerPage={4}
+        count={staffMembers.total?.count}
+        rowsPerPage={staffMembers.limit || 10}
         page={page}
         onPageChange={handleChangePage}
       />

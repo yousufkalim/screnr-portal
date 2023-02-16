@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // mui imports
 import { Grid, IconButton, InputLabel } from '@mui/material';
@@ -16,7 +17,7 @@ import Vector from '../assets/images/login/loginPgImg.svg';
 
 // child component import
 
-import { UpdateStore } from '../StoreContext';
+import { Store, UpdateStore } from '../StoreContext';
 import api from '../api';
 import ForgetPasswordPopup from '../components/popups/general/ForgetPasswordPopup';
 
@@ -49,8 +50,18 @@ export default function Login() {
   const [user, setUser] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+  const { loggedIn } = Store();
   const updateStore = UpdateStore();
   const outlinedInputStyles = useOutlinedInputStyles();
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigate('/dashboard');
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
