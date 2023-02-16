@@ -13,6 +13,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
 
+// phone
+import PhoneInput from 'react-phone-input-2';
+
 // react-toastify import
 import { toast } from 'react-toastify';
 
@@ -25,7 +28,6 @@ import edit from '../../../assets/icons/edit.svg';
 
 // child component imports
 import AvatarComponent from '../../Avatar';
-import formatPhoneNumber from '../../../utils/FormPhoneFormat';
 import api from '../../../api';
 import { getMediaUrl } from '../../../config';
 import useOutlinedInputStyles from '../../../utils/EditFormInput';
@@ -86,7 +88,6 @@ export default function EditStaffMember({
   }, [staffMemberDetails]);
 
   const outlinedInputStyles = useOutlinedInputStyles();
-  const format = /^(\+1 )?(\(\d{3}\)|\d{3})[\s-]?\d{3}[\s-]?\d{4}$/;
 
   const handleClose = () => {
     setOpenEditStaffMember(false);
@@ -98,9 +99,6 @@ export default function EditStaffMember({
 
   const handleChange = (e) => {
     setStaffMember({ ...staffMember, [e.target.name]: e.target.value });
-    if (e.target.name === 'phone_number') {
-      setStaffMember({ ...staffMember, phone_number: formatPhoneNumber(e.target.value) });
-    }
   };
 
   const dateChange = (e) => {
@@ -123,18 +121,22 @@ export default function EditStaffMember({
       staffMemberCopy.expiry_date = '';
       setStaffMember({ ...staffMemberCopy });
     }
-    if (typeof staffMemberCopy.profile_pic === 'string') {
+
+    if (typeof staffMemberCopy.profile_pic !== 'object') {
       delete staffMemberCopy.profile_pic;
     }
 
     Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
     if (staffMemberCopy.phone_number) {
-      if (!format.test(staffMemberCopy.phone_number)) return toast.error('Invalid Phone number');
+      if (staffMemberCopy.phone_number.length < 10)
+        return toast.error('Phone number must be contain 10 digits');
     }
-    await api('put', `/admins/staff/${staffMemberDetails.id}`, formData);
-    getStaffMembers();
-    handleClose();
-    return toast.success('Staff Member edited successfully');
+    const { data } = await api('put', `/admins/staff/${staffMemberDetails.id}`, formData);
+    if (data) {
+      getStaffMembers();
+      handleClose();
+      return toast.success('Staff Member edited successfully');
+    }
   };
 
   return (
@@ -256,27 +258,19 @@ export default function EditStaffMember({
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                  },
-                }}
-                id="outlined-phone"
-                classes={outlinedInputStyles}
-                placeholder="Phone Number"
-                inputProps={{
-                  maxLength: 14,
-                }}
-                size="normal"
-                type="text"
-                name="phone_number"
-                onChange={handleChange}
-                value={staffMember?.phone_number}
-              />
+              <div className="edit-phone-input">
+                <PhoneInput
+                  country="us"
+                  onlyCountries={['us']}
+                  value={staffMember.phone_number}
+                  onChange={(value) => {
+                    setStaffMember({ ...staffMember, phone_number: value });
+                  }}
+                  disableDropdown
+                  countryCodeEditable={false}
+                  disableCountryGuess
+                />
+              </div>
             </FormControl>
             <FormControl
               sx={{

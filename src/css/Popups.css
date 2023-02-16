@@ -457,3 +457,62 @@
   font-size: 14px;
   font-weight: 500;
 }
+
+.flag-dropdown {
+  display: none !important;
+}
+
+.react-tel-input {
+  width: fit-content !important;
+  /* border: 1px solid #e1e1e1 !important; */
+  border-radius: 20px !important;
+}
+
+.react-tel-input .form-control {
+  border: 1px solid #e1e1e1 !important;
+  padding: 22px 20px !important;
+  border-radius: 20px !important;
+  width: 262px !important;
+  color: black !important;
+}
+
+.edit-phone-input .react-tel-input .form-control {
+  border: 1px solid black !important;
+  padding: 24px 20px !important;
+  border-radius: 20px !important;
+  width: 262px !important;
+  color: black !important;
+}
+
+.react-tel-input .form-control:focus {
+  border: 1px solid #454238 !important;
+}
+.react-tel-input .form-control:hover {
+  border: 1px solid #454238 !important;
+}
+
+.edit-phone-input .react-tel-input .form-control:focus {
+  border: 1px solid #ff9d09 !important;
+}
+
+.edit-phone-input .react-tel-input .form-control:hover {
+  border: 1px solid #ff9d09 !important;
+}
+
+.dummyPlaceholder {
+  color: #929696d5;
+  font-size: 14px;
+  font-weight: 500;
+  position: absolute;
+  left: 20px;
+  cursor: text;
+  top: 12px;
+}
+
+.placeholerPhone .react-tel-input .form-control {
+  color: white !important;
+}
+
+#focus .react-tel-input .form-control {
+  z-index: 1300 !important;
+}

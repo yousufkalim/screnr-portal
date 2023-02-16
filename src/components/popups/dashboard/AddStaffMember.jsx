@@ -12,6 +12,10 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
 
+// phone format
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+
 // react-toastify import
 import { toast } from 'react-toastify';
 
@@ -27,7 +31,6 @@ import profiles from '../../../assets/icons/Profiles.svg';
 // child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import api from '../../../api';
-import formatPhoneNumber from '../../../utils/FormPhoneFormat';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -55,7 +58,6 @@ export default function AddStaffMember({
   const [staffMember, setStaffMember] = useState({
     role: 'staff',
   });
-  const format = /^(\+1 )?(\(\d{3}\)|\d{3})[\s-]?\d{3}[\s-]?\d{4}$/;
 
   const outlinedInputStyles = useOutlinedInputStyles();
 
@@ -66,9 +68,6 @@ export default function AddStaffMember({
 
   const handleChange = (e) => {
     setStaffMember({ ...staffMember, [e.target.name]: e.target.value });
-    if (e.target.name === 'phone_number') {
-      setStaffMember({ ...staffMember, phone_number: formatPhoneNumber(e.target.value) });
-    }
   };
   const dateChange = (e) => {
     setStaffMember({
@@ -100,15 +99,17 @@ export default function AddStaffMember({
     Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
 
     if (staffMemberCopy.phone_number) {
-      if (!format.test(staffMemberCopy.phone_number)) return toast.error('Invalid Phone number');
+      if (staffMemberCopy.phone_number.length < 10)
+        return toast.error('Phone number must be contain 10 digits');
     }
 
-    await api('post', '/admins/staff', formData);
-
-    getStaffMembers();
-    setStaffMember({ role: 'staff' });
-    handleClose();
-    return toast.success('Staff Member added successfully');
+    const { data } = await api('post', '/admins/staff', formData);
+    if (data) {
+      getStaffMembers();
+      setStaffMember({ role: 'staff' });
+      handleClose();
+      return toast.success('Staff Member added successfully');
+    }
   };
 
   const handleCheck = (event) => {
@@ -225,27 +226,44 @@ export default function AddStaffMember({
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                  },
-                }}
-                classes={outlinedInputStyles}
-                placeholder="Phone Number"
-                size="normal"
-                name="phone_number"
-                id="myPhoneField"
-                onChange={handleChange}
-                value={staffMember.phone_number}
-                inputProps={{
-                  maxLength: 14,
-                }}
-              />
+              <div
+                className={
+                  staffMember.phone_number === undefined || staffMember.phone_number === '1'
+                    ? 'placeholerPhone'
+                    : ''
+                }
+              >
+                <PhoneInput
+                  country="us"
+                  onlyCountries={['us']}
+                  value={staffMember.phone_number}
+                  onChange={(value) => {
+                    setStaffMember({ ...staffMember, phone_number: value });
+                  }}
+                  disableDropdown
+                  countryCodeEditable={false}
+                  disableCountryGuess
+                />
+                {staffMember.phone_number === undefined || staffMember.phone_number === '1' ? (
+                  <p
+                    className="dummyPlaceholder"
+                    id="txtClick"
+                    role="presentation"
+                    // onClick={handleClick}
+                    onClick={() =>
+                      document
+                        .querySelector('.placeholerPhone .react-tel-input .form-control')
+                        .focus()
+                    }
+                  >
+                    Phone number
+                  </p>
+                ) : (
+                  ''
+                )}
+              </div>
             </FormControl>
+
             <FormControl
               sx={{
                 textAlign: 'left',
