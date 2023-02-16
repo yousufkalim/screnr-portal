@@ -77,12 +77,6 @@ export default function AssignClinicians({
                   role="presentation"
                   onClick={() => selectClinician(clinician)}
                 >
-                  {console.log('S', selectedClinicians)}
-                  {console.log(
-                    '      selectedClinicians.includes(clinician)',
-                    selectedClinicians.includes(clinician),
-                  )}
-
                   <Dummy className="clinicianDP" />
                   <p>{`Dr ${clinician.name}`}</p>
                 </div>

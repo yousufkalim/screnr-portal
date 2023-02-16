@@ -83,8 +83,6 @@ export default function EditStaffMember({
       });
       setChecked(true);
     }
-
-    console.log(staffMemberDetails.expiry_date);
   }, [staffMemberDetails]);
 
   const outlinedInputStyles = useOutlinedInputStyles();

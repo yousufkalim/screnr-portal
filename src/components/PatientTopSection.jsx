@@ -16,7 +16,6 @@ export default function PatientTopSection() {
       <div className="PatientSubTopSection">
         {cliniciansData.map((data) => (
           <div className="topSec">
-            {console.log(data)}
             <div>
               <AvatarComponent alt={data.name} className="top_sec_avatar" />
             </div>
