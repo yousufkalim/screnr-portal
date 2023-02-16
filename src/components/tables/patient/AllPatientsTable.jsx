@@ -135,7 +135,6 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
               ref={filterRef}
               onClick={() => setOpenFilter(!openFilter)}
             />
-            {console.log('openFilter', openFilter)}
             {openFilter && (
               <div className="patientFilterPoper" ref={click}>
                 <div className="filterHead">
