@@ -32,9 +32,9 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
         </div>
       ) : (
         <ClinicAdminIcon
-          onClick={() => {
-            HandleTabsSwitch('/clinics');
-          }}
+          // onClick={() => {
+          //   HandleTabsSwitch('/clinics');
+          // }}
           className="tab_icon"
         />
       )}
@@ -45,9 +45,9 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
         </div>
       ) : (
         <ClinicalIcon
-          onClick={() => {
-            HandleTabsSwitch('/clinicians');
-          }}
+          // onClick={() => {
+          //   HandleTabsSwitch('/clinicians');
+          // }}
           className="tab_icon"
         />
       )}
@@ -57,7 +57,10 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
           <span>Patients</span>
         </div>
       ) : (
-        <PatientIcon onClick={() => HandleTabsSwitch('/patients')} className="tab_icon" />
+        <PatientIcon
+          //  onClick={() => HandleTabsSwitch('/patients')}
+          className="tab_icon"
+        />
       )}
       {activeTab === '/patients/:id/exercise/reports' ? (
         <div className="tab2_div">
@@ -66,7 +69,7 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
         </div>
       ) : (
         <PatientStatsIcon
-          onClick={() => HandleTabsSwitch('/patients/:id/exercise/reports')}
+          // onClick={() => HandleTabsSwitch('/patients/:id/exercise/reports')}
           className="tab_icon"
         />
       )}
