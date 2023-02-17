@@ -51,20 +51,17 @@ export default function AddClinicAdmin({
   getClinicAdmins,
 }) {
   const [checked, setChecked] = useState(false);
-  const [clinicAdmin, setClinicAdmin] = useState({
-    role: 'clinicadmin',
-    first_name: 'a',
-    last_name: 'b',
-    password: '12345678',
-    confirmPassword: '12345678',
-  });
+  const [clinicAdmin, setClinicAdmin] = useState({});
+  const [userData, setUserData] = useState({ staff: '4' });
   const [selectedGender, setSelectedGender] = useState('');
   const outlinedInputStyles = useOutlinedInputStyles();
 
+  // close popup
   const handleClose = () => {
     setOpenAddClinicAdmin(false);
   };
 
+  // uploading img
   const handleSelectedFile = (e) => {
     const myFile = e.target.files[0];
     const [file] = document.getElementById('profilePic').files;
@@ -79,16 +76,49 @@ export default function AddClinicAdmin({
     setClinicAdmin({ ...clinicAdmin, [e.target.name]: e.target.value });
   };
 
+  const handleUserDataChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  // handle gender selection
+  const handleGenderSelection = (name) => {
+    setSelectedGender(name);
+    setClinicAdmin({ ...clinicAdmin, gender: name });
+  };
+
+  // posting data
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    setClinicAdmin({ ...clinicAdmin, gender: selectedGender });
-    Object.keys(clinicAdmin).map((key) => formData.append(key, clinicAdmin[key]));
-    const { data } = await api('post', '/admins/clinics', formData);
-    if (data) {
-      toast.success('Clinic Admin added successfully');
-      getClinicAdmins();
-      handleClose();
+    try {
+      e.preventDefault();
+
+      // Create a new FormData object
+      const formData = new FormData();
+
+      setClinicAdmin({ ...clinicAdmin, gender: selectedGender });
+      // append properties from ClinicAdmin in formdata
+      Object.keys(clinicAdmin).forEach((key) => {
+        formData.append(key, clinicAdmin[key]);
+      });
+
+      // append properties from userData in formdata
+      Object.keys(userData).forEach((key) => {
+        formData.append(`userData[${key}]`, userData[key]);
+      });
+
+      // sending this data to api
+      const { data } = await api('post', '/admins/clinics', formData);
+      if (data) {
+        toast.success('Clinic Admin added successfully');
+        getClinicAdmins();
+        handleClose();
+        setClinicAdmin('');
+        setUserData('');
+      }
+    } catch (error) {
+      console.log('error');
+      if (error.response.status === 409) {
+        // setAlreadyExisitingUser(true);
+      }
     }
   };
 
@@ -157,8 +187,8 @@ export default function AddClinicAdmin({
                 placeholder="Clinic Name"
                 size="normal"
                 name="clinic_name"
-                value={clinicAdmin.clinic_name}
-                onChange={handleChange}
+                value={userData.clinic_name}
+                onChange={handleUserDataChange}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 2 }} variant="outlined">
@@ -174,15 +204,14 @@ export default function AddClinicAdmin({
                 }}
                 id="outlined-fname"
                 classes={outlinedInputStyles}
-                placeholder="Manager Name"
+                placeholder="First Name"
                 size="normal"
-                name="manager_name"
-                value={clinicAdmin.manager_name}
+                name="first_name"
+                value={clinicAdmin.first_name}
                 onChange={handleChange}
               />
             </FormControl>
-
-            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%' }} variant="outlined">
+            <FormControl sx={{ mb: 2, mt: 2.7, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -193,17 +222,14 @@ export default function AddClinicAdmin({
                     ml: 1,
                   },
                 }}
-                id="outlined-phone"
+                id="outlined-last-name"
                 classes={outlinedInputStyles}
-                placeholder="Phone Number"
+                placeholder="Last name"
                 size="normal"
                 type="text"
-                name="phone"
-                value={clinicAdmin.phone}
+                name="last_name"
+                value={clinicAdmin.last_name}
                 onChange={handleChange}
-                inputProps={{
-                  maxLength: 10,
-                }}
               />
             </FormControl>
 
@@ -240,13 +266,37 @@ export default function AddClinicAdmin({
                     ml: 1,
                   },
                 }}
+                id="outlined-phone"
+                classes={outlinedInputStyles}
+                placeholder="Phone Number"
+                size="normal"
+                type="text"
+                name="phone_number"
+                value={clinicAdmin.phone_number}
+                onChange={handleChange}
+                inputProps={{
+                  maxLength: 10,
+                }}
+              />
+            </FormControl>
+            <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
+              <TextField
+                sx={{
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 1,
+                  },
+                }}
                 id="outlined-fname"
                 classes={outlinedInputStyles}
                 placeholder="Address"
                 size="normal"
                 name="address"
-                value={clinicAdmin.address}
-                onChange={handleChange}
+                value={userData.address}
+                onChange={handleUserDataChange}
               />
             </FormControl>
 
@@ -257,7 +307,7 @@ export default function AddClinicAdmin({
                   className={selectedGender === 'male' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
                   onClick={() => {
-                    setSelectedGender('male');
+                    handleGenderSelection('male');
                   }}
                 >
                   Male
@@ -266,16 +316,16 @@ export default function AddClinicAdmin({
                   className={selectedGender === 'female' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
                   onClick={() => {
-                    setSelectedGender('female');
+                    handleGenderSelection('female');
                   }}
                 >
                   Female
                 </Button>
                 <Button
-                  className={selectedGender === 'other' ? 'selectGender' : 'genderBtn'}
+                  className={selectedGender === 'non-binary' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
                   onClick={() => {
-                    setSelectedGender('other');
+                    handleGenderSelection('non-binary');
                   }}
                 >
                   Non-binary

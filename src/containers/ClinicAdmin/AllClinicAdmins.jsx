@@ -4,7 +4,7 @@ import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 
 // import useParams
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 // assets import
 import addBtn from '../../assets/icons/addBtn.svg';
@@ -12,25 +12,25 @@ import addBtn from '../../assets/icons/addBtn.svg';
 // child components import
 import AllClinicAdminTable from '../../components/tables/clinicAdmin/AllClinicAdminTable';
 import AddClinicAdmin from '../../components/popups/clinicAdmin/AddNewClinicAdmin';
-import api from '../../api';
+// import api from '../../api';
 
 export default function ClinicAdmin() {
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
-  const [clinicAdmins, setClinicAdmins] = useState([]);
-  const { id } = useParams();
+  const [clinicAdmins] = useState([]);
+  // const { id } = useParams();
 
   const getClinicAdmins = async () => {
-    if (window.location.pathname.includes('staff')) {
-      const { data } = await api('get', `/admins/clinics/all/`);
-      if (data) {
-        setClinicAdmins(data.users);
-      }
-    } else {
-      const { data } = await api('get', `/admins/clinics/all/${id}`);
-      if (data) {
-        setClinicAdmins(data.users);
-      }
-    }
+    // if (window.location.pathname.includes('staff')) {
+    //   const { data } = await api('get', `/admins/clinics/all/`);
+    //   if (data) {
+    //     setClinicAdmins(data.users);
+    //   }
+    // } else {
+    //   const { data } = await api('get', `/admins/clinics/all/${id}`);
+    //   if (data) {
+    //     setClinicAdmins(data.users);
+    //   }
+    // }
   };
 
   useEffect(() => {

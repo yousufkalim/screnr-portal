@@ -32,9 +32,9 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
         </div>
       ) : (
         <ClinicAdminIcon
-          // onClick={() => {
-          //   HandleTabsSwitch('/clinics');
-          // }}
+          onClick={() => {
+            HandleTabsSwitch('/clinics');
+          }}
           className="tab_icon"
         />
       )}

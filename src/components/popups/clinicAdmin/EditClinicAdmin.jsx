@@ -54,11 +54,7 @@ export default function EditClinicAdmin({
   const [selectedGender, setSelectedGender] = useState('');
 
   const [clinicAdmin, setClinicAdmin] = useState({
-    role: 'clinicadmin',
-    first_name: 'a',
-    last_name: 'b',
-    password: '12345678',
-    confirmPassword: '12345678',
+    // role: 'clinicadmin',
   });
 
   const handleClose = () => {
@@ -181,15 +177,14 @@ export default function EditClinicAdmin({
                 }}
                 id="outlined-fname"
                 classes={outlinedInputStyles}
-                placeholder="Manager Name"
+                placeholder="First Name"
                 size="normal"
-                name="manager_name"
-                value={clinicAdmin.manager_name}
+                name="first_name"
+                value={clinicAdmin.first_name}
                 onChange={handleChange}
               />
             </FormControl>
-
-            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%' }} variant="outlined">
+            <FormControl sx={{ mb: 2, mt: 2.7, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -200,16 +195,13 @@ export default function EditClinicAdmin({
                     ml: 1,
                   },
                 }}
-                id="outlined-phone"
+                id="outlined-last-name"
                 classes={outlinedInputStyles}
-                placeholder="Phone Number"
+                placeholder="Last name"
                 size="normal"
                 type="text"
-                inputProps={{
-                  maxLength: 10,
-                }}
-                name="phone"
-                value={clinicAdmin.phone}
+                name="last_name"
+                value={clinicAdmin.last_name}
                 onChange={handleChange}
               />
             </FormControl>
@@ -237,6 +229,30 @@ export default function EditClinicAdmin({
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
+              <TextField
+                sx={{
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 1,
+                  },
+                }}
+                id="outlined-phone"
+                classes={outlinedInputStyles}
+                placeholder="Phone Number"
+                size="normal"
+                type="text"
+                name="phone"
+                value={clinicAdmin.phone}
+                onChange={handleChange}
+                inputProps={{
+                  maxLength: 10,
+                }}
+              />
+            </FormControl>
+            <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
