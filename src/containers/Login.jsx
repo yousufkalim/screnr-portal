@@ -78,6 +78,7 @@ export default function Login() {
     window.location = '/dashboard';
     setUser({ email: '', password: '' });
   };
+
   return (
     <div className="loginScreenBG">
       <Grid container>
@@ -156,6 +157,11 @@ export default function Login() {
                   size="normal"
                   name="password"
                   onChange={handleChange}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      handleSubmit(event);
+                    }
+                  }}
                   value={user.password}
                   type={showPassword ? 'text' : 'password'}
                   InputProps={{
