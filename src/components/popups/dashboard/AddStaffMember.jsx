@@ -33,6 +33,7 @@ import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegisteredPopup';
 import UserCreated from '../general/UserCreated';
 import api from '../../../api';
+import UserAlreadyExist from '../general/UserAlreadyExist';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -58,6 +59,7 @@ export default function AddStaffMember({
 }) {
   const [checked, setChecked] = useState(false);
   const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
+  const [exisitingButInactive, setExisitingButInactive] = useState(false);
   const [added, setAdded] = useState(false);
   const [staffMember, setStaffMember] = useState({
     role: 'staff',
@@ -122,6 +124,9 @@ export default function AddStaffMember({
     } catch (error) {
       if (error.response.status === 409) {
         setAlreadyExisitingUser(true);
+      }
+      if (error.response.status === 418) {
+        setExisitingButInactive(true);
       }
     }
   };
@@ -342,6 +347,12 @@ export default function AddStaffMember({
       )}
 
       {added && <UserCreated openUserCreated={added} setOpenUserCreated={setAdded} />}
+      {exisitingButInactive && (
+        <UserAlreadyExist
+          openExistingUser={exisitingButInactive}
+          setOpenExistingUser={setExisitingButInactive}
+        />
+      )}
     </div>
   );
 }
