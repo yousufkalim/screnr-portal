@@ -84,7 +84,11 @@ export default function AddStaffMember({
 
   const handleSelectedFile = (e) => {
     const myFile = e.target.files[0];
+    const size = 1024 * 1024 * 10;
 
+    if (myFile.size > size) {
+      return toast.error('File size can not exceed 10 Mb');
+    }
     if (myFile) {
       document.getElementById('selectedImg').src = URL.createObjectURL(myFile);
     }
