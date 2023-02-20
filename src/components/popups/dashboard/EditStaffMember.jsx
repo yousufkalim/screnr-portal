@@ -69,7 +69,6 @@ export default function EditStaffMember({
         email: staffMemberDetails.email,
         profile_pic: staffMemberDetails.profile_pic,
         phone_number: staffMemberDetails.phone_number,
-        active: staffMemberDetails.active,
       });
     } else {
       setStaffMember({
@@ -81,7 +80,6 @@ export default function EditStaffMember({
         phone_number: staffMemberDetails.phone_number,
         // eslint-disable-next-line no-underscore-dangle
         expiry_date: moment(staffMemberDetails.expiry_date)._d,
-        active: staffMemberDetails.active,
       });
       setChecked(true);
     }
@@ -130,6 +128,10 @@ export default function EditStaffMember({
     if (staffMemberCopy.phone_number) {
       if (staffMemberCopy.phone_number.length < 10)
         return toast.error('Phone number must be contain 10 digits');
+    }
+
+    if (checked && !staffMemberCopy.expiry_date) {
+      return toast.error('Please enter expiry date');
     }
     const { data } = await api('put', `/admins/staff/${staffMemberDetails.id}`, formData);
     if (data) {

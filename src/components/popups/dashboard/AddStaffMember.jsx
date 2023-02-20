@@ -107,6 +107,9 @@ export default function AddStaffMember({
         if (staffMemberCopy.phone_number.length < 10)
           return toast.error('Phone number must be contain 10 digits');
       }
+      if (checked && !staffMemberCopy.expiry_date) {
+        return toast.error('Please enter expiry date');
+      }
 
       const { data } = await api('post', '/admins/staff', formData);
 
