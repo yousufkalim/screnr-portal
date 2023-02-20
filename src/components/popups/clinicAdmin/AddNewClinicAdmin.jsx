@@ -12,6 +12,9 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
 
+// phone format
+import PhoneInput from 'react-phone-input-2';
+
 // react-toastify import
 import { toast } from 'react-toastify';
 
@@ -27,6 +30,9 @@ import edit from '../../../assets/icons/edit.svg';
 
 // child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
+import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegisteredPopup';
+import UserCreated from '../general/UserCreated';
+import UserAlreadyExist from '../general/UserAlreadyExist';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -54,22 +60,29 @@ export default function AddClinicAdmin({
   const [clinicAdmin, setClinicAdmin] = useState({});
   const [userData, setUserData] = useState({ staff: '4' });
   const [selectedGender, setSelectedGender] = useState('');
+  const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
+  const [exisitingButInactive, setExisitingButInactive] = useState(false);
+  const [added, setAdded] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
 
   // close popup
   const handleClose = () => {
     setOpenAddClinicAdmin(false);
+    setClinicAdmin('');
+    setSelectedGender('');
+    setChecked('');
+    setUserData('');
   };
 
   // uploading img
   const handleSelectedFile = (e) => {
     const myFile = e.target.files[0];
-    const [file] = document.getElementById('profilePic').files;
 
-    if (file) {
-      document.getElementById('selectedImg').src = URL.createObjectURL(file);
+    if (myFile) {
+      document.getElementById('selectedImg').src = URL.createObjectURL(myFile);
     }
-    setClinicAdmin({ ...clinicAdmin, image: myFile });
+
+    setClinicAdmin({ ...clinicAdmin, profile_pic: myFile });
   };
 
   const handleChange = (e) => {
@@ -78,6 +91,13 @@ export default function AddClinicAdmin({
 
   const handleUserDataChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const dateChange = (e) => {
+    setClinicAdmin({
+      ...clinicAdmin,
+      expiry_date: e,
+    });
   };
 
   // handle gender selection
@@ -105,19 +125,33 @@ export default function AddClinicAdmin({
         formData.append(`userData[${key}]`, userData[key]);
       });
 
+      if (clinicAdmin.phone_number) {
+        if (clinicAdmin.phone_number.length < 10)
+          return toast.error('Phone number must be contain 10 digits');
+      }
+      if (checked && !clinicAdmin.expiry_date) {
+        return toast.error('Please enter expiry date');
+      }
+
       // sending this data to api
       const { data } = await api('post', '/admins/clinics', formData);
       if (data) {
         toast.success('Clinic Admin added successfully');
         getClinicAdmins();
+        setAdded(true);
         handleClose();
         setClinicAdmin('');
+        setSelectedGender('');
+        setChecked('');
         setUserData('');
       }
     } catch (error) {
       console.log('error');
       if (error.response.status === 409) {
-        // setAlreadyExisitingUser(true);
+        setAlreadyExisitingUser(true);
+      }
+      if (error.response.status === 418) {
+        setExisitingButInactive(true);
       }
     }
   };
@@ -152,7 +186,7 @@ export default function AddClinicAdmin({
                     name="profile_pic"
                     type="file"
                     id="profilePic"
-                    accept="image/*"
+                    accept=".png, .jpg, .jpeg"
                     onChange={handleSelectedFile}
                   />
                   <img
@@ -189,6 +223,9 @@ export default function AddClinicAdmin({
                 name="clinic_name"
                 value={userData.clinic_name}
                 onChange={handleUserDataChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 2 }} variant="outlined">
@@ -209,6 +246,9 @@ export default function AddClinicAdmin({
                 name="first_name"
                 value={clinicAdmin.first_name}
                 onChange={handleChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
             <FormControl sx={{ mb: 2, mt: 2.7, width: '48.5%' }} variant="outlined">
@@ -230,6 +270,9 @@ export default function AddClinicAdmin({
                 name="last_name"
                 value={clinicAdmin.last_name}
                 onChange={handleChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
 
@@ -256,28 +299,42 @@ export default function AddClinicAdmin({
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-phone"
-                classes={outlinedInputStyles}
-                placeholder="Phone Number"
-                size="normal"
-                type="text"
-                name="phone_number"
-                value={clinicAdmin.phone_number}
-                onChange={handleChange}
-                inputProps={{
-                  maxLength: 10,
-                }}
-              />
+              <div
+                className={
+                  clinicAdmin.phone_number === undefined || clinicAdmin.phone_number === '1'
+                    ? 'placeholerPhone'
+                    : ''
+                }
+              >
+                <PhoneInput
+                  country="us"
+                  onlyCountries={['us']}
+                  value={clinicAdmin.phone_number}
+                  onChange={(value) => {
+                    setClinicAdmin({ ...clinicAdmin, phone_number: value });
+                  }}
+                  disableDropdown
+                  countryCodeEditable={false}
+                  disableCountryGuess
+                />
+                {clinicAdmin.phone_number === undefined || clinicAdmin.phone_number === '1' ? (
+                  <p
+                    className="dummyPlaceholder"
+                    id="txtClick"
+                    role="presentation"
+                    // onClick={handleClick}
+                    onClick={() =>
+                      document
+                        .querySelector('.placeholerPhone .react-tel-input .form-control')
+                        .focus()
+                    }
+                  >
+                    Phone number
+                  </p>
+                ) : (
+                  ''
+                )}
+              </div>
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <TextField
@@ -297,6 +354,9 @@ export default function AddClinicAdmin({
                 name="address"
                 value={userData.address}
                 onChange={handleUserDataChange}
+                inputProps={{
+                  maxLength: 50,
+                }}
               />
             </FormControl>
 
@@ -372,10 +432,10 @@ export default function AddClinicAdmin({
               <div className="date-div" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
-                  dateFormat="dd/MMMM/yyyy"
-                  name="expiry"
-                  value={clinicAdmin.expiry}
-                  onChange={handleChange}
+                  dateFormat="MM-dd-yyyy"
+                  name="expiry_date"
+                  selected={clinicAdmin.expiry_date}
+                  onChange={dateChange}
                   disabled={!checked}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
@@ -392,6 +452,19 @@ export default function AddClinicAdmin({
           </Button>
         </DialogActions>
       </BootstrapDialog>
+      {alreadyExisitingUser && (
+        <EmailAlreadyRegisteredPopup
+          openExistingEmail={alreadyExisitingUser}
+          setOpenExistingEmail={setAlreadyExisitingUser}
+        />
+      )}
+      {added && <UserCreated openUserCreated={added} setOpenUserCreated={setAdded} />}
+      {exisitingButInactive && (
+        <UserAlreadyExist
+          openExistingUser={exisitingButInactive}
+          setOpenExistingUser={setExisitingButInactive}
+        />
+      )}
     </div>
   );
 }
