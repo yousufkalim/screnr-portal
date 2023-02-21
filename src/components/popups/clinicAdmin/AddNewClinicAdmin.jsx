@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import Button from '@mui/material/Button';
@@ -52,18 +52,23 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function AddClinicAdmin({
+  clinicAdminId,
   openAddClinicAdmin,
   setOpenAddClinicAdmin,
   getClinicAdmins,
 }) {
   const [checked, setChecked] = useState(false);
   const [clinicAdmin, setClinicAdmin] = useState({});
-  const [userData, setUserData] = useState({ staff: '4' });
+  const [userData, setUserData] = useState({});
   const [selectedGender, setSelectedGender] = useState('');
   const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
   const [exisitingButInactive, setExisitingButInactive] = useState(false);
   const [added, setAdded] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
+
+  useEffect(() => {
+    setUserData({ staff: clinicAdminId });
+  }, [clinicAdminId, userData]);
 
   // close popup
   const handleClose = () => {
@@ -75,6 +80,7 @@ export default function AddClinicAdmin({
   };
 
   // uploading img
+
   const handleSelectedFile = (e) => {
     const myFile = e.target.files[0];
     const size = 1024 * 1024 * 10;
@@ -82,9 +88,9 @@ export default function AddClinicAdmin({
       return toast.error('File size can not exceed 10 Mb');
     }
     if (myFile) {
-      document.getElementById('selectedImg').src = URL.createObjectURL(myFile);
+      document.getElementById('clinicAdmin_AddProfile_Pic_selected').src =
+        URL.createObjectURL(myFile);
     }
-
     setClinicAdmin({ ...clinicAdmin, profile_pic: myFile });
   };
 
@@ -118,6 +124,7 @@ export default function AddClinicAdmin({
       const formData = new FormData();
 
       setClinicAdmin({ ...clinicAdmin, gender: selectedGender });
+
       // append properties from ClinicAdmin in formdata
       Object.keys(clinicAdmin).forEach((key) => {
         formData.append(key, clinicAdmin[key]);
@@ -146,7 +153,7 @@ export default function AddClinicAdmin({
         setClinicAdmin('');
         setSelectedGender('');
         setChecked('');
-        setUserData('');
+        setUserData({ staff: clinicAdminId });
       }
     } catch (error) {
       console.log('error');
@@ -184,18 +191,20 @@ export default function AddClinicAdmin({
             <p className="addPopupSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             <div>
               <div className="imgDivPopup">
-                <label htmlFor="profilePic">
+                <label htmlFor="clinicAdmin_AddProfile_Pic">
                   <input
                     name="profile_pic"
                     type="file"
-                    id="profilePic"
+                    id="clinicAdmin_AddProfile_Pic"
                     accept=".png, .jpg, .jpeg"
                     onChange={handleSelectedFile}
+                    className="noDisplay"
                   />
+
                   <img
                     src={profiles}
                     className="pointer"
-                    id="selectedImg"
+                    id="clinicAdmin_AddProfile_Pic_selected"
                     style={{
                       width: '100%',
                       borderRadius: '100px',
