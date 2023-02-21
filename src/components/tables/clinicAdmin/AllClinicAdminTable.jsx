@@ -2,7 +2,7 @@ import { React, useState, useEffect, useRef } from 'react';
 
 // mui imports
 import { styled } from '@mui/material/styles';
-import { Table, Button } from '@mui/material';
+import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import Radio from '@mui/material/Radio';
+import TablePagination from '@mui/material/TablePagination';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 // navigation
@@ -24,6 +25,7 @@ import { ReactComponent as Cross } from '../../../assets/icons/crossIcon.svg';
 import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin';
 import AvatarComponent from '../../Avatar';
 import IconTextField from '../../../utils/CustomTextInput';
+import { getMediaUrl } from '../../../config';
 import useStyles from '../../../utils/RadioBtnStyle';
 
 const StyledTableRow = styled(TableRow)(() => ({
@@ -36,28 +38,26 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function AllClinicAdminTable({
-  setOpenAddClinicAdmin,
-  clinicAdmins,
-  getClinicAdmins,
-}) {
+export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
   const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
   const [clinicAdmin, setClinicAdmin] = useState({});
+  const [page, setPage] = useState(0);
   const [openFilter, setOpenFilter] = useState(false);
   const navigate = useNavigate();
   const [filter, setFilter] = useState('');
   const click = useRef(null);
   const filterRef = useRef(null);
   const classes = useStyles();
-  const isSafari =
-    navigator.vendor.match(/apple/i) &&
-    !navigator.userAgent.match(/crios/i) &&
-    !navigator.userAgent.match(/fxios/i) &&
-    !navigator.userAgent.match(/Opera|OPT\//);
+
+  const handleChangePage = async (event, newPage) => {
+    await getClinicAdmins(newPage + 1);
+    setPage(newPage);
+  };
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
+
   useEffect(() => {
     const handleCloseFilter = (e) => {
       if (
@@ -83,17 +83,18 @@ export default function AllClinicAdminTable({
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '100%',
+          maxHeight: '95%',
           overflowX: 'hidden',
           width: '94vw',
         }}
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">
-            List of Clinic Admins <span className="countStyle">120</span>
+            List of Clinic Admins <span className="countStyle">{clinicAdmins?.total?.count}</span>
           </h1>
 
-          <div className="allTableTitle" style={{ flexGrow: !isSafari ? '0.15' : 'none' }}>
+          <div className="allTableTitle" style={{ flexGrow: '0.15' }}>
+            {/* <FormControl sx={{ mb: 1, mt: 3, width: '48.5%', mr: 2 }} variant="outlined"> */}
             <IconTextField />
             {filter && (
               <div className="selectedFilter">
@@ -158,12 +159,6 @@ export default function AllClinicAdminTable({
                 </RadioGroup>
               </div>
             )}
-            <Button
-              className="dashboard_table_head_btn"
-              onClick={() => setOpenAddClinicAdmin(true)}
-            >
-              Invite clinic admin
-            </Button>
           </div>
         </div>
         <Table
@@ -193,23 +188,39 @@ export default function AllClinicAdminTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {clinicAdmins.length > 0 ? (
-              clinicAdmins.map((row) => (
-                <StyledTableRow key={row.first_name} className="tableRow">
+            {clinicAdmins?.users?.length > 0 ? (
+              clinicAdmins?.users?.map((row) => (
+                <StyledTableRow key={row.id} className="tableRow">
                   <TableCell />
                   <TableCell
                     align="left"
                     sx={{ display: 'flex', paddingTop: '12%' }}
                     onClick={() => navigate(`/clinician/${row._id}`)}
                   >
-                    <AvatarComponent
-                      alt={`${row.first_name} ${row.last_name}`}
-                      className="header_avatar"
-                    />
+                    {row.profile_pic ? (
+                      <div className="imgDiv">
+                        <img
+                          src={getMediaUrl(row.profile_pic)}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '100px',
+                            objectFit: 'cover',
+                          }}
+                          alt=""
+                        />
+                      </div>
+                    ) : (
+                      <AvatarComponent
+                        alt={`${row.first_name} ${row.last_name}`}
+                        className="header_avatar"
+                      />
+                    )}
+
                     <div className="clinic_cell">
                       {`${row.first_name} ${row.last_name}`} <br />
                       <span className="clinicNametxt">
-                        Clinic: <span className="clinicNameSubtxt">{row.clinic_name}</span>
+                        Clinic: <span className="clinicNameSubtxt">{row.userData.clinic_name}</span>
                       </span>
                     </div>
                   </TableCell>
@@ -219,7 +230,7 @@ export default function AllClinicAdminTable({
                     className="table_cells"
                     onClick={() => navigate(`/clinician/${row._id}`)}
                   >
-                    {row.therapist_count}
+                    {row.clinician.count}
                   </TableCell>
                   <TableCell
                     align="center"
@@ -229,7 +240,7 @@ export default function AllClinicAdminTable({
                     }}
                     onClick={() => navigate(`/clinician/${row._id}`)}
                   >
-                    {row.patient_count}
+                    {row.patient.count}
                   </TableCell>
 
                   <TableCell align="center">
@@ -260,6 +271,14 @@ export default function AllClinicAdminTable({
           clinicAdminDetails={clinicAdmin}
         />
       </TableContainer>
+      <TablePagination
+        component="div"
+        rowsPerPageOptions={[]}
+        count={clinicAdmins?.total?.count}
+        rowsPerPage={clinicAdmins.limit || 10}
+        page={page}
+        onPageChange={handleChangePage}
+      />
     </div>
   );
 }

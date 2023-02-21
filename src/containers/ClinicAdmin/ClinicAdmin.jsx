@@ -21,16 +21,9 @@ export default function ClinicAdmin() {
   const { id } = useParams();
 
   const getClinicAdmins = async () => {
-    if (window.location.pathname.includes('staff')) {
-      const { data } = await api('get', `/admins/clinics/all/`);
-      if (data) {
-        setClinicAdmins(data.users);
-      }
-    } else {
-      const { data } = await api('get', `/admins/clinics/all/${id}`);
-      if (data) {
-        setClinicAdmins(data.users);
-      }
+    const { data } = await api('get', `/admins/clinics/all/${id}`);
+    if (data) {
+      setClinicAdmins(data.users);
     }
   };
 

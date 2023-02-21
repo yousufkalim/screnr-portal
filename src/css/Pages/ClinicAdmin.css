@@ -81,8 +81,8 @@
   width: 24%;
   padding: 40px;
   border-radius: 20px;
-  top: 23%;
-  right: 15%;
+  top: 29%;
+  right: 3%;
   font-weight: 500;
   font-size: 14px;
   color: #454238;
@@ -160,6 +160,6 @@
   }
   .filterPoper {
     top: 25%;
-    right: 18%;
+    right: 3%;
   }
 }
