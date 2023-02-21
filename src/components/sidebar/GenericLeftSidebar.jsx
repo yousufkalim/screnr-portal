@@ -1,6 +1,9 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+
+// moment
+import moment from 'moment';
 
 // images import
 import { ReactComponent as Phone } from '../../assets/images/staffScreen/phone.svg';
@@ -9,41 +12,98 @@ import { ReactComponent as Expiry } from '../../assets/images/staffScreen/expiry
 import { ReactComponent as Activity } from '../../assets/components/TimeCard/activity.svg';
 import edit from '../../assets/icons/sidebarEdit.svg';
 
+// child imports
 import AvatarComponent from '../Avatar';
+import api from '../../api/index';
+import { getMediaUrl } from '../../config';
+import PhoneFormat from '../../utils/PhoneFormat';
 
-export default function LeftSidebar() {
+export default function LeftSidebar({ id, txt }) {
   const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
+  const [info, setInfo] = useState({});
+
+  const getData = async () => {
+    const { data } = await api('get', `/${txt}/${id}`);
+    if (data) {
+      setInfo(data?.user);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="left_side">
       <div className="mainAvatarDiv">
-        <AvatarComponent alt="Rana Hamza" className="sidebar_avatar" />
+        <div>
+          <div className="imgDivSide">
+            {/* Avatar to be used */}
+            <label htmlFor="profilePic">
+              <input
+                name="profile_pic"
+                type="file"
+                id="profilePic"
+                accept=".png, .jpg, .jpeg"
+                // onChange={handleSelectedFile}
+              />
+
+              {info.profile_pic ? (
+                <img
+                  src={getMediaUrl(info.profile_pic)}
+                  className="pointer"
+                  id="selectedImg"
+                  style={{
+                    width: '100%',
+                    borderRadius: '100px',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                  alt=""
+                />
+              ) : (
+                <AvatarComponent
+                  alt={`${info?.first_name} ${info?.last_name}`}
+                  className="sidebar_avatar"
+                />
+              )}
+            </label>
+          </div>
+        </div>
+
         <img src={edit} alt="" className="editIconSidebar" />
       </div>
       <div className="sideBarInfo">
-        <div className="user_name">Rana Hamza</div>
+        <div className="user_name"> {`${info?.first_name} ${info?.last_name}`}</div>
         <div className="staff_id">
-          Staff ID: <span className="staff_id_2">12345</span>
+          Staff ID: <span className="staff_id_2"> {info?.id}</span>
         </div>
       </div>
       <div className="sidebarSubDiv">
         <div className="user_detail">
           <Phone className="spaceOnRight" />
-          +123456734
+          {PhoneFormat(info?.phone_number)}
         </div>
         <div className="user_detail">
           <Email className="spaceOnRight" />
-          Screner@gmail.com
+          {info?.email}
         </div>
       </div>
-      <div className="user_exp_detail">
-        <span className="detail_expiry">
-          <Expiry className="spaceOnRight" />
+      {info?.expiry_date ? (
+        <div className="user_exp_detail">
+          <span className="detail_expiry">
+            <Expiry className="spaceOnRight" />
 
-          <p className="spaceRight">Expiry Date</p>
-        </span>
-        <p> 12-05-2023</p>
-      </div>
+            <p className="spaceRight">Expiry Date</p>
+          </span>
+
+          <p> {moment(info.expiry_date).format('MM-DD-YYYY')}</p>
+        </div>
+      ) : (
+        ''
+      )}
       <br />
       {window.location.pathname.includes('clinician') ? (
         <>
