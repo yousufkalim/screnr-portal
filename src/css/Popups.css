@@ -240,6 +240,10 @@
   margin-bottom: 40px;
 }
 
+.noDisplay {
+  display: none;
+}
+
 .rangePopupTxt {
   font-size: 22px;
   font-weight: 600;
