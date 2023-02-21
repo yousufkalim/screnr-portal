@@ -14,7 +14,7 @@ import TablePagination from '@mui/material/TablePagination';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 // navigation
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
@@ -43,7 +43,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
   const [clinicAdmin, setClinicAdmin] = useState({});
   const [page, setPage] = useState(0);
   const [openFilter, setOpenFilter] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [filter, setFilter] = useState('');
   const click = useRef(null);
   const filterRef = useRef(null);
@@ -94,7 +94,6 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
           </h1>
 
           <div className="allTableTitle" style={{ flexGrow: '0.15' }}>
-            {/* <FormControl sx={{ mb: 1, mt: 3, width: '48.5%', mr: 2 }} variant="outlined"> */}
             <IconTextField />
             {filter && (
               <div className="selectedFilter">
@@ -192,13 +191,9 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
               clinicAdmins?.users?.map((row) => (
                 <StyledTableRow key={row.id} className="tableRow">
                   <TableCell />
-                  <TableCell
-                    align="left"
-                    sx={{ display: 'flex', paddingTop: '12%' }}
-                    onClick={() => navigate(`/clinician/${row._id}`)}
-                  >
+                  <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
                     {row.profile_pic ? (
-                      <div className="imgDiv">
+                      <div className="imgDivClinic">
                         <img
                           src={getMediaUrl(row.profile_pic)}
                           style={{
@@ -225,11 +220,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
                     </div>
                   </TableCell>
 
-                  <TableCell
-                    align="center"
-                    className="table_cells"
-                    onClick={() => navigate(`/clinician/${row._id}`)}
-                  >
+                  <TableCell align="center" className="table_cells">
                     {row.clinician.count}
                   </TableCell>
                   <TableCell
@@ -238,7 +229,6 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
                     sx={{
                       padding: '3%',
                     }}
-                    onClick={() => navigate(`/clinician/${row._id}`)}
                   >
                     {row.patient.count}
                   </TableCell>

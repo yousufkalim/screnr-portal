@@ -17,13 +17,13 @@ import api from '../../api';
 
 export default function ClinicAdmin() {
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
-  const [clinicAdmins, setClinicAdmins] = useState([]);
+  const [clinicAdmins, setClinicAdmins] = useState({});
   const { id } = useParams();
 
-  const getClinicAdmins = async () => {
-    const { data } = await api('get', `/admins/clinics/all/${id}`);
+  const getClinicAdmins = async (page = 1) => {
+    const { data } = await api('get', `/admins/clinics/getClinicsByStaffId/${id}?page=${page}`);
     if (data) {
-      setClinicAdmins(data.users);
+      setClinicAdmins(data);
     }
   };
 
@@ -35,12 +35,16 @@ export default function ClinicAdmin() {
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>
-        <Sidebar />
+        <Sidebar id={id} txt="admins/staff" />
       </Grid>
 
       <Grid className="bg" xl={10} lg={9.5}>
         <div className="breadCrumb">Dashboard &gt; Staff &gt;</div>
-        <ClinicAdminTable clinicAdmins={clinicAdmins} getClinicAdmins={getClinicAdmins} />
+        <ClinicAdminTable
+          clinicAdminId={id}
+          clinicAdmins={clinicAdmins}
+          getClinicAdmins={getClinicAdmins}
+        />
       </Grid>
       <div className="addBtn">
         <img
@@ -55,6 +59,7 @@ export default function ClinicAdmin() {
         openAddClinicAdmin={openAddClinicAdmin}
         setOpenAddClinicAdmin={setOpenAddClinicAdmin}
         getClinicAdmins={getClinicAdmins}
+        clinicAdminId={id}
       />
     </Grid>
   );
