@@ -108,6 +108,10 @@ export default function EditStaffMember({
 
   const handleSelectedFile = async (e) => {
     const myFile = e.target.files[0];
+    const size = 1024 * 1024 * 10;
+    if (myFile.size > size) {
+      return toast.error('File size can not exceed 10 Mb');
+    }
     setStaffMember({ ...staffMember, profile_pic: myFile });
   };
 
