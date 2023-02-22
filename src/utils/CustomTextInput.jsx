@@ -2,7 +2,7 @@ import { TextField } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import { ReactComponent as Search } from '../assets/icons/searchIcon.svg';
 
-function IconTextField() {
+function IconTextField({ value, handleChange }) {
   return (
     <TextField
       sx={{
@@ -19,6 +19,8 @@ function IconTextField() {
         },
       }}
       placeholder="Search"
+      value={value}
+      onChange={handleChange}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
