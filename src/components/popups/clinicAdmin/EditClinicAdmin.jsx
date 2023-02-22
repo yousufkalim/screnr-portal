@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import Button from '@mui/material/Button';
@@ -12,6 +12,12 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
 
+// phone format
+import PhoneInput from 'react-phone-input-2';
+
+// moment
+import moment from 'moment';
+
 // react-toastify import
 import { toast } from 'react-toastify';
 
@@ -24,6 +30,7 @@ import edit from '../../../assets/icons/edit.svg';
 
 // child import
 import AvatarComponent from '../../Avatar';
+import { getMediaUrl } from '../../../config';
 import api from '../../../api';
 import useOutlinedInputStyles from '../../../utils/EditFormInput';
 
@@ -45,21 +52,69 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function EditClinicAdmin({
+  table,
   openEditClinicAdmin,
   setOpenEditClinicAdmin,
   getClinicAdmins,
+  clinicAdminDetails,
 }) {
-  const [checked, setChecked] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
+  const [checked, setChecked] = useState(false);
   const [selectedGender, setSelectedGender] = useState('');
+  const [userData, setUserData] = useState({});
+  const [clinicAdmin, setClinicAdmin] = useState({});
 
-  const [clinicAdmin, setClinicAdmin] = useState({
-    role: 'clinicadmin',
-    first_name: 'a',
-    last_name: 'b',
-    password: '12345678',
-    confirmPassword: '12345678',
-  });
+  const dateChange = (e) => {
+    setClinicAdmin({
+      ...clinicAdmin,
+      expiry_date: e,
+    });
+  };
+
+  useEffect(() => {
+    if (!clinicAdminDetails.expiry_date) {
+      setClinicAdmin({
+        id: clinicAdminDetails.id,
+        first_name: clinicAdminDetails.first_name,
+        last_name: clinicAdminDetails.last_name,
+        email: clinicAdminDetails.email,
+        profile_pic: clinicAdminDetails.profile_pic,
+        phone_number: clinicAdminDetails.phone_number,
+        gender: clinicAdminDetails.gender,
+      });
+      setUserData({
+        clinic_name: clinicAdminDetails?.userData?.clinic_name,
+        address: clinicAdminDetails?.userData?.address,
+        staff:
+          table === 'allClinicAdminsTable'
+            ? clinicAdminDetails?.userData?.staff.id
+            : clinicAdminDetails?.userData?.staff,
+      });
+      setSelectedGender(clinicAdminDetails.gender);
+    } else {
+      setClinicAdmin({
+        id: clinicAdminDetails.id,
+        first_name: clinicAdminDetails.first_name,
+        last_name: clinicAdminDetails.last_name,
+        email: clinicAdminDetails.email,
+        profile_pic: clinicAdminDetails.profile_pic,
+        gender: clinicAdminDetails.gender,
+        phone_number: clinicAdminDetails.phone_number,
+        // eslint-disable-next-line no-underscore-dangle
+        expiry_date: moment(clinicAdminDetails.expiry_date)._d,
+      });
+      setUserData({
+        clinic_name: clinicAdminDetails?.userData?.clinic_name,
+        address: clinicAdminDetails?.userData?.address,
+        staff:
+          table === 'allClinicAdminsTable'
+            ? clinicAdminDetails?.userData?.staff.id
+            : clinicAdminDetails?.userData?.staff,
+      });
+      setSelectedGender(clinicAdminDetails.gender);
+      setChecked(true);
+    }
+  }, [clinicAdminDetails, table]);
 
   const handleClose = () => {
     setOpenEditClinicAdmin(false);
@@ -67,24 +122,54 @@ export default function EditClinicAdmin({
 
   const handleSelectedFile = (e) => {
     const myFile = e.target.files[0];
-    const [file] = document.getElementById('profilePic').files;
+    const size = 1024 * 1024 * 10;
 
-    if (file) {
-      document.getElementById('selectedImg').src = URL.createObjectURL(file);
+    if (myFile.size > size) {
+      return toast.error('File size can not exceed 10 Mb');
     }
-    setClinicAdmin({ ...clinicAdmin, image: myFile });
+    setClinicAdmin({ ...clinicAdmin, profile_pic: myFile });
   };
 
   const handleChange = (e) => {
     setClinicAdmin({ ...clinicAdmin, [e.target.name]: e.target.value });
   };
 
+  const handleUserDataChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
+
     setClinicAdmin({ ...clinicAdmin, gender: selectedGender });
-    Object.keys(clinicAdmin).map((key) => formData.append(key, clinicAdmin[key]));
-    const { data } = await api('post', '/admins/clinics', formData);
+    const clinicAdminCopy = { ...clinicAdmin };
+    // Create a new FormData object
+    const formData = new FormData();
+
+    if (typeof clinicAdminCopy.profile_pic !== 'object') {
+      delete clinicAdminCopy.profile_pic;
+    }
+
+    // append properties from clinicAdminCopy in formdata
+    Object.keys(clinicAdminCopy).forEach((key) => {
+      formData.append(key, clinicAdminCopy[key]);
+    });
+
+    // append properties from userData in formdata
+    Object.keys(userData).forEach((key) => {
+      formData.append(`userData[${key}]`, userData[key]);
+    });
+
+    if (clinicAdminCopy.phone_number) {
+      if (clinicAdminCopy.phone_number.length < 10)
+        return toast.error('Phone number must be contain 10 digits');
+    }
+    if (checked && !clinicAdminCopy.expiry_date) {
+      return toast.error('Please enter expiry date');
+    }
+
+    // sending this data to api
+    const { data } = await api('put', `/admins/clinics/${clinicAdminDetails.id}`, formData);
     if (data) {
       toast.success('Clinic Admin added successfully');
       getClinicAdmins();
@@ -117,19 +202,22 @@ export default function EditClinicAdmin({
             <p className="addPopupSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             <div>
               <div className="imgDivPopup">
-                <label htmlFor="profilePic">
+                {/* Avatar to be used */}
+                <label htmlFor="edit_profilePic">
                   <input
                     name="profile_pic"
                     type="file"
-                    id="profilePic"
-                    accept="image/*"
+                    id="edit_profilePic"
+                    accept=".png, .jpg, .jpeg"
                     onChange={handleSelectedFile}
+                    className="noDisplay"
                   />
-                  {clinicAdmin.photo ? (
+
+                  {clinicAdmin.profile_pic ? (
                     <img
-                      src={clinicAdmin.photo}
+                      src={getMediaUrl(clinicAdmin.profile_pic)}
                       className="pointer"
-                      id="selectedImg"
+                      id="edit_selectedImg"
                       style={{
                         width: '100%',
                         borderRadius: '100px',
@@ -164,8 +252,11 @@ export default function EditClinicAdmin({
                 placeholder="Clinic Name"
                 size="normal"
                 name="clinic_name"
-                value={clinicAdmin.clinic_name}
-                onChange={handleChange}
+                value={userData.clinic_name}
+                onChange={handleUserDataChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 2 }} variant="outlined">
@@ -181,15 +272,17 @@ export default function EditClinicAdmin({
                 }}
                 id="outlined-fname"
                 classes={outlinedInputStyles}
-                placeholder="Manager Name"
+                placeholder="First Name"
                 size="normal"
-                name="manager_name"
-                value={clinicAdmin.manager_name}
+                name="first_name"
+                value={clinicAdmin.first_name}
                 onChange={handleChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
-
-            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%' }} variant="outlined">
+            <FormControl sx={{ mb: 2, mt: 2.7, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -200,17 +293,17 @@ export default function EditClinicAdmin({
                     ml: 1,
                   },
                 }}
-                id="outlined-phone"
+                id="outlined-last-name"
                 classes={outlinedInputStyles}
-                placeholder="Phone Number"
+                placeholder="Last name"
                 size="normal"
                 type="text"
-                inputProps={{
-                  maxLength: 10,
-                }}
-                name="phone"
-                value={clinicAdmin.phone}
+                name="last_name"
+                value={clinicAdmin.last_name}
                 onChange={handleChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
 
@@ -237,6 +330,21 @@ export default function EditClinicAdmin({
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
+              <div className="edit-phone-input">
+                <PhoneInput
+                  country="us"
+                  onlyCountries={['us']}
+                  value={clinicAdmin.phone_number}
+                  onChange={(value) => {
+                    setClinicAdmin({ ...clinicAdmin, phone_number: value });
+                  }}
+                  disableDropdown
+                  countryCodeEditable={false}
+                  disableCountryGuess
+                />
+              </div>
+            </FormControl>
+            <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -252,8 +360,11 @@ export default function EditClinicAdmin({
                 placeholder="Address"
                 size="normal"
                 name="address"
-                value={clinicAdmin.address}
-                onChange={handleChange}
+                value={userData.address}
+                onChange={handleUserDataChange}
+                inputProps={{
+                  maxLength: 50,
+                }}
               />
             </FormControl>
 
@@ -329,9 +440,11 @@ export default function EditClinicAdmin({
               <div className="date-div2" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
-                  dateFormat="dd/MMMM/yyyy"
-                  name="date"
+                  dateFormat="MM-dd-yyyy"
+                  name="expiry_date"
+                  onChange={dateChange}
                   disabled={!checked}
+                  selected={clinicAdmin?.expiry_date}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
