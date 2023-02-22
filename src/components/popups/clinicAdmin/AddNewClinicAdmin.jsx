@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 
 // mui imports
 import Button from '@mui/material/Button';
@@ -59,24 +59,18 @@ export default function AddClinicAdmin({
 }) {
   const [checked, setChecked] = useState(false);
   const [clinicAdmin, setClinicAdmin] = useState({});
-  const [userData, setUserData] = useState({});
-  const [selectedGender, setSelectedGender] = useState('');
+  const [userData, setUserData] = useState({ staff: clinicAdminId });
   const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
   const [exisitingButInactive, setExisitingButInactive] = useState(false);
   const [added, setAdded] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
 
-  useEffect(() => {
-    setUserData({ staff: clinicAdminId });
-  }, [clinicAdminId, userData]);
-
   // close popup
   const handleClose = () => {
     setOpenAddClinicAdmin(false);
-    setClinicAdmin('');
-    setSelectedGender('');
-    setChecked('');
-    setUserData('');
+    setClinicAdmin({});
+    setChecked(false);
+    setUserData({});
   };
 
   // uploading img
@@ -111,7 +105,6 @@ export default function AddClinicAdmin({
 
   // handle gender selection
   const handleGenderSelection = (name) => {
-    setSelectedGender(name);
     setClinicAdmin({ ...clinicAdmin, gender: name });
   };
 
@@ -123,8 +116,10 @@ export default function AddClinicAdmin({
       // Create a new FormData object
       const formData = new FormData();
 
-      setClinicAdmin({ ...clinicAdmin, gender: selectedGender });
-
+      if (clinicAdmin.expiry_date && !checked) {
+        delete clinicAdmin.expiry_date;
+        setClinicAdmin({ ...clinicAdmin });
+      }
       // append properties from ClinicAdmin in formdata
       Object.keys(clinicAdmin).forEach((key) => {
         formData.append(key, clinicAdmin[key]);
@@ -135,9 +130,8 @@ export default function AddClinicAdmin({
         formData.append(`userData[${key}]`, userData[key]);
       });
 
-      if (clinicAdmin.phone_number) {
-        if (clinicAdmin.phone_number.length < 10)
-          return toast.error('Phone number must be contain 10 digits');
+      if (clinicAdmin.phone_number && clinicAdmin.phone_number.length < 11) {
+        return toast.error('Phone number must be contain 10 digits');
       }
       if (checked && !clinicAdmin.expiry_date) {
         return toast.error('Please enter expiry date');
@@ -150,9 +144,8 @@ export default function AddClinicAdmin({
         getClinicAdmins();
         setAdded(true);
         handleClose();
-        setClinicAdmin('');
-        setSelectedGender('');
-        setChecked('');
+        setClinicAdmin({});
+        setChecked(false);
         setUserData({ staff: clinicAdminId });
       }
     } catch (error) {
@@ -375,7 +368,7 @@ export default function AddClinicAdmin({
               <p className="genderTxt"> Gender</p>
               <span>
                 <Button
-                  className={selectedGender === 'male' ? 'selectGender' : 'genderBtn'}
+                  className={clinicAdmin.gender === 'male' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
                   onClick={() => {
                     handleGenderSelection('male');
@@ -384,7 +377,7 @@ export default function AddClinicAdmin({
                   Male
                 </Button>
                 <Button
-                  className={selectedGender === 'female' ? 'selectGender' : 'genderBtn'}
+                  className={clinicAdmin.gender === 'female' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
                   onClick={() => {
                     handleGenderSelection('female');
@@ -393,7 +386,7 @@ export default function AddClinicAdmin({
                   Female
                 </Button>
                 <Button
-                  className={selectedGender === 'non-binary' ? 'selectGender' : 'genderBtn'}
+                  className={clinicAdmin.gender === 'non-binary' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
                   onClick={() => {
                     handleGenderSelection('non-binary');

@@ -56,33 +56,25 @@ export default function EditStaffMember({
   staffMemberDetails,
 }) {
   const [checked, setChecked] = useState(false);
-  const [staffMember, setStaffMember] = useState({
-    role: 'staff',
-  });
+  const [staffMember, setStaffMember] = useState({});
 
   useEffect(() => {
-    if (!staffMemberDetails.expiry_date) {
-      setStaffMember({
-        id: staffMemberDetails.id,
-        first_name: staffMemberDetails.first_name,
-        last_name: staffMemberDetails.last_name,
-        email: staffMemberDetails.email,
-        profile_pic: staffMemberDetails.profile_pic,
-        phone_number: staffMemberDetails.phone_number,
-      });
-    } else {
-      setStaffMember({
-        id: staffMemberDetails.id,
-        first_name: staffMemberDetails.first_name,
-        last_name: staffMemberDetails.last_name,
-        email: staffMemberDetails.email,
-        profile_pic: staffMemberDetails.profile_pic,
-        phone_number: staffMemberDetails.phone_number,
-        // eslint-disable-next-line no-underscore-dangle
-        expiry_date: moment(staffMemberDetails.expiry_date)._d,
-      });
+    const tempStaffMember = {
+      id: staffMemberDetails.id,
+      first_name: staffMemberDetails.first_name,
+      last_name: staffMemberDetails.last_name,
+      email: staffMemberDetails.email,
+      profile_pic: staffMemberDetails.profile_pic,
+      phone_number: staffMemberDetails.phone_number,
+    };
+
+    if (staffMemberDetails.expiry_date) {
+      // eslint-disable-next-line no-underscore-dangle
+      tempStaffMember.expiry_date = moment(staffMemberDetails.expiry_date)._d;
       setChecked(true);
     }
+
+    setStaffMember(tempStaffMember);
   }, [staffMemberDetails]);
 
   const outlinedInputStyles = useOutlinedInputStyles();
@@ -129,9 +121,8 @@ export default function EditStaffMember({
     }
 
     Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
-    if (staffMemberCopy.phone_number) {
-      if (staffMemberCopy.phone_number.length < 10)
-        return toast.error('Phone number must be contain 10 digits');
+    if (staffMemberCopy.phone_number && staffMemberCopy.phone_number.length < 11) {
+      return toast.error('Phone number must be contain 10 digits');
     }
 
     if (checked && !staffMemberCopy.expiry_date) {

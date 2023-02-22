@@ -61,15 +61,13 @@ export default function AddStaffMember({
   const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
   const [exisitingButInactive, setExisitingButInactive] = useState(false);
   const [added, setAdded] = useState(false);
-  const [staffMember, setStaffMember] = useState({
-    role: 'staff',
-  });
+  const [staffMember, setStaffMember] = useState({});
 
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
     setOpenAddStaffMember(false);
-    setStaffMember({ role: 'staff' });
+    setStaffMember({});
   };
 
   const handleChange = (e) => {
@@ -109,9 +107,8 @@ export default function AddStaffMember({
 
       Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
 
-      if (staffMemberCopy.phone_number) {
-        if (staffMemberCopy.phone_number.length < 10)
-          return toast.error('Phone number must be contain 10 digits');
+      if (staffMemberCopy.phone_number && staffMemberCopy.phone_number.length < 11) {
+        return toast.error('Phone number must be contain 10 digits');
       }
       if (checked && !staffMemberCopy.expiry_date) {
         return toast.error('Please enter expiry date');
@@ -121,7 +118,7 @@ export default function AddStaffMember({
 
       if (data) {
         getStaffMembers();
-        setStaffMember({ role: 'staff' });
+        setStaffMember({});
         setAdded(true);
         handleClose();
       }

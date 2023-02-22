@@ -60,7 +60,7 @@ export default function EditClinicAdmin({
 }) {
   const outlinedInputStyles = useOutlinedInputStyles();
   const [checked, setChecked] = useState(false);
-  const [selectedGender, setSelectedGender] = useState('');
+
   const [userData, setUserData] = useState({});
   const [clinicAdmin, setClinicAdmin] = useState({});
 
@@ -71,49 +71,37 @@ export default function EditClinicAdmin({
     });
   };
 
+  // handle gender selection
+  const handleGenderSelection = (name) => {
+    setClinicAdmin({ ...clinicAdmin, gender: name });
+  };
+
   useEffect(() => {
-    if (!clinicAdminDetails.expiry_date) {
-      setClinicAdmin({
-        id: clinicAdminDetails.id,
-        first_name: clinicAdminDetails.first_name,
-        last_name: clinicAdminDetails.last_name,
-        email: clinicAdminDetails.email,
-        profile_pic: clinicAdminDetails.profile_pic,
-        phone_number: clinicAdminDetails.phone_number,
-        gender: clinicAdminDetails.gender,
-      });
-      setUserData({
-        clinic_name: clinicAdminDetails?.userData?.clinic_name,
-        address: clinicAdminDetails?.userData?.address,
-        staff:
-          table === 'allClinicAdminsTable'
-            ? clinicAdminDetails?.userData?.staff.id
-            : clinicAdminDetails?.userData?.staff,
-      });
-      setSelectedGender(clinicAdminDetails.gender);
-    } else {
-      setClinicAdmin({
-        id: clinicAdminDetails.id,
-        first_name: clinicAdminDetails.first_name,
-        last_name: clinicAdminDetails.last_name,
-        email: clinicAdminDetails.email,
-        profile_pic: clinicAdminDetails.profile_pic,
-        gender: clinicAdminDetails.gender,
-        phone_number: clinicAdminDetails.phone_number,
-        // eslint-disable-next-line no-underscore-dangle
-        expiry_date: moment(clinicAdminDetails.expiry_date)._d,
-      });
-      setUserData({
-        clinic_name: clinicAdminDetails?.userData?.clinic_name,
-        address: clinicAdminDetails?.userData?.address,
-        staff:
-          table === 'allClinicAdminsTable'
-            ? clinicAdminDetails?.userData?.staff.id
-            : clinicAdminDetails?.userData?.staff,
-      });
-      setSelectedGender(clinicAdminDetails.gender);
+    const clinicAdminTemp = {
+      id: clinicAdminDetails.id,
+      first_name: clinicAdminDetails.first_name,
+      last_name: clinicAdminDetails.last_name,
+      email: clinicAdminDetails.email,
+      profile_pic: clinicAdminDetails.profile_pic,
+      phone_number: clinicAdminDetails.phone_number,
+      gender: clinicAdminDetails.gender,
+    };
+
+    if (clinicAdminDetails.expiry_date) {
+      // eslint-disable-next-line no-underscore-dangle
+      clinicAdminTemp.expiry_date = moment(clinicAdminDetails.expiry_date)._d;
       setChecked(true);
     }
+
+    setClinicAdmin(clinicAdminTemp);
+    setUserData({
+      clinic_name: clinicAdminDetails?.userData?.clinic_name,
+      address: clinicAdminDetails?.userData?.address,
+      staff:
+        table === 'allClinicAdminsTable'
+          ? clinicAdminDetails?.userData?.staff.id
+          : clinicAdminDetails?.userData?.staff,
+    });
   }, [clinicAdminDetails, table]);
 
   const handleClose = () => {
@@ -141,10 +129,14 @@ export default function EditClinicAdmin({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setClinicAdmin({ ...clinicAdmin, gender: selectedGender });
     const clinicAdminCopy = { ...clinicAdmin };
     // Create a new FormData object
     const formData = new FormData();
+
+    if (clinicAdminCopy.expiry_date && !checked) {
+      clinicAdminCopy.expiry_date = '';
+      setClinicAdmin({ ...clinicAdminCopy });
+    }
 
     if (typeof clinicAdminCopy.profile_pic !== 'object') {
       delete clinicAdminCopy.profile_pic;
@@ -160,9 +152,8 @@ export default function EditClinicAdmin({
       formData.append(`userData[${key}]`, userData[key]);
     });
 
-    if (clinicAdminCopy.phone_number) {
-      if (clinicAdminCopy.phone_number.length < 10)
-        return toast.error('Phone number must be contain 10 digits');
+    if (clinicAdminCopy.phone_number && clinicAdminCopy.phone_number.length < 11) {
+      return toast.error('Phone number must be contain 10 digits');
     }
     if (checked && !clinicAdminCopy.expiry_date) {
       return toast.error('Please enter expiry date');
@@ -372,28 +363,28 @@ export default function EditClinicAdmin({
               <p className="genderTxt"> Gender</p>
               <span>
                 <Button
-                  className={selectedGender === 'male' ? 'selectGender' : 'genderBtn'}
+                  className={clinicAdmin.gender === 'male' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
                   onClick={() => {
-                    setSelectedGender('male');
+                    handleGenderSelection('male');
                   }}
                 >
                   Male
                 </Button>
                 <Button
-                  className={selectedGender === 'female' ? 'selectGender' : 'genderBtn'}
+                  className={clinicAdmin.gender === 'female' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
                   onClick={() => {
-                    setSelectedGender('female');
+                    handleGenderSelection('female');
                   }}
                 >
                   Female
                 </Button>
                 <Button
-                  className={selectedGender === 'other' ? 'selectGender' : 'genderBtn'}
+                  className={clinicAdmin.gender === 'other' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
                   onClick={() => {
-                    setSelectedGender('other');
+                    handleGenderSelection('other');
                   }}
                 >
                   Non-binary
