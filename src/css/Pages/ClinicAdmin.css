@@ -40,7 +40,8 @@
 .countStyle {
   color: #919b9bb4;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
+  margin-left: 5px;
 }
 
 .innerSubFilters {

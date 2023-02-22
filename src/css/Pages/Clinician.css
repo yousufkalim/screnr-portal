@@ -32,6 +32,7 @@
   color: #454238 !important ;
   margin-left: 8px;
   align-self: center;
+  min-width: max-content;
 }
 
 #clinicianTable {
