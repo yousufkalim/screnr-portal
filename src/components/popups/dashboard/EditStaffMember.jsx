@@ -60,7 +60,6 @@ export default function EditStaffMember({
 
   useEffect(() => {
     const tempStaffMember = {
-      id: staffMemberDetails.id,
       first_name: staffMemberDetails.first_name,
       last_name: staffMemberDetails.last_name,
       email: staffMemberDetails.email,

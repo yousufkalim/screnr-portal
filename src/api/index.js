@@ -19,9 +19,9 @@ const api = async (method, uri, body) => {
         } else {
           // eslint-disable-next-line no-console
           console.log('API Error --------> ', err?.response?.status);
-          if (!err?.response?.status === 'undefined') {
-            toast.error(err?.response?.data ? err.response.data.message : err?.message);
-          }
+          // if (!err?.response?.status === 'undefined') {
+          toast.error(err?.response?.data ? err.response.data.message : err?.message);
+          // }
           reject(err);
         }
       });

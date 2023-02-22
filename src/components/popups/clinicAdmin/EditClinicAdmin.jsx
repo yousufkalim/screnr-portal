@@ -78,7 +78,6 @@ export default function EditClinicAdmin({
 
   useEffect(() => {
     const clinicAdminTemp = {
-      id: clinicAdminDetails.id,
       first_name: clinicAdminDetails.first_name,
       last_name: clinicAdminDetails.last_name,
       email: clinicAdminDetails.email,
