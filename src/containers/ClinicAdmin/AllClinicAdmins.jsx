@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 
 // mui imports
 import { Grid } from '@mui/material';
@@ -10,8 +10,35 @@ import api from '../../api';
 export default function ClinicAdmin() {
   const [clinicAdmins, setClinicAdmins] = useState({});
 
-  const getClinicAdmins = async (page = 1) => {
-    const { data } = await api('get', `/admins/clinics?page=${page}`);
+  const abortControllerRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
+
+  const getClinicAdmins = async (sort, search, page = 1) => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    const abortController = new AbortController();
+    abortControllerRef.current = abortController;
+
+    let apiUrl = `/admins/clinics?page=${page}`;
+    if (sort) {
+      apiUrl += `&sort=${sort}`;
+    }
+    if (search) {
+      apiUrl += `&search=${search}`;
+    }
+    const { data } = await api('get', apiUrl, {
+      signal: abortController.signal,
+    });
+
     if (data) {
       setClinicAdmins(data);
     }

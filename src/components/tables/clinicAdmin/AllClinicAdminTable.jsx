@@ -43,6 +43,8 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
   const [clinicAdmin, setClinicAdmin] = useState({});
   const [page, setPage] = useState(0);
   const [openFilter, setOpenFilter] = useState(false);
+  const [search, setSearch] = useState('');
+
   // const navigate = useNavigate();
   const [filter, setFilter] = useState('');
   const click = useRef(null);
@@ -50,12 +52,18 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
   const classes = useStyles();
 
   const handleChangePage = async (event, newPage) => {
-    await getClinicAdmins(newPage + 1);
+    await getClinicAdmins('', '', newPage + 1);
     setPage(newPage);
   };
 
-  const handleFilterChange = (event) => {
+  const handleFilterChange = async (event) => {
     setFilter(event.target.value);
+    await getClinicAdmins(event.target.value);
+  };
+
+  const handleSearch = async (event) => {
+    setSearch(event.target.value);
+    await getClinicAdmins('', event.target.value);
   };
 
   useEffect(() => {
@@ -94,7 +102,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
           </h1>
 
           <div className="allTableTitle" style={{ flexGrow: '0.15' }}>
-            <IconTextField />
+            <IconTextField value={search} handleChange={handleSearch} name="search" />
             {filter && (
               <div className="selectedFilter">
                 <p>{filter}</p>
@@ -141,17 +149,17 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
                   }}
                 >
                   <FormControlLabel
-                    value="Admin Name"
+                    value="admin"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Admin Name"
                   />
                   <FormControlLabel
-                    value="Staff"
+                    value="staff"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Staff"
                   />
                   <FormControlLabel
-                    value="Clinic Name"
+                    value="clinic"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Clinic Name"
                   />
