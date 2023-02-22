@@ -104,15 +104,15 @@ export default function Dashboard() {
         <div className="chart_main_div">
           <Chart />
         </div>
-        <div className="addBtn2">
-          <img
-            src={addBtn}
-            className="pointer"
-            onClick={() => setOpenAddStaffMember(true)}
-            role="presentation"
-            alt=""
-          />
-        </div>
+      </div>
+      <div className="addBtn2">
+        <img
+          src={addBtn}
+          className="pointer"
+          onClick={() => setOpenAddStaffMember(true)}
+          role="presentation"
+          alt=""
+        />
       </div>
 
       <AddStaffMember
