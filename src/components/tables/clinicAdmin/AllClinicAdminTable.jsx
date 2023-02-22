@@ -253,13 +253,15 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
             )}
           </TableBody>
         </Table>
-
-        <EditClinicAdmin
-          openEditClinicAdmin={openEditClinicAdmin}
-          setOpenEditClinicAdmin={setOpenEditClinicAdmin}
-          getClinicAdmins={getClinicAdmins}
-          clinicAdminDetails={clinicAdmin}
-        />
+        {openEditClinicAdmin && (
+          <EditClinicAdmin
+            openEditClinicAdmin={openEditClinicAdmin}
+            setOpenEditClinicAdmin={setOpenEditClinicAdmin}
+            getClinicAdmins={getClinicAdmins}
+            clinicAdminDetails={clinicAdmin}
+            table="allClinicAdminsTable"
+          />
+        )}
       </TableContainer>
       <TablePagination
         component="div"

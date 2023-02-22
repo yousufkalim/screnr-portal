@@ -52,6 +52,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function EditClinicAdmin({
+  table,
   openEditClinicAdmin,
   setOpenEditClinicAdmin,
   getClinicAdmins,
@@ -84,7 +85,10 @@ export default function EditClinicAdmin({
       setUserData({
         clinic_name: clinicAdminDetails?.userData?.clinic_name,
         address: clinicAdminDetails?.userData?.address,
-        staff: clinicAdminDetails?.userData?.staff,
+        staff:
+          table === 'allClinicAdminsTable'
+            ? clinicAdminDetails?.userData?.staff.id
+            : clinicAdminDetails?.userData?.staff,
       });
       setSelectedGender(clinicAdminDetails.gender);
     } else {
@@ -102,12 +106,18 @@ export default function EditClinicAdmin({
       setUserData({
         clinic_name: clinicAdminDetails?.userData?.clinic_name,
         address: clinicAdminDetails?.userData?.address,
-        staff: clinicAdminDetails?.userData?.staff,
+        staff:
+          table === 'allClinicAdminsTable'
+            ? clinicAdminDetails?.userData?.staff.id
+            : clinicAdminDetails?.userData?.staff,
       });
       setSelectedGender(clinicAdminDetails.gender);
       setChecked(true);
     }
-  }, [clinicAdminDetails]);
+  }, [clinicAdminDetails, table]);
+
+  console.log('cliniuc', clinicAdminDetails);
+  console.log('userData', userData);
 
   const handleClose = () => {
     setOpenEditClinicAdmin(false);
