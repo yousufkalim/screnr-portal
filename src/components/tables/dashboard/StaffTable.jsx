@@ -11,7 +11,7 @@ import TablePagination from '@mui/material/TablePagination';
 import Button from '@mui/material/Button';
 
 // navigation
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
@@ -30,7 +30,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
   const [openDeletePopup, setOpenDeletePopup] = useState(false);
   const [page, setPage] = useState(0);
   const [staffMember, setStaffMember] = useState();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChangePage = async (event, newPage) => {
     await getStaffMembers(newPage + 1);
@@ -89,82 +89,73 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
           </TableHead>
           <TableBody>
             {staffMembers?.users?.map((row) => (
-              <>
-                <div style={{ margin: '20% 0' }} />
-
-                <TableRow
-                  key={row.name}
-                  className="tableRow"
-                  sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
-                    cursor: 'pointer',
-                  }}
+              <TableRow
+                key={row.name}
+                className="tableRow"
+                sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
+              >
+                <TableCell
+                  align="left"
+                  className="table_cells"
+                  onClick={() => navigate(`/staff/${row.id}`)}
                 >
-                  <TableCell
-                    align="left"
-                    className="table_cells"
-                    // onClick={() => navigate(`/staff/${row._id}`)}
-                  >
-                    {row.id}
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{ display: 'flex' }}
-                    // onClick={() => navigate(`/staff/${row.id}`)}
-                  >
-                    {row.profile_pic ? (
-                      <div className="imgDiv">
-                        <img
-                          src={getMediaUrl(row.profile_pic)}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            borderRadius: '100px',
-                            objectFit: 'cover',
-                          }}
-                          alt=""
-                        />
-                      </div>
-                    ) : (
-                      <AvatarComponent
-                        alt={`${row.first_name} ${row.last_name}`}
-                        className="header_avatar"
-                      />
-                    )}
-                    <div className="name_cell_dasdboard">
-                      {`${row.first_name} ${row.last_name}`} <br />
-                      <span className="staffEmailCell"> {row.email}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    className="table_cells"
-                    // onClick={() => navigate(`/staff/${row._id}`)}
-                  >
-                    {row.phone_number && PhoneFormat(row.phone_number)}
-                  </TableCell>
-                  <TableCell align="left">
-                    <div className="table_action_div">
-                      <Edit
-                        className="table_icons"
-                        onClick={() => {
-                          setStaffMember(row);
-                          setOpenEditStaffMember(true);
+                  {row.id}
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{ display: 'flex' }}
+                  onClick={() => navigate(`/staff/${row.id}`)}
+                >
+                  {row.profile_pic ? (
+                    <div className="imgDiv">
+                      <img
+                        src={getMediaUrl(row.profile_pic)}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          borderRadius: '100px',
+                          objectFit: 'cover',
                         }}
-                      />
-                      <Delete
-                        className="table_icons"
-                        onClick={() => {
-                          setStaffMember(row);
-                          setOpenDeletePopup(true);
-                        }}
+                        alt=""
                       />
                     </div>
-                  </TableCell>
-                </TableRow>
-
-                <div style={{ margin: '20% 0' }} />
-              </>
+                  ) : (
+                    <AvatarComponent
+                      alt={`${row.first_name} ${row.last_name}`}
+                      className="header_avatar"
+                    />
+                  )}
+                  <div className="name_cell_dasdboard">
+                    {`${row.first_name} ${row.last_name}`} <br />
+                    <span className="staffEmailCell"> {row.email}</span>
+                  </div>
+                </TableCell>
+                <TableCell
+                  align="left"
+                  className="table_cells"
+                  onClick={() => navigate(`/staff/${row.id}`)}
+                >
+                  {row.phone_number && PhoneFormat(row.phone_number)}
+                </TableCell>
+                <TableCell align="left">
+                  <div className="table_action_div">
+                    <Edit
+                      className="table_icons"
+                      onClick={() => {
+                        setStaffMember(row);
+                        setOpenEditStaffMember(true);
+                      }}
+                    />
+                    <Delete
+                      className="table_icons"
+                      onClick={() => {
+                        setStaffMember(row);
+                        setOpenDeletePopup(true);
+                      }}
+                    />
+                  </div>
+                </TableCell>
+              </TableRow>
             ))}
           </TableBody>
 

@@ -20,31 +20,42 @@ import api from '../api';
 
 export default function Dashboard() {
   const [openAddStaffMember, setOpenAddStaffMember] = useState(false);
-  const [staffCount, setStaffCount] = useState();
-  const [clinicianCount, setClinicianCount] = useState();
-  const [clinicsCount, setClinicsCount] = useState();
-  const [patientsCount, setPatientsCount] = useState();
+  const [count, setCount] = useState({
+    staffCount: 0,
+    clinicianCount: 0,
+    clinicsCount: 0,
+    patientsCount: 0,
+  });
+
   const [staffMembers, setStaffMembers] = useState({});
 
   const getStaffMembers = async (page = 1) => {
     const { data } = await api('get', `/admins/staff?page=${page}`);
     if (data) {
       setStaffMembers(data);
-      setStaffCount(data?.count.staffCount.count);
-      setClinicianCount(data?.count.clinicianCount.count);
-      setClinicsCount(data?.count.clinicCount.count);
-      setPatientsCount(data?.count.patientCount.count);
+
+      setCount({
+        ...count,
+        staffCount: data?.count.staffCount.count,
+        clinicianCount: data?.count.clinicianCount.count,
+        clinicsCount: data?.count.clinicCount.count,
+        patientsCount: data?.count.patientCount.count,
+      });
     }
   };
 
   useEffect(() => {
     getStaffMembers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const cardsData = [
     {
       icon: Patients,
-      amount: staffCount < 10 && staffCount > 0 ? `0${staffCount}` : staffCount || 0,
+      amount:
+        count.staffCount < 10 && count.staffCount > 0
+          ? `0${count.staffCount}`
+          : count.staffCount || 0,
       title: 'Total Staff',
       icon2: Circle,
       className: 'yellow_circle',
@@ -52,7 +63,10 @@ export default function Dashboard() {
     },
     {
       icon: Clinic,
-      amount: clinicsCount < 10 && clinicsCount > 0 ? `0${clinicsCount}` : clinicsCount || 0,
+      amount:
+        count.clinicsCount < 10 && count.clinicsCount > 0
+          ? `0${count.clinicsCount}`
+          : count.clinicsCount || 0,
       title: 'Total Clinics',
       icon2: RedCircle,
       className: 'red_circle',
@@ -61,7 +75,9 @@ export default function Dashboard() {
     {
       icon: Clinician,
       amount:
-        clinicianCount < 10 && clinicianCount > 0 ? `0${clinicianCount}` : clinicianCount || 0,
+        count.clinicianCount < 10 && count.clinicianCount > 0
+          ? `0${count.clinicianCount}`
+          : count.clinicianCount || 0,
       title: 'Total Clinicians',
       icon2: GreenCircle,
       className: 'green_circle',
@@ -69,7 +85,10 @@ export default function Dashboard() {
     },
     {
       icon: Patients2,
-      amount: patientsCount < 10 && patientsCount > 0 ? `0${patientsCount}` : patientsCount || 0,
+      amount:
+        count.patientsCount < 10 && count.patientsCount > 0
+          ? `0${count.patientsCount}`
+          : count.patientsCount || 0,
       title: 'Total Patients',
       icon2: BlueCircle,
       className: 'blue_circle',

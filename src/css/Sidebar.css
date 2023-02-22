@@ -211,6 +211,12 @@
   width: fit-content;
 }
 
+.imgDivSide {
+  width: 110px;
+  height: 110px;
+  border-radius: 100px;
+}
+
 @media only screen and (max-width: 1899px) {
   .spaceRight {
     margin-right: 4px;
