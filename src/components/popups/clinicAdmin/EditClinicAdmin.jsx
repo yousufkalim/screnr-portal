@@ -381,10 +381,10 @@ export default function EditClinicAdmin({
                   Female
                 </Button>
                 <Button
-                  className={clinicAdmin.gender === 'other' ? 'selectGender' : 'genderBtn'}
+                  className={clinicAdmin.gender === 'non-binary' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
                   onClick={() => {
-                    handleGenderSelection('other');
+                    handleGenderSelection('non-binary');
                   }}
                 >
                   Non-binary
