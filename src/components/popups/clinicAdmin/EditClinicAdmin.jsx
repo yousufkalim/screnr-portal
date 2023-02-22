@@ -116,9 +116,6 @@ export default function EditClinicAdmin({
     }
   }, [clinicAdminDetails, table]);
 
-  console.log('cliniuc', clinicAdminDetails);
-  console.log('userData', userData);
-
   const handleClose = () => {
     setOpenEditClinicAdmin(false);
   };

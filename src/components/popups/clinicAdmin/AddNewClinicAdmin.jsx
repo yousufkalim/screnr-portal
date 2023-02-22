@@ -156,7 +156,6 @@ export default function AddClinicAdmin({
         setUserData({ staff: clinicAdminId });
       }
     } catch (error) {
-      console.log('error');
       if (error.response.status === 409) {
         setAlreadyExisitingUser(true);
       }
