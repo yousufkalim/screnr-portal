@@ -353,6 +353,10 @@ export default function AddStaffMember({
         <UserAlreadyExist
           openExistingUser={exisitingButInactive}
           setOpenExistingUser={setExisitingButInactive}
+          staffMember={staffMember}
+          setStaffMember={setStaffMember}
+          getStaffMembers={getStaffMembers}
+          setOpenAddStaffMember={setOpenAddStaffMember}
         />
       )}
     </div>
