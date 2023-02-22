@@ -116,6 +116,10 @@ export default function AddClinicAdmin({
       // Create a new FormData object
       const formData = new FormData();
 
+      if (clinicAdmin.expiry_date && !checked) {
+        delete clinicAdmin.expiry_date;
+        setClinicAdmin({ ...clinicAdmin });
+      }
       // append properties from ClinicAdmin in formdata
       Object.keys(clinicAdmin).forEach((key) => {
         formData.append(key, clinicAdmin[key]);

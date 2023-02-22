@@ -133,6 +133,11 @@ export default function EditClinicAdmin({
     // Create a new FormData object
     const formData = new FormData();
 
+    if (clinicAdminCopy.expiry_date && !checked) {
+      clinicAdminCopy.expiry_date = '';
+      setClinicAdmin({ ...clinicAdminCopy });
+    }
+
     if (typeof clinicAdminCopy.profile_pic !== 'object') {
       delete clinicAdminCopy.profile_pic;
     }
