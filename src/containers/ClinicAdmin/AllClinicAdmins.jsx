@@ -35,9 +35,15 @@ export default function ClinicAdmin() {
     if (search) {
       apiUrl += `&search=${search}`;
     }
-    const { data } = await api('get', apiUrl, {
-      signal: abortController.signal,
-    });
+    const { data } = await api(
+      'get',
+      apiUrl,
+      {
+        signal: abortController.signal,
+      },
+      true,
+    );
+    console.log(abortController.signal);
 
     if (data) {
       setClinicAdmins(data);
