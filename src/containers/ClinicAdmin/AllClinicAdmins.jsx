@@ -43,7 +43,6 @@ export default function ClinicAdmin() {
       },
       true,
     );
-    console.log(abortController.signal);
 
     if (data) {
       setClinicAdmins(data);
