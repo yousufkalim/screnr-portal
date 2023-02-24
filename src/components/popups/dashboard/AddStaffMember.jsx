@@ -1,5 +1,4 @@
 import { React, useState } from 'react';
-
 // mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -353,10 +352,6 @@ export default function AddStaffMember({
         <UserAlreadyExist
           openExistingUser={exisitingButInactive}
           setOpenExistingUser={setExisitingButInactive}
-          staffMember={staffMember}
-          setStaffMember={setStaffMember}
-          getStaffMembers={getStaffMembers}
-          setOpenAddStaffMember={setOpenAddStaffMember}
         />
       )}
     </div>

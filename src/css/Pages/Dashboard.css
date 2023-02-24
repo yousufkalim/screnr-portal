@@ -19,6 +19,14 @@
   font-weight: 500 !important;
   color: #454238 !important ;
   margin-left: 8px;
+
+  display: table-cell;
+  /* vertical-align: middle; */
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 30%;
+  min-width: 0; */
 }
 .staffEmailCell {
   font-size: 14px !important;
@@ -126,9 +134,13 @@
 }
 
 .addBtn {
-  position: absolute !important;
+  /* position: absolute !important;
   right: 62px;
   bottom: 80px;
+  z-index: 1300 !important; */
+  position: fixed !important;
+  right: 3% !important;
+  bottom: 5% !important;
   z-index: 1300 !important;
 }
 
@@ -217,4 +229,29 @@
   .table_title h3 {
     font-size: 0.9rem;
   }
+}
+/* ScrollBar styling for default chrome view */
+::-webkit-scrollbar {
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 25px;
+  width: 3px;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  display: none;
 }
