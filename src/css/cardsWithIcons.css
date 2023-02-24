@@ -21,7 +21,7 @@
   justify-content: space-between;
   padding-left: 1rem;
   border-radius: 20px;
-  width: 21%;
+  width: 23%;
   border: 0.5px solid #e5ebeb;
   overflow: hidden;
 }
@@ -77,11 +77,11 @@
   }
 }
 
-@media only screen and (max-width: 1440px) {
+/* @media only screen and (max-width: 1440px) {
   .card_main_div {
-    width: 22%;
+    width: 23%;
   }
-}
+} */
 
 @media only screen and (max-width: 880px) {
   .card_main_div {

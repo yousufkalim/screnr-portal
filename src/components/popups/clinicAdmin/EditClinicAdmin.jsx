@@ -152,7 +152,7 @@ export default function EditClinicAdmin({
     });
 
     if (clinicAdminCopy.phone_number && clinicAdminCopy.phone_number.length < 11) {
-      return toast.error('Phone number must be contain 10 digits');
+      return toast.error('Phone number must contain 10 digits');
     }
     if (checked && !clinicAdminCopy.expiry_date) {
       return toast.error('Please enter expiry date');
@@ -161,7 +161,7 @@ export default function EditClinicAdmin({
     // sending this data to api
     const { data } = await api('put', `/admins/clinics/${clinicAdminDetails.id}`, formData);
     if (data) {
-      toast.success('Clinic Admin added successfully');
+      toast.success('Clinic Admin updated successfully');
       getClinicAdmins();
       handleClose();
     }
@@ -249,7 +249,7 @@ export default function EditClinicAdmin({
                 }}
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -297,7 +297,7 @@ export default function EditClinicAdmin({
               />
             </FormControl>
 
-            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',

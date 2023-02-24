@@ -474,7 +474,7 @@
 
 .react-tel-input .form-control {
   border: 1px solid #e1e1e1 !important;
-  padding: 22px 20px !important;
+  padding: 25px 20px !important;
   border-radius: 20px !important;
   width: 262px !important;
   color: black !important;
@@ -510,13 +510,20 @@
   position: absolute;
   left: 20px;
   cursor: text;
-  top: 12px;
+  top: 17px;
+  left: 16px;
 }
 
 .placeholerPhone .react-tel-input .form-control {
   color: white !important;
 }
 
+.react-tel-input .form-control:focus {
+  caret-color: black;
+}
+.placeholerPhone .react-tel-input .form-control:focus {
+  color: black !important;
+}
 #focus .react-tel-input .form-control {
   z-index: 1300 !important;
 }

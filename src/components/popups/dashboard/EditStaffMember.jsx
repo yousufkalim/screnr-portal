@@ -189,7 +189,7 @@ export default function EditStaffMember({
                 </label>
               </div>
             </div>
-            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -233,7 +233,7 @@ export default function EditStaffMember({
                 }}
               />
             </FormControl>
-            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
