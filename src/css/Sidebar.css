@@ -1,13 +1,16 @@
 .sideBarInfo {
   text-align: center;
+  width: 100%;
 }
 
 .sidebarSubDiv {
   display: flex;
   padding: 5% 0px;
+  padding-left: 5%;
+
   flex-direction: column;
   gap: 1rem;
-  width: 68%;
+  width: 80%;
 }
 
 .sidebarSubDiv2 {
@@ -40,8 +43,13 @@
 .user_detail {
   color: #919b9b;
   font-size: 0.9rem;
-  display: flex;
-  align-items: center;
+  display: table-cell;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .user_exp_detail {

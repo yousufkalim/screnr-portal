@@ -1,7 +1,12 @@
 .user_name {
-  font-size: 1.8rem;
+  font-size: 20px;
   color: #136773;
   font-weight: 600;
+  text-transform: capitalize;
+  width: 90%;
+  word-wrap: break-word;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .staff_id {
@@ -87,6 +92,7 @@
   font-weight: 500;
   font-size: 14px;
   color: #454238;
+  z-index: 1400;
 }
 
 .hl {

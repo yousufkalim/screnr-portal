@@ -1,5 +1,4 @@
 import { React, useState } from 'react';
-
 // mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -11,16 +10,12 @@ import { FormControl, TextField } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
-
-// phone format
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
-
 // react-toastify import
 import { toast } from 'react-toastify';
 
 // react-datepicker import
 import DatePicker from 'react-datepicker';
+import CustomPhoneInput from '../general/CustomPhoneInput';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
@@ -263,41 +258,8 @@ export default function AddStaffMember({
               />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <div
-                className={
-                  staffMember.phone_number === undefined || staffMember.phone_number === '1'
-                    ? 'placeholerPhone'
-                    : ''
-                }
-              >
-                <PhoneInput
-                  country="us"
-                  onlyCountries={['us']}
-                  value={staffMember.phone_number}
-                  onChange={(value) => {
-                    setStaffMember({ ...staffMember, phone_number: value });
-                  }}
-                  disableDropdown
-                  countryCodeEditable={false}
-                  disableCountryGuess
-                />
-                {staffMember.phone_number === undefined || staffMember.phone_number === '1' ? (
-                  <p
-                    className="dummyPlaceholder"
-                    id="txtClick"
-                    role="presentation"
-                    // onClick={handleClick}
-                    onClick={() =>
-                      document
-                        .querySelector('.placeholerPhone .react-tel-input .form-control')
-                        .focus()
-                    }
-                  >
-                    Phone number
-                  </p>
-                ) : (
-                  ''
-                )}
+              <div>
+                <CustomPhoneInput setStaffMember={setStaffMember} staffMember={staffMember} />
               </div>
             </FormControl>
 

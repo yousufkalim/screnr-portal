@@ -33,6 +33,7 @@
   margin-left: 8px;
   align-self: center;
   min-width: max-content;
+  text-transform: capitalize;
 }
 
 #clinicianTable {
