@@ -89,7 +89,12 @@ export default function ClinicAdmin() {
         />
       </div>
 
-      <AddClinician openAddClinican={openAddClinican} setOpenAddClinican={setOpenAddClinican} />
+      <AddClinician
+        clinicAdminId={id}
+        openAddClinican={openAddClinican}
+        setOpenAddClinican={setOpenAddClinican}
+        getClinicians={getClinicians}
+      />
     </Grid>
   );
 }

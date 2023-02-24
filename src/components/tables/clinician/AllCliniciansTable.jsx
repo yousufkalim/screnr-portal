@@ -40,7 +40,10 @@ const StyledTableRow = styled(TableRow)(() => ({
 export default function AllCliniciansTable({ clinicians, getClinicians }) {
   const [openEditClinician, setOpenEditClinician] = useState(false);
   const [clinician, setClinician] = useState({});
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState({
+    sortBy: '',
+    status: '',
+  });
   const [openFilter, setOpenFilter] = useState(false);
   const [page, setPage] = useState(0);
   const click = useRef(null);
@@ -54,7 +57,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
   };
 
   const handleFilterChange = (event) => {
-    setFilter(event.target.value);
+    setFilter({ ...filter, [event.target.name]: event.target.value });
   };
   useEffect(() => {
     const handleCloseFilter = (e) => {
@@ -118,10 +121,10 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
                   <p className="filterHead">Status</p>
                   <div className="hl" />
                   <RadioGroup
-                    aria-label="filter"
-                    name="filter"
+                    aria-label="statusFilter"
+                    name="status"
                     onChange={handleFilterChange}
-                    value={filter}
+                    value={filter.status}
                     sx={{
                       '.MuiFormControlLabel-label': {
                         fontSize: '14px',
@@ -129,14 +132,14 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
                     }}
                   >
                     <FormControlLabel
-                      value="Active"
+                      value="active"
                       control={
                         <Radio classes={{ root: classes.radio, checked: classes.checked }} />
                       }
                       label="Active"
                     />
                     <FormControlLabel
-                      value="Inactive"
+                      value="inactive"
                       control={
                         <Radio classes={{ root: classes.radio, checked: classes.checked }} />
                       }
@@ -148,10 +151,10 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
                 <p className="filterHead">Sort By</p>
                 <div className="hl" />
                 <RadioGroup
-                  aria-label="filter"
-                  name="filter"
+                  aria-label="sortFilter"
+                  name="sortBy"
                   onChange={handleFilterChange}
-                  value={filter}
+                  value={filter.sortBy}
                   sx={{
                     '.MuiFormControlLabel-label': {
                       fontSize: '14px',
@@ -159,33 +162,33 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
                   }}
                 >
                   <FormControlLabel
-                    value="Clinician Name"
+                    value="clinician"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Clinician Name"
                   />
 
                   <FormControlLabel
-                    value="Clinic Name"
+                    value="clinic"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Clinic Name"
                   />
                   <FormControlLabel
-                    value="Number of Patients"
+                    value="patient"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Number of Patients"
                   />
                   <FormControlLabel
-                    value="Active Patients"
+                    value="patient-in-active"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Active Patients"
                   />
                   <FormControlLabel
-                    value="Inactive Patients"
+                    value="patient-active"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Inactive Patients"
                   />
                   <FormControlLabel
-                    value="Patients Not Performing well"
+                    value="patient-error"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Patients Not Performing well"
                   />

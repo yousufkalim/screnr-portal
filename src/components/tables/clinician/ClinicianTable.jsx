@@ -18,7 +18,9 @@ import { ReactComponent as Edit } from '../../../assets/components/Table/alert.s
 
 // child component imports
 import EditClinician from '../../popups/clinician/EditClinician';
+import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar';
+import PhoneFormat from '../../../utils/PhoneFormat';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
@@ -30,8 +32,10 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function ClinicianTable({ clinicians }) {
+export default function ClinicianTable({ clinicians, getClinicians }) {
   const [openEditClinican, setOpenEditClinican] = useState(false);
+  const [clinician, setClinician] = useState({});
+
   const navigate = useNavigate();
 
   return (
@@ -49,7 +53,7 @@ export default function ClinicianTable({ clinicians }) {
           },
         }}
       >
-        <h1 className="clientTableHead">List of Clinicians</h1>
+        <h1 className="clientTableHead">List of Clinician</h1>
         <Table
           sx={{
             [`& .${tableCellClasses.root}`]: {
@@ -80,60 +84,92 @@ export default function ClinicianTable({ clinicians }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {clinicians.map((row) => (
-              <StyledTableRow key={row.name} className="tableRow">
-                <TableCell />
-                <TableCell
-                  align="left"
-                  sx={{ display: 'flex', paddingTop: '12%' }}
-                  onClick={() => navigate(`/patient/${row._id}`)}
-                >
-                  <AvatarComponent
-                    alt={`${row.first_name} ${row.last_name}`}
-                    className="header_avatar"
-                  />
-                  <div className="clinic_cell">
-                    {`${row.first_name} ${row.last_name}`} <br />
-                    <span className="clinicNametxt">{`Clinic: ${row.clinic_name}`}</span>
-                  </div>
-                </TableCell>
+            {clinicians?.users?.length > 0 ? (
+              clinicians?.users?.map((row) => (
+                <StyledTableRow key={row.id} className="tableRow">
+                  <TableCell />
+                  {console.log('row', row)}
+                  <TableCell
+                    align="left"
+                    sx={{ display: 'flex', paddingTop: '12%' }}
+                    onClick={() => navigate(`/patient/${row.id}`)}
+                  >
+                    {row.profile_pic ? (
+                      <div className="imgDivClinic">
+                        <img
+                          src={getMediaUrl(row.profile_pic)}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '100px',
+                            objectFit: 'cover',
+                          }}
+                          alt=""
+                        />
+                      </div>
+                    ) : (
+                      <AvatarComponent
+                        alt={`${row.first_name} ${row.last_name}`}
+                        className="header_avatar"
+                      />
+                    )}
+                    <div className="clinic_cell">
+                      {`${row.first_name} ${row.last_name}`} <br />
+                      <span className="clinicNametxt">{`Clinic: ${row.userData.clinic.userData.clinic_name}`}</span>
+                    </div>
+                  </TableCell>
 
-                <TableCell
-                  align="center"
-                  className="table_cells"
-                  onClick={() => navigate(`/patient/${row._id}`)}
-                >
-                  Muscular dystrophy
-                </TableCell>
-                <TableCell
-                  align="center"
-                  className="table_cells"
-                  onClick={() => navigate(`/patient/${row._id}`)}
-                >
-                  {row.phone}
-                </TableCell>
-                <TableCell
-                  onClick={() => navigate(`/patient/${row._id}`)}
-                  align="center"
-                  className="table_cells"
-                  sx={{
-                    padding: '3%',
-                  }}
-                >
-                  {row.patient_count}
-                </TableCell>
+                  <TableCell
+                    align="center"
+                    className="table_cells"
+                    onClick={() => navigate(`/patient/${row.id}`)}
+                  >
+                    {`${row.userData.title}.`}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    className="table_cells"
+                    onClick={() => navigate(`/patient/${row.id}`)}
+                  >
+                    {PhoneFormat(row.phone_number)}
+                  </TableCell>
+                  <TableCell
+                    onClick={() => navigate(`/patient/${row.id}`)}
+                    align="center"
+                    className="table_cells"
+                    sx={{
+                      padding: '3%',
+                    }}
+                  >
+                    {row.patient.count}
+                  </TableCell>
 
-                <TableCell align="center">
-                  <Edit className="table_icons" onClick={() => setOpenEditClinican(true)} />
-                </TableCell>
-              </StyledTableRow>
-            ))}
+                  <TableCell align="center">
+                    <Edit
+                      className="table_icons"
+                      onClick={() => {
+                        setClinician(row);
+                        setOpenEditClinican(true);
+                      }}
+                    />
+                  </TableCell>
+                </StyledTableRow>
+              ))
+            ) : (
+              <>
+                {' '}
+                <TableCell align="center" />
+                <TableCell align="left">No Clinicians found</TableCell>
+              </>
+            )}
           </TableBody>
         </Table>
 
         <EditClinician
+          clinicianDetails={clinician}
           openEditClinican={openEditClinican}
           setOpenEditClinican={setOpenEditClinican}
+          getClinicians={getClinicians}
         />
       </TableContainer>
     </div>

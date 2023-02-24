@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import Button from '@mui/material/Button';
@@ -14,20 +14,27 @@ import ClearIcon from '@mui/icons-material/Clear';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
+// moment
+import moment from 'moment';
+
 // react-toastify import
 import { toast } from 'react-toastify';
 
 // react-datepicker import
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+
+// phone format
+import PhoneInput from 'react-phone-input-2';
 
 // assets import
 import dropdown from '../../../assets/icons/downArrow.svg';
 import edit from '../../../assets/icons/edit.svg';
 
 // child component imports
+import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar';
 import useOutlinedInputStyles from '../../../utils/EditFormInput';
+import api from '../../../api/index';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -46,22 +53,125 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function EditClinician({ openEditClinican, setOpenEditClinican }) {
+export default function EditClinician({
+  clinicianDetails,
+  openEditClinican,
+  setOpenEditClinican,
+  getClinicians,
+  table,
+}) {
   const [checked, setChecked] = useState(false);
+  const [clinician, setClinician] = useState({});
+  const [userData, setUserData] = useState({ title: '' });
   const outlinedInputStyles = useOutlinedInputStyles();
 
+  useEffect(() => {
+    const clinicAdminTemp = {
+      first_name: clinicianDetails.first_name,
+      last_name: clinicianDetails.last_name,
+      email: clinicianDetails.email,
+      profile_pic: clinicianDetails.profile_pic,
+      phone_number: clinicianDetails.phone_number,
+      gender: clinicianDetails.gender,
+    };
+
+    if (clinicianDetails.expiry_date) {
+      // eslint-disable-next-line no-underscore-dangle
+      clinicAdminTemp.expiry_date = moment(clinicianDetails.expiry_date)._d;
+      setChecked(true);
+    }
+
+    setClinician(clinicAdminTemp);
+    setUserData({
+      clinic: clinicianDetails?.userData?.clinic.id,
+      title: clinicianDetails?.userData?.title,
+    });
+  }, [clinicianDetails, table]);
+
+  console.log('clinicianDetails', clinicianDetails);
   const handleClose = () => {
     setOpenEditClinican(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    toast.success('Clinic Admin edited successfully');
-    handleClose();
+  // uploading img
+  const handleSelectedFile = (e) => {
+    const myFile = e.target.files[0];
+    const size = 1024 * 1024 * 10;
+    if (myFile.size > size) {
+      return toast.error('File size can not exceed 10 Mb');
+    }
+    if (myFile) {
+      document.getElementById('clinicAdmin_AddProfile_Pic_selected').src =
+        URL.createObjectURL(myFile);
+    }
+    setClinician({ ...clinician, profile_pic: myFile });
+  };
+
+  const handleChange = (e) => {
+    setClinician({ ...clinician, [e.target.name]: e.target.value });
+  };
+
+  const handleUserDataChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const dateChange = (e) => {
+    setClinician({
+      ...clinician,
+      expiry_date: e,
+    });
   };
 
   const handleCheck = (event) => {
     setChecked(event.target.checked);
+  };
+
+  // handle gender selection
+  const handleGenderSelection = (name) => {
+    setClinician({ ...clinician, gender: name });
+  };
+
+  // posting data
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const clinicianCopy = { ...clinician };
+    // Create a new FormData object
+    const formData = new FormData();
+
+    if (clinicianCopy.expiry_date && !checked) {
+      clinicianCopy.expiry_date = '';
+      setClinician({ ...clinicianCopy });
+    }
+
+    if (typeof clinicianCopy.profile_pic !== 'object') {
+      delete clinicianCopy.profile_pic;
+    }
+
+    // append properties from clinicianCopy in formdata
+    Object.keys(clinicianCopy).forEach((key) => {
+      formData.append(key, clinicianCopy[key]);
+    });
+
+    // append properties from userData in formdata
+    Object.keys(userData).forEach((key) => {
+      formData.append(`userData[${key}]`, userData[key]);
+    });
+
+    if (clinicianCopy.phone_number && clinicianCopy.phone_number.length < 11) {
+      return toast.error('Phone number must be contain 10 digits');
+    }
+    if (checked && !clinicianCopy.expiry_date) {
+      return toast.error('Please enter expiry date');
+    }
+
+    // sending this data to api
+    const { data } = await api('put', `/admins/clinicians/${clinicianDetails.id}`, formData);
+    if (data) {
+      toast.success('Clinician updated successfully');
+      handleClose();
+      getClinicians();
+    }
   };
 
   return (
@@ -81,14 +191,39 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
         <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
           <Typography gutterBottom>
-            <h1 className="clinicianPopupTxt">Edit Clinician</h1>
+            <h1 className="clinicianPopupTxt">Edit New Clinician</h1>
             <p className="clinicianSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             <div>
               <div className="imgDivPopup">
-                <label htmlFor="profilePic">
-                  {/* avatar to be added */}
-                  <input name="profile_pic" type="file" id="profilePic" accept="image/*" />{' '}
-                  <AvatarComponent alt="Arooj Ishfaq" className="popups_avatar" />
+                <label htmlFor="clinicAdmin_AddProfile_Pic">
+                  <input
+                    name="profile_pic"
+                    type="file"
+                    id="clinicAdmin_AddProfile_Pic"
+                    accept=".png, .jpg, .jpeg"
+                    onChange={handleSelectedFile}
+                    className="noDisplay"
+                  />
+
+                  {clinician.profile_pic ? (
+                    <img
+                      src={getMediaUrl(clinician.profile_pic)}
+                      className="pointer"
+                      id="edit_selectedImg"
+                      style={{
+                        width: '100%',
+                        borderRadius: '100px',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                      alt=""
+                    />
+                  ) : (
+                    <AvatarComponent
+                      alt={`${clinician?.first_name} ${clinician?.last_name}`}
+                      className="popups_avatar"
+                    />
+                  )}
                   <img src={edit} className="addImgIcon" alt="" />
                 </label>
               </div>
@@ -103,15 +238,14 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
                 displayEmpty
                 sx={{
                   '.MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#454238',
+                    borderColor: '#E1E1E1',
                   },
                   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#FBA622',
+                    borderColor: ' #454238',
                   },
                   '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#FBA622',
+                    borderColor: ' #454238',
                   },
-
                   borderRadius: '20px',
                   input: {
                     color: 'black',
@@ -122,14 +256,19 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                name="client"
+                name="title"
+                value={userData.title}
+                onChange={handleUserDataChange}
                 placeholder="Title"
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
               >
-                <MenuItem value="">West</MenuItem>
-                <MenuItem>East</MenuItem>
+                <MenuItem value="">Title</MenuItem>
+                <MenuItem value="Mr">Mr.</MenuItem>
+                <MenuItem value="Mrs">Mrs.</MenuItem>
+                <MenuItem value="Miss">Miss.</MenuItem>
+                <MenuItem value="Dr">Dr.</MenuItem>
               </Select>
             </FormControl>
 
@@ -149,6 +288,8 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
                 placeholder="First Name"
                 size="normal"
                 name="first_name"
+                value={clinician.first_name}
+                onChange={handleChange}
               />
             </FormControl>
 
@@ -167,7 +308,9 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
                 classes={outlinedInputStyles}
                 placeholder="Last Name"
                 size="normal"
-                name="Last_name"
+                name="last_name"
+                value={clinician.last_name}
+                onChange={handleChange}
               />
             </FormControl>
 
@@ -186,42 +329,57 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
                 classes={outlinedInputStyles}
                 placeholder="Email"
                 size="normal"
+                name="email"
                 type="email"
+                value={clinician.email}
+                onChange={handleChange}
               />
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-phone"
-                classes={outlinedInputStyles}
-                placeholder="Phone Number"
-                size="normal"
-                type="text"
-                inputProps={{
-                  maxLength: 10,
-                }}
-              />
+              <div className="edit-phone-input">
+                <PhoneInput
+                  country="us"
+                  onlyCountries={['us']}
+                  value={clinician.phone_number}
+                  onChange={(value) => {
+                    setClinician({ ...clinician, phone_number: value });
+                  }}
+                  disableDropdown
+                  countryCodeEditable={false}
+                  disableCountryGuess
+                />
+              </div>
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <p className="genderTxt"> Gender</p>
               <span>
-                <Button className="genderBtn" variant="contained">
+                <Button
+                  className={clinician.gender === 'male' ? 'selectGender' : 'genderBtn'}
+                  variant="contained"
+                  onClick={() => {
+                    handleGenderSelection('male');
+                  }}
+                >
                   Male
                 </Button>
-                <Button className="genderBtn" variant="contained">
+                <Button
+                  className={clinician.gender === 'female' ? 'selectGender' : 'genderBtn'}
+                  variant="contained"
+                  onClick={() => {
+                    handleGenderSelection('female');
+                  }}
+                >
                   Female
                 </Button>
-                <Button className="genderBtn" variant="contained">
+                <Button
+                  className={clinician.gender === 'non-binary' ? 'selectGender' : 'genderBtn'}
+                  variant="contained"
+                  onClick={() => {
+                    handleGenderSelection('non-binary');
+                  }}
+                >
                   Non-binary
                 </Button>
               </span>
@@ -241,7 +399,9 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
                   fontSize: '40px',
                   width: 'fit-content',
                 }}
-                control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
+                control={
+                  <Checkbox onChange={handleCheck} checked={checked} style={{ color: '#136773' }} />
+                }
                 label={
                   <Typography
                     style={{
@@ -261,11 +421,13 @@ export default function EditClinician({ openEditClinican, setOpenEditClinican })
                 width: '100%',
               }}
             >
-              <div className="date-div2" id={!checked ? 'disabledDate' : ''}>
+              <div className="date-div" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
-                  dateFormat="dd/MMMM/yyyy"
-                  name="date"
+                  dateFormat="MM-dd-yyyy"
+                  name="expiry_date"
+                  selected={clinician.expiry_date}
+                  onChange={dateChange}
                   disabled={!checked}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"

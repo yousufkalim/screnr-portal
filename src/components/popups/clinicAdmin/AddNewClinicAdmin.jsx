@@ -367,6 +367,7 @@ export default function AddClinicAdmin({
                 )}
               </div>
             </FormControl>
+
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <TextField
                 sx={{
@@ -454,6 +455,7 @@ export default function AddClinicAdmin({
                 }
               />
             </FormControl>
+
             <FormControl
               sx={{
                 textAlign: 'left',
