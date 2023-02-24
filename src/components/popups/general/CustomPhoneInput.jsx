@@ -3,7 +3,7 @@ import { useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
-function CustomPhoneInput({ staffMember, setStaffMember }) {
+function CustomPhoneInput({ userInfo, setUserInfo }) {
   const [hide, setHide] = useState(false);
   const handleTextHide = () => {
     setHide(true);
@@ -15,7 +15,7 @@ function CustomPhoneInput({ staffMember, setStaffMember }) {
   return (
     <div
       className={
-        staffMember.phone_number === undefined || staffMember.phone_number === '1'
+        userInfo.phone_number === undefined || userInfo.phone_number === '1'
           ? 'placeholerPhone'
           : ''
       }
@@ -23,9 +23,9 @@ function CustomPhoneInput({ staffMember, setStaffMember }) {
       <PhoneInput
         country="us"
         onlyCountries={['us']}
-        value={staffMember.phone_number}
+        value={userInfo.phone_number}
         onChange={(value) => {
-          setStaffMember({ ...staffMember, phone_number: value });
+          setUserInfo({ ...userInfo, phone_number: value });
         }}
         onFocus={handleTextHide}
         onBlur={handleTextShow}
@@ -33,7 +33,7 @@ function CustomPhoneInput({ staffMember, setStaffMember }) {
         countryCodeEditable={false}
         disableCountryGuess
       />
-      {staffMember.phone_number === undefined || staffMember.phone_number === '1' ? (
+      {userInfo.phone_number === undefined || userInfo.phone_number === '1' ? (
         <p
           className="dummyPlaceholder"
           id="txtClick"

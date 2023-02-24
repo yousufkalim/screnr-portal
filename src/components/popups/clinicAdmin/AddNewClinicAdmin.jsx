@@ -329,7 +329,7 @@ export default function AddClinicAdmin({
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
               <div>
-                <CustomPhoneInput setStaffMember={setClinicAdmin} staffMember={clinicAdmin} />
+                <CustomPhoneInput setUserInfo={setClinicAdmin} userInfo={clinicAdmin} />
               </div>
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
