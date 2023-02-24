@@ -78,7 +78,11 @@ export default function LeftSidebar({ id, txt, roleTxt }) {
       <div className="sideBarInfo">
         <div className="user_name"> {`${info?.first_name} ${info?.last_name}`}</div>
         <div className="staff_id">
-          {roleTxt} ID: <span className="staff_id_2"> {info?.id}</span>
+          {roleTxt}:{' '}
+          <span className="staff_id_2">
+            {' '}
+            {roleTxt.includes('Clinic') ? info?.userData?.clinic_name : info?.id}
+          </span>
         </div>
       </div>
       <div className="sidebarSubDiv">
