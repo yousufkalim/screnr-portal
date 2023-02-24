@@ -130,7 +130,7 @@ export default function PatientTable({ patients }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {patients.map((row) => (
+            {patients?.users?.map((row) => (
               <>
                 <StyledTableRow
                   key={row.name}

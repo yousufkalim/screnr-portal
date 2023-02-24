@@ -8,7 +8,6 @@ import { useParams } from 'react-router-dom';
 
 // assets import
 import addBtn from '../../assets/icons/addBtn.svg';
-
 import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/greenIcon.svg';
 import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
 import { ReactComponent as YellowIcon } from '../../assets/components/StatsCard/yellowIcon.svg';
@@ -26,20 +25,13 @@ import api from '../../api';
 
 export default function Patient() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
-  const [patients, setPatients] = useState([]);
+  const [patients, setPatients] = useState({});
   const { id } = useParams();
 
   const getPatients = async () => {
-    if (window.location.pathname.includes('patient')) {
-      const { data } = await api('get', '/admins/patient/all/');
-      if (data) {
-        setPatients(data.users);
-      }
-    } else {
-      const { data } = await api('get', `/admins/patient/all/${id}`);
-      if (data) {
-        setPatients(data.users);
-      }
+    const { data } = await api('get', '/admins/patients');
+    if (data) {
+      setPatients(data);
     }
   };
 
@@ -72,7 +64,7 @@ export default function Patient() {
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>
-        <Sidebar />
+        <Sidebar id={id} txt="admins/clinicians" />
       </Grid>
 
       <Grid className="bgClinicianTable" xl={7.5} lg={7}>
