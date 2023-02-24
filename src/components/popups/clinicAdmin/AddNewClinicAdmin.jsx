@@ -52,14 +52,14 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function AddClinicAdmin({
-  clinicAdminId,
+  staffAdminId,
   openAddClinicAdmin,
   setOpenAddClinicAdmin,
   getClinicAdmins,
 }) {
   const [checked, setChecked] = useState(false);
   const [clinicAdmin, setClinicAdmin] = useState({});
-  const [userData, setUserData] = useState({ staff: clinicAdminId });
+  const [userData, setUserData] = useState({ staff: staffAdminId });
   const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
   const [exisitingButInactive, setExisitingButInactive] = useState(false);
   const [added, setAdded] = useState(false);
@@ -149,7 +149,7 @@ export default function AddClinicAdmin({
         handleClose();
         setClinicAdmin({});
         setChecked(false);
-        setUserData({ staff: clinicAdminId });
+        setUserData({ staff: staffAdminId });
       }
     } catch (error) {
       if (error.response.status === 409) {

@@ -18,7 +18,7 @@ import api from '../../api/index';
 import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
-export default function LeftSidebar({ id, txt }) {
+export default function LeftSidebar({ id, txt, roleTxt }) {
   const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
@@ -78,7 +78,7 @@ export default function LeftSidebar({ id, txt }) {
       <div className="sideBarInfo">
         <div className="user_name"> {`${info?.first_name} ${info?.last_name}`}</div>
         <div className="staff_id">
-          Staff ID: <span className="staff_id_2"> {info?.id}</span>
+          {roleTxt} ID: <span className="staff_id_2"> {info?.id}</span>
         </div>
       </div>
       <div className="sidebarSubDiv">
