@@ -182,7 +182,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
       <TablePagination
         component="div"
         rowsPerPageOptions={[]}
-        count={staffMembers.total?.count}
+        count={staffMembers.total?.count || 0}
         rowsPerPage={staffMembers.limit || 10}
         page={page}
         onPageChange={handleChangePage}

@@ -168,7 +168,7 @@ export default function ClinicAdminTable({ clinicAdminId, clinicAdmins, getClini
       <TablePagination
         component="div"
         rowsPerPageOptions={[]}
-        count={clinicAdmins?.total?.count}
+        count={clinicAdmins?.total?.count || 0}
         rowsPerPage={clinicAdmins.limit || 10}
         page={page}
         onPageChange={handleChangePage}
