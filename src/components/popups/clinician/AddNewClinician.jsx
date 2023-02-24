@@ -73,7 +73,7 @@ export default function AddClinician({
     setOpenAddClinican(false);
     setClinician({});
     setChecked(false);
-    setUserData({});
+    setUserData({ clinic: clinicAdminId, title: '' });
   };
 
   // uploading img
@@ -119,8 +119,6 @@ export default function AddClinician({
     try {
       e.preventDefault();
 
-      console.log('CXLINIC', clinician);
-
       // Create a new FormData object
       const formData = new FormData();
 
@@ -147,7 +145,6 @@ export default function AddClinician({
 
       // sending this data to api
       const { data } = await api('post', '/admins/clinicians', formData);
-      console.log('CXLINIC', clinician);
 
       if (data) {
         toast.success('Clinic Admin added successfully');
@@ -156,7 +153,7 @@ export default function AddClinician({
         handleClose();
         setClinician({});
         setChecked(false);
-        setUserData({ clinic: clinicAdminId });
+        setUserData({ clinic: clinicAdminId, title: '' });
       }
     } catch (error) {
       if (error.response.status === 409) {
@@ -272,7 +269,7 @@ export default function AddClinician({
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 name="title"
-                value={userData.title}
+                value={userData.title || ''}
                 onChange={handleUserDataChange}
                 placeholder="Title"
                 inputProps={{

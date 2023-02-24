@@ -88,7 +88,6 @@ export default function EditClinician({
     });
   }, [clinicianDetails, table]);
 
-  console.log('clinicianDetails', clinicianDetails);
   const handleClose = () => {
     setOpenEditClinican(false);
   };

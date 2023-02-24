@@ -77,7 +77,7 @@ export default function ClinicAdmin() {
             ))}
           </div>
         </div>
-        <ClinicianTable clinicians={clinicians} />
+        <ClinicianTable clinicians={clinicians} getClinicians={getClinicians} />
       </Grid>
       <div className="addBtn">
         <img

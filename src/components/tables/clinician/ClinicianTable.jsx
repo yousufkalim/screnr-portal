@@ -88,7 +88,6 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
               clinicians?.users?.map((row) => (
                 <StyledTableRow key={row.id} className="tableRow">
                   <TableCell />
-                  {console.log('row', row)}
                   <TableCell
                     align="left"
                     sx={{ display: 'flex', paddingTop: '12%' }}
