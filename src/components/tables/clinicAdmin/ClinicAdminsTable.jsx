@@ -12,7 +12,7 @@ import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 
 // navigation
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
@@ -32,16 +32,16 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function ClinicAdminTable({ clinicAdminId, clinicAdmins, getClinicAdmins }) {
+export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinicAdmins }) {
   const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
   const [clinicAdmin, setClinicAdmin] = useState({});
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
 
   const handleChangePage = async (event, newPage) => {
     await getClinicAdmins(newPage + 1);
     setPage(newPage);
   };
-  // const navigate = useNavigate();
 
   return (
     <div className="bg" id="clinicAdminTable">
@@ -88,13 +88,13 @@ export default function ClinicAdminTable({ clinicAdminId, clinicAdmins, getClini
           <TableBody>
             {clinicAdmins?.users?.length > 0 ? (
               clinicAdmins?.users?.map((row) => (
-                <StyledTableRow
-                  key={row.id}
-                  className="tableRow"
-                  // onClick={() => navigate(`/clinician/${row._id}`)}
-                >
+                <StyledTableRow key={row.id} className="tableRow">
                   <TableCell />
-                  <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
+                  <TableCell
+                    align="left"
+                    sx={{ display: 'flex', paddingTop: '12%' }}
+                    onClick={() => navigate(`/clinics/${row.id}`)}
+                  >
                     {row.profile_pic ? (
                       <div className="imgDivClinic">
                         <img
@@ -122,7 +122,11 @@ export default function ClinicAdminTable({ clinicAdminId, clinicAdmins, getClini
                     </div>
                   </TableCell>
 
-                  <TableCell align="center" className="table_cells">
+                  <TableCell
+                    align="center"
+                    className="table_cells"
+                    onClick={() => navigate(`/clinics/${row.id}`)}
+                  >
                     {row.clinician.count}
                   </TableCell>
                   <TableCell
@@ -131,6 +135,7 @@ export default function ClinicAdminTable({ clinicAdminId, clinicAdmins, getClini
                     sx={{
                       padding: '3%',
                     }}
+                    onClick={() => navigate(`/clinics/${row.id}`)}
                   >
                     {row.patient.count}
                   </TableCell>
@@ -157,7 +162,7 @@ export default function ClinicAdminTable({ clinicAdminId, clinicAdmins, getClini
         </Table>
         {openEditClinicAdmin && (
           <EditClinicAdmin
-            clinicAdminId={clinicAdminId}
+            staffAdminId={staffAdminId}
             openEditClinicAdmin={openEditClinicAdmin}
             setOpenEditClinicAdmin={setOpenEditClinicAdmin}
             getClinicAdmins={getClinicAdmins}
@@ -168,7 +173,7 @@ export default function ClinicAdminTable({ clinicAdminId, clinicAdmins, getClini
       <TablePagination
         component="div"
         rowsPerPageOptions={[]}
-        count={clinicAdmins?.total?.count}
+        count={clinicAdmins?.total?.count || 0}
         rowsPerPage={clinicAdmins.limit || 10}
         page={page}
         onPageChange={handleChangePage}

@@ -2,7 +2,7 @@ import { React, useState, useRef, useEffect } from 'react';
 
 // mui imports
 import { styled } from '@mui/material/styles';
-import { Table, Button } from '@mui/material';
+import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import TablePagination from '@mui/material/TablePagination';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 // navigation
@@ -36,20 +37,21 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function AllCliniciansTable({ setOpenAddClinican, clinicians, getClinicians }) {
+export default function AllCliniciansTable({ clinicians, getClinicians }) {
   const [openEditClinician, setOpenEditClinician] = useState(false);
   const [clinician, setClinician] = useState({});
   const [filter, setFilter] = useState('');
   const [openFilter, setOpenFilter] = useState(false);
-  const isSafari =
-    navigator.vendor.match(/apple/i) &&
-    !navigator.userAgent.match(/crios/i) &&
-    !navigator.userAgent.match(/fxios/i) &&
-    !navigator.userAgent.match(/Opera|OPT\//);
+  const [page, setPage] = useState(0);
   const click = useRef(null);
   const filterRef = useRef(null);
   const navigate = useNavigate();
   const classes = useStyles();
+
+  const handleChangePage = async (event, newPage) => {
+    await getClinicians('', '', newPage + 1);
+    setPage(newPage);
+  };
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
@@ -89,7 +91,7 @@ export default function AllCliniciansTable({ setOpenAddClinican, clinicians, get
             List of Clinicians <span className="countStyle">120</span>
           </h1>
 
-          <div className="allTableTitle" style={{ flexGrow: !isSafari ? '0.15' : 'none' }}>
+          <div className="allTableTitle" style={{ flexGrow: '0.15' }}>
             <IconTextField />
 
             <Filter
@@ -190,9 +192,6 @@ export default function AllCliniciansTable({ setOpenAddClinican, clinicians, get
                 </RadioGroup>
               </div>
             )}
-            <Button className="dashboard_table_head_btn" onClick={() => setOpenAddClinican(true)}>
-              Invite clinician
-            </Button>
           </div>
         </div>
         <Table
@@ -285,10 +284,18 @@ export default function AllCliniciansTable({ setOpenAddClinican, clinicians, get
         <EditClinician
           openEditClinican={openEditClinician}
           setOpenEditClinican={setOpenEditClinician}
-          clinicAdminDetails={clinician}
+          clinicianDetails={clinician}
           getClinicians={getClinicians}
         />
       </TableContainer>
+      <TablePagination
+        component="div"
+        rowsPerPageOptions={[]}
+        count={clinicians?.total?.count || 0}
+        rowsPerPage={clinicians.limit || 10}
+        page={page}
+        onPageChange={handleChangePage}
+      />
     </div>
   );
 }

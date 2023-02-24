@@ -23,20 +23,13 @@ import api from '../../api';
 
 export default function ClinicAdmin() {
   const [openAddClinican, setOpenAddClinican] = useState(false);
-  const [clinicians, setClinicians] = useState([]);
+  const [clinicians, setClinicians] = useState({});
   const { id } = useParams();
 
   const getClinicians = async () => {
-    if (window.location.pathname.includes('clinician')) {
-      const { data } = await api('get', '/admins/therapist/all/');
-      if (data) {
-        setClinicians(data.users);
-      }
-    } else {
-      const { data } = await api('get', `/admins/therapist/all/${id}`);
-      if (data) {
-        setClinicians(data.users);
-      }
+    const { data } = await api('get', `/admins/clinicians/getCliniciansByClinicId/${id}`);
+    if (data) {
+      setClinicians(data);
     }
   };
 
@@ -65,7 +58,7 @@ export default function ClinicAdmin() {
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>
-        <Sidebar />
+        <Sidebar id={id} txt="admins/clinics" roleTxt="Clinic" />
       </Grid>
 
       <Grid className="bgClinicianTable" xl={10} lg={9.5}>
