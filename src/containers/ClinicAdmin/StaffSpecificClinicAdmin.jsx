@@ -35,13 +35,13 @@ export default function ClinicAdmin() {
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>
-        <Sidebar id={id} txt="admins/staff" />
+        <Sidebar id={id} txt="admins/staff" roleTxt="Staff Id" />
       </Grid>
 
       <Grid className="bg" xl={10} lg={9.5}>
         <div className="breadCrumb">Dashboard &gt; Staff &gt;</div>
         <ClinicAdminTable
-          clinicAdminId={id}
+          staffAdminId={id}
           clinicAdmins={clinicAdmins}
           getClinicAdmins={getClinicAdmins}
         />
@@ -59,7 +59,7 @@ export default function ClinicAdmin() {
         openAddClinicAdmin={openAddClinicAdmin}
         setOpenAddClinicAdmin={setOpenAddClinicAdmin}
         getClinicAdmins={getClinicAdmins}
-        clinicAdminId={id}
+        staffAdminId={id}
       />
     </Grid>
   );

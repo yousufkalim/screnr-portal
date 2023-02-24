@@ -3,7 +3,7 @@ import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
 import ClinicAdmin from '../containers/ClinicAdmin/StaffSpecificClinicAdmin';
 import AllClinicAdmins from '../containers/ClinicAdmin/AllClinicAdmins';
-import Clinician from '../containers/Clinician/Clinician';
+import Clinician from '../containers/Clinician/ClinicAdminSpecificClinician';
 import AllClinicians from '../containers/Clinician/AllClinicians';
 import Patient from '../containers/Patient/Patient';
 import AllPatients from '../containers/Patient/AllPatients';
