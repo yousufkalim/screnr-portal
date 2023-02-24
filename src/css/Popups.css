@@ -521,6 +521,9 @@
 .react-tel-input .form-control:focus {
   caret-color: black;
 }
+.placeholerPhone .react-tel-input .form-control:focus {
+  color: black !important;
+}
 #focus .react-tel-input .form-control {
   z-index: 1300 !important;
 }

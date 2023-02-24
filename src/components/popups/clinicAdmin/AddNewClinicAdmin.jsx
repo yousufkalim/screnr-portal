@@ -12,9 +12,6 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
 
-// phone format
-import PhoneInput from 'react-phone-input-2';
-
 // react-toastify import
 import { toast } from 'react-toastify';
 
@@ -33,6 +30,7 @@ import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegisteredPopup';
 import UserCreated from '../general/UserCreated';
 import UserAlreadyExist from '../general/UserAlreadyExist';
+import CustomPhoneInput from '../general/CustomPhoneInput';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -303,41 +301,8 @@ export default function AddClinicAdmin({
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <div
-                className={
-                  clinicAdmin.phone_number === undefined || clinicAdmin.phone_number === '1'
-                    ? 'placeholerPhone'
-                    : ''
-                }
-              >
-                <PhoneInput
-                  country="us"
-                  onlyCountries={['us']}
-                  value={clinicAdmin.phone_number}
-                  onChange={(value) => {
-                    setClinicAdmin({ ...clinicAdmin, phone_number: value });
-                  }}
-                  disableDropdown
-                  countryCodeEditable={false}
-                  disableCountryGuess
-                />
-                {clinicAdmin.phone_number === undefined || clinicAdmin.phone_number === '1' ? (
-                  <p
-                    className="dummyPlaceholder"
-                    id="txtClick"
-                    role="presentation"
-                    // onClick={handleClick}
-                    onClick={() =>
-                      document
-                        .querySelector('.placeholerPhone .react-tel-input .form-control')
-                        .focus()
-                    }
-                  >
-                    Phone number
-                  </p>
-                ) : (
-                  ''
-                )}
+              <div>
+                <CustomPhoneInput setStaffMember={setClinicAdmin} staffMember={clinicAdmin} />
               </div>
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">

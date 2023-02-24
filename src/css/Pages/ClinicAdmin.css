@@ -1,8 +1,8 @@
 .user_name {
-  /* font-size: 1.8rem; */
   font-size: 20px;
   color: #136773;
   font-weight: 600;
+  text-transform: capitalize;
   width: 90%;
   word-wrap: break-word;
   margin-left: 5%;

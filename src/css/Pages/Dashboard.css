@@ -19,18 +19,13 @@
   font-weight: 500 !important;
   color: #454238 !important ;
   margin-left: 8px;
-
-  display: table-cell;
-  /* vertical-align: middle; */
-  /* white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 30%;
-  min-width: 0; */
+  text-transform: capitalize !important;
+  display: table-cell !important;
 }
 .staffEmailCell {
   font-size: 14px !important;
   font-weight: 400 !important;
+  text-transform: none !important;
 }
 
 .dashboardChartTxt {
@@ -101,7 +96,6 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  /* height: 200px; */
   margin-bottom: 2.7rem;
 }
 
@@ -134,10 +128,6 @@
 }
 
 .addBtn {
-  /* position: absolute !important;
-  right: 62px;
-  bottom: 80px;
-  z-index: 1300 !important; */
   position: fixed !important;
   right: 3% !important;
   bottom: 5% !important;
@@ -145,9 +135,6 @@
 }
 
 .addBtn2 {
-  /* position: absolute !important; */
-  /* right: 62px; */
-  /* bottom: 37px; */
   position: fixed !important;
   right: 3% !important;
   bottom: 5% !important;
