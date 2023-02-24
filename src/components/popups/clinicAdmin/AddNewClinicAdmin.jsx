@@ -50,14 +50,14 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function AddClinicAdmin({
-  clinicAdminId,
+  staffAdminId,
   openAddClinicAdmin,
   setOpenAddClinicAdmin,
   getClinicAdmins,
 }) {
   const [checked, setChecked] = useState(false);
   const [clinicAdmin, setClinicAdmin] = useState({});
-  const [userData, setUserData] = useState({ staff: clinicAdminId });
+  const [userData, setUserData] = useState({ staff: staffAdminId });
   const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
   const [exisitingButInactive, setExisitingButInactive] = useState(false);
   const [added, setAdded] = useState(false);
@@ -72,7 +72,6 @@ export default function AddClinicAdmin({
   };
 
   // uploading img
-
   const handleSelectedFile = (e) => {
     const myFile = e.target.files[0];
     const size = 1024 * 1024 * 10;
@@ -99,6 +98,10 @@ export default function AddClinicAdmin({
       ...clinicAdmin,
       expiry_date: e,
     });
+  };
+
+  const handleCheck = (event) => {
+    setChecked(event.target.checked);
   };
 
   // handle gender selection
@@ -144,7 +147,7 @@ export default function AddClinicAdmin({
         handleClose();
         setClinicAdmin({});
         setChecked(false);
-        setUserData({ staff: clinicAdminId });
+        setUserData({ staff: staffAdminId });
       }
     } catch (error) {
       if (error.response.status === 409) {
@@ -156,8 +159,32 @@ export default function AddClinicAdmin({
     }
   };
 
-  const handleCheck = (event) => {
-    setChecked(event.target.checked);
+  const handleActivate = async () => {
+    const formData = new FormData();
+
+    if (clinicAdmin.expiry_date && !checked) {
+      delete clinicAdmin.expiry_date;
+      setClinicAdmin({ ...clinicAdmin });
+    }
+    // append properties from ClinicAdmin in formdata
+    Object.keys(clinicAdmin).forEach((key) => {
+      formData.append(key, clinicAdmin[key]);
+    });
+
+    // append properties from userData in formdata
+    Object.keys(userData).forEach((key) => {
+      formData.append(`userData[${key}]`, userData[key]);
+    });
+    formData.append('active', 'true');
+    formData.append('activateUser', 'true');
+
+    const { data } = await api('put', '/admins/staff/undefined', formData);
+
+    if (data) {
+      getClinicAdmins();
+      setClinicAdmin({});
+      return toast.success('User added successfully');
+    }
   };
 
   return (
@@ -432,6 +459,8 @@ export default function AddClinicAdmin({
         <UserAlreadyExist
           openExistingUser={exisitingButInactive}
           setOpenExistingUser={setExisitingButInactive}
+          handleActivate={handleActivate}
+          setParentPopup={setClinicAdmin}
         />
       )}
     </div>

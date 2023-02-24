@@ -5,47 +5,21 @@ import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
 import ClearIcon from '@mui/icons-material/Clear';
 
-// react-toastify import
-import { toast } from 'react-toastify';
-
 // assets import
 import { ReactComponent as Icon } from '../../../assets/images/popups/existingEmail.svg';
 
 // child imports
 import BootstrapDialog from '../../../utils/GeneralPopupsStyling';
-import api from '../../../api/index';
 
 export default function UserAlreadyExist({
   openExistingUser,
   setOpenExistingUser,
-  staffMember,
-  setStaffMember,
-  getStaffMembers,
-  setOpenAddStaffMember,
+  handleActivate,
+  setParentPopup,
 }) {
   const handleClose = () => {
     setOpenExistingUser(false);
-  };
-
-  const handleActivate = async () => {
-    // setOpenExistingUser(false);
-
-    const staffMemberCopy = { ...staffMember };
-    const formData = new FormData();
-
-    Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
-    formData.append('active', 'true');
-    formData.append('activateUser', 'true');
-
-    const { data } = await api('put', '/admins/staff/undefined', formData);
-
-    if (data) {
-      getStaffMembers();
-      setStaffMember({});
-      setOpenAddStaffMember(false);
-      handleClose();
-      return toast.success('User added successfully');
-    }
+    setParentPopup(false);
   };
 
   return (
@@ -72,7 +46,14 @@ export default function UserAlreadyExist({
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
-          <Button className="inactiveBtn" variant="contained" onClick={handleActivate}>
+          <Button
+            className="inactiveBtn"
+            variant="contained"
+            onClick={() => {
+              handleActivate();
+              handleClose();
+            }}
+          >
             Activate user
           </Button>
         </DialogActions>
