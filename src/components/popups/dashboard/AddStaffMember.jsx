@@ -90,7 +90,6 @@ export default function AddStaffMember({
     if (myFile) {
       document.getElementById('selectedImg').src = URL.createObjectURL(myFile);
     }
-
     setStaffMember({ ...staffMember, profile_pic: myFile });
   };
 
@@ -129,6 +128,23 @@ export default function AddStaffMember({
       if (error.response.status === 418) {
         setExisitingButInactive(true);
       }
+    }
+  };
+
+  const handleActivate = async () => {
+    const staffMemberCopy = { ...staffMember };
+    const formData = new FormData();
+
+    Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
+    formData.append('active', 'true');
+    formData.append('activateUser', 'true');
+
+    const { data } = await api('put', '/admins/staff/undefined', formData);
+
+    if (data) {
+      getStaffMembers();
+      setStaffMember({});
+      return toast.success('User added successfully');
     }
   };
 
@@ -352,10 +368,8 @@ export default function AddStaffMember({
         <UserAlreadyExist
           openExistingUser={exisitingButInactive}
           setOpenExistingUser={setExisitingButInactive}
-          staffMember={staffMember}
-          setStaffMember={setStaffMember}
-          getStaffMembers={getStaffMembers}
-          setOpenAddStaffMember={setOpenAddStaffMember}
+          handleActivate={handleActivate}
+          setParentPopup={setOpenAddStaffMember}
         />
       )}
     </div>
