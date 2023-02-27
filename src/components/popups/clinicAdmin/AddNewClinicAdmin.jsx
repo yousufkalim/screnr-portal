@@ -462,7 +462,7 @@ export default function AddClinicAdmin({
           openExistingUser={exisitingButInactive}
           setOpenExistingUser={setExisitingButInactive}
           handleActivate={handleActivate}
-          setParentPopup={setClinicAdmin}
+          closeParent={handleClose}
         />
       )}
     </div>
