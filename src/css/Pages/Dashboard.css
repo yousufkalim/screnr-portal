@@ -1,10 +1,10 @@
 .dashboard_main_div {
   width: 100vw;
-  height: 92vh;
   max-height: 100vh;
   background-color: #f6fafb;
   padding: 0 4rem;
   position: relative !important;
+  padding-bottom: 8rem;
 }
 
 .navigation {
@@ -223,10 +223,11 @@
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 2px;
+  border-radius: 20px;
+  height: inherit;
 }
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #cccaca;
   border-radius: 25px;
   width: 3px;
 }
