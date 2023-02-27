@@ -51,7 +51,7 @@ export default function ClinicAdmin() {
   const cardsData = [
     {
       icon: TotalClinicians,
-      amount: '10',
+      amount: clinicians?.count?.clinicianCount?.count || 0,
       title: 'Total Clinicians',
       icon2: Circle,
       className: 'yellow_circle',
@@ -59,14 +59,14 @@ export default function ClinicAdmin() {
     },
     {
       icon: Clinician,
-      amount: '65',
+      amount: clinicians?.count?.patient7Days?.count || 0,
       title: 'New Patients (last 7 days)',
       icon2: GreenCircle,
       className: 'green_circle',
     },
     {
       icon: Patients2,
-      amount: '54',
+      amount: clinicians?.count?.patientCount?.count || 0,
       title: 'Total Active Patients',
       icon2: BlueCircle,
       className: 'blue_circle',
