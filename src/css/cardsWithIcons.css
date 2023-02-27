@@ -54,7 +54,9 @@
 .title {
   font-size: 14px;
   color: #919b9b;
-  width: max-content;
+  /* width: max-content; */
+  /* background-color: #919b9b; */
+  width: 6.5rem;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -130,5 +132,10 @@
   .title {
     font-size: 0.8rem;
     color: #919b9b;
+  }
+}
+@media only screen and (min-width: 1700px) {
+  .title {
+    width: auto;
   }
 }

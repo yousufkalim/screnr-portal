@@ -17,9 +17,6 @@ import ClearIcon from '@mui/icons-material/Clear';
 // react-toastify import
 import { toast } from 'react-toastify';
 
-// phone format
-import PhoneInput from 'react-phone-input-2';
-
 // react-datepicker import
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -36,6 +33,7 @@ import api from '../../../api/index';
 import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegisteredPopup';
 import UserCreated from '../general/UserCreated';
 import UserAlreadyExist from '../general/UserAlreadyExist';
+import CustomPhoneInput from '../general/CustomPhoneInput';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -349,40 +347,8 @@ export default function AddClinician({
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <div
-                className={
-                  clinician.phone_number === undefined || clinician.phone_number === '1'
-                    ? 'placeholerPhone'
-                    : ''
-                }
-              >
-                <PhoneInput
-                  country="us"
-                  onlyCountries={['us']}
-                  value={clinician.phone_number}
-                  onChange={(value) => {
-                    setClinician({ ...clinician, phone_number: value });
-                  }}
-                  disableDropdown
-                  countryCodeEditable={false}
-                  disableCountryGuess
-                />
-                {clinician.phone_number === undefined || clinician.phone_number === '1' ? (
-                  <p
-                    className="dummyPlaceholder"
-                    id="txtClick"
-                    role="presentation"
-                    onClick={() =>
-                      document
-                        .querySelector('.placeholerPhone .react-tel-input .form-control')
-                        .focus()
-                    }
-                  >
-                    Phone number
-                  </p>
-                ) : (
-                  ''
-                )}
+              <div>
+                <CustomPhoneInput setUserInfo={setClinician} userInfo={clinician} />
               </div>
             </FormControl>
 

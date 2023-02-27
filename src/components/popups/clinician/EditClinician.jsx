@@ -24,7 +24,7 @@ import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 
 // phone format
-import PhoneInput from 'react-phone-input-2';
+// import PhoneInput from 'react-phone-input-2';
 
 // assets import
 import dropdown from '../../../assets/icons/downArrow.svg';
@@ -35,6 +35,7 @@ import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar';
 import useOutlinedInputStyles from '../../../utils/EditFormInput';
 import api from '../../../api/index';
+import CustomPhoneInput from '../general/CustomPhoneInput';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -336,18 +337,8 @@ export default function EditClinician({
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <div className="edit-phone-input">
-                <PhoneInput
-                  country="us"
-                  onlyCountries={['us']}
-                  value={clinician.phone_number}
-                  onChange={(value) => {
-                    setClinician({ ...clinician, phone_number: value });
-                  }}
-                  disableDropdown
-                  countryCodeEditable={false}
-                  disableCountryGuess
-                />
+              <div>
+                <CustomPhoneInput setUserInfo={setClinician} userInfo={clinician} />
               </div>
             </FormControl>
 
