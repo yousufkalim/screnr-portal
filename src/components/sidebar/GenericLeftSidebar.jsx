@@ -18,7 +18,7 @@ import api from '../../api/index';
 import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
-export default function LeftSidebar({ id, txt, roleTxt }) {
+export default function LeftSidebar({ getClinicName, id, txt, roleTxt }) {
   const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
@@ -27,6 +27,7 @@ export default function LeftSidebar({ id, txt, roleTxt }) {
     const { data } = await api('get', `/${txt}/${id}`);
     if (data) {
       setInfo(data?.user);
+      getClinicName(data?.user.userData?.clinic_name);
     }
   };
 

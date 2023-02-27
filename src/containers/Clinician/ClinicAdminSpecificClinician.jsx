@@ -24,6 +24,7 @@ import api from '../../api';
 export default function ClinicAdmin() {
   const [openAddClinican, setOpenAddClinican] = useState(false);
   const [clinicians, setClinicians] = useState({});
+  const [breadcrumb, setBreadcrumb] = useState('');
   const { id } = useParams();
 
   const getClinicians = async () => {
@@ -31,6 +32,10 @@ export default function ClinicAdmin() {
     if (data) {
       setClinicians(data);
     }
+  };
+
+  const getClinicName = (name) => {
+    setBreadcrumb(name);
   };
 
   useEffect(() => {
@@ -58,11 +63,11 @@ export default function ClinicAdmin() {
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>
-        <Sidebar id={id} txt="admins/clinics" roleTxt="Clinic" />
+        <Sidebar id={id} txt="admins/clinics" roleTxt="Clinic" getClinicName={getClinicName} />
       </Grid>
 
       <Grid className="bgClinicianTable" xl={10} lg={9.5}>
-        <div className="breadCrumb">Dashboard &gt; Staff &gt; Lifeline Clinic &gt; </div>
+        <div className="breadCrumb">Dashboard &gt; Staff &gt; {breadcrumb} Clinic &gt; </div>
         <div className="clinicianScreenCardsDiv">
           <div className="cards_div_clinician_pg">
             {cardsData.map((item) => (
