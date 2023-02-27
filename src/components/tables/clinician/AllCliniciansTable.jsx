@@ -25,7 +25,9 @@ import { ReactComponent as Edit } from '../../../assets/components/Table/alert.s
 import IconTextField from '../../../utils/CustomTextInput';
 import EditClinician from '../../popups/clinician/EditClinician';
 import useStyles from '../../../utils/RadioBtnStyle';
+import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar';
+import PhoneFormat from '../../../utils/PhoneFormat';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
@@ -40,11 +42,13 @@ const StyledTableRow = styled(TableRow)(() => ({
 export default function AllCliniciansTable({ clinicians, getClinicians }) {
   const [openEditClinician, setOpenEditClinician] = useState(false);
   const [clinician, setClinician] = useState({});
+
   const [filter, setFilter] = useState({
     sortBy: '',
     status: '',
   });
   const [openFilter, setOpenFilter] = useState(false);
+  const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
   const click = useRef(null);
   const filterRef = useRef(null);
@@ -52,13 +56,25 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
   const classes = useStyles();
 
   const handleChangePage = async (event, newPage) => {
-    await getClinicians('', '', newPage + 1);
+    await getClinicians(filter.sortBy, search, filter.status, newPage + 1);
     setPage(newPage);
   };
 
-  const handleFilterChange = (event) => {
+  const handleFilterChange = async (event) => {
     setFilter({ ...filter, [event.target.name]: event.target.value });
+    await getClinicians(filter.sortBy, search, filter.status);
   };
+
+  const handleSearch = async (event) => {
+    setSearch(event.target.value);
+    await getClinicians(filter.sortBy, event.target.value, filter.status);
+  };
+
+  useEffect(() => {
+    getClinicians(filter.sortBy, search, filter.status);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter]);
+
   useEffect(() => {
     const handleCloseFilter = (e) => {
       if (
@@ -84,18 +100,18 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '100%',
+          maxHeight: '95%',
           overflowX: 'hidden',
           width: '94vw',
         }}
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">
-            List of Clinicians <span className="countStyle">120</span>
+            List of Clinicians <span className="countStyle">{clinicians?.total?.count || 0}</span>
           </h1>
 
           <div className="allTableTitle" style={{ flexGrow: '0.15' }}>
-            <IconTextField />
+            <IconTextField value={search} handleChange={handleSearch} name="search" />
 
             <Filter
               className="pointer"
@@ -110,6 +126,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
                     role="presentation"
                     onClick={() => {
                       setFilter('');
+                      setSearch('');
                     }}
                     className="pointer"
                   >
@@ -178,12 +195,12 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
                     label="Number of Patients"
                   />
                   <FormControlLabel
-                    value="patient-in-active"
+                    value="patient-active"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Active Patients"
                   />
                   <FormControlLabel
-                    value="patient-active"
+                    value="patient-in-active"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Inactive Patients"
                   />
@@ -210,33 +227,51 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
             <TableRow sx={{ height: '20px' }}>
               <TableCell sx={{ width: '2%' }} />
               <TableCell align="left" sx={{ width: '20%' }} className="table_head">
-                Clinic Name
+                Name
               </TableCell>
               <TableCell className="table_head" align="center">
-                Clinicans
+                Title
+              </TableCell>
+              <TableCell className="table_head" align="center">
+                Phone
               </TableCell>
               <TableCell className="table_head" align="center">
                 Patients
-              </TableCell>
+              </TableCell>{' '}
               <TableCell className="table_head" align="center">
                 Action
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {clinicians.length > 0 ? (
-              clinicians.map((row) => (
-                <StyledTableRow key={row.first_name} className="tableRow">
+            {clinicians?.users?.length > 0 ? (
+              clinicians?.users?.map((row) => (
+                <StyledTableRow key={row.id} className="tableRow">
                   <TableCell />
                   <TableCell
                     align="left"
                     sx={{ display: 'flex', paddingTop: '12%' }}
-                    onClick={() => navigate(`/clinician/${row._id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
-                    <AvatarComponent
-                      alt={`${row.first_name} ${row.last_name}`}
-                      className="header_avatar"
-                    />
+                    {row.profile_pic ? (
+                      <div className="imgDivClinic">
+                        <img
+                          src={getMediaUrl(row.profile_pic)}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '100px',
+                            objectFit: 'cover',
+                          }}
+                          alt=""
+                        />
+                      </div>
+                    ) : (
+                      <AvatarComponent
+                        alt={`${row.first_name} ${row.last_name}`}
+                        className="header_avatar"
+                      />
+                    )}
                     <div className="clinic_cell">
                       {`${row.first_name} ${row.last_name}`} <br />
                       <span className="clinicNametxt">
@@ -248,9 +283,16 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
                   <TableCell
                     align="center"
                     className="table_cells"
-                    onClick={() => navigate(`/clinician/${row._id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
-                    {row.therapist_count}
+                    {row.userData.title}.
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    className="table_cells"
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
+                  >
+                    {PhoneFormat(row.phone_number)}
                   </TableCell>
                   <TableCell
                     align="center"
@@ -258,9 +300,9 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
                     sx={{
                       padding: '3%',
                     }}
-                    onClick={() => navigate(`/clinician/${row._id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
-                    {row.patient_count}
+                    {row.patient.count}
                   </TableCell>
 
                   <TableCell align="center">

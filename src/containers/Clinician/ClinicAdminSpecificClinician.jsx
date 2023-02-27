@@ -29,8 +29,11 @@ export default function ClinicAdmin() {
   const [breadcrumb, setBreadcrumb] = useState('');
   const { id } = useParams();
 
-  const getClinicians = async () => {
-    const { data } = await api('get', `/admins/clinicians/getCliniciansByClinicId/${id}`);
+  const getClinicians = async (page = 1) => {
+    const { data } = await api(
+      'get',
+      `/admins/clinicians/getCliniciansByClinicId/${id}?page=${page}`,
+    );
     if (data) {
       setClinicians(data);
     }
