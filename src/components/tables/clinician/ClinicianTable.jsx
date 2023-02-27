@@ -91,7 +91,7 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
                   <TableCell
                     align="left"
                     sx={{ display: 'flex', paddingTop: '12%' }}
-                    onClick={() => navigate(`/patient/${row.id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
                     {row.profile_pic ? (
                       <div className="imgDivClinic">
@@ -121,19 +121,19 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
                   <TableCell
                     align="center"
                     className="table_cells"
-                    onClick={() => navigate(`/patient/${row.id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
                     {`${row.userData.title}.`}
                   </TableCell>
                   <TableCell
                     align="center"
                     className="table_cells"
-                    onClick={() => navigate(`/patient/${row.id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
                     {PhoneFormat(row.phone_number)}
                   </TableCell>
                   <TableCell
-                    onClick={() => navigate(`/patient/${row.id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                     align="center"
                     className="table_cells"
                     sx={{

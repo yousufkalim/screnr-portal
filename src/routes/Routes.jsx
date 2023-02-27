@@ -5,7 +5,7 @@ import ClinicAdmin from '../containers/ClinicAdmin/StaffSpecificClinicAdmin';
 import AllClinicAdmins from '../containers/ClinicAdmin/AllClinicAdmins';
 import Clinician from '../containers/Clinician/ClinicAdminSpecificClinician';
 import AllClinicians from '../containers/Clinician/AllClinicians';
-import Patient from '../containers/Patient/Patient';
+import Patient from '../containers/Patient/ClinicianSpecificPatient';
 import AllPatients from '../containers/Patient/AllPatients';
 import Activity from '../containers/Activity';
 import Prescription from '../containers/Patient/Prescription';
