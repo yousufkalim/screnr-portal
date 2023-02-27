@@ -9,6 +9,8 @@ import { useParams } from 'react-router-dom';
 // assets import
 import addBtn from '../../assets/icons/addBtn.svg';
 
+import { ReactComponent as Circle } from '../../assets/components/CardWithIcon/yellowIcon.svg';
+import { ReactComponent as TotalClinicians } from '../../assets/components/CardWithIcon/patientsIcon.svg';
 import { ReactComponent as Clinician } from '../../assets/components/CardWithIcon/clinician.svg';
 import { ReactComponent as Patients2 } from '../../assets/components/CardWithIcon/patients.svg';
 import { ReactComponent as GreenCircle } from '../../assets/components/CardWithIcon/greenCircle.svg';
@@ -39,6 +41,14 @@ export default function ClinicAdmin() {
   }, []);
 
   const cardsData = [
+    {
+      icon: TotalClinicians,
+      amount: '10',
+      title: 'Total Clinicians',
+      icon2: Circle,
+      className: 'yellow_circle',
+      link: '',
+    },
     {
       icon: Clinician,
       amount: '65',
