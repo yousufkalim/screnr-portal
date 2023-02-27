@@ -1,10 +1,10 @@
 .dashboard_main_div {
   width: 100vw;
-  height: 92vh;
   max-height: 100vh;
   background-color: #f6fafb;
   padding: 0 4rem;
   position: relative !important;
+  padding-bottom: 8rem;
 }
 
 .navigation {
