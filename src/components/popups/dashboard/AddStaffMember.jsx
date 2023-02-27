@@ -259,7 +259,7 @@ export default function AddStaffMember({
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
               <div>
-                <CustomPhoneInput setStaffMember={setStaffMember} staffMember={staffMember} />
+                <CustomPhoneInput setUserInfo={setStaffMember} userInfo={staffMember} />
               </div>
             </FormControl>
 
