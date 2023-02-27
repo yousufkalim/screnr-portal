@@ -334,6 +334,7 @@ export default function EditClinicAdmin({
                 />
               </div>
             </FormControl>
+
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <TextField
                 sx={{

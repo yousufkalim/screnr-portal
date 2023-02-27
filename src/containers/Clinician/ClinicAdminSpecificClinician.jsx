@@ -77,7 +77,7 @@ export default function ClinicAdmin() {
             ))}
           </div>
         </div>
-        <ClinicianTable clinicians={clinicians} />
+        <ClinicianTable clinicians={clinicians} getClinicians={getClinicians} />
       </Grid>
       <div className="addBtn">
         <img
@@ -89,7 +89,12 @@ export default function ClinicAdmin() {
         />
       </div>
 
-      <AddClinician openAddClinican={openAddClinican} setOpenAddClinican={setOpenAddClinican} />
+      <AddClinician
+        clinicAdminId={id}
+        openAddClinican={openAddClinican}
+        setOpenAddClinican={setOpenAddClinican}
+        getClinicians={getClinicians}
+      />
     </Grid>
   );
 }

@@ -17,6 +17,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 // react-toastify import
 import { toast } from 'react-toastify';
 
+// phone format
+import PhoneInput from 'react-phone-input-2';
+
 // react-datepicker import
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -24,10 +27,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 // assets import
 import add from '../../../assets/icons/add.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
+import edit from '../../../assets/icons/edit.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
 
 // child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
+import api from '../../../api/index';
+import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegisteredPopup';
+import UserCreated from '../general/UserCreated';
+import UserAlreadyExist from '../general/UserAlreadyExist';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -46,22 +54,143 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
+export default function AddClinician({
+  clinicAdminId,
+  openAddClinican,
+  setOpenAddClinican,
+  getClinicians,
+}) {
   const [checked, setChecked] = useState(false);
+  const [clinician, setClinician] = useState({});
+  const [userData, setUserData] = useState({ clinic: clinicAdminId, title: '' });
+  const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
+  const [exisitingButInactive, setExisitingButInactive] = useState(false);
+  const [added, setAdded] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
 
+  // close popup
   const handleClose = () => {
     setOpenAddClinican(false);
+    setClinician({});
+    setChecked(false);
+    setUserData({ clinic: clinicAdminId, title: '' });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(e);
-    toast.success('Clinic Admin added successfully');
-    handleClose();
+  // uploading img
+  const handleSelectedFile = (e) => {
+    const myFile = e.target.files[0];
+    const size = 1024 * 1024 * 10;
+    if (myFile.size > size) {
+      return toast.error('File size can not exceed 10 Mb');
+    }
+    if (myFile) {
+      document.getElementById('clinicAdmin_AddProfile_Pic_selected').src =
+        URL.createObjectURL(myFile);
+    }
+    setClinician({ ...clinician, profile_pic: myFile });
+  };
+
+  const handleChange = (e) => {
+    setClinician({ ...clinician, [e.target.name]: e.target.value });
+  };
+
+  const handleUserDataChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const dateChange = (e) => {
+    setClinician({
+      ...clinician,
+      expiry_date: e,
+    });
   };
 
   const handleCheck = (event) => {
     setChecked(event.target.checked);
+  };
+
+  // handle gender selection
+  const handleGenderSelection = (name) => {
+    setClinician({ ...clinician, gender: name });
+  };
+
+  // posting data
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      // Create a new FormData object
+      const formData = new FormData();
+
+      if (clinician.expiry_date && !checked) {
+        delete clinician.expiry_date;
+        setClinician({ ...clinician });
+      }
+      // append properties from clinician in formdata
+      Object.keys(clinician).forEach((key) => {
+        formData.append(key, clinician[key]);
+      });
+
+      // append properties from userData in formdata
+      Object.keys(userData).forEach((key) => {
+        formData.append(`userData[${key}]`, userData[key]);
+      });
+
+      if (clinician.phone_number && clinician.phone_number.length < 11) {
+        return toast.error('Phone number must be contain 10 digits');
+      }
+      if (checked && !clinician.expiry_date) {
+        return toast.error('Please enter expiry date');
+      }
+
+      // sending this data to api
+      const { data } = await api('post', '/admins/clinicians', formData);
+
+      if (data) {
+        toast.success('Clinic Admin added successfully');
+        getClinicians();
+        setAdded(true);
+        handleClose();
+        setClinician({});
+        setChecked(false);
+        setUserData({ clinic: clinicAdminId, title: '' });
+      }
+    } catch (error) {
+      if (error.response.status === 409) {
+        setAlreadyExisitingUser(true);
+      }
+      if (error.response.status === 418) {
+        setExisitingButInactive(true);
+      }
+    }
+  };
+
+  const handleActivate = async () => {
+    const formData = new FormData();
+
+    if (clinician.expiry_date && !checked) {
+      delete clinician.expiry_date;
+      setClinician({ ...clinician });
+    }
+    // append properties from clinician in formdata
+    Object.keys(clinician).forEach((key) => {
+      formData.append(key, clinician[key]);
+    });
+
+    // append properties from userData in formdata
+    Object.keys(userData).forEach((key) => {
+      formData.append(`userData[${key}]`, userData[key]);
+    });
+    formData.append('active', 'true');
+    formData.append('activateUser', 'true');
+
+    const { data } = await api('put', '/admins/staff/undefined', formData);
+
+    if (data) {
+      getClinicians();
+      setClinician({});
+      return toast.success('User added successfully');
+    }
   };
 
   return (
@@ -85,9 +214,29 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
             <p className="clinicianSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             <div>
               <div className="imgDivPopup">
-                <label htmlFor="profilePic">
-                  <input name="profile_pic" type="file" id="profilePic" accept="image/*" />{' '}
-                  <img src={profiles} className="pointer" alt="" />
+                <label htmlFor="clinicAdmin_AddProfile_Pic">
+                  <input
+                    name="profile_pic"
+                    type="file"
+                    id="clinicAdmin_AddProfile_Pic"
+                    accept=".png, .jpg, .jpeg"
+                    onChange={handleSelectedFile}
+                    className="noDisplay"
+                  />
+
+                  <img
+                    src={profiles}
+                    className="pointer"
+                    id="clinicAdmin_AddProfile_Pic_selected"
+                    style={{
+                      width: '100%',
+                      borderRadius: '100px',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                    alt=""
+                  />
+                  <img src={edit} className="addImgIcon" alt="" />
                 </label>
               </div>
             </div>
@@ -119,14 +268,19 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                name="client"
+                name="title"
+                value={userData.title || ''}
+                onChange={handleUserDataChange}
                 placeholder="Title"
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
               >
-                <MenuItem value="">West</MenuItem>
-                <MenuItem>East</MenuItem>
+                <MenuItem value="">Title</MenuItem>
+                <MenuItem value="Mr">Mr.</MenuItem>
+                <MenuItem value="Mrs">Mrs.</MenuItem>
+                <MenuItem value="Miss">Miss.</MenuItem>
+                <MenuItem value="Dr">Dr.</MenuItem>
               </Select>
             </FormControl>
 
@@ -146,6 +300,8 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                 placeholder="First Name"
                 size="normal"
                 name="first_name"
+                value={clinician.first_name}
+                onChange={handleChange}
               />
             </FormControl>
 
@@ -164,7 +320,9 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                 classes={outlinedInputStyles}
                 placeholder="Last Name"
                 size="normal"
-                name="Last_name"
+                name="last_name"
+                value={clinician.last_name}
+                onChange={handleChange}
               />
             </FormControl>
 
@@ -183,42 +341,79 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                 classes={outlinedInputStyles}
                 placeholder="Email"
                 size="normal"
+                name="email"
                 type="email"
+                value={clinician.email}
+                onChange={handleChange}
               />
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-phone"
-                classes={outlinedInputStyles}
-                placeholder="Phone Number"
-                size="normal"
-                type="text"
-                inputProps={{
-                  maxLength: 10,
-                }}
-              />
+              <div
+                className={
+                  clinician.phone_number === undefined || clinician.phone_number === '1'
+                    ? 'placeholerPhone'
+                    : ''
+                }
+              >
+                <PhoneInput
+                  country="us"
+                  onlyCountries={['us']}
+                  value={clinician.phone_number}
+                  onChange={(value) => {
+                    setClinician({ ...clinician, phone_number: value });
+                  }}
+                  disableDropdown
+                  countryCodeEditable={false}
+                  disableCountryGuess
+                />
+                {clinician.phone_number === undefined || clinician.phone_number === '1' ? (
+                  <p
+                    className="dummyPlaceholder"
+                    id="txtClick"
+                    role="presentation"
+                    onClick={() =>
+                      document
+                        .querySelector('.placeholerPhone .react-tel-input .form-control')
+                        .focus()
+                    }
+                  >
+                    Phone number
+                  </p>
+                ) : (
+                  ''
+                )}
+              </div>
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
               <p className="genderTxt"> Gender</p>
               <span>
-                <Button className="genderBtn" variant="contained">
+                <Button
+                  className={clinician.gender === 'male' ? 'selectGender' : 'genderBtn'}
+                  variant="contained"
+                  onClick={() => {
+                    handleGenderSelection('male');
+                  }}
+                >
                   Male
                 </Button>
-                <Button className="genderBtn" variant="contained">
+                <Button
+                  className={clinician.gender === 'female' ? 'selectGender' : 'genderBtn'}
+                  variant="contained"
+                  onClick={() => {
+                    handleGenderSelection('female');
+                  }}
+                >
                   Female
                 </Button>
-                <Button className="genderBtn" variant="contained">
+                <Button
+                  className={clinician.gender === 'non-binary' ? 'selectGender' : 'genderBtn'}
+                  variant="contained"
+                  onClick={() => {
+                    handleGenderSelection('non-binary');
+                  }}
+                >
                   Non-binary
                 </Button>
               </span>
@@ -238,7 +433,9 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
                   fontSize: '40px',
                   width: 'fit-content',
                 }}
-                control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
+                control={
+                  <Checkbox onChange={handleCheck} checked={checked} style={{ color: '#136773' }} />
+                }
                 label={
                   <Typography
                     style={{
@@ -261,8 +458,10 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
               <div className="date-div" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
-                  dateFormat="dd/MMMM/yyyy"
-                  name="date"
+                  dateFormat="MM-dd-yyyy"
+                  name="expiry_date"
+                  selected={clinician.expiry_date}
+                  onChange={dateChange}
                   disabled={!checked}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
@@ -279,6 +478,22 @@ export default function AddClinician({ openAddClinican, setOpenAddClinican }) {
           </Button>
         </DialogActions>
       </BootstrapDialog>
+      {alreadyExisitingUser && (
+        <EmailAlreadyRegisteredPopup
+          openExistingEmail={alreadyExisitingUser}
+          setOpenExistingEmail={setAlreadyExisitingUser}
+        />
+      )}
+
+      {added && <UserCreated openUserCreated={added} setOpenUserCreated={setAdded} />}
+      {exisitingButInactive && (
+        <UserAlreadyExist
+          openExistingUser={exisitingButInactive}
+          setOpenExistingUser={setExisitingButInactive}
+          handleActivate={handleActivate}
+          setParentPopup={setClinician}
+        />
+      )}
     </div>
   );
 }
