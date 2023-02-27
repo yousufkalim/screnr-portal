@@ -271,7 +271,7 @@ export default function EditClinician({
               </Select>
             </FormControl>
 
-            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -313,7 +313,7 @@ export default function EditClinician({
               />
             </FormControl>
 
-            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
