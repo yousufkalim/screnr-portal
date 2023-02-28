@@ -217,29 +217,27 @@
     font-size: 0.9rem;
   }
 }
-/* ScrollBar styling for default chrome view */
-::-webkit-scrollbar {
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 20px;
-  height: inherit;
-}
-::-webkit-scrollbar-thumb {
-  background: #cccaca;
-  border-radius: 25px;
-  width: 3px;
-}
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-thumb {
-  width: 6px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-::-webkit-scrollbar-thumb:horizontal {
-  display: none;
+/* scrollBar Only for Chrome Browser  */
+
+@supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee)) {
+  /* This rule only applies to Chrome */
+  ::-webkit-scrollbar {
+    height: 1px;
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f5f4f4;
+    border-radius: 25px 25px 25px 25px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #dddcdc;
+    border-radius: 25px 25px 25px 25px;
+    width: 1px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ece7e7;
+  }
+  ::-webkit-scrollbar-thumb:horizontal {
+    display: none;
+  }
 }
