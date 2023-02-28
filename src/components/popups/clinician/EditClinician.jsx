@@ -23,9 +23,6 @@ import { toast } from 'react-toastify';
 // react-datepicker import
 import DatePicker from 'react-datepicker';
 
-// phone format
-// import PhoneInput from 'react-phone-input-2';
-
 // assets import
 import dropdown from '../../../assets/icons/downArrow.svg';
 import edit from '../../../assets/icons/edit.svg';
@@ -67,7 +64,6 @@ export default function EditClinician({
   const outlinedInputStyles = useOutlinedInputStyles();
 
   useEffect(() => {
-    console.log('INSIDE USEFECT', clinicianDetails);
     const clinicAdminTemp = {
       first_name: clinicianDetails.first_name,
       last_name: clinicianDetails.last_name,
@@ -100,10 +96,6 @@ export default function EditClinician({
     const size = 1024 * 1024 * 10;
     if (myFile.size > size) {
       return toast.error('File size can not exceed 10 Mb');
-    }
-    if (myFile) {
-      document.getElementById('clinicAdmin_AddProfile_Pic_selected').src =
-        URL.createObjectURL(myFile);
     }
     setClinician({ ...clinician, profile_pic: myFile });
   };
