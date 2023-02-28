@@ -14,6 +14,12 @@
   padding-bottom: 1rem;
 }
 
+.headerImgDiv {
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+}
+
 .header_avatar {
   background-color: #136773 !important;
 }

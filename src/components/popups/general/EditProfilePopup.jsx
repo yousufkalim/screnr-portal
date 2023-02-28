@@ -15,7 +15,6 @@ import { toast } from 'react-toastify';
 // assets imports
 import { ReactComponent as Phone } from '../../../assets/icons/phoneIcon.svg';
 import { ReactComponent as Mail } from '../../../assets/icons/mailIcon.svg';
-// import { ReactComponent as Location } from '../../../assets/icons/location.svg';
 import edit from '../../../assets/icons/edit.svg';
 
 // child imports
@@ -190,21 +189,6 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
                 />
               </label>
             </FormControl>
-            {/* <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
-              <label className="pswdChangeTrack" htmlFor="address">
-                <p className="inputDiv">
-                  <Location className="customFieldIcon" /> Address
-                </p>
-                <input
-                  className="customInput"
-                  id="address"
-                  name="address"
-                  type="text"
-                  value={values.address}
-                  onChange={handleChange}
-                />
-              </label>
-            </FormControl> */}
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '84%' }}>
