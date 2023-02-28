@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useState } from 'react';
 
 // mui imports
 import { styled } from '@mui/material/styles';
@@ -9,14 +9,20 @@ import Typography from '@mui/material/Typography';
 import DialogActions from '@mui/material/DialogActions';
 import { FormControl, Button } from '@mui/material';
 
+// react-toastify import
+import { toast } from 'react-toastify';
+
 // assets imports
 import { ReactComponent as Phone } from '../../../assets/icons/phoneIcon.svg';
 import { ReactComponent as Mail } from '../../../assets/icons/mailIcon.svg';
-import { ReactComponent as Location } from '../../../assets/icons/location.svg';
+// import { ReactComponent as Location } from '../../../assets/icons/location.svg';
 import edit from '../../../assets/icons/edit.svg';
 
 // child imports
 import AvatarComponent from '../../Avatar';
+import { Store, UpdateStore } from '../../../StoreContext';
+import { getMediaUrl } from '../../../config';
+import api from '../../../api/index';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -34,17 +40,67 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProfilePopup }) {
-  const handleSelectedFile = async () => {
-    // const myFile = e.target.files[0];
-    // setValues({ ...values, profile_pic: myFile });
+  const { user } = Store();
+  const updateStore = UpdateStore();
+
+  const [values, setValues] = useState({
+    id: user.id,
+    phone_number: user.phone_number,
+    email: user.email,
+    profile_pic: user.profile_pic || '',
+  });
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    const regex = /^[0-9\b]+$/;
+    if (!e.target.value || regex.test(e.target.value)) {
+      setValues({
+        ...values,
+        phone_number: e.target.value,
+      });
+    } else return toast.error('Only digits are allowed');
+  };
+
+  // uploading img
+  const handleSelectedFile = (e) => {
+    const myFile = e.target.files[0];
+    const size = 1024 * 1024 * 10;
+    if (myFile.size > size) {
+      return toast.error('File size can not exceed 10 Mb');
+    }
+
+    setValues({ ...values, profile_pic: myFile });
   };
 
   const handleClose = () => {
     setOpenEditProfilePopup(false);
   };
+  const handleSubmit = async () => {
+    const formData = new FormData();
 
-  const handleSubmit = () => {
-    setOpenEditProfilePopup(false);
+    if (values.phone_number.length < 10) {
+      return toast.error('Phone number should be 10 digits long');
+    }
+    Object.keys(values).map((key) => formData.append(key, values[key]));
+    const { data } = await api('put', '/admins/', formData);
+
+    const updatedUser = {
+      ...user,
+      email: data.user.email,
+      phone_number: data.user.phone_number,
+      profile_pic: data.user.profile_pic,
+    };
+
+    if (data) {
+      updateStore({
+        user: updatedUser,
+      });
+      handleClose();
+      return toast.success('Profile updated successfully');
+    }
   };
 
   return (
@@ -71,39 +127,52 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
                     name="profile_pic"
                     type="file"
                     id="profilePic"
+                    className="noDisplay"
                     accept=".png, .jpg, .jpeg"
                     onChange={handleSelectedFile}
                   />
 
-                  {/* {staffMember.photo ? (
+                  {values?.profile_pic ? (
                     <img
-                      src={getMediaUrl(staffMember.photo)}
+                      src={getMediaUrl(values?.profile_pic)}
                       className="pointer"
-                      id="selectedImg"
+                      id="selectedProfileImg"
                       style={{
                         width: '100%',
                         borderRadius: '100px',
                         height: '100%',
                         objectFit: 'cover',
+                        border: ' 3px solid #faa017',
                       }}
-                      
                       alt=""
                     />
-                  ) : ( */}
-                  <AvatarComponent alt="A Q" className="profile_popups_avatar" />
-                  {/* )} */}
+                  ) : (
+                    <AvatarComponent
+                      alt={`${user.first_name} ${user.last_name}`}
+                      className="profile_popups_avatar"
+                    />
+                  )}
                   <img src={edit} className="addDPIcon" alt="" />
                 </label>
               </div>
             </div>
-            <h1 className="forgetPaswdTxt">Ahmed Qadri</h1>
+            <h1 className="forgetPaswdTxt">{`${user.first_name} ${user.last_name}`}</h1>
             <p className="enterEmailTxt">Superadmin</p>
             <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
               <label className="pswdChangeTrack" htmlFor="phone">
                 <p className="inputDiv">
                   <Phone className="customFieldIcon" /> Phone Number
                 </p>
-                <input className="customInput" id="phone" type="text" value="+92 312 4567890" />
+                <input
+                  className="customInput"
+                  id="phone"
+                  type="text"
+                  name="phone_number"
+                  maxLength="10"
+                  minLength="10"
+                  value={values.phone_number}
+                  onChange={handlePhoneNumberChange}
+                />
               </label>
             </FormControl>
             <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
@@ -111,10 +180,17 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
                 <p className="inputDiv">
                   <Mail className="customFieldIcon" /> Email
                 </p>
-                <input className="customInput" id="email" type="text" value="Ahmed@screnr.com" />
+                <input
+                  className="customInput"
+                  id="email"
+                  name="email"
+                  type="text"
+                  value={values.email}
+                  onChange={handleChange}
+                />
               </label>
             </FormControl>
-            <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
+            {/* <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
               <label className="pswdChangeTrack" htmlFor="address">
                 <p className="inputDiv">
                   <Location className="customFieldIcon" /> Address
@@ -122,11 +198,13 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
                 <input
                   className="customInput"
                   id="address"
+                  name="address"
                   type="text"
-                  value="Johar Town, Lahore"
+                  value={values.address}
+                  onChange={handleChange}
                 />
               </label>
-            </FormControl>
+            </FormControl> */}
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '84%' }}>
