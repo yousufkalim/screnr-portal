@@ -5,17 +5,28 @@ import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import ClearIcon from '@mui/icons-material/Clear';
 import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
-import { FormControl } from '@mui/material';
+import { FormControl, Button } from '@mui/material';
+
+// navigator
+import { useNavigate } from 'react-router-dom';
+
+// moment
+import moment from 'moment';
 
 // assets imports
 import { ReactComponent as Phone } from '../../../assets/icons/phoneIcon.svg';
 import { ReactComponent as Mail } from '../../../assets/icons/mailIcon.svg';
-import { ReactComponent as Location } from '../../../assets/icons/location.svg';
+import { ReactComponent as Arrow } from '../../../assets/icons/logoutArrow.svg';
 import edit from '../../../assets/icons/sidebarEdit.svg';
 
 // child imports
 import AvatarComponent from '../../Avatar';
+import { Store, UpdateStore } from '../../../StoreContext';
+import { getMediaUrl } from '../../../config';
+import PhoneFormat from '../../../utils/PhoneFormat';
+import api from '../../../api/index';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -24,8 +35,12 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
     paddingTop: theme.spacing(7),
-    paddingBottom: theme.spacing(7),
     textAlign: 'center',
+  },
+  '& .MuiDialogActions-root': {
+    paddingBottom: theme.spacing(7),
+    paddingTop: theme.spacing(0),
+    margin: 'auto',
   },
   [theme.breakpoints.down('1800')]: {
     '& .MuiDialogContent-root': {
@@ -42,8 +57,18 @@ export default function ProfilePopup({
   setOpenPasswordPopup,
   setOpenEditProfilePopup,
 }) {
+  const { user } = Store();
+  const updateStore = UpdateStore();
+  const navigate = useNavigate();
+
   const handleClose = () => {
     setOpenProfilePopup(false);
+  };
+
+  const handleLogout = () => {
+    api('patch', '/auth/logout/');
+    updateStore({ user: {}, loggedIn: false });
+    navigate('/');
   };
 
   return (
@@ -70,9 +95,9 @@ export default function ProfilePopup({
               <div className="imgDivPopupProfile">
                 {/* Avatar to be used */}
                 <label htmlFor="profilePic">
-                  {/* {staffMember.photo ? (
+                  {user.profile_pic ? (
                     <img
-                      src={getMediaUrl(staffMember.photo)}
+                      src={getMediaUrl(user.profile_pic)}
                       className="pointer"
                       id="selectedImg"
                       style={{
@@ -80,13 +105,16 @@ export default function ProfilePopup({
                         borderRadius: '100px',
                         height: '100%',
                         objectFit: 'cover',
+                        border: ' 3px solid #faa017',
                       }}
-                      
                       alt=""
                     />
-                  ) : ( */}
-                  <AvatarComponent alt="A Q" className="profile_popups_avatar" />
-                  {/* )} */}
+                  ) : (
+                    <AvatarComponent
+                      alt={`${user.first_name} ${user.last_name}`}
+                      className="profile_popups_avatar"
+                    />
+                  )}
                   <img
                     src={edit}
                     className="addDPIcon"
@@ -100,7 +128,7 @@ export default function ProfilePopup({
                 </label>
               </div>
             </div>
-            <h1 className="forgetPaswdTxt">Ahmed Qadri</h1>
+            <h1 className="forgetPaswdTxt">{`${user.first_name} ${user.last_name}`}</h1>
             <p className="enterEmailTxt">Superadmin</p>
             <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
               <div className="pswdChangeTrack" htmlFor="phone">
@@ -109,7 +137,7 @@ export default function ProfilePopup({
                 </p>
                 <p className="blktxt" id="fontWeight">
                   {' '}
-                  +92 312 4567890
+                  {PhoneFormat(user.phone_number)}
                 </p>
               </div>
             </FormControl>
@@ -120,24 +148,15 @@ export default function ProfilePopup({
                 </p>
 
                 <p className="blktxt" id="fontWeight">
-                  Ahmed@screnr.com
+                  {user.email}
                 </p>
               </div>
             </FormControl>
-            <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
-              <div className="pswdChangeTrack" htmlFor="address">
-                <p className="inputDiv">
-                  <Location className="customFieldIcon" /> Address
-                </p>
-                <p className="blktxt" id="fontWeight">
-                  Johar Town, Lahore
-                </p>
-              </div>
-            </FormControl>
+
             <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
               <div className="pswdChangeTrack">
                 <p>Last Password Changed</p>
-                <p>13-dec-2021</p>
+                <p>{moment(user.last_password_changed).format('MM-DD-YYYY')}</p>
               </div>
             </FormControl>
             <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
@@ -158,11 +177,17 @@ export default function ProfilePopup({
             <FormControl sx={{ mb: 1, width: '85%' }} variant="outlined">
               <div className="pswdChangeTrack">
                 <p className="blktxt">Account Created</p>
-                <p className="blktxt">13-July-2021</p>
+                <p className="blktxt">{moment(user.createdAt).format('MM-DD-YYYY')}</p>
               </div>
             </FormControl>
           </Typography>
         </DialogContent>
+        <DialogActions sx={{ width: '84%' }}>
+          <Button onClick={handleLogout} className="logoutBtn" variant="contained">
+            <p className="logoutTxt"> Logout</p>
+            <Arrow className="logoutArrow" />
+          </Button>
+        </DialogActions>
       </BootstrapDialog>
     </div>
   );

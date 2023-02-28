@@ -12,11 +12,13 @@ import { ReactComponent as Logo } from '../assets/components/HeaderIcons/Logo.sv
 import { ReactComponent as BellIcon } from '../assets/components/HeaderIcons/Bell.svg';
 import { ReactComponent as SearchIcon } from '../assets/components/HeaderIcons/Search.svg';
 import ProfilePopup from './popups/general/ProfilePopup';
+import { Store } from '../StoreContext';
 import UpdatePasswordPopup from './popups/general/ChangePasswordPopup';
 import EditProfilePopup from './popups/general/EditProfilePopup';
 
 export default function Header() {
   const { pathname } = useLocation();
+  const { user } = Store();
   const [activeTab, setActiveTab] = useState(pathname);
   const [openProfilePopup, setOpenProfilePopup] = useState(false);
   const [openPasswordPopup, setOpenPasswordPopup] = useState(false);
@@ -48,7 +50,7 @@ export default function Header() {
           <SearchIcon className="search" />
           <BellIcon className="bellIcon" />
           <AvatarComponent
-            alt="Rana Hamza"
+            alt={`${user.first_name} ${user.last_name}`}
             className="header_main_avatar"
             onClick={() => setOpenProfilePopup(true)}
           />
