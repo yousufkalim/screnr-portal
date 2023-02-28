@@ -8,6 +8,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 
 // navigation
@@ -35,8 +36,13 @@ const StyledTableRow = styled(TableRow)(() => ({
 export default function ClinicianTable({ clinicians, getClinicians }) {
   const [openEditClinican, setOpenEditClinican] = useState(false);
   const [clinician, setClinician] = useState({});
-
+  const [page, setPage] = useState(0);
   const navigate = useNavigate();
+
+  const handleChangePage = async (event, newPage) => {
+    await getClinicians(newPage + 1);
+    setPage(newPage);
+  };
 
   return (
     <div className="bgClinicianTable" id="clinicianTable">
@@ -44,7 +50,7 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '96%',
+          maxHeight: '94%',
           overflowX: 'hidden',
           width: '77.8vw',
           '@media (max-width: 1600px)': {
@@ -91,7 +97,7 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
                   <TableCell
                     align="left"
                     sx={{ display: 'flex', paddingTop: '12%' }}
-                    onClick={() => navigate(`/patient/${row.id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
                     {row.profile_pic ? (
                       <div className="imgDivClinic">
@@ -121,19 +127,19 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
                   <TableCell
                     align="center"
                     className="table_cells"
-                    onClick={() => navigate(`/patient/${row.id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
                     {`${row.userData.title}.`}
                   </TableCell>
                   <TableCell
                     align="center"
                     className="table_cells"
-                    onClick={() => navigate(`/patient/${row.id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
                     {PhoneFormat(row.phone_number)}
                   </TableCell>
                   <TableCell
-                    onClick={() => navigate(`/patient/${row.id}`)}
+                    onClick={() => navigate(`/clinicians/${row.id}`)}
                     align="center"
                     className="table_cells"
                     sx={{
@@ -171,6 +177,14 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
           getClinicians={getClinicians}
         />
       </TableContainer>
+      <TablePagination
+        component="div"
+        rowsPerPageOptions={[]}
+        count={clinicians?.total?.count || 0}
+        rowsPerPage={clinicians.limit || 10}
+        page={page}
+        onPageChange={handleChangePage}
+      />
     </div>
   );
 }

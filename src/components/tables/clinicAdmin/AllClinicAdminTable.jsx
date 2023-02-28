@@ -13,8 +13,9 @@ import Radio from '@mui/material/Radio';
 import TablePagination from '@mui/material/TablePagination';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+
 // navigation
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
@@ -45,7 +46,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
   const [openFilter, setOpenFilter] = useState(false);
   const [search, setSearch] = useState('');
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [filter, setFilter] = useState('');
   const click = useRef(null);
   const filterRef = useRef(null);
@@ -199,7 +200,11 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
               clinicAdmins?.users?.map((row) => (
                 <StyledTableRow key={row.id} className="tableRow">
                   <TableCell />
-                  <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
+                  <TableCell
+                    align="left"
+                    sx={{ display: 'flex', paddingTop: '12%' }}
+                    onClick={() => navigate(`/clinics/${row.id}`)}
+                  >
                     {row.profile_pic ? (
                       <div className="imgDivClinic">
                         <img
@@ -228,10 +233,15 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
                     </div>
                   </TableCell>
 
-                  <TableCell align="center" className="table_cells">
+                  <TableCell
+                    align="center"
+                    className="table_cells"
+                    onClick={() => navigate(`/clinics/${row.id}`)}
+                  >
                     {row.clinician.count}
                   </TableCell>
                   <TableCell
+                    onClick={() => navigate(`/clinics/${row.id}`)}
                     align="center"
                     className="table_cells"
                     sx={{

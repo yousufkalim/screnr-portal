@@ -26,13 +26,21 @@ import api from '../../api';
 export default function ClinicAdmin() {
   const [openAddClinican, setOpenAddClinican] = useState(false);
   const [clinicians, setClinicians] = useState({});
+  const [breadcrumb, setBreadcrumb] = useState('');
   const { id } = useParams();
 
-  const getClinicians = async () => {
-    const { data } = await api('get', `/admins/clinicians/getCliniciansByClinicId/${id}`);
+  const getClinicians = async (page = 1) => {
+    const { data } = await api(
+      'get',
+      `/admins/clinicians/getCliniciansByClinicId/${id}?page=${page}`,
+    );
     if (data) {
       setClinicians(data);
     }
+  };
+
+  const getClinicName = (name) => {
+    setBreadcrumb(name);
   };
 
   useEffect(() => {
@@ -43,7 +51,7 @@ export default function ClinicAdmin() {
   const cardsData = [
     {
       icon: TotalClinicians,
-      amount: '10',
+      amount: clinicians?.count?.clinicianCount?.count || 0,
       title: 'Total Clinicians',
       icon2: Circle,
       className: 'yellow_circle',
@@ -51,14 +59,14 @@ export default function ClinicAdmin() {
     },
     {
       icon: Clinician,
-      amount: '65',
+      amount: clinicians?.count?.patient7Days?.count || 0,
       title: 'New Patients (last 7 days)',
       icon2: GreenCircle,
       className: 'green_circle',
     },
     {
       icon: Patients2,
-      amount: '54',
+      amount: clinicians?.count?.patientCount?.count || 0,
       title: 'Total Active Patients',
       icon2: BlueCircle,
       className: 'blue_circle',
@@ -68,11 +76,11 @@ export default function ClinicAdmin() {
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>
-        <Sidebar id={id} txt="admins/clinics" roleTxt="Clinic" />
+        <Sidebar id={id} txt="admins/clinics" roleTxt="Clinic" getClinicName={getClinicName} />
       </Grid>
 
       <Grid className="bgClinicianTable" xl={10} lg={9.5}>
-        <div className="breadCrumb">Dashboard &gt; Staff &gt; Lifeline Clinic &gt; </div>
+        <div className="breadCrumb">Dashboard &gt; Staff &gt; {breadcrumb} Clinic &gt; </div>
         <div className="clinicianScreenCardsDiv">
           <div className="cards_div_clinician_pg">
             {cardsData.map((item) => (

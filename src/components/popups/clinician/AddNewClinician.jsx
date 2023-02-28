@@ -300,6 +300,9 @@ export default function AddClinician({
                 name="first_name"
                 value={clinician.first_name}
                 onChange={handleChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
 
@@ -321,6 +324,9 @@ export default function AddClinician({
                 name="last_name"
                 value={clinician.last_name}
                 onChange={handleChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
 
@@ -457,7 +463,7 @@ export default function AddClinician({
           openExistingUser={exisitingButInactive}
           setOpenExistingUser={setExisitingButInactive}
           handleActivate={handleActivate}
-          setParentPopup={setClinician}
+          closeParent={handleClose}
         />
       )}
     </div>

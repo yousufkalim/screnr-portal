@@ -25,6 +25,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import add from '../../../assets/icons/add.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
+import CustomPhoneInput from '../general/CustomPhoneInput';
 
 // child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
@@ -174,7 +175,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
               />
             </FormControl>
 
-            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -212,7 +213,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
               />
             </FormControl>
 
-            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 2 }} variant="outlined">
+            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -232,7 +233,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <TextField
+              {/* <TextField
                 sx={{
                   borderRadius: '20px',
                   input: {
@@ -250,7 +251,8 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
                 inputProps={{
                   maxLength: 10,
                 }}
-              />
+              /> */}
+              <CustomPhoneInput setUserInfo={setClinician} userInfo={clinician} />
             </FormControl>
 
             <FormControl

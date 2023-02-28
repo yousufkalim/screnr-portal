@@ -63,10 +63,11 @@ export default function EditClinician({
 }) {
   const [checked, setChecked] = useState(false);
   const [clinician, setClinician] = useState({});
-  const [userData, setUserData] = useState({ title: '' });
+  const [userData, setUserData] = useState({});
   const outlinedInputStyles = useOutlinedInputStyles();
 
   useEffect(() => {
+    console.log('INSIDE USEFECT', clinicianDetails);
     const clinicAdminTemp = {
       first_name: clinicianDetails.first_name,
       last_name: clinicianDetails.last_name,
@@ -85,7 +86,7 @@ export default function EditClinician({
     setClinician(clinicAdminTemp);
     setUserData({
       clinic: clinicianDetails?.userData?.clinic.id,
-      title: clinicianDetails?.userData?.title,
+      title: clinicianDetails?.userData?.title || '',
     });
   }, [clinicianDetails, table]);
 
@@ -191,7 +192,7 @@ export default function EditClinician({
         <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
           <Typography gutterBottom>
-            <h1 className="clinicianPopupTxt">Edit New Clinician</h1>
+            <h1 className="clinicianPopupTxt">Edit Clinician</h1>
             <p className="clinicianSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             <div>
               <div className="imgDivPopup">
@@ -264,7 +265,7 @@ export default function EditClinician({
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
               >
-                <MenuItem value="">Title</MenuItem>
+                {/* <MenuItem value="">Title</MenuItem> */}
                 <MenuItem value="Mr">Mr.</MenuItem>
                 <MenuItem value="Mrs">Mrs.</MenuItem>
                 <MenuItem value="Miss">Miss.</MenuItem>
@@ -290,6 +291,9 @@ export default function EditClinician({
                 name="first_name"
                 value={clinician.first_name}
                 onChange={handleChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
 
@@ -311,6 +315,9 @@ export default function EditClinician({
                 name="last_name"
                 value={clinician.last_name}
                 onChange={handleChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
 
@@ -411,14 +418,14 @@ export default function EditClinician({
                 width: '100%',
               }}
             >
-              <div className="date-div" id={!checked ? 'disabledDate' : ''}>
+              <div className="date-div2" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
                   dateFormat="MM-dd-yyyy"
                   name="expiry_date"
-                  selected={clinician.expiry_date}
                   onChange={dateChange}
                   disabled={!checked}
+                  selected={clinician?.expiry_date}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown

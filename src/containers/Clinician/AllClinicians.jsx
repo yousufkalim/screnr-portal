@@ -1,20 +1,55 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 
 // mui imports
 import { Grid } from '@mui/material';
 
 // child components import
 import AllCliniciansTable from '../../components/tables/clinician/AllCliniciansTable';
-// import api from '../../api';
+import api from '../../api';
 
 export default function AllClinicians() {
-  const [clinicians] = useState({});
+  const [clinicians, setClinicians] = useState({});
 
-  const getClinicians = async () => {
-    // const { data } = await api('get', '/admins/clinicians');
-    // if (data) {
-    //   setClinicians(data);
-    // }
+  const abortControllerRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
+
+  const getClinicians = async (sort, search, status, page = 1) => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    const abortController = new AbortController();
+    abortControllerRef.current = abortController;
+
+    let apiUrl = `/admins/clinicians?page=${page}`;
+    if (sort) {
+      apiUrl += `&sort=${sort}`;
+    }
+    if (search) {
+      apiUrl += `&search=${search}`;
+    }
+    if (status) {
+      apiUrl += `&status=${status}`;
+    }
+    const { data } = await api(
+      'get',
+      apiUrl,
+      {
+        signal: abortController.signal,
+      },
+      true,
+    );
+
+    if (data) {
+      setClinicians(data);
+    }
   };
 
   useEffect(() => {

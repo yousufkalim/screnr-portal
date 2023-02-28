@@ -15,11 +15,11 @@ export default function UserAlreadyExist({
   openExistingUser,
   setOpenExistingUser,
   handleActivate,
-  setParentPopup,
+  closeParent,
 }) {
   const handleClose = () => {
     setOpenExistingUser(false);
-    setParentPopup(false);
+    closeParent();
   };
 
   return (

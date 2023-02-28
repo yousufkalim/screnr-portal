@@ -332,7 +332,7 @@ export default function AddStaffMember({
           openExistingUser={exisitingButInactive}
           setOpenExistingUser={setExisitingButInactive}
           handleActivate={handleActivate}
-          setParentPopup={setOpenAddStaffMember}
+          closeParent={handleClose}
         />
       )}
     </div>
