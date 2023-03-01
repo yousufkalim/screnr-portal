@@ -13,6 +13,16 @@
   height: 71.2vh;
 }
 
+.notxt {
+  font-size: 14px;
+  font-weight: 400;
+  color: #919b9bf0;
+  margin-left: 10px;
+  background-color: #e4e4e4f0;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
 .clinicianScreenCardsDiv {
   width: 53%;
 }

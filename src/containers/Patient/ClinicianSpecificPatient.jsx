@@ -26,10 +26,14 @@ import api from '../../api';
 export default function Patient() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [patients, setPatients] = useState({});
+
   const { id } = useParams();
 
-  const getPatients = async () => {
-    const { data } = await api('get', `/admins/patients/getPatiemtsByClinicianId/${id}`);
+  const getPatients = async (page = 1) => {
+    const { data } = await api(
+      'get',
+      `/admins/patients/getPatientsByClinicianId/${id}?page=${page}`,
+    );
     if (data) {
       setPatients(data);
     }
@@ -43,19 +47,19 @@ export default function Patient() {
   const cardsData = [
     {
       icon: GreenIcon,
-      amount: '478',
+      amount: patients?.count?.completedExercise || 0,
       title: 'Completed Exercises',
       icon2: GreenStats,
     },
     {
       icon: RedIcon,
-      amount: '45',
+      amount: patients?.count?.patientWithError || 0,
       title: 'Patients with Errors',
       icon2: RedStats,
     },
     {
       icon: YellowIcon,
-      amount: '345',
+      amount: patients?.count?.uncheckedExercise || 0,
       title: 'Unchecked Exercise',
       icon2: YellowStats,
     },
@@ -98,7 +102,11 @@ export default function Patient() {
         />
       </div>
 
-      <AddNewPatient openAddPatient={openAddPatient} setOpenAddPatient={setOpenAddPatient} />
+      <AddNewPatient
+        getPatients={getPatients}
+        openAddPatient={openAddPatient}
+        setOpenAddPatient={setOpenAddPatient}
+      />
     </Grid>
   );
 }
