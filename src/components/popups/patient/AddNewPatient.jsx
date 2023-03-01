@@ -19,10 +19,10 @@ import { toast } from 'react-toastify';
 
 // react-datepicker import
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 // assets import
 import add from '../../../assets/icons/add.svg';
+import edit from '../../../assets/icons/edit.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
 
@@ -30,6 +30,9 @@ import dropdown from '../../../assets/icons/downArrow.svg';
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import ReactSelect from '../../ReactSelect';
 import api from '../../../api';
+import UserAlreadyExist from '../general/UserAlreadyExist';
+import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegisteredPopup';
+import UserCreated from '../general/UserCreated';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -48,40 +51,168 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
+export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPatients }) {
   const [checked, setChecked] = useState(false);
-  const [clinician, setClinician] = useState([]);
+  const [clinicians, setClinicians] = useState([]);
+  const [clinics, setClinics] = useState({});
+  const [patient, setPatient] = useState({});
+  const [selectedClinic, setSelectedClinic] = useState('');
+  const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
+  const [exisitingButInactive, setExisitingButInactive] = useState(false);
+  const [added, setAdded] = useState(false);
+  const [userData, setUserData] = useState({ diagnosis: '', location: '', clinicians: [] });
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
     setOpenAddPatient(false);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    toast.success('Patient added successfully');
-    handleClose();
+    setPatient({});
+    setChecked(false);
+    setClinicians([]);
+    setSelectedClinic('');
+    setUserData({ diagnosis: '', location: '', clinicians: [] });
   };
 
   const handleCheck = (event) => {
     setChecked(event.target.checked);
   };
 
-  const getClinicians = async () => {
-    const { data } = await api('get', '/admins/therapist/all/');
+  const handlePatientChange = (e) => {
+    setPatient({ ...patient, [e.target.name]: e.target.value });
+  };
+
+  const handleUserDataChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const expDateChange = (e) => {
+    setPatient({
+      ...patient,
+      expiry_date: e,
+    });
+  };
+
+  const dobChange = (e) => {
+    setUserData({
+      ...userData,
+      dob: e,
+    });
+  };
+
+  const handleSelectedFile = (e) => {
+    const myFile = e.target.files[0];
+    const size = 1024 * 1024 * 10;
+
+    if (myFile.size > size) {
+      return toast.error('File size can not exceed 10 Mb');
+    }
+    if (myFile) {
+      document.getElementById('patientDP').src = URL.createObjectURL(myFile);
+    }
+    setPatient({ ...patient, profile_pic: myFile });
+  };
+
+  const getAllClinics = async () => {
+    const { data } = await api('get', '/admins/clinics/getAllClinicsNonPaginated');
     if (data) {
-      // setClinicians(data.users);
-      setClinician(
-        data.users.map((doctor) => {
-          return { label: `Dr ${doctor.first_name}`, value: doctor.first_name };
-        }),
+      setClinics(data);
+    }
+  };
+
+  const getClinicians = async (page = 1) => {
+    if (selectedClinic) {
+      const { data } = await api(
+        'get',
+        `/admins/clinicians/getCliniciansByClinicId/${selectedClinic}?page=${page}`,
       );
+      if (data) {
+        setClinicians(
+          data.users.map((doctor) => {
+            return {
+              id: doctor.id,
+              optName: `${doctor.first_name} ${doctor.last_name}`,
+            };
+          }),
+        );
+      }
+    } else if (!selectedClinic) {
+      setClinicians([]);
+    }
+  };
+
+  const handleSelectedClinic = (e) => {
+    setSelectedClinic(e.target.value);
+    if (e.target.value) {
+      getClinicians();
+    } else {
+      setClinicians([]);
+    }
+  };
+
+  // posting data
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      // Create a new FormData object
+      const formData = new FormData();
+
+      if (patient.expiry_date && !checked) {
+        delete patient.expiry_date;
+        setPatient({ ...patient });
+      }
+      // append properties from patient in formdata
+      Object.keys(patient).forEach((key) => {
+        formData.append(key, patient[key]);
+      });
+
+      // append properties from userData in formdata
+      Object.keys(userData).forEach((key) => {
+        if (key === 'clinicians') {
+          // if the key is 'clinicians', loop over the array and append each value to the formData object
+          userData[key].forEach((value, index) => {
+            formData.append(`userData[${key}][${index}]`, value);
+          });
+        } else {
+          // for other properties, simply append the value to the formData object
+          formData.append(`userData[${key}]`, userData[key]);
+        }
+      });
+
+      // if (patient.phone_number && patient.phone_number.length < 11) {
+      //   return toast.error('Phone number must be contain 10 digits');
+      // }
+      if (checked && !patient.expiry_date) {
+        return toast.error('Please enter expiry date');
+      }
+
+      // sending this data to api
+      const { data } = await api('post', '/admins/patients', formData);
+      if (data) {
+        toast.success('Patient added successfully');
+        getPatients();
+        setAdded(true);
+        handleClose();
+      }
+    } catch (error) {
+      if (error.response.status === 409) {
+        setAlreadyExisitingUser(true);
+      }
+      if (error.response.status === 418) {
+        setExisitingButInactive(true);
+      }
     }
   };
 
   useEffect(() => {
-    getClinicians();
+    getAllClinics();
   }, []);
+
+  useEffect(() => {
+    if (selectedClinic) {
+      getClinicians();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedClinic]);
 
   return (
     <div>
@@ -104,12 +235,33 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
             <p className="clinicianSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             <div>
               <div className="imgDivPopup">
-                <label htmlFor="profilePic">
-                  <input name="profile_pic" type="file" id="profilePic" accept="image/*" />{' '}
-                  <img src={profiles} className="pointer" alt="" />
+                <label htmlFor="patient_AddProfile_Pic">
+                  <input
+                    name="profile_pic"
+                    type="file"
+                    id="patient_AddProfile_Pic"
+                    accept=".png, .jpg, .jpeg"
+                    onChange={handleSelectedFile}
+                    className="noDisplay"
+                  />
+
+                  <img
+                    src={profiles}
+                    className="pointer"
+                    id="patientDP"
+                    style={{
+                      width: '100%',
+                      borderRadius: '100px',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                    alt=""
+                  />
+                  <img src={edit} className="addImgIcon" alt="" />
                 </label>
               </div>
             </div>
+
             <FormControl sx={{ mt: 3, width: '100%' }} variant="outlined">
               <Select
                 // eslint-disable-next-line react/no-unstable-nested-components
@@ -138,23 +290,26 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                name="client"
+                name="clinic_name"
                 placeholder="Title"
-                value=""
+                value={selectedClinic}
+                onChange={handleSelectedClinic}
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
               >
                 <MenuItem value="">
-                  {' '}
                   <span style={{ color: '#949494' }}>Select Clinic Name</span>
                 </MenuItem>
-                <MenuItem>Uxaine</MenuItem>
+                {clinics?.users?.map((row) => (
+                  <MenuItem value={row.id}>
+                    <span style={{ color: '#949494' }}>{row.userData.clinic_name}</span>
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
-
             <FormControl sx={{ mt: 2, width: '100%' }} variant="outlined">
-              <ReactSelect dataOptions={clinician} />
+              <ReactSelect dataOptions={clinicians} setUserData={setUserData} userData={userData} />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 2, width: '100%' }} variant="outlined">
               <TextField
@@ -171,6 +326,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
                 classes={outlinedInputStyles}
                 placeholder="MRN (customized unique id)"
                 size="normal"
+                name="mrn_id"
+                value={userData.mrn_id}
+                onChange={handleUserDataChange}
               />
             </FormControl>
 
@@ -190,6 +348,8 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
                 placeholder="First Name"
                 size="normal"
                 name="first_name"
+                value={patient.first_name}
+                onChange={handlePatientChange}
               />
             </FormControl>
 
@@ -208,7 +368,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
                 classes={outlinedInputStyles}
                 placeholder="Last Name"
                 size="normal"
-                name="Last_name"
+                name="last_name"
+                value={patient.last_name}
+                onChange={handlePatientChange}
               />
             </FormControl>
 
@@ -228,6 +390,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
                 placeholder="Email"
                 size="normal"
                 type="email"
+                name="email"
+                value={patient.email}
+                onChange={handlePatientChange}
               />
             </FormControl>
 
@@ -246,6 +411,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
                 classes={outlinedInputStyles}
                 placeholder="Phone Number"
                 size="normal"
+                name="phone_number"
+                value={patient.phone_number}
+                onChange={handlePatientChange}
                 type="text"
                 inputProps={{
                   maxLength: 10,
@@ -263,8 +431,10 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
               <div className="date-div">
                 <DatePicker
                   showPopperArrow
-                  dateFormat="dd/MMMM/yyyy"
+                  dateFormat="MM-dd-yyyy"
                   name="date"
+                  selected={userData.dob}
+                  onChange={dobChange}
                   placeholderText="Date of birth"
                   popperPlacement="bottom-start"
                   showYearDropdown
@@ -300,9 +470,10 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                name="client"
+                name="diagnosis"
                 placeholder="Title"
-                value=""
+                value={userData.diagnosis}
+                onChange={handleUserDataChange}
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
@@ -310,8 +481,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
                 <MenuItem value="">
                   <span style={{ color: '#949494' }}>Select Diagnosis</span>
                 </MenuItem>
-                <MenuItem> Cancer</MenuItem>
-                <MenuItem> Typhoid</MenuItem>
+                <MenuItem value="Cancer"> Cancer</MenuItem>
+                <MenuItem value="Typhoid"> Typhoid</MenuItem>
+                <MenuItem value="Backpain"> Backpain</MenuItem>
               </Select>
             </FormControl>
             <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
@@ -346,32 +518,33 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
                   },
                 }}
                 name="location"
-                value=""
+                value={userData.location}
+                onChange={handleUserDataChange}
               >
                 <MenuItem disabled selected value="">
                   <span style={{ color: '#949494' }}>Location</span>{' '}
                 </MenuItem>
-                <MenuItem value="Left">
+                <MenuItem value="left">
                   {' '}
                   <span style={{ color: '#949494' }}>Left</span>{' '}
                 </MenuItem>
-                <MenuItem value="Right">
+                <MenuItem value="right">
                   {' '}
                   <span style={{ color: '#949494' }}>Right</span>{' '}
                 </MenuItem>
-                <MenuItem value="Posterior">
+                <MenuItem value="posterior">
                   {' '}
                   <span style={{ color: '#949494' }}>Posterior</span>{' '}
                 </MenuItem>
-                <MenuItem value="Anterior">
+                <MenuItem value="anterior">
                   {' '}
                   <span style={{ color: '#949494' }}>Anterior</span>{' '}
                 </MenuItem>
-                <MenuItem value="Medial">
+                <MenuItem value="medial">
                   {' '}
                   <span style={{ color: '#949494' }}>Medial</span>{' '}
                 </MenuItem>
-                <MenuItem value="Lateral">
+                <MenuItem value="lateral">
                   {' '}
                   <span style={{ color: '#949494' }}>Lateral</span>{' '}
                 </MenuItem>
@@ -415,8 +588,10 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
               <div className="date-div" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
                   showPopperArrow
-                  dateFormat="dd/MMMM/yyyy"
-                  name="date"
+                  dateFormat="MM-dd-yyyy"
+                  name="expiry_date"
+                  selected={patient.expiry_date}
+                  onChange={expDateChange}
                   disabled={!checked}
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
@@ -433,6 +608,22 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient }) {
           </Button>
         </DialogActions>
       </BootstrapDialog>
+      {alreadyExisitingUser && (
+        <EmailAlreadyRegisteredPopup
+          openExistingEmail={alreadyExisitingUser}
+          setOpenExistingEmail={setAlreadyExisitingUser}
+        />
+      )}
+
+      {added && <UserCreated openUserCreated={added} setOpenUserCreated={setAdded} />}
+      {exisitingButInactive && (
+        <UserAlreadyExist
+          openExistingUser={exisitingButInactive}
+          setOpenExistingUser={setExisitingButInactive}
+          // handleActivate={handleActivate}
+          closeParent={handleClose}
+        />
+      )}
     </div>
   );
 }
