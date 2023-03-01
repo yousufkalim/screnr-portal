@@ -215,8 +215,8 @@
 }
 
 .imgDivPopupProfile {
-  width: 26%;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -224,6 +224,40 @@
 
 #profilePic {
   display: none;
+}
+
+.logoutTxt {
+  margin-right: 10px;
+}
+
+.logoutBtn {
+  border: 1px solid #fba622 !important;
+  background-color: white !important;
+  color: #fba622 !important;
+  width: 100% !important;
+  border-radius: 20px !important;
+  padding: 2.1% 0px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+}
+
+.logoutBtn:hover {
+  border: none !important;
+  background-color: #fba622 !important;
+  color: white !important;
+  width: 100% !important;
+  border-radius: 20px !important;
+  padding: 2.1% 0px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+}
+
+.logoutBtn:hover .logoutArrow {
+  filter: brightness(0) invert(1);
 }
 
 .clinicianPopupTxt {
@@ -321,7 +355,7 @@
 
 .addDPIcon {
   position: relative;
-  top: -24px;
+  top: -27px;
   right: -34px;
   cursor: pointer;
 }

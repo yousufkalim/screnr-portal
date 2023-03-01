@@ -1,4 +1,6 @@
 import { React, useState } from 'react';
+
+// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -9,9 +11,16 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import InputAdornment from '@mui/material/InputAdornment';
 import Typography from '@mui/material/Typography';
-import { toast } from 'react-toastify';
 import { FormControl, TextField, IconButton } from '@mui/material';
+
+// toast
+import { toast } from 'react-toastify';
+
+// child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
+import { Store } from '../../../StoreContext';
+
+import api from '../../../api/index';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -29,19 +38,24 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function UpdatePasswordPopup({
-  openUpdateModal,
-  setOpenUpdateModal,
-  closeProfilePopup,
-}) {
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [values, setValues] = useState({
-    password: '',
-    newPassword: '',
+export default function UpdatePasswordPopup({ openUpdateModal, setOpenUpdateModal }) {
+  const [showPassword, setShowPassword] = useState({
+    showNew: false,
+    showOld: false,
+    showConfirm: false,
   });
+  const [values, setValues] = useState({
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  });
+  const { showNew, showOld, showConfirm } = showPassword;
+  const { oldPassword, newPassword, confirmPassword } = values;
+  const { user } = Store();
+  const { id } = user;
 
-  const { password, newPassword } = values;
+  const outlinedInputStyles = useOutlinedInputStyles();
+
   const handleChange = (e) => {
     setValues({
       ...values,
@@ -49,16 +63,15 @@ export default function UpdatePasswordPopup({
     });
   };
 
-  const outlinedInputStyles = useOutlinedInputStyles();
-
   const handleClose = () => {
     setOpenUpdateModal(false);
+    setValues({});
   };
 
   const handleForgetPassword = async () => {
-    toast.success('You have successfully updated your password');
-    closeProfilePopup();
+    await api('put', `/auth/password/${id}`, values);
     handleClose();
+    return toast.success('You have successfully updated your password');
   };
 
   return (
@@ -80,13 +93,7 @@ export default function UpdatePasswordPopup({
             <h1 className="forgetPaswdTxt">Change Password</h1>
             <p className="enterEmailTxt">Enter your new password to update!</p>
 
-            <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
-              <div className="pswdChangeTrack">
-                <p>Last Password Changed</p>
-                <p>13-dec-2021</p>
-              </div>
-            </FormControl>
-            <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
+            <FormControl sx={{ mt: 4, mb: 2, width: '85%' }} variant="outlined">
               <TextField
                 sx={{
                   backgroundColor: 'white',
@@ -103,9 +110,9 @@ export default function UpdatePasswordPopup({
                 id="outlined-password"
                 classes={outlinedInputStyles}
                 placeholder="Password"
-                name="password"
-                value={password}
-                type={showPassword ? 'text' : 'password'}
+                name="oldPassword"
+                value={oldPassword}
+                type={showOld ? 'text' : 'password'}
                 onChange={handleChange}
                 InputProps={{
                   endAdornment: (
@@ -113,12 +120,12 @@ export default function UpdatePasswordPopup({
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={() => setShowPassword(!showPassword)}
-                        onMouseDown={() => setShowPassword(true)}
+                        onClick={() => setShowPassword({ ...showPassword, showOld: !showOld })}
+                        onMouseDown={() => setShowPassword({ ...showPassword, showOld: !showOld })}
                         edge="end"
                         sx={{ color: '#FBA622' }}
                       >
-                        {showPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+                        {showOld ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -130,7 +137,7 @@ export default function UpdatePasswordPopup({
                 }}
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, width: '85%' }} variant="outlined">
+            <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
               <TextField
                 sx={{
                   backgroundColor: 'white',
@@ -151,7 +158,7 @@ export default function UpdatePasswordPopup({
                 size="normal"
                 varient="filled"
                 value={newPassword}
-                type={showNewPassword ? 'text' : 'password'}
+                type={showNew ? 'text' : 'password'}
                 onChange={handleChange}
                 InputProps={{
                   endAdornment: (
@@ -159,16 +166,66 @@ export default function UpdatePasswordPopup({
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={() => setShowNewPassword(!showNewPassword)}
-                        onMouseDown={() => setShowNewPassword(true)}
+                        onClick={() => setShowPassword({ ...showPassword, showNew: !showNew })}
+                        onMouseDown={() => setShowPassword({ ...showPassword, showNew: !showNew })}
                         edge="end"
                         sx={{ color: '#FBA622' }}
                       >
-                        {showNewPassword ? (
-                          <VisibilityOutlinedIcon />
-                        ) : (
-                          <VisibilityOffOutlinedIcon />
-                        )}
+                        {showNew ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                  style: {
+                    color: '#8C8C8C',
+                    fontSize: '19px',
+                    fontWeight: '700',
+                  },
+                }}
+              />
+            </FormControl>
+
+            <FormControl sx={{ mb: 1, width: '85%' }} variant="outlined">
+              <TextField
+                sx={{
+                  backgroundColor: 'white',
+                  borderRadius: '25px',
+                  input: {
+                    color: '#454238',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    '&::placeholder': {
+                      opacity: '1 !important',
+                    },
+                  },
+                }}
+                id="outlined-password"
+                classes={outlinedInputStyles}
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                size="normal"
+                varient="filled"
+                value={confirmPassword}
+                type={showConfirm ? 'text' : 'password'}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    // eslint-disable-next-line react/jsx-wrap-multilines
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => {
+                          setShowPassword({ ...showPassword, showConfirm: !showConfirm });
+                        }}
+                        onMouseDown={() =>
+                          setShowPassword({
+                            ...showPassword,
+                            showConfirm: !showConfirm,
+                          })
+                        }
+                        edge="end"
+                        sx={{ color: '#FBA622' }}
+                      >
+                        {showConfirm ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
                       </IconButton>
                     </InputAdornment>
                   ),
