@@ -217,10 +217,9 @@
     font-size: 0.9rem;
   }
 }
-/* scrollBar Only for Chrome Browser  */
+/* Customize ScrollBar */
 
 @supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee)) {
-  /* This rule only applies to Chrome */
   ::-webkit-scrollbar {
     height: 1px;
     width: 5px;
@@ -228,11 +227,14 @@
   ::-webkit-scrollbar-track {
     background: #f5f4f4;
     border-radius: 25px 25px 25px 25px;
+    max-height: min-content;
+    overflow-y: hidden;
   }
   ::-webkit-scrollbar-thumb {
     background: #dddcdc;
     border-radius: 25px 25px 25px 25px;
     width: 1px;
+    overflow-y: hidden;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #ece7e7;

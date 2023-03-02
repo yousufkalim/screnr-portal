@@ -39,12 +39,14 @@ export default function ClinicAdmin() {
       </Grid>
 
       <Grid className="bg" xl={10} lg={9.5}>
-        <div className="breadCrumb">Dashboard &gt; Staff &gt;</div>
-        <ClinicAdminTable
-          staffAdminId={id}
-          clinicAdmins={clinicAdmins}
-          getClinicAdmins={getClinicAdmins}
-        />
+        <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '95vh' }}>
+          <div className="breadCrumb">Dashboard &gt; Staff &gt;</div>
+          <ClinicAdminTable
+            staffAdminId={id}
+            clinicAdmins={clinicAdmins}
+            getClinicAdmins={getClinicAdmins}
+          />
+        </div>
       </Grid>
       <div className="addBtn">
         <img
