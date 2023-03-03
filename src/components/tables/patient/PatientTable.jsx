@@ -91,6 +91,22 @@ export default function PatientTable({ patients, getPatients }) {
           '@media (max-width: 1600px)': {
             maxHeight: '85.6%',
             width: '54.7vw',
+            overflowX: 'scroll',
+          },
+          '@media (min-width: 1536px)': {
+            maxHeight: '85.6%',
+            width: '59vw',
+          },
+          '@media (max-width: 1535px)': {
+            '&::-webkit-scrollbar': {
+              height: '6px',
+            },
+            '&::-webkit-scrollbar-track:vertical': {
+              background: '#f5f4f4',
+            },
+            '&::-webkit-scrollbar-track:horizontal': {
+              background: '#dddcdc',
+            },
           },
         }}
       >
