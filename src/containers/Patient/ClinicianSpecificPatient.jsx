@@ -93,7 +93,11 @@ export default function Patient() {
             </div>
           </div>
 
-          <PatientTable patients={patients} setOpenAddPatient={setOpenAddPatient} />
+          <PatientTable
+            patients={patients}
+            setOpenAddPatient={setOpenAddPatient}
+            getPatients={getPatients}
+          />
         </Grid>
         <Grid xl={2.5} lg={2.5}>
           <RightSidebar />
