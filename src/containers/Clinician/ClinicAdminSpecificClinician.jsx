@@ -78,24 +78,26 @@ export default function ClinicAdmin() {
       <Grid xl={2} lg={2.5}>
         <Sidebar id={id} txt="admins/clinics" roleTxt="Clinic" getClinicName={getClinicName} />
       </Grid>
-
       <Grid className="bgClinicianTable" xl={10} lg={9.5}>
         <div className="breadCrumb">Dashboard &gt; Staff &gt; {breadcrumb} Clinic &gt; </div>
-        <div className="clinicianScreenCardsDiv">
-          <div className="cards_div_clinician_pg">
-            {cardsData.map((item) => (
-              <CardWithIcon
-                Icon={item.icon}
-                amount={item.amount}
-                title={item.title}
-                CircleIcon={item.icon2}
-                LeftCircleClassName={item.className}
-                cardClassName="card_main_div2"
-              />
-            ))}
+
+        <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '90vh' }}>
+          <div className="clinicianScreenCardsDiv">
+            <div className="cards_div_clinician_pg">
+              {cardsData.map((item) => (
+                <CardWithIcon
+                  Icon={item.icon}
+                  amount={item.amount}
+                  title={item.title}
+                  CircleIcon={item.icon2}
+                  LeftCircleClassName={item.className}
+                  cardClassName="card_main_div2"
+                />
+              ))}
+            </div>
           </div>
+          <ClinicianTable clinicians={clinicians} getClinicians={getClinicians} />
         </div>
-        <ClinicianTable clinicians={clinicians} getClinicians={getClinicians} />
       </Grid>
       <div className="addBtn">
         <img

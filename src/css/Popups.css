@@ -481,6 +481,9 @@
   font-size: 14px;
   font-weight: 500;
   color: #454238;
+  width: 23rem;
+  display: flex;
+  align-items: flex-end;
 }
 
 .customFieldIcon {

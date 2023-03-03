@@ -62,43 +62,46 @@ export default function Patient() {
   ];
 
   return (
-    <Grid container>
-      <Grid xl={2} lg={2.5}>
-        <Sidebar id={id} txt="admins/clinicians" roleTxt="Patient" />
-      </Grid>
-
-      <Grid className="bgClinicianTable" xl={7.5} lg={7}>
-        <div className="breadCrumb">Dashboard &gt; Staff &gt; Lifeline Clinic &gt; Doctor &gt;</div>
-        <div className="patientScreenCardsDiv">
-          <div className="cards_div_patient_pg">
-            {cardsData.map((item) => (
-              <StatsCard
-                Icon={item.icon}
-                amount={item.amount}
-                title={item.title}
-                BottomStats={item.icon2}
-                statsCardClassName="stats_card_main_div"
-              />
-            ))}
+    <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '100vh' }}>
+      <Grid container>
+        <Grid xl={2} lg={2.5}>
+          <Sidebar id={id} txt="admins/clinicians" roleTxt="Patient" />
+        </Grid>
+        <Grid className="bgClinicianTable" xl={7.5} lg={7}>
+          <div className="breadCrumb">
+            Dashboard &gt; Staff &gt; Lifeline Clinic &gt; Doctor &gt;
           </div>
+          <div className="patientScreenCardsDiv">
+            <div className="cards_div_patient_pg">
+              {cardsData.map((item) => (
+                <StatsCard
+                  Icon={item.icon}
+                  amount={item.amount}
+                  title={item.title}
+                  BottomStats={item.icon2}
+                  statsCardClassName="stats_card_main_div"
+                />
+              ))}
+            </div>
+          </div>
+
+          <PatientTable patients={patients} setOpenAddPatient={setOpenAddPatient} />
+        </Grid>
+        <Grid xl={2.5} lg={2.5}>
+          <RightSidebar />
+        </Grid>
+        <div className="addBtn">
+          <img
+            src={addBtn}
+            className="pointer"
+            onClick={() => setOpenAddPatient(true)}
+            role="presentation"
+            alt=""
+          />
         </div>
 
-        <PatientTable patients={patients} setOpenAddPatient={setOpenAddPatient} />
+        <AddNewPatient openAddPatient={openAddPatient} setOpenAddPatient={setOpenAddPatient} />
       </Grid>
-      <Grid xl={2.5} lg={2.5}>
-        <RightSidebar />
-      </Grid>
-      <div className="addBtn">
-        <img
-          src={addBtn}
-          className="pointer"
-          onClick={() => setOpenAddPatient(true)}
-          role="presentation"
-          alt=""
-        />
-      </div>
-
-      <AddNewPatient openAddPatient={openAddPatient} setOpenAddPatient={setOpenAddPatient} />
-    </Grid>
+    </div>
   );
 }

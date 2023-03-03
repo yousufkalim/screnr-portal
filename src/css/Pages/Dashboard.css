@@ -217,10 +217,9 @@
     font-size: 0.9rem;
   }
 }
-/* scrollBar Only for Chrome Browser  */
-
+/* Customize ScrollBar */
 @supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee)) {
-  /* This rule only applies to Chrome */
+
   ::-webkit-scrollbar {
     height: 1px;
     width: 5px;
