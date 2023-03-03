@@ -169,13 +169,14 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
             )}
           </TableBody>
         </Table>
-
-        <EditClinician
-          clinicianDetails={clinician}
-          openEditClinican={openEditClinican}
-          setOpenEditClinican={setOpenEditClinican}
-          getClinicians={getClinicians}
-        />
+        {openEditClinican && (
+          <EditClinician
+            clinicianDetails={clinician}
+            openEditClinican={openEditClinican}
+            setOpenEditClinican={setOpenEditClinican}
+            getClinicians={getClinicians}
+          />
+        )}
       </TableContainer>
       <TablePagination
         component="div"
