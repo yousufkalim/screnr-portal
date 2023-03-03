@@ -59,43 +59,28 @@ export default function EditPatient({
   getPatients,
   patientDetails,
 }) {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(!!patientDetails.expiry_date);
   const [clinicians, setClinicians] = useState([]);
-  const [clinics, setClinics] = useState({});
-  const [patient, setPatient] = useState({});
-  const [selectedClinic, setSelectedClinic] = useState('');
+
+  const [patient, setPatient] = useState({
+    first_name: patientDetails.first_name,
+    last_name: patientDetails.last_name,
+    email: patientDetails.email,
+    profile_pic: patientDetails.profile_pic,
+    phone_number: patientDetails.phone_number,
+    // eslint-disable-next-line no-underscore-dangle
+    expiry_date: moment(patientDetails.expiry_date)?._d || '',
+  });
+
   const [userData, setUserData] = useState({
-    diagnosis: patientDetails?.userData?.diagnosis,
-    location: patientDetails?.userData?.location,
-    clinicians: patientDetails?.userData?.clinicians,
+    mrn_id: patientDetails?.userData?.mrn_id,
+    diagnosis: patientDetails?.userData?.diagnosis || '',
+    location: patientDetails?.userData?.location || '',
+    clinicians: patientDetails?.userData?.clinicians || [],
+    // eslint-disable-next-line no-underscore-dangle
+    dob: moment(patientDetails?.userData?.dob)._d || '',
   });
   const outlinedInputStyles = useOutlinedInputStyles();
-
-  useEffect(() => {
-    const patientTemp = {
-      first_name: patientDetails.first_name,
-      last_name: patientDetails.last_name,
-      email: patientDetails.email,
-      profile_pic: patientDetails.profile_pic,
-      phone_number: patientDetails.phone_number,
-    };
-
-    if (patientDetails.expiry_date) {
-      // eslint-disable-next-line no-underscore-dangle
-      patientTemp.expiry_date = moment(patientDetails.expiry_date)._d;
-      setChecked(true);
-    }
-
-    setPatient(patientTemp);
-    setUserData({
-      mrn_id: patientDetails?.userData?.mrn_id,
-      diagnosis: patientDetails?.userData?.diagnosis || '',
-      location: patientDetails?.userData?.location || '',
-      clinicians: patientDetails?.userData?.clinicians || [],
-      // eslint-disable-next-line no-underscore-dangle
-      dob: moment(patientDetails?.userData?.dob)._d || '',
-    });
-  }, [patientDetails]);
 
   const handleClose = () => {
     setOpenEditPatient(false);
@@ -137,55 +122,32 @@ export default function EditPatient({
     setPatient({ ...patient, profile_pic: myFile });
   };
 
-  const getAllClinics = async () => {
-    const { data } = await api('get', '/admins/clinics/getAllClinicsNonPaginated');
-    if (data) {
-      setClinics(data);
-    }
-  };
-
   const getClinicians = async (page = 1) => {
-    if (selectedClinic) {
-      const { data } = await api(
-        'get',
-        `/admins/clinicians/getCliniciansByClinicId/${selectedClinic}?page=${page}`,
+    const { data } = await api(
+      'get',
+      `/admins/clinicians/getCliniciansByClinicId/${userData?.clinicians[0]?.userData?.clinic?.id}?page=${page}`,
+    );
+    if (data) {
+      setClinicians(
+        data.users
+          .filter((dr) => userData?.clinicians?.filter((_) => _.id === dr.id).length === 0)
+          .map((doctor) => {
+            return {
+              id: doctor?.id,
+              optName: `${doctor?.first_name} ${doctor?.last_name}`,
+            };
+          }),
       );
-      if (data) {
-        setClinicians(
-          data.users
-            .filter((dr) => userData?.clinicians?.filter((_) => _ === dr.id).length === 0)
-            .map((doctor) => {
-              return {
-                id: doctor?.id,
-                optName: `${doctor?.first_name} ${doctor?.last_name}`,
-              };
-            }),
-        );
-      }
-    } else if (!selectedClinic) {
-      setClinicians([]);
-    }
-  };
-
-  const handleSelectedClinic = (e) => {
-    setSelectedClinic(e.target.value);
-    if (e.target.value) {
-      getClinicians();
-    } else {
-      setClinicians([]);
     }
   };
 
   useEffect(() => {
-    getAllClinics();
+    if (userData?.clinicians[0]?.userData?.clinic?.id) {
+      getClinicians();
+    }
+
+    // eslint-disable-next-line
   }, []);
-
-  useEffect(() => {
-    if (selectedClinic) {
-      getClinicians();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedClinic]);
 
   // posting data
   const handleSubmit = async (e) => {
@@ -292,52 +254,6 @@ export default function EditPatient({
               </div>
             </div>
 
-            <FormControl sx={{ mt: 3, width: '100%' }} variant="outlined">
-              <Select
-                // eslint-disable-next-line react/no-unstable-nested-components
-                IconComponent={(props) => (
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-                  <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
-                )}
-                displayEmpty
-                sx={{
-                  '.MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#E1E1E1',
-                  },
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: ' #454238',
-                  },
-                  '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: ' #454238',
-                  },
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 2,
-                  },
-                }}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                name="clinic_name"
-                placeholder="Title"
-                value={selectedClinic}
-                onChange={handleSelectedClinic}
-                inputProps={{
-                  sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
-                }}
-              >
-                <MenuItem value="">
-                  <span style={{ color: '#949494' }}>Select Clinic Name</span>
-                </MenuItem>
-                {clinics?.users?.map((row) => (
-                  <MenuItem value={row.id}>
-                    <span style={{ color: '#949494' }}>{row.userData.clinic_name}</span>
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
             <FormControl sx={{ mt: 2, width: '100%' }} variant="outlined">
               <ReactSelect dataOptions={clinicians} setUserData={setUserData} userData={userData} />
             </FormControl>

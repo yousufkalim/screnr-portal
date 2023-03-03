@@ -7,7 +7,7 @@ import AvatarComponent from './Avatar';
 
 export default function ReactSelect({ dataOptions, setUserData, userData }) {
   const [options, setOptions] = useState([]);
-  const [selected, setSelected] = useState(
+  const [preSelected] = useState(
     userData?.clinicians.map((doctor) => {
       return {
         id: doctor?.id,
@@ -15,13 +15,16 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
       };
     }) ?? [],
   );
+  const [selected, setSelected] = useState([]);
 
   useEffect(() => {
     setOptions(dataOptions);
+    setSelected([]);
   }, [dataOptions]);
 
   useEffect(() => {
-    setUserData((prevState) => ({ ...prevState, clinicians: selected.map((item) => item.id) }));
+    const clinicians = preSelected.map((item) => item.id).concat(selected.map((item) => item.id));
+    setUserData((prevState) => ({ ...prevState, clinicians }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
@@ -42,6 +45,13 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
   return (
     <div>
       <div className="customSelect">
+        {preSelected.map((opt) => (
+          <div className="customOptions" role="presentation">
+            {/* <img src="" alt="" /> */}
+            <AvatarComponent alt={opt.optName} className="opt_avatar" />
+            <p className="optName">{opt.optName}</p>
+          </div>
+        ))}
         {selected.length > 0
           ? selected.map((opt) => (
               <div
@@ -54,7 +64,7 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
                 <p className="optName">{opt.optName}</p>
               </div>
             ))
-          : 'Select Clinicians'}
+          : !preSelected.length && 'Select Clinicians'}
       </div>
       <div className="OptNames">
         {options.length > 0 ? (
