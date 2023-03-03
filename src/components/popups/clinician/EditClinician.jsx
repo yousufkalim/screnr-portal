@@ -60,7 +60,7 @@ export default function EditClinician({
 }) {
   const [checked, setChecked] = useState(false);
   const [clinician, setClinician] = useState({});
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({ title: clinicianDetails?.userData?.title || '' });
   const outlinedInputStyles = useOutlinedInputStyles();
 
   useEffect(() => {

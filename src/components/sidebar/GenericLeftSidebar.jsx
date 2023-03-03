@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { React, useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +28,9 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt }) {
     const { data } = await api('get', `/${txt}/${id}`);
     if (data) {
       setInfo(data?.user);
-      getClinicName(data?.user.userData?.clinic_name);
+      if (txt.includes('clinicians')) {
+        getClinicName(data?.user.userData?.clinic?.userData?.clinic_name);
+      } else getClinicName(data?.user.userData?.clinic_name);
     }
   };
 
@@ -81,8 +84,13 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt }) {
         <div className="staff_id">
           {roleTxt}:{' '}
           <span className="staff_id_2">
-            {' '}
-            {roleTxt.includes('Clinic') ? info?.userData?.clinic_name : info?.id}
+            {txt.includes('clinics')
+              ? info?.userData?.clinic_name
+              : txt.includes('clinicians')
+              ? info?.userData?.clinic?.userData?.clinic_name
+              : txt.includes('staff')
+              ? info?.id
+              : ''}
           </span>
         </div>
       </div>

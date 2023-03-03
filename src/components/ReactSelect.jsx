@@ -1,16 +1,29 @@
 // multi select component
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // child imports
 import AvatarComponent from './Avatar';
 
-export default function ReactSelect() {
-  const [options, setOptions] = useState([
-    { id: '1', optName: 'Arooj Ishfaq' },
-    { id: '2', optName: 'Jenney Resputin' },
-  ]);
-  const [selected, setSelected] = useState([]);
+export default function ReactSelect({ dataOptions, setUserData, userData }) {
+  const [options, setOptions] = useState([]);
+  const [selected, setSelected] = useState(
+    userData?.clinicians.map((doctor) => {
+      return {
+        id: doctor?.id,
+        optName: `${doctor?.first_name} ${doctor?.last_name}`,
+      };
+    }) ?? [],
+  );
+
+  useEffect(() => {
+    setOptions(dataOptions);
+  }, [dataOptions]);
+
+  useEffect(() => {
+    setUserData((prevState) => ({ ...prevState, clinicians: selected.map((item) => item.id) }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected]);
 
   const handleSelect = (opt) => {
     setSelected([...selected, opt]);
@@ -18,6 +31,7 @@ export default function ReactSelect() {
       return prev.filter((_) => _.id !== opt.id);
     });
   };
+
   const handleUnselect = (opt) => {
     setSelected((prev) => {
       return prev.filter((_) => _.id !== opt.id);
@@ -40,16 +54,20 @@ export default function ReactSelect() {
                 <p className="optName">{opt.optName}</p>
               </div>
             ))
-          : 'Select Clinic'}
+          : 'Select Clinicians'}
       </div>
       <div className="OptNames">
-        {options.map((opt) => (
-          <div className="customOptions" role="presentation" onClick={() => handleSelect(opt)}>
-            {/* <img src="" alt="" /> */}
-            <AvatarComponent alt={opt.optName} className="opt_avatar" />
-            <p className="optName">{opt.optName}</p>
-          </div>
-        ))}
+        {options.length > 0 ? (
+          options?.map((opt) => (
+            <div className="customOptions" role="presentation" onClick={() => handleSelect(opt)}>
+              {/* <img src="" alt="" /> */}
+              <AvatarComponent alt={opt.optName} className="opt_avatar" />
+              <p className="optName">{opt.optName}</p>
+            </div>
+          ))
+        ) : (
+          <p className="notxt"> No Clinicians found</p>
+        )}
       </div>
     </div>
   );

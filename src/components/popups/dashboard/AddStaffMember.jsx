@@ -131,8 +131,8 @@ export default function AddStaffMember({
     const formData = new FormData();
 
     Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
-    formData.append('active', 'true');
-    formData.append('activateUser', 'true');
+    formData.append('active', true);
+    formData.append('activateUser', true);
 
     const { data } = await api('put', '/admins/staff/undefined', formData);
 
