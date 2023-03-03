@@ -11,10 +11,13 @@ import HeaderTab2 from './headerMainTab';
 import { ReactComponent as Logo } from '../assets/components/HeaderIcons/Logo.svg';
 import { ReactComponent as BellIcon } from '../assets/components/HeaderIcons/Bell.svg';
 import { ReactComponent as SearchIcon } from '../assets/components/HeaderIcons/Search.svg';
+
+//  child imports
 import ProfilePopup from './popups/general/ProfilePopup';
 import { Store } from '../StoreContext';
 import UpdatePasswordPopup from './popups/general/ChangePasswordPopup';
 import EditProfilePopup from './popups/general/EditProfilePopup';
+import { getMediaUrl } from '../config';
 
 export default function Header() {
   const { pathname } = useLocation();
@@ -49,11 +52,31 @@ export default function Header() {
         <Stack direction="row" spacing={4} alignItems="center" className="tab3_div">
           <SearchIcon className="search" />
           <BellIcon className="bellIcon" />
-          <AvatarComponent
-            alt={`${user.first_name} ${user.last_name}`}
-            className="header_main_avatar"
-            onClick={() => setOpenProfilePopup(true)}
-          />
+
+          {user.profile_pic ? (
+            <div
+              className="headerImgDiv"
+              role="presentation"
+              onClick={() => setOpenProfilePopup(true)}
+            >
+              <img
+                src={getMediaUrl(user.profile_pic)}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '100px',
+                  objectFit: 'cover',
+                }}
+                alt=""
+              />
+            </div>
+          ) : (
+            <AvatarComponent
+              alt={`${user.first_name} ${user.last_name}`}
+              className="header_main_avatar"
+              onClick={() => setOpenProfilePopup(true)}
+            />
+          )}
         </Stack>
       </div>
       <div className="menu_icon_div">

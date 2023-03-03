@@ -11,6 +11,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 
 // // assets import
@@ -20,6 +21,7 @@ import { ReactComponent as Message } from '../../../assets/components/Table/emai
 import { ReactComponent as Tick } from '../../../assets/components/Table/tick.svg';
 
 // child component imports
+import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar';
 import EditPatient from '../../popups/patient/EditPatient';
 
@@ -33,9 +35,15 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function PatientTable({ patients }) {
+export default function PatientTable({ patients, getPatients }) {
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
+  const [page, setPage] = useState(0);
+
+  const handleChangePage = async (event, newPage) => {
+    await getPatients(newPage + 1);
+    setPage(newPage);
+  };
 
   const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 6,
@@ -133,7 +141,7 @@ export default function PatientTable({ patients }) {
             {patients?.users?.map((row) => (
               <>
                 <StyledTableRow
-                  key={row.name}
+                  key={row.id}
                   className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
                   onClick={() => {
                     setPatient(row);
@@ -141,15 +149,33 @@ export default function PatientTable({ patients }) {
                 >
                   <TableCell align="left"> {row.id} </TableCell>
                   <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                    <AvatarComponent alt="Arooj Ishfaq" className="header_avatar" />
-                    <div className="patient_cell">{row.name}</div>
+                    {row.profile_pic ? (
+                      <div className="imgDivClinic">
+                        <img
+                          src={getMediaUrl(row.profile_pic)}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '100px',
+                            objectFit: 'cover',
+                          }}
+                          alt=""
+                        />
+                      </div>
+                    ) : (
+                      <AvatarComponent
+                        alt={`${row.first_name} ${row.last_name}`}
+                        className="header_avatar"
+                      />
+                    )}
+                    <div className="clinic_cell">{`${row.first_name} ${row.last_name}`}</div>
                   </TableCell>
 
                   <TableCell align="center" className="table_cells">
-                    {row.diagnosis}
+                    {row.userData?.diagnosis}
                   </TableCell>
                   <TableCell align="center" className="table_cells">
-                    {row.exercises}
+                    {row.prescription}
                   </TableCell>
                   <TableCell
                     align="center"
@@ -159,9 +185,8 @@ export default function PatientTable({ patients }) {
                       padding: '3%',
                     }}
                   >
-                    {row.completion}
+                    {row.completion}%
                   </TableCell>
-
                   <TableCell align="center">
                     <span className="linearProgress">{`${row.performance}%`}</span>
                     {row.performance <= 30 ? (
@@ -189,12 +214,19 @@ export default function PatientTable({ patients }) {
                       <CircularProgress
                         variant="determinate"
                         thickness="4.5"
-                        value={50}
+                        value={row.pain}
                         size={55}
-                        sx={{ color: '#FABB18' }}
+                        sx={{
+                          color:
+                            row.pain <= 30
+                              ? '#FF5151'
+                              : row.pain > 30 && row.pain <= 79
+                              ? '#FABB18'
+                              : '#25CC7C',
+                        }}
                       />
 
-                      <span className="circularProgress">55%</span>
+                      <span className="circularProgress">{row.pain}%</span>
                     </div>
                   </TableCell>
                 </StyledTableRow>
@@ -204,13 +236,21 @@ export default function PatientTable({ patients }) {
 
                     <TableCell>
                       <div className="notiCell">
-                        <Report /> <p className="reportTxt"> 2 Reports</p>
+                        <Report />{' '}
+                        <p className="reportTxt">
+                          {' '}
+                          {`${patients?.uncheckedReport?.count || 0} Reports`}
+                        </p>
                       </div>
                     </TableCell>
+
                     <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
                       <div className="notiCell">
                         <Message />
-                        <p className="msgTxt"> 3 Messages</p>
+                        <p className="msgTxt">
+                          {' '}
+                          {`${patients?.unreadMessage?.count || 0} Messages`}{' '}
+                        </p>
                       </div>
                     </TableCell>
                     <TableCell>
@@ -221,7 +261,13 @@ export default function PatientTable({ patients }) {
                     <TableCell />
                     <TableCell />
                     <TableCell align="left">
-                      <Edit className="table_icons" onClick={() => setOpenEditPatient(true)} />
+                      <Edit
+                        className="table_icons"
+                        onClick={() => {
+                          setOpenEditPatient(true);
+                          setPatient(row);
+                        }}
+                      />
                     </TableCell>
                   </TableRow>
                 ) : (
@@ -232,8 +278,23 @@ export default function PatientTable({ patients }) {
           </TableBody>
         </Table>
 
-        <EditPatient openEditPatient={openEditPatient} setOpenEditPatient={setOpenEditPatient} />
+        {openEditPatient && (
+          <EditPatient
+            openEditPatient={openEditPatient}
+            setOpenEditPatient={setOpenEditPatient}
+            patientDetails={patient}
+            getPatients={getPatients}
+          />
+        )}
       </TableContainer>
+      <TablePagination
+        component="div"
+        rowsPerPageOptions={[]}
+        count={patients?.total?.count || 0}
+        rowsPerPage={patients?.limit || 10}
+        page={page}
+        onPageChange={handleChangePage}
+      />
     </div>
   );
 }

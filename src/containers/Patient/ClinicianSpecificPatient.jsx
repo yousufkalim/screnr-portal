@@ -26,13 +26,22 @@ import api from '../../api';
 export default function Patient() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [patients, setPatients] = useState({});
+  const [breadcrumb, setBreadcrumb] = useState('');
+
   const { id } = useParams();
 
-  const getPatients = async () => {
-    const { data } = await api('get', `/admins/patients/getPatiemtsByClinicianId/${id}`);
+  const getPatients = async (page = 1) => {
+    const { data } = await api(
+      'get',
+      `/admins/patients/getPatientsByClinicianId/${id}?page=${page}`,
+    );
     if (data) {
       setPatients(data);
     }
+  };
+
+  const getClinicName = (name) => {
+    setBreadcrumb(name);
   };
 
   useEffect(() => {
@@ -43,19 +52,19 @@ export default function Patient() {
   const cardsData = [
     {
       icon: GreenIcon,
-      amount: '478',
+      amount: patients?.count?.completedExercise || 0,
       title: 'Completed Exercises',
       icon2: GreenStats,
     },
     {
       icon: RedIcon,
-      amount: '45',
+      amount: patients?.count?.patientWithError || 0,
       title: 'Patients with Errors',
       icon2: RedStats,
     },
     {
       icon: YellowIcon,
-      amount: '345',
+      amount: patients?.count?.uncheckedExercise || 0,
       title: 'Unchecked Exercise',
       icon2: YellowStats,
     },
@@ -65,12 +74,11 @@ export default function Patient() {
     <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '100vh' }}>
       <Grid container>
         <Grid xl={2} lg={2.5}>
-          <Sidebar id={id} txt="admins/clinicians" roleTxt="Patient" />
+          <Sidebar id={id} txt="admins/clinicians" roleTxt="Clinic" getClinicName={getClinicName} />
         </Grid>
+
         <Grid className="bgClinicianTable" xl={7.5} lg={7}>
-          <div className="breadCrumb">
-            Dashboard &gt; Staff &gt; Lifeline Clinic &gt; Doctor &gt;
-          </div>
+          <div className="breadCrumb">Dashboard &gt; Staff &gt; {breadcrumb} &gt; Doctor &gt;</div>
           <div className="patientScreenCardsDiv">
             <div className="cards_div_patient_pg">
               {cardsData.map((item) => (
@@ -85,7 +93,11 @@ export default function Patient() {
             </div>
           </div>
 
-          <PatientTable patients={patients} setOpenAddPatient={setOpenAddPatient} />
+          <PatientTable
+            patients={patients}
+            setOpenAddPatient={setOpenAddPatient}
+            getPatients={getPatients}
+          />
         </Grid>
         <Grid xl={2.5} lg={2.5}>
           <RightSidebar />
@@ -99,8 +111,13 @@ export default function Patient() {
             alt=""
           />
         </div>
-
-        <AddNewPatient openAddPatient={openAddPatient} setOpenAddPatient={setOpenAddPatient} />
+        {openAddPatient && (
+          <AddNewPatient
+            getPatients={getPatients}
+            openAddPatient={openAddPatient}
+            setOpenAddPatient={setOpenAddPatient}
+          />
+        )}
       </Grid>
     </div>
   );

@@ -219,7 +219,6 @@
 }
 /* Customize ScrollBar */
 @supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee)) {
-
   ::-webkit-scrollbar {
     height: 1px;
     width: 5px;
