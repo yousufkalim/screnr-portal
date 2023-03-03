@@ -12,6 +12,7 @@ import Prescription from '../containers/Patient/Prescription';
 import AddPatientPrescription from '../containers/Patient/AddPrescription';
 import PatientMessageBox from '../containers/Patient/PatientMessageBox';
 import Index from '../containers/Patient/PatientStats/Index';
+import SearchScreen from '../components/popups/general/SearchScreen';
 
 const superadminRoutes = [
   {
@@ -44,6 +45,7 @@ const superadminRoutes = [
     element: <AllPatients />,
     protected: true,
   },
+  { path: '/searchScreen', element: <SearchScreen />, protected: true },
 
   // routes for getting data by a specific id
   {

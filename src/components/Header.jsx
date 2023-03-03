@@ -38,6 +38,10 @@ export default function Header() {
     navigate('/dashboard');
   };
 
+  const handleSearchLogoClick = () => {
+    navigate('/searchScreen');
+  };
+
   return (
     <div className="header_main_div">
       <Stack direction="row" alignItems="center" className="tab1_div" justifyContent="flex-start">
@@ -47,7 +51,7 @@ export default function Header() {
 
       <div className="tab3_div">
         <Stack direction="row" spacing={4} alignItems="center" className="tab3_div">
-          <SearchIcon className="search" />
+          <SearchIcon onClick={() => handleSearchLogoClick()} className="search" />
           <BellIcon className="bellIcon" />
           <AvatarComponent
             alt={`${user.first_name} ${user.last_name}`}
