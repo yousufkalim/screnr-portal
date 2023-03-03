@@ -10,7 +10,7 @@
 
 .bgClinicianTable {
   background-color: rgb(246, 250, 251);
-  height: 80vh;
+  height: 64vh;
 }
 
 .notxt {
@@ -65,7 +65,7 @@
     width: 57%;
   }
   .bgClinicianTable {
-    height: 80vh;
+    height: 64vh;
   }
 }
 @media only screen and (min-width: 1600px) and (max-width: 2200px) {
