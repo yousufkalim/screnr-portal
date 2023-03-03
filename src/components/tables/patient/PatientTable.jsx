@@ -261,7 +261,13 @@ export default function PatientTable({ patients, getPatients }) {
                     <TableCell />
                     <TableCell />
                     <TableCell align="left">
-                      <Edit className="table_icons" onClick={() => setOpenEditPatient(true)} />
+                      <Edit
+                        className="table_icons"
+                        onClick={() => {
+                          setOpenEditPatient(true);
+                          setPatient(row);
+                        }}
+                      />
                     </TableCell>
                   </TableRow>
                 ) : (
@@ -272,7 +278,14 @@ export default function PatientTable({ patients, getPatients }) {
           </TableBody>
         </Table>
 
-        <EditPatient openEditPatient={openEditPatient} setOpenEditPatient={setOpenEditPatient} />
+        {openEditPatient && (
+          <EditPatient
+            openEditPatient={openEditPatient}
+            setOpenEditPatient={setOpenEditPatient}
+            patientDetails={patient}
+            getPatients={getPatients}
+          />
+        )}
       </TableContainer>
       <TablePagination
         component="div"

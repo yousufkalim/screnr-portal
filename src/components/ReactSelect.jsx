@@ -5,9 +5,16 @@ import { useState, useEffect } from 'react';
 // child imports
 import AvatarComponent from './Avatar';
 
-export default function ReactSelect({ dataOptions, setUserData }) {
+export default function ReactSelect({ dataOptions, setUserData, userData }) {
   const [options, setOptions] = useState([]);
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState(
+    userData?.clinicians.map((doctor) => {
+      return {
+        id: doctor?.id,
+        optName: `${doctor?.first_name} ${doctor?.last_name}`,
+      };
+    }) ?? [],
+  );
 
   useEffect(() => {
     setOptions(dataOptions);

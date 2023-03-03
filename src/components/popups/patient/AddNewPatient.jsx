@@ -179,9 +179,10 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         }
       });
 
-      // if (patient.phone_number && patient.phone_number.length < 11) {
-      //   return toast.error('Phone number must be contain 10 digits');
-      // }
+      if (patient.phone_number && patient.phone_number.length < 11) {
+        return toast.error('Phone number must be contain 10 digits');
+      }
+
       if (checked && !patient.expiry_date) {
         return toast.error('Please enter expiry date');
       }
@@ -201,6 +202,43 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
       if (error.response.status === 418) {
         setExisitingButInactive(true);
       }
+    }
+  };
+
+  const handleActivate = async () => {
+    // Create a new FormData object
+    const formData = new FormData();
+
+    if (patient.expiry_date && !checked) {
+      delete patient.expiry_date;
+      setPatient({ ...patient });
+    }
+    // append properties from patient in formdata
+    Object.keys(patient).forEach((key) => {
+      formData.append(key, patient[key]);
+    });
+
+    // append properties from userData in formdata
+    Object.keys(userData).forEach((key) => {
+      if (key === 'clinicians') {
+        // if the key is 'clinicians', loop over the array and append each value to the formData object
+        userData[key].forEach((value, index) => {
+          formData.append(`userData[${key}][${index}]`, value);
+        });
+      } else {
+        // for other properties, simply append the value to the formData object
+        formData.append(`userData[${key}]`, userData[key]);
+      }
+      formData.append('active', true);
+      formData.append('activateUser', true);
+    });
+
+    // sending this data to api
+    const { data } = await api('put', '/admins/patients/undefined', formData);
+    if (data) {
+      toast.success('Patient added successfully');
+      getPatients();
+      handleClose();
     }
   };
 
@@ -310,7 +348,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
               </Select>
             </FormControl>
             <FormControl sx={{ mt: 2, width: '100%' }} variant="outlined">
-              <ReactSelect dataOptions={clinicians} setUserData={setUserData} userData={userData} />
+              <ReactSelect dataOptions={clinicians} setUserData={setUserData} />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 2, width: '100%' }} variant="outlined">
               <TextField
@@ -351,6 +389,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 name="first_name"
                 value={patient.first_name}
                 onChange={handlePatientChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
 
@@ -372,6 +413,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 name="last_name"
                 value={patient.last_name}
                 onChange={handlePatientChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
               />
             </FormControl>
 
@@ -398,29 +442,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              {/* <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-phone"
-                classes={outlinedInputStyles}
-                placeholder="Phone Number"
-                size="normal"
-                name="phone_number"
-                value={patient.phone_number}
-                onChange={handlePatientChange}
-                type="text"
-                inputProps={{
-                  maxLength: 10,
-                }}
-              /> */}
-              <CustomPhoneInput setUserInfo={setClinician} userInfo={clinician} />
+              <CustomPhoneInput setUserInfo={setPatient} userInfo={patient} />
             </FormControl>
 
             <FormControl
@@ -542,7 +564,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                   {' '}
                   <span style={{ color: '#949494' }}>Anterior</span>{' '}
                 </MenuItem>
-                <MenuItem value="medial">
+                <MenuItem value="medical">
                   {' '}
                   <span style={{ color: '#949494' }}>Medial</span>{' '}
                 </MenuItem>
@@ -622,7 +644,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         <UserAlreadyExist
           openExistingUser={exisitingButInactive}
           setOpenExistingUser={setExisitingButInactive}
-          // handleActivate={handleActivate}
+          handleActivate={handleActivate}
           closeParent={handleClose}
         />
       )}
