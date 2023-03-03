@@ -10,7 +10,7 @@ export default function StatsCard({ Icon, amount, title, BottomStats, statsCardC
           <span className="title">{title}</span>
         </div>
       </div>
-      <div>
+      <div className="statsGraphics">
         <BottomStats className="bottomStats" />
       </div>
     </div>
