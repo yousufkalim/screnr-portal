@@ -146,7 +146,10 @@ export default function PatientTable({ patients, getPatients }) {
               </TableCell>
               <TableCell
                 className="table_head"
-                sx={{ '@media (max-width: 1600px)': { width: '13%' } }}
+                sx={{
+                  '@media (max-width: 1600px)': { width: '13%' },
+                  '@media (max-width: 1545px)': { minWidth: '90px' },
+                }}
                 align="center"
               >
                 Pain (s)

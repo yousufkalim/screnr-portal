@@ -137,7 +137,7 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
                       className="pointer"
                       id="selectedProfileImg"
                       style={{
-                        width: '100%',
+                        width: '122px',
                         borderRadius: '100px',
                         height: '100%',
                         objectFit: 'cover',

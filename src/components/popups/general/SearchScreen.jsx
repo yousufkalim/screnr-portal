@@ -35,6 +35,7 @@ export default function SearchScreen() {
         height: '100vh',
         background: 'rgb(246, 250, 251)',
         padding: '5%',
+        paddingTop: '2.7%',
       }}
     >
       <div

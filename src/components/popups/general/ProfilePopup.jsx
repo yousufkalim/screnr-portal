@@ -101,7 +101,7 @@ export default function ProfilePopup({
                       className="pointer"
                       id="selectedImg"
                       style={{
-                        width: '100%',
+                        width: '122px',
                         borderRadius: '100px',
                         height: '100%',
                         objectFit: 'cover',

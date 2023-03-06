@@ -433,7 +433,9 @@ export default function EditPatient({
             </FormControl>
 
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <CustomPhoneInput setUserInfo={setPatient} userInfo={patient} />
+              <div className="edit-phone-input">
+                <CustomPhoneInput setUserInfo={setPatient} userInfo={patient} />
+              </div>
             </FormControl>
 
             <FormControl
