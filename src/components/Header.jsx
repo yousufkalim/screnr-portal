@@ -9,7 +9,7 @@ import AvatarComponent from './Avatar';
 import HeaderTab2 from './headerMainTab';
 // images imports
 import { ReactComponent as Logo } from '../assets/components/HeaderIcons/Logo.svg';
-import { ReactComponent as BellIcon } from '../assets/components/HeaderIcons/Bell.svg';
+// import { ReactComponent as BellIcon } from '../assets/components/HeaderIcons/Bell.svg';
 import { ReactComponent as SearchIcon } from '../assets/components/HeaderIcons/Search.svg';
 
 //  child imports
@@ -55,7 +55,7 @@ export default function Header() {
       <div className="tab3_div">
         <Stack direction="row" spacing={4} alignItems="center" className="tab3_div">
           <SearchIcon onClick={() => handleSearchLogoClick()} className="search" />
-          <BellIcon className="bellIcon" />
+          {/* <BellIcon className="bellIcon" /> */}
 
           {user.profile_pic ? (
             <div

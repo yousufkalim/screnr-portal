@@ -100,6 +100,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
         component={Paper}
         sx={{
           borderRadius: '20px',
+          boxShadow: '0',
           maxHeight: '95%',
           overflowX: 'hidden',
           width: '94vw',

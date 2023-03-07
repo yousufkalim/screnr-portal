@@ -46,6 +46,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
           maxHeight: '100%',
           overflowX: 'hidden',
           padding: '1% 0%',
+          boxShadow: '0',
           width: '58vw',
           '@media (max-width: 1600px)': {
             width: '54vw',

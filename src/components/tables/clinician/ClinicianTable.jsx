@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
+import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 
 // child component imports
 import EditClinician from '../../popups/clinician/EditClinician';
@@ -43,6 +44,9 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
     await getClinicians(newPage + 1);
     setPage(newPage);
   };
+  const handleBackIconClick = () => {
+    window.history.back();
+  };
 
   return (
     <div className="bgClinicianTable" id="clinicianTable">
@@ -52,6 +56,7 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
           borderRadius: '20px',
           maxHeight: '94%',
           overflowX: 'hidden',
+          boxShadow: '0',
           width: '77.8vw',
           '@media (max-width: 1600px)': {
             maxHeight: '96.3%',
@@ -59,7 +64,12 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
           },
         }}
       >
-        <h1 className="clientTableHead">List of Clinician</h1>
+        <div className="iconAndHeading">
+          <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
+            <BackIcon />
+          </div>
+          <h1 className="clientTableHead">List of Clinician</h1>
+        </div>
         <Table
           sx={{
             [`& .${tableCellClasses.root}`]: {

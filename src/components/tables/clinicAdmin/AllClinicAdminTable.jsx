@@ -94,6 +94,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
           borderRadius: '20px',
           maxHeight: '95%',
           overflowX: 'hidden',
+          boxShadow: '0',
           width: '94vw',
         }}
       >

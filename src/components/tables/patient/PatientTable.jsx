@@ -19,6 +19,7 @@ import { ReactComponent as Edit } from '../../../assets/components/Table/alert.s
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as Tick } from '../../../assets/components/Table/tick.svg';
+import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 
 // child component imports
 import { getMediaUrl } from '../../../config';
@@ -44,7 +45,9 @@ export default function PatientTable({ patients, getPatients }) {
     await getPatients(newPage + 1);
     setPage(newPage);
   };
-
+  const handleBackIconClick = () => {
+    window.history.back();
+  };
   const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 6,
     borderRadius: 5,
@@ -87,6 +90,7 @@ export default function PatientTable({ patients, getPatients }) {
           borderRadius: '20px',
           maxHeight: '84%',
           overflowX: 'hidden',
+          boxShadow: '0',
           width: '58.7vw',
           '@media (max-width: 1600px)': {
             maxHeight: '85.6%',
@@ -110,7 +114,16 @@ export default function PatientTable({ patients, getPatients }) {
           },
         }}
       >
-        <h1 className="clientTableHead">List of Patients</h1>
+        {/* <h1 className="clientTableHead">List of Patients</h1> */}
+
+        <div className="iconAndHeading">
+          <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
+            <BackIcon />
+          </div>
+          {/* <h1 className="clientTableHead">List of Clinician</h1> */}
+          <h1 className="clientTableHead">List of Patients</h1>
+        </div>
+
         <Table
           sx={{
             [`& .${tableCellClasses.root}`]: {

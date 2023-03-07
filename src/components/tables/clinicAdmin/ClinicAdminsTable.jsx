@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
+import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 
 // child component imports
 import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin';
@@ -42,6 +43,9 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
     await getClinicAdmins(newPage + 1);
     setPage(newPage);
   };
+  const handleBackIconClick = () => {
+    navigate('/dashboard');
+  };
 
   return (
     <div className="bg" id="clinicAdminTable">
@@ -51,6 +55,7 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
           borderRadius: '20px',
           maxHeight: '95%',
           overflowX: 'hidden',
+          boxShadow: '0',
           width: '77.8vw',
           '@media (max-width: 1600px)': {
             maxHeight: '92%',
@@ -58,7 +63,12 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
           },
         }}
       >
-        <h1 className="clientTableHead">List of Clinic Admins</h1>
+        <div className="iconAndHeading">
+          <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
+            <BackIcon />
+          </div>
+          <h1 className="clientTableHead">List of Clinic Admins</h1>
+        </div>
         <Table
           sx={{
             [`& .${tableCellClasses.root}`]: {
