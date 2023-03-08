@@ -1,7 +1,10 @@
 .patientScreenCardsDiv {
   width: 97%;
 }
-
+.navigationEntities {
+  margin-right: 8px;
+  cursor: pointer;
+}
 .cards_div_patient_pg {
   display: flex;
   flex-direction: row;

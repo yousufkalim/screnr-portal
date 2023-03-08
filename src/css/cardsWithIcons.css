@@ -22,7 +22,6 @@
   padding-left: 1rem;
   border-radius: 20px;
   width: 23%;
-  border: 0.5px solid #e5ebeb;
   overflow: hidden;
 }
 
@@ -55,7 +54,6 @@
   font-size: 14px;
   color: #919b9b;
   /* width: max-content; */
-  /* background-color: #919b9b; */
   width: 6.5rem;
 }
 
