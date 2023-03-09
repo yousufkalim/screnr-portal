@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable no-nested-ternary */
+import { useEffect, useState } from 'react';
 // mui imports
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import Button from '@mui/material/Button';
-
+import LinearProgress from '@mui/material/LinearProgress';
 // navigation
 import { useNavigate } from 'react-router-dom';
 
@@ -36,6 +37,15 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
     await getStaffMembers(newPage + 1);
     setPage(newPage);
   };
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500); // Set the loading time to 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -89,7 +99,13 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
             </TableRow>
           </TableHead>
           <TableBody>
-            {staffMembers?.users?.length > 0 ? (
+            {isLoading ? (
+              <TableRow>
+                <TableCell colSpan={4} align="center">
+                  <LinearProgress />
+                </TableCell>
+              </TableRow>
+            ) : staffMembers?.users?.length > 0 ? (
               staffMembers?.users?.map((row) => (
                 <TableRow
                   key={row.name}
@@ -160,11 +176,10 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
                 </TableRow>
               ))
             ) : (
-              <>
-                {' '}
-                <TableCell align="center" />
-                <TableCell align="left">No Staff Admins found</TableCell>
-              </>
+              <TableRow>
+                <TableCell align="left"> </TableCell>
+                <TableCell align="left">No Data Found</TableCell>
+              </TableRow>
             )}
           </TableBody>
 

@@ -18,13 +18,14 @@
 }
 
 .headerImgDiv {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
 }
 
 .header_avatar {
   background-color: #136773 !important;
+  font-size: medium !important;
 }
 
 .header_main_avatar {
