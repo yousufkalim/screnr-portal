@@ -119,6 +119,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
           borderRadius: '20px',
           maxHeight: '100%',
           overflowX: 'hidden',
+          boxShadow: '0',
           width: '94vw',
         }}
       >

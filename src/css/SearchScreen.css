@@ -1,0 +1,39 @@
+.textLine {
+  font-family: 'Poppins';
+  font-weight: 500;
+  color: #919b9b;
+  margin-left: 2rem;
+  margin-top: 1rem;
+}
+.buttonDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 47%;
+  margin-left: 1.5%;
+}
+#optionButtons {
+  color: #136773;
+  border-radius: 17px;
+  height: 50px;
+  text-transform: capitalize;
+  padding: 0 20px;
+  /* padding: 15px, 20px, 15px, 20px; */
+}
+#optionButtons:focus {
+  background-color: rgb(246, 250, 251);
+}
+.buttonLogos {
+  width: 25%;
+  margin-right: 8px;
+}
+@media only screen and (min-width: 1630px) {
+  .buttonDiv {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 1400px) {
+  .buttonDiv {
+    width: 50%;
+  }
+}

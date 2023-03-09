@@ -11,6 +11,7 @@
 @import url('./Report.css');
 @import url('./Message.css');
 @import url('./PainSurvey.css');
+@import url('./SearchScreen.css');
 /* pages */
 @import url('./Pages/Dashboard.css');
 @import url('./Pages/ClinicAdmin.css');

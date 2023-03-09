@@ -110,12 +110,22 @@
   height: 82vh;
   padding: 0 3% 1% 3%;
 }
-
+.iconAndHeading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
 .clientTableHead {
   font-weight: 600;
   padding: 30px !important;
+  padding-left: 20px !important;
   font-size: 20px;
   color: #136773;
+}
+.BackIconDiv {
+  margin-left: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 #disabledDate .react-datepicker-wrapper {

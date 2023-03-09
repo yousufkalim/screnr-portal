@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { React, useState, useRef, useEffect } from 'react';
 
 // mui imports
@@ -13,6 +14,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import TablePagination from '@mui/material/TablePagination';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import LinearProgress from '@mui/material/LinearProgress';
 
 // navigation
 import { useNavigate } from 'react-router-dom';
@@ -94,12 +96,22 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
     };
   }, [openFilter]);
 
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500); // Set the loading time to 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="allClinicAdminTable" id="clinicAdminTable">
       <TableContainer
         component={Paper}
         sx={{
           borderRadius: '20px',
+          boxShadow: '0',
           maxHeight: '95%',
           overflowX: 'hidden',
           width: '94vw',
@@ -244,7 +256,13 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {clinicians?.users?.length > 0 ? (
+            {isLoading ? (
+              <TableRow>
+                <TableCell colSpan={6} align="center">
+                  <LinearProgress />
+                </TableCell>
+              </TableRow>
+            ) : clinicians?.users?.length > 0 ? (
               clinicians?.users?.map((row) => (
                 <StyledTableRow key={row.id} className="tableRow">
                   <TableCell />

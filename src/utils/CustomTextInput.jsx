@@ -10,7 +10,7 @@ function IconTextField({ value, handleChange }) {
         color: 'white',
         borderRadius: '25px',
         padding: '0px 20px',
-        width: '50%',
+        width: '70%',
         '& .MuiOutlinedInput-root': {
           '& fieldset': {
             border: 'none',
