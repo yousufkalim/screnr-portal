@@ -11,15 +11,7 @@ import Paper from '@mui/material/Paper';
 import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
 import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 
-export default function AddPrescriptionTable() {
-  function createData(number, name, sets, reps, rest, action) {
-    return { number, name, sets, reps, rest, action };
-  }
-  const data = [
-    createData(1, 'Quad Stretch', 6, 8, 30, 'motionCapture'),
-    createData(2, 'Quad Stretch', 6, 8, 30, 'motionCapture'),
-    createData(2, 'Quad Stretch', 6, 8, 30, 'exerciseProgram'),
-  ];
+export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
   return (
     <TableContainer
       component={Paper}
@@ -72,20 +64,20 @@ export default function AddPrescriptionTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {ExercisePrescriptionList?.exercises?.map((row, index) => (
             <TableRow key={row.first_name}>
               <TableCell align="center" className="prescription_table_cells">
-                {`${row.number}.`}
+                {`${index + 1}.`}
               </TableCell>
 
               <TableCell align="center" className="table_cells">
                 <div className="actionDiv">
-                  {row.action === 'motionCapture' ? (
+                  {ExercisePrescriptionList.type === 'motion' ? (
                     <MotionCapture className="actionIcon" />
                   ) : (
                     <Program className="actionIcon" />
                   )}
-                  {row.name}
+                  {row?.name}
                 </div>
               </TableCell>
 
@@ -94,16 +86,14 @@ export default function AddPrescriptionTable() {
               <TableCell />
 
               <TableCell align="center" className="prescription_table_cells">
-                {row.sets}
+                {row?.sets}
               </TableCell>
 
               <TableCell align="center" className="prescription_table_cells">
-                {' '}
-                {row.reps}
+                {row?.reps}
               </TableCell>
               <TableCell align="center" className="prescription_table_cells">
-                {' '}
-                {`${row.rest}`}
+                {row?.rest}
               </TableCell>
             </TableRow>
           ))}

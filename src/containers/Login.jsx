@@ -46,20 +46,18 @@ const useOutlinedInputStyles = makeStyles({
 });
 
 export default function Login() {
+  const navigate = useNavigate();
+  const updateStore = UpdateStore();
+  const { loggedIn } = Store();
   const [openForgetPasswordPopup, setOpenForgetPasswordPopup] = useState(false);
   const [user, setUser] = useState({});
   const [showPassword, setShowPassword] = useState(false);
-
-  const navigate = useNavigate();
-  const { loggedIn } = Store();
-  const updateStore = UpdateStore();
   const outlinedInputStyles = useOutlinedInputStyles();
 
   useEffect(() => {
     if (loggedIn) {
       navigate('/dashboard');
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
 

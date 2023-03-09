@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { React, useState, useEffect } from 'react';
 // components import
 import CardWithIcon from '../components/cards/CardWithIcon';
@@ -124,14 +126,8 @@ export default function Dashboard() {
           <Chart />
         </div>
       </div>
-      <div className="addBtn2">
-        <img
-          src={addBtn}
-          className="pointer"
-          onClick={() => setOpenAddStaffMember(true)}
-          role="presentation"
-          alt=""
-        />
+      <div className="addBtn2" onClick={() => setOpenAddStaffMember(true)}>
+        <img src={addBtn} className="pointer" role="presentation" alt="" />
       </div>
 
       <AddStaffMember

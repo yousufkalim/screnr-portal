@@ -4,10 +4,8 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 // react-easy-router import
 import Router from 'react-easy-router';
-
 // Files
 import superadminRoutes from './routes/Routes';
 import Header from './components/Header';
@@ -22,7 +20,6 @@ function App() {
 
   const isAuthenticated = async () => {
     const { data } = await axios.get(`${baseUrl}/auth`, { withCredentials: true });
-
     updateStore({ loggedIn: true, user: data.user });
     return true;
   };
@@ -38,9 +35,7 @@ function App() {
     <div className="App">
       {/* toastify Container for Notification */}
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar transition={Flip} />
-
       {/* Routes */}
-
       {/* All Superadmin routes should have header except for login page */}
       {pathname !== '/' && pathname !== '/login' ? <Header /> : ''}
       {/* Superadmin routes alongwith header */}
