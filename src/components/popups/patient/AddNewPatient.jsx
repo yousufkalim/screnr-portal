@@ -119,34 +119,26 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     }
   };
 
-  const getClinicians = async (page = 1) => {
-    if (selectedClinic) {
-      const { data } = await api(
-        'get',
-        `/admins/clinicians/getCliniciansByClinicId/${selectedClinic}?page=${page}`,
+  const getClinicians = async (page, clinicId) => {
+    const { data } = await api(
+      'get',
+      `/admins/clinicians/getCliniciansByClinicId/${clinicId}?page=${page ?? 1}`,
+    );
+    if (data) {
+      setClinicians(
+        data.users.map((doctor) => {
+          return {
+            id: doctor.id,
+            optName: `${doctor.first_name} ${doctor.last_name}`,
+          };
+        }),
       );
-      if (data) {
-        setClinicians(
-          data.users.map((doctor) => {
-            return {
-              id: doctor.id,
-              optName: `${doctor.first_name} ${doctor.last_name}`,
-            };
-          }),
-        );
-      }
-    } else if (!selectedClinic) {
-      setClinicians([]);
     }
   };
 
-  const handleSelectedClinic = (e) => {
+  const handleSelectedClinic = async (e) => {
     setSelectedClinic(e.target.value);
-    if (e.target.value) {
-      getClinicians();
-    } else {
-      setClinicians([]);
-    }
+    await getClinicians(1, e.target.value);
   };
 
   // posting data
@@ -245,13 +237,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
   useEffect(() => {
     getAllClinics();
   }, []);
-
-  useEffect(() => {
-    if (selectedClinic) {
-      getClinicians();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedClinic]);
 
   return (
     <div>
