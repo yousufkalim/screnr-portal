@@ -181,7 +181,7 @@ export default function PatientTable({ patients, getPatients }) {
                 <StyledTableRow
                   key={row.id}
                   className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
-                  onMouseOver={() => {
+                  onClick={() => {
                     setPatient(row);
                   }}
                 >

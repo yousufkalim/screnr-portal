@@ -116,6 +116,9 @@ export default function PrescriptionTable() {
             width: '76vw',
             margin: 'auto',
             marginBottom: '25px',
+            '@media (max-width: 1535px)': {
+              width: '73vw',
+            },
           }}
         >
           <Table
