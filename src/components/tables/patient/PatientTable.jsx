@@ -18,7 +18,6 @@ import Paper from '@mui/material/Paper';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
-import { ReactComponent as Tick } from '../../../assets/components/Table/tick.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 
 // child component imports
@@ -286,9 +285,7 @@ export default function PatientTable({ patients, getPatients }) {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="notiCell">
-                        <Tick /> <p className="statusTxt">reviewed</p>
-                      </div>
+                      <div className="notiCell">{}</div>
                     </TableCell>
                     <TableCell />
                     <TableCell />

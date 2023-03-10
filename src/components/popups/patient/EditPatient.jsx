@@ -158,7 +158,7 @@ export default function EditPatient({
     const formData = new FormData();
 
     if (patientCopy.expiry_date && !checked) {
-      patientCopy.expiry_date = '';
+      delete patientCopy.expiry_date;
       setPatient({ ...patientCopy });
     }
 
