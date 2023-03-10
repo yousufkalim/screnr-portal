@@ -33,7 +33,7 @@ export default function Header() {
     setActiveTab(pathname);
   }, [pathname]);
 
-  const HandleTabsSwitch = (targetTab) => {
+  const handleTabsSwitch = (targetTab) => {
     navigate(targetTab);
   };
 
@@ -50,7 +50,7 @@ export default function Header() {
       <Stack direction="row" alignItems="center" className="tab1_div" justifyContent="flex-start">
         <Logo onClick={() => handleLogoClick()} className="app_logo" />
       </Stack>
-      <HeaderTab2 activeTab={activeTab} HandleTabsSwitch={HandleTabsSwitch} />
+      <HeaderTab2 activeTab={activeTab} handleTabsSwitch={handleTabsSwitch} />
 
       <div className="tab3_div">
         <Stack direction="row" spacing={4} alignItems="center" className="tab3_div">

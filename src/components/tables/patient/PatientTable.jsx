@@ -15,7 +15,9 @@ import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 
 // // assets import
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
+import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
@@ -36,6 +38,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function PatientTable({ patients, getPatients }) {
+  const navigate = useNavigate();
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
   const [page, setPage] = useState(0);
@@ -80,6 +83,10 @@ export default function PatientTable({ patients, getPatients }) {
       backgroundColor: '#25CC7C',
     },
   }));
+
+  const handlePatientProfile = (patientid) => {
+    navigate(`/patients/${patientid}/prescription`);
+  };
 
   return (
     <div className="bgClinicianTable" id="clinicianTable">
@@ -289,13 +296,18 @@ export default function PatientTable({ patients, getPatients }) {
                     </TableCell>
                     <TableCell />
                     <TableCell />
-                    <TableCell align="left">
+                    <TableCell style={{ display: 'flex', gap: '5px' }}>
                       <Edit
                         className="table_icons"
                         onClick={() => {
                           setOpenEditPatient(true);
                           setPatient(row);
                         }}
+                      />
+
+                      <Profile
+                        className="table_icons"
+                        onClick={() => handlePatientProfile(row.id)}
                       />
                     </TableCell>
                   </TableRow>

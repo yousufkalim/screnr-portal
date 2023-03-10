@@ -45,6 +45,11 @@
   justify-content: space-between;
 }
 
+.prescriptionBtns2 {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .thresholdsBtn {
   border: 5px solid #ff5151 !important;
   padding: 12px 45px !important;
@@ -62,6 +67,16 @@
   border-radius: 20px !important;
   color: white !important;
   background-color: #136773 !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+}
+
+.listBtn_disabled {
+  padding: 12px 45px !important;
+  border-radius: 20px !important;
+  color: white !important;
+  background-color: gray !important;
   text-transform: none !important;
   font-weight: 500 !important;
   font-size: 14px !important;
@@ -494,6 +509,18 @@
 
 .generatePrescriptionBtn {
   background-color: #fba622 !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  text-align: center !important;
+  color: #f6fafb !important;
+  text-transform: none !important;
+  border-radius: 15px !important;
+  border: none !important;
+  padding: 8px 20px !important;
+}
+
+.generatePrescriptionBtn_diaabled {
+  background-color: gray !important;
   font-weight: 500 !important;
   font-size: 16px !important;
   text-align: center !important;
