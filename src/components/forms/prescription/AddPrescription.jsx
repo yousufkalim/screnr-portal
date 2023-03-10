@@ -101,6 +101,25 @@ const rest = [
   },
 ];
 
+const bodyParts = [
+  {
+    value: 'Arms',
+    label: 'Arms',
+  },
+  {
+    value: 'Back',
+    label: 'Back',
+  },
+  {
+    value: 'Legs',
+    label: 'Legs',
+  },
+  {
+    value: 'Sholders',
+    label: 'Sholders',
+  },
+];
+
 export default function AddPrescription({
   prescription,
   exerciseInformation,
@@ -110,6 +129,7 @@ export default function AddPrescription({
   handleExerciseInformation,
   dateChange,
 }) {
+  console.log(exerciseInformation, 'exerciseInformation');
   const outlinedInputStyles = useOutlinedInputStyles();
   const [openAdjustRange, setOpenAdjustRange] = useState(false);
   const validatingListBtn =
@@ -449,13 +469,13 @@ export default function AddPrescription({
         ) : (
           <>
             <FormControl sx={{ mt: 2.5, width: '100%' }} variant="outlined">
+              <div />
               <Select
                 // eslint-disable-next-line react/no-unstable-nested-components
                 IconComponent={(props) => (
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
                 )}
-                displayEmpty
                 sx={{
                   '.MuiOutlinedInput-notchedOutline': {
                     borderColor: '#E1E1E1',
@@ -470,26 +490,50 @@ export default function AddPrescription({
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                name="body_part"
-                placeholder="Title"
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
+                name="body_part"
                 value={exerciseInformation?.body_part || 'default'}
                 onChange={(e) => {
                   handleExerciseInformation(e.target.name, e.target.value);
                 }}
               >
-                <MenuItem value="default">
+                <MenuItem value="default" selected disabled>
                   <span className="optColor">Select Body Part</span>
                 </MenuItem>
-                <MenuItem value="Legs">
-                  <span className="optColor">Legs</span>
-                </MenuItem>
+
+                {bodyParts?.map((item) => {
+                  return (
+                    <MenuItem value={item.value}>
+                      <span className="optColor">{item.label}</span>
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
             <FormControl sx={{ mt: 3, width: '100%', mb: 3 }} variant="outlined">
-              <Select
+              <TextField
+                sx={{
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 1,
+                  },
+                }}
+                id="outlined-fname"
+                classes={outlinedInputStyles}
+                placeholder="Exercise Name"
+                size="normal"
+                name="name"
+                value={exerciseInformation.name}
+                onChange={(e) => {
+                  handleExerciseInformation(e.target.name, e.target.value);
+                }}
+              />
+              {/* <Select
                 // eslint-disable-next-line react/no-unstable-nested-components
                 IconComponent={(props) => (
                   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -515,18 +559,14 @@ export default function AddPrescription({
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
-                value={exerciseInformation?.name || 'default'}
-                onChange={(e) => {
-                  handleExerciseInformation(e.target.name, e.target.value);
-                }}
               >
-                <MenuItem value="default">
+                <MenuItem value={0}>
                   <span className="optColor">Select Exercise</span>{' '}
                 </MenuItem>
                 <MenuItem value="Quad Stretch">
                   <span className="optColor">Quad Stretch</span>{' '}
                 </MenuItem>
-              </Select>
+              </Select> */}
             </FormControl>
             <FormControl sx={{ width: '32%', mr: 1.2 }} variant="outlined">
               <TextField
@@ -592,7 +632,6 @@ export default function AddPrescription({
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
                 )}
-                displayEmpty
                 sx={{
                   '.MuiOutlinedInput-notchedOutline': {
                     borderColor: '#E1E1E1',

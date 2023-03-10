@@ -54,6 +54,7 @@ export default function EditStaffMember({
   setOpenEditStaffMember,
   getStaffMembers,
   staffMemberDetails,
+  getData,
 }) {
   const [checked, setChecked] = useState(false);
   const [staffMember, setStaffMember] = useState({});
@@ -129,9 +130,11 @@ export default function EditStaffMember({
     }
     const { data } = await api('put', `/admins/staff/${staffMemberDetails.id}`, formData);
     if (data) {
-      getStaffMembers();
       handleClose();
-      return toast.success('Staff Member edited successfully');
+      setOpenEditStaffMember(false);
+      getData();
+      getStaffMembers();
+      toast.success('Staff Member edited successfully');
     }
   };
 
