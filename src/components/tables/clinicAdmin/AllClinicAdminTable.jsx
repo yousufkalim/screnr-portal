@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { React, useState, useEffect, useRef } from 'react';
 
 // mui imports
@@ -13,6 +14,7 @@ import Radio from '@mui/material/Radio';
 import TablePagination from '@mui/material/TablePagination';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import LinearProgress from '@mui/material/LinearProgress';
 
 // navigation
 import { useNavigate } from 'react-router-dom';
@@ -66,6 +68,14 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
     setSearch(event.target.value);
     await getClinicAdmins('', event.target.value);
   };
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500); // Set the loading time to 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleCloseFilter = (e) => {
@@ -94,6 +104,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
           borderRadius: '20px',
           maxHeight: '95%',
           overflowX: 'hidden',
+          boxShadow: '0',
           width: '94vw',
         }}
       >
@@ -196,7 +207,13 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {clinicAdmins?.users?.length > 0 ? (
+            {isLoading ? (
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  <LinearProgress />
+                </TableCell>
+              </TableRow>
+            ) : clinicAdmins?.users?.length > 0 ? (
               clinicAdmins?.users?.map((row) => (
                 <StyledTableRow key={row.id} className="tableRow">
                   <TableCell />

@@ -2,7 +2,8 @@ import { React, useState, useEffect } from 'react';
 // mui imports
 import { Grid } from '@mui/material';
 // import useParams
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
 // assets import
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as Circle } from '../../assets/components/CardWithIcon/yellowIcon.svg';
@@ -23,6 +24,7 @@ export default function ClinicAdmin() {
   const [clinicians, setClinicians] = useState({});
   const [breadcrumb, setBreadcrumb] = useState('');
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const getClinicians = async (page = 1) => {
     const { data } = await api(
@@ -36,6 +38,12 @@ export default function ClinicAdmin() {
 
   const getClinicName = (name) => {
     setBreadcrumb(name);
+  };
+  const handleDashboardNavClick = () => {
+    navigate('/dashboard');
+  };
+  const handleStaffNavClick = () => {
+    window.history.back();
   };
 
   useEffect(() => {
@@ -74,7 +82,15 @@ export default function ClinicAdmin() {
         <Sidebar id={id} txt="admins/clinics" roleTxt="Clinic" getClinicName={getClinicName} />
       </Grid>
       <Grid className="bgClinicianTable" xl={10} lg={9.5}>
-        <div className="breadCrumb">Dashboard &gt; Staff &gt; {breadcrumb} Clinic &gt; </div>
+        <div className="breadCrumb" style={{ display: 'flex' }}>
+          <div className="navigationEntities" onClick={handleDashboardNavClick} aria-hidden="true">
+            Dashboard &gt;{' '}
+          </div>
+          <div className="navigationEntities" onClick={handleStaffNavClick} aria-hidden="true">
+            Staff &gt;
+          </div>
+          <div> {breadcrumb} Clinic &gt;</div>
+        </div>
 
         <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '90vh' }}>
           <div className="clinicianScreenCardsDiv">

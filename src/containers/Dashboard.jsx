@@ -100,7 +100,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard_main_div">
-      <div className="navigation">Dashboard &gt; </div>
+      {/* <div className="navigation">.</div> */}
       <div className="cards_div">
         {cardsData.map((item) => (
           <CardWithIcon
@@ -120,6 +120,7 @@ export default function Dashboard() {
             setOpenAddStaffMember={setOpenAddStaffMember}
             staffMembers={staffMembers}
             getStaffMembers={getStaffMembers}
+            sx={{ boxShadow: '0' }}
           />
         </div>
         <div className="chart_main_div">

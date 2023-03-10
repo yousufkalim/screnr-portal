@@ -88,6 +88,7 @@ export default function ActivityTable() {
           borderRadius: '20px',
           maxHeight: '84%',
           overflowX: 'hidden',
+          boxShadow: '0',
           width: '58.7vw',
           paddingLeft: 2,
           '@media (max-width: 1600px)': {

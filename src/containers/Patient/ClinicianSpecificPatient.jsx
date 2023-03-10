@@ -4,7 +4,7 @@ import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 
 // import useParams
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // assets import
 import addBtn from '../../assets/icons/addBtn.svg';
@@ -27,6 +27,7 @@ export default function Patient() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [patients, setPatients] = useState({});
   const [breadcrumb, setBreadcrumb] = useState('');
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -42,6 +43,16 @@ export default function Patient() {
 
   const getClinicName = (name) => {
     setBreadcrumb(name);
+  };
+  const handleDashboardNavClick = () => {
+    navigate('/dashboard');
+  };
+  const handleStaffNavClick = () => {
+    window.history.back();
+    window.history.back();
+  };
+  const handleClinicNavClick = () => {
+    window.history.back();
   };
 
   useEffect(() => {
@@ -78,7 +89,22 @@ export default function Patient() {
         </Grid>
 
         <Grid className="bgClinicianTable" xl={7.5} lg={7}>
-          <div className="breadCrumb">Dashboard &gt; Staff &gt; {breadcrumb} &gt; Doctor &gt;</div>
+          <div className="breadCrumb" style={{ display: 'flex' }}>
+            <div
+              className="navigationEntities"
+              onClick={handleDashboardNavClick}
+              aria-hidden="true"
+            >
+              Dashboard &gt;
+            </div>
+            <div className="navigationEntities" onClick={handleStaffNavClick} aria-hidden="true">
+              Staff &gt;
+            </div>
+            <div className="navigationEntities" onClick={handleClinicNavClick} aria-hidden="true">
+              {breadcrumb} &gt;
+            </div>
+            <div> Doctor &gt;</div>
+          </div>
           <div className="patientScreenCardsDiv">
             <div className="cards_div_patient_pg">
               {cardsData.map((item) => (

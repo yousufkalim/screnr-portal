@@ -4,7 +4,7 @@ import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 
 // import useParams
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // assets import
 import addBtn from '../../assets/icons/addBtn.svg';
@@ -19,6 +19,7 @@ export default function ClinicAdmin() {
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
   const [clinicAdmins, setClinicAdmins] = useState({});
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const getClinicAdmins = async (page = 1) => {
     const { data } = await api('get', `/admins/clinics/getClinicsByStaffId/${id}?page=${page}`);
@@ -26,7 +27,9 @@ export default function ClinicAdmin() {
       setClinicAdmins(data);
     }
   };
-
+  const handleDashboardNavClick = () => {
+    navigate('/dashboard');
+  };
   useEffect(() => {
     getClinicAdmins();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,7 +43,16 @@ export default function ClinicAdmin() {
 
       <Grid className="bg" xl={10} lg={9.5}>
         <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '95vh' }}>
-          <div className="breadCrumb">Dashboard &gt; Staff &gt;</div>
+          <div className="breadCrumb" style={{ display: 'flex' }}>
+            <div
+              className="navigationEntities"
+              onClick={handleDashboardNavClick}
+              aria-hidden="true"
+            >
+              Dashboard &gt;
+            </div>
+            <div> Staff &gt;</div>
+          </div>
           <ClinicAdminTable
             staffAdminId={id}
             clinicAdmins={clinicAdmins}

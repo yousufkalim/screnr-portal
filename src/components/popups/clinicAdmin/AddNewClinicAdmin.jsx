@@ -363,6 +363,7 @@ export default function AddClinicAdmin({
                 <Button
                   className={clinicAdmin.gender === 'male' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
+                  sx={{ width: '130px' }}
                   onClick={() => {
                     handleGenderSelection('male');
                   }}

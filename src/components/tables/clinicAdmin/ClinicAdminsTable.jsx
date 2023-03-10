@@ -1,4 +1,5 @@
-import { React, useState } from 'react';
+/* eslint-disable no-nested-ternary */
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import { styled } from '@mui/material/styles';
@@ -15,7 +16,9 @@ import TablePagination from '@mui/material/TablePagination';
 import { useNavigate } from 'react-router-dom';
 
 // assets import
+import LinearProgress from '@mui/material/LinearProgress';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
+import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 
 // child component imports
 import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin';
@@ -38,9 +41,22 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500); // Set the loading time to 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleChangePage = async (event, newPage) => {
     await getClinicAdmins(newPage + 1);
     setPage(newPage);
+  };
+  const handleBackIconClick = () => {
+    navigate('/dashboard');
   };
 
   return (
@@ -51,6 +67,7 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
           borderRadius: '20px',
           maxHeight: '95%',
           overflowX: 'hidden',
+          boxShadow: '0',
           width: '77.8vw',
           '@media (max-width: 1600px)': {
             maxHeight: '92%',
@@ -58,7 +75,12 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
           },
         }}
       >
-        <h1 className="clientTableHead">List of Clinic Admins</h1>
+        <div className="iconAndHeading">
+          <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
+            <BackIcon />
+          </div>
+          <h1 className="clientTableHead">List of Clinic Admins</h1>
+        </div>
         <Table
           sx={{
             [`& .${tableCellClasses.root}`]: {
@@ -86,7 +108,13 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
             </TableRow>
           </TableHead>
           <TableBody>
-            {clinicAdmins?.users?.length > 0 ? (
+            {isLoading ? (
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  <LinearProgress />
+                </TableCell>
+              </TableRow>
+            ) : clinicAdmins?.users?.length > 0 ? (
               clinicAdmins?.users?.map((row) => (
                 <StyledTableRow key={row.id} className="tableRow">
                   <TableCell />
@@ -152,11 +180,10 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
                 </StyledTableRow>
               ))
             ) : (
-              <>
-                {' '}
-                <TableCell align="center" />
-                <TableCell align="left">No Clinic Admins found</TableCell>
-              </>
+              <TableRow>
+                <TableCell align="left"> </TableCell>
+                <TableCell align="left">No Data Found</TableCell>
+              </TableRow>
             )}
           </TableBody>
         </Table>

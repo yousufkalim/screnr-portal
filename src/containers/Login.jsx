@@ -111,7 +111,7 @@ export default function Login() {
                       marginLeft: '15px',
                       fontWeight: '500',
                       '@media (max-width: 1900px)': {
-                        padding: '13px',
+                        padding: '11px',
                       },
                     },
                   }}
@@ -145,7 +145,7 @@ export default function Login() {
                       marginLeft: '15px',
                       fontFamily: 'Poppins, sans-serif',
                       '@media (max-width: 1900px)': {
-                        padding: '13px',
+                        padding: '11px',
                       },
                     },
                   }}

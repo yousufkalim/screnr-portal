@@ -21,6 +21,7 @@ import { ReactComponent as Profile } from '../../../assets/components/Table/Prof
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as Tick } from '../../../assets/components/Table/tick.svg';
+import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 
 // child component imports
 import { getMediaUrl } from '../../../config';
@@ -47,7 +48,9 @@ export default function PatientTable({ patients, getPatients }) {
     await getPatients(newPage + 1);
     setPage(newPage);
   };
-
+  const handleBackIconClick = () => {
+    window.history.back();
+  };
   const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 6,
     borderRadius: 5,
@@ -94,14 +97,40 @@ export default function PatientTable({ patients, getPatients }) {
           borderRadius: '20px',
           maxHeight: '84%',
           overflowX: 'hidden',
+          boxShadow: '0',
           width: '58.7vw',
           '@media (max-width: 1600px)': {
             maxHeight: '85.6%',
             width: '54.7vw',
+            overflowX: 'scroll',
+          },
+          '@media (min-width: 1536px)': {
+            maxHeight: '85.6%',
+            width: '59vw',
+          },
+          '@media (max-width: 1535px)': {
+            '&::-webkit-scrollbar': {
+              height: '6px',
+            },
+            '&::-webkit-scrollbar-track:vertical': {
+              background: '#f5f4f4',
+            },
+            '&::-webkit-scrollbar-track:horizontal': {
+              background: '#dddcdc',
+            },
           },
         }}
       >
-        <h1 className="clientTableHead">List of Patients</h1>
+        {/* <h1 className="clientTableHead">List of Patients</h1> */}
+
+        <div className="iconAndHeading">
+          <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
+            <BackIcon />
+          </div>
+          {/* <h1 className="clientTableHead">List of Clinician</h1> */}
+          <h1 className="clientTableHead">List of Patients</h1>
+        </div>
+
         <Table
           sx={{
             [`& .${tableCellClasses.root}`]: {
@@ -137,7 +166,10 @@ export default function PatientTable({ patients, getPatients }) {
               </TableCell>
               <TableCell
                 className="table_head"
-                sx={{ '@media (max-width: 1600px)': { width: '13%' } }}
+                sx={{
+                  '@media (max-width: 1600px)': { width: '13%' },
+                  '@media (max-width: 1545px)': { minWidth: '90px' },
+                }}
                 align="center"
               >
                 Pain (s)
@@ -150,7 +182,7 @@ export default function PatientTable({ patients, getPatients }) {
                 <StyledTableRow
                   key={row.id}
                   className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
-                  onClick={() => {
+                  onMouseOver={() => {
                     setPatient(row);
                   }}
                 >

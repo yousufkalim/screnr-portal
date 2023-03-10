@@ -364,6 +364,7 @@ export default function AddClinician({
                 <Button
                   className={clinician.gender === 'male' ? 'selectGender' : 'genderBtn'}
                   variant="contained"
+                  sx={{ width: '130px' }}
                   onClick={() => {
                     handleGenderSelection('male');
                   }}

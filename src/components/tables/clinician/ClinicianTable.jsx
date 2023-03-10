@@ -1,4 +1,5 @@
-import { React, useState } from 'react';
+/* eslint-disable no-nested-ternary */
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import { styled } from '@mui/material/styles';
@@ -10,12 +11,14 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
+import LinearProgress from '@mui/material/LinearProgress';
 
 // navigation
 import { useNavigate } from 'react-router-dom';
 
 // assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
+import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 
 // child component imports
 import EditClinician from '../../popups/clinician/EditClinician';
@@ -43,6 +46,18 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
     await getClinicians(newPage + 1);
     setPage(newPage);
   };
+  const handleBackIconClick = () => {
+    window.history.back();
+  };
+
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500); // Set the loading time to 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="bgClinicianTable" id="clinicianTable">
@@ -52,6 +67,7 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
           borderRadius: '20px',
           maxHeight: '94%',
           overflowX: 'hidden',
+          boxShadow: '0',
           width: '77.8vw',
           '@media (max-width: 1600px)': {
             maxHeight: '96.3%',
@@ -59,7 +75,12 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
           },
         }}
       >
-        <h1 className="clientTableHead">List of Clinician</h1>
+        <div className="iconAndHeading">
+          <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
+            <BackIcon />
+          </div>
+          <h1 className="clientTableHead">List of Clinician</h1>
+        </div>
         <Table
           sx={{
             [`& .${tableCellClasses.root}`]: {
@@ -90,7 +111,13 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {clinicians?.users?.length > 0 ? (
+            {isLoading ? (
+              <TableRow>
+                <TableCell colSpan={6} align="center">
+                  <LinearProgress />
+                </TableCell>
+              </TableRow>
+            ) : clinicians?.users?.length > 0 ? (
               clinicians?.users?.map((row) => (
                 <StyledTableRow key={row.id} className="tableRow">
                   <TableCell />

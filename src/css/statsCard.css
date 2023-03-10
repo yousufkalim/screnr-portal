@@ -3,7 +3,6 @@
   align-items: center;
   border-radius: 20px;
   width: 342px !important;
-  border: 0.5px solid #e5ebeb;
   overflow: hidden;
 }
 
@@ -22,6 +21,15 @@
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
+}
+
+.bottomStats {
+  width: 100% !important;
+  height: 57px !important;
+}
+.statsGraphics {
+  height: 55px;
+  max-width: 100%;
 }
 
 .timeLog {
@@ -47,15 +55,32 @@
     width: 240px !important;
     height: 146px !important;
   }
-
   .bottomStats {
-    width: 239px !important;
-    height: 52px !important;
+    height: 51px !important;
+  }
+  .statsGraphics {
+    height: 60px;
   }
 }
 
 @media only screen and (max-width: 1338px) {
   .stats_card_main_div {
     width: 230px !important;
+  }
+}
+@media only screen and (min-width: 1475px) {
+  .bottomStats {
+    height: 67px !important;
+  }
+  .statsGraphics {
+    height: 58px;
+  }
+}
+@media only screen and (min-width: 1681px) {
+  .bottomStats {
+    height: 73px !important;
+  }
+  .statsGraphics {
+    height: 69qpx;
   }
 }

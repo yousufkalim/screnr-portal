@@ -1,7 +1,10 @@
 .patientScreenCardsDiv {
   width: 97%;
 }
-
+.navigationEntities {
+  margin-right: 8px;
+  cursor: pointer;
+}
 .cards_div_patient_pg {
   display: flex;
   flex-direction: row;
@@ -306,7 +309,7 @@
 
 .msgTxt {
   color: #fba622;
-  margin-left: 2%;
+  margin-left: 8px;
 }
 
 .clrTableRow {
@@ -757,11 +760,24 @@
   }
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1536px) {
   .notiCell {
     font-size: 12px;
+    width: 140px;
+    padding-left: 5px;
   }
   .prescriptionMenu {
     right: 5px;
   }
+}
+/* Mui ProgressBar color styling  */
+
+.css-1r8wrcl-MuiLinearProgress-bar2 {
+  background-color: #f6fafb !important;
+}
+.css-5ir5xx-MuiLinearProgress-bar1 {
+  background-color: #f6fafb !important;
+}
+.css-eglki6-MuiLinearProgress-root {
+  background-color: rgb(232 235 239) !important;
 }
