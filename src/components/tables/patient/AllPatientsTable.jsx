@@ -110,7 +110,6 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
       document.removeEventListener('mousedown', handleCloseFilter);
     };
   }, [openFilter]);
-
   return (
     <div className="allClinicAdminTable" id="clinicianTable">
       <TableContainer
@@ -125,7 +124,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">
-            List of Patients <span className="countStyle">120</span>
+            List of Patients <span className="countStyle">{patients?.length}</span>
           </h1>
 
           <div className="allTableTitle" style={{ flexGrow: !isSafari ? '0.15' : 'none' }}>
@@ -390,7 +389,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                 Prescription
               </TableCell>
               <TableCell className="table_head" align="center">
-                Completion
+                Completion rate
               </TableCell>
               <TableCell className="table_head" align="center">
                 Performance
@@ -405,7 +404,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {patients.map((row) => (
+            {patients?.map((row) => (
               <>
                 <StyledTableRow
                   key={row.name}
@@ -416,12 +415,15 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                 >
                   <TableCell align="left"> {row.id} </TableCell>
                   <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                    <AvatarComponent alt="Arooj Ishfaq" className="header_avatar" />
-                    <div className="patient_cell">{row.name}</div>
+                    <AvatarComponent
+                      alt={`${row.first_name} ${row.last_name}`}
+                      className="header_avatar"
+                    />
+                    <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
                   </TableCell>
 
                   <TableCell align="center" className="table_cells">
-                    {row.diagnosis}
+                    {row?.userData?.diagnosis}
                   </TableCell>
                   <TableCell align="center" className="table_cells">
                     {row.exercises}
@@ -460,15 +462,16 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                     )}
                   </TableCell>
                   <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
-                    <div className="circularBarCell">
+                    <div className="circularBarCell" style={{ alignItems: 'center' }}>
                       <CircularProgress
                         variant="determinate"
                         thickness="4.5"
                         value={50}
                         size={55}
-                        sx={{ color: '#FABB18' }}
+                        sx={{
+                          color: '#FABB18',
+                        }}
                       />
-
                       <span className="circularProgress">55%</span>
                     </div>
                   </TableCell>
@@ -495,7 +498,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                     </TableCell>
                     <TableCell />
                     <TableCell />
-                    <TableCell align="left">
+                    <TableCell align="center">
                       <Edit className="table_icons" onClick={() => setOpenEditPatient(true)} />
                     </TableCell>
                   </TableRow>

@@ -9,7 +9,7 @@ import { ReactComponent as ClinicalIcon } from '../assets/components/HeaderIcons
 import { ReactComponent as PatientIcon } from '../assets/components/HeaderIcons/Patient.svg';
 import { ReactComponent as PatientStatsIcon } from '../assets/components/HeaderIcons/PatientStatsIcon.svg';
 
-export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
+export default function HeaderMainTab({ activeTab, handleTabsSwitch }) {
   return (
     <Stack direction="row" spacing={6} alignItems="center">
       {activeTab === '/dashboard' || activeTab === '/dashboard/' ? (
@@ -20,7 +20,7 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
       ) : (
         <DashboardIcon
           onClick={() => {
-            HandleTabsSwitch('/dashboard');
+            handleTabsSwitch('/dashboard');
           }}
           className="tab_icon"
         />
@@ -33,7 +33,7 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
       ) : (
         <ClinicAdminIcon
           onClick={() => {
-            HandleTabsSwitch('/clinics');
+            handleTabsSwitch('/clinics');
           }}
           className="tab_icon"
         />
@@ -46,7 +46,7 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
       ) : (
         <ClinicalIcon
           onClick={() => {
-            HandleTabsSwitch('/clinicians');
+            handleTabsSwitch('/clinicians');
           }}
           className="tab_icon"
         />
@@ -57,10 +57,7 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
           <span>Patients</span>
         </div>
       ) : (
-        <PatientIcon
-          //  onClick={() => HandleTabsSwitch('/patients')}
-          className="tab_icon"
-        />
+        <PatientIcon onClick={() => handleTabsSwitch('/patients')} className="tab_icon" />
       )}
       {activeTab === '/patients/:id/exercise/reports' ? (
         <div className="tab2_div">
@@ -69,7 +66,7 @@ export default function HeaderMainTab({ activeTab, HandleTabsSwitch }) {
         </div>
       ) : (
         <PatientStatsIcon
-          // onClick={() => HandleTabsSwitch('/patients/:id/exercise/reports')}
+          // onClick={() => handleTabsSwitch('/patients/:id/exercise/reports')}
           className="tab_icon"
         />
       )}

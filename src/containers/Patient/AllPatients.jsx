@@ -1,25 +1,22 @@
 import { React, useState, useEffect } from 'react';
-
 // mui imports
 import { Grid } from '@mui/material';
-
 // assets import
 import addBtn from '../../assets/icons/addBtn.svg';
-
 // child components import
 import AllPatientTable from '../../components/tables/patient/AllPatientsTable';
 import AddNewPatient from '../../components/popups/patient/AddNewPatient';
-// import api from '../../api';
+import api from '../../api';
 
 export default function Patient() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
-  const [patients] = useState([]);
+  const [patients, setPatients] = useState([]);
 
   const getPatients = async () => {
-    // const { data } = await api('get', '/admins/patient/all/');
-    // if (data) {
-    //   setPatients(data.users);
-    // }
+    const { data } = await api('get', '/admins/patients/');
+    if (data) {
+      setPatients(data.users);
+    }
   };
 
   useEffect(() => {
@@ -42,7 +39,6 @@ export default function Patient() {
           alt=""
         />
       </div>
-
       <AddNewPatient openAddPatient={openAddPatient} setOpenAddPatient={setOpenAddPatient} />
     </Grid>
   );

@@ -59,17 +59,17 @@ export default function EditPatient({
   getPatients,
   patientDetails,
 }) {
-  const [checked, setChecked] = useState(!!patientDetails.expiry_date);
+  const [checked, setChecked] = useState(!!patientDetails?.expiry_date);
   const [clinicians, setClinicians] = useState([]);
 
   const [patient, setPatient] = useState({
-    first_name: patientDetails.first_name,
-    last_name: patientDetails.last_name,
-    email: patientDetails.email,
-    profile_pic: patientDetails.profile_pic,
-    phone_number: patientDetails.phone_number,
+    first_name: patientDetails?.first_name,
+    last_name: patientDetails?.last_name,
+    email: patientDetails?.email,
+    profile_pic: patientDetails?.profile_pic,
+    phone_number: patientDetails?.phone_number,
     // eslint-disable-next-line no-underscore-dangle
-    expiry_date: moment(patientDetails.expiry_date)?._d || '',
+    expiry_date: moment(patientDetails?.expiry_date)?._d || '',
   });
 
   const [userData, setUserData] = useState({

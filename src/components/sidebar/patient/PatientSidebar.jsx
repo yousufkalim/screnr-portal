@@ -8,7 +8,7 @@ import { ReactComponent as Activity } from '../../../assets/components/TimeCard/
 import { ReactComponent as Msg } from '../../../assets/components/Sidebar/msg.svg';
 import PatientSidebarSection from './PatientSidebarSection';
 
-export default function Sidebar() {
+export default function Sidebar({ patientId }) {
   const [activityClicked, setActivityClicked] = useState(false);
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export default function Sidebar() {
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate('/patients/:id/addPrescription');
+          navigate(`/patients/${patientId}/addPrescription`);
           setActivityClicked(true);
         }}
       >
