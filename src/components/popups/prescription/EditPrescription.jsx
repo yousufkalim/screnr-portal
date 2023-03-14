@@ -196,7 +196,12 @@ export default function EditPrescription({ openEditPrescription, setOpenEditPres
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
-          <Button onClick={handleSubmit} className="savePBtn" variant="contained">
+          <Button
+            sx={{ boxShadow: '0' }}
+            onClick={handleSubmit}
+            className="savePBtn"
+            variant="contained"
+          >
             Save
           </Button>
         </DialogActions>

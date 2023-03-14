@@ -13,6 +13,7 @@ import AddPatientPrescription from '../containers/Patient/AddPrescription';
 import PatientMessageBox from '../containers/Patient/PatientMessageBox';
 import Index from '../containers/Patient/PatientStats/Index';
 import SearchScreen from '../components/popups/general/SearchScreen';
+import Session from '../containers/Patient/PatientStats/Session';
 
 const superadminRoutes = [
   {
@@ -51,6 +52,11 @@ const superadminRoutes = [
   {
     path: '/staff/:id',
     element: <ClinicAdmin />,
+    protected: true,
+  },
+  {
+    path: '/staff/clinicAdmin/Clinician/Patient/Prescription/Session',
+    element: <Session />,
     protected: true,
   },
 

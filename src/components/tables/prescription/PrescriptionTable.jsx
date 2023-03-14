@@ -12,6 +12,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+import { useNavigate } from 'react-router-dom';
+
 // assets import
 import { ReactComponent as Action } from '../../../assets/components/Table/dots.svg';
 import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
@@ -29,6 +31,8 @@ export default function PrescriptionTable() {
   const [isOpen, setIsOpen] = useState({});
   const [openPrescriptionMenu, setOpenPrescriptionMenu] = useState(false);
   const [openEditPrescription, setOpenEditPrescription] = useState(false);
+
+  const navigate = useNavigate();
 
   const toggleOpen = (category) => {
     setIsOpen({
@@ -96,6 +100,10 @@ export default function PrescriptionTable() {
       '1 / 05 / 2022',
     ),
   ];
+
+  const handleSearchLogoClick = () => {
+    navigate('/staff/clinicAdmin/Clinician/Patient/Prescription/Session');
+  };
 
   const subPrescription = [
     createData('01 / 05 / 2022', 9, 55, 'Done', 97, 'check'),
@@ -291,7 +299,7 @@ export default function PrescriptionTable() {
                 </TableHead>
                 <TableBody>
                   {subPrescription.map((row) => (
-                    <StyledTableRow className="tableRow">
+                    <StyledTableRow className="tableRow" onClick={() => handleSearchLogoClick()}>
                       <TableCell align="left">{row.date}</TableCell>
 
                       <TableCell align="left" className="table_cells">
