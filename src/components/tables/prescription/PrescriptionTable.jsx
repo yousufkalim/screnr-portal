@@ -123,6 +123,7 @@ export default function PrescriptionTable() {
             overflowX: 'hidden',
             width: '76vw',
             margin: 'auto',
+            boxShadow: '0',
             marginBottom: '25px',
             '@media (max-width: 1535px)': {
               width: '73vw',
