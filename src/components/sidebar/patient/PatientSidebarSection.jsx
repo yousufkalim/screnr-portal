@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { React, useState } from 'react';
 
 // mui imports
 import Collapse from '@mui/material/Collapse';
 
+import moment from 'moment';
 // images import
 import { ReactComponent as Phone } from '../../../assets/components/Table/Call.svg';
 import { ReactComponent as Email } from '../../../assets/components/Table/SidebarEmail.svg';
@@ -18,60 +21,78 @@ import edit from '../../../assets/icons/sidebarEdit.svg';
 // Avatar
 import AvatarComponent from '../../Avatar';
 
-export default function PatientSidebarSection() {
+export default function PatientSidebarSection({
+  patientData,
+  openEditpatientModal,
+  setOpenEditpatientModal,
+}) {
   const [expanded, setExpanded] = useState('');
   const [toggleIcon, setToggleIcon] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
     setToggleIcon(!toggleIcon);
   };
+
+  const handleEditIconClick = () => {
+    setOpenEditpatientModal(!openEditpatientModal);
+  };
   return (
     <>
-      {' '}
       <div className="mainAvatarDiv">
-        <AvatarComponent alt="Rana Hamza" className="sidebar_avatar" />
-        <img src={edit} alt="" className="editIconSidebar" />
+        <AvatarComponent
+          alt={`${patientData?.first_name} ${patientData?.last_name}`}
+          className="sidebar_avatar"
+        />
+        <img
+          src={edit}
+          alt=""
+          className="editIconSidebar"
+          onClick={() => {
+            handleEditIconClick();
+          }}
+        />
       </div>
       <div className="sideBarInfo">
-        <div className="user_name">Rana Hamza</div>
+        <div className="user_name">{`${patientData?.first_name} ${patientData?.last_name}`}</div>
         <div className="staff_id">
-          Patient ID: <span className="staff_id_2">12345</span>
+          Patient ID: <span className="staff_id_2">{patientData?.id}</span>
         </div>
       </div>
       <div className="sidebarSubDiv">
-        <div className="user_detail">
-          <Counter className="spaceOnRight" />
-          25
+        <div className="user_detail" style={{ paddingLeft: '.3rem' }}>
+          <Counter />
+          {moment().diff(patientData?.userData?.dob, 'years')}
         </div>
         <div className="user_detail">
-          <Medical className="spaceOnRight" />
-          Backpain
+          <Medical />
+          {patientData?.userData?.diagnosis}
         </div>
         <div className="user_detail">
-          <Body className="spaceOnRight" />
-          Anterior
+          <Body />
+          {patientData?.userData?.location}
         </div>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <div className="sidebarSubDiv2">
           <div className="user_detail">
-            <Phone className="spaceOnRight" />
-            +123456734
+            <Phone />
+            {patientData?.phone_number}
           </div>
           <div className="user_detail">
-            <Email className="spaceOnRight" />
-            Screner@gmail.com
+            <Email />
+            {patientData?.email}
           </div>
         </div>
         <br />
-        <div className="patient_exp_detail">
-          <span className="detail_expiry">
-            <Expiry className="spaceOnRight" />
-
-            <p className="spaceOnRight">Expiry Date</p>
-          </span>
-          <p>12-05-2023</p>
-        </div>
+        {patientData?.expiry_date && (
+          <div className="patient_exp_detail">
+            <span className="detail_expiry">
+              <Expiry />
+              <p>Expiry Date</p>
+            </span>
+            <p>{moment(patientData?.expiry_date).format('DD/MM/YYYY')}</p>
+          </div>
+        )}
       </Collapse>
       {toggleIcon ? (
         <OpenArrow

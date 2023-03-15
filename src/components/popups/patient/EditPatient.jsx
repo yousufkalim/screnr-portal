@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react';
-
 // mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -80,6 +79,11 @@ export default function EditPatient({
     // eslint-disable-next-line no-underscore-dangle
     dob: moment(patientDetails?.userData?.dob)._d || '',
   });
+
+  const clinicId = patientDetails?.userData?.clinicians[0]?.userData?.clinic?.id
+    ? patientDetails?.userData?.clinicians[0]?.userData?.clinic?.id
+    : patientDetails?.userData?.clinicians[0]?.userData?.clinic;
+
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleClose = () => {
@@ -122,32 +126,34 @@ export default function EditPatient({
     setPatient({ ...patient, profile_pic: myFile });
   };
 
-  const getClinicians = async (page = 1) => {
-    const { data } = await api(
-      'get',
-      `/admins/clinicians/getCliniciansByClinicId/${userData?.clinicians[0]?.userData?.clinic?.id}?page=${page}`,
-    );
-    if (data) {
-      setClinicians(
-        data.users
-          .filter((dr) => userData?.clinicians?.filter((_) => _.id === dr.id).length === 0)
-          .map((doctor) => {
-            return {
-              id: doctor?.id,
-              optName: `${doctor?.first_name} ${doctor?.last_name}`,
-            };
-          }),
-      );
-    }
+  const getClinicians = async () => {
+    await api('get', `/admins/clinicians/getCliniciansByClinicId/${clinicId}`)
+      .then((res) => {
+        if (res.data) {
+          setClinicians(
+            res.data.users
+              .filter((dr) => userData?.clinicians?.filter((_) => _.id === dr.id).length === 0)
+              .map((doctor) => {
+                return {
+                  id: doctor?.id,
+                  optName: `${doctor?.first_name} ${doctor?.last_name}`,
+                };
+              }),
+          );
+        }
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error(`getClinicians --> ${err}`);
+      });
   };
 
   useEffect(() => {
-    if (userData?.clinicians[0]?.userData?.clinic?.id) {
+    if (clinicId) {
       getClinicians();
     }
-
     // eslint-disable-next-line
-  }, []);
+  }, [openEditPatient]);
 
   // posting data
   const handleSubmit = async (e) => {

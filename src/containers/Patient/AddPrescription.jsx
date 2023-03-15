@@ -22,7 +22,7 @@ export default function AddPatientPrescription() {
     duration: '',
     frequency: '',
     type: 'motion',
-    clinician: 'vaf6q',
+    clinician: 't6430',
     patient: id,
     exercises: [],
   });

@@ -28,7 +28,6 @@ export default function Patient() {
   const [patients, setPatients] = useState({});
   const [breadcrumb, setBreadcrumb] = useState('');
   const navigate = useNavigate();
-
   const { id } = useParams();
 
   const getPatients = async (page = 1) => {
