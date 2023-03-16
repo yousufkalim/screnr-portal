@@ -134,6 +134,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
               maxHeight: '84%',
               overflowX: 'hidden',
               width: '76vw',
+              boxShadow: '0',
               margin: 'auto',
               marginBottom: '25px',
             }}
