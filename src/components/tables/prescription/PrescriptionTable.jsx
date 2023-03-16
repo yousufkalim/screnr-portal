@@ -59,6 +59,9 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
       });
   };
   const navigate = useNavigate();
+  const handleSearchLogoClick = () => {
+    navigate('/staff/clinicAdmin/Clinician/Patient/Prescription/Session');
+  };
   const toggleOpen = (category) => {
     setIsOpen({
       ...isOpen,
@@ -115,7 +118,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patientId, selectedClinicianId]);
 
-
   return (
     <div id="prescriptionTable">
       <h3 className="prescription_header">Prescription List</h3>
@@ -128,7 +130,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
           <TableContainer
             key={mainRow?.id}
             component={Paper}
-
             sx={{
               borderRadius: '20px',
               maxHeight: '84%',
@@ -221,7 +222,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     />
                     {openPrescriptionMenu ? (
                       <div className="prescriptionMenu">
-
                         <div
                           className="editMenuItem"
                           role="presentation"
@@ -317,11 +317,12 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                   </TableHead>
                   <TableBody>
                     {mainRow?.sessions?.map((row, index2) => (
-                      <StyledTableRow className="tableRow" key={row?.id}>
-                        <TableCell align="left">
-                          {' '}
-                          {moment(row?.date).format('DD/MM/YYYY')}
-                        </TableCell>
+                      <StyledTableRow
+                        className="tableRow"
+                        key={row?.id}
+                        onClick={handleSearchLogoClick}
+                      >
+                        <TableCell align="left">{moment(row?.date).format('DD/MM/YYYY')}</TableCell>
                         <TableCell align="left" className="table_cells">
                           <div
                             className={
