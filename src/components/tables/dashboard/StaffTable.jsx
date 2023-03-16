@@ -102,7 +102,16 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
             {isLoading ? (
               <TableRow>
                 <TableCell colSpan={4} align="center">
-                  <LinearProgress />
+                  <LinearProgress
+                    sx={{
+                      '& .MuiLinearProgress-barColorPrimary': {
+                        backgroundColor: '#f6fafb',
+                      },
+                      '& .MuiLinearProgress-barColorSecondary': {
+                        backgroundColor: '#f6fafb',
+                      },
+                    }}
+                  />
                 </TableCell>
               </TableRow>
             ) : staffMembers?.users?.length > 0 ? (

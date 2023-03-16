@@ -13,6 +13,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import moment from 'moment';
 
+import { useNavigate } from 'react-router-dom';
+
 // assets import
 import { ReactComponent as Action } from '../../../assets/components/Table/dots.svg';
 import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
@@ -56,6 +58,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
         console.error(`handlePrescriptionList---> ${err}`);
       });
   };
+  const navigate = useNavigate();
   const toggleOpen = (category) => {
     setIsOpen({
       ...isOpen,
@@ -112,6 +115,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patientId, selectedClinicianId]);
 
+
   return (
     <div id="prescriptionTable">
       <h3 className="prescription_header">Prescription List</h3>
@@ -124,6 +128,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
           <TableContainer
             key={mainRow?.id}
             component={Paper}
+
             sx={{
               borderRadius: '20px',
               maxHeight: '84%',
@@ -216,6 +221,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     />
                     {openPrescriptionMenu ? (
                       <div className="prescriptionMenu">
+
                         <div
                           className="editMenuItem"
                           role="presentation"

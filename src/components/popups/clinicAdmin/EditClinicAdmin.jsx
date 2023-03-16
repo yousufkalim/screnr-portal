@@ -63,6 +63,8 @@ export default function EditClinicAdmin({
 
   const [userData, setUserData] = useState({});
   const [clinicAdmin, setClinicAdmin] = useState({});
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   const dateChange = (e) => {
     setClinicAdmin({
@@ -441,6 +443,8 @@ export default function EditClinicAdmin({
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
+                  minDate={tomorrow}
+                  disablePast
                 />
               </div>
             </FormControl>

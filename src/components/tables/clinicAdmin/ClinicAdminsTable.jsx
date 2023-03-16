@@ -111,7 +111,16 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
             {isLoading ? (
               <TableRow>
                 <TableCell colSpan={5} align="center">
-                  <LinearProgress />
+                  <LinearProgress
+                    sx={{
+                      '& .MuiLinearProgress-barColorPrimary': {
+                        backgroundColor: '#f6fafb',
+                      },
+                      '& .MuiLinearProgress-barColorSecondary': {
+                        backgroundColor: '#f6fafb',
+                      },
+                    }}
+                  />
                 </TableCell>
               </TableRow>
             ) : clinicAdmins?.users?.length > 0 ? (

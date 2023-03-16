@@ -259,7 +259,16 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
             {isLoading ? (
               <TableRow>
                 <TableCell colSpan={6} align="center">
-                  <LinearProgress />
+                  <LinearProgress
+                    sx={{
+                      '& .MuiLinearProgress-barColorPrimary': {
+                        backgroundColor: '#f6fafb',
+                      },
+                      '& .MuiLinearProgress-barColorSecondary': {
+                        backgroundColor: '#f6fafb',
+                      },
+                    }}
+                  />
                 </TableCell>
               </TableRow>
             ) : clinicians?.users?.length > 0 ? (
