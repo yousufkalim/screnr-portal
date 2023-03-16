@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import { Grid } from '@mui/material';
@@ -13,31 +13,88 @@ import addBtn from '../../assets/icons/addBtn.svg';
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import PatientTopSection from '../../components/PatientTopSection';
 import PrescriptionTable from '../../components/tables/prescription/PrescriptionTable';
+import api from '../../api';
+import EditPatient from '../../components/popups/patient/EditPatient';
 
 export default function Prescription() {
   const params = useParams();
   const { id } = params;
   const navigate = useNavigate();
+  const [patient, setPatient] = useState('');
+  const [allClinicians, setAllClinicians] = useState('');
+  const [openEditpatientModal, setOpenEditpatientModal] = useState(false);
+  const [selectedClinician, setSelectedClinician] = useState('');
+
+  const getPatients = async () => {
+    await api('get', `/admins/patients/${id}`)
+      .then(async (res) => {
+        setPatient(res?.data?.user);
+        const ClinicId = res?.data?.user?.userData?.clinicians[0]?.userData?.clinic;
+        await api('get', `/admins/clinicians/getCliniciansByClinicId/${ClinicId}`)
+          .then((res1) => {
+            setAllClinicians(res1?.data?.users);
+          })
+          .catch((err) => {
+            // eslint-disable-next-line no-console
+            console.error(`handleGetPatientData --> ${err}`);
+          });
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error(`handleGetPatientData --> ${err}`);
+      });
+  };
+  useEffect(() => {
+    getPatients();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
   return (
-    <Grid container>
-      <Grid xl={2} lg={2.5}>
-        <Sidebar patientId={id} />
+    <>
+      <Grid container>
+        <Grid xl={2} lg={2.5}>
+          <Sidebar
+            patientId={id}
+            patientData={patient}
+            openEditpatientModal={openEditpatientModal}
+            setOpenEditpatientModal={setOpenEditpatientModal}
+          />
+        </Grid>
+
+        <Grid className="bgPrescription" xl={10} lg={9.5}>
+          <PatientTopSection
+            allClinicians={allClinicians}
+            patientData={patient}
+            getPatients={getPatients}
+            selectedClinician={selectedClinician}
+            setSelectedClinician={setSelectedClinician}
+          />
+          <PrescriptionTable
+            patientId={id}
+            selectedClinicianId={selectedClinician}
+            selectedClinicians={patient?.userData?.clinicians}
+          />
+        </Grid>
+
+        <div className="addBtn">
+          <img
+            src={addBtn}
+            className="pointer"
+            onClick={() => navigate(`/patients/${id}/addPrescription`)}
+            role="presentation"
+            alt=""
+          />
+        </div>
       </Grid>
 
-      <Grid className="bgPrescription" xl={10} lg={9.5}>
-        <PatientTopSection />
-        <PrescriptionTable />
-      </Grid>
-
-      <div className="addBtn">
-        <img
-          src={addBtn}
-          className="pointer"
-          onClick={() => navigate('/patients/:id/addPrescription')}
-          role="presentation"
-          alt=""
+      {openEditpatientModal && (
+        <EditPatient
+          openEditPatient={openEditpatientModal}
+          setOpenEditPatient={setOpenEditpatientModal}
+          patientDetails={patient}
+          getPatients={getPatients}
         />
-      </div>
-    </Grid>
+      )}
+    </>
   );
 }

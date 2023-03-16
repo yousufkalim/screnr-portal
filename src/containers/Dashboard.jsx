@@ -35,7 +35,6 @@ export default function Dashboard() {
     const { data } = await api('get', `/admins/staff?page=${page}`);
     if (data) {
       setStaffMembers(data);
-
       setCount({
         ...count,
         staffCount: data?.count.staffCount.count,

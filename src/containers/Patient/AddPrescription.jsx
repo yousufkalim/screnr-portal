@@ -19,10 +19,10 @@ export default function AddPatientPrescription() {
   const [prescription, setPrescription] = useState({
     name: '',
     start_date: new Date(),
-    duration: 0,
-    frequency: 0,
+    duration: '',
+    frequency: '',
     type: 'motion',
-    clinician: 'vaf6q',
+    clinician: 't6430',
     patient: id,
     exercises: [],
   });

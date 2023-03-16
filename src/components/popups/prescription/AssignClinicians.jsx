@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import { styled } from '@mui/material/styles';
@@ -6,9 +6,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Typography from '@mui/material/Typography';
 import ClearIcon from '@mui/icons-material/Clear';
-
-// assets
-import { ReactComponent as Dummy } from '../../../assets/images/dummyprsn.svg';
+import AvatarComponent from '../../Avatar';
+import api from '../../../api/index';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -22,42 +21,60 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function AssignClinicians({
+  cliniciansData,
   setCliniciansData,
   openAssignClinicians,
   setOpenAssignClinicians,
+  allClinicians,
+  patientId,
+  getPatients,
 }) {
   const [selectedClinicians, setSelectedClinicians] = useState([]);
-  const allClinicians = [
-    { id: '1', name: 'Usman' },
-    { id: '2', name: 'Asif' },
-    { id: '3', name: 'Ghaffar' },
-    { id: '4', name: 'Sameer' },
-    { id: '5', name: 'Hania' },
-  ];
+
+  useEffect(() => {
+    setSelectedClinicians(cliniciansData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClose = () => {
     setOpenAssignClinicians(false);
   };
 
+  const handleAddClinicians = async (clinicianId) => {
+    setOpenAssignClinicians(false);
+    await api('put', `/admins/patients/addClinicianToPatient/${patientId}`, {
+      clinician: clinicianId,
+    })
+      .then(() => {
+        setOpenAssignClinicians(false);
+        getPatients();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const selectClinician = (chosenClinician) => {
-    if (selectedClinicians.some((t) => t.id === chosenClinician.id)) {
-      setSelectedClinicians(selectedClinicians.filter((t) => t.id !== chosenClinician.id));
-      setCliniciansData(selectedClinicians.filter((t) => t.id !== chosenClinician.id));
-    } else {
-      setSelectedClinicians([...selectedClinicians, chosenClinician]);
-      setCliniciansData([...selectedClinicians, chosenClinician]);
-    }
+    handleAddClinicians(chosenClinician.id);
+
+    const updatedClinicians = selectedClinicians.find(
+      (clinician) => clinician.id === chosenClinician.id,
+    )
+      ? [...selectedClinicians]
+      : [...selectedClinicians, chosenClinician];
+    setSelectedClinicians(updatedClinicians);
+    setCliniciansData(updatedClinicians);
   };
 
   return (
     <div>
       <BootstrapDialog
+        fullWidth
+        maxWidth="md"
         onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
         open={openAssignClinicians}
         setOpen={setOpenAssignClinicians}
-        maxWidth="md"
-        fullWidth
+        aria-labelledby="customized-dialog-title"
         PaperProps={{
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
@@ -67,7 +84,7 @@ export default function AssignClinicians({
           <Typography gutterBottom>
             <h1 className="clinicianPopupTxt">Assign more Clinicians</h1>
             <div className="clinicianParentDiv">
-              {allClinicians.map((clinician) => (
+              {allClinicians?.map((clinician) => (
                 <div
                   className={
                     selectedClinicians.some((c) => c.id === clinician.id)
@@ -77,8 +94,11 @@ export default function AssignClinicians({
                   role="presentation"
                   onClick={() => selectClinician(clinician)}
                 >
-                  <Dummy className="clinicianDP" />
-                  <p>{`Dr ${clinician.name}`}</p>
+                  <AvatarComponent
+                    alt={`${clinician?.first_name} ${clinician?.last_name}`}
+                    className="top_sec_avatar"
+                  />
+                  <p>{`${clinician?.first_name} ${clinician?.last_name}`}</p>
                 </div>
               ))}
             </div>

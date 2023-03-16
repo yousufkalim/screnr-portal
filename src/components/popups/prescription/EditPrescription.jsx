@@ -1,5 +1,4 @@
-import { React } from 'react';
-
+import { React, useState, useEffect } from 'react';
 // mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -20,6 +19,7 @@ import dropdown from '../../../assets/icons/downArrow.svg';
 
 // child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
+import api from '../../../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -39,18 +39,93 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function EditPrescription({ openEditPrescription, setOpenEditPrescription }) {
-  const outlinedInputStyles = useOutlinedInputStyles();
+const weeks = [
+  {
+    value: 1,
+    label: 'Week 1',
+  },
+  {
+    value: 2,
+    label: 'Week 2',
+  },
+  {
+    value: 3,
+    label: 'Week 3',
+  },
+  {
+    value: 4,
+    label: 'Week 4',
+  },
+  {
+    value: 5,
+    label: 'Week 5',
+  },
+  {
+    value: 6,
+    label: 'Week 6',
+  },
+];
 
+const frequency = [
+  {
+    value: 1,
+    label: '1 Times',
+  },
+  {
+    value: 2,
+    label: '2 Times',
+  },
+  {
+    value: 3,
+    label: '3 Times',
+  },
+  {
+    value: 4,
+    label: '4 Times',
+  },
+  {
+    value: 5,
+    label: '5 Times',
+  },
+];
+
+export default function EditPrescription({
+  openEditPrescription,
+  setOpenEditPrescription,
+  selectedPrescription,
+  handlePrescriptionList,
+}) {
+  const [prescriptionName, setPrescriptionName] = useState('');
+  const [prescriptionDuration, setPrescriptionDuration] = useState('');
+  const [prescriptionFrequency, setPrescriptionFrequency] = useState('');
+  const outlinedInputStyles = useOutlinedInputStyles();
   const handleClose = () => {
     setOpenEditPrescription(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    toast.success('Prescription added successfully');
+  const handleEditPrescriptions = async () => {
+    await api('put', `/admins/prescriptions/${selectedPrescription?.id}`, {
+      name: prescriptionName,
+      duration: prescriptionDuration,
+      frequency: prescriptionFrequency,
+    })
+      .then((res) => {
+        toast.success('Prescription added successfully');
+        handlePrescriptionList();
+        console.log('res', res);
+      })
+      .catch((err) => {
+        console.error(`handleEditPrescriptions --> ${err}`);
+      });
     handleClose();
   };
+
+  useEffect(() => {
+    setPrescriptionDuration(selectedPrescription?.duration);
+    setPrescriptionFrequency(selectedPrescription?.frequency);
+    setPrescriptionName(selectedPrescription?.name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openEditPrescription]);
 
   return (
     <div>
@@ -61,7 +136,7 @@ export default function EditPrescription({ openEditPrescription, setOpenEditPres
         setOpen={setOpenEditPrescription}
         maxWidth="md"
         PaperProps={{
-          style: { borderRadius: 20, background: '#FFFFFF' },
+          style: { borderRadius: 20, background: '#FFFFFF', width: '40%' },
         }}
       >
         <ClearIcon className="loginClearIcon" onClick={handleClose} />
@@ -74,7 +149,7 @@ export default function EditPrescription({ openEditPrescription, setOpenEditPres
                 sx={{
                   borderRadius: '20px',
                   input: {
-                    color: 'black',
+                    color: '#949494',
                     fontSize: '14px',
                     fontWeight: '500',
                     ml: 1,
@@ -82,8 +157,12 @@ export default function EditPrescription({ openEditPrescription, setOpenEditPres
                 }}
                 id="outlined-name"
                 classes={outlinedInputStyles}
-                placeholder="Prescription 1"
+                placeholder="Add prescription name"
                 size="normal"
+                value={prescriptionName}
+                onChange={(e) => {
+                  setPrescriptionName(e.target.value);
+                }}
               />
             </FormControl>
 
@@ -124,19 +203,22 @@ export default function EditPrescription({ openEditPrescription, setOpenEditPres
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                name="client"
-                value=""
+                value={prescriptionDuration || 'default'}
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
+                onChange={(e) => {
+                  setPrescriptionDuration(e.target.value);
+                }}
               >
-                <MenuItem value="">
+                <MenuItem value="default">
                   <span style={{ color: '#949494' }}>Select Duration</span>
                 </MenuItem>
-                <MenuItem> 1 Week</MenuItem>
-                <MenuItem> 2 Weeks</MenuItem>
-                <MenuItem> 3 Weeks</MenuItem>
-                <MenuItem> 4 Weeks</MenuItem>
+                {weeks.map((item) => (
+                  <MenuItem value={item?.value}>
+                    <span style={{ color: '#949494' }}>{item?.label}</span>
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
 
@@ -177,31 +259,28 @@ export default function EditPrescription({ openEditPrescription, setOpenEditPres
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                name="client"
-                placeholder="Title"
-                value=""
+                value={prescriptionFrequency || 'default'}
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
+                onChange={(e) => {
+                  setPrescriptionFrequency(e.target.value);
+                }}
               >
-                <MenuItem value="">
+                <MenuItem value="default">
                   <span style={{ color: '#949494' }}>Weekly Frequency</span>
                 </MenuItem>
-                <MenuItem> 1 Time</MenuItem>
-                <MenuItem> 2 Times</MenuItem>
-                <MenuItem> 3 Times</MenuItem>
-                <MenuItem> 4 Times</MenuItem>
+                {frequency.map((item) => (
+                  <MenuItem value={item?.value}>
+                    <span style={{ color: '#949494' }}>{item?.label}</span>
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
-          <Button
-            sx={{ boxShadow: '0' }}
-            onClick={handleSubmit}
-            className="savePBtn"
-            variant="contained"
-          >
+          <Button onClick={handleEditPrescriptions} sx={{ boxShadow: '0' }} className="savePBtn" variant="contained">
             Save
           </Button>
         </DialogActions>

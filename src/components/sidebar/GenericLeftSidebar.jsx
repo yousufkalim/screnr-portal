@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-nested-ternary */
 import { React, useState, useEffect } from 'react';
 
@@ -19,7 +21,7 @@ import api from '../../api/index';
 import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
-export default function LeftSidebar({ getClinicName, id, txt, roleTxt }) {
+export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, open }) {
   const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
@@ -37,7 +39,11 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt }) {
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [open]);
+
+  const handleEditIconClick = () => {
+    setOpen(!open);
+  };
 
   return (
     <div className="left_side">
@@ -76,8 +82,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt }) {
             </label>
           </div>
         </div>
-
-        <img src={edit} alt="" className="editIconSidebar" />
+        <img src={edit} alt="" className="editIconSidebar" onClick={handleEditIconClick} />
       </div>
       <div className="sideBarInfo">
         <div className="user_name"> {`${info?.first_name} ${info?.last_name}`}</div>

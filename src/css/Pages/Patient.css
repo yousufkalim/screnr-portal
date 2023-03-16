@@ -422,19 +422,42 @@
   width: max-content;
   margin-right: 40px;
   margin-bottom: 10px;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.topSec:hover .top_sec_avatar_disabled {
+  background-color: #136773;
+}
+.topSec:hover .topSecDocName_disabled {
+  color: #136773
+}
+.topSec:hover .topSecExpertise_disabled {
+  color: #fba622;
 }
 
 .top_sec_avatar {
   background-color: #136773 !important;
-  height: 70px !important;
-  width: 70px !important;
+  height: 60px !important;
+  width: 60px !important;
+}
+
+.top_sec_avatar_disabled {
+  background-color: #919B9B;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .topSecDocName {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   color: #136773;
+}
+
+.topSecDocName_disabled {
+  font-weight: 600;
+  font-size: 16px;
+  color: #919B9B;
 }
 
 .topSecExpertise {
@@ -443,15 +466,21 @@
   color: #fba622;
 }
 
+.topSecExpertise_disabled {
+  font-weight: 500;
+  font-size: 12px;
+  color: #919B9B;
+}
+
 .topSecActions {
   font-weight: 400;
   font-size: 12px;
   color: #919b9b;
 }
 
-.topSecDetails {
+/* .topSecDetails {
   margin-left: 15px;
-}
+} */
 
 .exerciseItems li {
   list-style: none;
@@ -634,12 +663,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: .3rem;
   width: max-content;
   background-color: #f4f4f4;
-  border-radius: 30px;
+  border-radius: 1000px;
   cursor: pointer;
-  flex-basis: 30%;
-  padding: 4px;
+  padding: .5rem;
   margin-bottom: 13px;
   /* width: 20%; */
 }
@@ -647,12 +676,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: .3rem;
   width: max-content;
-  background-color: #136773;
-  border-radius: 30px;
+  border: 1px solid #136773 ;
+  background-color: rgba(19, 103, 115, .1);
+  border-radius: 1000px;
   cursor: pointer;
-  flex-basis: 30%;
-  padding: 4px;
+  padding: .5rem;
   margin-bottom: 13px;
   /* width: 20%; */
 }
@@ -660,7 +690,7 @@
 .selectedClinicianDiv p {
   font-weight: 500;
   font-size: 17px;
-  color: white;
+  color: #919b9b;
 }
 
 .clinicianDiv p {

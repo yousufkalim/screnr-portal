@@ -164,6 +164,7 @@ export default function EditClinicAdmin({
     const { data } = await api('put', `/admins/clinics/${clinicAdminDetails.id}`, formData);
     if (data) {
       toast.success('Clinic Admin updated successfully');
+      setOpenEditClinicAdmin(false);
       getClinicAdmins();
       handleClose();
     }

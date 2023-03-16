@@ -8,13 +8,22 @@ import { ReactComponent as Activity } from '../../../assets/components/TimeCard/
 import { ReactComponent as Msg } from '../../../assets/components/Sidebar/msg.svg';
 import PatientSidebarSection from './PatientSidebarSection';
 
-export default function Sidebar({ patientId }) {
+export default function Sidebar({
+  patientId,
+  patientData,
+  openEditpatientModal,
+  setOpenEditpatientModal,
+}) {
   const [activityClicked, setActivityClicked] = useState(false);
   const navigate = useNavigate();
 
   return (
     <div className="left_side">
-      <PatientSidebarSection />
+      <PatientSidebarSection
+        patientData={patientData}
+        openEditpatientModal={openEditpatientModal}
+        setOpenEditpatientModal={setOpenEditpatientModal}
+      />
       <div
         className="activityLeft"
         role="presentation"

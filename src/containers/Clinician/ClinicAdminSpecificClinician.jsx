@@ -17,11 +17,19 @@ import Sidebar from '../../components/sidebar/GenericLeftSidebar';
 import CardWithIcon from '../../components/cards/CardWithIcon';
 import ClinicianTable from '../../components/tables/clinician/ClinicianTable';
 import AddClinician from '../../components/popups/clinician/AddNewClinician';
+import EditClinicAdmin from '../../components/popups/clinicAdmin/EditClinicAdmin';
 import api from '../../api';
 
 export default function ClinicAdmin() {
   const [openAddClinican, setOpenAddClinican] = useState(false);
+  const [openEditClinician, setOpenEditClinician] = useState(false);
+
   const [clinicians, setClinicians] = useState({});
+  const [clinicianData, setClinicianData] = useState({});
+  console.log(
+    '🚀 ~ file: ClinicAdminSpecificClinician.jsx:29 ~ ClinicAdmin ~ clinicianData:',
+    clinicianData,
+  );
   const [breadcrumb, setBreadcrumb] = useState('');
   const { id } = useParams();
   const navigate = useNavigate();
@@ -33,6 +41,13 @@ export default function ClinicAdmin() {
     );
     if (data) {
       setClinicians(data);
+    }
+  };
+
+  const getClinicianData = async () => {
+    const { data } = await api('get', `/admins/clinics/${id}`);
+    if (data) {
+      setClinicianData(data.user);
     }
   };
 
@@ -48,6 +63,7 @@ export default function ClinicAdmin() {
 
   useEffect(() => {
     getClinicians();
+    getClinicianData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -77,55 +93,74 @@ export default function ClinicAdmin() {
   ];
 
   return (
-    <Grid container>
-      <Grid xl={2} lg={2.5}>
-        <Sidebar id={id} txt="admins/clinics" roleTxt="Clinic" getClinicName={getClinicName} />
-      </Grid>
-      <Grid className="bgClinicianTable" xl={10} lg={9.5}>
-        <div className="breadCrumb" style={{ display: 'flex' }}>
-          <div className="navigationEntities" onClick={handleDashboardNavClick} aria-hidden="true">
-            Dashboard &gt;{' '}
-          </div>
-          <div className="navigationEntities" onClick={handleStaffNavClick} aria-hidden="true">
-            Staff &gt;
-          </div>
-          <div> {breadcrumb} Clinic &gt;</div>
-        </div>
-
-        <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '90vh' }}>
-          <div className="clinicianScreenCardsDiv">
-            <div className="cards_div_clinician_pg">
-              {cardsData.map((item) => (
-                <CardWithIcon
-                  Icon={item.icon}
-                  amount={item.amount}
-                  title={item.title}
-                  CircleIcon={item.icon2}
-                  LeftCircleClassName={item.className}
-                  cardClassName="card_main_div2"
-                />
-              ))}
+    <>
+      <Grid container>
+        <Grid xl={2} lg={2.5}>
+          <Sidebar
+            id={id}
+            txt="admins/clinics"
+            roleTxt="Clinic"
+            getClinicName={getClinicName}
+            setOpen={setOpenEditClinician}
+            open={openEditClinician}
+          />
+        </Grid>
+        <Grid className="bgClinicianTable" xl={10} lg={9.5}>
+          <div className="breadCrumb" style={{ display: 'flex' }}>
+            <div
+              className="navigationEntities"
+              onClick={handleDashboardNavClick}
+              aria-hidden="true"
+            >
+              Dashboard &gt;{' '}
             </div>
+            <div className="navigationEntities" onClick={handleStaffNavClick} aria-hidden="true">
+              Staff &gt;
+            </div>
+            <div> {breadcrumb} Clinic &gt;</div>
           </div>
-          <ClinicianTable clinicians={clinicians} getClinicians={getClinicians} />
-        </div>
-      </Grid>
-      <div className="addBtn">
-        <img
-          src={addBtn}
-          className="pointer"
-          onClick={() => setOpenAddClinican(true)}
-          role="presentation"
-          alt=""
-        />
-      </div>
 
-      <AddClinician
-        clinicAdminId={id}
-        openAddClinican={openAddClinican}
-        setOpenAddClinican={setOpenAddClinican}
-        getClinicians={getClinicians}
+          <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '90vh' }}>
+            <div className="clinicianScreenCardsDiv">
+              <div className="cards_div_clinician_pg">
+                {cardsData.map((item) => (
+                  <CardWithIcon
+                    Icon={item.icon}
+                    amount={item.amount}
+                    title={item.title}
+                    CircleIcon={item.icon2}
+                    LeftCircleClassName={item.className}
+                    cardClassName="card_main_div2"
+                  />
+                ))}
+              </div>
+            </div>
+            <ClinicianTable clinicians={clinicians} getClinicians={getClinicians} />
+          </div>
+        </Grid>
+        <div className="addBtn">
+          <img
+            src={addBtn}
+            className="pointer"
+            onClick={() => setOpenAddClinican(true)}
+            role="presentation"
+            alt=""
+          />
+        </div>
+
+        <AddClinician
+          clinicAdminId={id}
+          openAddClinican={openAddClinican}
+          setOpenAddClinican={setOpenAddClinican}
+          getClinicians={getClinicians}
+        />
+      </Grid>
+
+      <EditClinicAdmin
+        openEditClinicAdmin={openEditClinician}
+        setOpenEditClinicAdmin={setOpenEditClinician}
+        clinicAdminDetails={clinicianData}
       />
-    </Grid>
+    </>
   );
 }
