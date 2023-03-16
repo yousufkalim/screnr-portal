@@ -280,7 +280,7 @@ export default function EditPrescription({
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
-          <Button onClick={handleEditPrescriptions} className="savePBtn" variant="contained">
+          <Button onClick={handleEditPrescriptions} sx={{ boxShadow: '0' }} className="savePBtn" variant="contained">
             Save
           </Button>
         </DialogActions>

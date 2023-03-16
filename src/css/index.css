@@ -17,6 +17,7 @@
 @import url('./Pages/ClinicAdmin.css');
 @import url('./Pages/Clinician.css');
 @import url('./Pages/Patient.css');
+@import url('./Pages/Session.css');
 /* Defaults */
 * {
   padding: 0;

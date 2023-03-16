@@ -17,7 +17,8 @@ import { ReactComponent as Dummy } from '../../assets/images/dummyprsn.svg';
 import AvatarComponent from '../Avatar';
 import useOutlinedInputStyles from '../../utils/TextMessageInput';
 
-export default function ReportCard() {
+export default function ReportCard(props) {
+  const { title, heading, timeStamp } = props;
   const [reply, setReply] = useState('');
   const [replySent, setReplySent] = useState('');
   const [toReply, setToReply] = useState(false);
@@ -52,7 +53,8 @@ export default function ReportCard() {
     <div className="reply-box">
       <div className="reportBoxHeader">
         <p className="exerciseReportTxt">
-          Exercise: <span className="exerciseReportName"> Supine Bridge</span>
+          {heading}
+          <span className="exerciseReportName"> {title}</span>
         </p>
         {!toReply ? (
           <Button onClick={() => setToReply(true)} className="replyBtn" variant="contained">
@@ -68,7 +70,7 @@ export default function ReportCard() {
             <Dummy />
             <div>
               <p className="receiverName">Sabbir Ali</p>
-              <p className="msgTimeStamp">04:00 AM Oct 8</p>
+              <p className="msgTimeStamp">{timeStamp}</p>
             </div>
           </div>
           <div>

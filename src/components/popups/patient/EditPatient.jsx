@@ -61,6 +61,9 @@ export default function EditPatient({
   const [checked, setChecked] = useState(!!patientDetails?.expiry_date);
   const [clinicians, setClinicians] = useState([]);
 
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
   const [patient, setPatient] = useState({
     first_name: patientDetails?.first_name,
     last_name: patientDetails?.last_name,
@@ -164,7 +167,7 @@ export default function EditPatient({
     const formData = new FormData();
 
     if (patientCopy.expiry_date && !checked) {
-      patientCopy.expiry_date = '';
+      delete patientCopy.expiry_date;
       setPatient({ ...patientCopy });
     }
 
@@ -377,6 +380,7 @@ export default function EditPatient({
                   placeholderText="Date of birth"
                   popperPlacement="bottom-start"
                   showYearDropdown
+                  openToDate={new Date('01/01/2005')}
                 />
               </div>
             </FormControl>
@@ -535,6 +539,8 @@ export default function EditPatient({
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
+                  minDate={tomorrow}
+                  disablePast
                 />
               </div>
             </FormControl>

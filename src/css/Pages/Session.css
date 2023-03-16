@@ -1,0 +1,226 @@
+.bgAddPrescription {
+  margin-top: 40px;
+  background-color: #ffff;
+  margin-left: 30px;
+  border-radius: 20px;
+  height: 46vh;
+  max-width: 74vw;
+}
+.SessionsHeading {
+  display: flex;
+  justify-content: space-between;
+}
+.leftside_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.backIcon_button {
+  margin-right: 20px;
+}
+.dateTitle {
+  margin-right: 20px;
+  font-size: 18px;
+  color: #919b9b;
+  font-family: 'Poppins';
+  font-weight: 500;
+  line-height: 27px;
+}
+.dateExcercise {
+  background-color: #f6fafb;
+  padding: 6px;
+  border-radius: 15px;
+  color: #136773;
+  font-family: 'poppins';
+  font-size: 16px;
+  font-weight: 500;
+}
+.excerciseDay {
+  color: #fba622;
+  font-weight: 500;
+  font-size: 20px;
+  font-family: 'Poppins';
+  line-height: 30px;
+}
+.excercise_name_heading {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+.excerciseNameIcon {
+  margin-right: 10px;
+}
+.excercise_details {
+  display: flex;
+  max-width: 25vw;
+  justify-content: space-between;
+  height: 45px;
+  margin-top: 30px;
+}
+.setNumber {
+  width: 48%;
+  background-color: #f6fafb;
+  border-radius: 15px;
+  align-items: center;
+  display: flex;
+  padding: 4%;
+}
+.text_rep_set {
+  font-size: 12px;
+  font-weight: 400;
+  color: #919b9b;
+}
+.set_rep_valueNumber {
+  font-size: 22px;
+  margin-left: 8px;
+  color: #136773;
+  font-family: 'Poppins';
+  font-weight: 600;
+  line-height: 33px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jointScoreHeading {
+  margin-top: 20px;
+  color: #136773;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.jointScoreOuterDiv {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 70%;
+}
+.score_Bars {
+  height: 135px;
+  background-color: rgba(17, 162, 131, 0.05);
+  width: 110px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.score_Bar1 {
+  height: 160px;
+  background-color: rgba(17, 162, 131, 0.05);
+  width: 160px;
+  border-radius: 15px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.performanceGraphDiv {
+  height: 450px;
+  background-color: #fff;
+  margin-top: 40px;
+  width: 74vw;
+  margin-left: 30px;
+  border-radius: 15px;
+  padding-bottom: 40px;
+}
+.performanceTitle {
+  padding-top: 40px;
+  padding-left: 3.5%;
+  color: #136773;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  padding-bottom: 20px;
+}
+.excercise_name_p {
+  color: #136773;
+  font-family: 'poppins';
+  font-weight: 500;
+  line-height: 24px;
+  font-size: 16px;
+}
+.excercises_names {
+  color: #000000;
+  font-weight: 500;
+  font-family: 'poppins';
+  font-size: 12px;
+  line-height: 18px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.excercise_percent {
+  color: #000000;
+  font-family: 'Poppins';
+  font-weight: 500;
+  line-height: 17px;
+}
+.scoreText {
+  color: #919b9b;
+  font-size: 8px;
+  font-weight: 400;
+  font-family: 'poppins';
+  line-height: 12px;
+}
+.performanceName_colors {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+}
+.colorDotsDiv {
+  display: flex;
+  flex-direction: row;
+  width: 17%;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 5%;
+  margin-top: 20px;
+}
+.colorDots {
+  display: flex;
+  align-items: center;
+}
+.colortxt {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #202a3e;
+  font-family: 'Poppins';
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.graphData {
+  position: absolute;
+  top: 53%;
+  width: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.overallScoreGraph {
+  position: absolute;
+  max-height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.overAll_Arrows {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.colorDotsDiv2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
