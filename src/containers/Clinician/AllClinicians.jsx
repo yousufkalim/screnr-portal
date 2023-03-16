@@ -9,6 +9,7 @@ import api from '../../api';
 
 export default function AllClinicians() {
   const [clinicians, setClinicians] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const abortControllerRef = useRef(null);
 
@@ -38,17 +39,23 @@ export default function AllClinicians() {
     if (status) {
       apiUrl += `&status=${status}`;
     }
-    const { data } = await api(
-      'get',
-      apiUrl,
-      {
-        signal: abortController.signal,
-      },
-      true,
-    );
+    setIsLoading(true);
+    try {
+      const { data } = await api(
+        'get',
+        apiUrl,
+        {
+          signal: abortController.signal,
+        },
+        true,
+      );
 
-    if (data) {
-      setClinicians(data);
+      if (data) {
+        setClinicians(data);
+        setIsLoading(false);
+      }
+    } catch (err) {
+      setIsLoading(false);
     }
   };
 
@@ -60,7 +67,11 @@ export default function AllClinicians() {
   return (
     <Grid container>
       <Grid className="bg" xl={12} lg={12}>
-        <AllCliniciansTable clinicians={clinicians} getClinicians={getClinicians} />
+        <AllCliniciansTable
+          clinicians={clinicians}
+          getClinicians={getClinicians}
+          loading={isLoading}
+        />
       </Grid>
     </Grid>
   );

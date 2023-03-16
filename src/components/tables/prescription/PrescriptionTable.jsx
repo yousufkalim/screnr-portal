@@ -261,7 +261,8 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                 <TableRow>
                   <TableCell align="left" />
                   <TableCell align="left" />
-                  <TableCell align="right">
+                  <TableCell align="left" />
+                  <TableCell align="center">
                     {isOpen[index] ? (
                       <OpenArrow
                         onClick={() => {
@@ -283,7 +284,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                       />
                     )}
                   </TableCell>
-                  <TableCell align="left" />
                   <TableCell align="left" />
                   <TableCell align="left" />
                 </TableRow>

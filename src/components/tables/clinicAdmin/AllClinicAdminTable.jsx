@@ -41,7 +41,7 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
+export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loading }) {
   const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
   const [clinicAdmin, setClinicAdmin] = useState({});
   const [page, setPage] = useState(0);
@@ -68,14 +68,6 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
     setSearch(event.target.value);
     await getClinicAdmins('', event.target.value);
   };
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); // Set the loading time to 2.5 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     const handleCloseFilter = (e) => {
@@ -207,7 +199,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading ? (
+            {loading ? (
               <TableRow>
                 <TableCell colSpan={5} align="center">
                   <LinearProgress

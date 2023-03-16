@@ -41,7 +41,7 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function AllCliniciansTable({ clinicians, getClinicians }) {
+export default function AllCliniciansTable({ clinicians, getClinicians, loading }) {
   const [openEditClinician, setOpenEditClinician] = useState(false);
   const [clinician, setClinician] = useState({});
 
@@ -73,7 +73,9 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
   };
 
   useEffect(() => {
-    getClinicians(filter.sortBy, search, filter.status);
+    if (filter.sortBy || filter.status) {
+      getClinicians(filter.sortBy, search, filter.status);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
@@ -95,15 +97,6 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
       document.removeEventListener('mousedown', handleCloseFilter);
     };
   }, [openFilter]);
-
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); // Set the loading time to 2.5 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className="allClinicAdminTable" id="clinicAdminTable">
@@ -256,7 +249,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading ? (
+            {loading ? (
               <TableRow>
                 <TableCell colSpan={6} align="center">
                   <LinearProgress

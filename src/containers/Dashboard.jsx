@@ -22,6 +22,7 @@ import api from '../api';
 
 export default function Dashboard() {
   const [openAddStaffMember, setOpenAddStaffMember] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState({
     staffCount: 0,
     clinicianCount: 0,
@@ -32,16 +33,22 @@ export default function Dashboard() {
   const [staffMembers, setStaffMembers] = useState({});
 
   const getStaffMembers = async (page = 1) => {
-    const { data } = await api('get', `/admins/staff?page=${page}`);
-    if (data) {
-      setStaffMembers(data);
-      setCount({
-        ...count,
-        staffCount: data?.count.staffCount.count,
-        clinicianCount: data?.count.clinicianCount.count,
-        clinicsCount: data?.count.clinicCount.count,
-        patientsCount: data?.count.patientCount.count,
-      });
+    setIsLoading(true);
+    try {
+      const { data } = await api('get', `/admins/staff?page=${page}`);
+      if (data) {
+        setStaffMembers(data);
+        setCount({
+          ...count,
+          staffCount: data?.count.staffCount.count,
+          clinicianCount: data?.count.clinicianCount.count,
+          clinicsCount: data?.count.clinicCount.count,
+          patientsCount: data?.count.patientCount.count,
+        });
+        setIsLoading(false);
+      }
+    } catch (err) {
+      setIsLoading(false);
     }
   };
 
@@ -116,6 +123,7 @@ export default function Dashboard() {
       <div className="dashboard_div_2">
         <div className="dashboard_table_div">
           <TableComponent
+            loading={isLoading}
             setOpenAddStaffMember={setOpenAddStaffMember}
             staffMembers={staffMembers}
             getStaffMembers={getStaffMembers}

@@ -21,14 +21,21 @@ export default function ClinicAdmin() {
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
   const [clinicAdmins, setClinicAdmins] = useState({});
   const [staffMember, setStaffMember] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
 
   const getClinicAdmins = async (page = 1) => {
-    const { data } = await api('get', `/admins/clinics/getClinicsByStaffId/${id}?page=${page}`);
-    if (data) {
-      setClinicAdmins(data);
+    setIsLoading(true);
+    try {
+      const { data } = await api('get', `/admins/clinics/getClinicsByStaffId/${id}?page=${page}`);
+      if (data) {
+        setClinicAdmins(data);
+      }
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
     }
   };
   const handleDashboardNavClick = () => {
@@ -73,6 +80,7 @@ export default function ClinicAdmin() {
               staffAdminId={id}
               clinicAdmins={clinicAdmins}
               getClinicAdmins={getClinicAdmins}
+              loading={isLoading}
             />
           </div>
         </Grid>

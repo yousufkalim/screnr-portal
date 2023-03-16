@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 
 // mui imports
 import { styled } from '@mui/material/styles';
@@ -36,7 +36,7 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function ClinicianTable({ clinicians, getClinicians }) {
+export default function ClinicianTable({ clinicians, getClinicians, loading }) {
   const [openEditClinican, setOpenEditClinican] = useState(false);
   const [clinician, setClinician] = useState({});
   const [page, setPage] = useState(0);
@@ -49,15 +49,6 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
   const handleBackIconClick = () => {
     window.history.back();
   };
-
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); // Set the loading time to 2.5 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className="bgClinicianTable" id="clinicianTable">
@@ -111,7 +102,7 @@ export default function ClinicianTable({ clinicians, getClinicians }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading ? (
+            {loading ? (
               <TableRow>
                 <TableCell colSpan={6} align="center">
                   <LinearProgress

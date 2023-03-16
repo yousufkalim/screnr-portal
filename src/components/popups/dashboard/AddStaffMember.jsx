@@ -104,7 +104,7 @@ export default function AddStaffMember({
       Object.keys(staffMemberCopy).map((key) => formData.append(key, staffMemberCopy[key]));
 
       if (staffMemberCopy.phone_number && staffMemberCopy.phone_number.length < 11) {
-        return toast.error('Phone number must be contain 10 digits');
+        return toast.error('Phone number must contain 10 digits');
       }
       if (checked && !staffMemberCopy.expiry_date) {
         return toast.error('Please enter expiry date');

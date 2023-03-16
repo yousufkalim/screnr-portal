@@ -174,7 +174,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
       });
 
       if (patient.phone_number && patient.phone_number.length < 11) {
-        return toast.error('Phone number must be contain 10 digits');
+        return toast.error('Phone number must contain 10 digits');
       }
 
       if (checked && !patient.expiry_date) {

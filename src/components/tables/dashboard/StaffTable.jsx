@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // mui imports
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -26,7 +26,12 @@ import { getMediaUrl } from '../../../config';
 import PhoneFormat from '../../../utils/PhoneFormat';
 import DeleteModal from '../../popups/general/DeletePopup';
 
-export default function TableComponent({ setOpenAddStaffMember, staffMembers, getStaffMembers }) {
+export default function TableComponent({
+  setOpenAddStaffMember,
+  staffMembers,
+  getStaffMembers,
+  loading,
+}) {
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
   const [openDeletePopup, setOpenDeletePopup] = useState(false);
   const [page, setPage] = useState(0);
@@ -37,16 +42,6 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
     await getStaffMembers(newPage + 1);
     setPage(newPage);
   };
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); // Set the loading time to 2.5 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <>
       <TableContainer
@@ -99,7 +94,7 @@ export default function TableComponent({ setOpenAddStaffMember, staffMembers, ge
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading ? (
+            {loading ? (
               <TableRow>
                 <TableCell colSpan={4} align="center">
                   <LinearProgress
