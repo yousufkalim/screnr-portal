@@ -770,14 +770,3 @@
     right: 5px;
   }
 }
-/* Mui ProgressBar color styling  */
-
-.css-1r8wrcl-MuiLinearProgress-bar2 {
-  background-color: #f6fafb !important;
-}
-.css-5ir5xx-MuiLinearProgress-bar1 {
-  background-color: #f6fafb !important;
-}
-.css-eglki6-MuiLinearProgress-root {
-  background-color: rgb(232 235 239) !important;
-}

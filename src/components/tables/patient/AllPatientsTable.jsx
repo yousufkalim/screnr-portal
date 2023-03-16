@@ -23,7 +23,6 @@ import { ReactComponent as Edit } from '../../../assets/components/Table/alert.s
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
-import { ReactComponent as Tick } from '../../../assets/components/Table/tick.svg';
 
 // child component imports
 import IconTextField from '../../../utils/CustomTextInput';
@@ -492,9 +491,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="notiCell">
-                        <Tick /> <p className="statusTxt">reviewed</p>
-                      </div>
+                      <div className="notiCell" />
                     </TableCell>
                     <TableCell />
                     <TableCell />

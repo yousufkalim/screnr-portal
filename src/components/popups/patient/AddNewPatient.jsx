@@ -63,6 +63,8 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
   const [added, setAdded] = useState(false);
   const [userData, setUserData] = useState({ diagnosis: '', location: '', clinicians: [] });
   const outlinedInputStyles = useOutlinedInputStyles();
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   const handleClose = () => {
     setOpenAddPatient(false);
@@ -447,6 +449,8 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                   placeholderText="Date of birth"
                   popperPlacement="bottom-start"
                   showYearDropdown
+                  openToDate={new Date('01/01/2005')}
+                  maxDate={new Date()}
                 />
               </div>
             </FormControl>
@@ -605,6 +609,8 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
+                  minDate={tomorrow}
+                  disablePast
                 />
               </div>
             </FormControl>

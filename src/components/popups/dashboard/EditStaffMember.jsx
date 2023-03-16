@@ -57,6 +57,8 @@ export default function EditStaffMember({
 }) {
   const [checked, setChecked] = useState(false);
   const [staffMember, setStaffMember] = useState({});
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   useEffect(() => {
     const tempStaffMember = {
@@ -314,6 +316,8 @@ export default function EditStaffMember({
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
+                  minDate={tomorrow}
+                  disablePast
                 />
               </div>
             </FormControl>

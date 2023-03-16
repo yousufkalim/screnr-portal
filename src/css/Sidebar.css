@@ -251,3 +251,8 @@
     width: 80% !important;
   }
 }
+@media only screen and (max-width: 1383px) {
+  .activityTxt {
+    width: 90% !important;
+  }
+}

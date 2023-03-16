@@ -59,6 +59,8 @@ export default function AddStaffMember({
   const [staffMember, setStaffMember] = useState({});
 
   const outlinedInputStyles = useOutlinedInputStyles();
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   const handleClose = () => {
     setOpenAddStaffMember(false);
@@ -307,6 +309,8 @@ export default function AddStaffMember({
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
+                  minDate={tomorrow}
+                  disablePast
                 />
               </div>
             </FormControl>

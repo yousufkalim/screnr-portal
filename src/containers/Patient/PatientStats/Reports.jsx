@@ -16,9 +16,9 @@ export default function Reports() {
           Reports &gt;
         </div>
         <div className="bgReportCard">
-          <ReportCard />
-          <ReportCard />
-          <ReportCard />
+          <ReportCard heading="Excercise:" title="Supine Bridge" timeStamp="04:00 AM Oct 8" />
+          <ReportCard heading="Excercise:" title="Cat Camel" timeStamp="04:00 AM Oct 8" />
+          <ReportCard heading="Excercise:" title="Bird Dog" timeStamp="04:00 AM Oct 8" />
         </div>
       </Grid>
 

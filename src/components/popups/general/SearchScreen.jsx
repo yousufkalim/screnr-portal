@@ -49,6 +49,7 @@ export default function SearchScreen() {
             maxHeight: '100vh',
             overflowX: 'hidden',
             padding: '1% 0%',
+            boxShadow: '0',
             width: '90vw',
             '@media (max-width: 1600px)': {
               width: '90vw',

@@ -65,6 +65,8 @@ export default function AddClinician({
   const [exisitingButInactive, setExisitingButInactive] = useState(false);
   const [added, setAdded] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   // close popup
   const handleClose = () => {
@@ -439,6 +441,8 @@ export default function AddClinician({
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
+                  minDate={tomorrow}
+                  disablePast
                 />
               </div>
             </FormControl>

@@ -62,6 +62,8 @@ export default function EditClinician({
   const [clinician, setClinician] = useState({});
   const [userData, setUserData] = useState({ title: clinicianDetails?.userData?.title || '' });
   const outlinedInputStyles = useOutlinedInputStyles();
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   useEffect(() => {
     const clinicAdminTemp = {
@@ -422,6 +424,8 @@ export default function EditClinician({
                   placeholderText="Enter expiry date"
                   popperPlacement="bottom-start"
                   showYearDropdown
+                  minDate={tomorrow}
+                  disablePast
                 />
               </div>
             </FormControl>
