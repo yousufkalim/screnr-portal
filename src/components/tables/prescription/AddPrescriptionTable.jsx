@@ -18,6 +18,7 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
       sx={{
         borderRadius: '20px',
         background: '#F6FAFB',
+        boxShadow: '0',
         ml: 5,
         overflowX: 'hidden',
         // width: '58.7vw',
