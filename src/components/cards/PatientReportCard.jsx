@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import moment from 'moment';
 
 // mui imports
 import { TextField } from '@mui/material';
@@ -14,17 +15,47 @@ import { ReactComponent as Emoji } from '../../assets/icons/emoji.svg';
 import { ReactComponent as Dummy } from '../../assets/images/dummyprsn.svg';
 
 // child imports
-import AvatarComponent from '../Avatar';
+// import AvatarComponent from '../Avatar';
 import useOutlinedInputStyles from '../../utils/TextMessageInput';
+import api from '../../api';
 
-export default function ReportCard(props) {
-  const { title, heading, timeStamp } = props;
+export default function ReportCard({
+  title,
+  heading,
+  timeStamp,
+  message,
+  patientName,
+  exerciseId,
+  answer,
+  answerTime,
+}) {
   const [reply, setReply] = useState('');
   const [replySent, setReplySent] = useState('');
+  const [replySentTime, setReplySentTime] = useState('');
   const [toReply, setToReply] = useState(false);
   const [open, setOpen] = useState(false);
   const click = useRef(null);
   const outlinedInputStyles = useOutlinedInputStyles();
+
+  const handleSubmit = async () => {
+    await api('put', `/admins/prescribedExercises/report/${exerciseId}`, {
+      report: message,
+      report_time: timeStamp,
+      answer: reply,
+      answer_time: new Date(),
+    })
+      .then(() => {
+        setReplySent(reply);
+        setReply('');
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const EmojiOpen = () => {
+    setOpen(!open);
+  };
 
   useEffect(() => {
     const handleCloseEmojiSection = (e) => {
@@ -39,24 +70,21 @@ export default function ReportCard(props) {
     };
   }, [open]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setReplySent(reply);
-    setReply('');
-  };
-
-  const EmojiOpen = () => {
-    setOpen(!open);
-  };
+  useEffect(() => {
+    if (answer && answerTime) {
+      setReplySent(answer);
+      setReplySentTime(answerTime);
+    }
+  }, [answer, answerTime]);
 
   return (
     <div className="reply-box">
       <div className="reportBoxHeader">
         <p className="exerciseReportTxt">
           {heading}
-          <span className="exerciseReportName"> {title}</span>
+          <span className="exerciseReportName">{title}</span>
         </p>
-        {!toReply ? (
+        {!answer ? (
           <Button onClick={() => setToReply(true)} className="replyBtn" variant="contained">
             Reply
           </Button>
@@ -69,26 +97,26 @@ export default function ReportCard(props) {
           <div className="receivrInfo">
             <Dummy />
             <div>
-              <p className="receiverName">Sabbir Ali</p>
-              <p className="msgTimeStamp">{timeStamp}</p>
+              <p className="receiverName">{patientName}</p>
+              <p className="msgTimeStamp">{moment(timeStamp).format('hh:mm A MMM D')}</p>
             </div>
           </div>
           <div>
-            <p className="receiverMsg">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-              has been the industry standard dummy text ever since the 1500s, when an unknown
-              printer took a galley of type and scrambled it to make a type specimen book.
-            </p>
+            <p className="receiverMsg">{message}</p>
           </div>
         </div>
         {replySent ? (
           <div className="reportReply">
             <div className="senderInfo">
               <div className="replySnt">
-                <p className="receiverName">Dr Ali</p>
-                <p className="msgTimeStamp">04:00 AM Oct 8</p>
+                {/* <p className="receiverName">Dr Ali</p> */}
+                <p className="msgTimeStamp">
+                  {replySentTime
+                    ? moment(replySentTime).format('hh:mm A MMM D')
+                    : moment().format('hh:mm A MMM D')}
+                </p>
               </div>
-              <AvatarComponent alt="Dr Ali" className="reply_avatar" />
+              {/* <AvatarComponent alt="Dr Ali" className="reply_avatar" /> */}
             </div>
             <div>
               <p className="senderMsg">{replySent}</p>

@@ -11,6 +11,7 @@ import PatientSidebarSection from './PatientSidebarSection';
 export default function Sidebar({
   patientId,
   patientData,
+  selectedClinician,
   openEditpatientModal,
   setOpenEditpatientModal,
 }) {
@@ -28,7 +29,7 @@ export default function Sidebar({
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate(`/patients/${patientId}/addPrescription`);
+          navigate(`/patients/${patientId}/addPrescription/${selectedClinician}`);
           setActivityClicked(true);
         }}
       >

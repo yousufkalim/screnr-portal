@@ -1,12 +1,10 @@
 import { React } from 'react';
-
 // mui imports
 import { Grid } from '@mui/material';
-
 // child imports
 import SurveyPain from '../../../components/PainSurvey';
 
-export default function PainSurvey() {
+export default function PainSurvey({ session, prescription }) {
   return (
     <Grid container>
       <Grid className="bgMsg" xl={12} lg={12}>
@@ -15,7 +13,7 @@ export default function PainSurvey() {
           Pain Survey &gt;
         </div>
         <div className="bgPainSurvey">
-          <SurveyPain />
+          <SurveyPain session={session} prescription={prescription} />
         </div>
       </Grid>
     </Grid>

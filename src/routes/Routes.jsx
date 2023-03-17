@@ -55,7 +55,7 @@ const superadminRoutes = [
     protected: true,
   },
   {
-    path: '/staff/clinicAdmin/Clinician/Patient/Prescription/Session',
+    path: '/staff/clinicAdmin/Clinician/Patient/Prescription/Session/:sessionId/:prescriptionId',
     element: <Session />,
     protected: true,
   },
@@ -83,7 +83,7 @@ const superadminRoutes = [
     protected: true,
   },
   {
-    path: '/patients/:id/addPrescription',
+    path: '/patients/:patientId/addPrescription/:clinicianId',
     element: <AddPatientPrescription />,
     protected: true,
   },
@@ -99,7 +99,7 @@ const superadminRoutes = [
   },
 
   {
-    path: '/patients/:id/exercise',
+    path: '/patients/:sessionId/exercise',
     element: <Index />,
     protected: true,
 
@@ -110,12 +110,7 @@ const superadminRoutes = [
         protected: true,
       },
       {
-        path: '/painSurvey',
-        element: <Index />,
-        protected: true,
-      },
-      {
-        path: '/Supine Bridge',
+        path: '/painSurvey/:prescriptionId',
         element: <Index />,
         protected: true,
       },
