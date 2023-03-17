@@ -231,12 +231,14 @@
 .selctedPresChoice {
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: #f6fafb;
   color: #136773;
   font-weight: 500;
   font-size: 14px;
   border-radius: 10px;
-  padding: 10px;
+  /* padding: 10px; */
+  width: 45%;
 }
 
 #prescriptionTableHead {
@@ -265,7 +267,8 @@
 
 .actionDiv {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .linearPresProgress {
@@ -601,15 +604,17 @@
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  width: 40%;
+  width: 50%;
 }
 
 .presChoice {
+  width: 45%;
   display: flex;
   align-items: center;
   color: #919b9b;
   font-weight: 500;
   font-size: 14px;
+  /* padding: 10px; */
 }
 
 .iconClicked {

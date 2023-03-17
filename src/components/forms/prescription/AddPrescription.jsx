@@ -287,7 +287,7 @@ export default function AddPrescription({
             <MotionCapture
               className={prescription.type === 'motion' ? 'iconClicked' : 'choiceIcon'}
             />
-            <p className="selectedOpt"> Motion capture</p>
+            <p className="selectedOpt">Motion capture</p>
           </div>
           <div
             className={prescription.type === 'simple' ? 'selctedPresChoice' : 'presChoice'}
@@ -295,7 +295,7 @@ export default function AddPrescription({
             role="presentation"
           >
             <Program className={prescription.type === 'simple' ? 'iconClicked' : 'choiceIcon'} />
-            <p className="selectedOpt"> Exercise Program</p>
+            <p className="selectedOpt">Exercise Program</p>
           </div>
         </div>
         {prescription.type === 'motion' ? (
@@ -329,7 +329,7 @@ export default function AddPrescription({
                 }}
               >
                 <MenuItem>
-                  <span className="optColor"> Select Body Part</span>
+                  <span className="optColor">Select Body Part</span>
                 </MenuItem>
               </Select>
             </FormControl>
