@@ -211,7 +211,7 @@
 }
 
 .bgAddPrescription {
-  padding: 2rem 1.5rem 0rem 1.5rem;
+  padding: 2rem 0rem 0rem 0rem;
   width: 97%;
 }
 
@@ -433,7 +433,7 @@
   background-color: #136773;
 }
 .topSec:hover .topSecDocName_disabled {
-  color: #136773
+  color: #136773;
 }
 .topSec:hover .topSecExpertise_disabled {
   color: #fba622;
@@ -446,7 +446,7 @@
 }
 
 .top_sec_avatar_disabled {
-  background-color: #919B9B;
+  background-color: #919b9b;
   height: 60px !important;
   width: 60px !important;
 }
@@ -460,7 +460,7 @@
 .topSecDocName_disabled {
   font-weight: 600;
   font-size: 16px;
-  color: #919B9B;
+  color: #919b9b;
 }
 
 .topSecExpertise {
@@ -472,7 +472,7 @@
 .topSecExpertise_disabled {
   font-weight: 500;
   font-size: 12px;
-  color: #919B9B;
+  color: #919b9b;
 }
 
 .topSecActions {
@@ -549,6 +549,9 @@
   border-radius: 15px !important;
   border: none !important;
   padding: 8px 20px !important;
+  position: fixed;
+  top: 14rem;
+  right: 50px;
 }
 
 .generatePrescriptionBtn_diaabled {
@@ -561,6 +564,9 @@
   border-radius: 15px !important;
   border: none !important;
   padding: 8px 20px !important;
+  position: fixed;
+  top: 14rem;
+  right: 50px;
 }
 
 .dateDivPrescription .react-datepicker-wrapper {
@@ -668,12 +674,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .3rem;
+  gap: 0.3rem;
   width: max-content;
   background-color: #f4f4f4;
   border-radius: 1000px;
   cursor: pointer;
-  padding: .5rem;
+  padding: 0.5rem;
   margin-bottom: 13px;
   /* width: 20%; */
 }
@@ -681,13 +687,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .3rem;
+  gap: 0.3rem;
   width: max-content;
-  border: 1px solid #136773 ;
-  background-color: rgba(19, 103, 115, .1);
+  border: 1px solid #136773;
+  background-color: rgba(19, 103, 115, 0.1);
   border-radius: 1000px;
   cursor: pointer;
-  padding: .5rem;
+  padding: 0.5rem;
   margin-bottom: 13px;
   /* width: 20%; */
 }
@@ -710,7 +716,10 @@
   flex-wrap: wrap;
   margin-top: 20px;
 }
-
+.main_div_addPrescription {
+  height: 100vh;
+  background-color: #f6fafb;
+}
 .clinicianDP {
   margin-right: 10px;
   width: 25%;
@@ -726,7 +735,6 @@
   .addMore {
     width: 9%;
   }
-
   .bgPrescription {
     padding-bottom: 40px;
   }
@@ -803,5 +811,10 @@
   }
   .prescriptionMenu {
     right: 5px;
+  }
+}
+@media only screen and (max-width: 1536px) {
+  .main_div_addPrescription {
+    height: 60rem;
   }
 }

@@ -197,6 +197,7 @@ export default function AddPatientPrescription() {
             Generate Prescription
           </Button>
         </div>
+
         {openGeneratePrescription && (
           <GeneratePrescription
             openGeneratePrescription={openGeneratePrescription}
