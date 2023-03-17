@@ -12,22 +12,13 @@ import { ReactComponent as Survey } from '../../../assets/components/Sidebar/pai
 import { ReactComponent as Exercise } from '../../../assets/components/Sidebar/exercise.svg';
 import { ReactComponent as Dropdown } from '../../../assets/components/Sidebar/dropdownEx.svg';
 import { ReactComponent as Divider } from '../../../assets/components/Sidebar/divider.svg';
-import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
-import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
+// import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
+// import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 import PatientSidebarSection from './PatientSidebarSection';
 
-export default function Sidebar() {
+export default function Sidebar({ session, patient, prescriptionId }) {
   const [expanded, setExpanded] = useState(false);
   const [toggleIcon, setToggleIcon] = useState(false);
-
-  function createData(name, action) {
-    return { name, action };
-  }
-  const data = [
-    createData('Supine Bridge', 'motionCapture'),
-    createData('Bird Dog', 'motionCapture'),
-    createData('Cat Camel', 'exerciseProgram'),
-  ];
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -35,7 +26,7 @@ export default function Sidebar() {
   };
   return (
     <div className="left_side">
-      <PatientSidebarSection />
+      <PatientSidebarSection patientData={patient} />
       <div className="activityLeft" role="presentation">
         <Exercise className={window.location.pathname.includes('session') ? 'iconActivity' : ''} />
         <div className="dropdownIcons">
@@ -44,7 +35,7 @@ export default function Sidebar() {
               window.location.pathname.includes('session') ? 'clickedActivity' : 'activityTxt'
             }
           >
-            Exercise{' '}
+            Exercise
           </p>
           {expanded ? (
             <Dropdown
@@ -71,18 +62,18 @@ export default function Sidebar() {
           <div className="exerciseList">
             <Divider className={window.location.pathname.includes('session') ? 'divider' : ''} />
             <div>
-              {data.map((row) => (
+              {session?.exercises?.map((row) => (
                 <NavLink
                   key={row.name}
-                  to={`/session/${row.name}`}
+                  to={`/session/exercise/${row.id}`}
                   className={({ isActive }) => (isActive ? 'selectedItemExercise' : 'itemExercise')}
                 >
                   <div className="actionDiv" style={{ cursor: 'pointer' }}>
-                    {row.action === 'motionCapture' ? (
+                    {/* {row.action === 'motionCapture' ? (
                       <MotionCapture className="actionListIcon" />
                     ) : (
                       <Program className="actionListIcon" />
-                    )}
+                    )} */}
                     {row.name}
                   </div>
                 </NavLink>
@@ -93,7 +84,7 @@ export default function Sidebar() {
       </div>
 
       <NavLink
-        to="/patients/:id/exercise/painSurvey"
+        to={`/patients/${session?.id}/exercise/painSurvey/${prescriptionId}`}
         className={({ isActive }) => (isActive ? 'selectedExActivity' : 'activityEx')}
       >
         <Survey className="exIcon" />
@@ -101,7 +92,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink
-        to="/patients/:id/exercise/reports"
+        to={`/patients/${session?.id}/exercise/reports`}
         className={({ isActive }) => (isActive ? 'selectedExActivity' : 'activityEx')}
       >
         <Msg className="exIcon" />

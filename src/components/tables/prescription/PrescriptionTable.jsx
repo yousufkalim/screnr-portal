@@ -12,7 +12,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import moment from 'moment';
-
 import { useNavigate } from 'react-router-dom';
 
 // assets import
@@ -23,7 +22,6 @@ import { ReactComponent as Check } from '../../../assets/components/Table/check.
 import { ReactComponent as Uncheck } from '../../../assets/components/Table/uncheck.svg';
 import { ReactComponent as Edit } from '../../../assets/icons/editIcon.svg';
 import { ReactComponent as Tick } from '../../../assets/components/Table/tick.svg';
-
 // child import
 import AvatarComponent from '../../Avatar';
 import EditPrescription from '../../popups/prescription/EditPrescription';
@@ -49,7 +47,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     )
       .then((res) => {
         setLoading(false);
-        console.log('🚀 ~ file: PrescriptionTable.jsx:47 ~ .then ~ res:', res);
         setPrescriptionList(res?.data?.prescriptions);
       })
       .catch((err) => {
@@ -58,17 +55,21 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
         console.error(`handlePrescriptionList---> ${err}`);
       });
   };
+
   const navigate = useNavigate();
-  const handleSearchLogoClick = () => {
-    navigate('/staff/clinicAdmin/Clinician/Patient/Prescription/Session');
+
+  const handleSearchLogoClick = (sessionId, prescriptionId) => {
+    navigate(
+      `/staff/clinicAdmin/Clinician/Patient/Prescription/Session/${sessionId}/${prescriptionId}`,
+    );
   };
+
   const toggleOpen = (category) => {
     setIsOpen({
       ...isOpen,
       [category]: !isOpen[category],
     });
   };
-
   const StyledTableRow = styled(TableRow)(() => ({
     '&:nth-of-type(even)': {
       backgroundColor: '#F6F6F6',
@@ -78,7 +79,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
       borderBottom: '1px solid transparent',
     },
   }));
-
   const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 6,
     borderRadius: 5,
@@ -320,7 +320,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                       <StyledTableRow
                         className="tableRow"
                         key={row?.id}
-                        onClick={handleSearchLogoClick}
+                        onClick={() => handleSearchLogoClick(row?.id, mainRow?.id)}
                       >
                         <TableCell align="left">{moment(row?.date).format('DD/MM/YYYY')}</TableCell>
                         <TableCell align="left" className="table_cells">
@@ -362,7 +362,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                           )}
                         </TableCell>
                         <TableCell align="center" className="table_cells">
-                          Done
+                          {row.survey ? 'Done' : 'Not Done'}
                         </TableCell>
                         <TableCell align="center" className="table_cells">
                           <Message />

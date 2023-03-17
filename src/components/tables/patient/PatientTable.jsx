@@ -185,7 +185,7 @@ export default function PatientTable({ patients, getPatients }) {
                     setPatient(row);
                   }}
                 >
-                  <TableCell align="left"> {row.id} </TableCell>
+                  <TableCell align="left"> {row?.userData?.mrn_id} </TableCell>
                   <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
                     {row.profile_pic ? (
                       <div className="imgDivClinic">
