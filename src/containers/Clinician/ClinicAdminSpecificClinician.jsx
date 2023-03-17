@@ -128,7 +128,7 @@ export default function ClinicAdmin() {
             <div> {breadcrumb} Clinic &gt;</div>
           </div>
 
-          <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '90vh' }}>
+          <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '85vh' }}>
             <div className="clinicianScreenCardsDiv">
               <div className="cards_div_clinician_pg">
                 {cardsData.map((item) => (

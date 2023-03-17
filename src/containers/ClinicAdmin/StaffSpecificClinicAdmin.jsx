@@ -65,7 +65,13 @@ export default function ClinicAdmin() {
           />
         </Grid>
         <Grid className="bg" xl={10} lg={9.5}>
-          <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '95vh' }}>
+          <div
+            className="main_div"
+            style={{
+              background: 'rgb(246, 250, 251)',
+              height: '80vh',
+            }}
+          >
             <div className="breadCrumb" style={{ display: 'flex' }}>
               <div
                 className="navigationEntities"

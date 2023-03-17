@@ -615,8 +615,8 @@ export default function AddPrescription({
                 onChange={(e) => {
                   if (
                     (/^\d{1,2}$/.test(e.target.value) &&
-                      parseInt(e.target.value, 15) >= 1 &&
-                      parseInt(e.target.value, 15) <= 15) ||
+                      parseInt(e.target.value, 10) >= 1 &&
+                      parseInt(e.target.value, 10) <= 15) ||
                     e.target.value === ''
                   ) {
                     handleExerciseInformation(e.target.name, e.target.value);
