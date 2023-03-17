@@ -40,7 +40,6 @@ export default function Sidebar({
               : ''
           }
         />
-
         <p
           className={
             activityClicked || window.location.pathname === '/patients/:id/addPrescription'
@@ -66,7 +65,6 @@ export default function Sidebar({
               : ''
           }
         />
-
         <p
           className={
             activityClicked || window.location.pathname === '/patients/:id/messages'
@@ -81,7 +79,7 @@ export default function Sidebar({
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate('/patients/:id/activity');
+          // navigate('/patients/:id/activity');
           setActivityClicked(true);
         }}
       >
@@ -92,7 +90,6 @@ export default function Sidebar({
               : ''
           }
         />
-
         <p
           className={
             activityClicked || window.location.pathname === '/patients/:id/activity'

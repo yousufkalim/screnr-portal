@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // mui imports
 // import Radio from '@mui/material/Radio';
@@ -11,25 +11,8 @@ import moment from 'moment';
 import { ReactComponent as Back } from '../assets/icons/backBtn.svg';
 import { ReactComponent as OpenArrow } from '../assets/components/Sidebar/openArrow.svg';
 
-export default function SurveyPain({ session, prescription }) {
+export default function SurveyPain({ session, prescription, handleFeedBack, surveyText }) {
   const [expanded, setExpanded] = useState(true);
-  const [survey, setSurvey] = useState(session?.survey);
-  const handleFeedBack = (targetFeedback, targetIndex) => {
-    const newSurvey = survey.map((obj, index) => {
-      if (index === targetIndex) {
-        return {
-          ...obj,
-          feedback: targetFeedback,
-        };
-      }
-      return obj;
-    });
-    setSurvey(newSurvey);
-  };
-
-  useEffect(() => {
-    setSurvey(session?.survey);
-  }, [session]);
 
   return (
     <div>
@@ -60,10 +43,12 @@ export default function SurveyPain({ session, prescription }) {
                 <div className="feedbackSec">
                   <p className="feedbackLeftTxt">Feedback</p>
                   <input
+                    disabled={item.feedback}
                     type="text"
                     name="feedback"
                     className="feedbackInput"
                     placeholder="Write feedback to send to patient..."
+                    value={item.feedback ?? surveyText}
                     onChange={(e) => handleFeedBack(e.target.value, index)}
                   />
                 </div>
