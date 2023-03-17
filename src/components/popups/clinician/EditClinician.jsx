@@ -154,7 +154,7 @@ export default function EditClinician({
     });
 
     if (clinicianCopy.phone_number && clinicianCopy.phone_number.length < 11) {
-      return toast.error('Phone number must be contain 10 digits');
+      return toast.error('Phone number must contain 10 digits');
     }
     if (checked && !clinicianCopy.expiry_date) {
       return toast.error('Please enter expiry date');

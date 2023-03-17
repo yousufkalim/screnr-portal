@@ -26,6 +26,8 @@ export default function ClinicAdmin() {
 
   const [clinicians, setClinicians] = useState({});
   const [clinicianData, setClinicianData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
   console.log(
     '🚀 ~ file: ClinicAdminSpecificClinician.jsx:29 ~ ClinicAdmin ~ clinicianData:',
     clinicianData,
@@ -35,12 +37,18 @@ export default function ClinicAdmin() {
   const navigate = useNavigate();
 
   const getClinicians = async (page = 1) => {
-    const { data } = await api(
-      'get',
-      `/admins/clinicians/getCliniciansByClinicId/${id}?page=${page}`,
-    );
-    if (data) {
-      setClinicians(data);
+    setIsLoading(true);
+    try {
+      const { data } = await api(
+        'get',
+        `/admins/clinicians/getCliniciansByClinicId/${id}?page=${page}`,
+      );
+      if (data) {
+        setClinicians(data);
+      }
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
     }
   };
 
@@ -135,7 +143,11 @@ export default function ClinicAdmin() {
                 ))}
               </div>
             </div>
-            <ClinicianTable clinicians={clinicians} getClinicians={getClinicians} />
+            <ClinicianTable
+              clinicians={clinicians}
+              getClinicians={getClinicians}
+              loading={isLoading}
+            />
           </div>
         </Grid>
         <div className="addBtn">

@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 
 // mui imports
 import { styled } from '@mui/material/styles';
@@ -35,21 +35,11 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinicAdmins }) {
+export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinicAdmins, loading }) {
   const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
   const [clinicAdmin, setClinicAdmin] = useState({});
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); // Set the loading time to 2.5 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleChangePage = async (event, newPage) => {
     await getClinicAdmins(newPage + 1);
@@ -108,7 +98,7 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading ? (
+            {loading ? (
               <TableRow>
                 <TableCell colSpan={5} align="center">
                   <LinearProgress

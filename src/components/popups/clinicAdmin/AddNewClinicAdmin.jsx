@@ -134,7 +134,7 @@ export default function AddClinicAdmin({
       });
 
       if (clinicAdmin.phone_number && clinicAdmin.phone_number.length < 11) {
-        return toast.error('Phone number must be contain 10 digits');
+        return toast.error('Phone number must contain 10 digits');
       }
       if (checked && !clinicAdmin.expiry_date) {
         return toast.error('Please enter expiry date');

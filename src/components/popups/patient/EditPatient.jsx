@@ -194,7 +194,7 @@ export default function EditPatient({
     });
 
     if (patientCopy.phone_number && patientCopy.phone_number.length < 11) {
-      return toast.error('Phone number must be contain 10 digits');
+      return toast.error('Phone number must contain 10 digits');
     }
     if (checked && !patientCopy.expiry_date) {
       return toast.error('Please enter expiry date');

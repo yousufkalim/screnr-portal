@@ -9,6 +9,7 @@ import api from '../../api';
 
 export default function ClinicAdmin() {
   const [clinicAdmins, setClinicAdmins] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const abortControllerRef = useRef(null);
 
@@ -21,31 +22,37 @@ export default function ClinicAdmin() {
   }, []);
 
   const getClinicAdmins = async (sort, search, page = 1) => {
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
+    setIsLoading(true);
+    try {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
 
-    const abortController = new AbortController();
-    abortControllerRef.current = abortController;
+      const abortController = new AbortController();
+      abortControllerRef.current = abortController;
 
-    let apiUrl = `/admins/clinics?page=${page}`;
-    if (sort) {
-      apiUrl += `&sort=${sort}`;
-    }
-    if (search) {
-      apiUrl += `&search=${search}`;
-    }
-    const { data } = await api(
-      'get',
-      apiUrl,
-      {
-        signal: abortController.signal,
-      },
-      true,
-    );
+      let apiUrl = `/admins/clinics?page=${page}`;
+      if (sort) {
+        apiUrl += `&sort=${sort}`;
+      }
+      if (search) {
+        apiUrl += `&search=${search}`;
+      }
+      const { data } = await api(
+        'get',
+        apiUrl,
+        {
+          signal: abortController.signal,
+        },
+        true,
+      );
 
-    if (data) {
-      setClinicAdmins(data);
+      if (data) {
+        setClinicAdmins(data);
+      }
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
     }
   };
 
@@ -57,7 +64,11 @@ export default function ClinicAdmin() {
   return (
     <Grid container>
       <Grid className="bg" xl={12} lg={12}>
-        <AllClinicAdminTable clinicAdmins={clinicAdmins} getClinicAdmins={getClinicAdmins} />
+        <AllClinicAdminTable
+          clinicAdmins={clinicAdmins}
+          getClinicAdmins={getClinicAdmins}
+          loading={isLoading}
+        />
       </Grid>
     </Grid>
   );
