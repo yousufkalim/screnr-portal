@@ -1,14 +1,10 @@
 import { React, useState, useEffect } from 'react';
-
 // mui imports
 import { Grid } from '@mui/material';
-
 // navigator
 import { useNavigate, useParams } from 'react-router-dom';
-
 // assets import
 import addBtn from '../../assets/icons/addBtn.svg';
-
 // child components import
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import PatientTopSection from '../../components/PatientTopSection';
@@ -29,6 +25,7 @@ export default function Prescription() {
     await api('get', `/admins/patients/${id}`)
       .then(async (res) => {
         setPatient(res?.data?.user);
+        setSelectedClinician(res?.data?.user?.userData?.clinicians[0]?.id);
         const ClinicId = res?.data?.user?.userData?.clinicians[0]?.userData?.clinic;
         await api('get', `/admins/clinicians/getCliniciansByClinicId/${ClinicId}`)
           .then((res1) => {
@@ -58,9 +55,9 @@ export default function Prescription() {
             patientData={patient}
             openEditpatientModal={openEditpatientModal}
             setOpenEditpatientModal={setOpenEditpatientModal}
+            selectedClinician={selectedClinician}
           />
         </Grid>
-
         <Grid className="bgPrescription" xl={10} lg={9.5}>
           <PatientTopSection
             allClinicians={allClinicians}
@@ -75,7 +72,6 @@ export default function Prescription() {
             selectedClinicians={patient?.userData?.clinicians}
           />
         </Grid>
-
         <div className="addBtn">
           <img
             src={addBtn}
@@ -86,7 +82,6 @@ export default function Prescription() {
           />
         </div>
       </Grid>
-
       {openEditpatientModal && (
         <EditPatient
           openEditPatient={openEditpatientModal}

@@ -1,6 +1,8 @@
 /* eslint-disable import/extensions */
-import { React } from 'react';
+import { React, useEffect, useState } from 'react';
 // import MessageBox from
+
+import { useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
@@ -14,15 +16,41 @@ import { ReactComponent as RightArrow } from '../../../assets/icons/ArrowIcon2.s
 import { ReactComponent as RedDot } from '../../../assets/icons/sessionGraphColorDot1.svg';
 import { ReactComponent as GreenDot } from '../../../assets/icons/sessionGraphColorDot2.svg';
 import { ReactComponent as YellowDot } from '../../../assets/icons/sessionGraphColorDot3.svg';
-
+import api from '../../../api/index.js';
 // mui imports
 
 export default function Session() {
+  const params = useParams();
+  const { sessionId, prescriptionId } = params;
+  const [session, setSession] = useState({});
+  const [patient, setPatient] = useState({});
+
+  const handleGetSessionById = async () => {
+    await api('get', `/admins/sessions/${sessionId}`)
+      .then(async (res) => {
+        setSession(res?.data?.session);
+        await api('get', `/admins/patients/${res?.data?.session?.patient?.id}`)
+          .then((res2) => {
+            setPatient(res2?.data?.user);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    handleGetSessionById();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>
         <div className="sideBar_nadded">
-          <ExcerciseSideBar />
+          <ExcerciseSideBar patient={patient} session={session} prescriptionId={prescriptionId} />
         </div>
       </Grid>
       <Grid className="bgMsg" xl={10} lg={9.5}>
@@ -112,7 +140,7 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="77"
+                    value="0"
                     size={60}
                     sx={{ color: '#FABB18' }}
                   />
@@ -127,7 +155,7 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="45"
+                    value="0"
                     size={60}
                     sx={{ color: '#FF5151' }}
                   />
@@ -145,7 +173,7 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="55"
+                    value="0"
                     size={60}
                     sx={{ color: '#25CC7C' }}
                   />
@@ -160,7 +188,7 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="65"
+                    value="0"
                     size={60}
                     sx={{ color: '#FABB18' }}
                   />
@@ -175,7 +203,7 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="25"
+                    value="0"
                     size={60}
                     sx={{ color: '#FF5151' }}
                   />
@@ -190,7 +218,7 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="60"
+                    value="0"
                     size={60}
                     sx={{ color: '#25CC7C' }}
                   />
@@ -209,14 +237,15 @@ export default function Session() {
               </div>
               <div className="colorDotsDiv">
                 <div className="colorDots">
-                  <RedDot /> <p className="colortxt">Low</p>
-                </div>
-                <div className="colorDots">
                   <GreenDot />
-                  <p className="colortxt">Medium</p>
+                  <p className="colortxt">Low</p>
                 </div>
                 <div className="colorDots">
                   <YellowDot />
+                  <p className="colortxt">Medium</p>
+                </div>
+                <div className="colorDots">
+                  <RedDot />
                   <p className="colortxt">High</p>
                 </div>
               </div>

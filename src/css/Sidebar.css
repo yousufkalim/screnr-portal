@@ -126,8 +126,9 @@
 .exerciseList {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2rem;
   margin: auto;
   width: 62%;
   list-style: none;

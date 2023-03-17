@@ -1,17 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // mui imports
-import Radio from '@mui/material/Radio';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Typography from '@mui/material/Typography';
+// import Radio from '@mui/material/Radio';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Typography from '@mui/material/Typography';
 import Collapse from '@mui/material/Collapse';
+import moment from 'moment';
 
 // assets import
 import { ReactComponent as Back } from '../assets/icons/backBtn.svg';
 import { ReactComponent as OpenArrow } from '../assets/components/Sidebar/openArrow.svg';
 
-export default function SurveyPain() {
+export default function SurveyPain({ session, prescription }) {
   const [expanded, setExpanded] = useState(true);
+  const [survey, setSurvey] = useState(session?.survey);
+  const handleFeedBack = (targetFeedback, targetIndex) => {
+    const newSurvey = survey.map((obj, index) => {
+      if (index === targetIndex) {
+        return {
+          ...obj,
+          feedback: targetFeedback,
+        };
+      }
+      return obj;
+    });
+    setSurvey(newSurvey);
+  };
+
+  useEffect(() => {
+    setSurvey(session?.survey);
+  }, [session]);
 
   return (
     <div>
@@ -20,38 +38,40 @@ export default function SurveyPain() {
           <div className="topSessionSec">
             <Back className="backBtn" />
             <p className="sessionHeader">Session Date</p>
-            <p className="sessionDate">01/05/2022</p>
+            <p className="sessionDate">{moment(session?.date).format('DD/MM/YYYY')}</p>
           </div>
-          <div className="surveyHeaderName"> Prescription Name</div>
+          <div className="surveyHeaderName">{prescription?.name}</div>
         </div>
       </div>
 
       <div className="questionaire">
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <div className="quesDiv">
-            <div className="quesSec">
-              <p className="leftTxt">Question 1:</p>
-              <p className="rightTxt">What is the Lorem Ipsum?</p>
-            </div>
-            <div className="quesSec">
-              <p className="leftTxt">Answer</p>
-              <p className="rightTxt">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                Ipsum has been the industrys standard dummy text ever since the 1500s, when an
-                unknown printer took a galley of type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-            <div className="feedbackSec">
-              <p className="feedbackLeftTxt">Feedback</p>
-              <input
-                type="text"
-                className="feedbackInput"
-                placeholder="Write feedback to send to patient..."
-              />
-            </div>
-          </div>
+          {session?.survey?.map((item, index) => {
+            return (
+              <div className="quesDiv">
+                <div className="quesSec">
+                  <p className="leftTxt">Question 1:</p>
+                  <p className="rightTxt">{item?.question}</p>
+                </div>
+                <div className="quesSec">
+                  <p className="leftTxt">Answer</p>
+                  <p className="rightTxt">{item?.answer}</p>
+                </div>
+                <div className="feedbackSec">
+                  <p className="feedbackLeftTxt">Feedback</p>
+                  <input
+                    type="text"
+                    name="feedback"
+                    className="feedbackInput"
+                    placeholder="Write feedback to send to patient..."
+                    onChange={(e) => handleFeedBack(e.target.value, index)}
+                  />
+                </div>
+              </div>
+            );
+          })}
 
-          <div className="quesDiv">
+          {/* <div className="quesDiv">
             <div className="quesSec">
               <p className="leftTxt">Question 2:</p>
               <p className="rightTxt">What is the Lorem Ipsum?</p>
@@ -86,7 +106,7 @@ export default function SurveyPain() {
                 placeholder="Write feedback to send to patient..."
               />
             </div>
-          </div>
+          </div> */}
         </Collapse>
 
         {expanded ? (

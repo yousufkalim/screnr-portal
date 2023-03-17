@@ -1,29 +1,32 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 // mui imports
 import { Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import request from '../../api/index';
+import api from '../../api/index';
 
 // child components import
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import AddPrescription from '../../components/forms/prescription/AddPrescription';
 import GeneratePrescription from '../../components/popups/prescription/PrescriptionGenerated';
+import EditPatient from '../../components/popups/patient/EditPatient';
 
 export default function AddPatientPrescription() {
   const params = useParams();
-  const { id } = params;
+  const { patientId, clinicianId } = params;
   const [openGeneratePrescription, setOpenGeneratePrescription] = useState(false);
+  const [openEditpatientModal, setOpenEditpatientModal] = useState(false);
+  const [patient, setPatient] = useState({});
   const [prescription, setPrescription] = useState({
     name: '',
     start_date: new Date(),
     duration: '',
     frequency: '',
     type: 'motion',
-    clinician: 't6430',
-    patient: id,
+    clinician: clinicianId,
+    patient: patientId,
     exercises: [],
   });
 
@@ -35,6 +38,21 @@ export default function AddPatientPrescription() {
     rest: '',
     instructions: '',
   });
+
+  const getPatientDataById = async () => {
+    await api('get', `/admins/patients/${patientId}`)
+      .then((res) => {
+        setPatient(res?.data?.user);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getPatientDataById();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleExercideInfoReset = () => {
     setExerciseInformation({
@@ -86,8 +104,8 @@ export default function AddPatientPrescription() {
           duration: 0,
           frequency: 0,
           type: 'motion',
-          clinician: 'vaf6q',
-          patient: id,
+          clinician: clinicianId,
+          patient: patientId,
           exercises: [],
         })
       : setPrescription({
@@ -96,8 +114,8 @@ export default function AddPatientPrescription() {
           duration: 0,
           frequency: 0,
           type: 'simple',
-          clinician: 'vaf6q',
-          patient: id,
+          clinician: clinicianId,
+          patient: patientId,
           exercises: [],
         });
   };
@@ -112,14 +130,14 @@ export default function AddPatientPrescription() {
       prescription.patient &&
       prescription.start_date
     ) {
-      await request('post', '/admins/prescriptions', prescription)
+      await api('post', '/admins/prescriptions', prescription)
         .then(() => {
           setOpenGeneratePrescription(true);
           handlePrescriptionDetailsReset();
           toast.success('Prescription added successfully');
         })
         .catch((err) => {
-          console.log('err', err);
+          console.error('err', err);
         });
     } else {
       toast.error('Please fill all the fields');
@@ -136,48 +154,64 @@ export default function AddPatientPrescription() {
     prescription.patient &&
     prescription.exercises.length > 0;
   return (
-    <Grid container>
-      <Grid xl={2} lg={2.5}>
-        <Sidebar />
-      </Grid>
-
-      <Grid className="bgPrescription" xl={10} lg={9.5}>
-        <div className="breadCrumb">
-          Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescribe Exercise
-          &gt;
-        </div>
-        <div className="bgAddPrescription">
-          <AddPrescription
-            patientId={id}
-            prescription={prescription}
-            exerciseInformation={exerciseInformation}
-            handleAddToList={handleAddToList}
-            handlePrescriptionDetails={handlePrescriptionDetails}
-            handleExerciseInformation={handleExerciseInformation}
-            dateChange={dateChange}
+    <>
+      <Grid container>
+        <Grid xl={2} lg={2.5}>
+          <Sidebar
+            patientId={patientId}
+            patientData={patient}
+            selectedClinician={clinicianId}
+            openEditpatientModal={openEditpatientModal}
+            setOpenEditpatientModal={setOpenEditpatientModal}
           />
-        </div>
-      </Grid>
+        </Grid>
 
-      <div className="addPrescriptionBtn">
-        <Button
-          variant="contained"
-          className={
-            validatingGeneratePrescriptionBtn
-              ? 'generatePrescriptionBtn'
-              : 'generatePrescriptionBtn_diaabled'
-          }
-          onClick={() => handleGeneratePrescription()}
-        >
-          Generate Prescription
-        </Button>
-      </div>
-      {openGeneratePrescription && (
-        <GeneratePrescription
-          openGeneratePrescription={openGeneratePrescription}
-          setOpenGeneratePrescription={setOpenGeneratePrescription}
+        <Grid className="bgPrescription" xl={10} lg={9.5}>
+          <div className="breadCrumb">
+            Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescribe
+            Exercise &gt;
+          </div>
+          <div className="bgAddPrescription">
+            <AddPrescription
+              patientId={patientId}
+              prescription={prescription}
+              exerciseInformation={exerciseInformation}
+              handleAddToList={handleAddToList}
+              handlePrescriptionDetails={handlePrescriptionDetails}
+              handleExerciseInformation={handleExerciseInformation}
+              dateChange={dateChange}
+            />
+          </div>
+        </Grid>
+
+        <div className="addPrescriptionBtn">
+          <Button
+            variant="contained"
+            className={
+              validatingGeneratePrescriptionBtn
+                ? 'generatePrescriptionBtn'
+                : 'generatePrescriptionBtn_diaabled'
+            }
+            onClick={() => handleGeneratePrescription()}
+          >
+            Generate Prescription
+          </Button>
+        </div>
+        {openGeneratePrescription && (
+          <GeneratePrescription
+            openGeneratePrescription={openGeneratePrescription}
+            setOpenGeneratePrescription={setOpenGeneratePrescription}
+          />
+        )}
+      </Grid>
+      {openEditpatientModal && (
+        <EditPatient
+          openEditPatient={openEditpatientModal}
+          setOpenEditPatient={setOpenEditpatientModal}
+          patientDetails={patient}
+          getPatients={getPatientDataById}
         />
       )}
-    </Grid>
+    </>
   );
 }
