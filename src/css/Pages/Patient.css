@@ -641,7 +641,9 @@
   height: 70vh;
   overflow-y: scroll;
 }
-
+.selectedOpt {
+  padding: 15px;
+}
 .prescriptionMenu {
   border-radius: 20px;
   background-color: #f6fafb;

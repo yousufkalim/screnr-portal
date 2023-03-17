@@ -171,16 +171,18 @@ export default function AddPatientPrescription() {
             Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescribe
             Exercise &gt;
           </div>
-          <div className="bgAddPrescription">
-            <AddPrescription
-              patientId={patientId}
-              prescription={prescription}
-              exerciseInformation={exerciseInformation}
-              handleAddToList={handleAddToList}
-              handlePrescriptionDetails={handlePrescriptionDetails}
-              handleExerciseInformation={handleExerciseInformation}
-              dateChange={dateChange}
-            />
+          <div className="main_div_addPrescription">
+            <div className="bgAddPrescription">
+              <AddPrescription
+                patientId={patientId}
+                prescription={prescription}
+                exerciseInformation={exerciseInformation}
+                handleAddToList={handleAddToList}
+                handlePrescriptionDetails={handlePrescriptionDetails}
+                handleExerciseInformation={handleExerciseInformation}
+                dateChange={dateChange}
+              />
+            </div>
           </div>
         </Grid>
 
