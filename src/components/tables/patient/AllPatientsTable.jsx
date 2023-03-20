@@ -19,10 +19,12 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 // // assets import
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
+import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
 
 // child component imports
 import IconTextField from '../../../utils/CustomTextInput';
@@ -75,6 +77,7 @@ const GreenLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 export default function PatientTable({ patients, setOpenAddPatient }) {
+  const navigate = useNavigate();
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
   const [filter, setFilter] = useState('');
@@ -109,6 +112,11 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
       document.removeEventListener('mousedown', handleCloseFilter);
     };
   }, [openFilter]);
+
+  const handlePatientProfile = (patientid) => {
+    navigate(`/patients/${patientid}/prescription`);
+  };
+
   return (
     <div className="allClinicAdminTable" id="clinicianTable">
       <TableContainer
@@ -425,7 +433,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                     {row?.userData?.diagnosis}
                   </TableCell>
                   <TableCell align="center" className="table_cells">
-                    {row.exercises}
+                    {row.exercises ?? '-'}
                   </TableCell>
                   <TableCell
                     align="center"
@@ -435,11 +443,11 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                       padding: '3%',
                     }}
                   >
-                    {row.completion}
+                    {row.completion ?? '0%'}
                   </TableCell>
 
                   <TableCell align="center">
-                    <span className="linearProgress">{`${row.performance}%`}</span>
+                    <span className="linearProgress">{`${row?.performance ?? 0}%`}</span>
                     {row.performance <= 30 ? (
                       <RedLinearProgress
                         variant="determinate"
@@ -455,7 +463,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                     ) : (
                       <GreenLinearProgress
                         variant="determinate"
-                        value={row.performance}
+                        value={row.performance ?? 0}
                         thickness="40"
                       />
                     )}
@@ -465,20 +473,19 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                       <CircularProgress
                         variant="determinate"
                         thickness="4.5"
-                        value={50}
+                        value={0}
                         size={55}
                         sx={{
                           color: '#FABB18',
                         }}
                       />
-                      <span className="circularProgress">55%</span>
+                      <span className="circularProgress">0%</span>
                     </div>
                   </TableCell>
                 </StyledTableRow>
                 {patient.id === row.id ? (
                   <TableRow className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}>
                     <TableCell width="2%" />
-
                     <TableCell>
                       <div className="notiCell">
                         <Report /> <p className="reportTxt"> 2 Reports</p>
@@ -495,8 +502,19 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                     </TableCell>
                     <TableCell />
                     <TableCell />
-                    <TableCell align="center">
+                    <TableCell
+                      style={{
+                        display: 'flex',
+                        gap: '15px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
                       <Edit className="table_icons" onClick={() => setOpenEditPatient(true)} />
+                      <Profile
+                        className="table_icons"
+                        onClick={() => handlePatientProfile(row.id)}
+                      />
                     </TableCell>
                   </TableRow>
                 ) : (

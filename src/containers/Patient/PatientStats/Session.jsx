@@ -5,12 +5,12 @@ import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
-import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
-import { ReactComponent as TitleExcerciseIcon } from '../../../assets/icons/titleExcerciseIcon.svg';
 import ExcerciseChart from './ExcerciseChart';
 import ExcerciseSideBar from '../../../components/sidebar/patient/ExerciseSidebar';
 import ReportCard from '../../../components/cards/PatientReportCard';
 import MultiCircularProgress from './OverallExcerciseScore.jsx';
+import { ReactComponent as TitleExcerciseIcon } from '../../../assets/icons/titleExcerciseIcon.svg';
+import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 import { ReactComponent as LeftArrow } from '../../../assets/icons/ArrowIcon1.svg';
 import { ReactComponent as RightArrow } from '../../../assets/icons/ArrowIcon2.svg';
 import { ReactComponent as RedDot } from '../../../assets/icons/sessionGraphColorDot1.svg';
@@ -34,10 +34,12 @@ export default function Session() {
             setPatient(res2?.data?.user);
           })
           .catch((err) => {
+            // eslint-disable-next-line no-console
             console.error(err);
           });
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.error(err);
       });
   };
