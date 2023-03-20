@@ -213,7 +213,7 @@ export default function PatientTable({ patients, getPatients }) {
                     {row.userData?.diagnosis}
                   </TableCell>
                   <TableCell align="center" className="table_cells">
-                    {row.prescription}
+                    {row?.prescription}
                   </TableCell>
                   <TableCell
                     align="center"
@@ -223,10 +223,10 @@ export default function PatientTable({ patients, getPatients }) {
                       padding: '3%',
                     }}
                   >
-                    {row.completion}%
+                    {row.completion ?? '0'}%
                   </TableCell>
                   <TableCell align="center">
-                    <span className="linearProgress">{`${row.performance}%`}</span>
+                    <span className="linearProgress">{`${row?.performance ?? 0}%`}</span>
                     {row.performance <= 30 ? (
                       <RedLinearProgress
                         variant="determinate"
@@ -252,7 +252,7 @@ export default function PatientTable({ patients, getPatients }) {
                       <CircularProgress
                         variant="determinate"
                         thickness="4.5"
-                        value={row.pain}
+                        value={100}
                         size={55}
                         sx={{
                           color:
@@ -263,12 +263,11 @@ export default function PatientTable({ patients, getPatients }) {
                               : '#25CC7C',
                         }}
                       />
-
-                      <span className="circularProgress">{row.pain}%</span>
+                      <span className="circularProgress">{row?.pain ?? 0}%</span>
                     </div>
                   </TableCell>
                 </StyledTableRow>
-                {patient.id === row.id ? (
+                {patient?.id === row?.id ? (
                   <TableRow className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}>
                     <TableCell width="2%" />
 
@@ -296,7 +295,14 @@ export default function PatientTable({ patients, getPatients }) {
                     </TableCell>
                     <TableCell />
                     <TableCell />
-                    <TableCell style={{ display: 'flex', gap: '5px' }}>
+                    <TableCell
+                      style={{
+                        display: 'flex',
+                        gap: '5px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
                       <Edit
                         className="table_icons"
                         onClick={() => {
