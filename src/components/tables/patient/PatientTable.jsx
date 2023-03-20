@@ -274,7 +274,9 @@ export default function PatientTable({ patients, getPatients }) {
                               : '#25CC7C',
                         }}
                       />
-                      <span className="circularProgress">{row?.pain ?? 0}%</span>
+                      <div className="percentageData">
+                        <span className="circularProgress">{row?.pain ?? 0}%</span>
+                      </div>
                     </div>
                   </TableCell>
                 </StyledTableRow>

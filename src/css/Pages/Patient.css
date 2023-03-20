@@ -197,7 +197,11 @@
   text-align: center;
   color: #454238;
 }
-
+.percentageData {
+  position: absolute;
+  bottom: 36%;
+  right: 32%;
+}
 .circularProgressPrescription {
   transform: rotate(90deg) !important;
   position: absolute;
