@@ -13,6 +13,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import * as React from 'react';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 // assets import
 import { ReactComponent as Action } from '../../../assets/components/Table/dots.svg';
@@ -21,7 +24,7 @@ import { ReactComponent as Message } from '../../../assets/components/Table/emai
 import { ReactComponent as Check } from '../../../assets/components/Table/check.svg';
 import { ReactComponent as Uncheck } from '../../../assets/components/Table/uncheck.svg';
 import { ReactComponent as Edit } from '../../../assets/icons/editIcon.svg';
-import { ReactComponent as Tick } from '../../../assets/components/Table/tick.svg';
+import { ReactComponent as Tick } from '../../../assets/components/Table/markTick.svg';
 // child import
 import AvatarComponent from '../../Avatar';
 import EditPrescription from '../../popups/prescription/EditPrescription';
@@ -35,8 +38,26 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
   const [loading, setLoading] = useState(false);
   const [selectedPrescription, setSelectedPrescription] = useState({});
 
-  const handleSelectedPrescription = (targetPrescription) => {
-    setSelectedPrescription(targetPrescription);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event, item) => {
+    setSelectedPrescription(item);
+    setAnchorEl(event.currentTarget);
+    setOpenPrescriptionMenu(!openPrescriptionMenu);
+  };
+  const handleClose = () => {
+    setSelectedPrescription({});
+    setAnchorEl(null);
+  };
+  const handleCloseEdit = () => {
+    setAnchorEl(null);
+    setOpenEditPrescription(true);
+    setOpenPrescriptionMenu(false);
+  };
+  const handleCloseCompleted = () => {
+    setAnchorEl(null);
+    setOpenPrescriptionMenu(false);
   };
 
   const handlePrescriptionList = async () => {
@@ -216,44 +237,59 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     </div>
                   </TableCell>
                   <TableCell align="right">
-                    <Action
-                      className="pointer"
-                      onClick={() => setOpenPrescriptionMenu(!openPrescriptionMenu)}
-                    />
-                    {openPrescriptionMenu ? (
-                      <div className="prescriptionMenu">
-                        <div
-                          className="editMenuItem"
-                          role="presentation"
-                          onClick={() => {
-                            setOpenEditPrescription(true);
-                            setOpenPrescriptionMenu(false);
-                            handleSelectedPrescription(mainRow);
+                    <div>
+                      <Action
+                        className="pointer"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={(e) => handleClick(e, mainRow)}
+                      />
+                      {openPrescriptionMenu ? (
+                        <Menu
+                          id="basic-menu"
+                          anchorEl={anchorEl}
+                          open={open}
+                          onClose={handleClose}
+                          MenuListProps={{
+                            'aria-labelledby': 'basic-button',
+                          }}
+                          PaperProps={{
+                            style: {
+                              backgroundColor: '#F6FAFB',
+                              // boxShadow: 'none',
+                              boxShadow: '1',
+                              border: '1px ',
+                              borderColor: 'black',
+                              borderRadius: '15px',
+                            },
                           }}
                         >
-                          <Edit
-                            className="pIcon"
-                            style={{
-                              filter:
-                                'brightness(0) saturate(100%) invert(66%) sepia(69%) saturate(1538%) hue-rotate(344deg) brightness(107%) contrast(97%)',
+                          <MenuItem
+                            className="editMenuItem"
+                            role="presentation"
+                            onClick={() => {
+                              handleCloseEdit();
                             }}
-                          />
-                          <p>Edit Prescription</p>
-                        </div>
-                        <div
-                          className="menuItem"
-                          role="presentation"
-                          onClick={() => {
-                            setOpenPrescriptionMenu(false);
-                          }}
-                        >
-                          <Tick className="pIcon" />
-                          <p>Mark as Completeted</p>
-                        </div>
-                      </div>
-                    ) : (
-                      ''
-                    )}
+                          >
+                            <Edit
+                              className="pIcon"
+                              style={{
+                                filter:
+                                  'brightness(0) saturate(100%) invert(66%) sepia(69%) saturate(1538%) hue-rotate(344deg) brightness(107%) contrast(97%)',
+                              }}
+                            />
+                            <p className="actionMenus"> Edit Prescription</p>
+                          </MenuItem>
+                          <MenuItem onClick={handleCloseCompleted}>
+                            <Tick className="pIcon" />
+                            <p className="actionMenus">Mark as Completed</p>
+                          </MenuItem>
+                        </Menu>
+                      ) : (
+                        ''
+                      )}
+                    </div>
                   </TableCell>
                 </TableRow>
               </TableHead>

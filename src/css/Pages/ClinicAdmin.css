@@ -12,6 +12,9 @@
 .staff_id {
   font-size: 1rem;
   color: #919b9b;
+  text-overflow: ellipsis;
+  max-width: 17rem;
+  align-items: center;
 }
 
 .staff_id_2 {

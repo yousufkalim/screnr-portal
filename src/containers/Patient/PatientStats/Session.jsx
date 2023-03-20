@@ -61,11 +61,11 @@ export default function Session() {
             Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription
             &gt; Session &gt;
           </div>
-          <div className="bgAddPrescription">
+          <div className="bgAddPrescriptionSessions">
             <div className="SessionsHeading">
               <div className="leftside_title">
                 <div className="backIcon_button">
-                  <BackIcon />
+                  <BackIcon className="arrows" />
                 </div>
                 <div className="dateTitle">
                   <p>Session Date</p>
@@ -91,8 +91,9 @@ export default function Session() {
                   <p>set Number</p>
                 </div>
                 <div className="set_rep_valueNumber">
-                  <LeftArrow /> <p> 04 </p>
-                  <RightArrow />
+                  <LeftArrow className="arrows" />
+                  <p> 04 </p>
+                  <RightArrow className="arrows" />
                 </div>
               </div>
               <div className="setNumber">
@@ -100,8 +101,8 @@ export default function Session() {
                   <p>Rep number</p>
                 </div>
                 <div className="set_rep_valueNumber">
-                  <LeftArrow /> <p> 12 </p>
-                  <RightArrow />
+                  <LeftArrow className="arrows" /> <p> 12 </p>
+                  <RightArrow className="arrows" />
                 </div>
               </div>
             </div>
@@ -112,9 +113,9 @@ export default function Session() {
               <div className="score_Bar1">
                 <div className="overallScoreGraph">
                   <div className="overAll_Arrows">
-                    <LeftArrow />
+                    <LeftArrow className="arrows" />
                     <p className="excercises_names">Overall</p>
-                    <RightArrow />
+                    <RightArrow className="arrows" />
                   </div>
 
                   <MultiCircularProgress />
@@ -147,7 +148,7 @@ export default function Session() {
                     sx={{ color: '#FABB18' }}
                   />
                   <div className="graphData">
-                    <p className="excercise_percent">77</p> <p className="scoreText">Score</p>
+                    <p className="excercise_percent">00</p> <p className="scoreText">Score</p>
                   </div>
                 </div>
               </div>

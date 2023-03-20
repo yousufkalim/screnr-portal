@@ -247,7 +247,18 @@ export default function PatientTable({ patients, getPatients }) {
                       />
                     )}
                   </TableCell>
-                  <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      transform: 'rotate(270deg)',
+                      padding: '40px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '140px',
+                      marginLeft: '50px',
+                    }}
+                  >
                     <div className="circularBarCell">
                       <CircularProgress
                         variant="determinate"

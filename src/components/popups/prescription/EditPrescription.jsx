@@ -110,7 +110,7 @@ export default function EditPrescription({
       frequency: prescriptionFrequency,
     })
       .then((res) => {
-        toast.success('Prescription added successfully');
+        toast.success('Edited Successfully');
         handlePrescriptionList();
         console.log('res', res);
       })
