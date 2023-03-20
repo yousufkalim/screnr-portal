@@ -186,6 +186,17 @@
   bottom: 20px;
   right: 1;
 }
+.circularBarCellAllPatients {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.percentageValue {
+  position: absolute;
+  right: 46%;
+  bottom: 42%;
+}
 
 .circularProgress {
   transform: rotate(90deg) !important;

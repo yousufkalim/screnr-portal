@@ -469,7 +469,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                     )}
                   </TableCell>
                   <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
-                    <div className="circularBarCell" style={{ alignItems: 'center' }}>
+                    <div className="circularBarCellAllPatients" style={{ alignItems: 'center' }}>
                       <CircularProgress
                         variant="determinate"
                         thickness="4.5"
@@ -479,7 +479,9 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                           color: '#FABB18',
                         }}
                       />
-                      <span className="circularProgress">0%</span>
+                      <div className="percentageValue">
+                        <span className="circularProgress">0%</span>
+                      </div>
                     </div>
                   </TableCell>
                 </StyledTableRow>
