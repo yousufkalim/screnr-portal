@@ -109,10 +109,9 @@ export default function EditPrescription({
       duration: prescriptionDuration,
       frequency: prescriptionFrequency,
     })
-      .then((res) => {
+      .then(() => {
         toast.success('Edited Successfully');
         handlePrescriptionList();
-        console.log('res', res);
       })
       .catch((err) => {
         console.error(`handleEditPrescriptions --> ${err}`);

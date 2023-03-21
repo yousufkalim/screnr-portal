@@ -20,27 +20,15 @@ export default function Index() {
   const [prescription, setPrescription] = useState({});
 
   const handleGetSessionById = async () => {
-    await api('get', `/admins/sessions/${sessionId}`)
-      .then(async (res) => {
-        setSession(res?.data?.session);
-        await api('get', `/admins/patients/${res?.data?.session?.patient?.id}`)
-          .then(async (res2) => {
-            setPatient(res2?.data?.user);
-            await api('get', `/admins/prescriptions/${prescriptionId}`)
-              .then((res3) => {
-                setPrescription(res3?.data?.prescription);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      })
-      .catch((err) => {
-        console.error(err);
+    await api('get', `/admins/sessions/${sessionId}`).then(async (res) => {
+      setSession(res?.data?.session);
+      await api('get', `/admins/patients/${res?.data?.session?.patient?.id}`).then(async (res2) => {
+        setPatient(res2?.data?.user);
+        await api('get', `/admins/prescriptions/${prescriptionId}`).then((res3) => {
+          setPrescription(res3?.data?.prescription);
+        });
       });
+    });
   };
 
   useEffect(() => {

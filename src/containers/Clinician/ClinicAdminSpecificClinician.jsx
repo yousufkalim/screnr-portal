@@ -23,15 +23,9 @@ import api from '../../api';
 export default function ClinicAdmin() {
   const [openAddClinican, setOpenAddClinican] = useState(false);
   const [openEditClinician, setOpenEditClinician] = useState(false);
-
   const [clinicians, setClinicians] = useState({});
   const [clinicianData, setClinicianData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log(
-    '🚀 ~ file: ClinicAdminSpecificClinician.jsx:29 ~ ClinicAdmin ~ clinicianData:',
-    clinicianData,
-  );
   const [breadcrumb, setBreadcrumb] = useState('');
   const { id } = useParams();
   const navigate = useNavigate();

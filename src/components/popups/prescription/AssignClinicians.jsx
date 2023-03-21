@@ -44,14 +44,10 @@ export default function AssignClinicians({
     setOpenAssignClinicians(false);
     await api('put', `/admins/patients/addClinicianToPatient/${patientId}`, {
       clinician: clinicianId,
-    })
-      .then(() => {
-        setOpenAssignClinicians(false);
-        getPatients();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(() => {
+      setOpenAssignClinicians(false);
+      getPatients();
+    });
   };
 
   const selectClinician = (chosenClinician) => {

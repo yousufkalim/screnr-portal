@@ -460,7 +460,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
             color: '#919B9B',
           }}
         >
-          No Prescription From This Clinician
+          No Prescription
         </h1>
       )}
     </div>

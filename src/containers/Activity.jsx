@@ -31,7 +31,6 @@ export default function Activity() {
       time: '120 Hr',
       text: 'Login Hours',
     },
-
     {
       icon: Logoff,
       time: '30 Min Ago',
@@ -48,7 +47,6 @@ export default function Activity() {
           <GenericSidebar />
         )}
       </Grid>
-
       <Grid className="bgClinicianTable" xl={7.5} lg={7}>
         <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Lifeline Clinic &gt; Doctor &gt;{' '}
