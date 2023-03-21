@@ -180,6 +180,22 @@
 .circularBarCell {
   display: flex;
   flex-direction: column;
+  margin-right: 20px;
+  position: fixed;
+  top: 0px;
+  bottom: 20px;
+  right: 1;
+}
+.circularBarCellAllPatients {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.percentageValue {
+  position: absolute;
+  right: 46%;
+  bottom: 42%;
 }
 
 .circularProgress {
@@ -192,7 +208,11 @@
   text-align: center;
   color: #454238;
 }
-
+.percentageData {
+  position: absolute;
+  bottom: 36%;
+  right: 32%;
+}
 .circularProgressPrescription {
   transform: rotate(90deg) !important;
   position: absolute;
@@ -211,7 +231,7 @@
 }
 
 .bgAddPrescription {
-  padding: 2rem 0rem 0rem 0rem;
+  padding: 2rem 2rem 2rem 2rem;
   width: 97%;
 }
 
@@ -644,14 +664,11 @@
 .selectedOpt {
   padding: 15px;
 }
-.prescriptionMenu {
-  border-radius: 20px;
-  background-color: #f6fafb;
-  padding: 20px;
-  width: max-content;
-  position: relative;
-  bottom: 40px;
-  right: -70px;
+.actionMenus {
+  font-family: 'poppins';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
 }
 
 .pIcon {

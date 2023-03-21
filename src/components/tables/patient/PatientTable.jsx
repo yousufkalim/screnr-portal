@@ -247,7 +247,18 @@ export default function PatientTable({ patients, getPatients }) {
                       />
                     )}
                   </TableCell>
-                  <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      transform: 'rotate(270deg)',
+                      padding: '40px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '140px',
+                      marginLeft: '50px',
+                    }}
+                  >
                     <div className="circularBarCell">
                       <CircularProgress
                         variant="determinate"
@@ -263,7 +274,9 @@ export default function PatientTable({ patients, getPatients }) {
                               : '#25CC7C',
                         }}
                       />
-                      <span className="circularProgress">{row?.pain ?? 0}%</span>
+                      <div className="percentageData">
+                        <span className="circularProgress">{row?.pain ?? 0}%</span>
+                      </div>
                     </div>
                   </TableCell>
                 </StyledTableRow>

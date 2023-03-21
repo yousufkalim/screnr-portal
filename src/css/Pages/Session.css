@@ -1,10 +1,14 @@
-.bgAddPrescription {
+.bgAddPrescriptionSessions {
   margin-top: 40px;
   background-color: #ffff;
   margin-left: 30px;
   border-radius: 20px;
   height: 46vh;
   max-width: 74vw;
+  padding: 2rem 2rem 2rem 2rem;
+}
+.arrows {
+  cursor: pointer;
 }
 .SessionsHeading {
   display: flex;
@@ -223,4 +227,49 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+@media only screen and (max-width: 1750px) {
+  .bgAddPrescriptionSessions {
+    height: 30rem;
+  }
+  .excercise_details {
+    max-width: 27rem;
+  }
+  .jointScoreOuterDiv {
+    width: 80%;
+  }
+  .score_Bars {
+    width: 109px;
+  }
+}
+@media only screen and (max-width: 1500px) {
+  .jointScoreOuterDiv {
+    width: 90%;
+  }
+  .score_Bars {
+    width: 105px;
+  }
+  .excerciseDay {
+    font-size: 17px;
+  }
+  .jointScoreHeading {
+    font-size: 16.5px;
+  }
+  .dateTitle {
+    font-size: 16.5px;
+  }
+  .dateExcercise {
+    font-size: 14.5px;
+  }
+  .set_rep_valueNumber {
+    font-size: 20px;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .jointScoreOuterDiv {
+    width: 95%;
+  }
+  .score_Bars {
+    width: 100px;
+  }
 }
