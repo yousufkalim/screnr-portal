@@ -83,6 +83,31 @@ export default function EditPatient({
     dob: moment(patientDetails?.userData?.dob)._d || '',
   });
 
+  const setPatientData = () => {
+    setPatient({
+      first_name: patientDetails?.first_name,
+      last_name: patientDetails?.last_name,
+      email: patientDetails?.email,
+      profile_pic: patientDetails?.profile_pic,
+      phone_number: patientDetails?.phone_number,
+      // eslint-disable-next-line no-underscore-dangle
+      expiry_date: moment(patientDetails?.expiry_date)?._d || '',
+    });
+    setUserData({
+      mrn_id: patientDetails?.userData?.mrn_id,
+      diagnosis: patientDetails?.userData?.diagnosis || '',
+      location: patientDetails?.userData?.location || '',
+      clinicians: patientDetails?.userData?.clinicians || [],
+      // eslint-disable-next-line no-underscore-dangle
+      dob: moment(patientDetails?.userData?.dob)._d || '',
+    });
+  };
+
+  useEffect(() => {
+    setPatientData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openEditPatient]);
+
   const clinicId = patientDetails?.userData?.clinicians[0]?.userData?.clinic?.id
     ? patientDetails?.userData?.clinicians[0]?.userData?.clinic?.id
     : patientDetails?.userData?.clinicians[0]?.userData?.clinic;
@@ -282,7 +307,7 @@ export default function EditPatient({
                 placeholder="MRN (customized unique id)"
                 size="normal"
                 name="mrn_id"
-                value={userData.mrn_id}
+                value={userData?.mrn_id}
                 onChange={handleUserDataChange}
               />
             </FormControl>

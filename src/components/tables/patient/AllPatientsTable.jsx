@@ -76,12 +76,34 @@ const GreenLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-export default function PatientTable({ patients, setOpenAddPatient }) {
+export default function PatientTable({
+  patients,
+  setOpenAddPatient,
+  getPatients,
+  handleFilterAndSorting,
+  loading,
+  exerciseFilter,
+  diaganosisFilter,
+  handleFilters,
+}) {
   const navigate = useNavigate();
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
-  const [filter, setFilter] = useState('');
+  const [editPatient, setEditPatient] = useState('');
+  // const [filter, setFilter] = useState('');
+  const [search, setSearch] = useState('');
+  const [sorting, setSorting] = useState({
+    sortBy: '',
+  });
+  const [filter, setFilter] = useState({
+    filterType: 'all',
+    clinicNamefilter: '',
+    filterValue: [],
+  });
+  console.log('🚀 ~ file: AllPatientsTable.jsx:102 ~ filter:', filter);
+  // const [clinicNameSearch , setClinicNameSearch] = useState('')
   const [openFilter, setOpenFilter] = useState(false);
+
   const isSafari =
     navigator.vendor.match(/apple/i) &&
     !navigator.userAgent.match(/crios/i) &&
@@ -91,9 +113,32 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
   const filterRef = useRef(null);
   const classes = useStyles();
 
-  const handleFilterChange = (event) => {
-    setFilter(event.target.value);
+  // const handleFilterChange = (event) => {
+  //   setFilter(event.target.value);
+  // };
+
+  const handleFilter = async (event) => {
+    setFilter({ ...filter, [event.target.name]: event.target.value });
   };
+
+  const handlePatientProfile = (patientid) => {
+    navigate(`/patients/${patientid}/prescription`);
+  };
+  const handleSearch = async (event) => {
+    setSearch(event.target.value);
+    await handleFilterAndSorting(event.target.value);
+  };
+
+  const handleFilterChange = async (event) => {
+    setSorting({ ...sorting, [event.target.name]: event.target.value });
+    await handleFilterAndSorting(event.target.value);
+  };
+
+  const handleClinicNamefilter = async (event) => {
+    setFilter({ ...filter, clinicNamefilter: event.target.value });
+    await handleFilters(filter.filterType, event.target.value);
+  };
+
   useEffect(() => {
     const handleCloseFilter = (e) => {
       if (
@@ -113,10 +158,6 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
     };
   }, [openFilter]);
 
-  const handlePatientProfile = (patientid) => {
-    navigate(`/patients/${patientid}/prescription`);
-  };
-
   return (
     <div className="allClinicAdminTable" id="clinicianTable">
       <TableContainer
@@ -135,7 +176,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
           </h1>
 
           <div className="allTableTitle" style={{ flexGrow: !isSafari ? '0.15' : 'none' }}>
-            <IconTextField />
+            <IconTextField value={search} handleChange={handleSearch} name="search" />
 
             <Filter
               className="pointer"
@@ -145,25 +186,25 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
             {openFilter && (
               <div className="patientFilterPoper" ref={click}>
                 <div className="filterHead">
-                  <p>Filters</p>{' '}
+                  <p>Filters</p>
                   <p
                     role="presentation"
-                    onClick={() => {
-                      setFilter('');
-                    }}
                     className="pointer"
+                    onClick={() => {
+                      setSorting({
+                        sortBy: '',
+                      });
+                    }}
                   >
                     Clear All
                   </p>
                 </div>
-
-                <p className="filterHead">Sort By</p>
                 <div className="hl" />
                 <RadioGroup
                   aria-label="filter"
-                  name="filter"
-                  onChange={handleFilterChange}
-                  value={filter}
+                  name="filterType"
+                  onChange={handleFilter}
+                  value={filter.filterType}
                   sx={{
                     '.MuiFormControlLabel-label': {
                       fontSize: '14px',
@@ -171,12 +212,13 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                   }}
                 >
                   <FormControlLabel
-                    value="All"
+                    value="all"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="All"
                   />
+
                   <FormControlLabel
-                    value="Clinic Name"
+                    value="clinic"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Clinic Name"
                   />
@@ -193,7 +235,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                           borderRadius: '22px',
                         },
                         '&:hover fieldset': {
-                          borderColor: '#454238',
+                          borderColor: filter.filterType === 'clinic' ? '#454238' : '',
                         },
                         '&.Mui-focused fieldset': {
                           borderColor: '#454238',
@@ -203,9 +245,9 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                     id="outlined-email"
                     placeholder="Enter Clinic Name"
                     size="normal"
-                    // value={email}
-                    // type={email}
-                    // onChange={handleInput}
+                    value={filter.clinicNamefilter}
+                    onChange={handleClinicNamefilter}
+                    disabled={filter.filterType !== 'clinic'}
                   />
                   <div className="subFilters">
                     <FormControlLabel
@@ -216,54 +258,32 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                       label="Exercise"
                     />
                     <div className="innerSubFilters">
-                      <FormControlLabel
-                        sx={{
-                          textAlign: 'left',
-                          width: 'fit-content',
-                        }}
-                        control={
-                          <Checkbox
-                            // onChange={handleCheck}
-                            // checked={checked}
-                            classes={{ root: classes.checkBox, checked: classes.checked }}
-                          />
-                        }
-                        label={
-                          <Typography
-                            style={{
-                              textAlign: 'left',
-                              fontWeight: '500',
-                              fontSize: '14px',
-                            }}
-                          >
-                            Cat Camel
-                          </Typography>
-                        }
-                      />
-                      <FormControlLabel
-                        sx={{
-                          textAlign: 'left',
-                          width: 'fit-content',
-                        }}
-                        control={
-                          <Checkbox
-                            // onChange={handleCheck}
-                            // checked={checked}
-                            classes={{ root: classes.checkBox, checked: classes.checked }}
-                          />
-                        }
-                        label={
-                          <Typography
-                            style={{
-                              textAlign: 'left',
-                              fontWeight: '500',
-                              fontSize: '14px',
-                            }}
-                          >
-                            Supine Bridge
-                          </Typography>
-                        }
-                      />
+                      {exerciseFilter?.map((item) => (
+                        <FormControlLabel
+                          sx={{
+                            textAlign: 'left',
+                            width: 'fit-content',
+                          }}
+                          control={
+                            <Checkbox
+                              // onChange={handleCheck}
+                              // checked={checked}
+                              classes={{ root: classes.checkBox, checked: classes.checked }}
+                            />
+                          }
+                          label={
+                            <Typography
+                              style={{
+                                textAlign: 'left',
+                                fontWeight: '500',
+                                fontSize: '14px',
+                              }}
+                            >
+                              {item}
+                            </Typography>
+                          }
+                        />
+                      ))}
                     </div>
                   </div>
                   <div className="subFilters">
@@ -275,68 +295,54 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                       label="Diagnosis"
                     />
                     <div className="innerSubFilters">
-                      <FormControlLabel
-                        sx={{
-                          textAlign: 'left',
-                          width: 'fit-content',
-                        }}
-                        control={
-                          <Checkbox
-                            // onChange={handleCheck}
-                            // checked={checked}
-                            classes={{ root: classes.checkBox, checked: classes.checked }}
-                          />
-                        }
-                        label={
-                          <Typography
-                            style={{
-                              textAlign: 'left',
-                              fontWeight: '500',
-                              fontSize: '14px',
-                            }}
-                          >
-                            Knee joint
-                          </Typography>
-                        }
-                      />
-                      <FormControlLabel
-                        sx={{
-                          textAlign: 'left',
-                          width: 'fit-content',
-                        }}
-                        control={
-                          <Checkbox
-                            // onChange={handleCheck}
-                            // checked={checked}
-                            classes={{ root: classes.checkBox, checked: classes.checked }}
-                          />
-                        }
-                        label={
-                          <Typography
-                            style={{
-                              textAlign: 'left',
-                              fontWeight: '500',
-                              fontSize: '14px',
-                            }}
-                          >
-                            Back and Neck Pain
-                          </Typography>
-                        }
-                      />
+                      {diaganosisFilter?.map((item) => (
+                        <FormControlLabel
+                          sx={{
+                            textAlign: 'left',
+                            width: 'fit-content',
+                          }}
+                          control={
+                            <Checkbox
+                              // onChange={handleCheck}
+                              // checked={checked}
+                              classes={{ root: classes.checkBox, checked: classes.checked }}
+                            />
+                          }
+                          label={
+                            <Typography
+                              style={{
+                                textAlign: 'left',
+                                fontWeight: '500',
+                                fontSize: '14px',
+                              }}
+                            >
+                              {item}
+                            </Typography>
+                          }
+                        />
+                      ))}
                     </div>
                   </div>
+                </RadioGroup>
+                <RadioGroup
+                  aria-label="sortFilter"
+                  name="sortBy"
+                  onChange={handleFilterChange}
+                  value={sorting.sortBy}
+                  sx={{
+                    '.MuiFormControlLabel-label': {
+                      fontSize: '14px',
+                    },
+                  }}
+                >
+                  <p className="filterHead">Sort By</p>
                   <FormControlLabel
-                    value="Injury type"
+                    value="diagnosis"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Injury type"
                   />
                   <FormControlLabel
-                    value="Outstanding Errors"
-                    control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
-                    label="Outstanding Errors"
-                  />
-                  <FormControlLabel
-                    value="Outstanding Errors"
+                    value="error"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Outstanding Errors"
                   />
@@ -344,14 +350,16 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                     value="% Accuracy of Recent Session"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="% Accuracy of Recent Session"
+                    disabled
                   />
                   <FormControlLabel
                     value="% Completion of most recent session"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="% Completion of most recent session"
+                    disabled
                   />
                   <FormControlLabel
-                    value="Reviewed by Clinician"
+                    value="reviewed"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Reviewed by Clinician"
                   />
@@ -359,6 +367,7 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                     value="Messages Unread"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Messages Unread"
+                    disabled
                   />
                 </RadioGroup>
               </div>
@@ -411,123 +420,157 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {patients?.map((row) => (
-              <>
-                <StyledTableRow
-                  key={row.name}
-                  className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
-                  onClick={() => {
-                    setPatient(row);
-                  }}
-                >
-                  <TableCell align="left"> {row.id} </TableCell>
-                  <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                    <AvatarComponent
-                      alt={`${row.first_name} ${row.last_name}`}
-                      className="header_avatar"
-                    />
-                    <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
-                  </TableCell>
-
-                  <TableCell align="center" className="table_cells">
-                    {row?.userData?.diagnosis}
-                  </TableCell>
-                  <TableCell align="center" className="table_cells">
-                    {row.exercises ?? '-'}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    className="table_cells"
-                    id="completion_cell"
+            {loading ? (
+              <TableRow>
+                <TableCell colSpan={6} align="center">
+                  <LinearProgress
                     sx={{
-                      padding: '3%',
+                      '& .MuiLinearProgress-barColorPrimary': {
+                        backgroundColor: '#f6fafb',
+                      },
+                      '& .MuiLinearProgress-barColorSecondary': {
+                        backgroundColor: '#f6fafb',
+                      },
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
+            ) : patients.length > 0 ? (
+              patients?.map((row) => (
+                <>
+                  <StyledTableRow
+                    key={row?.id}
+                    className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
+                    onClick={() => {
+                      setPatient(row);
                     }}
                   >
-                    {row.completion ?? '0%'}
-                  </TableCell>
+                    <TableCell align="left"> {row.id} </TableCell>
+                    <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
+                      <AvatarComponent
+                        alt={`${row.first_name} ${row.last_name}`}
+                        className="header_avatar"
+                      />
 
-                  <TableCell align="center">
-                    <span className="linearProgress">{`${row?.performance ?? 0}%`}</span>
-                    {row.performance <= 30 ? (
-                      <RedLinearProgress
-                        variant="determinate"
-                        value={row.performance}
-                        thickness="40"
-                      />
-                    ) : row.performance > 30 && row.performance <= 79 ? (
-                      <YellowLinearProgress
-                        variant="determinate"
-                        value={row.performance}
-                        thickness="40"
-                      />
-                    ) : (
-                      <GreenLinearProgress
-                        variant="determinate"
-                        value={row.performance ?? 0}
-                        thickness="40"
-                      />
-                    )}
-                  </TableCell>
-                  <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
-                    <div className="circularBarCellAllPatients" style={{ alignItems: 'center' }}>
-                      <CircularProgress
-                        variant="determinate"
-                        thickness="4.5"
-                        value={0}
-                        size={55}
-                        sx={{
-                          color: '#FABB18',
-                        }}
-                      />
-                      <div className="percentageValue" style={{ color: 'black' }}>
-                        <span className="circularProgress">00%</span>
-                      </div>
-                    </div>
-                  </TableCell>
-                </StyledTableRow>
-                {patient.id === row.id ? (
-                  <TableRow className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}>
-                    <TableCell width="2%" />
-                    <TableCell>
-                      <div className="notiCell">
-                        <Report /> <p className="reportTxt"> 2 Reports</p>
-                      </div>
+                      <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
                     </TableCell>
-                    <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
-                      <div className="notiCell">
-                        <Message />
-                        <p className="msgTxt"> 3 Messages</p>
-                      </div>
+
+                    <TableCell align="center" className="table_cells">
+                      {row?.userData?.diagnosis}
                     </TableCell>
-                    <TableCell>
-                      <div className="notiCell" />
+                    <TableCell align="center" className="table_cells">
+                      {row.exercises ?? '-'}
                     </TableCell>
-                    <TableCell />
-                    <TableCell />
                     <TableCell
-                      style={{
-                        display: 'flex',
-                        gap: '15px',
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                      align="center"
+                      className="table_cells"
+                      id="completion_cell"
+                      sx={{
+                        padding: '3%',
                       }}
                     >
-                      <Edit className="table_icons" onClick={() => setOpenEditPatient(true)} />
-                      <Profile
-                        className="table_icons"
-                        onClick={() => handlePatientProfile(row.id)}
-                      />
+                      {row.completion ?? '0%'}
                     </TableCell>
-                  </TableRow>
-                ) : (
-                  ''
-                )}
+
+                    <TableCell align="center">
+                      <span className="linearProgress">{`${row?.performance ?? 0}%`}</span>
+                      {row.performance <= 30 ? (
+                        <RedLinearProgress
+                          variant="determinate"
+                          value={row.performance}
+                          thickness="40"
+                        />
+                      ) : row.performance > 30 && row.performance <= 79 ? (
+                        <YellowLinearProgress
+                          variant="determinate"
+                          value={row.performance}
+                          thickness="40"
+                        />
+                      ) : (
+                        <GreenLinearProgress
+                          variant="determinate"
+                          value={row.performance ?? 0}
+                          thickness="40"
+                        />
+                      )}
+                    </TableCell>
+                    <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
+                      <div className="circularBarCell" style={{ alignItems: 'center' }}>
+                        <CircularProgress
+                          variant="determinate"
+                          thickness="4.5"
+                          value={100}
+                          size={55}
+                          sx={{
+                            color: '#FABB18',
+                          }}
+                        />
+                        <div className="percentageValue" style={{ color: 'black' }}>
+                        <span className="circularProgress">0%</span>
+                        </div>
+                      </div>
+                    </TableCell>
+                  </StyledTableRow>
+                  {patient?.id === row?.id ? (
+                    <TableRow className={patient?.id === row?.id ? 'clrTableRow' : 'tableRow'}>
+                      <TableCell width="2%" />
+                      <TableCell>
+                        <div className="notiCell">
+                          <Report /> <p className="reportTxt"> 2 Reports</p>
+                        </div>
+                      </TableCell>
+                      <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
+                        <div className="notiCell">
+                          <Message />
+                          <p className="msgTxt"> 3 Messages</p>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="notiCell" />
+                      </TableCell>
+                      <TableCell />
+                      <TableCell />
+                      <TableCell
+                        style={{
+                          display: 'flex',
+                          gap: '15px',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Edit
+                          className="table_icons"
+                          onClick={() => {
+                            setOpenEditPatient(true);
+                            setEditPatient(row);
+                          }}
+                        />
+                        <Profile
+                          className="table_icons"
+                          onClick={() => handlePatientProfile(row.id)}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    ''
+                  )}
+                </>
+              ))
+            ) : (
+              <>
+                <TableCell align="center" />
+                <TableCell align="left">No Patient found</TableCell>
               </>
-            ))}
+            )}
           </TableBody>
         </Table>
 
-        <EditPatient openEditPatient={openEditPatient} setOpenEditPatient={setOpenEditPatient} />
+        <EditPatient
+          openEditPatient={openEditPatient}
+          setOpenEditPatient={setOpenEditPatient}
+          patientDetails={editPatient}
+          getPatients={getPatients}
+        />
       </TableContainer>
     </div>
   );
