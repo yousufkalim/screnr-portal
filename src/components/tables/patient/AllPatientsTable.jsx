@@ -506,7 +506,7 @@ export default function PatientTable({
                           }}
                         />
                         <div className="percentageValue" style={{ color: 'black' }}>
-                        <span className="circularProgress">0%</span>
+                          <span className="circularProgress">0%</span>
                         </div>
                       </div>
                     </TableCell>

@@ -23,7 +23,7 @@ import moment from 'moment';
 import DatePicker from 'react-datepicker';
 
 // assets import
-import add from '../../../assets/icons/add.svg';
+// import add from '../../../assets/icons/add.svg';
 import edit from '../../../assets/icons/edit.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
 
@@ -573,8 +573,7 @@ export default function EditPatient({
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p className="sendInviteTxt">Send Invite</p>{' '}
-            <img src={add} className="spaceOnLeft" alt="" />
+            <p className="sendInviteTxt">Save Changes</p>{' '}
           </Button>
         </DialogActions>
       </BootstrapDialog>

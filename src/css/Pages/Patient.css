@@ -445,8 +445,9 @@
   width: max-content;
   margin-right: 40px;
   margin-bottom: 10px;
-  justify-content: center;
-  gap: 0.4rem;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  min-width: 14rem;
 }
 
 .topSec:hover .top_sec_avatar_disabled {
@@ -461,26 +462,28 @@
 
 .top_sec_avatar {
   background-color: #136773 !important;
-  height: 60px !important;
-  width: 60px !important;
+  height: 55px !important;
+  width: 55px !important;
 }
 
 .top_sec_avatar_disabled {
   background-color: #919b9b;
-  height: 60px !important;
-  width: 60px !important;
+  height: 55px !important;
+  width: 55px !important;
 }
 
 .topSecDocName {
   font-weight: 600;
   font-size: 16px;
   color: #136773;
+  text-transform: capitalize;
 }
 
 .topSecDocName_disabled {
   font-weight: 600;
   font-size: 16px;
   color: #919b9b;
+  text-transform: capitalize;
 }
 
 .topSecExpertise {
@@ -500,11 +503,6 @@
   font-size: 12px;
   color: #919b9b;
 }
-
-/* .topSecDetails {
-  margin-left: 15px;
-} */
-
 .exerciseItems li {
   list-style: none;
   color: #454238;
@@ -722,6 +720,7 @@
   font-weight: 500;
   font-size: 17px;
   color: #919b9b;
+  text-transform: capitalize;
 }
 
 .clinicianDiv p {
@@ -735,6 +734,7 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin-top: 20px;
+  min-width: 18rem;
 }
 .main_div_addPrescription {
   height: 100vh;
@@ -831,6 +831,42 @@
   }
   .prescriptionMenu {
     right: 5px;
+  }
+  .topSecDocName {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .topSecDocName_disabled {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .topSecExpertise {
+    font-size: 11px;
+  }
+  .topSecExpertise_disabled {
+    font-size: 11px;
+  }
+  .top_sec_avatar {
+    height: 50px;
+    width: 50px;
+  }
+  .top_sec_avatar_disabled {
+    height: 50px;
+    width: 50px;
+  }
+  .topSec {
+    min-width: 13rem;
+  }
+  .selectedClinicianDiv {
+    max-height: 4.3rem;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 15px;
+  }
+  .selectedClinicianDiv p {
+    font-size: 15px;
   }
 }
 @media only screen and (max-width: 1536px) {

@@ -54,6 +54,9 @@ export default function TableComponent({
           boxShadow: '0',
           width: '58vw',
           '@media (max-width: 1600px)': {
+            width: '56vw',
+          },
+          '@media (max-width: 1440px)': {
             width: '54vw',
           },
         }}

@@ -564,3 +564,9 @@
 #focus .react-tel-input .form-control {
   z-index: 1300 !important;
 }
+@media only screen and (max-width: 1536px) {
+  .clinicianPopupTxt {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
