@@ -40,14 +40,9 @@ export default function AddPatientPrescription() {
   });
 
   const getPatientDataById = async () => {
-    await api('get', `/admins/patients/${patientId}`)
-      .then((res) => {
-        setPatient(res?.data?.user);
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      });
+    await api('get', `/admins/patients/${patientId}`).then((res) => {
+      setPatient(res?.data?.user);
+    });
   };
   useEffect(() => {
     getPatientDataById();

@@ -124,12 +124,10 @@ export default function AddPrescription({
   prescription,
   exerciseInformation,
   handleAddToList,
-
   handlePrescriptionDetails,
   handleExerciseInformation,
   dateChange,
 }) {
-  console.log(exerciseInformation, 'exerciseInformation');
   const outlinedInputStyles = useOutlinedInputStyles();
   const [openAdjustRange, setOpenAdjustRange] = useState(false);
   const validatingListBtn =

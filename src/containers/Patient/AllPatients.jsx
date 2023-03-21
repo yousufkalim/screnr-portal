@@ -15,60 +15,58 @@ export default function Patient() {
   const [patients, setPatients] = useState([]);
   const [diaganosisFilter, setDiaganosisFilter] = useState([]);
   const [exerciseFilter, setExerciseFilter] = useState([]);
+  const [filter, setFilter] = useState({
+    filterType: 'all',
+    clinicNamefilter: '',
+    exerciseArray: [],
+    diagnosisArray: [],
+  });
+  const [sorting, setSorting] = useState({
+    sortBy: '',
+  });
 
-  const getPatients = async () => {
-    const { data } = await api('get', '/admins/patients/');
-    if (data) {
-      setPatients(data?.users);
-    }
-  };
+  const handleFilterAndSorting = async (item) => {
+    const page1 = item?.page ?? 1;
+    let apiUrl = `/admins/patients/filters?page=${page1}`;
+    const obj = {
+      filter_type: '',
+      filter_value: '',
+    };
 
-  const handleFilterAndSorting = async (sort, searchValue, page = 1) => {
-    let apiUrl = `/admins/patients?&page=${page}`;
-    if (sort) {
-      apiUrl += `&sort=${sort}`;
-    }
-    if (searchValue) {
-      apiUrl += `&search=${searchValue}`;
-    }
-
-    setLoading(true);
-    await api('get', apiUrl)
-      .then((res) => {
-        if (res?.data?.users) {
-          setPatients(res?.data?.users);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        // eslint-disable-next-line no-console
-        console.error(`handleFilterAndSorting --> ${err}`);
-      });
-  };
-
-  const handleFilters = async (filterType, clinicName, multiChecks, page = 1) => {
-    let apiUrl = `/admins/patients?&page=${page}`;
-    if (filterType === 'clinic') {
-      apiUrl += `&filter_type=${filterType}&filter_value=${clinicName}`;
-    }
-    if (filterType === 'all') {
-      apiUrl += `&filter_type=${filterType}&filter_value=""`;
+    switch (item?.filterType) {
+      case 'all':
+        obj.filter_type = item?.filterType;
+        obj.filter_value = '';
+        break;
+      case 'clinic':
+        obj.filter_type = item?.filterType;
+        obj.filter_value = item?.clinicName;
+        break;
+      case 'exercise':
+      case 'diagnosis':
+        obj.filter_type = item?.filterType;
+        obj.filter_value = item?.filterValueArray;
+        break;
+      default:
+        break;
     }
 
-    setLoading(true);
-    await api('get', apiUrl)
-      .then((res) => {
-        if (res?.data?.users) {
-          setPatients(res?.data?.users);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        // eslint-disable-next-line no-console
-        console.error(`handleFilterAndSorting --> ${err}`);
-      });
+    if (item?.sort) apiUrl += `&sort=${item?.sort}`;
+    if (item?.searchValue) apiUrl += `&search=${item?.searchValue}`;
+    try {
+      setLoading(true);
+      const res = await api('put', apiUrl, obj);
+      if (res?.data?.users) {
+        setPatients(res?.data?.users);
+      } else {
+        setPatients([]);
+      }
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      // eslint-disable-next-line no-console
+      console.error(`handleFilterAndSorting --> ${err}`);
+    }
   };
 
   const handleDynamicFilter = async () => {
@@ -80,7 +78,11 @@ export default function Patient() {
   };
 
   useEffect(() => {
-    getPatients();
+    handleFilterAndSorting();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     handleDynamicFilter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -90,12 +92,15 @@ export default function Patient() {
         <AllPatientTable
           loading={loading}
           patients={patients}
-          getPatients={getPatients}
-          handleFilters={handleFilters}
+          getPatients={handleFilterAndSorting}
           exerciseFilter={exerciseFilter}
           diaganosisFilter={diaganosisFilter}
           setOpenAddPatient={setOpenAddPatient}
           handleFilterAndSorting={handleFilterAndSorting}
+          filter={filter}
+          setFilter={setFilter}
+          sorting={sorting}
+          setSorting={setSorting}
         />
       </Grid>
 
@@ -109,8 +114,8 @@ export default function Patient() {
         />
       </div>
       <AddNewPatient
-        getPatients={getPatients}
         openAddPatient={openAddPatient}
+        getPatients={handleFilterAndSorting}
         setOpenAddPatient={setOpenAddPatient}
       />
     </Grid>

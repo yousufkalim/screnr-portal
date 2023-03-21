@@ -7,7 +7,6 @@ import RightSidebar from '../../../components/sidebar/patient/PatientListRightSi
 import ReportCard from '../../../components/cards/PatientReportCard';
 
 export default function Reports({ session }) {
-  console.log('🚀 ~ file: Reports.jsx:11 ~ Reports ~ session:', session);
   return (
     <Grid container>
       <Grid className="bgReport" xl={9} lg={9}>
