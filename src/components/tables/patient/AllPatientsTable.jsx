@@ -479,8 +479,8 @@ export default function PatientTable({ patients, setOpenAddPatient }) {
                           color: '#FABB18',
                         }}
                       />
-                      <div className="percentageValue">
-                        <span className="circularProgress">0%</span>
+                      <div className="percentageValue" style={{ color: 'black' }}>
+                        <span className="circularProgress">00%</span>
                       </div>
                     </div>
                   </TableCell>
