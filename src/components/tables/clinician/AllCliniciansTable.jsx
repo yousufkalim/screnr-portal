@@ -273,7 +273,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
                     sx={{ display: 'flex', paddingTop: '12%' }}
                     onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
-                    {row.profile_pic ? (
+                    {row?.profile_pic ? (
                       <div className="imgDivClinic">
                         <img
                           src={getMediaUrl(row.profile_pic)}
