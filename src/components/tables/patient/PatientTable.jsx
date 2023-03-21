@@ -120,8 +120,6 @@ export default function PatientTable({ patients, getPatients }) {
           },
         }}
       >
-        {/* <h1 className="clientTableHead">List of Patients</h1> */}
-
         <div className="iconAndHeading">
           <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
             <BackIcon />
@@ -186,7 +184,14 @@ export default function PatientTable({ patients, getPatients }) {
                   }}
                 >
                   <TableCell align="left"> {row?.userData?.mrn_id} </TableCell>
-                  <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
+                  <TableCell
+                    align="left"
+                    sx={{
+                      display: 'flex',
+                      paddingTop: '12%',
+                      marginBottom: '20px',
+                    }}
+                  >
                     {row.profile_pic ? (
                       <div className="imgDivClinic">
                         <img

@@ -451,6 +451,7 @@ export default function PatientTable({
                         alt={`${row.first_name} ${row.last_name}`}
                         className="header_avatar"
                       />
+
                       <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
                     </TableCell>
 
@@ -504,7 +505,9 @@ export default function PatientTable({
                             color: '#FABB18',
                           }}
                         />
+                        <div className="percentageValue" style={{ color: 'black' }}>
                         <span className="circularProgress">0%</span>
+                        </div>
                       </div>
                     </TableCell>
                   </StyledTableRow>
