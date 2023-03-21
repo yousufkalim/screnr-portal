@@ -660,6 +660,7 @@
   color: #454238;
   height: 70vh;
   overflow-y: scroll;
+  z-index: 99;
 }
 .selectedOpt {
   padding: 15px;

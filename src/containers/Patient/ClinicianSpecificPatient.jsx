@@ -26,6 +26,7 @@ import api from '../../api';
 export default function Patient() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [patients, setPatients] = useState({});
+  console.log('🚀 ~ file: ClinicianSpecificPatient.jsx:29 ~ Patient ~ patients:', patients);
   const [breadcrumb, setBreadcrumb] = useState('');
   const navigate = useNavigate();
   const { id } = useParams();
@@ -62,19 +63,19 @@ export default function Patient() {
   const cardsData = [
     {
       icon: GreenIcon,
-      amount: patients?.count?.completedExercise || 0,
+      amount: patients?.count?.completedSession?.count || 0,
       title: 'Completed Exercises',
       icon2: GreenStats,
     },
     {
       icon: RedIcon,
-      amount: patients?.count?.patientWithError || 0,
+      amount: patients?.count?.erroredActivePatient?.count || 0,
       title: 'Patients with Errors',
       icon2: RedStats,
     },
     {
       icon: YellowIcon,
-      amount: patients?.count?.uncheckedExercise || 0,
+      amount: patients?.count?.uncheckedSession?.count || 0,
       title: 'Unchecked Exercise',
       icon2: YellowStats,
     },
