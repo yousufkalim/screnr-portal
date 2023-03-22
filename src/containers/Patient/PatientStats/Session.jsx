@@ -117,7 +117,6 @@ export default function Session() {
                     <p className="excercises_names">Overall</p>
                     <RightArrow className="arrows" />
                   </div>
-
                   <MultiCircularProgress />
                   <div className="graphData">
                     <p className="excercise_percent">88</p> <p className="scoreText">Score</p>
@@ -143,7 +142,7 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="0"
+                    value={0}
                     size={60}
                     sx={{ color: '#FABB18' }}
                   />
@@ -158,30 +157,29 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="0"
+                    value={0}
                     size={60}
                     sx={{ color: '#FF5151' }}
                   />
                   <div className="graphData">
-                    <p className="excercise_percent">45</p> <p className="scoreText">Score</p>
+                    <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
                   </div>
                 </div>
               </div>
               <div className="score_Bars">
                 <div>
-                  {' '}
                   <p className="excercises_names">Spine Angle</p>{' '}
                 </div>
                 <div>
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="0"
+                    value={0}
                     size={60}
                     sx={{ color: '#25CC7C' }}
                   />
                   <div className="graphData">
-                    <p className="excercise_percent">55</p> <p className="scoreText">Score</p>
+                    <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
                   </div>
                 </div>
               </div>
@@ -191,12 +189,12 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="0"
+                    value={0}
                     size={60}
                     sx={{ color: '#FABB18' }}
                   />
                   <div className="graphData">
-                    <p className="excercise_percent">65</p> <p className="scoreText">Score</p>
+                    <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
                   </div>
                 </div>
               </div>
@@ -206,12 +204,12 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="0"
+                    value={0}
                     size={60}
                     sx={{ color: '#FF5151' }}
                   />
                   <div className="graphData">
-                    <p className="excercise_percent">25</p> <p className="scoreText">Score</p>
+                    <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
                   </div>
                 </div>
               </div>
@@ -221,12 +219,12 @@ export default function Session() {
                   <CircularProgress
                     variant="determinate"
                     thickness="8"
-                    value="0"
+                    value={0}
                     size={60}
                     sx={{ color: '#25CC7C' }}
                   />
                   <div className="graphData">
-                    <p className="excercise_percent">60</p> <p className="scoreText">Score</p>
+                    <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
                   </div>
                 </div>
               </div>

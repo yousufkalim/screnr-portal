@@ -1,11 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { React, useState } from 'react';
-
 // navigator
 import { NavLink } from 'react-router-dom';
-
 // mui imports
 import Collapse from '@mui/material/Collapse';
-
 // images import;
 import { ReactComponent as Msg } from '../../../assets/components/Sidebar/msg.svg';
 import { ReactComponent as Survey } from '../../../assets/components/Sidebar/painSurvey.svg';
@@ -24,12 +23,18 @@ export default function Sidebar({ session, patient, prescriptionId }) {
     setExpanded(!expanded);
     setToggleIcon(!toggleIcon);
   };
+
   return (
     <div className="left_side">
       <PatientSidebarSection patientData={patient} />
       <div className="activityLeft" role="presentation">
         <Exercise className={window.location.pathname.includes('session') ? 'iconActivity' : ''} />
-        <div className="dropdownIcons">
+        <div
+          className="dropdownIcons"
+          onClick={() => {
+            handleExpandClick();
+          }}
+        >
           <p
             className={
               window.location.pathname.includes('session') ? 'clickedActivity' : 'activityTxt'
@@ -39,7 +44,6 @@ export default function Sidebar({ session, patient, prescriptionId }) {
           </p>
           {expanded ? (
             <Dropdown
-              onClick={handleExpandClick}
               style={{
                 cursor: 'pointer',
               }}
@@ -47,7 +51,6 @@ export default function Sidebar({ session, patient, prescriptionId }) {
             />
           ) : (
             <Dropdown
-              onClick={handleExpandClick}
               style={{
                 transform: 'rotateX(180deg)',
                 cursor: 'pointer',
@@ -58,22 +61,17 @@ export default function Sidebar({ session, patient, prescriptionId }) {
         </div>
       </div>
       <div className="listDiv">
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout="auto">
           <div className="exerciseList">
             <Divider className={window.location.pathname.includes('session') ? 'divider' : ''} />
             <div>
               {session?.exercises?.map((row) => (
                 <NavLink
-                  key={row.name}
+                  key={row.id}
                   to={`/session/exercise/${row.id}`}
                   className={({ isActive }) => (isActive ? 'selectedItemExercise' : 'itemExercise')}
                 >
                   <div className="actionDiv" style={{ cursor: 'pointer' }}>
-                    {/* {row.action === 'motionCapture' ? (
-                      <MotionCapture className="actionListIcon" />
-                    ) : (
-                      <Program className="actionListIcon" />
-                    )} */}
                     {row.name}
                   </div>
                 </NavLink>

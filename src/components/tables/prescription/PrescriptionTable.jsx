@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 /* eslint-disable no-nested-ternary */
 import { useState, useEffect } from 'react';
 // mui imports
@@ -21,8 +22,11 @@ import MenuItem from '@mui/material/MenuItem';
 import { ReactComponent as Action } from '../../../assets/components/Table/dots.svg';
 import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
-import { ReactComponent as Check } from '../../../assets/components/Table/check.svg';
-import { ReactComponent as Uncheck } from '../../../assets/components/Table/uncheck.svg';
+import { ReactComponent as Complete } from '../../../assets/components/Table/check.svg';
+import { ReactComponent as Pending } from '../../../assets/components/Table/uncheck.svg';
+import { ReactComponent as Error } from '../../../assets/components/Table/Error.svg';
+import { ReactComponent as Inprogress } from '../../../assets/components/Table/inprogress.svg';
+import { ReactComponent as Incomplete } from '../../../assets/components/Table/Incomplete.svg';
 import { ReactComponent as Edit } from '../../../assets/icons/editIcon.svg';
 import { ReactComponent as Tick } from '../../../assets/components/Table/markTick.svg';
 // child import
@@ -31,20 +35,21 @@ import EditPrescription from '../../popups/prescription/EditPrescription';
 import request from '../../../api/index';
 
 export default function PrescriptionTable({ patientId, selectedClinicianId }) {
+  const navigate = useNavigate();
   const [prescriptionList, setPrescriptionList] = useState([]);
   const [isOpen, setIsOpen] = useState({});
   const [openPrescriptionMenu, setOpenPrescriptionMenu] = useState(false);
   const [openEditPrescription, setOpenEditPrescription] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedPrescription, setSelectedPrescription] = useState({});
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event, item) => {
+    console.log('<-clicked');
+    setOpenPrescriptionMenu(!openPrescriptionMenu);
     setSelectedPrescription(item);
     setAnchorEl(event.currentTarget);
-    setOpenPrescriptionMenu(!openPrescriptionMenu);
   };
   const handleClose = () => {
     setSelectedPrescription({});
@@ -55,11 +60,11 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     setOpenEditPrescription(true);
     setOpenPrescriptionMenu(false);
   };
-  const handleCloseCompleted = () => {
+  const handleCloseCompleted = async (prescriptionId) => {
+    await request('put', `/admins/prescriptions/complete/${prescriptionId}`);
     setAnchorEl(null);
     setOpenPrescriptionMenu(false);
   };
-
   const handlePrescriptionList = async () => {
     setLoading(true);
     await request(
@@ -76,15 +81,11 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
         console.error(`handlePrescriptionList---> ${err}`);
       });
   };
-
-  const navigate = useNavigate();
-
   const handleSearchLogoClick = (sessionId, prescriptionId) => {
     navigate(
       `/staff/clinicAdmin/Clinician/Patient/Prescription/Session/${sessionId}/${prescriptionId}`,
     );
   };
-
   const toggleOpen = (category) => {
     setIsOpen({
       ...isOpen,
@@ -139,6 +140,14 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patientId, selectedClinicianId]);
 
+  const sessionStatus = {
+    pending: <Pending />,
+    'in-progress': <Inprogress />,
+    completed: <Complete />,
+    errored: <Error />,
+    unchecked: <Incomplete />,
+  };
+
   return (
     <div id="prescriptionTable">
       <h3 className="prescription_header">Prescription List</h3>
@@ -187,12 +196,9 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                   >
                     <div className="exerciseItems">
                       <p>Exercise</p>
-
-                      {mainRow?.sessions?.map((session) =>
-                        session?.exercises?.map((item) => {
-                          return <li key={item?.name}>{item?.name}</li>;
-                        }),
-                      )}
+                      {mainRow?.sessions[0].exercises?.map((item) => {
+                        return <li key={item?.name}>{item?.name}</li>;
+                      })}
                     </div>
                   </TableCell>
                   <TableCell
@@ -221,7 +227,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                           className="header_avatar"
                         />
                         <div className="prescription_cell">
-                          Dr {mainRow?.clinician?.first_name} {mainRow?.clinician?.last_name}
+                          {mainRow?.clinician?.first_name} {mainRow?.clinician?.last_name}
                           <br />
                           <span className="presSubtxt">{mainRow?.clinician?.role}</span>
                         </div>
@@ -257,7 +263,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                           PaperProps={{
                             style: {
                               backgroundColor: '#F6FAFB',
-                              // boxShadow: 'none',
                               boxShadow: '1',
                               border: '1px ',
                               borderColor: 'black',
@@ -279,9 +284,16 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                                   'brightness(0) saturate(100%) invert(66%) sepia(69%) saturate(1538%) hue-rotate(344deg) brightness(107%) contrast(97%)',
                               }}
                             />
-                            <p className="actionMenus"> Edit Prescription</p>
+                            <p className="actionMenus">Edit Prescription</p>
                           </MenuItem>
-                          <MenuItem onClick={handleCloseCompleted}>
+                          <MenuItem
+                            onClick={() => {
+                              handleCloseCompleted(mainRow?.id);
+                            }}
+                            disabled={
+                              !mainRow?.sessions?.some((item) => item.status === 'completed')
+                            }
+                          >
                             <Tick className="pIcon" />
                             <p className="actionMenus">Mark as Completed</p>
                           </MenuItem>
@@ -352,7 +364,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {mainRow?.sessions?.map((row, index2) => (
+                    {mainRow?.sessions?.map((row) => (
                       <StyledTableRow
                         className="tableRow"
                         key={row?.id}
@@ -362,62 +374,58 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         <TableCell align="left" className="table_cells">
                           <div
                             className={
-                              index2 < 5
-                                ? 'scoreRed'
-                                : index2 <= 5 && index2 < 8
-                                ? 'scoreYellow'
-                                : 'scoreGreen'
+                              0 < 5 ? 'scoreRed' : 0 <= 5 && 0 < 8 ? 'scoreYellow' : 'scoreGreen'
                             }
                           >
-                            {`${index2}/10`}
+                            {`${0}/10`}
                           </div>
                         </TableCell>
                         <TableCell align="center" className="table_cells">
-                          <span className="linearPresProgress">{`${index2}%`}</span>
-                          {index2 <= 30 ? (
+                          <span className="linearPresProgress">{`${0}%`}</span>
+                          {0 <= 30 ? (
                             <RedLinearProgress
                               variant="determinate"
-                              value={index2}
+                              value={0}
                               thickness="40"
                               sx={{ width: '80%' }}
                             />
-                          ) : index2 > 30 && index2 <= 79 ? (
+                          ) : 0 > 30 && 0 <= 79 ? (
                             <YellowLinearProgress
                               variant="determinate"
-                              value={index2}
+                              value={0}
                               thickness="40"
                               sx={{ width: '80%' }}
                             />
                           ) : (
                             <GreenLinearProgress
                               variant="determinate"
-                              value={index2}
+                              value={0}
                               thickness="40"
                               sx={{ width: '80%' }}
                             />
                           )}
                         </TableCell>
                         <TableCell align="center" className="table_cells">
-                          {row.survey ? 'Done' : 'Not Done'}
+                          {row?.survey ? 'Done' : 'Not Done'}
                         </TableCell>
                         <TableCell align="center" className="table_cells">
                           <Message />
                         </TableCell>
                         <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
                           <div>
-                            {index2 <= 30 ? (
+                            {0 <= 30 ? (
                               <CircularProgress
                                 variant="determinate"
                                 thickness="4.5"
-                                value={index2}
+                                value={0}
                                 size={45}
                                 sx={{ color: '#FF5151' }}
                               />
-                            ) : index2 > 30 && index2 <= 79 ? (
+                            ) : 0 > 30 && 0 <= 79 ? (
                               <CircularProgress
                                 variant="determinate"
                                 thickness="4.5"
-                                value={index2}
+                                value={0}
                                 size={45}
                                 sx={{ color: '#FABB18' }}
                               />
@@ -425,16 +433,29 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                               <CircularProgress
                                 variant="determinate"
                                 thickness="4.5"
-                                value={index2}
+                                value={0}
                                 size={45}
                                 sx={{ color: '#25CC7C' }}
                               />
                             )}
-                            <span className="circularProgressPrescription">{`${index2}%`}</span>
+                            <span className="circularProgressPrescription">{`${0}%`}</span>
                           </div>
                         </TableCell>
                         <TableCell align="center">
-                          {row.status === 'pending' ? <Check /> : <Uncheck />}
+                          {sessionStatus[row.status]}
+                          {/* {row.status === 'pending' ? (
+                            <Pending />
+                          ) : row.status === 'in-progress' ? (
+                            <Inprogress />
+                          ) : row.status === 'completed' ? (
+                            <Complete />
+                          ) : row.status === 'errored' ? (
+                            <Error />
+                          ) : row.status === 'unchecked' ? (
+                            <Incomplete />
+                          ) : (
+                            <Pending />
+                          )} */}
                         </TableCell>
                       </StyledTableRow>
                     ))}
