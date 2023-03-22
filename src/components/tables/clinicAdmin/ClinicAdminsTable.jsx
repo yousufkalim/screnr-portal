@@ -87,7 +87,7 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
                 Clinic Name
               </TableCell>
               <TableCell className="table_head" align="center">
-                Clinicans
+                Clinicians
               </TableCell>
               <TableCell className="table_head" align="center">
                 Patients

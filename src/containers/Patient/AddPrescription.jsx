@@ -172,7 +172,7 @@ export default function AddPatientPrescription() {
             Exercise &gt;
           </div>
           <div className="main_div_addPrescription">
-            <div className="bgAddPrescription" style={{ marginLeft: '25px', marginRight: '25px' }}>
+            <div className="bgAddPrescription">
               <AddPrescription
                 patientId={patientId}
                 prescription={prescription}

@@ -76,7 +76,7 @@ export default function Patient() {
     {
       icon: YellowIcon,
       amount: patients?.count?.uncheckedSession?.count || 0,
-      title: 'Unchecked Exercise',
+      title: 'Unchecked Exercises',
       icon2: YellowStats,
     },
   ];

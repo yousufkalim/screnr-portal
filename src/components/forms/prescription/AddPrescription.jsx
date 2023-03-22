@@ -54,7 +54,7 @@ const weeks = [
 const frequency = [
   {
     value: 1,
-    label: '1 Times',
+    label: '1 Time',
   },
   {
     value: 2,
@@ -115,8 +115,8 @@ const bodyParts = [
     label: 'Legs',
   },
   {
-    value: 'Sholders',
-    label: 'Sholders',
+    value: 'shoulders',
+    label: 'shoulders',
   },
 ];
 

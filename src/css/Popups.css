@@ -88,6 +88,7 @@
   font-size: 15px;
   width: 100%;
   outline: none;
+  color: #919b9b;
 }
 
 .closeBtn {
@@ -568,5 +569,8 @@
   .clinicianPopupTxt {
     font-size: 20px;
     font-weight: 500;
+  }
+  .jointImg {
+    max-height: 25rem;
   }
 }

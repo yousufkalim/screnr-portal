@@ -48,6 +48,8 @@
 .prescriptionBtns2 {
   display: flex;
   justify-content: flex-end;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .thresholdsBtn {
@@ -607,6 +609,7 @@
   right: 90px;
   bottom: 10px;
   z-index: 1300 !important;
+  padding-bottom: 50px;
 }
 
 .calenderIcon {
@@ -661,7 +664,7 @@
   z-index: 99;
 }
 .selectedOpt {
-  padding: 15px;
+  padding: 14px;
 }
 .actionMenus {
   font-family: 'poppins';
@@ -784,17 +787,19 @@
   .addPrescriptionBtn {
     position: absolute !important;
     right: 30px;
-    bottom: -19%;
+    bottom: -42%;
     z-index: 1300 !important;
   }
 
   .generatePrescriptionBtn {
     font-size: 12px !important;
     padding: 13px 20px !important;
+    position: absolute;
+    top: 2500px;
   }
 
   #prescriptionTableHead {
-    font-size: 13px !important;
+    font-size: 12px !important;
   }
 
   .listBtn,
@@ -872,5 +877,22 @@
 @media only screen and (max-width: 1536px) {
   .main_div_addPrescription {
     height: 60rem;
+  }
+  .prescriptionHead {
+    font-size: 17px;
+  }
+  .PrescriptionTableHead {
+    font-size: 16px;
+  }
+  .selectedOpt {
+    font-size: 13px;
+  }
+  .selctedPresChoice {
+    /* background-color: #11a283; */
+    min-width: 11rem;
+    margin-right: 2rem;
+  }
+  .presChoice {
+    min-width: 11rem;
   }
 }
