@@ -124,7 +124,6 @@ export default function PatientTable({ patients, getPatients }) {
           <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
             <BackIcon />
           </div>
-          {/* <h1 className="clientTableHead">List of Clinician</h1> */}
           <h1 className="clientTableHead">List of Patients</h1>
         </div>
 
@@ -145,7 +144,10 @@ export default function PatientTable({ patients, getPatients }) {
               <TableCell
                 align="left"
                 className="table_head"
-                sx={{ width: '20%', '@media (max-width: 1600px)': { width: '34%' } }}
+                sx={{
+                  width: '20%',
+                  '@media (max-width: 1600px)': { width: '34%' },
+                }}
               >
                 Name
               </TableCell>
@@ -188,8 +190,9 @@ export default function PatientTable({ patients, getPatients }) {
                     align="left"
                     sx={{
                       display: 'flex',
-                      paddingTop: '12%',
-                      marginBottom: '20px',
+                      minHeight: '80%',
+                      paddingTop: '23px',
+                      '@media (max-width: 1600px)': { paddingBottom: '32px', paddingTop: '0px' },
                     }}
                   >
                     {row.profile_pic ? (
@@ -256,12 +259,14 @@ export default function PatientTable({ patients, getPatients }) {
                     align="center"
                     sx={{
                       transform: 'rotate(270deg)',
-                      padding: '40px',
+                      padding: '22px',
+                      paddingRight: '20px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      width: '140px',
-                      marginLeft: '50px',
+                      width: '100px',
+                      marginLeft: '40px',
+                      '@media (max-width: 1500px)': { marginTop: '22px' },
                     }}
                   >
                     <div className="circularBarCell">

@@ -453,15 +453,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
           </TableContainer>
         ))
       ) : (
-        <h1
-          style={{
-            textAlign: 'center',
-            fontWeight: '300',
-            color: '#919B9B',
-          }}
-        >
-          No Prescription From This Clinician
-        </h1>
+        <h1 className="NoPrescriptionTxt">No Prescription From This Clinician</h1>
       )}
     </div>
   );

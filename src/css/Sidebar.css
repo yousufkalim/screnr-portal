@@ -67,7 +67,6 @@
   margin: 0 auto;
   color: #ff5151;
   display: flex;
-  justify-content: space-between;
 }
 
 .patient_exp_detail {
@@ -238,7 +237,7 @@
 
 @media only screen and (max-width: 1899px) {
   .spaceRight {
-    margin-right: 4px;
+    margin-right: 14px;
   }
 
   .user_exp_detail {
@@ -251,7 +250,7 @@
     width: 80% !important;
   }
 }
-@media only screen and (max-width: 1263px) {
+@media only screen and (max-width: 1300px) {
   .user_exp_detail {
     width: 85% !important;
   }
@@ -261,8 +260,16 @@
     width: 80% !important;
   }
 }
+@media screen and (min-width: 1536px) and (max-width: 1600px) {
+  .user_exp_detail {
+    width: 85% !important;
+  }
+}
 @media only screen and (max-width: 1383px) {
   .activityTxt {
     width: 90% !important;
+  }
+  .user_exp_detail {
+    width: 80% !important;
   }
 }

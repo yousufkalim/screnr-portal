@@ -449,9 +449,15 @@ export default function EditPatient({
                 <MenuItem value="">
                   <span style={{ color: '#949494' }}>Select Diagnosis</span>
                 </MenuItem>
-                <MenuItem value="Cancer"> Cancer</MenuItem>
-                <MenuItem value="Typhoid"> Typhoid</MenuItem>
-                <MenuItem value="Backpain"> Backpain</MenuItem>
+                <MenuItem value="Cancer" style={{ color: '#949494' }}>
+                  Cancer
+                </MenuItem>
+                <MenuItem value="Typhoid" style={{ color: '#949494' }}>
+                  Typhoid
+                </MenuItem>
+                <MenuItem value="Backpain" style={{ color: '#949494' }}>
+                  Backpain
+                </MenuItem>
               </Select>
             </FormControl>
             <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
