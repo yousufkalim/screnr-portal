@@ -1,10 +1,8 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState, useEffect } from 'react';
-
 // mui imports
 import { Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
-
 // child components import
 import Sidebar from '../../../components/sidebar/patient/ExerciseSidebar';
 // import MessageBox from '../components/MessageBox';
@@ -14,9 +12,9 @@ import api from '../../../api/index';
 
 export default function Index() {
   const params = useParams();
-  const { sessionId, prescriptionId } = params;
   const [session, setSession] = useState({});
   const [patient, setPatient] = useState({});
+  const { sessionId, prescriptionId } = params;
   const [prescription, setPrescription] = useState({});
 
   const handleGetSessionById = async () => {
@@ -35,6 +33,7 @@ export default function Index() {
     handleGetSessionById();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>

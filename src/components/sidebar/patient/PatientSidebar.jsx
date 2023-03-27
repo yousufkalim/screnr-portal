@@ -54,7 +54,7 @@ export default function Sidebar({
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate('/patients/:id/messages');
+          // navigate('/patients/:id/messages');
           setActivityClicked(true);
         }}
       >

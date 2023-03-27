@@ -26,7 +26,6 @@ export default function SurveyPain({ session, prescription, handleFeedBack, surv
           <div className="surveyHeaderName">{prescription?.name}</div>
         </div>
       </div>
-
       <div className="questionaire">
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           {session?.survey?.map((item, index) => {
