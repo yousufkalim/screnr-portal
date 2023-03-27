@@ -262,7 +262,6 @@
   font-weight: 500;
   font-size: 14px;
   border-radius: 10px;
-  /* padding: 10px; */
   width: 45%;
 }
 
@@ -467,14 +466,14 @@
 
 .top_sec_avatar {
   background-color: #136773 !important;
-  height: 55px !important;
-  width: 55px !important;
+  height: 52px !important;
+  width: 52px !important;
 }
 
 .top_sec_avatar_disabled {
   background-color: #919b9b;
-  height: 55px !important;
-  width: 55px !important;
+  height: 52px !important;
+  width: 52px !important;
 }
 
 .topSecDocName {
@@ -698,7 +697,6 @@
   justify-content: center;
   gap: 0.3rem;
   width: max-content;
-  background-color: #f4f4f4;
   border-radius: 1000px;
   cursor: pointer;
   padding: 0.5rem;
@@ -710,8 +708,9 @@
   justify-content: center;
   gap: 0.3rem;
   width: max-content;
-  border: 1px solid #136773;
-  background-color: rgba(19, 103, 115, 0.1);
+  border: 1px solid #fba622;
+  background-color: rgba(251, 166, 34, 0.05);
+  color: white;
   border-radius: 1000px;
   cursor: pointer;
   padding: 0.5rem;
@@ -721,14 +720,16 @@
 .selectedClinicianDiv p {
   font-weight: 500;
   font-size: 17px;
-  color: #919b9b;
+  color: #136773;
   text-transform: capitalize;
+  margin-right: 6px;
 }
 
 .clinicianDiv p {
   font-weight: 500;
   font-size: 17px;
   color: #919b9b;
+  text-transform: capitalize;
 }
 
 .clinicianParentDiv {

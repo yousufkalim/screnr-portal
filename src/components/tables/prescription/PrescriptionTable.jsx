@@ -184,7 +184,12 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     align="center"
                     size="small"
                     className="prescription_head"
-                    sx={{ paddingTop: '20px' }}
+                    sx={{
+                      paddingTop: '20px',
+                      minWidth: '8rem',
+                      maxWidth: '8rem',
+                      textTransform: 'capitalize',
+                    }}
                   >
                     {mainRow?.name}
                   </TableCell>
@@ -192,7 +197,12 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     align="left"
                     size="small"
                     className="table_header"
-                    sx={{ paddingTop: '20px' }}
+                    sx={{
+                      paddingTop: '20px',
+                      minWidth: '8rem',
+                      maxWidth: '8rem',
+                      textAlign: 'center',
+                    }}
                   >
                     <div className="exerciseItems">
                       <p>Exercise</p>
