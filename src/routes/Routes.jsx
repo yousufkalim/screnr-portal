@@ -114,6 +114,11 @@ const superadminRoutes = [
         element: <Index />,
         protected: true,
       },
+      {
+        path: '/exerciseDetails/:exerciseId',
+        element: <Index />,
+        protected: true,
+      },
     ],
   },
 ];

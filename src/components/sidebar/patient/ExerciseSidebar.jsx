@@ -1,18 +1,13 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { React, useState } from 'react';
-// navigator
 import { NavLink } from 'react-router-dom';
-// mui imports
 import Collapse from '@mui/material/Collapse';
-// images import;
 import { ReactComponent as Msg } from '../../../assets/components/Sidebar/msg.svg';
 import { ReactComponent as Survey } from '../../../assets/components/Sidebar/painSurvey.svg';
 import { ReactComponent as Exercise } from '../../../assets/components/Sidebar/exercise.svg';
 import { ReactComponent as Dropdown } from '../../../assets/components/Sidebar/dropdownEx.svg';
 import { ReactComponent as Divider } from '../../../assets/components/Sidebar/divider.svg';
-// import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
-// import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 import PatientSidebarSection from './PatientSidebarSection';
 
 export default function Sidebar({ session, patient, prescriptionId }) {
@@ -68,7 +63,7 @@ export default function Sidebar({ session, patient, prescriptionId }) {
               {session?.exercises?.map((row) => (
                 <NavLink
                   key={row.id}
-                  to={`/session/exercise/${row.id}`}
+                  to={`/patients/${session?.id}/exercise/exerciseDetails/${row.id}`}
                   className={({ isActive }) => (isActive ? 'selectedItemExercise' : 'itemExercise')}
                 >
                   <div className="actionDiv" style={{ cursor: 'pointer' }}>
@@ -80,7 +75,6 @@ export default function Sidebar({ session, patient, prescriptionId }) {
           </div>
         </Collapse>
       </div>
-
       <NavLink
         to={`/patients/${session?.id}/exercise/painSurvey/${prescriptionId}`}
         className={({ isActive }) => (isActive ? 'selectedExActivity' : 'activityEx')}
@@ -88,7 +82,6 @@ export default function Sidebar({ session, patient, prescriptionId }) {
         <Survey className="exIcon" />
         <p className="exTxt">Pain Survey</p>
       </NavLink>
-
       <NavLink
         to={`/patients/${session?.id}/exercise/reports`}
         className={({ isActive }) => (isActive ? 'selectedExActivity' : 'activityEx')}
