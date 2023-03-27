@@ -38,6 +38,12 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     margin: 'auto',
   },
 }));
+const MyBackdrop = styled(BootstrapDialog)({
+  '& .MuiBackdrop-root': {
+    backgroundColor: 'rgba(0, 0, 0, 15%)',
+    backdropFilter: 'blur(5px)',
+  },
+});
 
 const weeks = [
   {
@@ -133,9 +139,15 @@ export default function EditPrescription({
         aria-labelledby="customized-dialog-title"
         open={openEditPrescription}
         setOpen={setOpenEditPrescription}
+        BackdropComponent={MyBackdrop}
         maxWidth="md"
         PaperProps={{
-          style: { borderRadius: 20, background: '#FFFFFF', width: '40%' },
+          style: {
+            borderRadius: 20,
+            background: '#FFFFFF',
+            width: '40%',
+            boxShadow: '0',
+          },
         }}
       >
         <ClearIcon className="loginClearIcon" onClick={handleClose} />
