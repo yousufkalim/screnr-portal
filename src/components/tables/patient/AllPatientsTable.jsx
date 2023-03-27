@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-nested-ternary */
 import { React, useState, useRef, useEffect } from 'react';
 
@@ -84,24 +85,16 @@ export default function PatientTable({
   loading,
   exerciseFilter,
   diaganosisFilter,
-  handleFilters,
+  filter,
+  setFilter,
+  sorting,
+  setSorting,
 }) {
   const navigate = useNavigate();
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
   const [editPatient, setEditPatient] = useState('');
-  // const [filter, setFilter] = useState('');
   const [search, setSearch] = useState('');
-  const [sorting, setSorting] = useState({
-    sortBy: '',
-  });
-  const [filter, setFilter] = useState({
-    filterType: 'all',
-    clinicNamefilter: '',
-    filterValue: [],
-  });
-  console.log('🚀 ~ file: AllPatientsTable.jsx:102 ~ filter:', filter);
-  // const [clinicNameSearch , setClinicNameSearch] = useState('')
   const [openFilter, setOpenFilter] = useState(false);
 
   const isSafari =
@@ -113,12 +106,58 @@ export default function PatientTable({
   const filterRef = useRef(null);
   const classes = useStyles();
 
-  // const handleFilterChange = (event) => {
-  //   setFilter(event.target.value);
-  // };
+  const handleCheck = async (event, value) => {
+    if (filter.filterType === 'exercise') {
+      if (event.target.checked) {
+        setFilter((prevFilter) => ({
+          ...prevFilter,
+          exerciseArray: [...prevFilter.exerciseArray, value],
+        }));
+        const arr = [...filter.exerciseArray, value];
+
+        await handleFilterAndSorting({
+          filterType: 'exercise',
+          filterValueArray: [...arr],
+        });
+      } else {
+        setFilter((prevFilter) => ({
+          ...prevFilter,
+          exerciseArray: prevFilter.exerciseArray.filter((item) => item !== value),
+        }));
+        const arr = filter.exerciseArray.filter((item) => item !== value);
+
+        await handleFilterAndSorting({
+          filterType: 'exercise',
+          filterValueArray: [...arr],
+        });
+      }
+    } else if (filter.filterType === 'diagnosis') {
+      if (event.target.checked) {
+        setFilter((prevFilter) => ({
+          ...prevFilter,
+          diagnosisArray: [...prevFilter.diagnosisArray, value],
+        }));
+      } else {
+        setFilter((prevFilter) => ({
+          ...prevFilter,
+          diagnosisArray: prevFilter.diagnosisArray.filter((item) => item !== value),
+        }));
+      }
+      await handleFilterAndSorting({
+        filterType: 'diagnosis',
+        filterValueArray: filter.diagnosisArray,
+      });
+    } else {
+      event.preventDefault();
+      event.target.checked = false;
+    }
+  };
 
   const handleFilter = async (event) => {
     setFilter({ ...filter, [event.target.name]: event.target.value });
+    if (event.target.value === 'all') {
+      await handleFilterAndSorting({ filterType: event.target.value });
+    }
   };
 
   const handlePatientProfile = (patientid) => {
@@ -126,17 +165,17 @@ export default function PatientTable({
   };
   const handleSearch = async (event) => {
     setSearch(event.target.value);
-    await handleFilterAndSorting(event.target.value);
+    await handleFilterAndSorting({ searchValue: event.target.value });
   };
 
   const handleFilterChange = async (event) => {
     setSorting({ ...sorting, [event.target.name]: event.target.value });
-    await handleFilterAndSorting(event.target.value);
+    await handleFilterAndSorting({ sort: event.target.value });
   };
 
   const handleClinicNamefilter = async (event) => {
     setFilter({ ...filter, clinicNamefilter: event.target.value });
-    await handleFilters(filter.filterType, event.target.value);
+    await handleFilterAndSorting({ filterType: 'clinic', clinicName: event.target.value });
   };
 
   useEffect(() => {
@@ -157,6 +196,12 @@ export default function PatientTable({
       document.removeEventListener('mousedown', handleCloseFilter);
     };
   }, [openFilter]);
+
+  const handleAllClear = async () => {
+    setFilter({ ...filter, filterType: 'all' });
+    setSorting({ ...sorting, sortBy: '' });
+    await handleFilterAndSorting({ filterType: 'all' });
+  };
 
   return (
     <div className="allClinicAdminTable" id="clinicianTable">
@@ -187,15 +232,7 @@ export default function PatientTable({
               <div className="patientFilterPoper" ref={click}>
                 <div className="filterHead">
                   <p>Filters</p>
-                  <p
-                    role="presentation"
-                    className="pointer"
-                    onClick={() => {
-                      setSorting({
-                        sortBy: '',
-                      });
-                    }}
-                  >
+                  <p role="presentation" className="pointer" onClick={handleAllClear}>
                     Clear All
                   </p>
                 </div>
@@ -251,7 +288,7 @@ export default function PatientTable({
                   />
                   <div className="subFilters">
                     <FormControlLabel
-                      value="Exercise"
+                      value="exercise"
                       control={
                         <Radio classes={{ root: classes.radio, checked: classes.checked }} />
                       }
@@ -260,15 +297,20 @@ export default function PatientTable({
                     <div className="innerSubFilters">
                       {exerciseFilter?.map((item) => (
                         <FormControlLabel
+                          key={item}
                           sx={{
                             textAlign: 'left',
                             width: 'fit-content',
                           }}
                           control={
                             <Checkbox
-                              // onChange={handleCheck}
-                              // checked={checked}
                               classes={{ root: classes.checkBox, checked: classes.checked }}
+                              disabled={filter.filterType !== 'exercise'}
+                              onChange={(event) => handleCheck(event, item)}
+                              checked={
+                                filter.exerciseArray.includes(item) &&
+                                filter.filterType === 'exercise'
+                              }
                             />
                           }
                           label={
@@ -288,7 +330,7 @@ export default function PatientTable({
                   </div>
                   <div className="subFilters">
                     <FormControlLabel
-                      value="Diagnosis"
+                      value="diagnosis"
                       control={
                         <Radio classes={{ root: classes.radio, checked: classes.checked }} />
                       }
@@ -297,15 +339,20 @@ export default function PatientTable({
                     <div className="innerSubFilters">
                       {diaganosisFilter?.map((item) => (
                         <FormControlLabel
+                          key={item}
                           sx={{
                             textAlign: 'left',
                             width: 'fit-content',
                           }}
                           control={
                             <Checkbox
-                              // onChange={handleCheck}
-                              // checked={checked}
                               classes={{ root: classes.checkBox, checked: classes.checked }}
+                              disabled={filter.filterType !== 'diagnosis'}
+                              onChange={(event) => handleCheck(event, item)}
+                              checked={
+                                filter.diagnosisArray.includes(item) &&
+                                filter.filterType === 'diagnosis'
+                              }
                             />
                           }
                           label={
@@ -435,7 +482,7 @@ export default function PatientTable({
                   />
                 </TableCell>
               </TableRow>
-            ) : patients.length > 0 ? (
+            ) : patients?.length > 0 ? (
               patients?.map((row) => (
                 <>
                   <StyledTableRow
@@ -495,7 +542,7 @@ export default function PatientTable({
                       )}
                     </TableCell>
                     <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
-                      <div className="circularBarCell" style={{ alignItems: 'center' }}>
+                      <div className="circularBarCellAllPatients" style={{ alignItems: 'center' }}>
                         <CircularProgress
                           variant="determinate"
                           thickness="4.5"

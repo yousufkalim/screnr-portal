@@ -26,7 +26,6 @@ import api from '../../api';
 export default function Patient() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [patients, setPatients] = useState({});
-  console.log('🚀 ~ file: ClinicianSpecificPatient.jsx:29 ~ Patient ~ patients:', patients);
   const [breadcrumb, setBreadcrumb] = useState('');
   const navigate = useNavigate();
   const { id } = useParams();
