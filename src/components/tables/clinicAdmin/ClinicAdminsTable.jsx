@@ -181,7 +181,9 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
             ) : (
               <TableRow>
                 <TableCell align="left"> </TableCell>
-                <TableCell align="left">No Data Found</TableCell>
+                <TableCell align="left">
+                  <p className="noDataTxt">No Data Found</p>
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
@@ -197,6 +199,7 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
         )}
       </TableContainer>
       <TablePagination
+        sx={{ color: '#919B9B' }}
         component="div"
         rowsPerPageOptions={[]}
         count={clinicAdmins?.total?.count || 0}

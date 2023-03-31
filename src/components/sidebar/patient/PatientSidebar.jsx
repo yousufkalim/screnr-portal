@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,27 @@ export default function Sidebar({
   setOpenEditpatientModal,
 }) {
   const [activityClicked, setActivityClicked] = useState(false);
+  const [activityClickedTwo, setActivityClickedTwo] = useState(false);
+  const [activityClickedThree, setActivityClickedThree] = useState(false);
+
   const navigate = useNavigate();
+  useEffect(() => {
+    // Set the activityClicked state based on the current URL path
+    const path = window.location.pathname;
+    if (path === `/patients/${patientId}/addPrescription/${selectedClinician}`) {
+      setActivityClicked(true);
+      setActivityClickedTwo(false);
+      setActivityClickedThree(false);
+    } else if (path === '/patients/:id/messages') {
+      setActivityClickedTwo(true);
+      setActivityClicked(false);
+      setActivityClickedThree(false);
+    } else if (path === '/patients/:id/activity') {
+      setActivityClickedThree(true);
+      setActivityClicked(false);
+      setActivityClickedTwo(false);
+    }
+  }, [patientId, selectedClinician]);
 
   return (
     <div className="left_side">
@@ -29,10 +49,14 @@ export default function Sidebar({
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          navigate(`/patients/${patientId}/addPrescription/${selectedClinician}`);
           setActivityClicked(true);
+          setActivityClickedTwo(false);
+          setActivityClickedThree(false);
+          navigate(`/patients/${patientId}/addPrescription/${selectedClinician}`);
         }}
       >
+        {console.log('check', activityClicked)}
+
         <Completed
           className={
             activityClicked || window.location.pathname === '/patients/:id/addPrescription'
@@ -55,19 +79,21 @@ export default function Sidebar({
         role="presentation"
         onClick={() => {
           // navigate('/patients/:id/messages');
-          setActivityClicked(true);
+          setActivityClickedTwo(true);
+          setActivityClicked(false);
+          setActivityClickedThree(false);
         }}
       >
         <Msg
           className={
-            activityClicked || window.location.pathname === '/patients/:id/messages'
+            activityClickedTwo || window.location.pathname === '/patients/:id/messages'
               ? 'iconActivity'
               : ''
           }
         />
         <p
           className={
-            activityClicked || window.location.pathname === '/patients/:id/messages'
+            activityClickedTwo || window.location.pathname === '/patients/:id/messages'
               ? 'clickedActivity'
               : 'activityTxt'
           }
@@ -80,19 +106,21 @@ export default function Sidebar({
         role="presentation"
         onClick={() => {
           // navigate('/patients/:id/activity');
-          setActivityClicked(true);
+          setActivityClickedThree(true);
+          setActivityClicked(false);
+          setActivityClickedTwo(false);
         }}
       >
         <Activity
           className={
-            activityClicked || window.location.pathname === '/patients/:id/activity'
+            activityClickedThree || window.location.pathname === '/patients/:id/activity'
               ? 'iconActivity'
               : ''
           }
         />
         <p
           className={
-            activityClicked || window.location.pathname === '/patients/:id/activity'
+            activityClickedThree || window.location.pathname === '/patients/:id/activity'
               ? 'clickedActivity'
               : 'activityTxt'
           }

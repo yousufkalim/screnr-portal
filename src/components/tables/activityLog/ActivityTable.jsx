@@ -164,6 +164,7 @@ export default function ActivityTable() {
         </Table>
       </TableContainer>
       <TablePagination
+        sx={{ color: '#919B9B' }}
         component="div"
         rowsPerPageOptions={[]}
         count={activity.length}
