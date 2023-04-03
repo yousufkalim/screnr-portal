@@ -49,6 +49,7 @@ export default function ReportCard({
         setReply('');
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.error(err);
       });
   };

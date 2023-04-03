@@ -55,8 +55,6 @@ export default function Sidebar({
           navigate(`/patients/${patientId}/addPrescription/${selectedClinician}`);
         }}
       >
-        {console.log('check', activityClicked)}
-
         <Completed
           className={
             activityClicked || window.location.pathname === '/patients/:id/addPrescription'

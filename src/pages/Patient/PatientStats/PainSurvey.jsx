@@ -34,6 +34,7 @@ export default function PainSurvey({ session, prescription }) {
         toast.success('Survey added successfully');
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.error('handlePainSurveySubmit', err);
       });
   };

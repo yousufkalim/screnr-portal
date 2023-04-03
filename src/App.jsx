@@ -12,16 +12,19 @@ import Header from './components/Header';
 import './css/index.css';
 import { UpdateStore } from './StoreContext';
 import { baseUrl } from './config';
+// import Index from './routes/index';
 
 // Component
 function App() {
+  // const [user, setUser] = useState('');
   const updateStore = UpdateStore();
   const { pathname } = useLocation();
 
   const isAuthenticated = async () => {
     const { data } = await axios.get(`${baseUrl}/auth`, { withCredentials: true });
     updateStore({ loggedIn: true, user: data.user });
-    return true;
+    console.log(data.user);
+    return { authenticated: true, role: data.user?.role };
   };
 
   useEffect(() => {
@@ -30,6 +33,8 @@ function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
+  // const filteredRoutes = superadminRoutes.filter((item) => item?.roles?.includes(user?.role));
 
   return (
     <div className="App">
@@ -40,6 +45,7 @@ function App() {
       {pathname !== '/' && pathname !== '/login' ? <Header /> : ''}
       {/* Superadmin routes alongwith header */}
       <Router routes={superadminRoutes} isAuthenticated={isAuthenticated} />
+      {/* {user && <Index user={user} />} */}
     </div>
   );
 }

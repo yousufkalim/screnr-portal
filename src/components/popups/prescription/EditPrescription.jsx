@@ -117,6 +117,7 @@ export default function EditPrescription({
         handlePrescriptionList();
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.error(`handleEditPrescriptions --> ${err}`);
       });
     handleClose();

@@ -46,7 +46,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
   const open = Boolean(anchorEl);
 
   const handleClick = (event, item) => {
-    console.log('<-clicked');
     setOpenPrescriptionMenu(!openPrescriptionMenu);
     setSelectedPrescription(item);
     setAnchorEl(event.currentTarget);
