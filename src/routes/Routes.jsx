@@ -1,5 +1,5 @@
 // Routes
-import Login from '../containers/Login';
+import Login from '../unAuth/Login';
 import Dashboard from '../containers/Dashboard';
 import ClinicAdmin from '../containers/ClinicAdmin/StaffSpecificClinicAdmin';
 import AllClinicAdmins from '../containers/ClinicAdmin/AllClinicAdmins';
@@ -111,6 +111,11 @@ const superadminRoutes = [
       },
       {
         path: '/painSurvey/:prescriptionId',
+        element: <Index />,
+        protected: true,
+      },
+      {
+        path: '/exerciseDetails/:exerciseId',
         element: <Index />,
         protected: true,
       },

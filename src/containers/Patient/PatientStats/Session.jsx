@@ -1,7 +1,5 @@
 /* eslint-disable import/extensions */
 import { React, useEffect, useState } from 'react';
-// import MessageBox from
-
 import { useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -17,7 +15,6 @@ import { ReactComponent as RedDot } from '../../../assets/icons/sessionGraphColo
 import { ReactComponent as GreenDot } from '../../../assets/icons/sessionGraphColorDot2.svg';
 import { ReactComponent as YellowDot } from '../../../assets/icons/sessionGraphColorDot3.svg';
 import api from '../../../api/index.js';
-// mui imports
 
 export default function Session() {
   const params = useParams();
