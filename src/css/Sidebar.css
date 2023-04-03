@@ -275,4 +275,7 @@
     width: 80% !important;
     padding-left: 2%;
   }
+  .clickedActivity {
+    margin-left: 6%;
+  }
 }
