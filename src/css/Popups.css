@@ -88,6 +88,7 @@
   font-size: 15px;
   width: 100%;
   outline: none;
+  color: #919b9b;
 }
 
 .closeBtn {
@@ -173,12 +174,6 @@
   font-weight: 500 !important;
 }
 
-/* .selectGender:hover {
-  border: 1px solid #136773 !important;
-  background-color: #136773 !important;
-  color: white !important;
-} */
-
 .genderTxt {
   color: #8c8c8c;
   font-family: 'Helvetica Neue';
@@ -191,7 +186,6 @@
   font-weight: 600;
   margin-top: 40px;
 }
-
 .forgetPaswdTxt {
   font-size: 20px;
   font-weight: 600;
@@ -265,6 +259,13 @@
   font-weight: 600;
   color: #fba622;
   line-height: 2;
+  padding-bottom: 10px;
+}
+.clinicianDiv:hover .top_sec_avatar_disabled {
+  background-color: #136773;
+}
+.clinicianDiv:hover .topSecDocName_disabled {
+  color: #136773;
 }
 
 .clinicianSubTxt {
@@ -505,7 +506,6 @@
 
 .react-tel-input {
   width: fit-content !important;
-  /* border: 1px solid #e1e1e1 !important; */
   border-radius: 20px !important;
 }
 
@@ -563,4 +563,13 @@
 }
 #focus .react-tel-input .form-control {
   z-index: 1300 !important;
+}
+@media only screen and (max-width: 1536px) {
+  .clinicianPopupTxt {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .jointImg {
+    max-height: 25rem;
+  }
 }

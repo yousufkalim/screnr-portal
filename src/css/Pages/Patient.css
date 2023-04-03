@@ -48,6 +48,8 @@
 .prescriptionBtns2 {
   display: flex;
   justify-content: flex-end;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .thresholdsBtn {
@@ -195,14 +197,17 @@
 .percentageValue {
   position: absolute;
   right: 46%;
-  bottom: 42%;
+  bottom: 52%;
 }
 
 .circularProgress {
   transform: rotate(90deg) !important;
   position: absolute;
-  bottom: 39%;
-  right: 53%;
+  bottom: 0%;
+  right: 0%;
+  top: 100%;
+  bottom: 50px;
+  left: 0px;
   font-size: 12px;
   font-weight: 400;
   text-align: center;
@@ -257,7 +262,6 @@
   font-weight: 500;
   font-size: 14px;
   border-radius: 10px;
-  /* padding: 10px; */
   width: 45%;
 }
 
@@ -445,8 +449,9 @@
   width: max-content;
   margin-right: 40px;
   margin-bottom: 10px;
-  justify-content: center;
-  gap: 0.4rem;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  min-width: 14rem;
 }
 
 .topSec:hover .top_sec_avatar_disabled {
@@ -461,26 +466,28 @@
 
 .top_sec_avatar {
   background-color: #136773 !important;
-  height: 60px !important;
-  width: 60px !important;
+  height: 52px !important;
+  width: 52px !important;
 }
 
 .top_sec_avatar_disabled {
   background-color: #919b9b;
-  height: 60px !important;
-  width: 60px !important;
+  height: 52px !important;
+  width: 52px !important;
 }
 
 .topSecDocName {
   font-weight: 600;
   font-size: 16px;
   color: #136773;
+  text-transform: capitalize;
 }
 
 .topSecDocName_disabled {
   font-weight: 600;
   font-size: 16px;
   color: #919b9b;
+  text-transform: capitalize;
 }
 
 .topSecExpertise {
@@ -500,11 +507,6 @@
   font-size: 12px;
   color: #919b9b;
 }
-
-/* .topSecDetails {
-  margin-left: 15px;
-} */
-
 .exerciseItems li {
   list-style: none;
   color: #454238;
@@ -609,6 +611,7 @@
   right: 90px;
   bottom: 10px;
   z-index: 1300 !important;
+  padding-bottom: 50px;
 }
 
 .calenderIcon {
@@ -634,7 +637,6 @@
   color: #919b9b;
   font-weight: 500;
   font-size: 14px;
-  /* padding: 10px; */
 }
 
 .iconClicked {
@@ -646,7 +648,6 @@
 .choiceIcon {
   margin-right: 8px;
 }
-
 .patientFilterPoper {
   position: absolute;
   background-color: white;
@@ -663,7 +664,7 @@
   z-index: 99;
 }
 .selectedOpt {
-  padding: 15px;
+  padding: 14px;
 }
 .actionMenus {
   font-family: 'poppins';
@@ -696,12 +697,10 @@
   justify-content: center;
   gap: 0.3rem;
   width: max-content;
-  background-color: #f4f4f4;
   border-radius: 1000px;
   cursor: pointer;
   padding: 0.5rem;
   margin-bottom: 13px;
-  /* width: 20%; */
 }
 .selectedClinicianDiv {
   display: flex;
@@ -709,25 +708,28 @@
   justify-content: center;
   gap: 0.3rem;
   width: max-content;
-  border: 1px solid #136773;
-  background-color: rgba(19, 103, 115, 0.1);
+  border: 1px solid #fba622;
+  background-color: rgba(251, 166, 34, 0.05);
+  color: white;
   border-radius: 1000px;
   cursor: pointer;
   padding: 0.5rem;
   margin-bottom: 13px;
-  /* width: 20%; */
 }
 
 .selectedClinicianDiv p {
   font-weight: 500;
   font-size: 17px;
-  color: #919b9b;
+  color: #136773;
+  text-transform: capitalize;
+  margin-right: 6px;
 }
 
 .clinicianDiv p {
   font-weight: 500;
   font-size: 17px;
   color: #919b9b;
+  text-transform: capitalize;
 }
 
 .clinicianParentDiv {
@@ -735,6 +737,7 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin-top: 20px;
+  min-width: 18rem;
 }
 .main_div_addPrescription {
   height: 100vh;
@@ -743,6 +746,12 @@
 .clinicianDP {
   margin-right: 10px;
   width: 25%;
+}
+.NoPrescriptionTxt {
+  text-align: center;
+  font-weight: 300;
+  color: #919b9b;
+  font-size: 32px;
 }
 
 @media only screen and (max-width: 1810px) {
@@ -784,17 +793,19 @@
   .addPrescriptionBtn {
     position: absolute !important;
     right: 30px;
-    bottom: -19%;
+    bottom: -42%;
     z-index: 1300 !important;
   }
 
   .generatePrescriptionBtn {
     font-size: 12px !important;
     padding: 13px 20px !important;
+    position: absolute;
+    top: 2500px;
   }
 
   #prescriptionTableHead {
-    font-size: 13px !important;
+    font-size: 12px !important;
   }
 
   .listBtn,
@@ -832,9 +843,64 @@
   .prescriptionMenu {
     right: 5px;
   }
+  .topSecDocName {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .topSecDocName_disabled {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .topSecExpertise {
+    font-size: 11px;
+  }
+  .topSecExpertise_disabled {
+    font-size: 11px;
+  }
+  .top_sec_avatar {
+    height: 50px;
+    width: 50px;
+  }
+  .top_sec_avatar_disabled {
+    height: 50px;
+    width: 50px;
+  }
+  .topSec {
+    min-width: 13rem;
+  }
+  .selectedClinicianDiv {
+    max-height: 4.3rem;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 15px;
+  }
+  .selectedClinicianDiv p {
+    font-size: 15px;
+  }
+  .NoPrescriptionTxt {
+    font-size: 26px;
+  }
 }
 @media only screen and (max-width: 1536px) {
   .main_div_addPrescription {
     height: 60rem;
+  }
+  .prescriptionHead {
+    font-size: 17px;
+  }
+  .PrescriptionTableHead {
+    font-size: 16px;
+  }
+  .selectedOpt {
+    font-size: 13px;
+  }
+  .selctedPresChoice {
+    min-width: 11rem;
+    margin-right: 2rem;
+  }
+  .presChoice {
+    min-width: 11rem;
   }
 }

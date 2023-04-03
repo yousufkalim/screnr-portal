@@ -23,7 +23,7 @@ import moment from 'moment';
 import DatePicker from 'react-datepicker';
 
 // assets import
-import add from '../../../assets/icons/add.svg';
+// import add from '../../../assets/icons/add.svg';
 import edit from '../../../assets/icons/edit.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
 
@@ -449,9 +449,15 @@ export default function EditPatient({
                 <MenuItem value="">
                   <span style={{ color: '#949494' }}>Select Diagnosis</span>
                 </MenuItem>
-                <MenuItem value="Cancer"> Cancer</MenuItem>
-                <MenuItem value="Typhoid"> Typhoid</MenuItem>
-                <MenuItem value="Backpain"> Backpain</MenuItem>
+                <MenuItem value="Cancer" style={{ color: '#949494' }}>
+                  Cancer
+                </MenuItem>
+                <MenuItem value="Typhoid" style={{ color: '#949494' }}>
+                  Typhoid
+                </MenuItem>
+                <MenuItem value="Backpain" style={{ color: '#949494' }}>
+                  Backpain
+                </MenuItem>
               </Select>
             </FormControl>
             <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
@@ -573,8 +579,7 @@ export default function EditPatient({
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p className="sendInviteTxt">Send Invite</p>{' '}
-            <img src={add} className="spaceOnLeft" alt="" />
+            <p className="sendInviteTxt">Save Changes</p>{' '}
           </Button>
         </DialogActions>
       </BootstrapDialog>

@@ -43,7 +43,7 @@
 }
 
 .dashboard_table_div {
-  width: 55%;
+  width: 62%;
   margin-top: 2rem;
   height: 60vh;
 }
@@ -73,6 +73,7 @@
 
 .table_icons {
   cursor: pointer;
+  z-index: 5;
 }
 
 .dashboard_div_2 {
@@ -146,6 +147,11 @@
   height: 40px;
   border-radius: 100px;
 }
+@media only screen and (max-width: 1600px) {
+  .dashboard_table_div {
+    width: 59%;
+  }
+}
 
 @media only screen and (max-width: 1440px) {
   .name_cell_dasdboard,
@@ -154,6 +160,7 @@
   }
   .dashboard_table_div {
     height: 53vh;
+    width: 58%;
   }
   .chart_main_div {
     width: 38%;

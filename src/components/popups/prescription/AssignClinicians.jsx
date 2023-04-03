@@ -80,23 +80,26 @@ export default function AssignClinicians({
           <Typography gutterBottom>
             <h1 className="clinicianPopupTxt">Assign more Clinicians</h1>
             <div className="clinicianParentDiv">
-              {allClinicians?.map((clinician) => (
-                <div
-                  className={
-                    selectedClinicians.some((c) => c.id === clinician.id)
-                      ? 'selectedClinicianDiv'
-                      : 'clinicianDiv'
-                  }
-                  role="presentation"
-                  onClick={() => selectClinician(clinician)}
-                >
-                  <AvatarComponent
-                    alt={`${clinician?.first_name} ${clinician?.last_name}`}
-                    className="top_sec_avatar"
-                  />
-                  <p>{`${clinician?.first_name} ${clinician?.last_name}`}</p>
-                </div>
-              ))}
+              {allClinicians?.map((clinician) => {
+                const isSelected = selectedClinicians.some((c) => c.id === clinician.id);
+                const avatarClassName = isSelected ? 'top_sec_avatar' : 'top_sec_avatar_disabled';
+                const pTagClassName = isSelected ? 'topSecDocName' : 'topSecDocName_disabled';
+                return (
+                  <div
+                    className={isSelected ? 'selectedClinicianDiv' : 'clinicianDiv'}
+                    role="presentation"
+                    onClick={() => selectClinician(clinician)}
+                  >
+                    <AvatarComponent
+                      alt={`${clinician?.first_name} ${clinician?.last_name}`}
+                      className={avatarClassName}
+                    />
+                    <p className={pTagClassName}>
+                      {`${clinician?.first_name} ${clinician?.last_name}`}{' '}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </Typography>
         </DialogContent>

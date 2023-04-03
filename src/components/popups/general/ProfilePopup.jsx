@@ -84,7 +84,7 @@ export default function ProfilePopup({
           style: {
             borderRadius: 20,
             background: 'white',
-            width: 800,
+            width: 750,
           },
         }}
       >

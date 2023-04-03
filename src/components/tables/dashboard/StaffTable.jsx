@@ -54,6 +54,9 @@ export default function TableComponent({
           boxShadow: '0',
           width: '58vw',
           '@media (max-width: 1600px)': {
+            width: '56vw',
+          },
+          '@media (max-width: 1440px)': {
             width: '54vw',
           },
         }}
@@ -182,7 +185,9 @@ export default function TableComponent({
             ) : (
               <TableRow>
                 <TableCell align="left"> </TableCell>
-                <TableCell align="left">No Data Found</TableCell>
+                <TableCell align="left">
+                  <p className="noDataTxt">No Data Found</p>
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
@@ -208,6 +213,7 @@ export default function TableComponent({
         </Table>
       </TableContainer>
       <TablePagination
+        sx={{ color: '#919B9B' }}
         component="div"
         rowsPerPageOptions={[]}
         count={staffMembers.total?.count || 0}
