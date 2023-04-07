@@ -51,6 +51,10 @@
   padding: 2% 3% 0px 3%;
 }
 
+#patientsByClinicianTable {
+  padding: 2% 0px 2% 0px;
+}
+
 .breadCrumb {
   padding: 1.3rem 0 0rem 3rem;
   color: #919b9b;

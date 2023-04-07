@@ -116,7 +116,9 @@
 .iconAndHeading {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+  padding-left: 1%;
+  padding-right: 2%;
 }
 .clientTableHead {
   font-weight: 600;

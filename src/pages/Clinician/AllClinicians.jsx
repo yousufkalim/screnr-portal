@@ -1,16 +1,11 @@
 import { React, useState, useEffect, useRef } from 'react';
-
-// mui imports
 import { Grid } from '@mui/material';
-
-// child components import
 import AllCliniciansTable from '../../components/tables/clinician/AllCliniciansTable';
 import api from '../../api';
 
 export default function AllClinicians() {
   const [clinicians, setClinicians] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
   const abortControllerRef = useRef(null);
 
   useEffect(() => {

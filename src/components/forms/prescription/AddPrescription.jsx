@@ -1,6 +1,4 @@
 import { useState } from 'react';
-
-// mui imports
 import Grid from '@mui/material/Grid';
 import { FormControl, TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
@@ -9,17 +7,12 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
-
-// datepicker
 import DatePicker from 'react-datepicker';
-// assets import
 import dropdown from '../../../assets/icons/dropdownOrange.svg';
 import { ReactComponent as ExpiryDate } from '../../../assets/icons/expiryDate.svg';
 import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
 import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 import { ReactComponent as List } from '../../../assets/icons/list.svg';
-
-// child imports
 import AddPrescriptionTable from '../../tables/prescription/AddPrescriptionTable';
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import AdjustRange from '../../popups/prescription/AdjustMotionRange';

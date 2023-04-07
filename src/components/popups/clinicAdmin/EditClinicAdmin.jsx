@@ -1,6 +1,4 @@
 import { React, useState, useEffect } from 'react';
-
-// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -11,24 +9,12 @@ import { FormControl, TextField } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
-
-// phone format
 import PhoneInput from 'react-phone-input-2';
-
-// moment
 import moment from 'moment';
-
-// react-toastify import
 import { toast } from 'react-toastify';
-
-// react-datepicker import
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
-// assets import
 import edit from '../../../assets/icons/edit.svg';
-
-// child import
 import AvatarComponent from '../../Avatar';
 import { getMediaUrl } from '../../../config';
 import api from '../../../api';
@@ -73,7 +59,6 @@ export default function EditClinicAdmin({
     });
   };
 
-  // handle gender selection
   const handleGenderSelection = (name) => {
     setClinicAdmin({ ...clinicAdmin, gender: name });
   };
@@ -143,12 +128,10 @@ export default function EditClinicAdmin({
       delete clinicAdminCopy.profile_pic;
     }
 
-    // append properties from clinicAdminCopy in formdata
     Object.keys(clinicAdminCopy).forEach((key) => {
       formData.append(key, clinicAdminCopy[key]);
     });
 
-    // append properties from userData in formdata
     Object.keys(userData).forEach((key) => {
       formData.append(`userData[${key}]`, userData[key]);
     });
@@ -160,7 +143,6 @@ export default function EditClinicAdmin({
       return toast.error('Please enter expiry date');
     }
 
-    // sending this data to api
     const { data } = await api('put', `/admins/clinics/${clinicAdminDetails.id}`, formData);
     if (data) {
       toast.success('Clinic Admin updated successfully');

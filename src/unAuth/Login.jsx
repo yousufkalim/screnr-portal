@@ -1,24 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-// mui imports
 import { Grid, IconButton, InputLabel } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from '@mui/styles';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
-
-// assets import
 import Logo from '../assets/icons/Logo.svg';
 import Vector from '../assets/images/login/loginPgImg.svg';
-
-// child component import
-
-import { Store, UpdateStore } from '../StoreContext';
 import api from '../api';
+import { Store, UpdateStore } from '../StoreContext';
 import ForgetPasswordPopup from '../components/popups/general/ForgetPasswordPopup';
 
 const useOutlinedInputStyles = makeStyles({
@@ -45,24 +38,32 @@ const useOutlinedInputStyles = makeStyles({
   },
 });
 
+const loggedInUser = {
+  admin: '/dashboard',
+  staff: '/dashboard',
+  clinic: '/dashboard',
+  clinician: '/clinician/dasboard',
+  patient: '/dashboard',
+};
+
 export default function Login() {
   const navigate = useNavigate();
+  const { loggedIn, user } = Store();
   const updateStore = UpdateStore();
-  const { loggedIn } = Store();
-  const [openForgetPasswordPopup, setOpenForgetPasswordPopup] = useState(false);
-  const [user, setUser] = useState({});
+  const [userData, setUserData] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
+  const [openForgetPasswordPopup, setOpenForgetPasswordPopup] = useState(false);
 
   useEffect(() => {
     if (loggedIn) {
-      navigate('/dashboard');
+      navigate(`${loggedInUser[user.role]}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
 
   const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
   const handleClickShowPassword = () => {
@@ -71,10 +72,10 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await api('post', '/auth/login', user);
-    updateStore({ admin: data.admin, loggedIn: true });
-    window.location = '/dashboard';
-    setUser({ email: '', password: '' });
+    const { data } = await api('post', '/auth/login', userData);
+    updateStore({ user: data.user, loggedIn: true });
+    window.location = loggedInUser[data.user.role];
+    setUserData({ email: '', password: '' });
   };
 
   return (
@@ -115,7 +116,7 @@ export default function Login() {
                       },
                     },
                   }}
-                  value={user.email}
+                  value={userData.email}
                   onChange={handleChange}
                   id="outlined-email"
                   classes={outlinedInputStyles}
@@ -160,7 +161,7 @@ export default function Login() {
                       handleSubmit(event);
                     }
                   }}
-                  value={user.password}
+                  value={userData.password}
                   type={showPassword ? 'text' : 'password'}
                   InputProps={{
                     endAdornment: (

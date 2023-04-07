@@ -1,20 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-
-// mui imports
 import { TextField } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
-
-// emoji picker
 import EmojiPicker from 'emoji-picker-react';
-
-// assets
 import { ReactComponent as Send } from '../assets/icons/sendMsg.svg';
 import { ReactComponent as Emoji } from '../assets/icons/emoji.svg';
 import { ReactComponent as Dummy } from '../assets/images/dummyprsn.svg';
 import { ReactComponent as Dots } from '../assets/icons/threedots.svg';
 import { ReactComponent as Back } from '../assets/icons/backBtn.svg';
-
-// child imports
 import AvatarComponent from './Avatar';
 import useOutlinedInputStyles from '../utils/TextMessageInput';
 

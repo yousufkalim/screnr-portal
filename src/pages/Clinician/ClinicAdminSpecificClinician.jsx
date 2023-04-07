@@ -1,10 +1,6 @@
 import { React, useState, useEffect } from 'react';
-// mui imports
 import { Grid } from '@mui/material';
-// import useParams
 import { useNavigate, useParams } from 'react-router-dom';
-
-// assets import
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as Circle } from '../../assets/components/CardWithIcon/yellowIcon.svg';
 import { ReactComponent as TotalClinicians } from '../../assets/components/CardWithIcon/patientsIcon.svg';
@@ -12,7 +8,6 @@ import { ReactComponent as Clinician } from '../../assets/components/CardWithIco
 import { ReactComponent as Patients2 } from '../../assets/components/CardWithIcon/patients.svg';
 import { ReactComponent as GreenCircle } from '../../assets/components/CardWithIcon/greenCircle.svg';
 import { ReactComponent as BlueCircle } from '../../assets/components/CardWithIcon/blueCircle.svg';
-// child components import
 import Sidebar from '../../components/sidebar/GenericLeftSidebar';
 import CardWithIcon from '../../components/cards/CardWithIcon';
 import ClinicianTable from '../../components/tables/clinician/ClinicianTable';
@@ -33,10 +28,7 @@ export default function ClinicAdmin() {
   const getClinicians = async (page = 1) => {
     setIsLoading(true);
     try {
-      const { data } = await api(
-        'get',
-        `/admins/clinicians/getCliniciansByClinicId/${id}?page=${page}`,
-      );
+      const { data } = await api('get', `/clinicians/getCliniciansByClinicId/${id}?page=${page}`);
       if (data) {
         setClinicians(data);
       }

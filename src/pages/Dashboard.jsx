@@ -1,10 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { React, useState, useEffect } from 'react';
-// components import
 import CardWithIcon from '../components/cards/CardWithIcon';
 import Chart from '../components/charts/dashboard/DasboardChart';
-// images import
 import { ReactComponent as Patients } from '../assets/components/CardWithIcon/patientsIcon.svg';
 import { ReactComponent as Clinic } from '../assets/components/CardWithIcon/clinicIcon.svg';
 import { ReactComponent as Clinician } from '../assets/components/CardWithIcon/clinician.svg';
@@ -14,8 +12,6 @@ import { ReactComponent as RedCircle } from '../assets/components/CardWithIcon/r
 import { ReactComponent as GreenCircle } from '../assets/components/CardWithIcon/greenCircle.svg';
 import { ReactComponent as BlueCircle } from '../assets/components/CardWithIcon/blueCircle.svg';
 import addBtn from '../assets/icons/addBtn.svg';
-
-// child import
 import AddStaffMember from '../components/popups/dashboard/AddStaffMember';
 import TableComponent from '../components/tables/dashboard/StaffTable';
 import api from '../api';

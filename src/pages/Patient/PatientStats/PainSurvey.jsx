@@ -1,9 +1,7 @@
 import { React, useEffect, useState } from 'react';
-// mui imports
 import { Grid } from '@mui/material';
 import { toast } from 'react-toastify';
 import api from '../../../api/index';
-// child imports
 import SurveyPain from '../../../components/PainSurvey';
 
 export default function PainSurvey({ session, prescription }) {
@@ -29,7 +27,7 @@ export default function PainSurvey({ session, prescription }) {
   }, [session]);
 
   const handlePainSurveySubmit = async () => {
-    await api('put', `/admins/sessions/${session.id}`, { survey })
+    await api('put', `/clinicians/sessions/getSession/${session.id}`, { survey })
       .then(() => {
         toast.success('Survey added successfully');
       })

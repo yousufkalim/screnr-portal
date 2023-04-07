@@ -2,27 +2,20 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-nested-ternary */
 import { React, useState, useEffect } from 'react';
-
-import { useNavigate } from 'react-router-dom';
-
-// moment
+// import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-
-// images import
 import { ReactComponent as Phone } from '../../assets/images/staffScreen/phone.svg';
 import { ReactComponent as Email } from '../../assets/images/staffScreen/email.svg';
 import { ReactComponent as Expiry } from '../../assets/images/staffScreen/expiryDate.svg';
 import { ReactComponent as Activity } from '../../assets/components/TimeCard/activity.svg';
 import edit from '../../assets/icons/sidebarEdit.svg';
-
-// child imports
 import AvatarComponent from '../Avatar';
 import api from '../../api/index';
 import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
 export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, open }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
 
@@ -113,7 +106,6 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
         <div className="user_exp_detail">
           <span className="detail_expiry">
             <Expiry className="spaceOnRight" />
-
             <p className="spaceRight">Expiry Date</p>
           </span>
 
@@ -129,7 +121,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
             className="activityLeft"
             role="presentation"
             onClick={() => {
-              navigate('/clinicians/:id/activity');
+              // navigate('/clinicians/:id/activity');
               setActivityClicked(true);
             }}
           >

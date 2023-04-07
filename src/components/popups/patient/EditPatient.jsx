@@ -34,6 +34,7 @@ import CustomPhoneInput from '../general/CustomPhoneInput';
 import { getMediaUrl } from '../../../config';
 import ReactSelect from '../../ReactSelect';
 import api from '../../../api/index';
+import { Store } from '../../../StoreContext';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -58,6 +59,7 @@ export default function EditPatient({
   getPatients,
   patientDetails,
 }) {
+  const { user } = Store();
   const [checked, setChecked] = useState(!!patientDetails?.expiry_date);
   const [clinicians, setClinicians] = useState([]);
 
@@ -155,7 +157,7 @@ export default function EditPatient({
   };
 
   const getClinicians = async () => {
-    await api('get', `/admins/clinicians/getCliniciansByClinicId/${clinicId}`)
+    await api('get', `/clinicians/getCliniciansByClinicId/${clinicId}`)
       .then((res) => {
         if (res.data) {
           setClinicians(
@@ -226,10 +228,10 @@ export default function EditPatient({
     }
 
     // sending this data to api
-    const { data } = await api('put', `/admins/patients/${patientDetails.id}`, formData);
+    const { data } = await api('put', `/clinicians/editPatient/${patientDetails.id}`, formData);
     if (data) {
-      getPatients();
       handleClose();
+      getPatients();
       return toast.success('Patient updated successfully');
     }
   };
@@ -237,13 +239,13 @@ export default function EditPatient({
   return (
     <div>
       <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={openEditPatient}
-        setOpen={setOpenEditPatient}
         fullWidth
         width="40.8%"
         minWidth="90%"
+        onClose={handleClose}
+        open={openEditPatient}
+        setOpen={setOpenEditPatient}
+        aria-labelledby="customized-dialog-title"
         PaperProps={{
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
@@ -257,12 +259,12 @@ export default function EditPatient({
               <div className="imgDivPopup">
                 <label htmlFor="patient_EditProfile_Pic">
                   <input
-                    name="profile_pic"
                     type="file"
-                    id="patient_EditProfile_Pic"
-                    accept=".png, .jpg, .jpeg"
-                    onChange={handleSelectedFile}
+                    name="profile_pic"
                     className="noDisplay"
+                    accept=".png, .jpg, .jpeg"
+                    id="patient_EditProfile_Pic"
+                    onChange={handleSelectedFile}
                   />
                   {patient.profile_pic ? (
                     <img
@@ -287,8 +289,10 @@ export default function EditPatient({
                 </label>
               </div>
             </div>
-
-            <FormControl sx={{ mt: 2, width: '100%' }} variant="outlined">
+            <FormControl
+              sx={{ mt: 2, width: '100%', display: user.role === 'clinician' ? 'none' : '' }}
+              variant="outlined"
+            >
               <ReactSelect dataOptions={clinicians} setUserData={setUserData} userData={userData} />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 2, width: '100%' }} variant="outlined">
@@ -302,13 +306,13 @@ export default function EditPatient({
                     ml: 1,
                   },
                 }}
-                id="outlined-name"
-                classes={outlinedInputStyles}
-                placeholder="MRN (customized unique id)"
                 size="normal"
                 name="mrn_id"
+                id="outlined-name"
                 value={userData?.mrn_id}
+                classes={outlinedInputStyles}
                 onChange={handleUserDataChange}
+                placeholder="MRN (customized unique id)"
               />
             </FormControl>
 
@@ -323,19 +327,18 @@ export default function EditPatient({
                     ml: 1,
                   },
                 }}
-                id="outlined-name"
-                classes={outlinedInputStyles}
-                placeholder="First Name"
                 size="normal"
                 name="first_name"
+                id="outlined-name"
+                placeholder="First Name"
                 value={patient.first_name}
+                classes={outlinedInputStyles}
                 onChange={handlePatientChange}
                 inputProps={{
                   maxLength: 20,
                 }}
               />
             </FormControl>
-
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
@@ -347,19 +350,18 @@ export default function EditPatient({
                     ml: 1,
                   },
                 }}
-                id="outlined-name"
-                classes={outlinedInputStyles}
-                placeholder="Last Name"
                 size="normal"
                 name="last_name"
+                id="outlined-name"
+                placeholder="Last Name"
                 value={patient.last_name}
+                classes={outlinedInputStyles}
                 onChange={handlePatientChange}
                 inputProps={{
                   maxLength: 20,
                 }}
               />
             </FormControl>
-
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
@@ -371,23 +373,21 @@ export default function EditPatient({
                     ml: 1,
                   },
                 }}
-                id="outlined-email"
-                classes={outlinedInputStyles}
-                placeholder="Email"
                 size="normal"
                 type="email"
                 name="email"
+                id="outlined-email"
+                placeholder="Email"
                 value={patient.email}
+                classes={outlinedInputStyles}
                 onChange={handlePatientChange}
               />
             </FormControl>
-
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
               <div className="edit-phone-input">
                 <CustomPhoneInput setUserInfo={setPatient} userInfo={patient} />
               </div>
             </FormControl>
-
             <FormControl
               sx={{
                 textAlign: 'left',
@@ -397,14 +397,14 @@ export default function EditPatient({
             >
               <div className="date-div">
                 <DatePicker
-                  showPopperArrow
-                  dateFormat="MM-dd-yyyy"
                   name="date"
-                  selected={userData.dob}
-                  onChange={dobChange}
-                  placeholderText="Date of birth"
-                  popperPlacement="bottom-start"
+                  showPopperArrow
                   showYearDropdown
+                  onChange={dobChange}
+                  dateFormat="MM-dd-yyyy"
+                  selected={userData.dob}
+                  popperPlacement="bottom-start"
+                  placeholderText="Date of birth"
                   openToDate={new Date('01/01/2005')}
                 />
               </div>
@@ -462,9 +462,9 @@ export default function EditPatient({
             </FormControl>
             <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
                 displayEmpty
+                id="demo-simple-select"
+                labelId="demo-simple-select-label"
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                   'aria-label': 'Without label',
@@ -496,31 +496,25 @@ export default function EditPatient({
                 onChange={handleUserDataChange}
               >
                 <MenuItem disabled selected value="">
-                  <span style={{ color: '#949494' }}>Location</span>{' '}
+                  <span style={{ color: '#949494' }}>Location</span>
                 </MenuItem>
                 <MenuItem value="left">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Left</span>{' '}
+                  <span style={{ color: '#949494' }}>Left</span>
                 </MenuItem>
                 <MenuItem value="right">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Right</span>{' '}
+                  <span style={{ color: '#949494' }}>Right</span>
                 </MenuItem>
                 <MenuItem value="posterior">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Posterior</span>{' '}
+                  <span style={{ color: '#949494' }}>Posterior</span>
                 </MenuItem>
                 <MenuItem value="anterior">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Anterior</span>{' '}
+                  <span style={{ color: '#949494' }}>Anterior</span>
                 </MenuItem>
                 <MenuItem value="medical">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Medial</span>{' '}
+                  <span style={{ color: '#949494' }}>Medial</span>
                 </MenuItem>
                 <MenuItem value="lateral">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Lateral</span>{' '}
+                  <span style={{ color: '#949494' }}>Lateral</span>
                 </MenuItem>
               </Select>
             </FormControl>
@@ -561,17 +555,17 @@ export default function EditPatient({
             >
               <div className="date-div" id={!checked ? 'disabledDate' : ''}>
                 <DatePicker
-                  showPopperArrow
-                  dateFormat="MM-dd-yyyy"
-                  name="expiry_date"
-                  selected={patient.expiry_date}
-                  onChange={expDateChange}
-                  disabled={!checked}
-                  placeholderText="Enter expiry date"
-                  popperPlacement="bottom-start"
-                  showYearDropdown
-                  minDate={tomorrow}
                   disablePast
+                  showPopperArrow
+                  showYearDropdown
+                  name="expiry_date"
+                  minDate={tomorrow}
+                  disabled={!checked}
+                  dateFormat="MM-dd-yyyy"
+                  onChange={expDateChange}
+                  popperPlacement="bottom-start"
+                  selected={patient.expiry_date}
+                  placeholderText="Enter expiry date"
                 />
               </div>
             </FormControl>

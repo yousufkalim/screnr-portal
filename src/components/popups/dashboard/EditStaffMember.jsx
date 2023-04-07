@@ -1,35 +1,23 @@
 import { React, useState, useEffect } from 'react';
-
-// mui imports
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 import { FormControl, TextField } from '@mui/material';
+import { toast } from 'react-toastify';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
-
-// phone
 import PhoneInput from 'react-phone-input-2';
-
-// react-toastify import
-import { toast } from 'react-toastify';
-
-// react-datepicker import
 import DatePicker from 'react-datepicker';
+import { getMediaUrl } from '../../../config';
 import 'react-datepicker/dist/react-datepicker.css';
-
-// assets import
 import edit from '../../../assets/icons/edit.svg';
-
-// child component imports
 import AvatarComponent from '../../Avatar';
 import api from '../../../api';
-import { getMediaUrl } from '../../../config';
 import useOutlinedInputStyles from '../../../utils/EditFormInput';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({

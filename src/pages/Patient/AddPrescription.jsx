@@ -1,13 +1,9 @@
 import { React, useState, useEffect } from 'react';
-
-// mui imports
 import { Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../../api/index';
-
-// child components import
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import AddPrescription from '../../components/forms/prescription/AddPrescription';
 import GeneratePrescription from '../../components/popups/prescription/PrescriptionGenerated';
@@ -40,7 +36,7 @@ export default function AddPatientPrescription() {
   });
 
   const getPatientDataById = async () => {
-    await api('get', `/admins/patients/${patientId}`).then((res) => {
+    await api('get', `/clinicians/getPatientDetail/${patientId}`).then((res) => {
       setPatient(res?.data?.user);
     });
   };
@@ -125,7 +121,7 @@ export default function AddPatientPrescription() {
       prescription.patient &&
       prescription.start_date
     ) {
-      await api('post', '/admins/prescriptions', prescription)
+      await api('post', '/clinicians/prescriptions/createPrescription', prescription)
         .then(() => {
           setOpenGeneratePrescription(true);
           handlePrescriptionDetailsReset();

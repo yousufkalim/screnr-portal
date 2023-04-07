@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from 'react';
-// assets import
 import AddMore from '../assets/icons/AddMore.svg';
-// child imports
 import AvatarComponent from './Avatar';
 import AssignClinicians from './popups/prescription/AssignClinicians';
 
