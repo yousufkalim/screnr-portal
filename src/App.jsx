@@ -19,7 +19,7 @@ import { ReactComponent as PatientStatsIcon } from './assets/components/HeaderIc
 // Component
 const adminTabs = [
   {
-    path: '/dashboard',
+    path: '/admin/dashboard',
     label: 'Dashboard',
     IconComponent: DashboardIcon,
   },
@@ -63,20 +63,71 @@ const clinicianDasboardRoutes = [
   },
 ];
 
+const clinicDasboardRoutes = [
+  {
+    label: 'Dashboard',
+    path: '/clinic/dashboard',
+    IconComponent: DashboardIcon,
+  },
+  {
+    label: 'Clinician',
+    path: '/clinicians',
+    IconComponent: ClinicalIcon,
+  },
+  {
+    label: 'Patients',
+    path: '/patients',
+    IconComponent: PatientIcon,
+  },
+  {
+    label: 'Patient Statics',
+    path: '/patients/:id/exercise/reports',
+    IconComponent: PatientStatsIcon,
+  },
+];
+
+const StaffDashboardRoutes = [
+  {
+    path: '/staff/dashboard',
+    label: 'Dashboard',
+    IconComponent: DashboardIcon,
+  },
+  {
+    path: '/clinics',
+    label: 'Clinic Admin',
+    IconComponent: ClinicAdminIcon,
+  },
+  {
+    path: '/clinicians',
+    label: 'Clinician',
+    IconComponent: ClinicalIcon,
+  },
+  {
+    path: '/patients',
+    label: 'Patients',
+    IconComponent: PatientIcon,
+  },
+  {
+    path: '/patients/:id/exercise/reports',
+    label: 'Patient Statics',
+    IconComponent: PatientStatsIcon,
+  },
+];
+
 const tabsByUser = {
   admin: adminTabs,
-  staff: adminTabs,
-  clinic: adminTabs,
+  staff: StaffDashboardRoutes,
+  clinic: clinicDasboardRoutes,
   clinician: clinicianDasboardRoutes,
   patient: adminTabs,
 };
 
 const redirectPathByRole = {
-  admin: '/dashboard',
-  staff: '/dashboard',
-  clinic: '/dashboard',
+  admin: '/admin/dashboard',
+  staff: '/staff/dashboard',
+  clinic: '/clinic/dashboard',
   clinician: '/clinician/dasboard',
-  patient: '/dashboard',
+  patient: '/patient/dashboard',
 };
 
 function App() {
@@ -111,5 +162,4 @@ function App() {
   );
 }
 
-// Export
 export default App;

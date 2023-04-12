@@ -107,7 +107,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
   };
 
   const getAllClinics = async () => {
-    const { data } = await api('get', '/admins/clinics/getAllClinicsNonPaginated');
+    const { data } = await api('get', '/staff/getAllClinicsNonPaginated');
     if (data) {
       setClinics(data);
     }
@@ -231,13 +231,19 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
       handleClose();
     }
   };
+  useEffect(() => {
+    if (user?.role === 'clinic') {
+      getClinicians(1, user?.id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openAddPatient]);
 
   useEffect(() => {
-    if (user?.role !== 'clinician') {
+    if (user?.role !== 'clinician' || user?.role !== 'clinic') {
       getAllClinics();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [openAddPatient]);
 
   return (
     <div>
@@ -288,7 +294,11 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
             </div>
 
             <FormControl
-              sx={{ mt: 3, width: '100%', display: user?.role === 'clinician' ? 'none' : '' }}
+              sx={{
+                mt: 3,
+                width: '100%',
+                display: user?.role === 'clinician' || user?.role === 'clinic' ? 'none' : '',
+              }}
               variant="outlined"
             >
               <Select
@@ -546,31 +556,25 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 onChange={handleUserDataChange}
               >
                 <MenuItem disabled selected value="">
-                  <span style={{ color: '#949494' }}>Location</span>{' '}
+                  <span style={{ color: '#949494' }}>Location</span>
                 </MenuItem>
                 <MenuItem value="left">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Left</span>{' '}
+                  <span style={{ color: '#949494' }}>Left</span>
                 </MenuItem>
                 <MenuItem value="right">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Right</span>{' '}
+                  <span style={{ color: '#949494' }}>Right</span>
                 </MenuItem>
                 <MenuItem value="posterior">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Posterior</span>{' '}
+                  <span style={{ color: '#949494' }}>Posterior</span>
                 </MenuItem>
                 <MenuItem value="anterior">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Anterior</span>{' '}
+                  <span style={{ color: '#949494' }}>Anterior</span>
                 </MenuItem>
                 <MenuItem value="medical">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Medial</span>{' '}
+                  <span style={{ color: '#949494' }}>Medial</span>
                 </MenuItem>
                 <MenuItem value="lateral">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Lateral</span>{' '}
+                  <span style={{ color: '#949494' }}>Lateral</span>
                 </MenuItem>
               </Select>
             </FormControl>

@@ -276,7 +276,8 @@ export default function AddPrescription({
         <div className="prescriptionChoiceSec">
           <div
             className={prescription.type === 'motion' ? 'selctedPresChoice' : 'presChoice'}
-            onClick={() => handlePrescriptionDetails('type', 'motion')}
+            // for now
+            // onClick={() => handlePrescriptionDetails('type', 'motion')}
             role="presentation"
           >
             <MotionCapture
@@ -619,7 +620,6 @@ export default function AddPrescription({
                 }}
               />
             </FormControl>
-
             <FormControl sx={{ width: '32%' }} variant="outlined">
               <Select
                 // eslint-disable-next-line react/no-unstable-nested-components
@@ -687,33 +687,6 @@ export default function AddPrescription({
               />
             </FormControl>
             <div className="prescriptionBtns2">
-              {/* <div>
-                <Button className="thresholdsBtn" onClick={() => setOpenAdjustRange(true)}>
-                  Thresholds{' '}
-                </Button>
-                <FormControlLabel
-                  sx={{
-                    color: '#25C8B4',
-                    textAlign: 'left',
-                    fontSize: '12px',
-                    width: 'fit-content',
-                  }}
-                  control={<Checkbox style={{ color: '#25C8B4' }} />}
-                  label={
-                    <Typography
-                      style={{
-                        color: '#25C8B4',
-                        textAlign: 'left',
-                        fontWeight: '500',
-                        fontSize: '12px',
-                      }}
-                    >
-                      Screen Shots
-                    </Typography>
-                  }
-                />
-              </div> */}
-
               <Button
                 disabled={!validatingListBtn}
                 className={validatingListBtn ? 'listBtn' : 'listBtn_disabled'}
@@ -726,10 +699,10 @@ export default function AddPrescription({
           </>
         )}
       </Grid>
-
       <Grid xl={5} lg={6}>
         <AddPrescriptionTable ExercisePrescriptionList={prescription} />
       </Grid>
+
       {openAdjustRange && (
         <AdjustRange openAdjustRange={openAdjustRange} setOpenAdjustRange={setOpenAdjustRange} />
       )}

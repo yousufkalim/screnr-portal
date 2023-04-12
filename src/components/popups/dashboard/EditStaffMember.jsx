@@ -118,7 +118,7 @@ export default function EditStaffMember({
     if (checked && !staffMemberCopy.expiry_date) {
       return toast.error('Please enter expiry date');
     }
-    const { data } = await api('put', `/admins/staff/${staffMemberDetails.id}`, formData);
+    const { data } = await api('put', `/admins/editStaff/${staffMemberDetails.id}`, formData);
     if (data) {
       handleClose();
       setOpenEditStaffMember(false);

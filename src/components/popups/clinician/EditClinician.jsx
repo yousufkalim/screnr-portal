@@ -149,7 +149,7 @@ export default function EditClinician({
     }
 
     // sending this data to api
-    const { data } = await api('put', `/admins/clinicians/${clinicianDetails.id}`, formData);
+    const { data } = await api('put', `/clinics/editClinician/${clinicianDetails.id}`, formData);
     if (data) {
       toast.success('Clinician updated successfully');
       handleClose();

@@ -28,7 +28,7 @@
     "react-chartjs-2": "^5.0.1",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
-    "react-easy-router": "^2.1.2",
+    "react-easy-router": "^2.2.0",
     "react-phone-input-2": "^2.15.1",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",

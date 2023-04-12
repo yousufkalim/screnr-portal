@@ -23,10 +23,7 @@ export default function Patient() {
   const { id } = useParams();
 
   const getPatients = async (page = 1) => {
-    const { data } = await api(
-      'get',
-      `/admins/patients/getPatientsByClinicianId/${id}?page=${page}`,
-    );
+    const { data } = await api('get', `/clinicians/getPatientsByClinicianId/${id}?page=${page}`);
     if (data) {
       setPatients(data);
     }
@@ -76,7 +73,12 @@ export default function Patient() {
     <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '100vh' }}>
       <Grid container>
         <Grid xl={2} lg={2.5}>
-          <Sidebar id={id} txt="admins/clinicians" roleTxt="Clinic" getClinicName={getClinicName} />
+          <Sidebar
+            id={id}
+            txt="clinics/getClinician"
+            roleTxt="Clinic"
+            getClinicName={getClinicName}
+          />
         </Grid>
 
         <Grid className="bgClinicianTable" xl={7.5} lg={7}>

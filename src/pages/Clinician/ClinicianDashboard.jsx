@@ -20,11 +20,15 @@ import AddNewPatient from '../../components/popups/patient/AddNewPatient';
 export default function ClinicianDashboard() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [patientsByClinician, setPatientsByClinician] = useState({});
-
+  const [loading, setLoading] = useState(false);
   const getPatients = async () => {
+    setLoading(true);
     const { data } = await api('get', `/clinicians/dashboard`);
     if (data) {
       setPatientsByClinician(data);
+      setLoading(false);
+    } else {
+      setLoading(false);
     }
   };
 
@@ -93,7 +97,14 @@ export default function ClinicianDashboard() {
             <BlueCircle style={{ color: 'rgba(13, 170, 220, 0.12)' }} />
           </div>
         </div>
-        <PatientsTable patients={patientsByClinician} getPatients={getPatients} />
+        <PatientsTable
+          patients={patientsByClinician}
+          getPatients={getPatients}
+          loading={loading}
+          setLoading={setLoading}
+          openAddPatient={openAddPatient}
+          setOpenAddPatient={setOpenAddPatient}
+        />
       </div>
       <div className="clinician_dashboard_right_div">
         <div className="clinician_statsCards_div">

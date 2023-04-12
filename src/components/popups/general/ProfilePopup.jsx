@@ -71,6 +71,14 @@ export default function ProfilePopup({
     navigate('/');
   };
 
+  const roles = {
+    admin: 'Super Admin',
+    staff: 'Staff Admin',
+    clinic: 'Clinic Admin',
+    clinician: 'Clinician',
+    patient: 'Patient',
+  };
+
   return (
     <div>
       <BootstrapDialog
@@ -129,7 +137,7 @@ export default function ProfilePopup({
               </div>
             </div>
             <h1 className="forgetPaswdTxt">{`${user.first_name} ${user.last_name}`}</h1>
-            <p className="enterEmailTxt">Superadmin</p>
+            <p className="enterEmailTxt">{roles[user?.role]}</p>
             <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
               <div className="pswdChangeTrack" htmlFor="phone">
                 <p className="inputDiv">

@@ -102,7 +102,7 @@ export default function AddStaffMember({
         return toast.error('Please enter expiry date');
       }
 
-      const { data } = await api('post', '/admins/staff', formData);
+      const { data } = await api('post', '/admins/addStaff', formData);
 
       if (data) {
         getStaffMembers();

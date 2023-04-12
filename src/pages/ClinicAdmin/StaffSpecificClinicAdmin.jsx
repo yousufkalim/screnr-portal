@@ -20,7 +20,7 @@ export default function ClinicAdmin() {
   const getClinicAdmins = async (page = 1) => {
     setIsLoading(true);
     try {
-      const { data } = await api('get', `/admins/clinics/getClinicsByStaffId/${id}?page=${page}`);
+      const { data } = await api('get', `/staff/getClinicsByStaffId/${id}?page=${page}`);
       if (data) {
         setClinicAdmins(data);
       }
@@ -29,11 +29,13 @@ export default function ClinicAdmin() {
       setIsLoading(false);
     }
   };
+
   const handleDashboardNavClick = () => {
-    navigate('/dashboard');
+    navigate('/admins/dashboard');
   };
+
   const getData = async () => {
-    const { data } = await api('get', `/admins/staff/${id}`);
+    const { data } = await api('get', `/admins/getStaff/${id}`);
     setStaffMember(data?.user);
   };
 
@@ -49,7 +51,7 @@ export default function ClinicAdmin() {
         <Grid xl={2} lg={2.5}>
           <Sidebar
             id={id}
-            txt="admins/staff"
+            txt="admins/getStaff"
             roleTxt="Staff Id"
             setOpen={setOpenEditStaffMember}
             open={openEditStaffMember}

@@ -24,7 +24,7 @@ export default function AllClinicians() {
     const abortController = new AbortController();
     abortControllerRef.current = abortController;
 
-    let apiUrl = `/admins/clinicians?page=${page}`;
+    let apiUrl = `/clinics/allCliniciansList?page=${page}`;
     if (sort) {
       apiUrl += `&sort=${sort}`;
     }

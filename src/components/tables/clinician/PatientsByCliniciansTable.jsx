@@ -23,6 +23,7 @@ import { ReactComponent as Message } from '../../../assets/components/Table/emai
 import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar';
 import EditPatient from '../../popups/patient/EditPatient';
+import AddPatient from '../../popups/patient/AddNewPatient';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
@@ -34,7 +35,12 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function PatientsByCliniciansTable({ patients, getPatients }) {
+export default function PatientsByCliniciansTable({
+  patients,
+  getPatients,
+  openAddPatient,
+  setOpenAddPatient,
+}) {
   const navigate = useNavigate();
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
@@ -109,18 +115,8 @@ export default function PatientsByCliniciansTable({ patients, getPatients }) {
       >
         <div className="iconAndHeading">
           <h1 className="clientTableHead">List of Patients</h1>
-          <span
-            onClick={() => {
-              setOpenEditPatient(true);
-            }}
-            style={{
-              padding: '0px 15px 0px 15px',
-              border: '2px solid #FBA622',
-              borderRadius: '17px',
-              color: '#FBA622',
-            }}
-          >
-            Invite Member
+          <span onClick={() => setOpenAddPatient(true)} className="invitePatientBtn">
+            Invite Patient
           </span>
         </div>
 
@@ -289,7 +285,6 @@ export default function PatientsByCliniciansTable({ patients, getPatients }) {
                 {patient?.id === row?.id ? (
                   <TableRow className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}>
                     <TableCell width="2%" />
-
                     <TableCell>
                       <div className="notiCell">
                         <Report />{' '}
@@ -348,6 +343,14 @@ export default function PatientsByCliniciansTable({ patients, getPatients }) {
             setOpenEditPatient={setOpenEditPatient}
             patientDetails={patient}
             getPatients={getPatients}
+          />
+        )}
+
+        {openAddPatient && (
+          <AddPatient
+            getPatients={getPatients}
+            openAddPatient={openAddPatient}
+            setOpenAddPatient={setOpenAddPatient}
           />
         )}
       </TableContainer>

@@ -16,8 +16,11 @@ import SearchScreen from '../components/popups/general/SearchScreen';
 import ClinicianDashboard from '../pages/Clinician/ClinicianDashboard';
 import Clinician from '../pages/Clinician/ClinicAdminSpecificClinician';
 import AllClinicians from '../pages/Clinician/AllClinicians';
+import ClinicAdminDashboard from '../pages/ClinicAdmin/ClinicAdminDashboard';
+import StaffDashboard from '../pages/Staff/dashboard';
 
 const superadminRoutes = [
+  // unAuth routes
   {
     path: '/',
     navigate: '/login',
@@ -26,19 +29,32 @@ const superadminRoutes = [
     path: '/login',
     element: <Login />,
   },
-  {
-    path: '/dashboard',
-    element: <Dashboard />,
-    protected: true,
-    roles: ['admin'],
-  },
+  // Dashboard route for all roles
   {
     path: '/clinician/dasboard',
     element: <ClinicianDashboard />,
     protected: true,
     roles: ['admin', 'staff', 'clinic', 'clinician'],
   },
-
+  {
+    path: '/clinic/dashboard',
+    element: <ClinicAdminDashboard />,
+    protected: true,
+    roles: ['admin', 'staff', 'clinic'],
+  },
+  {
+    path: '/staff/dashboard',
+    element: <StaffDashboard />,
+    protected: true,
+    roles: ['admin', 'staff'],
+  },
+  {
+    path: '/admin/dashboard',
+    element: <Dashboard />,
+    protected: true,
+    roles: ['admin'],
+  },
+  // All users list by roles
   {
     path: '/clinics',
     element: <AllClinicAdmins />,
@@ -57,7 +73,13 @@ const superadminRoutes = [
     protected: true,
     roles: ['admin', 'staff', 'clinic', 'clinician'],
   },
-  { path: '/searchScreen', element: <SearchScreen />, protected: true, roles: ['admin'] },
+  // search screen
+  {
+    path: '/searchScreen',
+    element: <SearchScreen />,
+    protected: true,
+    roles: ['admin', 'staff', 'clinic', 'clinician'],
+  },
 
   // routes for getting data by a specific id
   {
@@ -91,13 +113,13 @@ const superadminRoutes = [
     path: '/patients/:id/prescription',
     element: <Prescription />,
     protected: true,
-    roles: ['admin'],
+    roles: ['admin', 'staff', 'clinic', 'clinician'],
   },
   {
     path: '/patients/:patientId/addPrescription/:clinicianId',
     element: <AddPatientPrescription />,
     protected: true,
-    roles: ['admin'],
+    roles: ['admin', 'staff', 'clinic', 'clinician'],
   },
   {
     path: '/patients/:id/messages',
@@ -108,13 +130,13 @@ const superadminRoutes = [
   {
     path: '/patients/:id/activity',
     element: <Activity />,
-    roles: ['admin'],
+    roles: ['admin', 'staff', 'clinic', 'clinician'],
     protected: true,
   },
   {
     path: '/patients/:sessionId/exercise/exerciseDetails/:prescriptionId',
     element: <Index />,
-    roles: ['admin'],
+    roles: ['admin', 'staff', 'clinic', 'clinician'],
     protected: true,
   },
 ];

@@ -143,7 +143,7 @@ export default function EditClinicAdmin({
       return toast.error('Please enter expiry date');
     }
 
-    const { data } = await api('put', `/admins/clinics/${clinicAdminDetails.id}`, formData);
+    const { data } = await api('put', `/staff/editClinic/${clinicAdminDetails.id}`, formData);
     if (data) {
       toast.success('Clinic Admin updated successfully');
       setOpenEditClinicAdmin(false);

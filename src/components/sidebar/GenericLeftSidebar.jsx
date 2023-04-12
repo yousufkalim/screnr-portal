@@ -52,7 +52,6 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
                 accept=".png, .jpg, .jpeg"
                 // onChange={handleSelectedFile}
               />
-
               {info.profile_pic ? (
                 <img
                   src={getMediaUrl(info.profile_pic)}

@@ -107,7 +107,7 @@ export default function EditPrescription({
   };
 
   const handleEditPrescriptions = async () => {
-    await api('put', `/admins/prescriptions/${selectedPrescription?.id}`, {
+    await api('put', `/clinicians/prescriptions/updatePrescription/${selectedPrescription?.id}`, {
       name: prescriptionName,
       duration: prescriptionDuration,
       frequency: prescriptionFrequency,

@@ -206,7 +206,7 @@ export default function TableComponent({
               openDeletePopup={openDeletePopup}
               setOpenDeletePopup={setOpenDeletePopup}
               item={staffMember}
-              txt="admins/staff"
+              txt="admins/deleteStaff"
               getData={getStaffMembers}
             />
           )}

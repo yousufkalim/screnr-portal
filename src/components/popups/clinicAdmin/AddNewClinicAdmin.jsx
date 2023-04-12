@@ -130,7 +130,7 @@ export default function AddClinicAdmin({
       }
 
       // sending this data to api
-      const { data } = await api('post', '/admins/clinics', formData);
+      const { data } = await api('post', '/staff/addClinic', formData);
       if (data) {
         toast.success('Clinic Admin added successfully');
         getClinicAdmins();

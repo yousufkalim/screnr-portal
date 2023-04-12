@@ -20,7 +20,7 @@ export default function AddPatientPrescription() {
     start_date: new Date(),
     duration: '',
     frequency: '',
-    type: 'motion',
+    type: 'simple',
     clinician: clinicianId,
     patient: patientId,
     exercises: [],
@@ -87,28 +87,16 @@ export default function AddPatientPrescription() {
   };
 
   const handlePrescriptionDetailsReset = () => {
-    // eslint-disable-next-line no-unused-expressions
-    prescription?.type === 'motion'
-      ? setPrescription({
-          name: '',
-          start_date: '',
-          duration: 0,
-          frequency: 0,
-          type: 'motion',
-          clinician: clinicianId,
-          patient: patientId,
-          exercises: [],
-        })
-      : setPrescription({
-          name: '',
-          start_date: '',
-          duration: 0,
-          frequency: 0,
-          type: 'simple',
-          clinician: clinicianId,
-          patient: patientId,
-          exercises: [],
-        });
+    setPrescription({
+      name: '',
+      start_date: '',
+      duration: 0,
+      frequency: 0,
+      type: prescription?.type === 'motion' ? 'motion' : 'simple',
+      clinician: clinicianId,
+      patient: patientId,
+      exercises: [],
+    });
   };
 
   const handleGeneratePrescription = async () => {

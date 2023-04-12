@@ -39,11 +39,11 @@ const useOutlinedInputStyles = makeStyles({
 });
 
 const loggedInUser = {
-  admin: '/dashboard',
-  staff: '/dashboard',
-  clinic: '/dashboard',
+  admin: '/admin/dashboard',
+  staff: '/staff/dashboard',
+  clinic: '/clinic/dashboard',
   clinician: '/clinician/dasboard',
-  patient: '/dashboard',
+  patient: '/patient/dashboard',
 };
 
 export default function Login() {

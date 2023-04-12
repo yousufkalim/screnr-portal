@@ -31,7 +31,7 @@ export default function Dashboard() {
   const getStaffMembers = async (page = 1) => {
     setIsLoading(true);
     try {
-      const { data } = await api('get', `/admins/staff?page=${page}`);
+      const { data } = await api('get', `/admins/dashboard?page=${page}`);
       if (data) {
         setStaffMembers(data);
         setCount({

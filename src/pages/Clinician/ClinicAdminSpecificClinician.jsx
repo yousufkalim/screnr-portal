@@ -39,7 +39,7 @@ export default function ClinicAdmin() {
   };
 
   const getClinicianData = async () => {
-    const { data } = await api('get', `/admins/clinics/${id}`);
+    const { data } = await api('get', `/staff/getClinic/${id}`);
     if (data) {
       setClinicianData(data.user);
     }
@@ -92,7 +92,7 @@ export default function ClinicAdmin() {
         <Grid xl={2} lg={2.5}>
           <Sidebar
             id={id}
-            txt="admins/clinics"
+            txt="staff/getClinic"
             roleTxt="Clinic"
             getClinicName={getClinicName}
             setOpen={setOpenEditClinician}
