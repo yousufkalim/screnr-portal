@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 import { React, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import ExcerciseChart from './ExcerciseChart';
@@ -21,7 +21,7 @@ export default function Session() {
   const { sessionId, prescriptionId } = params;
   const [session, setSession] = useState({});
   const [patient, setPatient] = useState({});
-
+  const navigate = useNavigate();
   const handleGetSessionById = async () => {
     await api('get', `/admins/sessions/${sessionId}`)
       .then(async (res) => {
@@ -40,6 +40,24 @@ export default function Session() {
         console.error(err);
       });
   };
+  const handleDashboardNavClick = () => {
+    navigate('/dashboard');
+  };
+  const goToStaff = () => {
+    window.history.go(-4);
+  };
+  const goToClinicAdmin = () => {
+    window.history.go(-3);
+  };
+  const goToClinician = () => {
+    window.history.go(-2);
+  };
+  const goToPatient = () => {
+    window.history.go(-1);
+  };
+  const goToPrescription = () => {
+    window.history.go(-1);
+  };
 
   useEffect(() => {
     handleGetSessionById();
@@ -54,9 +72,32 @@ export default function Session() {
       </Grid>
       <Grid className="bgMsg" xl={10} lg={9.5}>
         <div className="bg_main_div_sessions" style={{ height: '85rem', background: '#F6FAFB' }}>
-          <div className="breadCrumb">
-            Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription
-            &gt; Session &gt;
+          <div className="breadCrumb" style={{ display: 'flex' }}>
+            <div
+              className="navigationEntities"
+              onClick={handleDashboardNavClick}
+              aria-hidden="true"
+            >
+              Dashboard &gt;
+            </div>
+            <div className="navigationEntities" onClick={goToStaff} aria-hidden="true">
+              Staff &gt;
+            </div>
+            <div className="navigationEntities" onClick={goToClinicAdmin} aria-hidden="true">
+              Clinic Admin &gt;
+            </div>
+            <div className="navigationEntities" onClick={goToClinician} aria-hidden="true">
+              Clinician &gt;
+            </div>
+            <div className="navigationEntities" onClick={goToPatient} aria-hidden="true">
+              {' '}
+              Patient &gt;
+            </div>
+            <div className="navigationEntities" onClick={goToPrescription} aria-hidden="true">
+              {' '}
+              Prescription &gt;{' '}
+            </div>
+            Session &gt;
           </div>
           <div className="bgAddPrescriptionSessions">
             <div className="SessionsHeading">
