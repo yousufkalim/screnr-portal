@@ -135,7 +135,7 @@ export default function AddPatientPrescription() {
     prescription.exercises.length > 0;
   return (
     <>
-      <Grid container>
+      <Grid container className="gridish">
         <Grid xl={2} lg={2.5}>
           <Sidebar
             patientId={patientId}
@@ -187,6 +187,7 @@ export default function AddPatientPrescription() {
           />
         )}
       </Grid>
+
       {openEditpatientModal && (
         <EditPatient
           openEditPatient={openEditpatientModal}

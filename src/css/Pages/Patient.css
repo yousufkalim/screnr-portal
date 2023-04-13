@@ -579,13 +579,12 @@
   font-size: 16px !important;
   text-align: center !important;
   color: #f6fafb !important;
+  line-height: 24px;
   text-transform: none !important;
   border-radius: 15px !important;
   border: none !important;
   padding: 8px 20px !important;
-  position: fixed;
-  top: 14rem;
-  right: 50px;
+  width: 13rem !important;
 }
 
 .generatePrescriptionBtn_diaabled {
@@ -598,9 +597,7 @@
   border-radius: 15px !important;
   border: none !important;
   padding: 8px 20px !important;
-  position: fixed;
-  top: 14rem;
-  right: 50px;
+  width: 15rem !important;
 }
 
 .dateDivPrescription .react-datepicker-wrapper {
@@ -617,13 +614,15 @@
   background-color: white;
   border-radius: 20px;
 }
-
+.gridish {
+  position: relative;
+}
 .addPrescriptionBtn {
   position: absolute !important;
-  right: 90px;
-  bottom: 40px;
+  right: 6%;
+  bottom: 40%;
+
   z-index: 1300 !important;
-  padding-bottom: 50px;
 }
 
 .calenderIcon {
@@ -803,17 +802,14 @@
   }
 
   .addPrescriptionBtn {
-    position: absolute !important;
-    right: 30px;
-    bottom: -42%;
-    z-index: 1300 !important;
+    bottom: 45%;
   }
 
   .generatePrescriptionBtn {
     font-size: 12px !important;
     padding: 13px 20px !important;
     position: absolute;
-    top: 2500px;
+    top: 25px;
   }
 
   #prescriptionTableHead {
