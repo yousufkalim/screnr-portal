@@ -1,6 +1,4 @@
 import { useState } from 'react';
-
-// mui imports
 import Grid from '@mui/material/Grid';
 import { FormControl, TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
@@ -9,17 +7,12 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
-
-// datepicker
 import DatePicker from 'react-datepicker';
-// assets import
 import dropdown from '../../../assets/icons/dropdownOrange.svg';
 import { ReactComponent as ExpiryDate } from '../../../assets/icons/expiryDate.svg';
 import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
 import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 import { ReactComponent as List } from '../../../assets/icons/list.svg';
-
-// child imports
 import AddPrescriptionTable from '../../tables/prescription/AddPrescriptionTable';
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import AdjustRange from '../../popups/prescription/AdjustMotionRange';
@@ -283,7 +276,8 @@ export default function AddPrescription({
         <div className="prescriptionChoiceSec">
           <div
             className={prescription.type === 'motion' ? 'selctedPresChoice' : 'presChoice'}
-            onClick={() => handlePrescriptionDetails('type', 'motion')}
+            // for now
+            // onClick={() => handlePrescriptionDetails('type', 'motion')}
             role="presentation"
           >
             <MotionCapture
@@ -626,7 +620,6 @@ export default function AddPrescription({
                 }}
               />
             </FormControl>
-
             <FormControl sx={{ width: '32%' }} variant="outlined">
               <Select
                 // eslint-disable-next-line react/no-unstable-nested-components
@@ -694,33 +687,6 @@ export default function AddPrescription({
               />
             </FormControl>
             <div className="prescriptionBtns2">
-              {/* <div>
-                <Button className="thresholdsBtn" onClick={() => setOpenAdjustRange(true)}>
-                  Thresholds{' '}
-                </Button>
-                <FormControlLabel
-                  sx={{
-                    color: '#25C8B4',
-                    textAlign: 'left',
-                    fontSize: '12px',
-                    width: 'fit-content',
-                  }}
-                  control={<Checkbox style={{ color: '#25C8B4' }} />}
-                  label={
-                    <Typography
-                      style={{
-                        color: '#25C8B4',
-                        textAlign: 'left',
-                        fontWeight: '500',
-                        fontSize: '12px',
-                      }}
-                    >
-                      Screen Shots
-                    </Typography>
-                  }
-                />
-              </div> */}
-
               <Button
                 disabled={!validatingListBtn}
                 className={validatingListBtn ? 'listBtn' : 'listBtn_disabled'}
@@ -733,10 +699,10 @@ export default function AddPrescription({
           </>
         )}
       </Grid>
-
       <Grid xl={5} lg={6}>
         <AddPrescriptionTable ExercisePrescriptionList={prescription} />
       </Grid>
+
       {openAdjustRange && (
         <AdjustRange openAdjustRange={openAdjustRange} setOpenAdjustRange={setOpenAdjustRange} />
       )}

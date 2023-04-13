@@ -1,6 +1,4 @@
 import { React, useState } from 'react';
-
-// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -13,21 +11,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import ClearIcon from '@mui/icons-material/Clear';
-
-// react-toastify import
 import { toast } from 'react-toastify';
-
-// react-datepicker import
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
-// assets import
 import add from '../../../assets/icons/add.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import edit from '../../../assets/icons/edit.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
-
-// child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import api from '../../../api/index';
 import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegisteredPopup';
@@ -144,7 +134,7 @@ export default function AddClinician({
       }
 
       // sending this data to api
-      const { data } = await api('post', '/admins/clinicians', formData);
+      const { data } = await api('post', '/clinics/addClinician', formData);
 
       if (data) {
         toast.success('Clinic Admin added successfully');

@@ -25,6 +25,28 @@
   overflow: hidden;
 }
 
+.detail_card_main_div {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1rem;
+  border-radius: 20px;
+  width: 31%;
+  overflow: hidden;
+}
+
+.detail_card_staff_dashboard {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1rem;
+  border-radius: 20px;
+  width: 23.5%;
+  overflow: hidden;
+}
+
 .card_main_div2 {
   background-color: #fff;
   display: flex;

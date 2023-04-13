@@ -14,8 +14,7 @@ const api = async (method, uri, body, bypass = false) => {
       .then((res) => resolve(res))
       .catch((err) => {
         if (err?.response?.status === 403) {
-          localStorage.removeItem('token');
-          window.location = '/login';
+          // window.location = '/login';
         } else {
           // eslint-disable-next-line no-console
           console.log('API Error --------> ', err?.response?.status);

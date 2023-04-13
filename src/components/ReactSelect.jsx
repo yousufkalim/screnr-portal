@@ -1,8 +1,5 @@
 // multi select component
-
 import { useState, useEffect } from 'react';
-
-// child imports
 import AvatarComponent from './Avatar';
 
 export default function ReactSelect({ dataOptions, setUserData, userData }) {
@@ -45,7 +42,6 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
       <div className="customSelect">
         {preSelected.map((opt) => (
           <div className="customOptions" role="presentation">
-            {/* <img src="" alt="" /> */}
             <AvatarComponent alt={opt.optName} className="opt_avatar" />
             <p className="optName">{opt.optName}</p>
           </div>
@@ -57,7 +53,6 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
                 role="presentation"
                 onClick={() => handleUnselect(opt)}
               >
-                {/* <img src="" alt="" /> */}
                 <AvatarComponent alt={opt.optName} className="opt_avatar" />
                 <p className="optName">{opt.optName}</p>
               </div>
@@ -68,13 +63,12 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
         {options.length > 0 ? (
           options?.map((opt) => (
             <div className="customOptions" role="presentation" onClick={() => handleSelect(opt)}>
-              {/* <img src="" alt="" /> */}
               <AvatarComponent alt={opt.optName} className="opt_avatar" />
               <p className="optName">{opt.optName}</p>
             </div>
           ))
         ) : (
-          <p className="notxt"> No Clinicians found</p>
+          <p className="notxt">No Clinicians found</p>
         )}
       </div>
     </div>

@@ -1,10 +1,7 @@
-import { React, useState, useEffect } from 'react';
-// mui imports
-import { Grid } from '@mui/material';
-// assets import
-import addBtn from '../../assets/icons/addBtn.svg';
-// child components import
 // eslint-disable-next-line import/no-named-as-default-member
+import { React, useState, useEffect } from 'react';
+import { Grid } from '@mui/material';
+import addBtn from '../../assets/icons/addBtn.svg';
 import AllPatientTable from '../../components/tables/patient/AllPatientsTable';
 import AddNewPatient from '../../components/popups/patient/AddNewPatient';
 import api from '../../api';
@@ -26,8 +23,8 @@ export default function Patient() {
   });
 
   const handleFilterAndSorting = async (item) => {
-    const page1 = item?.page ?? 1;
-    let apiUrl = `/admins/patients/filters?page=${page1}`;
+    // const page1 = item?.page ?? 1;
+    let apiUrl = `/clinicians/allPatientsListWithFilters`;
     const obj = {
       filter_type: '',
       filter_value: '',
@@ -70,7 +67,7 @@ export default function Patient() {
   };
 
   const handleDynamicFilter = async () => {
-    const { data } = await api('get', '/admins/patients/getDynamicFilters');
+    const { data } = await api('get', '/clinicians/getDynamicFilters');
     if (data) {
       setExerciseFilter(data?.exercises);
       setDiaganosisFilter(data?.diagnosis);

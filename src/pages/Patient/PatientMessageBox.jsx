@@ -1,9 +1,5 @@
 import { React } from 'react';
-
-// mui imports
 import { Grid } from '@mui/material';
-
-// child components import
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import MessageBox from '../../components/MessageBox';
 

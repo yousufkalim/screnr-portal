@@ -1,13 +1,8 @@
-// mui imports
 import { Grid } from '@mui/material';
-
-// assets import
 import { ReactComponent as Clock } from '../assets/components/TimeCard/clock.svg';
 import { ReactComponent as Login } from '../assets/components/TimeCard/login.svg';
 import { ReactComponent as LoginCount } from '../assets/components/TimeCard/loginCount.svg';
 import { ReactComponent as Logoff } from '../assets/components/TimeCard/logoff.svg';
-
-// child components import
 import GenericSidebar from '../components/sidebar/GenericLeftSidebar';
 import PatientSidebar from '../components/sidebar/patient/PatientSidebar';
 import TimeCard from '../components/cards/TimeCard';

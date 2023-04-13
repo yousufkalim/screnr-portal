@@ -1,13 +1,6 @@
 import { useState } from 'react';
-
-// mui imports
-// import Radio from '@mui/material/Radio';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Typography from '@mui/material/Typography';
 import Collapse from '@mui/material/Collapse';
 import moment from 'moment';
-
-// assets import
 import { ReactComponent as Back } from '../assets/icons/backBtn.svg';
 import { ReactComponent as OpenArrow } from '../assets/components/Sidebar/openArrow.svg';
 

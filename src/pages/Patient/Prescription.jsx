@@ -1,11 +1,7 @@
 import { React, useState, useEffect } from 'react';
-// mui imports
 import { Grid } from '@mui/material';
-// navigator
 import { useNavigate, useParams } from 'react-router-dom';
-// assets import
 import addBtn from '../../assets/icons/addBtn.svg';
-// child components import
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import PatientTopSection from '../../components/PatientTopSection';
 import PrescriptionTable from '../../components/tables/prescription/PrescriptionTable';
@@ -22,12 +18,12 @@ export default function Prescription() {
   const [selectedClinician, setSelectedClinician] = useState('');
 
   const getPatients = async () => {
-    await api('get', `/admins/patients/${id}`)
+    await api('get', `/clinicians/getPatientDetail/${id}`)
       .then(async (res) => {
         setPatient(res?.data?.user);
         setSelectedClinician(res?.data?.user?.userData?.clinicians[0]?.id);
         const ClinicId = res?.data?.user?.userData?.clinicians[0]?.userData?.clinic;
-        await api('get', `/admins/clinicians/getCliniciansByClinicId/${ClinicId}`)
+        await api('get', `/clinicians/getCliniciansByClinicId/${ClinicId}`)
           .then((res1) => {
             setAllClinicians(res1?.data?.users);
           })

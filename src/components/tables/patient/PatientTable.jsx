@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState, Fragment } from 'react';
-
 // mui imports
 import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -13,15 +12,13 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
-
-// // assets import
+// assets import
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
-
 // child component imports
 import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar';
@@ -185,7 +182,7 @@ export default function PatientTable({ patients, getPatients }) {
                     setPatient(row);
                   }}
                 >
-                  <TableCell align="left"> {row?.userData?.mrn_id} </TableCell>
+                  <TableCell align="left"> {row?.id} </TableCell>
                   <TableCell
                     align="left"
                     sx={{

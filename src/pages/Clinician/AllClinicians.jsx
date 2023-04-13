@@ -1,16 +1,11 @@
 import { React, useState, useEffect, useRef } from 'react';
-
-// mui imports
 import { Grid } from '@mui/material';
-
-// child components import
 import AllCliniciansTable from '../../components/tables/clinician/AllCliniciansTable';
 import api from '../../api';
 
 export default function AllClinicians() {
   const [clinicians, setClinicians] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
   const abortControllerRef = useRef(null);
 
   useEffect(() => {
@@ -29,7 +24,7 @@ export default function AllClinicians() {
     const abortController = new AbortController();
     abortControllerRef.current = abortController;
 
-    let apiUrl = `/admins/clinicians?page=${page}`;
+    let apiUrl = `/clinics/allCliniciansList?page=${page}`;
     if (sort) {
       apiUrl += `&sort=${sort}`;
     }

@@ -1,0 +1,61 @@
+.clinician_dashboard_main_div {
+  width: 100%;
+  max-height: 90vh;
+  background-color: #f6fafb;
+  padding: 1rem 4rem 0rem 4rem;
+  position: relative !important;
+  padding-bottom: 8rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.clinician_dashboard_left_div {
+  width: 77%;
+  max-height: 90vh;
+}
+.clinician_dashboard_right_div {
+  width: 23%;
+  max-height: 90vh;
+}
+.clinician_statsCards_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.vertical_patient_info_card_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.vertical_patient_info_card {
+  height: 120px;
+  width: 49%;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+.active_patients_details_div {
+  display: flex;
+  flex-direction: column;
+}
+
+.total_active_patients {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.active_patients_title {
+  color: #919b9b;
+  font-size: 1rem;
+}
+
+.staff_dashboard_div {
+  width: 100%;
+  max-height: 90vh;
+}
