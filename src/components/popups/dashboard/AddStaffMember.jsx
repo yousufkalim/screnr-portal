@@ -1,5 +1,4 @@
 import { React, useState } from 'react';
-// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -10,20 +9,13 @@ import { FormControl, TextField } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
-// react-toastify import
 import { toast } from 'react-toastify';
-
-// react-datepicker import
 import DatePicker from 'react-datepicker';
 import CustomPhoneInput from '../general/CustomPhoneInput';
 import 'react-datepicker/dist/react-datepicker.css';
-
-// assets import
 import arrow from '../../../assets/icons/RightArrow.svg';
 import edit from '../../../assets/icons/edit.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
-
-// child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegisteredPopup';
 import UserCreated from '../general/UserCreated';
@@ -110,7 +102,7 @@ export default function AddStaffMember({
         return toast.error('Please enter expiry date');
       }
 
-      const { data } = await api('post', '/admins/staff', formData);
+      const { data } = await api('post', '/admins/addStaff', formData);
 
       if (data) {
         getStaffMembers();

@@ -1,15 +1,7 @@
 import { React, useState, useEffect } from 'react';
-
-// mui imports
 import { Grid } from '@mui/material';
-
-// import useParams
 import { useNavigate, useParams } from 'react-router-dom';
-
-// assets import
 import addBtn from '../../assets/icons/addBtn.svg';
-
-// child components import
 import Sidebar from '../../components/sidebar/GenericLeftSidebar';
 import ClinicAdminTable from '../../components/tables/clinicAdmin/ClinicAdminsTable';
 import AddClinicAdmin from '../../components/popups/clinicAdmin/AddNewClinicAdmin';
@@ -17,19 +9,18 @@ import EditStaffMember from '../../components/popups/dashboard/EditStaffMember';
 import api from '../../api';
 
 export default function ClinicAdmin() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
   const [clinicAdmins, setClinicAdmins] = useState({});
   const [staffMember, setStaffMember] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const { id } = useParams();
-  const navigate = useNavigate();
-
   const getClinicAdmins = async (page = 1) => {
     setIsLoading(true);
     try {
-      const { data } = await api('get', `/admins/clinics/getClinicsByStaffId/${id}?page=${page}`);
+      const { data } = await api('get', `/staff/getClinicsByStaffId/${id}?page=${page}`);
       if (data) {
         setClinicAdmins(data);
       }
@@ -38,11 +29,13 @@ export default function ClinicAdmin() {
       setIsLoading(false);
     }
   };
+
   const handleDashboardNavClick = () => {
-    navigate('/dashboard');
+    navigate('/admins/dashboard');
   };
+
   const getData = async () => {
-    const { data } = await api('get', `/admins/staff/${id}`);
+    const { data } = await api('get', `/admins/getStaff/${id}`);
     setStaffMember(data?.user);
   };
 
@@ -58,7 +51,7 @@ export default function ClinicAdmin() {
         <Grid xl={2} lg={2.5}>
           <Sidebar
             id={id}
-            txt="admins/staff"
+            txt="admins/getStaff"
             roleTxt="Staff Id"
             setOpen={setOpenEditStaffMember}
             open={openEditStaffMember}

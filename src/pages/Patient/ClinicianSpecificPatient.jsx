@@ -1,21 +1,13 @@
 import { React, useState, useEffect } from 'react';
-
-// mui imports
 import { Grid } from '@mui/material';
-
-// import useParams
 import { useNavigate, useParams } from 'react-router-dom';
-
-// assets import
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/greenIcon.svg';
-import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
-import { ReactComponent as YellowIcon } from '../../assets/components/StatsCard/yellowIcon.svg';
 import { ReactComponent as GreenStats } from '../../assets/components/StatsCard/greenStats.svg';
-import { ReactComponent as RedStats } from '../../assets/components/StatsCard/redStats.svg';
+import { ReactComponent as YellowIcon } from '../../assets/components/StatsCard/yellowIcon.svg';
 import { ReactComponent as YellowStats } from '../../assets/components/StatsCard/yellowStats.svg';
-
-// child components import
+import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
+import { ReactComponent as RedStats } from '../../assets/components/StatsCard/redStats.svg';
 import Sidebar from '../../components/sidebar/GenericLeftSidebar';
 import StatsCard from '../../components/cards/StatsCard';
 import PatientTable from '../../components/tables/patient/PatientTable';
@@ -31,10 +23,7 @@ export default function Patient() {
   const { id } = useParams();
 
   const getPatients = async (page = 1) => {
-    const { data } = await api(
-      'get',
-      `/admins/patients/getPatientsByClinicianId/${id}?page=${page}`,
-    );
+    const { data } = await api('get', `/clinicians/getPatientsByClinicianId/${id}?page=${page}`);
     if (data) {
       setPatients(data);
     }
@@ -84,7 +73,12 @@ export default function Patient() {
     <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '100vh' }}>
       <Grid container>
         <Grid xl={2} lg={2.5}>
-          <Sidebar id={id} txt="admins/clinicians" roleTxt="Clinic" getClinicName={getClinicName} />
+          <Sidebar
+            id={id}
+            txt="clinics/getClinician"
+            roleTxt="Clinic"
+            getClinicName={getClinicName}
+          />
         </Grid>
 
         <Grid className="bgClinicianTable" xl={7.5} lg={7}>
@@ -108,10 +102,11 @@ export default function Patient() {
             <div className="cards_div_patient_pg">
               {cardsData.map((item) => (
                 <StatsCard
-                  Icon={item.icon}
-                  amount={item.amount}
-                  title={item.title}
-                  BottomStats={item.icon2}
+                  key={item?.title}
+                  Icon={item?.icon}
+                  amount={item?.amount}
+                  title={item?.title}
+                  BottomStats={item?.icon2}
                   statsCardClassName="stats_card_main_div"
                 />
               ))}

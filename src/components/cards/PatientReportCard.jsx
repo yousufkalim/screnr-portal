@@ -1,21 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import moment from 'moment';
-
-// mui imports
 import { TextField } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
-
-// emoji picker
 import EmojiPicker from 'emoji-picker-react';
-
-// assets
 import { ReactComponent as Send } from '../../assets/icons/sendMsg.svg';
 import { ReactComponent as Emoji } from '../../assets/icons/emoji.svg';
 import { ReactComponent as Dummy } from '../../assets/images/dummyprsn.svg';
-
-// child imports
-// import AvatarComponent from '../Avatar';
 import useOutlinedInputStyles from '../../utils/TextMessageInput';
 import api from '../../api';
 
@@ -38,7 +29,7 @@ export default function ReportCard({
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleSubmit = async () => {
-    await api('put', `/admins/prescribedExercises/report/${exerciseId}`, {
+    await api('put', `/clinicians/prescribedExercises/checkReport/${exerciseId}`, {
       report: message,
       report_time: timeStamp,
       answer: reply,

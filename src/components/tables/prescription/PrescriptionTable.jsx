@@ -68,7 +68,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     setLoading(true);
     await request(
       'get',
-      `/admins/prescriptions/getPrescriptionByPatientIdAndClinicianId/${patientId}/${selectedClinicianId}`,
+      `/clinicians/prescriptions/getPrescriptionListByPatientIdAndClinicianId/${patientId}/${selectedClinicianId}`,
     )
       .then((res) => {
         setLoading(false);
@@ -81,9 +81,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
       });
   };
   const handleSearchLogoClick = (sessionId, prescriptionId) => {
-    navigate(
-      `/staff/clinicAdmin/Clinician/Patient/Prescription/Session/${sessionId}/${prescriptionId}`,
-    );
+    navigate(`/patients/${sessionId}/exercise/exerciseDetails/${prescriptionId}`);
   };
   const toggleOpen = (category) => {
     setIsOpen({
@@ -450,22 +448,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                             <span className="circularProgressPrescription">{`${0}%`}</span>
                           </div>
                         </TableCell>
-                        <TableCell align="center">
-                          {sessionStatus[row.status]}
-                          {/* {row.status === 'pending' ? (
-                            <Pending />
-                          ) : row.status === 'in-progress' ? (
-                            <Inprogress />
-                          ) : row.status === 'completed' ? (
-                            <Complete />
-                          ) : row.status === 'errored' ? (
-                            <Error />
-                          ) : row.status === 'unchecked' ? (
-                            <Incomplete />
-                          ) : (
-                            <Pending />
-                          )} */}
-                        </TableCell>
+                        <TableCell align="center">{sessionStatus[row.status]}</TableCell>
                       </StyledTableRow>
                     ))}
                   </TableBody>

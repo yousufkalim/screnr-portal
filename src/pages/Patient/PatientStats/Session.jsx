@@ -1,311 +1,50 @@
-/* eslint-disable import/extensions */
-import { React, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Grid } from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
-import ExcerciseChart from './ExcerciseChart';
-import ExcerciseSideBar from '../../../components/sidebar/patient/ExerciseSidebar';
-import ReportCard from '../../../components/cards/PatientReportCard';
-import MultiCircularProgress from './OverallExcerciseScore.jsx';
-import { ReactComponent as TitleExcerciseIcon } from '../../../assets/icons/titleExcerciseIcon.svg';
-import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
-import { ReactComponent as LeftArrow } from '../../../assets/icons/ArrowIcon1.svg';
-import { ReactComponent as RightArrow } from '../../../assets/icons/ArrowIcon2.svg';
-import { ReactComponent as RedDot } from '../../../assets/icons/sessionGraphColorDot1.svg';
-import { ReactComponent as GreenDot } from '../../../assets/icons/sessionGraphColorDot2.svg';
-import { ReactComponent as YellowDot } from '../../../assets/icons/sessionGraphColorDot3.svg';
-import api from '../../../api/index.js';
 
-export default function Session() {
-  const params = useParams();
-  const { sessionId, prescriptionId } = params;
-  const [session, setSession] = useState({});
-  const [patient, setPatient] = useState({});
-  const navigate = useNavigate();
-  const handleGetSessionById = async () => {
-    await api('get', `/admins/sessions/${sessionId}`)
-      .then(async (res) => {
-        setSession(res?.data?.session);
-        await api('get', `/admins/patients/${res?.data?.session?.patient?.id}`)
-          .then((res2) => {
-            setPatient(res2?.data?.user);
-          })
-          .catch((err) => {
-            // eslint-disable-next-line no-console
-            console.error(err);
-          });
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error(err);
-      });
-  };
-  const handleDashboardNavClick = () => {
-    navigate('/dashboard');
-  };
-  const goToStaff = () => {
-    window.history.go(-4);
-  };
-  const goToClinicAdmin = () => {
-    window.history.go(-3);
-  };
-  const goToClinician = () => {
-    window.history.go(-2);
-  };
-  const goToPatient = () => {
-    window.history.go(-1);
-  };
-  const goToPrescription = () => {
-    window.history.go(-1);
-  };
+// /* eslint-disable import/extensions */
+// import { React, useEffect, useState } from 'react';
+// import { useParams } from 'react-router-dom';
+// import { Grid } from '@mui/material';
+// import ExcerciseSideBar from '../../../components/sidebar/patient/ExerciseSidebar';
+// import api from '../../../api/index.js';
 
-  useEffect(() => {
-    handleGetSessionById();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return (
-    <Grid container>
-      <Grid xl={2} lg={2.5}>
-        <div className="sideBar_nadded">
-          <ExcerciseSideBar patient={patient} session={session} prescriptionId={prescriptionId} />
-        </div>
-      </Grid>
-      <Grid className="bgMsg" xl={10} lg={9.5}>
-        <div className="bg_main_div_sessions" style={{ height: '85rem', background: '#F6FAFB' }}>
-          <div className="breadCrumb" style={{ display: 'flex' }}>
-            <div
-              className="navigationEntities"
-              onClick={handleDashboardNavClick}
-              aria-hidden="true"
-            >
-              Dashboard &gt;
-            </div>
-            <div className="navigationEntities" onClick={goToStaff} aria-hidden="true">
-              Staff &gt;
-            </div>
-            <div className="navigationEntities" onClick={goToClinicAdmin} aria-hidden="true">
-              Clinic Admin &gt;
-            </div>
-            <div className="navigationEntities" onClick={goToClinician} aria-hidden="true">
-              Clinician &gt;
-            </div>
-            <div className="navigationEntities" onClick={goToPatient} aria-hidden="true">
-              {' '}
-              Patient &gt;
-            </div>
-            <div className="navigationEntities" onClick={goToPrescription} aria-hidden="true">
-              {' '}
-              Prescription &gt;{' '}
-            </div>
-            Session &gt;
-          </div>
-          <div className="bgAddPrescriptionSessions">
-            <div className="SessionsHeading">
-              <div className="leftside_title">
-                <div className="backIcon_button">
-                  <BackIcon className="arrows" />
-                </div>
-                <div className="dateTitle">
-                  <p>Session Date</p>
-                </div>
-                <div className="dateExcercise">
-                  <p>01/05/2022</p>
-                </div>
-              </div>
-              <div className="excerciseDay">
-                <p>Monday Excercise</p>
-              </div>
-            </div>
+// export default function Session() {
+//   const params = useParams();
+//   const { sessionId, prescriptionId } = params;
+//   const [session, setSession] = useState({});
+//   const [patient, setPatient] = useState({});
 
-            <div className="excercise_name_heading">
-              <div className="excerciseNameIcon">
-                <TitleExcerciseIcon />
-              </div>{' '}
-              <p className="excercise_name_p">Supine Bridge</p>
-            </div>
-            <div className="excercise_details">
-              <div className="setNumber">
-                <div className="text_rep_set">
-                  <p>set Number</p>
-                </div>
-                <div className="set_rep_valueNumber">
-                  <LeftArrow className="arrows" />
-                  <p> 04 </p>
-                  <RightArrow className="arrows" />
-                </div>
-              </div>
-              <div className="setNumber">
-                <div className="text_rep_set">
-                  <p>Rep number</p>
-                </div>
-                <div className="set_rep_valueNumber">
-                  <LeftArrow className="arrows" /> <p> 12 </p>
-                  <RightArrow className="arrows" />
-                </div>
-              </div>
-            </div>
-            <div className="jointScoreHeading">
-              <p>Joint Score (Lateral View)</p>
-            </div>
-            <div className="jointScoreOuterDiv">
-              <div className="score_Bar1">
-                <div className="overallScoreGraph">
-                  <div className="overAll_Arrows">
-                    <LeftArrow className="arrows" />
-                    <p className="excercises_names">Overall</p>
-                    <RightArrow className="arrows" />
-                  </div>
-                  <MultiCircularProgress />
-                  <div className="graphData">
-                    <p className="excercise_percent">88</p> <p className="scoreText">Score</p>
-                  </div>
-                  <div className="colorDotsDiv2">
-                    <div className="colorDots">
-                      <RedDot /> <p className="colortxt">Low</p>
-                    </div>
-                    <div className="colorDots">
-                      <GreenDot />
-                      <p className="colortxt">Medium</p>
-                    </div>
-                    <div className="colorDots">
-                      <YellowDot />
-                      <p className="colortxt">High</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="score_Bars">
-                <p className="excercises_names">Super Arm</p>{' '}
-                <div>
-                  <CircularProgress
-                    variant="determinate"
-                    thickness="8"
-                    value={0}
-                    size={60}
-                    sx={{ color: '#FABB18' }}
-                  />
-                  <div className="graphData">
-                    <p className="excercise_percent">00</p> <p className="scoreText">Score</p>
-                  </div>
-                </div>
-              </div>
-              <div className="score_Bars">
-                <p className="excercises_names">Thigh Angle</p>{' '}
-                <div>
-                  <CircularProgress
-                    variant="determinate"
-                    thickness="8"
-                    value={0}
-                    size={60}
-                    sx={{ color: '#FF5151' }}
-                  />
-                  <div className="graphData">
-                    <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
-                  </div>
-                </div>
-              </div>
-              <div className="score_Bars">
-                <div>
-                  <p className="excercises_names">Spine Angle</p>{' '}
-                </div>
-                <div>
-                  <CircularProgress
-                    variant="determinate"
-                    thickness="8"
-                    value={0}
-                    size={60}
-                    sx={{ color: '#25CC7C' }}
-                  />
-                  <div className="graphData">
-                    <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
-                  </div>
-                </div>
-              </div>
-              <div className="score_Bars">
-                <p className="excercises_names">Ankle Flexion</p>{' '}
-                <div>
-                  <CircularProgress
-                    variant="determinate"
-                    thickness="8"
-                    value={0}
-                    size={60}
-                    sx={{ color: '#FABB18' }}
-                  />
-                  <div className="graphData">
-                    <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
-                  </div>
-                </div>
-              </div>
-              <div className="score_Bars">
-                <p className="excercises_names">Shin Angle</p>{' '}
-                <div>
-                  <CircularProgress
-                    variant="determinate"
-                    thickness="8"
-                    value={0}
-                    size={60}
-                    sx={{ color: '#FF5151' }}
-                  />
-                  <div className="graphData">
-                    <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
-                  </div>
-                </div>
-              </div>
-              <div className="score_Bars">
-                <p className="excercises_names">Upper Arm</p>{' '}
-                <div>
-                  <CircularProgress
-                    variant="determinate"
-                    thickness="8"
-                    value={0}
-                    size={60}
-                    sx={{ color: '#25CC7C' }}
-                  />
-                  <div className="graphData">
-                    <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+//   const handleGetSessionById = async () => {
+//     await api('get', `/admins/sessions/${sessionId}`)
+//       .then(async (res) => {
+//         setSession(res?.data?.session);
+//         await api('get', `/admins/patients/${res?.data?.session?.patient?.id}`)
+//           .then((res2) => {
+//             setPatient(res2?.data?.user);
+//           })
+//           .catch((err) => {
+//             // eslint-disable-next-line no-console
+//             console.error(err);
+//           });
+//       })
+//       .catch((err) => {
+//         // eslint-disable-next-line no-console
+//         console.error(err);
+//       });
+//   };
 
-          <div className="performanceGraphDiv">
-            <div className="performanceName_colors" style={{ display: 'flex' }}>
-              <div className="performanceTitle">
-                <p>Performance Graph</p>
-              </div>
-              <div className="colorDotsDiv">
-                <div className="colorDots">
-                  <GreenDot />
-                  <p className="colortxt">Low</p>
-                </div>
-                <div className="colorDots">
-                  <YellowDot />
-                  <p className="colortxt">Medium</p>
-                </div>
-                <div className="colorDots">
-                  <RedDot />
-                  <p className="colortxt">High</p>
-                </div>
-              </div>
-            </div>
-            <div style={{ width: '90%', height: '80%', marginLeft: '3%' }}>
-              <ExcerciseChart />
-            </div>
-          </div>
-          <div
-            className="reportCardMsgDiv"
-            style={{
-              marginTop: '45px',
-              width: '74vw',
-              marginLeft: '30px',
-              marginBottom: '40px',
-            }}
-          >
-            <ReportCard title="Comments" />
-          </div>
-        </div>
-      </Grid>
-    </Grid>
-  );
-}
+//   useEffect(() => {
+//     handleGetSessionById();
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, []);
+//   return (
+//     <Grid container>
+//       <Grid xl={2} lg={2.5}>
+//         <div className="sideBar_nadded">
+//           <ExcerciseSideBar patient={patient} session={session} prescriptionId={prescriptionId} />
+//         </div>
+//       </Grid>
+//       <Grid className="bgMsg" xl={10} lg={9.5}>
+//         <h1>unwanted screen</h1>
+//       </Grid>
+//     </Grid>
+//   );
+// }

@@ -42,7 +42,7 @@ export default function AssignClinicians({
 
   const handleAddClinicians = async (clinicianId) => {
     setOpenAssignClinicians(false);
-    await api('put', `/admins/patients/addClinicianToPatient/${patientId}`, {
+    await api('put', `/clinicians/addClinicianToPatient/${patientId}`, {
       clinician: clinicianId,
     }).then(() => {
       setOpenAssignClinicians(false);

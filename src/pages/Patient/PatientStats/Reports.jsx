@@ -1,8 +1,5 @@
 import { React } from 'react';
-// mui imports
 import { Grid } from '@mui/material';
-
-// child components import
 import RightSidebar from '../../../components/sidebar/patient/PatientListRightSidebar';
 import ReportCard from '../../../components/cards/PatientReportCard';
 

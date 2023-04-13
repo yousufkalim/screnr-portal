@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-// mui imports
 import Avatar from '@mui/material/Avatar';
 // import Badge from '@mui/material/Badge';
 // import { styled } from '@mui/material/styles';

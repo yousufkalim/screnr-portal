@@ -1,6 +1,4 @@
 import { React, useState, useEffect } from 'react';
-
-// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -13,27 +11,20 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import ClearIcon from '@mui/icons-material/Clear';
-
-// react-toastify import
 import { toast } from 'react-toastify';
-
-// react-datepicker import
 import DatePicker from 'react-datepicker';
-
-// assets import
 import add from '../../../assets/icons/add.svg';
 import edit from '../../../assets/icons/edit.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
 import CustomPhoneInput from '../general/CustomPhoneInput';
-
-// child imports
 import useOutlinedInputStyles from '../../../utils/AddFormInput';
 import ReactSelect from '../../ReactSelect';
 import api from '../../../api';
 import UserAlreadyExist from '../general/UserAlreadyExist';
 import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegisteredPopup';
 import UserCreated from '../general/UserCreated';
+import { Store } from '../../../StoreContext';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
@@ -53,6 +44,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPatients }) {
+  const { user } = Store();
   const [checked, setChecked] = useState(false);
   const [clinicians, setClinicians] = useState([]);
   const [clinics, setClinics] = useState({});
@@ -115,7 +107,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
   };
 
   const getAllClinics = async () => {
-    const { data } = await api('get', '/admins/clinics/getAllClinicsNonPaginated');
+    const { data } = await api('get', '/staff/getAllClinicsNonPaginated');
     if (data) {
       setClinics(data);
     }
@@ -124,7 +116,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
   const getClinicians = async (page, clinicId) => {
     const { data } = await api(
       'get',
-      `/admins/clinicians/getCliniciansByClinicId/${clinicId}?page=${page ?? 1}`,
+      `/clinicians/getCliniciansByClinicId/${clinicId}?page=${page ?? 1}`,
     );
     if (data) {
       setClinicians(
@@ -150,6 +142,10 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
 
       // Create a new FormData object
       const formData = new FormData();
+
+      if (user?.role === 'clinician') {
+        formData.append(`userData[clinicians][0]`, [user?.id]);
+      }
 
       if (patient.expiry_date && !checked) {
         delete patient.expiry_date;
@@ -182,7 +178,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
       }
 
       // sending this data to api
-      const { data } = await api('post', '/admins/patients', formData);
+      const { data } = await api('post', '/clinicians/addPatient', formData);
       if (data) {
         toast.success('Patient added successfully');
         getPatients();
@@ -235,10 +231,19 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
       handleClose();
     }
   };
+  useEffect(() => {
+    if (user?.role === 'clinic') {
+      getClinicians(1, user?.id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openAddPatient]);
 
   useEffect(() => {
-    getAllClinics();
-  }, []);
+    if (user?.role !== 'clinician' || user?.role !== 'clinic') {
+      getAllClinics();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openAddPatient]);
 
   return (
     <div>
@@ -288,7 +293,14 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
               </div>
             </div>
 
-            <FormControl sx={{ mt: 3, width: '100%' }} variant="outlined">
+            <FormControl
+              sx={{
+                mt: 3,
+                width: '100%',
+                display: user?.role === 'clinician' || user?.role === 'clinic' ? 'none' : '',
+              }}
+              variant="outlined"
+            >
               <Select
                 // eslint-disable-next-line react/no-unstable-nested-components
                 IconComponent={(props) => (
@@ -334,7 +346,10 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 ))}
               </Select>
             </FormControl>
-            <FormControl sx={{ mt: 2, width: '100%' }} variant="outlined">
+            <FormControl
+              sx={{ mt: 2, width: '100%', display: user?.role === 'clinician' ? 'none' : '' }}
+              variant="outlined"
+            >
               <ReactSelect dataOptions={clinicians} setUserData={setUserData} />
             </FormControl>
             <FormControl sx={{ mb: 1, mt: 2, width: '100%' }} variant="outlined">
@@ -541,31 +556,25 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 onChange={handleUserDataChange}
               >
                 <MenuItem disabled selected value="">
-                  <span style={{ color: '#949494' }}>Location</span>{' '}
+                  <span style={{ color: '#949494' }}>Location</span>
                 </MenuItem>
                 <MenuItem value="left">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Left</span>{' '}
+                  <span style={{ color: '#949494' }}>Left</span>
                 </MenuItem>
                 <MenuItem value="right">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Right</span>{' '}
+                  <span style={{ color: '#949494' }}>Right</span>
                 </MenuItem>
                 <MenuItem value="posterior">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Posterior</span>{' '}
+                  <span style={{ color: '#949494' }}>Posterior</span>
                 </MenuItem>
                 <MenuItem value="anterior">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Anterior</span>{' '}
+                  <span style={{ color: '#949494' }}>Anterior</span>
                 </MenuItem>
                 <MenuItem value="medical">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Medial</span>{' '}
+                  <span style={{ color: '#949494' }}>Medial</span>
                 </MenuItem>
                 <MenuItem value="lateral">
-                  {' '}
-                  <span style={{ color: '#949494' }}>Lateral</span>{' '}
+                  <span style={{ color: '#949494' }}>Lateral</span>
                 </MenuItem>
               </Select>
             </FormControl>

@@ -1,7 +1,6 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { React, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { React, useState, useEffect } from 'react';
 import Collapse from '@mui/material/Collapse';
 import { ReactComponent as Msg } from '../../../assets/components/Sidebar/msg.svg';
 import { ReactComponent as Survey } from '../../../assets/components/Sidebar/painSurvey.svg';
@@ -10,39 +9,47 @@ import { ReactComponent as Dropdown } from '../../../assets/components/Sidebar/d
 import { ReactComponent as Divider } from '../../../assets/components/Sidebar/divider.svg';
 import PatientSidebarSection from './PatientSidebarSection';
 
-export default function Sidebar({ session, patient, prescriptionId }) {
+export default function Sidebar({
+  session,
+  patient,
+  setActiveTab,
+  activeTab,
+  handleGetExerciseById,
+}) {
   const [expanded, setExpanded] = useState(false);
   const [toggleIcon, setToggleIcon] = useState(false);
+  const [activeItem, setActiveItem] = useState('');
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
     setToggleIcon(!toggleIcon);
   };
+  const handleActiveTab = (targetTab) => {
+    setActiveTab(targetTab);
+  };
+
+  useEffect(() => {
+    setExpanded(true);
+  }, []);
 
   return (
     <div className="left_side">
       <PatientSidebarSection patientData={patient} />
       <div className="activityLeft" role="presentation">
-        <Exercise className={window.location.pathname.includes('session') ? 'iconActivity' : ''} />
+        <Exercise className={expanded ? 'iconActivity' : ''} />
         <div
           className="dropdownIcons"
           onClick={() => {
             handleExpandClick();
           }}
         >
-          <p
-            className={
-              window.location.pathname.includes('session') ? 'clickedActivity' : 'activityTxt'
-            }
-          >
-            Exercise
-          </p>
+          <p className={expanded ? 'clickedActivity' : 'activityTxt'}>Exercise</p>
           {expanded ? (
             <Dropdown
               style={{
                 cursor: 'pointer',
               }}
-              className={window.location.pathname.includes('session') ? 'divider' : ''}
+              className={expanded ? 'divider' : ''}
             />
           ) : (
             <Dropdown
@@ -50,7 +57,7 @@ export default function Sidebar({ session, patient, prescriptionId }) {
                 transform: 'rotateX(180deg)',
                 cursor: 'pointer',
               }}
-              className={window.location.pathname.includes('session') ? 'divider' : ''}
+              className={expanded ? 'divider' : ''}
             />
           )}
         </div>
@@ -60,35 +67,37 @@ export default function Sidebar({ session, patient, prescriptionId }) {
           <div className="exerciseList">
             <Divider className={window.location.pathname.includes('session') ? 'divider' : ''} />
             <div>
-              {session?.exercises?.map((row) => (
-                <NavLink
-                  key={row.id}
-                  to={`/patients/${session?.id}/exercise/exerciseDetails/${row.id}`}
-                  className={({ isActive }) => (isActive ? 'selectedItemExercise' : 'itemExercise')}
+              {session?.exercises?.map((exercise) => (
+                <div
+                  className={exercise.name === activeItem ? 'selectedItemExercise' : 'itemExercise'}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => {
+                    handleGetExerciseById(exercise?.id);
+                    handleActiveTab('exercise');
+                    setActiveItem(exercise.name);
+                  }}
                 >
-                  <div className="actionDiv" style={{ cursor: 'pointer' }}>
-                    {row.name}
-                  </div>
-                </NavLink>
+                  {exercise.name}
+                </div>
               ))}
             </div>
           </div>
         </Collapse>
       </div>
-      <NavLink
-        to={`/patients/${session?.id}/exercise/painSurvey/${prescriptionId}`}
-        className={({ isActive }) => (isActive ? 'selectedExActivity' : 'activityEx')}
+      <div
+        onClick={() => handleActiveTab('Pain Survey')}
+        className={activeTab === 'Pain Survey' ? 'selectedExActivity' : 'activityEx'}
       >
         <Survey className="exIcon" />
         <p className="exTxt">Pain Survey</p>
-      </NavLink>
-      <NavLink
-        to={`/patients/${session?.id}/exercise/reports`}
-        className={({ isActive }) => (isActive ? 'selectedExActivity' : 'activityEx')}
+      </div>
+      <div
+        onClick={() => handleActiveTab('Reports')}
+        className={activeTab === 'Reports' ? 'selectedExActivity' : 'activityEx'}
       >
         <Msg className="exIcon" />
         <p className="exTxt">Reports</p>
-      </NavLink>
+      </div>
     </div>
   );
 }

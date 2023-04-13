@@ -1,6 +1,4 @@
 import { React, useState, useEffect } from 'react';
-
-// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -13,21 +11,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-
-// moment
 import moment from 'moment';
-
-// react-toastify import
 import { toast } from 'react-toastify';
-
-// react-datepicker import
 import DatePicker from 'react-datepicker';
-
-// assets import
 import dropdown from '../../../assets/icons/downArrow.svg';
 import edit from '../../../assets/icons/edit.svg';
-
-// child component imports
 import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar';
 import useOutlinedInputStyles from '../../../utils/EditFormInput';
@@ -161,7 +149,7 @@ export default function EditClinician({
     }
 
     // sending this data to api
-    const { data } = await api('put', `/admins/clinicians/${clinicianDetails.id}`, formData);
+    const { data } = await api('put', `/clinics/editClinician/${clinicianDetails.id}`, formData);
     if (data) {
       toast.success('Clinician updated successfully');
       handleClose();
