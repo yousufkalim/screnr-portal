@@ -1,6 +1,6 @@
 // unAuth Routes
 import Login from '../unAuth/Login';
-// Routes
+import VerifyEmail from '../unAuth/VerifyEmail';
 import Dashboard from '../pages/Dashboard';
 import ClinicAdmin from '../pages/ClinicAdmin/StaffSpecificClinicAdmin';
 import AllClinicAdmins from '../pages/ClinicAdmin/AllClinicAdmins';
@@ -29,7 +29,12 @@ const superadminRoutes = [
     path: '/login',
     element: <Login />,
   },
-  // Dashboard route for all roles
+  {
+    path: '/VerifyEmail',
+    element: <VerifyEmail />,
+  },
+
+  // routes for all data
   {
     path: '/clinician/dasboard',
     element: <ClinicianDashboard />,
