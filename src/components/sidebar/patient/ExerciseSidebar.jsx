@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 import Collapse from '@mui/material/Collapse';
 import { ReactComponent as Msg } from '../../../assets/components/Sidebar/msg.svg';
 import { ReactComponent as Survey } from '../../../assets/components/Sidebar/painSurvey.svg';
@@ -16,7 +16,7 @@ export default function Sidebar({
   activeTab,
   handleGetExerciseById,
 }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const [toggleIcon, setToggleIcon] = useState(false);
   const [activeItem, setActiveItem] = useState('');
 
@@ -27,10 +27,6 @@ export default function Sidebar({
   const handleActiveTab = (targetTab) => {
     setActiveTab(targetTab);
   };
-
-  useEffect(() => {
-    setExpanded(true);
-  }, []);
 
   return (
     <div className="left_side">

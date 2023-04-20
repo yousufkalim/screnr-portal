@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { useState } from 'react';
-// mui imports
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -11,20 +10,14 @@ import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
-// navigation
 import { useNavigate } from 'react-router-dom';
-
-// assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
-
-// child import
-import AvatarComponent from '../../Avatar';
-
-import EditStaffMember from '../../popups/dashboard/EditStaffMember';
+import AvatarComponent from '../../Avatar/Avatar.Component';
+import EditStaffMember from '../../popups/dashboard/EditStaff.Popup';
 import { getMediaUrl } from '../../../config';
 import PhoneFormat from '../../../utils/PhoneFormat';
-import DeleteModal from '../../popups/general/DeletePopup';
+import DeleteModal from '../../popups/general/Delete.Popup';
 
 export default function TableComponent({
   setOpenAddStaffMember,

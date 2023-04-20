@@ -18,20 +18,32 @@ import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
-// // assets import
 import { useNavigate } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
 import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
+import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
+import AvatarComponent from '../../Avatar/Avatar.Component';
+import EditPatient from '../../popups/patient/EditPatient.Popup';
 
-// child component imports
-import IconTextField from '../../../utils/CustomTextInput';
-import AvatarComponent from '../../Avatar';
-import useStyles from '../../../utils/RadioBtnStyle';
-import EditPatient from '../../popups/patient/EditPatient';
+const useStyles = makeStyles(() => ({
+  radio: {
+    color: '#D1D1D6 !important',
+    '&$checked': {
+      color: '#136773 !important',
+    },
+  },
+  checkBox: {
+    color: ' #919B9B !important',
+    '&$checked': {
+      color: '#136773 !important',
+    },
+  },
+  checked: {},
+}));
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {

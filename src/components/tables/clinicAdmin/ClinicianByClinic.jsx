@@ -11,17 +11,11 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import LinearProgress from '@mui/material/LinearProgress';
-
-// navigation
 import { useNavigate } from 'react-router-dom';
-
-// assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
-
-// child component imports
-import EditClinician from '../../popups/clinician/EditClinician';
+import EditClinician from '../../popups/clinician/EditClinician.Popup';
 import { getMediaUrl } from '../../../config';
-import AvatarComponent from '../../Avatar';
+import AvatarComponent from '../../Avatar/Avatar.Component';
 import PhoneFormat from '../../../utils/PhoneFormat';
 
 const StyledTableRow = styled(TableRow)(() => ({

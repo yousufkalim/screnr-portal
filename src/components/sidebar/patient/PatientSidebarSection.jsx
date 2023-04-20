@@ -19,7 +19,7 @@ import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/
 import edit from '../../../assets/icons/sidebarEdit.svg';
 
 // Avatar
-import AvatarComponent from '../../Avatar';
+import AvatarComponent from '../../Avatar/Avatar.Component';
 
 export default function PatientSidebarSection({
   patientData,

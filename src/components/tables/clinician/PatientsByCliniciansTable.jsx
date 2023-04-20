@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-nested-ternary */
 import { React, useState, Fragment } from 'react';
-// mui imports
 import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
@@ -13,17 +12,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
-// assets import
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
-// child component imports
 import { getMediaUrl } from '../../../config';
-import AvatarComponent from '../../Avatar';
-import EditPatient from '../../popups/patient/EditPatient';
-import AddPatient from '../../popups/patient/AddNewPatient';
+import AvatarComponent from '../../Avatar/Avatar.Component';
+import EditPatient from '../../popups/patient/EditPatient.Popup';
+import AddPatient from '../../popups/patient/AddPatient.Popup';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {

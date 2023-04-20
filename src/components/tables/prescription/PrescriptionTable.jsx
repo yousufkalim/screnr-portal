@@ -1,7 +1,6 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable no-nested-ternary */
 import { useState, useEffect } from 'react';
-// mui imports
 import Table from '@mui/material/Table';
 import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -17,8 +16,6 @@ import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-
-// assets import
 import { ReactComponent as Action } from '../../../assets/components/Table/dots.svg';
 import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
@@ -29,10 +26,9 @@ import { ReactComponent as Inprogress } from '../../../assets/components/Table/i
 import { ReactComponent as Incomplete } from '../../../assets/components/Table/Incomplete.svg';
 import { ReactComponent as Edit } from '../../../assets/icons/editIcon.svg';
 import { ReactComponent as Tick } from '../../../assets/components/Table/markTick.svg';
-// child import
-import AvatarComponent from '../../Avatar';
-import EditPrescription from '../../popups/prescription/EditPrescription';
-import request from '../../../api/index';
+import AvatarComponent from '../../Avatar/Avatar.Component';
+import EditPrescription from '../../popups/prescription/EditPrescription.Popup';
+import request from '../../../request';
 
 export default function PrescriptionTable({ patientId, selectedClinicianId }) {
   const navigate = useNavigate();
