@@ -5,7 +5,7 @@ import { ToastContainer, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Router from 'react-easy-router';
 import Header from './components/Header/Header.component';
-import AllRoutes from './routes';
+import AllRoutes from './routes/index';
 import { UpdateStore } from './StoreContext';
 import { baseUrl } from './config';
 import './css/index.css';
@@ -31,7 +31,7 @@ function App() {
       {/* toastify Container for Notification */}
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar transition={Flip} />
       {/* All Superadmin routes should have header except for login page */}
-      {pathname !== '/' && pathname !== '/login' && <Header />}
+      {pathname !== '/' && pathname !== '/login' && pathname !== '/VerifyEmail' && <Header />}
       {/* Superadmin routes alongwith header */}
       <Router routes={AllRoutes} isAuthenticated={isAuthenticated} />
     </div>

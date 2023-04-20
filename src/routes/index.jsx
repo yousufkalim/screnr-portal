@@ -1,4 +1,5 @@
 import Login from '../unAuth/Login';
+import VerifyEmail from '../unAuth/VerifyEmail';
 import Dashboard from '../pages/SuperAdmin/AdminDashboard.Page';
 import ClinicAdmin from '../pages/ClinicAdmin/StaffSpecificClinicAdmin.Page';
 import AllClinicAdmins from '../pages/ClinicAdmin/AllClinicAdmins.Page';
@@ -25,6 +26,12 @@ const AllRoutes = [
     path: '/login',
     element: <Login />,
   },
+  {
+    path: '/VerifyEmail',
+    element: <VerifyEmail />,
+  },
+
+  // routes for all data
   {
     path: '/clinician/dasboard',
     element: <ClinicianDashboard />,
