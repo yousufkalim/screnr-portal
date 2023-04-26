@@ -1,7 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState } from 'react';
-
-// mui imports
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,18 +10,12 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 import LinearProgress from '@mui/material/LinearProgress';
-
-// navigation
 import { useNavigate } from 'react-router-dom';
-
-// assets import
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
-
-// child component imports
-import EditClinician from '../../popups/clinician/EditClinician';
+import EditClinician from '../../popups/clinician/EditClinician.Popup';
 import { getMediaUrl } from '../../../config';
-import AvatarComponent from '../../Avatar';
+import AvatarComponent from '../../Avatar/Avatar.Component';
 import PhoneFormat from '../../../utils/PhoneFormat';
 
 const StyledTableRow = styled(TableRow)(() => ({

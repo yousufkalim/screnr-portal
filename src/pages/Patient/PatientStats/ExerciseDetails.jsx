@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import CircularProgress from '@mui/material/CircularProgress';
 import ExcerciseChart from './ExcerciseChart';
-import ReportCard from '../../../components/cards/PatientReportCard';
+import ReportCard from '../../../components/cards/ReportCard.Component';
 import MultiCircularProgress from './OverallExcerciseScore';
 import { ReactComponent as TitleExcerciseIcon } from '../../../assets/icons/titleExcerciseIcon.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';

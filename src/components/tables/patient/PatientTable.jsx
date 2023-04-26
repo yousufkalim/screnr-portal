@@ -21,8 +21,8 @@ import { ReactComponent as Message } from '../../../assets/components/Table/emai
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 // child component imports
 import { getMediaUrl } from '../../../config';
-import AvatarComponent from '../../Avatar';
-import EditPatient from '../../popups/patient/EditPatient';
+import AvatarComponent from '../../Avatar/Avatar.Component';
+import EditPatient from '../../popups/patient/EditPatient.Popup';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {

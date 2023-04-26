@@ -10,9 +10,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 import Logo from '../assets/icons/Logo.svg';
 import Vector from '../assets/images/login/loginPgImg.svg';
-import api from '../api';
+import request from '../request';
 import { Store, UpdateStore } from '../StoreContext';
-import ForgetPasswordPopup from '../components/popups/general/ForgetPasswordPopup';
+import ForgetPasswordPopup from '../components/popups/general/ForgetPassword.Popup';
 
 const useOutlinedInputStyles = makeStyles({
   root: {
@@ -72,7 +72,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await api('post', '/auth/login', userData);
+    const { data } = await request('post', '/auth/login', userData);
     updateStore({ user: data.user, loggedIn: true });
     window.location = loggedInUser[data.user.role];
     setUserData({ email: '', password: '' });

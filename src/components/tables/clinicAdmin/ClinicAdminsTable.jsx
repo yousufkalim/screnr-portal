@@ -1,7 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState } from 'react';
-
-// mui imports
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,19 +9,13 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
-
-// navigation
 import { useNavigate } from 'react-router-dom';
-
-// assets import
 import LinearProgress from '@mui/material/LinearProgress';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
-
-// child component imports
-import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin';
+import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin.Popup';
 import { getMediaUrl } from '../../../config';
-import AvatarComponent from '../../Avatar';
+import AvatarComponent from '../../Avatar/Avatar.Component';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {

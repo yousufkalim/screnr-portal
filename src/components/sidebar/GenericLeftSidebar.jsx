@@ -1,6 +1,4 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-nested-ternary */
 import { React, useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -9,8 +7,8 @@ import { ReactComponent as Email } from '../../assets/images/staffScreen/email.s
 import { ReactComponent as Expiry } from '../../assets/images/staffScreen/expiryDate.svg';
 import { ReactComponent as Activity } from '../../assets/components/TimeCard/activity.svg';
 import edit from '../../assets/icons/sidebarEdit.svg';
-import AvatarComponent from '../Avatar';
-import api from '../../api/index';
+import AvatarComponent from '../Avatar/Avatar.Component';
+import request from '../../request';
 import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
@@ -20,7 +18,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
   const [info, setInfo] = useState({});
 
   const getData = async () => {
-    const { data } = await api('get', `/${txt}/${id}`);
+    const { data } = await request('get', `/${txt}/${id}`);
     if (data) {
       setInfo(data?.user);
       if (txt.includes('clinicians')) {
@@ -37,6 +35,17 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
   const handleEditIconClick = () => {
     setOpen(!open);
   };
+
+  let result = '';
+  if (txt.includes('clinics')) {
+    result = info?.userData?.clinic_name || '';
+  } else if (txt.includes('clinicians')) {
+    result = info?.userData?.clinic?.userData?.clinic_name || '';
+  } else if (txt.includes('staff')) {
+    result = info?.id || '';
+  } else {
+    result = '';
+  }
 
   return (
     <div className="left_side">
@@ -74,21 +83,22 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
             </label>
           </div>
         </div>
-        <img src={edit} alt="" className="editIconSidebar" onClick={handleEditIconClick} />
+        <img
+          src={edit}
+          alt=""
+          className="editIconSidebar"
+          onClick={handleEditIconClick}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              handleEditIconClick();
+            }
+          }}
+        />
       </div>
       <div className="sideBarInfo">
         <div className="user_name"> {`${info?.first_name} ${info?.last_name}`}</div>
         <div className="staff_id">
-          {roleTxt}:{' '}
-          <span className="staff_id_2">
-            {txt.includes('clinics')
-              ? info?.userData?.clinic_name
-              : txt.includes('clinicians')
-              ? info?.userData?.clinic?.userData?.clinic_name
-              : txt.includes('staff')
-              ? info?.id
-              : ''}
-          </span>
+          {roleTxt}: <span className="staff_id_2">{result}</span>
         </div>
       </div>
       <div className="sidebarSubDiv">

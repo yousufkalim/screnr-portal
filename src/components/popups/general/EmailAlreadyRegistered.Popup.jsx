@@ -1,0 +1,64 @@
+// mui imports
+import Button from '@mui/material/Button';
+
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Typography from '@mui/material/Typography';
+import ClearIcon from '@mui/icons-material/Clear';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import { ReactComponent as Icon } from '../../../assets/images/popups/existingEmail.svg';
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialog-root': {
+    borderRadius: '20px',
+  },
+  '& .MuiDialogContent-root': {
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+    paddingTop: theme.spacing(9),
+    textAlign: 'center',
+  },
+  '& .MuiDialogActions-root': {
+    paddingLeft: theme.spacing(5),
+    paddingRight: theme.spacing(5),
+    paddingBottom: theme.spacing(7),
+  },
+}));
+
+export default function EmailAlreadyRegisteredPopup({ openExistingEmail, setOpenExistingEmail }) {
+  const handleClose = () => {
+    setOpenExistingEmail(false);
+  };
+
+  return (
+    <div>
+      <BootstrapDialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={openExistingEmail}
+        setOpen={setOpenExistingEmail}
+        fullWidth
+        maxWidth="xs"
+        PaperProps={{
+          style: { borderRadius: 20, background: '#FFFFFF' },
+        }}
+      >
+        <ClearIcon className="loginClearIcon" onClick={handleClose} />
+
+        <DialogContent>
+          <Typography>
+            <Icon />
+            <h1 className="genPresTxt">This email is Already Register</h1>
+            <p className="genSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ width: '100%' }}>
+          <Button onClick={handleClose} className="tryAnotherBtn" variant="contained">
+            Try with Another Email
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
+    </div>
+  );
+}

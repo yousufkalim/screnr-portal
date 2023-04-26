@@ -11,8 +11,8 @@ import Paper from '@mui/material/Paper';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
-import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin';
-import AvatarComponent from '../../Avatar';
+import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin.Popup';
+import AvatarComponent from '../../Avatar/Avatar.Component';
 import { getMediaUrl } from '../../../config';
 
 const StyledTableRow = styled(TableRow)(() => ({

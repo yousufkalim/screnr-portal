@@ -1,7 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState, useEffect, useRef } from 'react';
-
-// mui imports
 import { styled } from '@mui/material/styles';
 import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
@@ -15,21 +13,31 @@ import TablePagination from '@mui/material/TablePagination';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import LinearProgress from '@mui/material/LinearProgress';
-
-// navigation
 import { useNavigate } from 'react-router-dom';
-
-// assets import
+import { makeStyles } from '@mui/styles';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
 import { ReactComponent as Cross } from '../../../assets/icons/crossIcon.svg';
-
-// child component imports
-import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin';
-import AvatarComponent from '../../Avatar';
-import IconTextField from '../../../utils/CustomTextInput';
+import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin.Popup';
+import AvatarComponent from '../../Avatar/Avatar.Component';
+import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import { getMediaUrl } from '../../../config';
-import useStyles from '../../../utils/RadioBtnStyle';
+
+const useStyles = makeStyles(() => ({
+  radio: {
+    color: '#D1D1D6 !important',
+    '&$checked': {
+      color: '#136773 !important',
+    },
+  },
+  checkBox: {
+    color: ' #919B9B !important',
+    '&$checked': {
+      color: '#136773 !important',
+    },
+  },
+  checked: {},
+}));
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {

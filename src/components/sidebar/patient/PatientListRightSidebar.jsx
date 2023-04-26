@@ -1,7 +1,5 @@
 import React from 'react';
-
-// child imports
-import Chart from '../../charts/patient/PatientChart';
+import Chart from '../../charts/patient/Chart.Component';
 
 export default function RightSidebar() {
   return (

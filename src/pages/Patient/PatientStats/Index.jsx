@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import Sidebar from '../../../components/sidebar/patient/ExerciseSidebar';
 import Reports from './Reports';
 import PainSurvey from './PainSurvey';
-import api from '../../../api/index';
+import request from '../../../request';
 import ExerciseDetails from './ExerciseDetails';
 
 export default function Index() {
@@ -18,12 +18,12 @@ export default function Index() {
   const [activeTab, setActiveTab] = useState('');
 
   const handleGetSessionById = async () => {
-    await api('get', `/clinicians/sessions/getSession/${sessionId}`).then(async (res) => {
+    await request('get', `/clinicians/sessions/getSession/${sessionId}`).then(async (res) => {
       setSession(res?.data?.session);
-      await api('get', `/clinicians/getPatientDetail/${res?.data?.session?.patient?.id}`).then(
+      await request('get', `/clinicians/getPatientDetail/${res?.data?.session?.patient?.id}`).then(
         async (res2) => {
           setPatient(res2?.data?.user);
-          await api('get', `/clinicians/prescriptions/getPrescription/${prescriptionId}`).then(
+          await request('get', `/clinicians/prescriptions/getPrescription/${prescriptionId}`).then(
             (res3) => {
               setPrescription(res3?.data?.prescription);
             },
@@ -34,7 +34,7 @@ export default function Index() {
   };
 
   const handleGetExerciseById = async (targetExerciseId) => {
-    await api('get', `/clinicians/prescribedExercises/getExercise/${targetExerciseId}`).then(
+    await request('get', `/clinicians/prescribedExercises/getExercise/${targetExerciseId}`).then(
       (res) => {
         setExercise(res?.data?.prescribedExercises);
       },

@@ -1,7 +1,7 @@
 import { React } from 'react';
 import { Grid } from '@mui/material';
 import RightSidebar from '../../../components/sidebar/patient/PatientListRightSidebar';
-import ReportCard from '../../../components/cards/PatientReportCard';
+import ReportCard from '../../../components/cards/ReportCard.Component';
 
 export default function Reports({ session }) {
   return (
