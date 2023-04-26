@@ -27,7 +27,7 @@ const AllRoutes = [
     element: <Login />,
   },
   {
-    path: '/VerifyEmail',
+    path: '/VerifyEmail/:token',
     element: <VerifyEmail />,
   },
 
@@ -129,7 +129,7 @@ const AllRoutes = [
     protected: true,
   },
   {
-    path: '/patients/:sessionId/exercise/exerciseDetails/:prescriptionId',
+    path: '/patients/:sessionId/exercise/exerciseDetails',
     element: <Index />,
     roles: ['admin', 'staff', 'clinic', 'clinician'],
     protected: true,

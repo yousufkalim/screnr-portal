@@ -76,8 +76,8 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
         console.error(`handlePrescriptionList---> ${err}`);
       });
   };
-  const handleSearchLogoClick = (sessionId, prescriptionId) => {
-    navigate(`/patients/${sessionId}/exercise/exerciseDetails/${prescriptionId}`);
+  const handleSearchLogoClick = (sessionId) => {
+    navigate(`/patients/${sessionId}/exercise/exerciseDetails`);
   };
   const toggleOpen = (category) => {
     setIsOpen({
@@ -371,7 +371,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                       <StyledTableRow
                         className="tableRow"
                         key={row?.id}
-                        onClick={() => handleSearchLogoClick(row?.id, mainRow?.id)}
+                        onClick={() => handleSearchLogoClick(row?.id)}
                       >
                         <TableCell align="left">{moment(row?.date).format('DD/MM/YYYY')}</TableCell>
                         <TableCell align="left" className="table_cells">

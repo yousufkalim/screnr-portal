@@ -196,7 +196,7 @@ export default function AddClinician({
     formData.append('active', 'true');
     formData.append('activateUser', 'true');
 
-    const { data } = await request('put', '/admins/staff/undefined', formData);
+    const { data } = await request('put', '/clinics/editClinician/undefined', formData);
 
     if (data) {
       getClinicians();

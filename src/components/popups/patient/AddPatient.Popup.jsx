@@ -135,10 +135,10 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     }
   };
 
-  const getClinicians = async (page, clinicId) => {
+  const getClinicians = async (clinicId) => {
     const { data } = await request(
       'get',
-      `/clinicians/getCliniciansByClinicId/${clinicId}?page=${page ?? 1}`,
+      `/clinics/getCliniciansByClinicIdNonPaginated/${clinicId}`,
     );
     if (data) {
       setClinicians(
@@ -154,7 +154,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
 
   const handleSelectedClinic = async (e) => {
     setSelectedClinic(e.target.value);
-    await getClinicians(1, e.target.value);
+    await getClinicians(e.target.value);
   };
 
   // posting data
@@ -246,7 +246,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     });
 
     // sending this data to api
-    const { data } = await request('put', '/admins/patients/undefined', formData);
+    const { data } = await request('put', '/clinicians/editPatient/undefined', formData);
     if (data) {
       toast.success('Patient added successfully');
       getPatients();
@@ -255,7 +255,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
   };
   useEffect(() => {
     if (user?.role === 'clinic') {
-      getClinicians(1, user?.id);
+      getClinicians(user?.id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openAddPatient]);
@@ -297,7 +297,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                     onChange={handleSelectedFile}
                     className="noDisplay"
                   />
-
                   <img
                     src={profiles}
                     className="pointer"

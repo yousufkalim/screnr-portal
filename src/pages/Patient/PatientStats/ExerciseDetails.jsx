@@ -77,7 +77,7 @@ function ExerciseDetails({ session, exercise }) {
               </div>
               <MultiCircularProgress />
               <div className="graphData">
-                <p className="excercise_percent">88</p> <p className="scoreText">Score</p>
+                <p className="excercise_percent">00</p> <p className="scoreText">Score</p>
               </div>
               <div className="colorDotsDiv2">
                 <div className="colorDots">

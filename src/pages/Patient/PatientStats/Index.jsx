@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
@@ -10,7 +11,7 @@ import ExerciseDetails from './ExerciseDetails';
 
 export default function Index() {
   const params = useParams();
-  const { sessionId, prescriptionId } = params;
+  const { sessionId } = params;
   const [session, setSession] = useState({});
   const [patient, setPatient] = useState({});
   const [exercise, setExercise] = useState({});
@@ -18,18 +19,11 @@ export default function Index() {
   const [activeTab, setActiveTab] = useState('');
 
   const handleGetSessionById = async () => {
-    await request('get', `/clinicians/sessions/getSession/${sessionId}`).then(async (res) => {
+    await request('get', `/clinicians/sessions/getSessionDetails/${sessionId}`).then((res) => {
       setSession(res?.data?.session);
-      await request('get', `/clinicians/getPatientDetail/${res?.data?.session?.patient?.id}`).then(
-        async (res2) => {
-          setPatient(res2?.data?.user);
-          await request('get', `/clinicians/prescriptions/getPrescription/${prescriptionId}`).then(
-            (res3) => {
-              setPrescription(res3?.data?.prescription);
-            },
-          );
-        },
-      );
+      setPatient(res?.data?.session?.patient);
+      setPrescription(res?.data?.prescription);
+      setExercise(res?.data?.session?.exercises[0]);
     });
   };
 
@@ -65,9 +59,7 @@ export default function Index() {
         ) : activeTab === 'Pain Survey' ? (
           <PainSurvey session={session} prescription={prescription} />
         ) : (
-          activeTab === 'exercise' && (
-            <ExerciseDetails session={session} exercise={exercise ?? session?.exercises[0]} />
-          )
+          activeTab === 'exercise' && <ExerciseDetails session={session} exercise={exercise} />
         )}
       </Grid>
     </Grid>

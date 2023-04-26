@@ -150,7 +150,7 @@ export default function AddStaffMember({
     formData.append('active', true);
     formData.append('activateUser', true);
 
-    const { data } = await request('put', '/admins/staff/undefined', formData);
+    const { data } = await request('put', '/admins/editStaff/undefined', formData);
 
     if (data) {
       getStaffMembers();
