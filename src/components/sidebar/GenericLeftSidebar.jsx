@@ -22,8 +22,8 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
     if (data) {
       setInfo(data?.user);
       if (txt.includes('clinicians')) {
-        getClinicName(data?.user.userData?.clinic?.userData?.clinic_name);
-      } else getClinicName(data?.user.userData?.clinic_name);
+        getClinicName(data?.user?.userData?.clinic?.userData?.clinic_name);
+      } else getClinicName(data?.user?.userData?.clinic_name);
     }
   };
 
