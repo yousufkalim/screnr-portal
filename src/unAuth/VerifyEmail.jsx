@@ -1,22 +1,22 @@
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-
-// mui imports
-import { Grid, IconButton, InputLabel } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  Checkbox,
+  Grid,
+  //  IconButton,
+  InputLabel,
+} from '@mui/material';
+// import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+// import Visibility from '@mui/icons-material/Visibility';
+// import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
-
-// assets import
 import Logo from '../assets/icons/Logo.svg';
 import Vector from '../assets/images/login/loginPgImg.svg';
-
-// child component import
+import request from '../request';
 
 const useOutlinedInputStyles = makeStyles({
   root: {
@@ -43,36 +43,60 @@ const useOutlinedInputStyles = makeStyles({
 });
 
 export default function Login() {
-  const [user, setUser] = useState({});
-  // console.log('user', user);
-  const [show, setShow] = useState({
-    password: false,
-    confirmPassword: false,
+  const params = useParams();
+  const naviagte = useNavigate();
+  const { token } = params;
+  const [user, setUser] = useState({
+    password: '',
+    confirmPassword: '',
+    showPassword: false,
   });
 
   const outlinedInputStyles = useOutlinedInputStyles();
 
-  const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+  const handlePasswordChange = (name, value) => {
+    setUser({ ...user, [name]: value });
   };
 
   const handleClickShowPassword = (name) => {
-    setShow((prevState) => ({ ...prevState, [name]: !prevState[name] }));
+    setUser((prevState) => ({ ...prevState, [name]: !prevState[name] }));
+  };
+
+  const handleResetPage = () => {
+    setUser({
+      password: '',
+      confirmPassword: '',
+      showPassword: false,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!user.password1) {
+    if (!user.password) {
       toast.error('Please enter a password.');
-    } else if (user.password1.length < 8) {
+    } else if (user.password.length < 8) {
       toast.error('Password must be at least 8 characters.');
-    } else if (!user.Confirmpassword) {
+    } else if (!user.confirmPassword) {
       toast.error('Please enter confirm password.');
-    } else if (user.Confirmpassword !== user.password1) {
+    } else if (user.confirmPassword !== user.password) {
       toast.error('Passwords do not match.');
     } else {
-      toast.success('Password Generated successfully.');
+      await request('post', '/auth/verify-email', {
+        password: user.password,
+        confirmPassword: user.confirmPassword,
+        token: token && token,
+      })
+        .then((res) => {
+          console.log(res);
+          toast.success(res.data.message);
+          handleResetPage();
+          naviagte('/login');
+        })
+        .catch((err) => {
+          console.log(err);
+          naviagte('/login');
+        });
     }
   };
 
@@ -110,28 +134,30 @@ export default function Login() {
                       },
                     },
                   }}
-                  value={user.password1}
-                  onChange={handleChange}
+                  value={user.password}
+                  onChange={(e) => {
+                    handlePasswordChange(e.target.name, e.target.value);
+                  }}
                   id="outlined-password"
                   classes={outlinedInputStyles}
                   placeholder="Enter Password"
                   size="normal"
-                  name="password1"
-                  type={show.password ? 'text' : 'password'}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={() => handleClickShowPassword('password')}
-                          aria-label="toggle password visibility"
-                          edge="end"
-                          sx={{ color: '#FBA622', mr: 1 }}
-                        >
-                          {show.password ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
+                  name="password"
+                  type={user.showPassword ? 'text' : 'password'}
+                  // InputProps={{
+                  //   endAdornment: (
+                  //     <InputAdornment position="end">
+                  //       <IconButton
+                  //         onClick={() => handleClickShowPassword('showPassword')}
+                  //         aria-label="toggle password visibility"
+                  //         edge="end"
+                  //         sx={{ color: '#FBA622', mr: 1 }}
+                  //       >
+                  //         {user.showPassword ? <Visibility /> : <VisibilityOff />}
+                  //       </IconButton>
+                  //     </InputAdornment>
+                  //   ),
+                  // }}
                 />
               </FormControl>
             </Grid>
@@ -141,7 +167,7 @@ export default function Login() {
               >
                 Confirm Password
               </InputLabel>
-              <FormControl sx={{ mb: 5, width: '100%' }} variant="outlined">
+              <FormControl sx={{ mb: 0.5, width: '100%' }} variant="outlined">
                 <TextField
                   sx={{
                     backgroundColor: 'white',
@@ -162,31 +188,57 @@ export default function Login() {
                   classes={outlinedInputStyles}
                   placeholder="Confirm password"
                   size="normal"
-                  name="Confirmpassword"
-                  onChange={handleChange}
+                  name="confirmPassword"
+                  onChange={(e) => {
+                    handlePasswordChange(e.target.name, e.target.value);
+                  }}
                   onKeyDown={(event) => {
                     if (event.key === 'Enter') {
                       handleSubmit(event);
                     }
                   }}
-                  value={user.password}
-                  type={show.confirmPassword ? 'text' : 'password'}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={() => handleClickShowPassword('confirmPassword')}
-                          aria-label="toggle password visibility"
-                          edge="end"
-                          sx={{ color: '#FBA622', mr: 1 }}
-                        >
-                          {show.confirmPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
+                  value={user.confirmPassword}
+                  type={user.showPassword ? 'text' : 'password'}
+                  // InputProps={{
+                  //   endAdornment: (
+                  //     <InputAdornment position="end">
+                  //       <IconButton
+                  //         onClick={() => handleClickShowPassword('showPassword')}
+                  //         aria-label="toggle password visibility"
+                  //         edge="end"
+                  //         sx={{ color: '#FBA622', mr: 1 }}
+                  //       >
+                  //         {user.showPassword ? <Visibility /> : <VisibilityOff />}
+                  //       </IconButton>
+                  //     </InputAdornment>
+                  //   ),
+                  // }}
                 />
               </FormControl>
+
+              <InputLabel
+                sx={{
+                  mb: 8,
+                  fontWeight: '500',
+                  color: '#454238',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  gap: '10px',
+                }}
+              >
+                <Checkbox
+                  sx={{
+                    color: '#454238',
+                    padding: '0px',
+                    '&.Mui-checked': {
+                      color: '#FBA622',
+                    },
+                  }}
+                  onClick={() => handleClickShowPassword('showPassword')}
+                />
+                <span>Show password</span>
+              </InputLabel>
 
               <Button className="logInBtn" variant="contained" onClick={handleSubmit}>
                 Verify

@@ -30,7 +30,6 @@ const useOutlinedInputStyles = makeStyles({
       '&:hover fieldset': {
         borderColor: '#FBA622',
       },
-
       '&.Mui-focused fieldset': {
         borderColor: '#FBA622',
       },

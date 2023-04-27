@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +13,10 @@ import './css/index.css';
 function App() {
   const updateStore = UpdateStore();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const verify = window.location.pathname?.split('/')[1];
+  const token = window.location.pathname?.split('/')[2];
+
   const isAuthenticated = async () => {
     const { data } = await axios.get(`${baseUrl}/auth`, { withCredentials: true });
     updateStore({ loggedIn: true, user: data.user });
@@ -26,12 +30,21 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  useEffect(() => {
+    if (verify && verify === 'verify') {
+      if (token) {
+        navigate(`/VerifyEmail/${token}`);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="App">
       {/* toastify Container for Notification */}
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar transition={Flip} />
       {/* All Superadmin routes should have header except for login page */}
-      {pathname !== '/' && pathname !== '/login' && pathname !== '/VerifyEmail' && <Header />}
+      {(pathname !== '/' || pathname !== '/login' || pathname !== '/VerifyEmail') && <Header />}
       {/* Superadmin routes alongwith header */}
       <Router routes={AllRoutes} isAuthenticated={isAuthenticated} />
     </div>
