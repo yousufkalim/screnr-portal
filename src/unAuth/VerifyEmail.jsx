@@ -42,7 +42,7 @@ const useOutlinedInputStyles = makeStyles({
   },
 });
 
-export default function Login() {
+export default function VerifyEmail() {
   const params = useParams();
   const naviagte = useNavigate();
   const { token } = params;
@@ -88,13 +88,12 @@ export default function Login() {
         token: token && token,
       })
         .then((res) => {
-          console.log(res);
-          toast.success(res.data.message);
+          toast.success(res?.data?.message);
           handleResetPage();
           naviagte('/login');
         })
         .catch((err) => {
-          console.log(err);
+          toast.error(err?.response?.data?.message);
           naviagte('/login');
         });
     }

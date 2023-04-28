@@ -10,6 +10,9 @@ import { UpdateStore } from './StoreContext';
 import { baseUrl } from './config';
 import './css/index.css';
 
+const queryParams = new URLSearchParams(window.location.search);
+const verify = queryParams.get('verify');
+const token = queryParams.get('token');
 function App() {
   const userToken = localStorage.getItem('token');
   const updateStore = UpdateStore();
@@ -41,8 +44,7 @@ function App() {
   }, [pathname]);
 
   useEffect(() => {
-    if (pathname?.split('/')[1] === 'verify') {
-      const token = pathname?.split('/')[2];
+    if (verify) {
       if (token) {
         navigate(`/VerifyEmail/${token}`);
       }
