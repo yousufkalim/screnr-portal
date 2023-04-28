@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     if (pathname === '/' || pathname === '/login') {
       isAuthenticated()
-        .then((res) => console.log('res ', res))
+        .then((r) => r)
         .catch((err) => {
           if (err?.response?.status === 403) {
             localStorage.removeItem('token');

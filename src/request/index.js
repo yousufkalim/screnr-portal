@@ -24,7 +24,7 @@ const api = async (method, uri, body) => {
           toast.error(err?.response?.data?.message);
         } else {
           // eslint-disable-next-line no-console
-          console.log('API Error --------> ', err?.response?.status);
+          console.log('API Error --> ', err?.response?.status);
           reject(err);
         }
       });
