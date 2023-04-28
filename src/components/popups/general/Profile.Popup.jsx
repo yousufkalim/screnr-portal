@@ -8,10 +8,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
 import { FormControl, Button } from '@mui/material';
-
-// navigator
-import { useNavigate } from 'react-router-dom';
-
 // moment
 import moment from 'moment';
 
@@ -59,16 +55,15 @@ export default function ProfilePopup({
 }) {
   const { user } = Store();
   const updateStore = UpdateStore();
-  const navigate = useNavigate();
-
   const handleClose = () => {
     setOpenProfilePopup(false);
   };
 
   const handleLogout = () => {
     request('patch', '/auth/logout/');
+    localStorage.removeItem('token');
     updateStore({ user: {}, loggedIn: false });
-    navigate('/');
+    window.location = '/login';
   };
 
   const roles = {

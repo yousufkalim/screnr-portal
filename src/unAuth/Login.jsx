@@ -69,12 +69,14 @@ export default function Login() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { data } = await request('post', '/auth/login', userData);
-    updateStore({ user: data.user, loggedIn: true });
-    window.location = loggedInUser[data.user.role];
-    setUserData({ email: '', password: '' });
+    request('post', '/auth/login', userData).then((res) => {
+      localStorage.setItem('token', res.data.token);
+      updateStore({ user: res.data.user, loggedIn: true });
+      window.location = loggedInUser[res.data.user.role];
+      setUserData({ email: '', password: '' });
+    });
   };
 
   return (

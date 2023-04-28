@@ -10,28 +10,41 @@ import { UpdateStore } from './StoreContext';
 import { baseUrl } from './config';
 import './css/index.css';
 
+const queryParams = new URLSearchParams(window.location.search);
+const verify = queryParams.get('verify');
+const token = queryParams.get('token');
 function App() {
+  const userToken = localStorage.getItem('token');
   const updateStore = UpdateStore();
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const verify = window.location.pathname?.split('/')[1];
-  const token = window.location.pathname?.split('/')[2];
 
   const isAuthenticated = async () => {
-    const { data } = await axios.get(`${baseUrl}/auth`, { withCredentials: true });
+    const { data } = await axios.get(`${baseUrl}/auth`, {
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
     updateStore({ loggedIn: true, user: data.user });
     return { authenticated: true, role: data.user?.role };
   };
 
   useEffect(() => {
     if (pathname === '/' || pathname === '/login') {
-      isAuthenticated().then((r) => r);
+      isAuthenticated()
+        .then((r) => r)
+        .catch((err) => {
+          if (err?.response?.status === 403) {
+            localStorage.removeItem('token');
+          }
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useEffect(() => {
-    if (verify && verify === 'verify') {
+    if (verify) {
       if (token) {
         navigate(`/VerifyEmail/${token}`);
       }
@@ -44,7 +57,12 @@ function App() {
       {/* toastify Container for Notification */}
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar transition={Flip} />
       {/* All Superadmin routes should have header except for login page */}
-      {pathname !== '/' && pathname !== '/login' && pathname !== '/VerifyEmail' && <Header />}
+      {!(
+        pathname === '/login' ||
+        pathname === `/VerifyEmail/${pathname?.split('/')[2]}` ||
+        pathname === '/'
+      ) && <Header />}
+
       {/* Superadmin routes alongwith header */}
       <Router routes={AllRoutes} isAuthenticated={isAuthenticated} />
     </div>
