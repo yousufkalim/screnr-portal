@@ -231,7 +231,7 @@ export default function Header() {
             </div>
           ) : (
             <AvatarComponent
-              alt={`${user.first_name} ${user.last_name}`}
+              alt={`${user?.first_name} ${user?.last_name}`}
               className="header_main_avatar"
               onClick={() => setOpenProfilePopup(true)}
             />

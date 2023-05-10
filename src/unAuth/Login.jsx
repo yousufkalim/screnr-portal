@@ -56,7 +56,7 @@ export default function Login() {
 
   useEffect(() => {
     if (loggedIn) {
-      navigate(`${loggedInUser[user.role]}`);
+      navigate(`${loggedInUser[user?.role]}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
