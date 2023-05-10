@@ -56,14 +56,13 @@ function App() {
     <div className="App">
       {/* toastify Container for Notification */}
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar transition={Flip} />
-      {/* All Superadmin routes should have header except for login page */}
       {!(
         pathname === '/login' ||
         pathname === `/VerifyEmail/${pathname?.split('/')[2]}` ||
         pathname === '/'
       ) && <Header />}
 
-      {/* Superadmin routes alongwith header */}
+      {/* All role's routes alongwith header */}
       <Router routes={AllRoutes} isAuthenticated={isAuthenticated} />
     </div>
   );
