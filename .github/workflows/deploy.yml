@@ -41,10 +41,11 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Target environment (dev)'
+        description: 'Target environment (dev, staging)'
         type: choice
         options:
           - dev
+          - staging
         required: true
 
 jobs:
