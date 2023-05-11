@@ -117,10 +117,18 @@
   height: 82vh;
   padding: 0 3% 1% 3%;
 }
+
+/* .iconAndHeadingClinicTable {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1%;
+  padding-right: 2%;
+} */
 .iconAndHeading {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-left: 1%;
   padding-right: 2%;
 }

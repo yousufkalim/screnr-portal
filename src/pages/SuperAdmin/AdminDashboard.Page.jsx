@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { React, useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import CardWithIcon from '../../components/cards/InfoCard.Component';
 import Chart from '../../components/charts/dashboard/Chart.Component';
 import { ReactComponent as Patients } from '../../assets/components/CardWithIcon/patientsIcon.svg';
@@ -27,6 +28,7 @@ export default function Dashboard() {
   });
 
   const [staffMembers, setStaffMembers] = useState({});
+  const [clinicsPerMonth, setClinicsPerMonth] = useState([]);
 
   const getStaffMembers = async (page = 1) => {
     setIsLoading(true);
@@ -41,10 +43,12 @@ export default function Dashboard() {
           clinicsCount: data?.count.clinicCount.count,
           patientsCount: data?.count.patientCount.count,
         });
+        setClinicsPerMonth(data?.clinicsPerMonth);
         setIsLoading(false);
       }
-    } catch (err) {
+    } catch (error) {
       setIsLoading(false);
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -127,7 +131,7 @@ export default function Dashboard() {
           />
         </div>
         <div className="chart_main_div">
-          <Chart />
+          <Chart clinicsPerMonth={clinicsPerMonth} />
         </div>
       </div>
       <div className="addBtn2" onClick={() => setOpenAddStaffMember(true)}>

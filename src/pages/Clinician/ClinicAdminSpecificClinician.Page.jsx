@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import addBtn from '../../assets/icons/addBtn.svg';
@@ -36,15 +37,20 @@ export default function ClinicAdmin() {
         setClinicians(data);
       }
       setIsLoading(false);
-    } catch (err) {
+    } catch (error) {
       setIsLoading(false);
+      toast.error(error?.response?.data?.message);
     }
   };
 
   const getClinicianData = async () => {
-    const { data } = await request('get', `/staff/getClinic/${id}`);
-    if (data) {
-      setClinicianData(data.user);
+    try {
+      const { data } = await request('get', `/staff/getClinic/${id}`);
+      if (data) {
+        setClinicianData(data.user);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 

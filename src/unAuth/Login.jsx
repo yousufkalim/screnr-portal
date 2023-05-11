@@ -8,9 +8,9 @@ import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
+import request from '../request';
 import Logo from '../assets/icons/Logo.svg';
 import Vector from '../assets/images/login/loginPgImg.svg';
-import request from '../request';
 import { Store, UpdateStore } from '../StoreContext';
 import ForgetPasswordPopup from '../components/popups/general/ForgetPassword.Popup';
 
@@ -61,13 +61,8 @@ export default function Login() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
 
-  const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  const handleChange = (e) => setUserData({ ...userData, [e.target.name]: e.target.value });
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   const handleSubmit = (e) => {
     e.preventDefault();

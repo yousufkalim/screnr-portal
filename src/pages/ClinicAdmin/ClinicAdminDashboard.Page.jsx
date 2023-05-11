@@ -1,4 +1,5 @@
 import { React, useState, useCallback } from 'react';
+import { toast } from 'react-toastify';
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/greenIcon.svg';
 import { ReactComponent as GreenStats } from '../../assets/components/StatsCard/greenStats.svg';
@@ -28,13 +29,17 @@ export default function ClinicAdminDashboard() {
   const [loading, setLoading] = useState(false);
 
   const getClinicians = useCallback(async () => {
-    setLoading(true);
-    const { data } = await request('get', `/clinics/dashboard`);
-    if (data) {
-      setClinicianByClinic(data);
-      setLoading(false);
-    } else {
-      setLoading(false);
+    try {
+      setLoading(true);
+      const { data } = await request('get', `/clinics/dashboard`);
+      if (data) {
+        setClinicianByClinic(data);
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   }, []);
 
@@ -51,7 +56,7 @@ export default function ClinicAdminDashboard() {
         clinicianByClinic?.count?.totalSessions?.count > 0
           ? `0${clinicianByClinic?.count?.totalSessions?.count}`
           : clinicianByClinic?.count?.totalSessions?.count || 0,
-      title: 'Total no.  Exercises',
+      title: 'Total no. Exercises',
       icon2: GreenStats,
     },
     {
@@ -74,7 +79,6 @@ export default function ClinicAdminDashboard() {
       title: 'Completed Exercises',
       icon2: GrayStats,
     },
-
     {
       icon: RedIcon,
       amount:
