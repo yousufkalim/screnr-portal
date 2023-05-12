@@ -72,6 +72,7 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
         return toast.error('Phone number must contain 10 digits');
       }
       Object.keys(values).map((key) => formData.append(key, values[key]));
+
       const { data } = await request('put', '/admins/', formData);
       if (data) {
         updateStore({

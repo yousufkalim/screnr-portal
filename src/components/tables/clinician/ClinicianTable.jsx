@@ -62,7 +62,7 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
           <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
             <BackIcon />
           </div>
-          <h1 className="clientTableHead">List of Clinician</h1>
+          <h1 className="clientTableHead">List of Clinicians</h1>
         </div>
         <Table
           sx={{
@@ -183,7 +183,9 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
               <>
                 {' '}
                 <TableCell align="center" />
-                <TableCell align="left">No Clinicians found</TableCell>
+                <TableCell align="left" className="noDataTxt">
+                  No Clinicians found
+                </TableCell>
               </>
             )}
           </TableBody>
@@ -198,7 +200,13 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
         )}
       </TableContainer>
       <TablePagination
-        sx={{ color: '#919B9B' }}
+        sx={{
+          color: '#919B9B',
+          width: '100vw',
+          '@media screen and (max-width: 1400px)': {
+            width: '70vw',
+          },
+        }}
         component="div"
         rowsPerPageOptions={[]}
         count={clinicians?.total?.count || 0}

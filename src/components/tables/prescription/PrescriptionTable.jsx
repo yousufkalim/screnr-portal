@@ -161,6 +161,9 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
               boxShadow: '0',
               margin: 'auto',
               marginBottom: '25px',
+              '@media only screen and (max-width: 1400px)': {
+                maxWidth: '73vw',
+              },
             }}
           >
             <Table

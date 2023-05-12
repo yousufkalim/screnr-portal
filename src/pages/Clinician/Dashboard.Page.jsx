@@ -27,6 +27,7 @@ export default function ClinicianDashboard() {
   const getPatients = async () => {
     try {
       setLoading(true);
+
       const { data } = await request('get', '/clinicians/dashboard');
       if (data) {
         setPatientsByClinician(data);

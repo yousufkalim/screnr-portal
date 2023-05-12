@@ -22,6 +22,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
       const { data } = await request('get', `/${txt}/${id}`);
       if (data) {
         setInfo(data?.user);
+
         if (txt.includes('Clinician')) {
           getClinicName(data?.user?.userData?.clinic?.userData?.clinic_name);
         } else getClinicName(data?.user?.userData?.clinic_name);
@@ -36,10 +37,11 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
+
   const handleEditIconClick = () => {
-    console.log('pencil');
     setOpen(!open);
   };
+
 
   let result = '';
   if (txt.includes('Clinic')) {
@@ -113,7 +115,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
         </div>
         <div className="user_detail">
           <Email className="spaceOnRight" />
-          {info?.email}
+          <div className="xnewww"> {info?.email}</div>
         </div>
       </div>
       {info?.expiry_date ? (

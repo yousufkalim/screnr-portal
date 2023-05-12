@@ -80,7 +80,7 @@ export default function PatientSidebarSection({
           </div>
           <div className="user_detail">
             <Email />
-            {patientData?.email}
+            <div className="xnewww"> {patientData?.email}</div>
           </div>
         </div>
         <br />

@@ -41,7 +41,7 @@ export default function Patient() {
     setBreadcrumb(name);
   };
   const handleDashboardNavClick = () => {
-    navigate('/dashboard');
+    navigate('/admin/dashboard');
   };
   const handleStaffNavClick = () => {
     window.history.back();

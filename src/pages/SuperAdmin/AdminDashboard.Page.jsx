@@ -66,7 +66,7 @@ export default function Dashboard() {
       title: 'Total Staff',
       icon2: Circle,
       className: 'yellow_circle',
-      link: '/dashboard',
+      link: '/admin/dashboard',
     },
     {
       icon: Clinic,

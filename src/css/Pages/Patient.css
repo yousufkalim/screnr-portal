@@ -674,6 +674,9 @@
   overflow-y: scroll;
   z-index: 99;
 }
+#filterPatientsTbl{
+  /* margin-left: 3% !important; */
+}
 .selectedOpt {
   padding: 14px;
 }

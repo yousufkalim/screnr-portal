@@ -48,6 +48,9 @@
   align-items: center;
   padding: 0px 20px;
 }
+#allTabletitlePatnts{
+  width: 36vw !important;
+}
 
 .countStyle {
   color: #919b9bb4;
@@ -209,5 +212,26 @@
   .filterPoper {
     top: 25%;
     right: 3%;
+  }
+}
+@media only screen and (max-width: 1440px) {
+  #allTabletitlePatnts{
+    width: 48vw !important;
+  }
+}
+
+@media only screen and (max-width: 1466px) {
+  #allTabletitlePatnts{
+    width: 49vw !important;
+  }
+}
+@media only screen and (max-width: 1250px) {
+  #allTabletitlePatnts{
+    width: 53vw !important;
+  }
+}
+@media only screen and (max-width: 992px) {
+  #allTabletitlePatnts{
+    width: 67vw !important;
   }
 }

@@ -180,7 +180,9 @@ export default function ProfilePopup({
             <FormControl sx={{ mb: 1, width: '85%' }} variant="outlined">
               <div className="pswdChangeTrack">
                 <p className="blktxt">Account Created</p>
-                <p className="blktxt">{moment(user.createdAt).format('MM-DD-YYYY')}</p>
+                <p className="blktxt" id="boldx">
+                  {moment(user.createdAt).format('MM-DD-YYYY')}
+                </p>
               </div>
             </FormControl>
           </Typography>

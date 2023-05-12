@@ -105,7 +105,7 @@ export default function UpdatePasswordPopup({ openUpdateModal, setOpenUpdateModa
         <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
           <Typography gutterBottom>
-            <h1 className="forgetPaswdTxt">Change Password</h1>
+            <h1 className="forgetPaswdTxtchng">Change Password</h1>
             <p className="enterEmailTxt">Enter your new password to update!</p>
 
             <FormControl sx={{ mt: 4, mb: 2, width: '85%' }} variant="outlined">
