@@ -125,14 +125,35 @@ export default function AddPatientPrescription() {
   };
 
   const validatingGeneratePrescriptionBtn =
-    prescription.name &&
-    prescription.start_date &&
-    prescription.duration &&
-    prescription.frequency &&
-    prescription.type &&
-    prescription.clinician &&
-    prescription.patient &&
-    prescription.exercises.length > 0;
+    prescription?.name &&
+    prescription?.start_date &&
+    prescription?.duration &&
+    prescription?.frequency &&
+    prescription?.type &&
+    prescription?.clinician &&
+    prescription?.patient &&
+    prescription?.exercises?.length > 0;
+
+  const GeneratePrescriptionSection = openGeneratePrescription && (
+    <GeneratePrescription
+      openGeneratePrescription={openGeneratePrescription}
+      setOpenGeneratePrescription={setOpenGeneratePrescription}
+    />
+  );
+
+  const EditPatientPopup = openEditpatientModal && (
+    <EditPatient
+      openEditPatient={openEditpatientModal}
+      setOpenEditPatient={setOpenEditpatientModal}
+      patientDetails={patient}
+      getPatients={getPatientDataById}
+    />
+  );
+
+  const validatingGeneratePrescription = validatingGeneratePrescriptionBtn
+    ? 'generatePrescriptionBtn'
+    : 'generatePrescriptionBtn_diaabled';
+
   return (
     <>
       <Grid container className="gridish">
@@ -169,33 +190,15 @@ export default function AddPatientPrescription() {
         <div className="addPrescriptionBtn">
           <Button
             variant="contained"
-            className={
-              validatingGeneratePrescriptionBtn
-                ? 'generatePrescriptionBtn'
-                : 'generatePrescriptionBtn_diaabled'
-            }
+            className={validatingGeneratePrescription}
             onClick={() => handleGeneratePrescription()}
           >
             Generate Prescription
           </Button>
         </div>
-
-        {openGeneratePrescription && (
-          <GeneratePrescription
-            openGeneratePrescription={openGeneratePrescription}
-            setOpenGeneratePrescription={setOpenGeneratePrescription}
-          />
-        )}
+        {GeneratePrescriptionSection}
       </Grid>
-
-      {openEditpatientModal && (
-        <EditPatient
-          openEditPatient={openEditpatientModal}
-          setOpenEditPatient={setOpenEditpatientModal}
-          patientDetails={patient}
-          getPatients={getPatientDataById}
-        />
-      )}
+      {EditPatientPopup}
     </>
   );
 }

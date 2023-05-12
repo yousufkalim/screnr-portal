@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import addBtn from '../../assets/icons/addBtn.svg';
 import Sidebar from '../../components/sidebar/GenericLeftSidebar';
 import ClinicAdminTable from '../../components/tables/clinicAdmin/ClinicAdminsTable';
@@ -25,8 +26,9 @@ export default function ClinicAdmin() {
         setClinicAdmins(data);
       }
       setIsLoading(false);
-    } catch (err) {
+    } catch (error) {
       setIsLoading(false);
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -35,8 +37,12 @@ export default function ClinicAdmin() {
   };
 
   const getData = async () => {
-    const { data } = await request('get', `/admins/getStaff/${id}`);
-    setStaffMember(data?.user);
+    try {
+      const { data } = await request('get', `/admins/getStaff/${id}`);
+      setStaffMember(data?.user);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   useEffect(() => {

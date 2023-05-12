@@ -1,5 +1,6 @@
 import { React, useState, useEffect, useRef } from 'react';
 import { Grid } from '@mui/material';
+import { toast } from 'react-toastify';
 import AllClinicAdminTable from '../../components/tables/clinicAdmin/AllClinicAdminTable';
 import request from '../../request';
 
@@ -7,14 +8,6 @@ export default function ClinicAdmin() {
   const [clinicAdmins, setClinicAdmins] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const abortControllerRef = useRef(null);
-
-  useEffect(() => {
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
-  }, []);
 
   const getClinicAdmins = async (sort, search, page = 1) => {
     setIsLoading(true);
@@ -33,6 +26,7 @@ export default function ClinicAdmin() {
       if (search) {
         apiUrl += `&search=${search}`;
       }
+
       const { data } = await request(
         'get',
         apiUrl,
@@ -46,14 +40,23 @@ export default function ClinicAdmin() {
         setClinicAdmins(data);
       }
       setIsLoading(false);
-    } catch (err) {
+    } catch (error) {
       setIsLoading(false);
+      toast.error(error?.response?.data?.message);
     }
   };
 
   useEffect(() => {
     getClinicAdmins();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
   }, []);
 
   return (

@@ -129,26 +129,34 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
   };
 
   const getAllClinics = async () => {
-    const { data } = await request('get', '/staff/getAllClinicsNonPaginated');
-    if (data) {
-      setClinics(data);
+    try {
+      const { data } = await request('get', '/staff/getAllClinicsNonPaginated');
+      if (data) {
+        setClinics(data);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 
   const getClinicians = async (clinicId) => {
-    const { data } = await request(
-      'get',
-      `/clinics/getCliniciansByClinicIdNonPaginated/${clinicId}`,
-    );
-    if (data) {
-      setClinicians(
-        data.users.map((doctor) => {
-          return {
-            id: doctor.id,
-            optName: `${doctor.first_name} ${doctor.last_name}`,
-          };
-        }),
+    try {
+      const { data } = await request(
+        'get',
+        `/clinics/getCliniciansByClinicIdNonPaginated/${clinicId}`,
       );
+      if (data) {
+        setClinicians(
+          data.users.map((doctor) => {
+            return {
+              id: doctor.id,
+              optName: `${doctor.first_name} ${doctor.last_name}`,
+            };
+          }),
+        );
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -214,6 +222,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
       if (error.response.status === 418) {
         setExisitingButInactive(true);
       }
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -246,11 +255,15 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     });
 
     // sending this data to api
-    const { data } = await request('put', '/clinicians/editPatient/undefined', formData);
-    if (data) {
-      toast.success('Patient added successfully');
-      getPatients();
-      handleClose();
+    try {
+      const { data } = await request('put', '/clinicians/editPatient/undefined', formData);
+      if (data) {
+        toast.success('Patient added successfully');
+        getPatients();
+        handleClose();
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
   useEffect(() => {

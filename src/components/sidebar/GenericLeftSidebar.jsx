@@ -2,6 +2,7 @@
 import { React, useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { toast } from 'react-toastify';
 import { ReactComponent as Phone } from '../../assets/images/staffScreen/phone.svg';
 import { ReactComponent as Email } from '../../assets/images/staffScreen/email.svg';
 import { ReactComponent as Expiry } from '../../assets/images/staffScreen/expiryDate.svg';
@@ -18,12 +19,16 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
   const [info, setInfo] = useState({});
 
   const getData = async () => {
-    const { data } = await request('get', `/${txt}/${id}`);
-    if (data) {
-      setInfo(data?.user);
-      if (txt.includes('clinicians')) {
-        getClinicName(data?.user?.userData?.clinic?.userData?.clinic_name);
-      } else getClinicName(data?.user?.userData?.clinic_name);
+    try {
+      const { data } = await request('get', `/${txt}/${id}`);
+      if (data) {
+        setInfo(data?.user);
+        if (txt.includes('clinicians')) {
+          getClinicName(data?.user?.userData?.clinic?.userData?.clinic_name);
+        } else getClinicName(data?.user?.userData?.clinic_name);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -32,9 +37,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  const handleEditIconClick = () => {
-    setOpen(!open);
-  };
+  const handleEditIconClick = () => setOpen(!open);
 
   let result = '';
   if (txt.includes('clinics')) {

@@ -151,8 +151,9 @@ export default function AddPrescription({
     exerciseInformation.sets &&
     exerciseInformation.reps &&
     exerciseInformation.rest;
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  const today = new Date().toISOString();
+  console.log('🚀 ~ file: AddPrescription.Component.jsx:155 ~ today:', today);
+  // tomorrow.setDate(tomorrow.getDate() + 1);
   return (
     <Grid container className="addPrescription">
       <Grid xl={6} lg={6}>
@@ -241,7 +242,7 @@ export default function AddPrescription({
               showYearDropdown
               selected={prescription.start_date}
               onChange={dateChange}
-              minDate={tomorrow}
+              minDate={today}
               disablePast
             />
             <ExpiryDate className="calenderIcon" />

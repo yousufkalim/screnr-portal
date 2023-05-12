@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/greenIcon.svg';
 import { ReactComponent as GreenStats } from '../../assets/components/StatsCard/greenStats.svg';
@@ -23,12 +24,16 @@ export default function Patient() {
   const { id } = useParams();
 
   const getPatients = async (page = 1) => {
-    const { data } = await request(
-      'get',
-      `/clinicians/getPatientsByClinicianId/${id}?page=${page}`,
-    );
-    if (data) {
-      setPatients(data);
+    try {
+      const { data } = await request(
+        'get',
+        `/clinicians/getPatientsByClinicianId/${id}?page=${page}`,
+      );
+      if (data) {
+        setPatients(data);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 

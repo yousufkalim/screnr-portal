@@ -21,7 +21,6 @@ function MultiCircularProgress() {
     alignItems: 'center',
     justifyContent: 'center',
   };
-
   return (
     <div style={{ width: '110px', height: '85px', position: 'relative' }}>
       {exercises.map((exercise, index) => (

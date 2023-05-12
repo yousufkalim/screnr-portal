@@ -240,11 +240,19 @@ export default function EditPatient({
     }
 
     // sending this data to api
-    const { data } = await request('put', `/clinicians/editPatient/${patientDetails.id}`, formData);
-    if (data) {
-      handleClose();
-      getPatients();
-      return toast.success('Patient updated successfully');
+    try {
+      const { data } = await request(
+        'put',
+        `/clinicians/editPatient/${patientDetails.id}`,
+        formData,
+      );
+      if (data) {
+        handleClose();
+        getPatients();
+        toast.success('Patient updated successfully');
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 

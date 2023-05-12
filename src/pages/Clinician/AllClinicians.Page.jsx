@@ -1,5 +1,6 @@
 import { React, useState, useEffect, useRef } from 'react';
 import { Grid } from '@mui/material';
+import { toast } from 'react-toastify';
 import AllCliniciansTable from '../../components/tables/clinician/AllCliniciansTable';
 import request from '../../request';
 
@@ -49,8 +50,9 @@ export default function AllClinicians() {
         setClinicians(data);
         setIsLoading(false);
       }
-    } catch (err) {
+    } catch (error) {
       setIsLoading(false);
+      toast.error(error?.response?.data?.message);
     }
   };
 

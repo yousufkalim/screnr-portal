@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { ReactComponent as Patients } from '../../assets/components/CardWithIcon/patientsIcon.svg';
 import { ReactComponent as Clinician } from '../../assets/components/CardWithIcon/clinician.svg';
 import { ReactComponent as Patients2 } from '../../assets/components/CardWithIcon/patients.svg';
@@ -21,13 +22,16 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false);
 
   const getClinicAdmins = async () => {
-    setLoading(true);
-    const { data } = await request('get', `/staff/dashboard`);
-    if (data) {
-      setClinicAdmins(data);
+    try {
+      setLoading(true);
+      const { data } = await request('get', `/staff/dashboard`);
+      if (data) {
+        setClinicAdmins(data);
+        setLoading(false);
+      }
+    } catch (error) {
       setLoading(false);
-    } else {
-      setLoading(false);
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -116,8 +120,8 @@ export default function Dashboard() {
           src={addBtn}
           className="pointer"
           role="presentation"
-          alt=""
           onClick={openAddPatientModal}
+          alt=""
         />
       </div>
       {openAddClinicAdmin && (

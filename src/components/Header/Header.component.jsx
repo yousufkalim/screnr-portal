@@ -156,7 +156,6 @@ export default function Header() {
   const [openProfilePopup, setOpenProfilePopup] = useState(false);
   const [openPasswordPopup, setOpenPasswordPopup] = useState(false);
   const [openEditProfilePopup, setOpenEditProfilePopup] = useState(false);
-
   const useClickHandler = (handler) => {
     return useCallback(
       (event) => {
@@ -170,20 +169,9 @@ export default function Header() {
     setActiveTab(pathname);
   }, [pathname]);
 
-  const handleTabsSwitch = (targetTab) => {
-    navigate(targetTab);
-  };
-
-  const handleLogoClick = () => {
-    if (user) {
-      navigate(redirectPathByRole[user?.role]);
-    }
-  };
-
-  const handleSearchLogoClick = () => {
-    navigate('/searchScreen');
-  };
-
+  const handleTabsSwitch = (targetTab) => navigate(targetTab);
+  const handleLogoClick = () => user && navigate(redirectPathByRole[user?.role]);
+  const handleSearchLogoClick = () => navigate('/searchScreen');
   const handleLogoClickCallback = useClickHandler(handleLogoClick);
   const handleSearchLogoClickCallback = useClickHandler(handleSearchLogoClick);
 
@@ -195,7 +183,6 @@ export default function Header() {
       setOpenEditProfilePopup={setOpenEditProfilePopup}
     />
   );
-
   const EditProfilePopups = openEditProfilePopup && (
     <EditProfilePopup
       openEditProfilePopup={openEditProfilePopup}
@@ -208,6 +195,7 @@ export default function Header() {
       setOpenUpdateModal={setOpenPasswordPopup}
     />
   );
+
   return (
     <div className="header_main_div">
       <Stack direction="row" alignItems="center" className="tab1_div" justifyContent="flex-start">
@@ -227,7 +215,7 @@ export default function Header() {
               role="presentation"
               onClick={() => setOpenProfilePopup(true)}
             >
-              <img src={getMediaUrl(user.profile_pic)} className="headerProfileImage" alt="" />
+              <img src={getMediaUrl(user?.profile_pic)} className="headerProfileImage" alt="" />
             </div>
           ) : (
             <AvatarComponent

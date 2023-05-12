@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line import/no-unresolved
 import { Bar } from 'react-chartjs-2';
 import {
@@ -13,52 +13,83 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 ChartJS.defaults.borderColor = '#655B96';
-const options = {
-  elements: {
-    bar: {
-      barPercentage: 0.4,
-    },
-  },
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-  scales: {
-    y: {
-      grid: {
-        display: false,
-      },
-      max: 1000,
-      min: 200,
-      ticks: {
-        stepSize: 200,
+
+export default function Chart({ clinicsPerMonth }) {
+  const [chartArray, setChartArray] = useState([]);
+  const options = {
+    elements: {
+      bar: {
+        barPercentage: 0.4,
       },
     },
-    x: {
-      grid: {
+    responsive: true,
+    plugins: {
+      legend: {
         display: false,
       },
     },
-  },
-};
-
-const labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-const data = {
-  labels,
-  datasets: [
-    {
-      label: '',
-      data: [550, 700, 600, 600, 400, 900, 800, 450, 800, 1000, 900, 1000],
-      backgroundColor: 'rgb(251, 166, 34)',
-      barPercentage: 0.2,
+    scales: {
+      y: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          stepSize: 1,
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+      },
     },
-  ],
-};
+  };
 
-export default function Chart() {
+  const labels = [
+    'JAN',
+    'FEB',
+    'MAR',
+    'APR',
+    'MAY',
+    'JUN',
+    'JUL',
+    'AUG',
+    'SEP',
+    'OCT',
+    'NOV',
+    'DEC',
+  ];
+
+  const chartData = () => {
+    const tempArray = [];
+    labels?.forEach((item) => {
+      const found = clinicsPerMonth?.find((count) => count?.month?.toUpperCase() === item);
+      if (found) {
+        tempArray.push(found?.count);
+      } else {
+        tempArray.push(0);
+      }
+    });
+    setChartArray(tempArray);
+  };
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: '',
+        data: chartArray,
+        backgroundColor: 'rgb(251, 166, 34)',
+        barPercentage: 0.2,
+      },
+    ],
+  };
+
+  useEffect(() => {
+    chartData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clinicsPerMonth]);
+
   return (
     <>
       <div className="chart_header_div">

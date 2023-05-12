@@ -140,13 +140,18 @@ export default function EditStaffMember({
     if (checked && !staffMemberCopy.expiry_date) {
       return toast.error('Please enter expiry date');
     }
-    const { data } = await request('put', `/admins/editStaff/${staffMemberDetails.id}`, formData);
-    if (data) {
-      handleClose();
-      setOpenEditStaffMember(false);
-      getData();
-      getStaffMembers();
-      toast.success('Staff Member edited successfully');
+
+    try {
+      const { data } = await request('put', `/admins/editStaff/${staffMemberDetails.id}`, formData);
+      if (data) {
+        handleClose();
+        setOpenEditStaffMember(false);
+        getData();
+        getStaffMembers();
+        toast.success('Staff Member edited successfully');
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 

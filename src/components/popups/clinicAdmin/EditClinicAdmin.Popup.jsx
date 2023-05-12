@@ -164,13 +164,16 @@ export default function EditClinicAdmin({
     if (checked && !clinicAdminCopy.expiry_date) {
       return toast.error('Please enter expiry date');
     }
-
-    const { data } = await request('put', `/staff/editClinic/${clinicAdminDetails.id}`, formData);
-    if (data) {
-      toast.success('Clinic Admin updated successfully');
-      setOpenEditClinicAdmin(false);
-      getClinicAdmins();
-      handleClose();
+    try {
+      const { data } = await request('put', `/staff/editClinic/${clinicAdminDetails.id}`, formData);
+      if (data) {
+        toast.success('Clinic Admin updated successfully');
+        setOpenEditClinicAdmin(false);
+        getClinicAdmins();
+        handleClose();
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 

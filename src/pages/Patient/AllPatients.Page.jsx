@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-named-as-default-member
 import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
+import { toast } from 'react-toastify';
 import addBtn from '../../assets/icons/addBtn.svg';
 import AllPatientTable from '../../components/tables/patient/AllPatientsTable';
 import AddNewPatient from '../../components/popups/patient/AddPatient.Popup';
@@ -67,10 +68,14 @@ export default function Patient() {
   };
 
   const handleDynamicFilter = async () => {
-    const { data } = await request('get', '/clinicians/getDynamicFilters');
-    if (data) {
-      setExerciseFilter(data?.exercises);
-      setDiaganosisFilter(data?.diagnosis);
+    try {
+      const { data } = await request('get', '/clinicians/getDynamicFilters');
+      if (data) {
+        setExerciseFilter(data?.exercises);
+        setDiaganosisFilter(data?.diagnosis);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -83,6 +88,14 @@ export default function Patient() {
     handleDynamicFilter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const addNewPatientPopup = openAddPatient && (
+    <AddNewPatient
+      openAddPatient={openAddPatient}
+      getPatients={handleFilterAndSorting}
+      setOpenAddPatient={setOpenAddPatient}
+    />
+  );
+
   return (
     <Grid container>
       <Grid className="bgClinicianTable" xl={12} lg={12}>
@@ -110,11 +123,7 @@ export default function Patient() {
           onClick={() => setOpenAddPatient(true)}
         />
       </div>
-      <AddNewPatient
-        openAddPatient={openAddPatient}
-        getPatients={handleFilterAndSorting}
-        setOpenAddPatient={setOpenAddPatient}
-      />
+      {addNewPatientPopup}
     </Grid>
   );
 }
