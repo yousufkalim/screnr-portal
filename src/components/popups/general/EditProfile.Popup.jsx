@@ -1,6 +1,4 @@
 import { React, useState } from 'react';
-
-// mui imports
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -8,16 +6,10 @@ import DialogContent from '@mui/material/DialogContent';
 import Typography from '@mui/material/Typography';
 import DialogActions from '@mui/material/DialogActions';
 import { FormControl, Button } from '@mui/material';
-
-// react-toastify import
 import { toast } from 'react-toastify';
-
-// assets imports
 import { ReactComponent as Phone } from '../../../assets/icons/phoneIcon.svg';
 import { ReactComponent as Mail } from '../../../assets/icons/mailIcon.svg';
 import edit from '../../../assets/icons/edit.svg';
-
-// child imports
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import { Store, UpdateStore } from '../../../StoreContext';
 import { getMediaUrl } from '../../../config';
@@ -41,7 +33,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProfilePopup }) {
   const { user } = Store();
   const updateStore = UpdateStore();
-
   const [values, setValues] = useState({
     id: user.id,
     phone_number: user.phone_number,
@@ -49,9 +40,7 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
     profile_pic: user.profile_pic || '',
   });
 
-  const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
 
   const handlePhoneNumberChange = (e) => {
     const regex = /^[0-9\b]+$/;
@@ -70,22 +59,19 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
     if (myFile.size > size) {
       return toast.error('File size can not exceed 10 Mb');
     }
-
     setValues({ ...values, profile_pic: myFile });
   };
 
-  const handleClose = () => {
-    setOpenEditProfilePopup(false);
-  };
+  const handleClose = () => setOpenEditProfilePopup(false);
+
   const handleSubmit = async () => {
     const formData = new FormData();
 
-    if (values.phone_number.length < 10) {
-      return toast.error('Phone number must contain 10 digits');
-    }
-    Object.keys(values).map((key) => formData.append(key, values[key]));
-
     try {
+      if (values.phone_number.length < 10) {
+        return toast.error('Phone number must contain 10 digits');
+      }
+      Object.keys(values).map((key) => formData.append(key, values[key]));
       const { data } = await request('put', '/admins/', formData);
       if (data) {
         updateStore({

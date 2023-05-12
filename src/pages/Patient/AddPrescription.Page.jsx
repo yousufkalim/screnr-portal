@@ -115,9 +115,8 @@ export default function AddPatientPrescription() {
           handlePrescriptionDetailsReset();
           toast.success('Prescription added successfully');
         })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error('handleGeneratePrescription -->', err);
+        .catch((error) => {
+          toast.error(error?.response?.data?.message);
         });
     } else {
       toast.error('Please fill all the fields');

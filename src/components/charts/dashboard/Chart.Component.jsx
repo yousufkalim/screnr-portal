@@ -10,55 +10,13 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { labels, options } from '../../../utils/data';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 ChartJS.defaults.borderColor = '#655B96';
 
 export default function Chart({ clinicsPerMonth }) {
   const [chartArray, setChartArray] = useState([]);
-  const options = {
-    elements: {
-      bar: {
-        barPercentage: 0.4,
-      },
-    },
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-    scales: {
-      y: {
-        grid: {
-          display: false,
-        },
-        ticks: {
-          stepSize: 1,
-        },
-      },
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-    },
-  };
-
-  const labels = [
-    'JAN',
-    'FEB',
-    'MAR',
-    'APR',
-    'MAY',
-    'JUN',
-    'JUL',
-    'AUG',
-    'SEP',
-    'OCT',
-    'NOV',
-    'DEC',
-  ];
 
   const chartData = () => {
     const tempArray = [];

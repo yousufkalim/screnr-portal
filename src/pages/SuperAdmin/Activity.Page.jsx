@@ -1,38 +1,12 @@
 import { Grid } from '@mui/material';
-import { ReactComponent as Clock } from '../../assets/components/TimeCard/clock.svg';
-import { ReactComponent as Login } from '../../assets/components/TimeCard/login.svg';
-import { ReactComponent as LoginCount } from '../../assets/components/TimeCard/loginCount.svg';
-import { ReactComponent as Logoff } from '../../assets/components/TimeCard/logoff.svg';
 import GenericSidebar from '../../components/sidebar/GenericLeftSidebar';
 import PatientSidebar from '../../components/sidebar/patient/PatientSidebar';
 import TimeCard from '../../components/cards/TimeCard.Component';
 import ActivityTable from '../../components/tables/activityLog/ActivityTable';
 import RightSidebar from '../../components/sidebar/patient/PatientListRightSidebar';
+import { cardsData } from '../../utils/data';
 
 export default function Activity() {
-  const cardsData = [
-    {
-      icon: Login,
-      time: '1 Hr Ago',
-      text: 'Last Login',
-    },
-    {
-      icon: LoginCount,
-      time: '22',
-      text: 'Login count',
-    },
-    {
-      icon: Clock,
-      time: '120 Hr',
-      text: 'Login Hours',
-    },
-    {
-      icon: Logoff,
-      time: '30 Min Ago',
-      text: 'Last Logoff',
-    },
-  ];
-
   return (
     <Grid container>
       <Grid xl={2} lg={2.5}>

@@ -1,17 +1,9 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  Checkbox,
-  Grid,
-  //  IconButton,
-  InputLabel,
-} from '@mui/material';
-// import InputAdornment from '@mui/material/InputAdornment';
+import { Checkbox, Grid, InputLabel } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles';
-// import Visibility from '@mui/icons-material/Visibility';
-// import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
 import Logo from '../assets/icons/Logo.svg';

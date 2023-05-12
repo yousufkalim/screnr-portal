@@ -54,12 +54,9 @@ export default function ClinicAdmin() {
     }
   };
 
-  const getClinicName = (name) => {
-    setBreadcrumb(name);
-  };
-  const handleDashboardNavClick = () => {
-    navigate('/dashboard');
-  };
+  const getClinicName = (name) => setBreadcrumb(name);
+
+  const handleDashboardNavClick = () => navigate('/dashboard');
   const handleStaffNavClick = () => {
     window.history.back();
   };

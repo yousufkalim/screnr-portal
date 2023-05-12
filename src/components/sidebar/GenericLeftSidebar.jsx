@@ -14,7 +14,6 @@ import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
 export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, open }) {
-  // const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
 
@@ -44,7 +43,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
     result = info?.userData?.clinic_name || '';
   } else if (txt.includes('clinicians')) {
     result = info?.userData?.clinic?.userData?.clinic_name || '';
-  } else if (txt.includes('staff')) {
+  } else if (txt.includes('Staff')) {
     result = info?.id || '';
   } else {
     result = '';
@@ -66,7 +65,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
               />
               {info.profile_pic ? (
                 <img
-                  src={getMediaUrl(info.profile_pic)}
+                  src={getMediaUrl(info?.profile_pic)}
                   className="pointer"
                   id="selectedImg"
                   style={{
@@ -92,7 +91,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
           className="editIconSidebar"
           onClick={handleEditIconClick}
           onKeyDown={(event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
+            if (event?.key === 'Enter' || event?.key === ' ') {
               handleEditIconClick();
             }
           }}
@@ -114,19 +113,14 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
           {info?.email}
         </div>
       </div>
-      {info?.expiry_date ? (
-        <div className="user_exp_detail">
-          <span className="detail_expiry">
-            <Expiry className="spaceOnRight" />
-            <p className="spaceRight">Expiry Date</p>
-          </span>
-
-          <p> {moment(info.expiry_date).format('MM-DD-YYYY')}</p>
-        </div>
-      ) : (
-        ''
-      )}
-      <br />
+      <div className="user_exp_detail">
+        <span className="detail_expiry">
+          <Expiry className="spaceOnRight" />
+          <p className="spaceRight">Expiry Date </p>
+        </span>
+        {info?.expiry_date ? <p> {moment(info?.expiry_date).format('MM-DD-YYYY')}</p> : 'None'}
+        <br />
+      </div>
       {window.location.pathname.includes('clinician') ? (
         <>
           <div
