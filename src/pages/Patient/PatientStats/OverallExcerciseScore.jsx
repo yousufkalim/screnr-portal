@@ -32,8 +32,8 @@ function MultiCircularProgress() {
             variant="determinate"
             thickness="8"
             size={70}
-            value={exercise.score}
-            style={{ color: exercise.color }}
+            value={exercise?.score}
+            style={{ color: exercise?.color }}
           />
         </div>
       ))}

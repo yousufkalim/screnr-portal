@@ -1,11 +1,10 @@
 import { React, useState, useEffect } from 'react';
-
-// mui imports
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Typography from '@mui/material/Typography';
 import ClearIcon from '@mui/icons-material/Clear';
+import { toast } from 'react-toastify';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import request from '../../../request';
 
@@ -36,22 +35,24 @@ export default function AssignClinicians({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleClose = () => {
-    setOpenAssignClinicians(false);
-  };
+  const handleClose = () => setOpenAssignClinicians(false);
 
   const handleAddClinicians = async (clinicianId) => {
     setOpenAssignClinicians(false);
     await request('put', `/clinicians/addClinicianToPatient/${patientId}`, {
       clinician: clinicianId,
-    }).then(() => {
-      setOpenAssignClinicians(false);
-      getPatients();
-    });
+    })
+      .then(() => {
+        setOpenAssignClinicians(false);
+        getPatients();
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+      });
   };
 
   const selectClinician = (chosenClinician) => {
-    handleAddClinicians(chosenClinician.id);
+    handleAddClinicians(chosenClinician?.id);
 
     const updatedClinicians = selectedClinicians.find(
       (clinician) => clinician.id === chosenClinician.id,
