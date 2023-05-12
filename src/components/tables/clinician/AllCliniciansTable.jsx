@@ -349,7 +349,9 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
               <>
                 {' '}
                 <TableCell align="center" />
-                <TableCell align="left">No Clinicians found</TableCell>
+                <TableCell align="left" className="noDataTxt">
+                  No Clinicians found
+                </TableCell>
               </>
             )}
           </TableBody>

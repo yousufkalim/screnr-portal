@@ -191,7 +191,16 @@
   font-weight: 600;
   line-height: 2;
   color: #454238;
+  padding-top: 3% !important;
 }
+.forgetPaswdTxtchng {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 2;
+  color: #454238;
+  padding-top: 0% !important;
+}
+
 .addPopupTxt {
   font-size: 22px;
   font-weight: 600;
@@ -463,6 +472,9 @@
 
 .blktxt {
   color: #454238;
+}
+#boldx{
+  font-weight: 600 !important;
 }
 
 .passwordChangeTxt {

@@ -225,6 +225,7 @@ export default function PatientTable({
           overflowX: 'hidden',
           boxShadow: '0',
           width: '94vw',
+          marginTop: '1%',
         }}
       >
         <div className="allTableHead">
@@ -232,11 +233,16 @@ export default function PatientTable({
             List of Patients <span className="countStyle">{patients?.length}</span>
           </h1>
 
-          <div className="allTableTitle" style={{ flexGrow: !isSafari ? '0.15' : 'none' }}>
+          <div
+            id="allTabletitlePatnts"
+            className="allTableTitle"
+            style={{ flexGrow: !isSafari ? '0.15' : 'none' }}
+          >
             <IconTextField value={search} handleChange={handleSearch} name="search" />
 
             <Filter
               className="pointer"
+              id="filterPatientsTbl"
               ref={filterRef}
               onClick={() => setOpenFilter(!openFilter)}
             />
@@ -618,7 +624,9 @@ export default function PatientTable({
             ) : (
               <>
                 <TableCell align="center" />
-                <TableCell align="left">No Patient found</TableCell>
+                <TableCell align="left" className="noDataTxt">
+                  No Patient found
+                </TableCell>
               </>
             )}
           </TableBody>

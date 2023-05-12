@@ -33,7 +33,7 @@ export default function ClinicAdmin() {
   };
 
   const handleDashboardNavClick = () => {
-    navigate('/admins/dashboard');
+    navigate('/admin/dashboard');
   };
 
   const getData = async () => {

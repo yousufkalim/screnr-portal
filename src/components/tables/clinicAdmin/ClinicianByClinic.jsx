@@ -50,7 +50,7 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
         }}
       >
         <div className="iconAndHeading">
-          <h1 className="clientTableHead">List of Clinician</h1>
+          <h1 className="clientTableHead">List of Clinicians</h1>
         </div>
         <Table
           sx={{
@@ -170,7 +170,9 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
             ) : (
               <>
                 <TableCell align="center" />
-                <TableCell align="left">No Clinicians found</TableCell>
+                <TableCell align="left" className="noDataTxt">
+                  No Clinicians found
+                </TableCell>
               </>
             )}
           </TableBody>

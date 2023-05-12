@@ -9,7 +9,9 @@
   margin-top: 2rem;
   cursor: pointer;
 }
-
+.noDataTxt{
+  color: rgba(145, 155, 155, 1) !important;
+}
 .receiver {
   text-align: left;
   padding: 20px;

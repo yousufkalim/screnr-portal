@@ -111,7 +111,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
         </div>
         <div className="user_detail">
           <Email className="spaceOnRight" />
-          {info?.email}
+          <div className="xnewww"> {info?.email}</div>
         </div>
       </div>
       {info?.expiry_date ? (

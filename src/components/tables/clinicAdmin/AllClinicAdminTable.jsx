@@ -292,7 +292,9 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
               <>
                 {' '}
                 <TableCell align="center" />
-                <TableCell align="left">No Clinic Admins found</TableCell>
+                <TableCell align="left" className="noDataTxt">
+                  No Clinic Admins found
+                </TableCell>
               </>
             )}
           </TableBody>

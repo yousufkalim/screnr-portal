@@ -38,7 +38,7 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
     setPage(newPage);
   };
   const handleBackIconClick = () => {
-    navigate('/dashboard');
+    navigate('/admin/dashboard');
   };
 
   return (

@@ -58,7 +58,7 @@ export default function ClinicAdmin() {
     setBreadcrumb(name);
   };
   const handleDashboardNavClick = () => {
-    navigate('/dashboard');
+    navigate('/admin/dashboard');
   };
   const handleStaffNavClick = () => {
     window.history.back();
