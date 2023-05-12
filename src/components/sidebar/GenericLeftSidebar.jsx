@@ -14,6 +14,7 @@ import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
 export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, open }) {
+  console.log('🚀 ~ file: GenericLeftSidebar.jsx:17 ~ LeftSidebar ~ txt:', txt);
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
 
@@ -22,7 +23,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
       const { data } = await request('get', `/${txt}/${id}`);
       if (data) {
         setInfo(data?.user);
-        if (txt.includes('clinicians')) {
+        if (txt.includes('Clinician')) {
           getClinicName(data?.user?.userData?.clinic?.userData?.clinic_name);
         } else getClinicName(data?.user?.userData?.clinic_name);
       }
@@ -39,7 +40,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
   const handleEditIconClick = () => setOpen(!open);
 
   let result = '';
-  if (txt.includes('clinics')) {
+  if (txt.includes('Clinic')) {
     result = info?.userData?.clinic_name || '';
   } else if (txt.includes('clinicians')) {
     result = info?.userData?.clinic?.userData?.clinic_name || '';
@@ -99,7 +100,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
       </div>
       <div className="sideBarInfo">
         <div className="user_name"> {`${info?.first_name} ${info?.last_name}`}</div>
-        <div className="staff_id">
+        <div className="staff_id" style={{ display: txt.includes('Clinician') ? 'none' : '' }}>
           {roleTxt}: <span className="staff_id_2">{result}</span>
         </div>
       </div>
@@ -113,14 +114,18 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
           {info?.email}
         </div>
       </div>
-      <div className="user_exp_detail">
-        <span className="detail_expiry">
-          <Expiry className="spaceOnRight" />
-          <p className="spaceRight">Expiry Date </p>
-        </span>
-        {info?.expiry_date ? <p> {moment(info?.expiry_date).format('MM-DD-YYYY')}</p> : 'None'}
-        <br />
-      </div>
+      {info?.expiry_date ? (
+        <div className="user_exp_detail">
+          <span className="detail_expiry">
+            <Expiry className="spaceOnRight" />
+            <p className="spaceRight">Expiry Date </p>
+          </span>
+          <p> {moment(info?.expiry_date).format('MM-DD-YYYY')}</p>
+        </div>
+      ) : (
+        ''
+      )}
+      <br />
       {window.location.pathname.includes('clinician') ? (
         <>
           <div

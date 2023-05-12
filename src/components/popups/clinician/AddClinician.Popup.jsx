@@ -227,7 +227,7 @@ export default function AddClinician({
         <DialogContent>
           <Typography gutterBottom>
             <h1 className="clinicianPopupTxt">Add New Clinician</h1>
-            <p className="clinicianSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="clinicianSubTxt"> </p>
             <div>
               <div className="imgDivPopup">
                 <label htmlFor="clinicAdmin_AddProfile_Pic">

@@ -77,7 +77,7 @@ export default function AdjustRange({ openAdjustRange, setOpenAdjustRange }) {
       >
         <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <h1 className="rangePopupTxt">Adjust range of Motion</h1>
-        <p className="rangeSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+        <p className="rangeSubTxt"> </p>
         <Grid container>
           <Grid xl={7} lg={7}>
             <DialogContent>

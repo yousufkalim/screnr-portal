@@ -56,7 +56,7 @@ export default function UserAlreadyExist({
             {/* need to show avatar/display pic of inactive user here instead of this icon */}
             <Icon />
             <h1 className="genPresTxt">This User Already exist but inactive</h1>
-            <p className="genSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="genSubTxt"> </p>
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>

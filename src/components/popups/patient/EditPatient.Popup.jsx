@@ -274,7 +274,7 @@ export default function EditPatient({
         <DialogContent>
           <Typography gutterBottom>
             <h1 className="clinicianPopupTxt">Edit Patient</h1>
-            <p className="clinicianSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="clinicianSubTxt"> </p>
             <div>
               <div className="imgDivPopup">
                 <label htmlFor="patient_EditProfile_Pic">
