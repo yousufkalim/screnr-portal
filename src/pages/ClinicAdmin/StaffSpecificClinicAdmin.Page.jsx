@@ -59,8 +59,8 @@ export default function ClinicAdmin() {
             id={id}
             txt="admins/getStaff"
             roleTxt="Staff Id"
-            setOpen={setOpenEditStaffMember}
             open={openEditStaffMember}
+            setOpen={setOpenEditStaffMember}
           />
         </Grid>
         <Grid className="bg" xl={10} lg={9.5}>
@@ -107,7 +107,7 @@ export default function ClinicAdmin() {
       </Grid>
       {openEditStaffMember && (
         <EditStaffMember
-          openEditStaffopeMember={openEditStaffMember}
+          openEditStaffMember={openEditStaffMember}
           setOpenEditStaffMember={setOpenEditStaffMember}
           staffMemberDetails={staffMember}
           getData={getData}

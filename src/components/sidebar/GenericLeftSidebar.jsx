@@ -14,7 +14,6 @@ import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
 export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, open }) {
-  console.log('🚀 ~ file: GenericLeftSidebar.jsx:17 ~ LeftSidebar ~ txt:', txt);
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
 
@@ -37,7 +36,10 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  const handleEditIconClick = () => setOpen(!open);
+  const handleEditIconClick = () => {
+    console.log('pencil');
+    setOpen(!open);
+  };
 
   let result = '';
   if (txt.includes('Clinic')) {
@@ -64,7 +66,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
                 accept=".png, .jpg, .jpeg"
                 // onChange={handleSelectedFile}
               />
-              {info.profile_pic ? (
+              {info?.profile_pic ? (
                 <img
                   src={getMediaUrl(info?.profile_pic)}
                   className="pointer"

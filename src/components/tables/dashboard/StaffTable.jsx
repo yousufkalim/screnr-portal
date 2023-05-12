@@ -190,7 +190,7 @@ export default function TableComponent({
               openEditStaffMember={openEditStaffMember}
               setOpenEditStaffMember={setOpenEditStaffMember}
               staffMemberDetails={staffMember}
-              getStaffMembers={getStaffMembers}
+              getData={getStaffMembers}
             />
           )}
 
