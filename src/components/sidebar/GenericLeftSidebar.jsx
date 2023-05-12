@@ -37,11 +37,9 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-
   const handleEditIconClick = () => {
     setOpen(!open);
   };
-
 
   let result = '';
   if (txt.includes('Clinic')) {
