@@ -1,9 +1,7 @@
 import React from 'react';
 
 function Tab({ activeTab, path, label, IconComponent, handleTabsSwitch }) {
-  const isActive = activeTab === path;
-  const isPatientStats = label === 'Patient Statics';
-  if (isActive) {
+  if (activeTab === path) {
     return (
       <div className="tab2_div">
         <IconComponent />
@@ -11,7 +9,7 @@ function Tab({ activeTab, path, label, IconComponent, handleTabsSwitch }) {
       </div>
     );
   }
-  if (isPatientStats) {
+  if (label === 'Patient Statics') {
     return <IconComponent className="tab_icon" />;
   }
   return <IconComponent onClick={() => handleTabsSwitch(path)} className="tab_icon" />;

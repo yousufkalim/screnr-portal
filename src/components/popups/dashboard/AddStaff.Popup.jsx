@@ -139,6 +139,7 @@ export default function AddStaffMember({
       if (error.response.status === 418) {
         setExisitingButInactive(true);
       }
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -150,12 +151,15 @@ export default function AddStaffMember({
     formData.append('active', true);
     formData.append('activateUser', true);
 
-    const { data } = await request('put', '/admins/editStaff/undefined', formData);
-
-    if (data) {
-      getStaffMembers();
-      setStaffMember({});
-      return toast.success('User added successfully');
+    try {
+      const { data } = await request('put', '/admins/editStaff/undefined', formData);
+      if (data) {
+        getStaffMembers();
+        setStaffMember({});
+        return toast.success('User added successfully');
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 

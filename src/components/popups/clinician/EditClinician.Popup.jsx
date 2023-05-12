@@ -169,16 +169,19 @@ export default function EditClinician({
     if (checked && !clinicianCopy.expiry_date) {
       return toast.error('Please enter expiry date');
     }
-
-    const { data } = await request(
-      'put',
-      `/clinics/editClinician/${clinicianDetails.id}`,
-      formData,
-    );
-    if (data) {
-      toast.success('Clinician updated successfully');
-      handleClose();
-      getClinicians();
+    try {
+      const { data } = await request(
+        'put',
+        `/clinics/editClinician/${clinicianDetails.id}`,
+        formData,
+      );
+      if (data) {
+        toast.success('Clinician updated successfully');
+        handleClose();
+        getClinicians();
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 

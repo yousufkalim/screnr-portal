@@ -73,18 +73,18 @@ export default function VerifyEmail() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!user.password) {
+    if (!user?.password) {
       toast.error('Please enter a password.');
-    } else if (user.password.length < 8) {
+    } else if (user?.password?.length < 8) {
       toast.error('Password must be at least 8 characters.');
-    } else if (!user.confirmPassword) {
+    } else if (!user?.confirmPassword) {
       toast.error('Please enter confirm password.');
-    } else if (user.confirmPassword !== user.password) {
+    } else if (user?.confirmPassword !== user?.password) {
       toast.error('Passwords do not match.');
     } else {
       await request('post', '/auth/verify-email', {
-        password: user.password,
-        confirmPassword: user.confirmPassword,
+        password: user?.password,
+        confirmPassword: user?.confirmPassword,
         token: token && token,
       })
         .then((res) => {
@@ -111,7 +111,7 @@ export default function VerifyEmail() {
         </Grid>
         <Grid lg={5.5} xl={5.5}>
           <div className="loginForm">
-            <h1 className="loginformHeading"> Generate Password </h1>
+            <h1 className="loginformHeading">Generate Password</h1>
             <Grid item xs={12}>
               <InputLabel
                 sx={{ mt: 4, mb: 1.3, fontWeight: '600', fontSize: '14px', color: '#454238' }}
@@ -133,30 +133,16 @@ export default function VerifyEmail() {
                       },
                     },
                   }}
+                  size="normal"
+                  name="password"
                   value={user.password}
+                  id="outlined-password"
+                  placeholder="Enter Password"
+                  classes={outlinedInputStyles}
+                  type={user.showPassword ? 'text' : 'password'}
                   onChange={(e) => {
                     handlePasswordChange(e.target.name, e.target.value);
                   }}
-                  id="outlined-password"
-                  classes={outlinedInputStyles}
-                  placeholder="Enter Password"
-                  size="normal"
-                  name="password"
-                  type={user.showPassword ? 'text' : 'password'}
-                  // InputProps={{
-                  //   endAdornment: (
-                  //     <InputAdornment position="end">
-                  //       <IconButton
-                  //         onClick={() => handleClickShowPassword('showPassword')}
-                  //         aria-label="toggle password visibility"
-                  //         edge="end"
-                  //         sx={{ color: '#FBA622', mr: 1 }}
-                  //       >
-                  //         {user.showPassword ? <Visibility /> : <VisibilityOff />}
-                  //       </IconButton>
-                  //     </InputAdornment>
-                  //   ),
-                  // }}
                 />
               </FormControl>
             </Grid>
@@ -198,23 +184,8 @@ export default function VerifyEmail() {
                   }}
                   value={user.confirmPassword}
                   type={user.showPassword ? 'text' : 'password'}
-                  // InputProps={{
-                  //   endAdornment: (
-                  //     <InputAdornment position="end">
-                  //       <IconButton
-                  //         onClick={() => handleClickShowPassword('showPassword')}
-                  //         aria-label="toggle password visibility"
-                  //         edge="end"
-                  //         sx={{ color: '#FBA622', mr: 1 }}
-                  //       >
-                  //         {user.showPassword ? <Visibility /> : <VisibilityOff />}
-                  //       </IconButton>
-                  //     </InputAdornment>
-                  //   ),
-                  // }}
                 />
               </FormControl>
-
               <InputLabel
                 sx={{
                   mb: 8,

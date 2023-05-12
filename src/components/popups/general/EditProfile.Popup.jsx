@@ -84,21 +84,23 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
       return toast.error('Phone number must contain 10 digits');
     }
     Object.keys(values).map((key) => formData.append(key, values[key]));
-    const { data } = await request('put', '/admins/', formData);
 
-    const updatedUser = {
-      ...user,
-      email: data.user.email,
-      phone_number: data.user.phone_number,
-      profile_pic: data.user.profile_pic,
-    };
-
-    if (data) {
-      updateStore({
-        user: updatedUser,
-      });
-      handleClose();
-      return toast.success('Profile updated successfully');
+    try {
+      const { data } = await request('put', '/admins/', formData);
+      if (data) {
+        updateStore({
+          user: {
+            ...user,
+            email: data.user.email,
+            phone_number: data.user.phone_number,
+            profile_pic: data.user.profile_pic,
+          },
+        });
+        handleClose();
+        toast.success('Profile updated successfully');
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 

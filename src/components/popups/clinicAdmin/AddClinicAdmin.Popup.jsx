@@ -169,6 +169,7 @@ export default function AddClinicAdmin({
       if (error.response.status === 418) {
         setExisitingButInactive(true);
       }
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -190,13 +191,15 @@ export default function AddClinicAdmin({
     });
     formData.append('active', 'true');
     formData.append('activateUser', 'true');
-
-    const { data } = await request('put', '/staff/editClinic/undefined', formData);
-
-    if (data) {
-      getClinicAdmins();
-      setClinicAdmin({});
-      return toast.success('User added successfully');
+    try {
+      const { data } = await request('put', '/staff/editClinic/undefined', formData);
+      if (data) {
+        getClinicAdmins();
+        setClinicAdmin({});
+        return toast.success('User added successfully');
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 

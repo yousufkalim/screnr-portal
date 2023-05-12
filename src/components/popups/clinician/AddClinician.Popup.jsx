@@ -174,6 +174,7 @@ export default function AddClinician({
       if (error.response.status === 418) {
         setExisitingButInactive(true);
       }
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -195,13 +196,16 @@ export default function AddClinician({
     });
     formData.append('active', 'true');
     formData.append('activateUser', 'true');
+    try {
+      const { data } = await request('put', '/clinics/editClinician/undefined', formData);
 
-    const { data } = await request('put', '/clinics/editClinician/undefined', formData);
-
-    if (data) {
-      getClinicians();
-      setClinician({});
-      return toast.success('User added successfully');
+      if (data) {
+        getClinicians();
+        setClinician({});
+        return toast.success('User added successfully');
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 

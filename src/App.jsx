@@ -26,8 +26,8 @@ function App() {
         Authorization: `Bearer ${userToken}`,
       },
     });
-    updateStore({ loggedIn: true, user: data.user });
-    return { authenticated: true, role: data.user?.role };
+    updateStore({ loggedIn: true, user: data?.user });
+    return { authenticated: true, role: data?.user?.role };
   };
 
   useEffect(() => {

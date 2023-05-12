@@ -161,7 +161,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
                       padding: '3%',
                     }}
                   >
-                    {row.patient.count}
+                    {row?.patient?.count}
                   </TableCell>
 
                   <TableCell align="center">
@@ -177,9 +177,10 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
               ))
             ) : (
               <>
-                {' '}
                 <TableCell align="center" />
-                <TableCell align="left">No Clinic Admins found</TableCell>
+                <TableCell align="left">
+                  <p className="noDataTxt">No Clinic found</p>
+                </TableCell>
               </>
             )}
           </TableBody>
