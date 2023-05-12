@@ -50,7 +50,7 @@ export default function SomethingWrong({ openSomethingWrong, setOpenSomethingWro
           <Typography>
             <Icon style={{ zIndex: '1300' }} />
             <h1 className="genPresTxt">Something Wrong</h1>
-            <p className="genSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="genSubTxt"> </p>
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>

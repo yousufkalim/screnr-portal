@@ -199,7 +199,7 @@ export default function EditClinicAdmin({
         <DialogContent>
           <Typography gutterBottom>
             <h1 className="addPopupTxt">Edit Clinic Admin</h1>
-            <p className="addPopupSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="addPopupSubTxt"> </p>
             <div>
               <div className="imgDivPopup">
                 {/* Avatar to be used */}

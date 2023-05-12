@@ -49,7 +49,7 @@ export default function UserCreated({ openUserCreated, setOpenUserCreated }) {
           <Typography>
             <Icon />
             <h1 className="genPresTxt">New User Added</h1>
-            <p className="genSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="genSubTxt"> </p>
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>

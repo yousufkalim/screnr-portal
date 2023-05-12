@@ -209,7 +209,7 @@ export default function AddClinicAdmin({
         <DialogContent>
           <Typography gutterBottom>
             <h1 className="addPopupTxt">Add New Clinic Admin</h1>
-            <p className="addPopupSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="addPopupSubTxt"> </p>
             <div>
               <div className="imgDivPopup">
                 <label htmlFor="clinicAdmin_AddProfile_Pic">

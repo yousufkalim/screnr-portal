@@ -50,7 +50,7 @@ export default function EmailAlreadyRegisteredPopup({ openExistingEmail, setOpen
           <Typography>
             <Icon />
             <h1 className="genPresTxt">This email is Already Register</h1>
-            <p className="genSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="genSubTxt"> </p>
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>

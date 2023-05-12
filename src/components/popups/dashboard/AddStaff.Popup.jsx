@@ -185,7 +185,7 @@ export default function AddStaffMember({
         <DialogContent>
           <Typography gutterBottom>
             <h1 className="addPopupTxt">Add Staff Member</h1>
-            <p className="addPopupSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="addPopupSubTxt"> </p>
             <div>
               <div className="imgDivPopup">
                 <label htmlFor="profilePic">
