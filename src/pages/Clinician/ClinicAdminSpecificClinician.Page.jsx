@@ -54,7 +54,6 @@ export default function ClinicAdmin() {
     }
   };
 
-
   const getClinicName = (name) => {
     setBreadcrumb(name);
   };

@@ -8,6 +8,7 @@ import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
+import { toast } from 'react-toastify';
 import request from '../request';
 import Logo from '../assets/icons/Logo.svg';
 import Vector from '../assets/images/login/loginPgImg.svg';
@@ -66,13 +67,24 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    request('post', '/auth/login', userData).then((res) => {
-      localStorage.setItem('token', res.data.token);
-      updateStore({ user: res.data.user, loggedIn: true });
-      window.location = loggedInUser[res.data.user.role];
-      setUserData({ email: '', password: '' });
-    });
+    request('post', '/auth/login', userData)
+      .then((res) => {
+        localStorage.setItem('token', res?.data?.token);
+        updateStore({ user: res.data.user, loggedIn: true });
+        window.location = loggedInUser[res.data.user.role];
+        setUserData({ email: '', password: '' });
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+      });
   };
+
+  const forgetPasswordPopup = openForgetPasswordPopup && (
+    <ForgetPasswordPopup
+      openForgetPasswordPopup={openForgetPasswordPopup}
+      setOpenForgetPasswordPopup={setOpenForgetPasswordPopup}
+    />
+  );
 
   return (
     <div className="loginScreenBG">
@@ -189,12 +201,7 @@ export default function Login() {
                 Login
               </Button>
             </Grid>
-            {openForgetPasswordPopup && (
-              <ForgetPasswordPopup
-                openForgetPasswordPopup={openForgetPasswordPopup}
-                setOpenForgetPasswordPopup={setOpenForgetPasswordPopup}
-              />
-            )}
+            {forgetPasswordPopup}
           </div>
         </Grid>
       </Grid>
