@@ -22,10 +22,13 @@ export default function ClinicianDashboard() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [patientsByClinician, setPatientsByClinician] = useState({});
   const [loading, setLoading] = useState(false);
+  const openAddPatientModal = () => setOpenAddPatient(true);
+
   const getPatients = async () => {
     try {
       setLoading(true);
-      const { data } = await request('get', `/clinicians/dashboard`);
+
+      const { data } = await request('get', '/clinicians/dashboard');
       if (data) {
         setPatientsByClinician(data);
         setLoading(false);
@@ -63,10 +66,6 @@ export default function ClinicianDashboard() {
       icon2: RedStats,
     },
   ];
-
-  const openAddPatientModal = () => {
-    setOpenAddPatient(true);
-  };
 
   useEffect(() => {
     getPatients();

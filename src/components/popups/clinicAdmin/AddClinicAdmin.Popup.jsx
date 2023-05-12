@@ -32,7 +32,7 @@ const useOutlinedInputStyles = makeStyles({
         height: 55,
       },
       '&:hover fieldset': {
-        borderColor: '#454238',
+        borderColor: '#FBA622',
       },
       '&::placeholder fieldset': {
         fontWeight: 800,
@@ -98,13 +98,9 @@ export default function AddClinicAdmin({
     setClinicAdmin({ ...clinicAdmin, profile_pic: myFile });
   };
 
-  const handleChange = (e) => {
-    setClinicAdmin({ ...clinicAdmin, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setClinicAdmin({ ...clinicAdmin, [e.target.name]: e.target.value });
 
-  const handleUserDataChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
+  const handleUserDataChange = (e) => setUserData({ ...userData, [e.target.name]: e.target.value });
 
   const dateChange = (e) => {
     setClinicAdmin({
@@ -113,16 +109,8 @@ export default function AddClinicAdmin({
     });
   };
 
-  const handleCheck = (event) => {
-    setChecked(event.target.checked);
-  };
-
-  // handle gender selection
-  const handleGenderSelection = (name) => {
-    setClinicAdmin({ ...clinicAdmin, gender: name });
-  };
-
-  // posting data
+  const handleCheck = (event) => setChecked(event.target.checked);
+  const handleGenderSelection = (name) => setClinicAdmin({ ...clinicAdmin, gender: name });
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -221,7 +209,7 @@ export default function AddClinicAdmin({
         <DialogContent>
           <Typography gutterBottom>
             <h1 className="addPopupTxt">Add New Clinic Admin</h1>
-            <p className="addPopupSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="addPopupSubTxt"> </p>
             <div>
               <div className="imgDivPopup">
                 <label htmlFor="clinicAdmin_AddProfile_Pic">

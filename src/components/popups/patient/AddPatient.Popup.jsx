@@ -298,7 +298,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         <DialogContent>
           <Typography gutterBottom>
             <h1 className="clinicianPopupTxt">Add New Patient</h1>
-            <p className="clinicianSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="clinicianSubTxt"> </p>
             <div>
               <div className="imgDivPopup">
                 <label htmlFor="patient_AddProfile_Pic">

@@ -88,9 +88,7 @@ export default function Login() {
         <Grid lg={5.5} xl={5.5}>
           <div className="loginForm">
             <h1 className="loginformHeading"> Welcome back !</h1>
-            <p className="loginformSubHeading">
-              Lorem ipsum dolor sit amet, consectetur adipiscing
-            </p>
+            <p className="loginformSubHeading"> </p>
             <Grid item xs={12}>
               <InputLabel
                 sx={{ mt: 4, mb: 1.3, fontWeight: '600', fontSize: '14px', color: '#454238' }}

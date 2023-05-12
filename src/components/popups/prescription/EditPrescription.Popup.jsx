@@ -134,9 +134,8 @@ export default function EditPrescription({
         toast.success('Edited Successfully');
         handlePrescriptionList();
       })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error(`handleEditPrescriptions --> ${err}`);
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
       });
     handleClose();
   };

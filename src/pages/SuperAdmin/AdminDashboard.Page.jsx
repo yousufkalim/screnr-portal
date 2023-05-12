@@ -20,15 +20,14 @@ import request from '../../request';
 export default function Dashboard() {
   const [openAddStaffMember, setOpenAddStaffMember] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [staffMembers, setStaffMembers] = useState({});
+  const [clinicsPerMonth, setClinicsPerMonth] = useState([]);
   const [count, setCount] = useState({
     staffCount: 0,
     clinicianCount: 0,
     clinicsCount: 0,
     patientsCount: 0,
   });
-
-  const [staffMembers, setStaffMembers] = useState({});
-  const [clinicsPerMonth, setClinicsPerMonth] = useState([]);
 
   const getStaffMembers = async (page = 1) => {
     setIsLoading(true);

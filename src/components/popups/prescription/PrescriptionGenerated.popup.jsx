@@ -52,7 +52,7 @@ export default function GeneratePrescription({
           <Typography>
             <Icon />
             <h1 className="genPresTxt">Prescription Generated Successfully</h1>
-            <p className="genSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="genSubTxt"> </p>
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>

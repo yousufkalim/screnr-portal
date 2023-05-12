@@ -5,6 +5,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import EmojiPicker from 'emoji-picker-react';
 import { makeStyles } from '@mui/styles';
+import { toast } from 'react-toastify';
 import { ReactComponent as Send } from '../../assets/icons/sendMsg.svg';
 import { ReactComponent as Emoji } from '../../assets/icons/emoji.svg';
 import { ReactComponent as Dummy } from '../../assets/images/dummyprsn.svg';
@@ -59,9 +60,8 @@ export default function ReportCard({
         setReplySent(reply);
         setReply('');
       })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error(err);
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
       });
   };
 

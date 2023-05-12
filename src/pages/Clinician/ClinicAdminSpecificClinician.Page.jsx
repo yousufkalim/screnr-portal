@@ -54,12 +54,14 @@ export default function ClinicAdmin() {
     }
   };
 
+
   const getClinicName = (name) => {
     setBreadcrumb(name);
   };
   const handleDashboardNavClick = () => {
     navigate('/admin/dashboard');
   };
+
   const handleStaffNavClick = () => {
     window.history.back();
   };

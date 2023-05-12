@@ -14,7 +14,6 @@ import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
 export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, open }) {
-  // const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
 
@@ -23,7 +22,8 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
       const { data } = await request('get', `/${txt}/${id}`);
       if (data) {
         setInfo(data?.user);
-        if (txt.includes('clinicians')) {
+
+        if (txt.includes('Clinician')) {
           getClinicName(data?.user?.userData?.clinic?.userData?.clinic_name);
         } else getClinicName(data?.user?.userData?.clinic_name);
       }
@@ -37,14 +37,18 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  const handleEditIconClick = () => setOpen(!open);
+
+  const handleEditIconClick = () => {
+    setOpen(!open);
+  };
+
 
   let result = '';
-  if (txt.includes('clinics')) {
+  if (txt.includes('Clinic')) {
     result = info?.userData?.clinic_name || '';
   } else if (txt.includes('clinicians')) {
     result = info?.userData?.clinic?.userData?.clinic_name || '';
-  } else if (txt.includes('staff')) {
+  } else if (txt.includes('Staff')) {
     result = info?.id || '';
   } else {
     result = '';
@@ -64,9 +68,9 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
                 accept=".png, .jpg, .jpeg"
                 // onChange={handleSelectedFile}
               />
-              {info.profile_pic ? (
+              {info?.profile_pic ? (
                 <img
-                  src={getMediaUrl(info.profile_pic)}
+                  src={getMediaUrl(info?.profile_pic)}
                   className="pointer"
                   id="selectedImg"
                   style={{
@@ -92,7 +96,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
           className="editIconSidebar"
           onClick={handleEditIconClick}
           onKeyDown={(event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
+            if (event?.key === 'Enter' || event?.key === ' ') {
               handleEditIconClick();
             }
           }}
@@ -100,7 +104,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
       </div>
       <div className="sideBarInfo">
         <div className="user_name"> {`${info?.first_name} ${info?.last_name}`}</div>
-        <div className="staff_id">
+        <div className="staff_id" style={{ display: txt.includes('Clinician') ? 'none' : '' }}>
           {roleTxt}: <span className="staff_id_2">{result}</span>
         </div>
       </div>
@@ -118,10 +122,9 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
         <div className="user_exp_detail">
           <span className="detail_expiry">
             <Expiry className="spaceOnRight" />
-            <p className="spaceRight">Expiry Date</p>
+            <p className="spaceRight">Expiry Date </p>
           </span>
-
-          <p> {moment(info.expiry_date).format('MM-DD-YYYY')}</p>
+          <p> {moment(info?.expiry_date).format('MM-DD-YYYY')}</p>
         </div>
       ) : (
         ''

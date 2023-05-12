@@ -203,7 +203,7 @@ export default function EditClinician({
         <DialogContent>
           <Typography gutterBottom>
             <h1 className="clinicianPopupTxt">Edit Clinician</h1>
-            <p className="clinicianSubTxt">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            <p className="clinicianSubTxt"> </p>
             <div>
               <div className="imgDivPopup">
                 <label htmlFor="clinicAdmin_AddProfile_Pic">
