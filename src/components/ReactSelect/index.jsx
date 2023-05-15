@@ -68,7 +68,7 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
             </div>
           ))
         ) : (
-          <p className="notxt">No Clinicians found</p>
+          <p className="notxt">No Clinician found</p>
         )}
       </div>
     </div>

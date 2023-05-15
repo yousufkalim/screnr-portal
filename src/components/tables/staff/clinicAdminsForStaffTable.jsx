@@ -65,7 +65,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
         }}
       >
         <div className="allTableHead">
-          <h1 className="clientTableHead">List of Clinic Admin&apos;s</h1>
+          <h1 className="clientTableHead">List of Clinic Admins</h1>
         </div>
         <Table
           sx={{

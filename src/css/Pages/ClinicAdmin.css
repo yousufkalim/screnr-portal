@@ -27,7 +27,7 @@
 }
 
 #clinicAdminTable1 {
-  padding: 2% 0% 2% 0%;
+  padding: 3% 0% 2% 0% !important;
 }
 
 .bg {
@@ -88,7 +88,7 @@
 
 .allClinicAdminTable {
   background-color: rgb(246, 250, 251);
-  height: 91vh;
+  height: 80vh;
 }
 
 .filterPoper {
@@ -203,7 +203,7 @@
 
   .allClinicAdminTable {
     background-color: rgb(246, 250, 251);
-    height: 89vh;
+    height: 79vh;
   }
 
   .activityTable {
