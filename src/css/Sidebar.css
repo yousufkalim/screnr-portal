@@ -45,7 +45,9 @@
   height: 111px !important;
   font-size: 32px !important;
 }
-
+#gapAdd{
+  gap: 1rem !important;
+}
 .user_detail {
   color: #919b9b;
   font-size: 0.9rem;

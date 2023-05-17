@@ -1,8 +1,8 @@
 .clinician_dashboard_main_div {
   width: 100%;
-  max-height: 90vh;
+  height: 100vh !important;
   background-color: #f6fafb;
-  padding: 1rem 4rem 0rem 4rem;
+  padding: 2.5rem 4rem 0rem 4rem !important;
   position: relative !important;
   padding-bottom: 8rem;
   display: flex;

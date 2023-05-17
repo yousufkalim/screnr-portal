@@ -56,18 +56,6 @@ export default function Dashboard() {
       link: '/clinics',
     },
     {
-      icon: Patients,
-      amount:
-        clinicAdmins?.count?.activePatient?.count < 10 &&
-        clinicAdmins?.count?.activePatient?.count > 0
-          ? `0${clinicAdmins?.count?.activePatient?.count}`
-          : clinicAdmins?.count?.activePatient?.count || 0,
-      title: 'Active Patients',
-      icon2: Circle,
-      className: 'yellow_circle',
-      link: '/staff/dashboard',
-    },
-    {
       icon: Clinician,
       amount:
         clinicAdmins?.count?.totalClinician?.count < 10 &&
@@ -90,6 +78,18 @@ export default function Dashboard() {
       icon2: BlueCircle2,
       className: 'blue_circle',
       link: '/patients',
+    },
+    {
+      icon: Patients,
+      amount:
+        clinicAdmins?.count?.activePatient?.count < 10 &&
+        clinicAdmins?.count?.activePatient?.count > 0
+          ? `0${clinicAdmins?.count?.activePatient?.count}`
+          : clinicAdmins?.count?.activePatient?.count || 0,
+      title: 'Active Patients',
+      icon2: Circle,
+      className: 'yellow_circle',
+      link: '/staff/dashboard',
     },
   ];
 
