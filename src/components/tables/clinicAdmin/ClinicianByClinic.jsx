@@ -171,7 +171,7 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
               <>
                 <TableCell align="center" />
                 <TableCell align="left" className="noDataTxt">
-                  No Clinicians found
+                  No Clinician found
                 </TableCell>
               </>
             )}

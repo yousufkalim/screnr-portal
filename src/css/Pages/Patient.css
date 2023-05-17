@@ -674,7 +674,7 @@
   overflow-y: scroll;
   z-index: 99;
 }
-#filterPatientsTbl{
+#filterPatientsTbl {
   /* margin-left: 3% !important; */
 }
 .selectedOpt {
@@ -913,5 +913,13 @@
   }
   .presChoice {
     min-width: 11rem;
+  }
+}
+@media only screen and (max-width: 1420px) {
+  .PatientTopSection {
+    width: 73vw !important;
+  }
+  .addMore {
+    width: 10% !important;
   }
 }

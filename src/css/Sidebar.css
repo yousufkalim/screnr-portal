@@ -45,7 +45,9 @@
   height: 111px !important;
   font-size: 32px !important;
 }
-
+#gapAdd {
+  gap: 1rem !important;
+}
 .user_detail {
   color: #919b9b;
   font-size: 0.9rem;
@@ -236,7 +238,7 @@
   height: 110px;
   border-radius: 100px;
 }
-.xnewww{
+.xnewww {
   width: 85%;
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -274,10 +276,10 @@
   }
 }
 @media only screen and (max-width: 1383px) {
-  .user_detail{
+  .user_detail {
     font-size: 0.8rem !important;
   }
-  .xnewww{
+  .xnewww {
     width: 80% !important;
   }
   .activityTxt {

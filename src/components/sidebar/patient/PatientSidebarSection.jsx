@@ -60,26 +60,26 @@ export default function PatientSidebarSection({
         </div>
       </div>
       <div className="sidebarSubDiv">
-        <div className="user_detail" style={{ paddingLeft: '.3rem' }}>
+        <div className="user_detail" id="gapAdd" style={{ paddingLeft: '.3rem' }}>
           <Counter />
           {moment().diff(patientData?.userData?.dob, 'years')}
         </div>
-        <div className="user_detail">
+        <div className="user_detail" id="gapAdd">
           <Medical />
           {patientData?.userData?.diagnosis}
         </div>
-        <div className="user_detail">
+        <div className="user_detail" id="gapAdd">
           <Body />
           {patientData?.userData?.location}
         </div>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <div className="sidebarSubDiv2">
-          <div className="user_detail">
+          <div className="user_detail" id="gapAdd">
             <Phone />
             {patientData?.phone_number}
           </div>
-          <div className="user_detail">
+          <div className="user_detail" id="gapAdd">
             <Email />
             <div className="xnewww">{patientData?.email}</div>
           </div>
@@ -87,7 +87,7 @@ export default function PatientSidebarSection({
         <br />
         {patientData?.expiry_date && (
           <div className="patient_exp_detail">
-            <span className="detail_expiry">
+            <span className="detail_expiry" id="gapAdd">
               <Expiry />
               <p>Expiry Date</p>
             </span>
