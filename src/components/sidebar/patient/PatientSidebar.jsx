@@ -27,7 +27,7 @@ export default function Sidebar({
       setActivityClicked(true);
       setActivityClickedTwo(false);
       setActivityClickedThree(false);
-    } else if (path === '/patients/:id/messages') {
+    } else if (path === `/patients/${patientId}/messages/${selectedClinician}`) {
       setActivityClickedTwo(true);
       setActivityClicked(false);
       setActivityClickedThree(false);
@@ -76,7 +76,7 @@ export default function Sidebar({
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          // navigate('/patients/:id/messages');
+          navigate(`/patients/${patientId}/messages/${selectedClinician}`);
           setActivityClickedTwo(true);
           setActivityClicked(false);
           setActivityClickedThree(false);
@@ -84,14 +84,16 @@ export default function Sidebar({
       >
         <Msg
           className={
-            activityClickedTwo || window.location.pathname === '/patients/:id/messages'
+            activityClickedTwo ||
+            window.location.pathname === `/patients/${patientId}/messages/${selectedClinician}`
               ? 'iconActivity'
               : ''
           }
         />
         <p
           className={
-            activityClickedTwo || window.location.pathname === '/patients/:id/messages'
+            activityClickedTwo ||
+            window.location.pathname === `/patients/${patientId}/messages/${selectedClinician}`
               ? 'clickedActivity'
               : 'activityTxt'
           }

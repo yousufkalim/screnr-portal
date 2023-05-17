@@ -117,7 +117,7 @@ const AllRoutes = [
     roles: ['admin', 'staff', 'clinic', 'clinician'],
   },
   {
-    path: '/patients/:id/messages',
+    path: '/patients/:patientId/messages/:clinicianId',
     element: <PatientMessageBox />,
     roles: ['admin'],
     protected: true,

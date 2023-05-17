@@ -33,14 +33,13 @@ export default function PatientSidebarSection({
     setToggleIcon(!toggleIcon);
   };
 
-  const handleEditIconClick = () => {
-    setOpenEditpatientModal(!openEditpatientModal);
-  };
+  const handleEditIconClick = () => setOpenEditpatientModal(!openEditpatientModal);
+
   return (
     <>
       <div className="mainAvatarDiv">
         <AvatarComponent
-          alt={`${patientData?.first_name} ${patientData?.last_name}`}
+          alt={`${patientData?.first_name} ${patientData?.last_name}` || ''}
           className="sidebar_avatar"
         />
         <img
@@ -53,9 +52,11 @@ export default function PatientSidebarSection({
         />
       </div>
       <div className="sideBarInfo">
-        <div className="user_name">{`${patientData?.first_name} ${patientData?.last_name}`}</div>
+        <div className="user_name">
+          {`${patientData?.first_name} ${patientData?.last_name}` || ''}
+        </div>
         <div className="staff_id">
-          Patient ID: <span className="staff_id_2">{patientData?.userData?.mrn_id}</span>
+          Patient ID: <span className="staff_id_2">{patientData?.userData?.mrn_id || ''}</span>
         </div>
       </div>
       <div className="sidebarSubDiv">
@@ -80,7 +81,7 @@ export default function PatientSidebarSection({
           </div>
           <div className="user_detail">
             <Email />
-            <div className="xnewww"> {patientData?.email}</div>
+            <div className="xnewww">{patientData?.email}</div>
           </div>
         </div>
         <br />

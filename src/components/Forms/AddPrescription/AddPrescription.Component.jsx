@@ -152,8 +152,6 @@ export default function AddPrescription({
     exerciseInformation.reps &&
     exerciseInformation.rest;
   const today = new Date().toISOString();
-  console.log('🚀 ~ file: AddPrescription.Component.jsx:155 ~ today:', today);
-  // tomorrow.setDate(tomorrow.getDate() + 1);
   return (
     <Grid container className="addPrescription">
       <Grid xl={6} lg={6}>
