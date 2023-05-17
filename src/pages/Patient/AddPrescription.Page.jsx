@@ -20,7 +20,7 @@ export default function AddPatientPrescription() {
     start_date: new Date(),
     duration: '',
     frequency: '',
-    type: 'simple',
+    type: 'motion',
     clinician: clinicianId,
     patient: patientId,
     exercises: [],

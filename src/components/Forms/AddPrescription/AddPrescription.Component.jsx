@@ -213,8 +213,8 @@ export default function AddPrescription({
             </MenuItem>
             {weeks?.map((week) => {
               return (
-                <MenuItem value={week.value}>
-                  <span className="optColor">{week.label}</span>
+                <MenuItem value={week?.value}>
+                  <span className="optColor">{week?.label}</span>
                 </MenuItem>
               );
             })}
@@ -283,8 +283,8 @@ export default function AddPrescription({
             </MenuItem>
             {frequency.map((item) => {
               return (
-                <MenuItem value={item.value}>
-                  <span className="optColor">{item.label}</span>
+                <MenuItem value={item?.value}>
+                  <span className="optColor">{item?.label}</span>
                 </MenuItem>
               );
             })}
@@ -297,8 +297,7 @@ export default function AddPrescription({
         <div className="prescriptionChoiceSec">
           <div
             className={prescription.type === 'motion' ? 'selctedPresChoice' : 'presChoice'}
-            // for now
-            // onClick={() => handlePrescriptionDetails('type', 'motion')}
+            onClick={() => handlePrescriptionDetails('type', 'motion')}
             role="presentation"
           >
             <MotionCapture
@@ -315,7 +314,7 @@ export default function AddPrescription({
             <p className="selectedOpt">Exercise Program</p>
           </div>
         </div>
-        {prescription.type === 'motion' ? (
+        {prescription?.type === 'motion' ? (
           <>
             <FormControl sx={{ mt: 2.5, width: '100%' }} variant="outlined">
               <Select
@@ -379,7 +378,7 @@ export default function AddPrescription({
                 }}
               >
                 <MenuItem>
-                  <span className="optColor"> Select Exercise</span>{' '}
+                  <span className="optColor">Select Exercise</span>
                 </MenuItem>
               </Select>
             </FormControl>
@@ -672,7 +671,7 @@ export default function AddPrescription({
                 }}
               >
                 <MenuItem value="default">
-                  <span className="optColor">Rest Between Sets</span>{' '}
+                  <span className="optColor">Rest Between Sets</span>
                 </MenuItem>
                 {rest?.map((item) => {
                   return (
