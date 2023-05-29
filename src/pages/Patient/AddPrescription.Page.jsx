@@ -13,20 +13,21 @@ export default function AddPatientPrescription() {
   const params = useParams();
   const { patientId, clinicianId } = params;
   const [openGeneratePrescription, setOpenGeneratePrescription] = useState(false);
-  const [openEditpatientModal, setOpenEditpatientModal] = useState(false);
+  const [openEditPatientModal, setOpenEditPatientModal] = useState(false);
   const [patient, setPatient] = useState({});
+  const [allMotionExercise, setAllMotionExercise] = useState([]);
+  const [exerciseType, setExerciseType] = useState('motion');
   const [prescription, setPrescription] = useState({
     name: '',
     start_date: new Date(),
     duration: '',
     frequency: '',
-    type: 'motion',
     clinician: clinicianId,
     patient: patientId,
     exercises: [],
   });
-
-  const [exerciseInformation, setExerciseInformation] = useState({
+  const [simpleExerciseInfo, setSimpleExerciseInfo] = useState({
+    type: 'simple',
     name: '',
     body_part: '',
     sets: '',
@@ -34,19 +35,35 @@ export default function AddPatientPrescription() {
     rest: '',
     instructions: '',
   });
+  const [motionExerciseInfo, setMotionExerciseInfo] = useState({
+    type: 'motion',
+    name: '',
+    body_part: '',
+    sets: '',
+    reps: '',
+    rest: '',
+    instructions: '',
+    exercise: {},
+    screenshot: false,
+  });
+
+  const handleMotionExerciseInfo = (name, value) => {
+    setMotionExerciseInfo({ ...motionExerciseInfo, [name]: value });
+  };
+
+  const handleSimpleExerciseInfo = (name, value) => {
+    setSimpleExerciseInfo({ ...simpleExerciseInfo, [name]: value });
+  };
 
   const getPatientDataById = async () => {
     await request('get', `/clinicians/getPatientDetail/${patientId}`).then((res) => {
       setPatient(res?.data?.user);
     });
   };
-  useEffect(() => {
-    getPatientDataById();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleExercideInfoReset = () => {
-    setExerciseInformation({
+    setSimpleExerciseInfo({
+      type: 'simple',
       name: '',
       body_part: '',
       sets: '',
@@ -54,29 +71,57 @@ export default function AddPatientPrescription() {
       rest: '',
       instructions: '',
     });
+
+    setMotionExerciseInfo({
+      type: 'motion',
+      name: '',
+      body_part: '',
+      sets: '',
+      reps: '',
+      rest: '',
+      instructions: '',
+      exercise: {},
+      screenshot: false,
+    });
   };
+
   const handleAddToList = () => {
-    if (
-      exerciseInformation.body_part &&
-      exerciseInformation.name &&
-      exerciseInformation.reps &&
-      exerciseInformation.rest &&
-      exerciseInformation.sets
-    ) {
-      setPrescription({
-        ...prescription,
-        exercises: [...prescription.exercises, exerciseInformation],
-      });
-      handleExercideInfoReset();
+    if (exerciseType === 'simple') {
+      if (
+        simpleExerciseInfo.body_part &&
+        simpleExerciseInfo.name &&
+        simpleExerciseInfo.reps &&
+        simpleExerciseInfo.rest &&
+        simpleExerciseInfo.sets &&
+        simpleExerciseInfo.type
+      ) {
+        setPrescription({
+          ...prescription,
+          exercises: [...prescription.exercises, simpleExerciseInfo],
+        });
+        handleExercideInfoReset();
+      }
+    } else if (exerciseType === 'motion') {
+      if (
+        motionExerciseInfo.body_part &&
+        motionExerciseInfo.name &&
+        motionExerciseInfo.reps &&
+        motionExerciseInfo.rest &&
+        motionExerciseInfo.sets &&
+        motionExerciseInfo.exercise &&
+        motionExerciseInfo.type
+      ) {
+        setPrescription({
+          ...prescription,
+          exercises: [...prescription.exercises, motionExerciseInfo],
+        });
+        handleExercideInfoReset();
+      }
     }
   };
 
   const handlePrescriptionDetails = (name, value) => {
     setPrescription({ ...prescription, [name]: value });
-  };
-
-  const handleExerciseInformation = (name, value) => {
-    setExerciseInformation({ ...exerciseInformation, [name]: value });
   };
 
   const dateChange = (e) => {
@@ -92,7 +137,6 @@ export default function AddPatientPrescription() {
       start_date: '',
       duration: 0,
       frequency: 0,
-      type: prescription?.type === 'motion' ? 'motion' : 'simple',
       clinician: clinicianId,
       patient: patientId,
       exercises: [],
@@ -101,13 +145,13 @@ export default function AddPatientPrescription() {
 
   const handleGeneratePrescription = async () => {
     if (
-      prescription.clinician &&
-      prescription.duration &&
-      prescription.exercises &&
-      prescription.frequency &&
-      prescription.name &&
-      prescription.patient &&
-      prescription.start_date
+      prescription?.clinician &&
+      prescription?.duration &&
+      prescription?.exercises &&
+      prescription?.frequency &&
+      prescription?.name &&
+      prescription?.patient &&
+      prescription?.start_date
     ) {
       await request('post', '/clinicians/prescriptions/createPrescription', prescription)
         .then(() => {
@@ -123,15 +167,30 @@ export default function AddPatientPrescription() {
     }
   };
 
+  const handleGetAllExercise = async () => {
+    await request('get', '/exercises')
+      .then((res) => {
+        setAllMotionExercise(res?.data?.exercises);
+      })
+      .catch((error) => {
+        console.log('-->', error);
+      });
+  };
+
   const validatingGeneratePrescriptionBtn =
-    prescription?.name &&
-    prescription?.start_date &&
-    prescription?.duration &&
-    prescription?.frequency &&
-    prescription?.type &&
-    prescription?.clinician &&
-    prescription?.patient &&
-    prescription?.exercises?.length > 0;
+    prescription &&
+    prescription.name &&
+    prescription.start_date &&
+    prescription.duration &&
+    prescription.frequency &&
+    prescription.clinician &&
+    prescription.patient &&
+    prescription.exercises &&
+    prescription.exercises.length > 0;
+
+  const validatingGeneratePrescription = validatingGeneratePrescriptionBtn
+    ? 'generatePrescriptionBtn'
+    : 'generatePrescriptionBtn_diaabled';
 
   const GeneratePrescriptionSection = openGeneratePrescription && (
     <GeneratePrescription
@@ -140,18 +199,23 @@ export default function AddPatientPrescription() {
     />
   );
 
-  const EditPatientPopup = openEditpatientModal && (
+  const EditPatientPopup = openEditPatientModal && (
     <EditPatient
-      openEditPatient={openEditpatientModal}
-      setOpenEditPatient={setOpenEditpatientModal}
+      openEditPatient={openEditPatientModal}
+      setOpenEditPatient={setOpenEditPatientModal}
       patientDetails={patient}
       getPatients={getPatientDataById}
     />
   );
 
-  const validatingGeneratePrescription = validatingGeneratePrescriptionBtn
-    ? 'generatePrescriptionBtn'
-    : 'generatePrescriptionBtn_diaabled';
+  useEffect(() => {
+    getPatientDataById();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    handleGetAllExercise();
+  }, []);
 
   return (
     <>
@@ -161,11 +225,10 @@ export default function AddPatientPrescription() {
             patientId={patientId}
             patientData={patient}
             selectedClinician={clinicianId}
-            openEditpatientModal={openEditpatientModal}
-            setOpenEditpatientModal={setOpenEditpatientModal}
+            openEditpatientModal={openEditPatientModal}
+            setOpenEditpatientModal={setOpenEditPatientModal}
           />
         </Grid>
-
         <Grid className="bgPrescription" xl={10} lg={9.5}>
           <div className="breadCrumb">
             Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescribe
@@ -174,18 +237,23 @@ export default function AddPatientPrescription() {
           <div className="main_div_addPrescription">
             <div className="bgAddPrescription">
               <AddPrescription
+                exerciseType={exerciseType}
+                setExerciseType={setExerciseType}
                 patientId={patientId}
-                prescription={prescription}
-                exerciseInformation={exerciseInformation}
-                handleAddToList={handleAddToList}
-                handlePrescriptionDetails={handlePrescriptionDetails}
-                handleExerciseInformation={handleExerciseInformation}
                 dateChange={dateChange}
+                prescription={prescription}
+                handleAddToList={handleAddToList}
+                allMotionExercise={allMotionExercise}
+                simpleExerciseInfo={simpleExerciseInfo}
+                handlePrescriptionDetails={handlePrescriptionDetails}
+                handleSimpleExerciseInfo={handleSimpleExerciseInfo}
+                handleMotionExerciseInfo={handleMotionExerciseInfo}
+                motionExerciseInfo={motionExerciseInfo}
+                setMotionExerciseInfo={setMotionExerciseInfo}
               />
             </div>
           </div>
         </Grid>
-
         <div className="addPrescriptionBtn">
           <Button
             variant="contained"

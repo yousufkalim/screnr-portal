@@ -1,8 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-nested-ternary */
 import { React, useState, useRef, useEffect } from 'react';
-
-// mui imports
 import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
@@ -20,6 +18,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
+import { toast } from 'react-toastify';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
@@ -28,6 +27,7 @@ import { ReactComponent as Profile } from '../../../assets/components/Table/Prof
 import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
+import request from '../../../request/index';
 
 const useStyles = makeStyles(() => ({
   radio: {
@@ -44,7 +44,6 @@ const useStyles = makeStyles(() => ({
   },
   checked: {},
 }));
-
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
     backgroundColor: '#F6F6F6',
@@ -54,7 +53,6 @@ const StyledTableRow = styled(TableRow)(() => ({
     borderBottom: '1px solid transparent',
   },
 }));
-
 const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 6,
   borderRadius: 5,
@@ -108,15 +106,19 @@ export default function PatientTable({
   const [editPatient, setEditPatient] = useState('');
   const [search, setSearch] = useState('');
   const [openFilter, setOpenFilter] = useState(false);
+  const click = useRef(null);
+  const filterRef = useRef(null);
+  const classes = useStyles();
+  const [counter, setCounter] = useState({
+    report: '',
+    unReadMsg: '',
+  });
 
   const isSafari =
     navigator.vendor.match(/apple/i) &&
     !navigator.userAgent.match(/crios/i) &&
     !navigator.userAgent.match(/fxios/i) &&
     !navigator.userAgent.match(/Opera|OPT\//);
-  const click = useRef(null);
-  const filterRef = useRef(null);
-  const classes = useStyles();
 
   const handleCheck = async (event, value) => {
     if (filter.filterType === 'exercise') {
@@ -190,6 +192,25 @@ export default function PatientTable({
     await handleFilterAndSorting({ filterType: 'clinic', clinicName: event.target.value });
   };
 
+  const handleAllClear = async () => {
+    setFilter({ ...filter, filterType: 'all' });
+    setSorting({ ...sorting, sortBy: '' });
+    await handleFilterAndSorting({ filterType: 'all' });
+  };
+
+  const handleReportAndMsgCounter = (patientId) => {
+    request('get', `/clinicians/unreadMesasgeAndUncheckedReport/${patientId}`)
+      .then((res) => {
+        setCounter({
+          report: res?.data?.uncheckedReport?.count,
+          unReadMsg: res?.data?.unreadMessage?.count,
+        });
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+      });
+  };
+
   useEffect(() => {
     const handleCloseFilter = (e) => {
       if (
@@ -208,12 +229,6 @@ export default function PatientTable({
       document.removeEventListener('mousedown', handleCloseFilter);
     };
   }, [openFilter]);
-
-  const handleAllClear = async () => {
-    setFilter({ ...filter, filterType: 'all' });
-    setSorting({ ...sorting, sortBy: '' });
-    await handleFilterAndSorting({ filterType: 'all' });
-  };
 
   return (
     <div className="allClinicAdminTable" id="clinicianTable">
@@ -508,6 +523,7 @@ export default function PatientTable({
                     className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
                     onClick={() => {
                       setPatient(row);
+                      handleReportAndMsgCounter(row?.id);
                     }}
                   >
                     <TableCell align="left"> {row.id} </TableCell>
@@ -581,13 +597,13 @@ export default function PatientTable({
                       <TableCell width="2%" />
                       <TableCell>
                         <div className="notiCell">
-                          <Report /> <p className="reportTxt"> 2 Reports</p>
+                          <Report /> <p className="reportTxt">{counter?.report} Reports</p>
                         </div>
                       </TableCell>
                       <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
                         <div className="notiCell">
                           <Message />
-                          <p className="msgTxt"> 3 Messages</p>
+                          <p className="msgTxt">{counter?.unReadMsg} Messages</p>
                         </div>
                       </TableCell>
                       <TableCell>

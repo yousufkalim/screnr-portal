@@ -17,11 +17,16 @@ import RightSidebar from '../../components/sidebar/patient/PatientListRightSideb
 import request from '../../request';
 
 export default function Patient() {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [patients, setPatients] = useState({});
   const [breadcrumb, setBreadcrumb] = useState('');
-  const navigate = useNavigate();
-  const { id } = useParams();
+
+  const getClinicName = (name) => setBreadcrumb(name);
+  const handleDashboardNavClick = () => navigate('/admin/dashboard');
+  const handleStaffNavClick = () => window.history.back();
+  const handleClinicNavClick = () => window.history.back();
 
   const getPatients = async (page = 1) => {
     try {
@@ -35,20 +40,6 @@ export default function Patient() {
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
-  };
-
-  const getClinicName = (name) => {
-    setBreadcrumb(name);
-  };
-  const handleDashboardNavClick = () => {
-    navigate('/admin/dashboard');
-  };
-  const handleStaffNavClick = () => {
-    window.history.back();
-    window.history.back();
-  };
-  const handleClinicNavClick = () => {
-    window.history.back();
   };
 
   useEffect(() => {

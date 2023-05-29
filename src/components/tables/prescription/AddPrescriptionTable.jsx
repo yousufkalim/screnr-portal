@@ -1,4 +1,3 @@
-// mui imports
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -6,8 +5,6 @@ import TableRow from '@mui/material/TableRow';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
-
-// assets
 import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
 import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 
@@ -48,11 +45,9 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
             <TableCell className="table_head" id="prescriptionTableHead" align="left">
               Name
             </TableCell>
-
             <TableCell />
             <TableCell />
             <TableCell />
-
             <TableCell className="table_head" id="prescriptionTableHead" align="center">
               Sets
             </TableCell>
@@ -70,10 +65,9 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
               <TableCell align="center" className="prescription_table_cells">
                 {`${index + 1}.`}
               </TableCell>
-
               <TableCell align="center" className="table_cells">
                 <div className="actionDiv">
-                  {ExercisePrescriptionList.type === 'motion' ? (
+                  {row?.type === 'motion' ? (
                     <MotionCapture className="actionIcon" />
                   ) : (
                     <Program className="actionIcon" />
@@ -81,11 +75,9 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
                   {row?.name}
                 </div>
               </TableCell>
-
               <TableCell />
               <TableCell />
               <TableCell />
-
               <TableCell align="center" className="prescription_table_cells">
                 {row?.sets}
               </TableCell>

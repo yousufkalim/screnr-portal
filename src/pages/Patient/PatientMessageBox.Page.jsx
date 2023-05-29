@@ -16,6 +16,8 @@ export default function PatientMessageBox() {
   const [allMessages, setAllMessages] = useState([]);
   const [chatId, setChatId] = useState('');
   const [openEditpatientModal, setOpenEditpatientModal] = useState(false);
+  const [lastKey, setLastKey] = useState({}); // for pagination
+  console.log('🚀 ~ file: PatientMessageBox.Page.jsx:20 ~ PatientMessageBox ~ lastKey:', lastKey);
 
   useEffect(() => {
     if (SocketConnection) {
@@ -25,6 +27,27 @@ export default function PatientMessageBox() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [SocketConnection]);
+
+  useEffect(() => {
+    if (SocketConnection && chatId) {
+      SocketConnection.emit('read', {
+        chat: chatId,
+        sender: clinicianId,
+        receiver: patientId,
+      });
+    }
+
+    return () => {
+      if (SocketConnection && chatId) {
+        SocketConnection.emit('read', {
+          chat: chatId,
+          sender: clinicianId,
+          receiver: patientId,
+        });
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chatId]);
 
   const getPatientDataById = async () => {
     await request('get', `/clinicians/getPatientDetail/${patientId}`)
@@ -53,6 +76,7 @@ export default function PatientMessageBox() {
         await request('get', `/messages/allMessages/${chatIdRespose?.data?.chatId}?limit=50`)
           .then((allMessagesResponse) => {
             setAllMessages(allMessagesResponse?.data?.messages.reverse());
+            setLastKey(allMessagesResponse?.data?.lastKey);
           })
           .catch((error) => {
             toast.error(error?.response?.data?.message);
@@ -113,6 +137,8 @@ export default function PatientMessageBox() {
             clinician={clinician}
             chatId={chatId}
             handleSendMessage={handleSendMessage}
+            lastKey={lastKey}
+            setLastKey={setLastKey}
           />
         </div>
       </Grid>

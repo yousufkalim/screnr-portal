@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { FormControl, TextField } from '@mui/material';
@@ -16,6 +16,7 @@ import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 import { ReactComponent as List } from '../../../assets/icons/list.svg';
 import AddPrescriptionTable from '../../tables/prescription/AddPrescriptionTable';
 import AdjustRange from '../../popups/prescription/AdjustRange.Popup';
+import { weeks, frequency, rest, bodyParts } from '../../../utils/data';
 
 const useOutlinedInputStyles = makeStyles({
   root: {
@@ -39,119 +40,39 @@ const useOutlinedInputStyles = makeStyles({
   },
 });
 
-const weeks = [
-  {
-    value: 1,
-    label: 'Week 1',
-  },
-  {
-    value: 2,
-    label: 'Week 2',
-  },
-  {
-    value: 3,
-    label: 'Week 3',
-  },
-  {
-    value: 4,
-    label: 'Week 4',
-  },
-  {
-    value: 5,
-    label: 'Week 5',
-  },
-  {
-    value: 6,
-    label: 'Week 6',
-  },
-];
-
-const frequency = [
-  {
-    value: 1,
-    label: '1 Time',
-  },
-  {
-    value: 2,
-    label: '2 Times',
-  },
-  {
-    value: 3,
-    label: '3 Times',
-  },
-  {
-    value: 4,
-    label: '4 Times',
-  },
-  {
-    value: 5,
-    label: '5 Times',
-  },
-];
-
-const rest = [
-  {
-    value: '15s',
-    label: '15s',
-  },
-  {
-    value: '30s',
-    label: '30s',
-  },
-  {
-    value: '45s',
-    label: '45s',
-  },
-  {
-    value: '60s',
-    label: '60s',
-  },
-  {
-    value: '90s',
-    label: '90s',
-  },
-  {
-    value: '120s',
-    label: '120s',
-  },
-];
-
-const bodyParts = [
-  {
-    value: 'Arms',
-    label: 'Arms',
-  },
-  {
-    value: 'Back',
-    label: 'Back',
-  },
-  {
-    value: 'Legs',
-    label: 'Legs',
-  },
-  {
-    value: 'shoulders',
-    label: 'shoulders',
-  },
-];
-
 export default function AddPrescription({
   prescription,
-  exerciseInformation,
+  simpleExerciseInfo,
   handleAddToList,
   handlePrescriptionDetails,
-  handleExerciseInformation,
+  handleSimpleExerciseInfo,
   dateChange,
+  allMotionExercise,
+  exerciseType,
+  setExerciseType,
+  handleMotionExerciseInfo,
+  motionExerciseInfo,
+  setMotionExerciseInfo,
 }) {
   const outlinedInputStyles = useOutlinedInputStyles();
   const [openAdjustRange, setOpenAdjustRange] = useState(false);
   const validatingListBtn =
-    exerciseInformation.name &&
-    exerciseInformation.body_part &&
-    exerciseInformation.sets &&
-    exerciseInformation.reps &&
-    exerciseInformation.rest;
+    simpleExerciseInfo.name &&
+    simpleExerciseInfo.body_part &&
+    simpleExerciseInfo.sets &&
+    simpleExerciseInfo.reps &&
+    simpleExerciseInfo.rest;
+
+  const validatingMotionListBtn =
+    motionExerciseInfo.name &&
+    motionExerciseInfo.body_part &&
+    motionExerciseInfo.sets &&
+    motionExerciseInfo.reps &&
+    motionExerciseInfo.rest &&
+    motionExerciseInfo.exercise;
+
   const today = new Date().toISOString();
+
   return (
     <Grid container className="addPrescription">
       <Grid xl={6} lg={6}>
@@ -221,7 +142,6 @@ export default function AddPrescription({
           </Select>
         </FormControl>
       </Grid>
-
       <Grid xl={6} lg={6}>
         <FormControl
           sx={{
@@ -291,30 +211,27 @@ export default function AddPrescription({
           </Select>
         </FormControl>
       </Grid>
-
       <Grid xl={6.6} lg={6}>
         <h3 className="prescriptionHead">Add Exercise Information</h3>
         <div className="prescriptionChoiceSec">
           <div
-            className={prescription.type === 'motion' ? 'selctedPresChoice' : 'presChoice'}
-            onClick={() => handlePrescriptionDetails('type', 'motion')}
+            className={exerciseType === 'motion' ? 'selctedPresChoice' : 'presChoice'}
+            onClick={() => setExerciseType('motion')}
             role="presentation"
           >
-            <MotionCapture
-              className={prescription.type === 'motion' ? 'iconClicked' : 'choiceIcon'}
-            />
+            <MotionCapture className={exerciseType === 'motion' ? 'iconClicked' : 'choiceIcon'} />
             <p className="selectedOpt">Motion capture</p>
           </div>
           <div
-            className={prescription.type === 'simple' ? 'selctedPresChoice' : 'presChoice'}
-            onClick={() => handlePrescriptionDetails('type', 'simple')}
+            className={exerciseType === 'simple' ? 'selctedPresChoice' : 'presChoice'}
+            onClick={() => setExerciseType('simple')}
             role="presentation"
           >
-            <Program className={prescription.type === 'simple' ? 'iconClicked' : 'choiceIcon'} />
+            <Program className={exerciseType === 'simple' ? 'iconClicked' : 'choiceIcon'} />
             <p className="selectedOpt">Exercise Program</p>
           </div>
         </div>
-        {prescription?.type === 'motion' ? (
+        {exerciseType === 'motion' ? (
           <>
             <FormControl sx={{ mt: 2.5, width: '100%' }} variant="outlined">
               <Select
@@ -338,15 +255,26 @@ export default function AddPrescription({
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                name="client"
+                name="body_part"
                 placeholder="Title"
+                value={motionExerciseInfo?.body_part || 'default'}
+                onChange={(e) => {
+                  handleMotionExerciseInfo(e.target.name, e.target.value);
+                }}
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
               >
-                <MenuItem>
+                <MenuItem value="default">
                   <span className="optColor">Select Body Part</span>
                 </MenuItem>
+                {bodyParts?.map((item) => {
+                  return (
+                    <MenuItem value={item.value}>
+                      <span className="optColor">{item.label}</span>
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
             <FormControl sx={{ mt: 3, width: '100%', mb: 3 }} variant="outlined">
@@ -356,7 +284,6 @@ export default function AddPrescription({
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
                 )}
-                displayEmpty
                 sx={{
                   '.MuiOutlinedInput-notchedOutline': {
                     borderColor: '#E1E1E1',
@@ -371,15 +298,29 @@ export default function AddPrescription({
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                name="client"
-                placeholder="Title"
+                placeholder="Select Exercise"
                 inputProps={{
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
+                name="exercise"
+                value={motionExerciseInfo?.exercise || 'default'}
+                onChange={(e) => {
+                  const selectedExercise = e.target.value;
+                  setMotionExerciseInfo({
+                    ...motionExerciseInfo,
+                    name: selectedExercise?.name,
+                    exercise: selectedExercise,
+                  });
+                }}
               >
-                <MenuItem>
+                <MenuItem value="default">
                   <span className="optColor">Select Exercise</span>
                 </MenuItem>
+                {allMotionExercise?.map((item) => (
+                  <MenuItem value={item}>
+                    <span className="optColor">{item?.name}</span>
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
             <FormControl sx={{ width: '32%', mr: 1.2 }} variant="outlined">
@@ -396,6 +337,18 @@ export default function AddPrescription({
                 id="outlined-fname"
                 classes={outlinedInputStyles}
                 placeholder="Number of sets"
+                name="sets"
+                value={motionExerciseInfo.sets}
+                onChange={(e) => {
+                  if (
+                    (/^\d{1,2}$/.test(e.target.value) &&
+                      parseInt(e.target.value, 10) >= 1 &&
+                      parseInt(e.target.value, 10) <= 10) ||
+                    e.target.value === ''
+                  ) {
+                    handleMotionExerciseInfo(e.target.name, e.target.value);
+                  }
+                }}
               />
             </FormControl>
             <FormControl sx={{ width: '32%', mr: 1.2 }} variant="outlined">
@@ -412,24 +365,63 @@ export default function AddPrescription({
                 id="outlined-fname"
                 classes={outlinedInputStyles}
                 placeholder="Number of reps"
+                name="reps"
+                value={motionExerciseInfo.reps}
+                onChange={(e) => {
+                  if (
+                    (/^\d{1,2}$/.test(e.target.value) &&
+                      parseInt(e.target.value, 10) >= 1 &&
+                      parseInt(e.target.value, 10) <= 15) ||
+                    e.target.value === ''
+                  ) {
+                    handleMotionExerciseInfo(e.target.name, e.target.value);
+                  }
+                }}
               />
             </FormControl>
             <FormControl sx={{ width: '32%' }} variant="outlined">
-              <TextField
+              <Select
+                // eslint-disable-next-line react/no-unstable-nested-components
+                IconComponent={(props) => (
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
+                )}
                 sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '400',
+                  '.MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#E1E1E1',
                   },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
+                  borderRadius: '20px',
                 }}
-                id="outlined-fname"
-                classes={outlinedInputStyles}
-                placeholder="Rest Between Sets"
-              />
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                inputProps={{
+                  sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
+                }}
+                name="rest"
+                value={motionExerciseInfo.rest || 'default'}
+                onChange={(e) => {
+                  handleMotionExerciseInfo(e.target.name, e.target.value);
+                }}
+              >
+                <MenuItem value="default">
+                  <span className="optColor">Rest Between Sets</span>
+                </MenuItem>
+                {rest?.map((item) => {
+                  return (
+                    <MenuItem value={item.value}>
+                      <span className="optColor">{item.label}</span>
+                    </MenuItem>
+                  );
+                })}
+              </Select>
             </FormControl>
-            <FormControl sx={{ width: '100%', mt: 3, mb: 3 }} variant="outlined">
+            <FormControl sx={{ width: '100%', mt: 3, mb: 0 }} variant="outlined">
               <TextField
                 multiline
                 rows={5}
@@ -446,9 +438,14 @@ export default function AddPrescription({
                 id="outlined-fname"
                 classes={outlinedInputStyles}
                 placeholder="Special instruction"
+                name="instructions"
+                value={motionExerciseInfo.instructions}
+                onChange={(e) => {
+                  handleMotionExerciseInfo(e.target.name, e.target.value);
+                }}
               />
             </FormControl>
-            <div className="prescriptionBtns">
+            <div className="prescriptionBtns" style={{ marginTop: '-3.5rem' }}>
               <div>
                 <Button className="thresholdsBtn" onClick={() => setOpenAdjustRange(true)}>
                   Thresholds{' '}
@@ -460,7 +457,15 @@ export default function AddPrescription({
                     fontSize: '12px',
                     width: 'fit-content',
                   }}
-                  control={<Checkbox style={{ color: '#25C8B4' }} />}
+                  control={
+                    <Checkbox
+                      style={{ color: '#25C8B4' }}
+                      checked={motionExerciseInfo?.screenshot}
+                      onChange={(e) => {
+                        handleMotionExerciseInfo('screenshot', e.target.checked);
+                      }}
+                    />
+                  }
                   label={
                     <Typography
                       style={{
@@ -475,9 +480,12 @@ export default function AddPrescription({
                   }
                 />
               </div>
-
-              <Button className="listBtn">
-                <p className="listTxtBtn">Add to List</p>
+              <Button
+                disabled={!validatingMotionListBtn}
+                className={validatingMotionListBtn ? 'listBtn' : 'listBtn_disabled'}
+                onClick={handleAddToList}
+              >
+                <span className="listTxtBtn">Add to List</span>
                 <List />
               </Button>
             </div>
@@ -510,9 +518,9 @@ export default function AddPrescription({
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
                 name="body_part"
-                value={exerciseInformation?.body_part || 'default'}
+                value={simpleExerciseInfo?.body_part || 'default'}
                 onChange={(e) => {
-                  handleExerciseInformation(e.target.name, e.target.value);
+                  handleSimpleExerciseInfo(e.target.name, e.target.value);
                 }}
               >
                 <MenuItem value="default" selected disabled>
@@ -544,9 +552,9 @@ export default function AddPrescription({
                 placeholder="Exercise Name"
                 size="normal"
                 name="name"
-                value={exerciseInformation.name}
+                value={simpleExerciseInfo.name}
                 onChange={(e) => {
-                  handleExerciseInformation(e.target.name, e.target.value);
+                  handleSimpleExerciseInfo(e.target.name, e.target.value);
                 }}
               />
               {/* <Select
@@ -599,7 +607,7 @@ export default function AddPrescription({
                 classes={outlinedInputStyles}
                 placeholder="Number of sets"
                 name="sets"
-                value={exerciseInformation.sets}
+                value={simpleExerciseInfo.sets}
                 onChange={(e) => {
                   if (
                     (/^\d{1,2}$/.test(e.target.value) &&
@@ -607,7 +615,7 @@ export default function AddPrescription({
                       parseInt(e.target.value, 10) <= 10) ||
                     e.target.value === ''
                   ) {
-                    handleExerciseInformation(e.target.name, e.target.value);
+                    handleSimpleExerciseInfo(e.target.name, e.target.value);
                   }
                 }}
               />
@@ -627,7 +635,7 @@ export default function AddPrescription({
                 classes={outlinedInputStyles}
                 placeholder="Number of reps"
                 name="reps"
-                value={exerciseInformation.reps}
+                value={simpleExerciseInfo.reps}
                 onChange={(e) => {
                   if (
                     (/^\d{1,2}$/.test(e.target.value) &&
@@ -635,7 +643,7 @@ export default function AddPrescription({
                       parseInt(e.target.value, 10) <= 15) ||
                     e.target.value === ''
                   ) {
-                    handleExerciseInformation(e.target.name, e.target.value);
+                    handleSimpleExerciseInfo(e.target.name, e.target.value);
                   }
                 }}
               />
@@ -665,9 +673,9 @@ export default function AddPrescription({
                   sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                 }}
                 name="rest"
-                value={exerciseInformation.rest || 'default'}
+                value={simpleExerciseInfo.rest || 'default'}
                 onChange={(e) => {
-                  handleExerciseInformation(e.target.name, e.target.value);
+                  handleSimpleExerciseInfo(e.target.name, e.target.value);
                 }}
               >
                 <MenuItem value="default">
@@ -700,9 +708,9 @@ export default function AddPrescription({
                 classes={outlinedInputStyles}
                 placeholder="Special instruction"
                 name="instructions"
-                value={exerciseInformation.instructions}
+                value={simpleExerciseInfo.instructions}
                 onChange={(e) => {
-                  handleExerciseInformation(e.target.name, e.target.value);
+                  handleSimpleExerciseInfo(e.target.name, e.target.value);
                 }}
               />
             </FormControl>

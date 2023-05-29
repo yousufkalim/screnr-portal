@@ -13,8 +13,8 @@ const createSocketConnection = () => {
       },
     });
 
-    // Token check
     socket.on('connected', () => {
+      // eslint-disable-next-line no-console
       console.log('Socket connection successful');
     });
   }

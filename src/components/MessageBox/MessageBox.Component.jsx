@@ -10,6 +10,7 @@ import { ReactComponent as Back } from '../../assets/icons/backBtn.svg';
 import AvatarComponent from '../Avatar/Avatar.Component';
 import SenderSection from './senderSection';
 import ReciverSection from './recieverSection';
+import request from '../../request/index';
 
 // import { getMediaUrl } from '../../config';
 
@@ -40,6 +41,8 @@ function MessageBox({
   chatId,
   setAllMessages,
   handleSendMessage,
+  setLastKey,
+  lastKey,
 }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -47,25 +50,8 @@ function MessageBox({
   const click = useRef(null);
   const allMessagediv = useRef(null);
   const outlinedInputStyles = useOutlinedInputStyles();
-
-  useEffect(() => {
-    // Scroll to the bottom of the chat messages when they change
-    if (allMessagediv.current) {
-      allMessagediv.current.scrollTop = allMessagediv.current.scrollHeight;
-    }
-  }, [allMessages]);
-  useEffect(() => {
-    const handleCloseEmojiSection = (e) => {
-      if (click.current && open && !click.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleCloseEmojiSection);
-
-    return () => {
-      document.removeEventListener('mousedown', handleCloseEmojiSection);
-    };
-  }, [open]);
+  const [messageLimit, setMessageLimit] = useState(5);
+  const [isLastList, setIsLastList] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,6 +71,62 @@ function MessageBox({
 
   const EmojiOpen = () => setOpen(!open);
   const handleSentMessage = (value) => setNewMessage(value);
+
+  const fetchMessages = async () => {
+    if (Object.prototype.hasOwnProperty.call(lastKey, 'id')) {
+      await request(
+        'get',
+        `/messages/allMessages/${chatId}?limit=${messageLimit}&id=${lastKey?.id}&createdAt=${lastKey?.createdAt}`,
+      )
+        .then((res) => {
+          if (res.data.messages.length > 0) {
+            setLastKey(res.data.lastKey);
+            const newMessages = res.data.messages.reverse();
+            const concatingAllMessages = [...newMessages, ...allMessages];
+            setAllMessages(concatingAllMessages);
+            if (Object.prototype.hasOwnProperty.call(res.data, 'lastKey')) {
+              setMessageLimit(5);
+            } else {
+              setIsLastList(true);
+              setLastKey({});
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const onScroll = () => {
+    if (allMessagediv.current) {
+      const { scrollTop } = allMessagediv.current;
+      if (scrollTop === 0) {
+        if (!isLastList) {
+          fetchMessages();
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Scroll to the bottom of the chat messages when they change
+    if (allMessagediv.current) {
+      allMessagediv.current.scrollTop = allMessagediv.current.scrollHeight;
+    }
+  }, [allMessages]);
+  useEffect(() => {
+    const handleCloseEmojiSection = (e) => {
+      if (click.current && open && !click.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleCloseEmojiSection);
+
+    return () => {
+      document.removeEventListener('mousedown', handleCloseEmojiSection);
+    };
+  }, [open]);
 
   return (
     <div className="chat-box">
@@ -113,7 +155,7 @@ function MessageBox({
           </div>
         </div>
       </div>
-      <div className="chat-box__messages" ref={allMessagediv}>
+      <div className="chat-box__messages" ref={allMessagediv} onScroll={onScroll}>
         {allMessages?.map((item) =>
           item?.sender === clinician?.id ? (
             <SenderSection
