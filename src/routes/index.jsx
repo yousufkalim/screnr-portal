@@ -99,7 +99,7 @@ const AllRoutes = [
     roles: ['admin', 'staff', 'clinic', 'clinician'],
   },
   {
-    path: '/clinicians/:id/activity',
+    path: '/clinicians/:clinicianId/activity',
     element: <Activity />,
     protected: true,
     roles: ['admin', 'staff', 'clinic', 'clinician'],
@@ -117,13 +117,13 @@ const AllRoutes = [
     roles: ['admin', 'staff', 'clinic', 'clinician'],
   },
   {
-    path: '/patients/:id/messages',
+    path: '/patients/:patientId/messages/:clinicianId',
     element: <PatientMessageBox />,
     roles: ['admin'],
     protected: true,
   },
   {
-    path: '/patients/:id/activity',
+    path: '/patients/:patientId/activity/:clinicianId',
     element: <Activity />,
     roles: ['admin', 'staff', 'clinic', 'clinician'],
     protected: true,

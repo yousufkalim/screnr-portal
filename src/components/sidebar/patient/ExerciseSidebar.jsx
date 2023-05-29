@@ -6,7 +6,7 @@ import { ReactComponent as Msg } from '../../../assets/components/Sidebar/msg.sv
 import { ReactComponent as Survey } from '../../../assets/components/Sidebar/painSurvey.svg';
 import { ReactComponent as Exercise } from '../../../assets/components/Sidebar/exercise.svg';
 import { ReactComponent as Dropdown } from '../../../assets/components/Sidebar/dropdownEx.svg';
-import { ReactComponent as Divider } from '../../../assets/components/Sidebar/divider.svg';
+// import { ReactComponent as Divider } from '../../../assets/components/Sidebar/divider.svg';
 import PatientSidebarSection from './PatientSidebarSection';
 
 export default function Sidebar({
@@ -60,8 +60,16 @@ export default function Sidebar({
       </div>
       <div className="listDiv">
         <Collapse in={expanded} timeout="auto">
-          <div className="exerciseList">
-            <Divider className={window.location.pathname.includes('session') ? 'divider' : ''} />
+          <div
+            className="exerciseList"
+            style={{
+              borderLeft: '2px solid #136773',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {/* <Divider className={window.location.pathname.includes('session') ? 'divider' : ''} /> */}
             <div>
               {session?.exercises?.map((exercise) => (
                 <div
@@ -73,7 +81,7 @@ export default function Sidebar({
                     setActiveItem(exercise.name);
                   }}
                 >
-                  {exercise.name}
+                  {exercise?.name}
                 </div>
               ))}
             </div>

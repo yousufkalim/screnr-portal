@@ -1,9 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-import { ReactComponent as Clock } from '../assets/components/TimeCard/clock.svg';
-import { ReactComponent as Login } from '../assets/components/TimeCard/login.svg';
-import { ReactComponent as LoginCount } from '../assets/components/TimeCard/loginCount.svg';
-import { ReactComponent as Logoff } from '../assets/components/TimeCard/logoff.svg';
-
 export const labels = [
   'JAN',
   'FEB',
@@ -48,25 +43,126 @@ export const options = {
   },
 };
 
-export const cardsData = [
+export const weeks = [
   {
-    icon: Login,
-    time: '1 Hr Ago',
-    text: 'Last Login',
+    value: 1,
+    label: 'Week 1',
   },
   {
-    icon: LoginCount,
-    time: '22',
-    text: 'Login count',
+    value: 2,
+    label: 'Week 2',
   },
   {
-    icon: Clock,
-    time: '120 Hr',
-    text: 'Login Hours',
+    value: 3,
+    label: 'Week 3',
   },
   {
-    icon: Logoff,
-    time: '30 Min Ago',
-    text: 'Last Logoff',
+    value: 4,
+    label: 'Week 4',
+  },
+  {
+    value: 5,
+    label: 'Week 5',
+  },
+  {
+    value: 6,
+    label: 'Week 6',
+  },
+];
+
+export const frequency = [
+  {
+    value: 1,
+    label: '1 Time',
+  },
+  {
+    value: 2,
+    label: '2 Times',
+  },
+  {
+    value: 3,
+    label: '3 Times',
+  },
+  {
+    value: 4,
+    label: '4 Times',
+  },
+  {
+    value: 5,
+    label: '5 Times',
+  },
+];
+
+export const rest = [
+  {
+    value: '15s',
+    label: '15s',
+  },
+  {
+    value: '30s',
+    label: '30s',
+  },
+  {
+    value: '45s',
+    label: '45s',
+  },
+  {
+    value: '60s',
+    label: '60s',
+  },
+  {
+    value: '90s',
+    label: '90s',
+  },
+  {
+    value: '120s',
+    label: '120s',
+  },
+];
+
+export const bodyParts = [
+  {
+    value: 'Neck/Upper Spine',
+    label: 'Neck/Upper Spine',
+  },
+  {
+    value: 'Shoulder',
+    label: 'Shoulder',
+  },
+  {
+    value: 'Rotator Cuff',
+    label: 'Rotator Cuff',
+  },
+  {
+    value: 'Elbow',
+    label: 'Elbow',
+  },
+  {
+    value: 'Wrist',
+    label: 'Wrist',
+  },
+  {
+    value: 'Hand',
+    label: 'Hand',
+  },
+  {
+    value: 'Core',
+    label: 'Core',
+  },
+  {
+    value: 'Hip',
+    label: 'Hip',
+  },
+  {
+    value: 'Knee',
+    label: 'Knee',
+  },
+  {
+    value: 'Ankle',
+    label: 'Ankle',
+  },
+  {
+    value: 'Foot',
+    label: 'Foot',
   },
 ];

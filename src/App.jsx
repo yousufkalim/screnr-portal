@@ -13,6 +13,7 @@ import './css/index.css';
 const queryParams = new URLSearchParams(window.location.search);
 const verify = queryParams.get('verify');
 const token = queryParams.get('token');
+
 function App() {
   const userToken = localStorage.getItem('token');
   const updateStore = UpdateStore();

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { React, useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import { ReactComponent as Phone } from '../../assets/images/staffScreen/phone.svg';
@@ -14,6 +14,7 @@ import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
 export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, open }) {
+  const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
 
@@ -134,7 +135,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
             className="activityLeft"
             role="presentation"
             onClick={() => {
-              // navigate('/clinicians/:id/activity');
+              navigate(`/clinicians/${info?.id}/activity`);
               setActivityClicked(true);
             }}
           >
@@ -145,7 +146,6 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
                   : ''
               }
             />
-
             <p
               className={
                 activityClicked || window.location.pathname.includes('activity')

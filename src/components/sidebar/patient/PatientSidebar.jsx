@@ -27,11 +27,11 @@ export default function Sidebar({
       setActivityClicked(true);
       setActivityClickedTwo(false);
       setActivityClickedThree(false);
-    } else if (path === '/patients/:id/messages') {
+    } else if (path === `/patients/${patientId}/messages/${selectedClinician}`) {
       setActivityClickedTwo(true);
       setActivityClicked(false);
       setActivityClickedThree(false);
-    } else if (path === '/patients/:id/activity') {
+    } else if (path === `/patients/${patientId}/activity`) {
       setActivityClickedThree(true);
       setActivityClicked(false);
       setActivityClickedTwo(false);
@@ -76,7 +76,7 @@ export default function Sidebar({
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          // navigate('/patients/:id/messages');
+          navigate(`/patients/${patientId}/messages/${selectedClinician}`);
           setActivityClickedTwo(true);
           setActivityClicked(false);
           setActivityClickedThree(false);
@@ -84,14 +84,16 @@ export default function Sidebar({
       >
         <Msg
           className={
-            activityClickedTwo || window.location.pathname === '/patients/:id/messages'
+            activityClickedTwo ||
+            window.location.pathname === `/patients/${patientId}/messages/${selectedClinician}`
               ? 'iconActivity'
               : ''
           }
         />
         <p
           className={
-            activityClickedTwo || window.location.pathname === '/patients/:id/messages'
+            activityClickedTwo ||
+            window.location.pathname === `/patients/${patientId}/messages/${selectedClinician}`
               ? 'clickedActivity'
               : 'activityTxt'
           }
@@ -103,7 +105,7 @@ export default function Sidebar({
         className="activityLeft"
         role="presentation"
         onClick={() => {
-          // navigate('/patients/:id/activity');
+          navigate(`/patients/${patientId}/activity/${selectedClinician}`);
           setActivityClickedThree(true);
           setActivityClicked(false);
           setActivityClickedTwo(false);
@@ -111,14 +113,16 @@ export default function Sidebar({
       >
         <Activity
           className={
-            activityClickedThree || window.location.pathname === '/patients/:id/activity'
+            activityClickedThree ||
+            window.location.pathname === `/patients/${patientId}/activity/${selectedClinician}`
               ? 'iconActivity'
               : ''
           }
         />
         <p
           className={
-            activityClickedThree || window.location.pathname === '/patients/:id/activity'
+            activityClickedThree ||
+            window.location.pathname === `/patients/${patientId}/activity/${selectedClinician}`
               ? 'clickedActivity'
               : 'activityTxt'
           }

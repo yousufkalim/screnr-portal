@@ -1,6 +1,4 @@
 import { React, useState } from 'react';
-
-// mui imports
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
+import moment from 'moment';
 
 const StyledTableRow = styled(TableRow)(() => ({
   // hide last border
@@ -18,68 +17,13 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function ActivityTable() {
+export default function ActivityTable({ activityLog }) {
   const [page, setPage] = useState(0);
-
-  function createCardData(description, date, type, time, timeSpent) {
-    return { description, date, type, time, timeSpent };
-  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const activity = [
-    createCardData(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing',
-      '11/05/2022',
-      'USER LOGIN',
-      '10:08:13 GMT',
-      '6 hours',
-    ),
-    createCardData(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing',
-      '11/05/2022',
-      'USER LOGOUT',
-      '10:08:13 GMT',
-      '6 hours',
-    ),
-    createCardData(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing',
-      '11/05/2022',
-      'USER LOGIN',
-      '10:08:13 GMT',
-      '6 hours',
-    ),
-    createCardData(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing',
-      '11/05/2022',
-      'USER LOGOUT',
-      '10:08:13 GMT',
-      '6 hours',
-    ),
-    createCardData(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing',
-      '11/05/2022',
-      'USER LOGIN',
-      '10:08:13 GMT',
-      '6 hours',
-    ),
-    createCardData(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing',
-      '11/05/2022',
-      'USER LOGIN',
-      '10:08:13 GMT',
-      '6 hours',
-    ),
-    createCardData(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing',
-      '11/05/2022',
-      'USER LOGIN',
-      '10:08:13 GMT',
-      '6 hours',
-    ),
-  ];
   return (
     <div className="activityTable">
       <TableContainer
@@ -128,8 +72,8 @@ export default function ActivityTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {activity.slice(page * 4, page * 4 + 4).map((row) => (
-              <StyledTableRow key={row.first_name}>
+            {activityLog?.slice(page * 4, page * 4 + 4).map((row) => (
+              <StyledTableRow key={row.id}>
                 <TableCell
                   align="left"
                   className="table_cells"
@@ -140,23 +84,19 @@ export default function ActivityTable() {
                     fontWeight: '500!important',
                   }}
                 >
-                  {row.description}
-                </TableCell>
-
-                <TableCell align="center" className="table_cells">
-                  {row.date}
+                  {row?.description}
                 </TableCell>
                 <TableCell align="center" className="table_cells">
-                  {row.type}
-                </TableCell>
-
-                <TableCell align="center" className="table_cells">
-                  {' '}
-                  {row.time}
+                  {moment(row?.time).format('DD/MM/YYYY')}
                 </TableCell>
                 <TableCell align="center" className="table_cells">
-                  {' '}
-                  {row.timeSpent}
+                  {row?.type}
+                </TableCell>
+                <TableCell align="center" className="table_cells">
+                  {moment(row?.time).format('hh:mm:ss')} GMT
+                </TableCell>
+                <TableCell align="center" className="table_cells">
+                  {row?.time_spent}
                 </TableCell>
               </StyledTableRow>
             ))}
@@ -167,7 +107,7 @@ export default function ActivityTable() {
         sx={{ color: '#919B9B' }}
         component="div"
         rowsPerPageOptions={[]}
-        count={activity.length}
+        count={activityLog?.length}
         rowsPerPage={4}
         page={page}
         onPageChange={handleChangePage}

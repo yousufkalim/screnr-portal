@@ -85,17 +85,17 @@ export default function AddClinicAdmin({
   };
 
   // uploading img
-  const handleSelectedFile = (e) => {
-    const myFile = e.target.files[0];
-    const size = 1024 * 1024 * 10;
-    if (myFile.size > size) {
+  const handleSelectedFile = ({ target }) => {
+    if (target.files[0].size > 1024 * 1024 * 10) {
       return toast.error('File size can not exceed 10 Mb');
     }
-    if (myFile) {
-      document.getElementById('clinicAdmin_AddProfile_Pic_selected').src =
-        URL.createObjectURL(myFile);
+    if (target.files[0]) {
+      const imageElement = document.getElementById('clinicAdmin_AddProfile_Pic_selected');
+      if (imageElement) {
+        imageElement.src = URL.createObjectURL(target.files[0]);
+      }
     }
-    setClinicAdmin({ ...clinicAdmin, profile_pic: myFile });
+    setClinicAdmin({ ...clinicAdmin, profile_pic: target.files[0] });
   };
 
   const handleChange = (e) => setClinicAdmin({ ...clinicAdmin, [e.target.name]: e.target.value });

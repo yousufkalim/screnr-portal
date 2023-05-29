@@ -49,8 +49,8 @@ export default function Patient() {
         break;
     }
 
-    if (item?.sort) apiUrl += `&sort=${item?.sort}`;
-    if (item?.searchValue) apiUrl += `&search=${item?.searchValue}`;
+    if (item?.sort) apiUrl += `?sort=${item?.sort}`;
+    if (item?.searchValue) apiUrl += `?search=${item?.searchValue}`;
     try {
       setLoading(true);
       const res = await request('put', apiUrl, obj);
@@ -100,17 +100,17 @@ export default function Patient() {
     <Grid container>
       <Grid className="bgClinicianTable" xl={12} lg={12}>
         <AllPatientTable
+          filter={filter}
+          sorting={sorting}
           loading={loading}
           patients={patients}
+          setFilter={setFilter}
+          setSorting={setSorting}
           getPatients={handleFilterAndSorting}
           exerciseFilter={exerciseFilter}
           diaganosisFilter={diaganosisFilter}
           setOpenAddPatient={setOpenAddPatient}
           handleFilterAndSorting={handleFilterAndSorting}
-          filter={filter}
-          setFilter={setFilter}
-          sorting={sorting}
-          setSorting={setSorting}
         />
       </Grid>
 

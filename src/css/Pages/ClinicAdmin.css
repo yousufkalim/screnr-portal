@@ -48,7 +48,7 @@
   align-items: center;
   padding: 0px 20px;
 }
-#allTabletitlePatnts{
+#allTabletitlePatnts {
   width: 36vw !important;
 }
 
@@ -215,23 +215,23 @@
   }
 }
 @media only screen and (max-width: 1440px) {
-  #allTabletitlePatnts{
+  #allTabletitlePatnts {
     width: 48vw !important;
   }
 }
 
 @media only screen and (max-width: 1466px) {
-  #allTabletitlePatnts{
+  #allTabletitlePatnts {
     width: 49vw !important;
   }
 }
 @media only screen and (max-width: 1250px) {
-  #allTabletitlePatnts{
+  #allTabletitlePatnts {
     width: 53vw !important;
   }
 }
 @media only screen and (max-width: 992px) {
-  #allTabletitlePatnts{
+  #allTabletitlePatnts {
     width: 67vw !important;
   }
 }

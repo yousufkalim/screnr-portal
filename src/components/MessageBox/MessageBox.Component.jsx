@@ -5,10 +5,14 @@ import EmojiPicker from 'emoji-picker-react';
 import { makeStyles } from '@mui/styles';
 import { ReactComponent as Send } from '../../assets/icons/sendMsg.svg';
 import { ReactComponent as Emoji } from '../../assets/icons/emoji.svg';
-import { ReactComponent as Dummy } from '../../assets/images/dummyprsn.svg';
 import { ReactComponent as Dots } from '../../assets/icons/threedots.svg';
 import { ReactComponent as Back } from '../../assets/icons/backBtn.svg';
 import AvatarComponent from '../Avatar/Avatar.Component';
+import SenderSection from './senderSection';
+import ReciverSection from './recieverSection';
+import request from '../../request/index';
+
+// import { getMediaUrl } from '../../config';
 
 const useOutlinedInputStyles = makeStyles({
   root: {
@@ -30,13 +34,87 @@ const useOutlinedInputStyles = makeStyles({
   },
 });
 
-function MessageBox() {
+function MessageBox({
+  patient,
+  allMessages,
+  clinician,
+  chatId,
+  setAllMessages,
+  handleSendMessage,
+  setLastKey,
+  lastKey,
+}) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [open, setOpen] = useState(false);
   const click = useRef(null);
+  const allMessagediv = useRef(null);
   const outlinedInputStyles = useOutlinedInputStyles();
+  const [messageLimit, setMessageLimit] = useState(5);
+  const [isLastList, setIsLastList] = useState(false);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setMessages([...messages, newMessage]);
+    handleSendMessage(chatId, newMessage, patient?.id, clinician?.id);
+    setAllMessages([
+      ...allMessages,
+      {
+        chat: chatId,
+        content: newMessage,
+        receiver: patient?.id,
+        sender: clinician?.id,
+      },
+    ]);
+    setNewMessage('');
+  };
+
+  const EmojiOpen = () => setOpen(!open);
+  const handleSentMessage = (value) => setNewMessage(value);
+
+  const fetchMessages = async () => {
+    if (Object.prototype.hasOwnProperty.call(lastKey, 'id')) {
+      await request(
+        'get',
+        `/messages/allMessages/${chatId}?limit=${messageLimit}&id=${lastKey?.id}&createdAt=${lastKey?.createdAt}`,
+      )
+        .then((res) => {
+          if (res.data.messages.length > 0) {
+            setLastKey(res.data.lastKey);
+            const newMessages = res.data.messages.reverse();
+            const concatingAllMessages = [...newMessages, ...allMessages];
+            setAllMessages(concatingAllMessages);
+            if (Object.prototype.hasOwnProperty.call(res.data, 'lastKey')) {
+              setMessageLimit(5);
+            } else {
+              setIsLastList(true);
+              setLastKey({});
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const onScroll = () => {
+    if (allMessagediv.current) {
+      const { scrollTop } = allMessagediv.current;
+      if (scrollTop === 0) {
+        if (!isLastList) {
+          fetchMessages();
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Scroll to the bottom of the chat messages when they change
+    if (allMessagediv.current) {
+      allMessagediv.current.scrollTop = allMessagediv.current.scrollHeight;
+    }
+  }, [allMessages]);
   useEffect(() => {
     const handleCloseEmojiSection = (e) => {
       if (click.current && open && !click.current.contains(e.target)) {
@@ -50,16 +128,6 @@ function MessageBox() {
     };
   }, [open]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setMessages([...messages, newMessage]);
-    setNewMessage('');
-  };
-
-  const EmojiOpen = () => {
-    setOpen(!open);
-  };
-
   return (
     <div className="chat-box">
       <div className="chat-header">
@@ -67,12 +135,18 @@ function MessageBox() {
           <div className="receivrInfo">
             <div className="iconsSec">
               <Back className="backBtn" />
-              <Dummy />
+              <AvatarComponent
+                // src={getMediaUrl(patient?.profile_pic)}
+                alt={`${patient?.first_name} ${patient?.last_name}`}
+                className="header_avatar"
+              />
             </div>
             <div className="">
-              <p className="receiverHeaderName">Sabbir Ali</p>
+              <p className="receiverHeaderName">
+                {patient?.first_name} {patient?.last_name}
+              </p>
               <p className="patientId">
-                Patient ID: <span style={{ color: '#FBA622' }}>12345</span>
+                Patient ID: <span style={{ color: '#FBA622' }}>{patient?.id}</span>
               </p>
             </div>
           </div>
@@ -81,34 +155,22 @@ function MessageBox() {
           </div>
         </div>
       </div>
-      <div className="chat-box__messages">
-        <div className="receiver">
-          <div className="receivrInfo">
-            <Dummy />
-            <p className="receiverName">Sabbir Ali</p>
-          </div>
-          <div>
-            <p className="receiverMsg">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-              has been the industry standard dummy text ever since the 1500s, when an unknown
-              printer took a galley of type and scrambled it to make a type specimen book.
-            </p>
-          </div>
-        </div>
-
-        {messages.map((message) => (
-          <div className="sender">
-            <div className="senderInfo">
-              <p className="senderName">Dr Ali</p>
-              {/* <Dummy />
-               */}
-              <AvatarComponent alt="Dr Ali" className="header_avatar" />
-            </div>
-            <div>
-              <p className="senderMsg">{message}</p>
-            </div>
-          </div>
-        ))}
+      <div className="chat-box__messages" ref={allMessagediv} onScroll={onScroll}>
+        {allMessages?.map((item) =>
+          item?.sender === clinician?.id ? (
+            <SenderSection
+              senderName={`${clinician?.first_name} ${clinician?.last_name}`}
+              message={item?.content}
+              key={item?.key}
+            />
+          ) : (
+            <ReciverSection
+              recieverName={`${patient?.first_name} ${patient?.last_name}`}
+              message={item?.content}
+              key={item?.key}
+            />
+          ),
+        )}
       </div>
 
       <TextField
@@ -122,7 +184,9 @@ function MessageBox() {
           '@media (max-width: 1600px)': { width: '72%', ml: 0 },
         }}
         placeholder="Type a message here"
-        onChange={(e) => setNewMessage(e.target.value)}
+        onChange={(e) => {
+          handleSentMessage(e.target.value);
+        }}
         onKeyDown={(e) => {
           if (e.code === 'Enter') {
             handleSubmit(e);

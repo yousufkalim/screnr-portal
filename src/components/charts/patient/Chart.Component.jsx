@@ -44,25 +44,27 @@ const options = {
 };
 
 const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const data = {
-  labels,
-  datasets: [
-    {
-      label: '',
-      data: [700, 600, 600, 400, 900, 800, 450, 800, 1000, 900, 1000],
-      backgroundColor: '#136773B2',
-      borderRadius: 5,
-      barPercentage: 0.29,
-    },
-  ],
-};
+export default function Chart({ graph }) {
+  const array = daysOfWeek.map((day) => graph?.data[day]);
 
-export default function Chart() {
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: '',
+        data: array,
+        backgroundColor: '#136773B2',
+        borderRadius: 5,
+        barPercentage: 0.29,
+      },
+    ],
+  };
   return (
     <div className="patientListChart">
       <div className="timeChartDiv">
-        <span className="chartTime">26:50:32</span>
+        <span className="chartTime">{graph?.totalTracked}</span>
         <span className="chartSubtxt">Total</span>
         <span className="chartTimeTxt">TRACKED HOURS</span>
       </div>

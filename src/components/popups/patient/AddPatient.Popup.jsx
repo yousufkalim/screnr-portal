@@ -89,17 +89,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     setUserData({ diagnosis: '', location: '', clinicians: [] });
   };
 
-  const handleCheck = (event) => {
-    setChecked(event.target.checked);
-  };
-
-  const handlePatientChange = (e) => {
-    setPatient({ ...patient, [e.target.name]: e.target.value });
-  };
-
-  const handleUserDataChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
+  const handleCheck = (event) => setChecked(event.target.checked);
+  const handlePatientChange = (e) => setPatient({ ...patient, [e.target.name]: e.target.value });
+  const handleUserDataChange = (e) => setUserData({ ...userData, [e.target.name]: e.target.value });
 
   const expDateChange = (e) => {
     setPatient({
@@ -266,22 +258,18 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
       toast.error(error?.response?.data?.message);
     }
   };
+
   useEffect(() => {
-    if (user?.role === 'clinic') {
+    if (user?.role !== 'clinician' && user?.role !== 'clinic') {
+      getAllClinics();
+    } else if (user?.role === 'clinic') {
       getClinicians(user?.id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openAddPatient]);
 
-  useEffect(() => {
-    if (user?.role !== 'clinician' && user?.role !== 'clinic') {
-      getAllClinics();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openAddPatient]);
-
   return (
-    <div>
+    <>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -688,6 +676,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
           closeParent={handleClose}
         />
       )}
-    </div>
+    </>
   );
 }
