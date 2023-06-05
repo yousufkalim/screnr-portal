@@ -62,7 +62,7 @@ export default function Dashboard() {
         clinicAdmins?.count?.totalClinician?.count > 0
           ? `0${clinicAdmins?.count?.totalClinician?.count}`
           : clinicAdmins?.count?.totalClinician?.count || 0,
-      title: 'Total Clinicians',
+      title: 'Total Clinician',
       icon2: GreenCircle,
       className: 'green_circle',
       link: '/clinicians',

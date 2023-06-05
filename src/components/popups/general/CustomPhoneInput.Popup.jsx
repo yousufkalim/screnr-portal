@@ -42,7 +42,7 @@ function CustomPhoneInput({ userInfo, setUserInfo }) {
             document.querySelector('.placeholerPhone .react-tel-input .form-control').focus()
           }
         >
-          {hide ? ' ' : 'Phone number'}
+          {hide ? ' ' : 'Phone number (XXX-XXX-XXXX)'}
         </p>
       ) : (
         ''

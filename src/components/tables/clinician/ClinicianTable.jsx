@@ -62,7 +62,7 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
           <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
             <BackIcon />
           </div>
-          <h1 className="clientTableHead">List of Clinicians</h1>
+          <h1 className="clientTableHead">List of Clinician</h1>
         </div>
         <Table
           sx={{

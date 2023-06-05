@@ -105,14 +105,17 @@
   z-index: 1400;
 }
 
-.hl {
+/* .hl {
   border-bottom: 1px solid #b4b4b4;
-}
+} */
 
 .filterHead {
   display: flex;
   justify-content: space-between;
   padding: 10px 0px;
+}
+.status_bottom{
+  border-bottom: 1px solid;
 }
 
 .activityTable {

@@ -158,7 +158,7 @@ export default function ProfilePopup({
 
             <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
               <div className="pswdChangeTrack">
-                <p>Last Password Changed</p>
+                <p>Last Password Change</p>
                 <p>{moment(user.last_password_changed).format('MM-DD-YYYY')}</p>
               </div>
             </FormControl>

@@ -51,8 +51,8 @@ export default function GeneratePrescription({
         <DialogContent>
           <Typography>
             <Icon />
-            <h1 className="genPresTxt">Prescription Generated Successfully</h1>
-            <p className="genSubTxt"> </p>
+            <h1 className="genPresTxt">Prescription generated successfully!</h1>
+            <p className="genSubTxt">The prescripton has been added and is editable</p>
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
