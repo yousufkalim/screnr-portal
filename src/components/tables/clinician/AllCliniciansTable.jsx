@@ -150,7 +150,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
 
                 <div>
                   <p className="filterHead">Status</p>
-                <div className='status_bottom'/>
+                  <div className="status_bottom" />
                   <div className="hl" />
                   <RadioGroup
                     aria-label="statusFilter"

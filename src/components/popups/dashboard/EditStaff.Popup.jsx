@@ -110,7 +110,7 @@ export default function EditStaffMember({
     });
   };
 
-  const handleSelectedFile = async (e) => {
+  const handleSelectedFile = (e) => {
     const myFile = e.target.files[0];
     const size = 1024 * 1024 * 10;
     if (myFile.size > size) {
@@ -120,6 +120,7 @@ export default function EditStaffMember({
   };
 
   const handleSubmit = async (e) => {
+    const emailRegex = /^[\w-]+@screnr\.com$/;
     e.preventDefault();
     const staffMemberCopy = { ...staffMember };
     const formData = new FormData();
@@ -140,7 +141,9 @@ export default function EditStaffMember({
     if (checked && !staffMemberCopy.expiry_date) {
       return toast.error('Please enter expiry date');
     }
-
+    if (staffMemberCopy.email && !emailRegex.test(staffMemberCopy.email)) {
+      return toast.error('Email should be in @screnr.com format');
+    }
     try {
       const { data } = await request('put', `/admins/editStaff/${staffMemberDetails.id}`, formData);
       if (data) {
@@ -177,16 +180,19 @@ export default function EditStaffMember({
             <div>
               <div className="imgDivPopup">
                 {/* Avatar to be used */}
-                <label htmlFor="profilePic">
+                <label htmlFor="edit_profilePic">
                   <input
                     name="profile_pic"
                     type="file"
-                    id="profilePic"
+                    id="edit_profilePic"
                     accept=".png, .jpg, .jpeg"
-                    onChange={handleSelectedFile}
+                    onChange={(e) => {
+                      handleSelectedFile(e);
+                    }}
+                    className="noDisplay"
                   />
 
-                  {staffMember.profile_pic ? (
+                  {staffMember?.profile_pic ? (
                     <img
                       src={getMediaUrl(staffMember.profile_pic)}
                       className="pointer"

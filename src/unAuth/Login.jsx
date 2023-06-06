@@ -168,6 +168,7 @@ export default function Login() {
                     }
                   }}
                   value={userData.password}
+                  autoComplete="nope"
                   type={showPassword ? 'text' : 'password'}
                   InputProps={{
                     endAdornment: (

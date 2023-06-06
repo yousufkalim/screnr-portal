@@ -238,6 +238,10 @@ export default function EditPatient({
     if (checked && !patientCopy.expiry_date) {
       return toast.error('Please enter expiry date');
     }
+    const emailRegex = /^[\w-]+@screnr\.com$/;
+    if (patientCopy.email && !emailRegex.test(patientCopy.email)) {
+      return toast.error('Email should be in @screnr.com format');
+    }
 
     // sending this data to api
     try {

@@ -268,7 +268,6 @@ export default function PatientTable({
                   <p role="presentation" className="pointer" onClick={handleAllClear}>
                     Clear All
                   </p>
-
                 </div>
 
                 <div className="hl" />
@@ -417,7 +416,7 @@ export default function PatientTable({
                     },
                   }}
                 >
-                  <p className="filterHead " > Sort By</p>
+                  <p className="filterHead "> Sort By</p>
 
                   <FormControlLabel
                     value="diagnosis"

@@ -1,5 +1,6 @@
 import Login from '../unAuth/Login';
 import VerifyEmail from '../unAuth/VerifyEmail';
+import ForgetPassword from '../unAuth/ForgetPassword';
 import Dashboard from '../pages/SuperAdmin/AdminDashboard.Page';
 import ClinicAdmin from '../pages/ClinicAdmin/StaffSpecificClinicAdmin.Page';
 import AllClinicAdmins from '../pages/ClinicAdmin/AllClinicAdmins.Page';
@@ -29,6 +30,10 @@ const AllRoutes = [
   {
     path: '/VerifyEmail/:token',
     element: <VerifyEmail />,
+  },
+  {
+    path: '/forgetPassword/:token',
+    element: <ForgetPassword />,
   },
 
   // routes for all data

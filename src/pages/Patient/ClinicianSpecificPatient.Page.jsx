@@ -13,6 +13,7 @@ import Sidebar from '../../components/sidebar/GenericLeftSidebar';
 import StatsCard from '../../components/cards/StatsCard.Component';
 import PatientTable from '../../components/tables/patient/PatientTable';
 import AddNewPatient from '../../components/popups/patient/AddPatient.Popup';
+import EditClinician from '../../components/popups/clinician/EditClinician.Popup';
 import RightSidebar from '../../components/sidebar/patient/PatientListRightSidebar';
 import request from '../../request';
 
@@ -20,8 +21,10 @@ export default function Patient() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [openAddPatient, setOpenAddPatient] = useState(false);
+  const [openEditClinician, setOpenEditClinician] = useState(false);
   const [patients, setPatients] = useState({});
   const [breadcrumb, setBreadcrumb] = useState('');
+  const [clinician, setClinician] = useState({});
 
   const getClinicName = (name) => setBreadcrumb(name);
   const handleDashboardNavClick = () => navigate('/admin/dashboard');
@@ -42,10 +45,16 @@ export default function Patient() {
     }
   };
 
-  useEffect(() => {
-    getPatients();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const getClinicians = async () => {
+    try {
+      const { data } = await request('get', `/clinics/getClinician/${id}`);
+      if (data) {
+        setClinician(data?.user);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   const cardsData = [
     {
@@ -68,6 +77,12 @@ export default function Patient() {
     },
   ];
 
+  useEffect(() => {
+    getPatients();
+    getClinicians();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '100vh' }}>
       <Grid container>
@@ -77,6 +92,8 @@ export default function Patient() {
             txt="clinics/getClinician"
             roleTxt="Clinic"
             getClinicName={getClinicName}
+            open={openEditClinician}
+            setOpen={setOpenEditClinician}
           />
         </Grid>
 
@@ -138,6 +155,13 @@ export default function Patient() {
           />
         )}
       </Grid>
+
+      <EditClinician
+        openEditClinican={openEditClinician}
+        setOpenEditClinican={setOpenEditClinician}
+        clinicianDetails={clinician}
+        getClinicians={getClinicians}
+      />
     </div>
   );
 }
