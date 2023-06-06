@@ -1,6 +1,4 @@
 import { React, useState } from 'react';
-
-// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -10,8 +8,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
 import { FormControl, TextField } from '@mui/material';
-
-// react-toastify import
 import { toast } from 'react-toastify';
 import request from '../../../request';
 
@@ -32,6 +28,7 @@ const CustomMuiDialog = styled(Dialog)(({ theme }) => ({
     margin: 'auto',
   },
 }));
+
 const useOutlinedInputStyles = makeStyles({
   root: {
     '& .MuiOutlinedInput-root': {
@@ -58,12 +55,8 @@ export default function ForgetPasswordPopup({
   const [email, setEmail] = useState('');
   const outlinedInputStyles = useOutlinedInputStyles();
 
-  const handleInput = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleClose = () => {
-    setOpenForgetPasswordPopup(false);
-  };
+  const handleInput = (e) => setEmail(e.target.value);
+  const handleClose = () => setOpenForgetPasswordPopup(false);
 
   const handleForgetPassword = async () => {
     if (!email) {

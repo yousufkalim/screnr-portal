@@ -28,7 +28,7 @@
   top: 30px;
   z-index: 1300;
   cursor: pointer;
-  color: #919b9b;
+  color: #fba622;
 }
 
 .resetPasswordBtn:hover,
@@ -128,7 +128,7 @@
   margin-top: 30px;
 }
 
-.genPresTxt_2{
+.genPresTxt_2 {
   font-size: 25px !important;
 }
 .genSubTxt {
@@ -477,7 +477,7 @@
 .blktxt {
   color: #454238;
 }
-#boldx{
+#boldx {
   font-weight: 600 !important;
 }
 

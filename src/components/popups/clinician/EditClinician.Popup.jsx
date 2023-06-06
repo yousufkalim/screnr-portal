@@ -77,15 +77,15 @@ export default function EditClinician({
 
   useEffect(() => {
     const clinicAdminTemp = {
-      first_name: clinicianDetails.first_name,
-      last_name: clinicianDetails.last_name,
-      email: clinicianDetails.email,
-      profile_pic: clinicianDetails.profile_pic,
-      phone_number: clinicianDetails.phone_number,
-      gender: clinicianDetails.gender,
+      first_name: clinicianDetails?.first_name,
+      last_name: clinicianDetails?.last_name,
+      email: clinicianDetails?.email,
+      profile_pic: clinicianDetails?.profile_pic,
+      phone_number: clinicianDetails?.phone_number,
+      gender: clinicianDetails?.gender,
     };
 
-    if (clinicianDetails.expiry_date) {
+    if (clinicianDetails?.expiry_date) {
       // eslint-disable-next-line no-underscore-dangle
       clinicAdminTemp.expiry_date = moment(clinicianDetails.expiry_date)._d;
       setChecked(true);
@@ -169,6 +169,11 @@ export default function EditClinician({
     if (checked && !clinicianCopy.expiry_date) {
       return toast.error('Please enter expiry date');
     }
+    const emailRegex = /^[\w-]+@screnr\.com$/;
+    if (clinicianCopy.email && !emailRegex.test(clinicianCopy.email)) {
+      return toast.error('Email should be in @screnr.com format');
+    }
+
     try {
       const { data } = await request(
         'put',

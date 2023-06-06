@@ -199,6 +199,11 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         return toast.error('Please enter expiry date');
       }
 
+      const emailRegex = /^[\w-]+@screnr\.com$/;
+      if (patient.email && !emailRegex.test(patient.email)) {
+        return toast.error('Email should be in @screnr.com format');
+      }
+
       // sending this data to api
       const { data } = await request('post', '/clinicians/addPatient', formData);
       if (data) {
@@ -592,7 +597,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 <MenuItem value="anterior">
                   <span style={{ color: '#949494' }}>Anterior</span>
                 </MenuItem>
-                <MenuItem value="medical">
+                <MenuItem value="medial">
                   <span style={{ color: '#949494' }}>Medial</span>
                 </MenuItem>
                 <MenuItem value="lateral">

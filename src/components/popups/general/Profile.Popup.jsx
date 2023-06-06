@@ -1,6 +1,4 @@
 import { React } from 'react';
-
-// mui imports
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -8,16 +6,12 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
 import { FormControl, Button } from '@mui/material';
-// moment
 import moment from 'moment';
-
-// assets imports
+import { toast } from 'react-toastify';
 import { ReactComponent as Phone } from '../../../assets/icons/phoneIcon.svg';
 import { ReactComponent as Mail } from '../../../assets/icons/mailIcon.svg';
 import { ReactComponent as Arrow } from '../../../assets/icons/logoutArrow.svg';
 import edit from '../../../assets/icons/sidebarEdit.svg';
-
-// child imports
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import { Store, UpdateStore } from '../../../StoreContext';
 import { getMediaUrl } from '../../../config';
@@ -60,10 +54,15 @@ export default function ProfilePopup({
   };
 
   const handleLogout = () => {
-    request('patch', '/auth/logout/');
-    localStorage.removeItem('token');
-    updateStore({ user: {}, loggedIn: false });
-    window.location = '/login';
+    request('patch', '/auth/logout/')
+      .then(() => {
+        window.location = '/login';
+        localStorage.removeItem('token');
+        updateStore({ user: {}, loggedIn: false });
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
   };
 
   const roles = {

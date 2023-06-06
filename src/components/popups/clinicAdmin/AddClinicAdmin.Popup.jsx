@@ -138,7 +138,10 @@ export default function AddClinicAdmin({
       if (checked && !clinicAdmin.expiry_date) {
         return toast.error('Please enter expiry date');
       }
-
+      const emailRegex = /^[\w-]+@screnr\.com$/;
+      if (clinicAdmin.email && !emailRegex.test(clinicAdmin.email)) {
+        return toast.error('Email should be in @screnr.com format');
+      }
       // sending this data to api
       const { data } = await request('post', '/staff/addClinic', formData);
       if (data) {

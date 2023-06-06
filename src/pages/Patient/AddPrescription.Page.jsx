@@ -17,6 +17,7 @@ export default function AddPatientPrescription() {
   const [patient, setPatient] = useState({});
   const [allMotionExercise, setAllMotionExercise] = useState([]);
   const [exerciseType, setExerciseType] = useState('motion');
+  const [disableBtn, setDisableBtn] = useState(false);
   const [prescription, setPrescription] = useState({
     name: '',
     start_date: new Date(),
@@ -144,6 +145,7 @@ export default function AddPatientPrescription() {
   };
 
   const handleGeneratePrescription = async () => {
+    setDisableBtn(true);
     if (
       prescription?.clinician &&
       prescription?.duration &&
@@ -157,12 +159,14 @@ export default function AddPatientPrescription() {
         .then(() => {
           setOpenGeneratePrescription(true);
           handlePrescriptionDetailsReset();
+          setDisableBtn(false);
           toast.success('Prescription added successfully');
         })
         .catch((error) => {
           toast.error(error?.response?.data?.message);
         });
     } else {
+      setDisableBtn(false);
       toast.error('Please fill all the fields');
     }
   };
@@ -257,6 +261,7 @@ export default function AddPatientPrescription() {
         <div className="addPrescriptionBtn">
           <Button
             variant="contained"
+            disabled={disableBtn}
             className={validatingGeneratePrescription}
             onClick={() => handleGeneratePrescription()}
           >

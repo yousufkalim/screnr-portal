@@ -12,6 +12,7 @@ import './css/index.css';
 
 const queryParams = new URLSearchParams(window.location.search);
 const verify = queryParams.get('verify');
+const forgetPassword = queryParams.get('forgetPassword');
 const token = queryParams.get('token');
 
 function App() {
@@ -49,6 +50,10 @@ function App() {
       if (token) {
         navigate(`/VerifyEmail/${token}`);
       }
+    } else if (forgetPassword) {
+      if (token) {
+        navigate(`/forgetPassword/${token}`);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -60,6 +65,7 @@ function App() {
       {!(
         pathname === '/login' ||
         pathname === `/VerifyEmail/${pathname?.split('/')[2]}` ||
+        pathname === `/forgetPassword/${pathname?.split('/')[2]}` ||
         pathname === '/'
       ) && <Header />}
 
