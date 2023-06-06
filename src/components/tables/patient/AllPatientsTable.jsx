@@ -230,8 +230,6 @@ export default function PatientTable({
     };
   }, [openFilter]);
 
-  console.log('----> patients', patients);
-
   return (
     <div className="allClinicAdminTable" id="clinicianTable">
       <TableContainer

@@ -110,7 +110,8 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">
-            List of Clinic Admin's <span className="countStyle">{clinicAdmins?.total?.count}</span>
+            List of Clinic Admin&apos;s{' '}
+            <span className="countStyle">{clinicAdmins?.total?.count}</span>
           </h1>
 
           <div className="allTableTitle" style={{ flexGrow: '0.15' }}>
@@ -148,7 +149,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
                 </div>
 
                 <p className="filterHead">Sort By</p>
-                <div className='status_bottom'/>
+                <div className="status_bottom" />
                 <div className="hl" />
                 <RadioGroup
                   aria-label="filter"

@@ -177,7 +177,8 @@ export default function AddPatientPrescription() {
         setAllMotionExercise(res?.data?.exercises);
       })
       .catch((error) => {
-        console.log('-->', error);
+        // eslint-disable-next-line no-console
+        console.error('-->', error);
       });
   };
 
