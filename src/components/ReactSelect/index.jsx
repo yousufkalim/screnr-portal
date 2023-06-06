@@ -57,7 +57,7 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
                 <p className="optName">{opt.optName}</p>
               </div>
             ))
-          : !preSelected.length && 'Select Clinicians'}
+          : !preSelected.length && 'Select Clinician'}
       </div>
       <div className="OptNames">
         {options.length > 0 ? (

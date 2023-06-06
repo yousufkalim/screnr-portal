@@ -49,13 +49,13 @@ export default function EmailAlreadyRegisteredPopup({ openExistingEmail, setOpen
         <DialogContent>
           <Typography>
             <Icon />
-            <h1 className="genPresTxt">This email is Already Register</h1>
-            <p className="genSubTxt"> </p>
+            <h1 className="genPresTxt">Sorry, this email is already registered!</h1>
+            <p className="genSubTxt">PLease try again with a different email address. </p>
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleClose} className="tryAnotherBtn" variant="contained">
-            Try with Another Email
+            Try Again
           </Button>
         </DialogActions>
       </BootstrapDialog>

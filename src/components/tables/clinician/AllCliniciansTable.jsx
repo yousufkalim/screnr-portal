@@ -120,7 +120,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">
-            List of Clinicians
+            List of Clinician
             <span className="countStyle">{clinicians?.total?.count || 0}</span>
           </h1>
 
@@ -150,6 +150,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
 
                 <div>
                   <p className="filterHead">Status</p>
+                <div className='status_bottom'/>
                   <div className="hl" />
                   <RadioGroup
                     aria-label="statusFilter"
