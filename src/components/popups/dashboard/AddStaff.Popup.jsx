@@ -123,7 +123,7 @@ export default function AddStaffMember({
       if (checked && !staffMemberCopy.expiry_date) {
         return toast.error('Please enter expiry date');
       }
-      const emailRegex = /^[\w-]+@screnrhealth\.com$/;
+      const emailRegex = /^[\w-]+@screnrhealth\.com$/i;
       if (staffMemberCopy.email && !emailRegex.test(staffMemberCopy.email)) {
         return toast.error('Email should be in @screnrhealth.com format');
       }

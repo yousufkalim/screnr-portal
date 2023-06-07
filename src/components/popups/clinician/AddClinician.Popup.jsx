@@ -154,7 +154,7 @@ export default function AddClinician({
       if (checked && !clinician.expiry_date) {
         return toast.error('Please enter expiry date');
       }
-      const emailRegex = /^[\w-]+@screnrhealth\.com$/;
+      const emailRegex = /^[\w-]+@screnrhealth\.com$/i;
       if (clinician.email && !emailRegex.test(clinician.email)) {
         return toast.error('Email should be in @screnrhealth.com format');
       }
