@@ -165,9 +165,9 @@ export default function EditClinicAdmin({
       return toast.error('Please enter expiry date');
     }
 
-    const emailRegex = /^[\w-]+@screnr\.com$/;
+    const emailRegex = /^[\w-]+@screnrhealth\.com$/;
     if (clinicAdminCopy.email && !emailRegex.test(clinicAdminCopy.email)) {
-      return toast.error('Email should be in @screnr.com format');
+      return toast.error('Email should be in @screnrhealth.com format');
     }
     try {
       const { data } = await request('put', `/staff/editClinic/${clinicAdminDetails.id}`, formData);

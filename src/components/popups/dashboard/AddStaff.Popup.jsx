@@ -107,7 +107,6 @@ export default function AddStaffMember({
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const emailRegex = /^[\w-]+@screnr\.com$/;
       const staffMemberCopy = { ...staffMember };
       const formData = new FormData();
 
@@ -124,8 +123,9 @@ export default function AddStaffMember({
       if (checked && !staffMemberCopy.expiry_date) {
         return toast.error('Please enter expiry date');
       }
+      const emailRegex = /^[\w-]+@screnrhealth\.com$/;
       if (staffMemberCopy.email && !emailRegex.test(staffMemberCopy.email)) {
-        return toast.error('Email should be in @screnr.com format');
+        return toast.error('Email should be in @screnrhealth.com format');
       }
       const { data } = await request('post', '/admins/addStaff', formData);
 

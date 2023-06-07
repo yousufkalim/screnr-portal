@@ -16,7 +16,6 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
-// import add from '../../../assets/icons/add.svg';
 import edit from '../../../assets/icons/edit.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
 import AvatarComponent from '../../Avatar/Avatar.Component';
@@ -238,11 +237,11 @@ export default function EditPatient({
     if (checked && !patientCopy.expiry_date) {
       return toast.error('Please enter expiry date');
     }
-    const emailRegex = /^[\w-]+@screnr\.com$/;
-    if (patientCopy.email && !emailRegex.test(patientCopy.email)) {
-      return toast.error('Email should be in @screnr.com format');
-    }
 
+    const emailRegex = /^[\w-]+@screnrhealth\.com$/;
+    if (patientCopy.email && !emailRegex.test(patientCopy.email)) {
+      return toast.error('Email should be in @screnrhealth.com format');
+    }
     // sending this data to api
     try {
       const { data } = await request(
