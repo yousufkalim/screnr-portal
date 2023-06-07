@@ -20,9 +20,17 @@
   padding: 0 20px;
   /* padding: 15px, 20px, 15px, 20px; */
 }
-#optionButtons:focus {
-  background-color: rgb(246, 250, 251);
+
+#optionButtons_selected {
+  color: #136773;
+  border-radius: 17px;
+  height: 50px;
+  text-transform: capitalize;
+  padding: 0 20px;
+  background-color: rgb(229, 244, 248);
+  /* padding: 15px, 20px, 15px, 20px; */
 }
+
 .buttonLogos {
   width: 25%;
   margin-right: 8px;

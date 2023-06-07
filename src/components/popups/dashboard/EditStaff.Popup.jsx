@@ -73,14 +73,14 @@ export default function EditStaffMember({
 
   useEffect(() => {
     const tempStaffMember = {
-      first_name: staffMemberDetails.first_name,
-      last_name: staffMemberDetails.last_name,
-      email: staffMemberDetails.email,
-      profile_pic: staffMemberDetails.profile_pic,
-      phone_number: staffMemberDetails.phone_number,
+      first_name: staffMemberDetails?.first_name,
+      last_name: staffMemberDetails?.last_name,
+      email: staffMemberDetails?.email,
+      profile_pic: staffMemberDetails?.profile_pic,
+      phone_number: staffMemberDetails?.phone_number,
     };
 
-    if (staffMemberDetails.expiry_date) {
+    if (staffMemberDetails?.expiry_date) {
       // eslint-disable-next-line no-underscore-dangle
       tempStaffMember.expiry_date = moment(staffMemberDetails.expiry_date)._d;
       setChecked(true);
@@ -120,7 +120,6 @@ export default function EditStaffMember({
   };
 
   const handleSubmit = async (e) => {
-    const emailRegex = /^[\w-]+@screnr\.com$/;
     e.preventDefault();
     const staffMemberCopy = { ...staffMember };
     const formData = new FormData();
@@ -141,8 +140,9 @@ export default function EditStaffMember({
     if (checked && !staffMemberCopy.expiry_date) {
       return toast.error('Please enter expiry date');
     }
+    const emailRegex = /^[\w-]+@screnrhealth\.com$/;
     if (staffMemberCopy.email && !emailRegex.test(staffMemberCopy.email)) {
-      return toast.error('Email should be in @screnr.com format');
+      return toast.error('Email should be in @screnrhealth.com format');
     }
     try {
       const { data } = await request('put', `/admins/editStaff/${staffMemberDetails.id}`, formData);
