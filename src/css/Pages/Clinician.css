@@ -40,7 +40,7 @@
 .clinic_cell {
   font-size: 1rem !important;
   font-weight: 500 !important;
-  color: #454238 !important ;
+  color: #454238 !important;
   margin-left: 8px;
   align-self: center;
   min-width: max-content;
@@ -68,12 +68,28 @@
   .clinicianScreenCardsDiv {
     width: 57%;
   }
+
   .bgClinicianTable {
     height: 64vh;
+  }
+  .breadCrumb {
+    font-size: 10px;
   }
 }
 @media only screen and (min-width: 1600px) and (max-width: 2200px) {
   .cards_div_clinician_pg {
     width: 78vw;
+  }
+}
+
+@media only screen and (max-width: 1710px) {
+  .table_cells {
+    padding: 5px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .bgClinicianTable {
+    width: 64%;
   }
 }

@@ -98,11 +98,12 @@
   }
 }
 
-/* @media only screen and (max-width: 1440px) {
-  .card_main_div {
-    width: 23%;
+@media only screen and (max-width: 1600px) {
+  .title {
+    width: 10rem;
+    font-size: 12px;
   }
-} */
+}
 
 @media only screen and (max-width: 880px) {
   .card_main_div {
@@ -153,6 +154,7 @@
     color: #919b9b;
   }
 }
+
 @media only screen and (min-width: 1700px) {
   .title {
     width: auto;

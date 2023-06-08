@@ -48,6 +48,7 @@
   align-items: center;
   padding: 0px 20px;
 }
+
 #allTabletitlePatnts {
   width: 36vw !important;
 }
@@ -138,6 +139,7 @@
   padding-left: 1%;
   padding-right: 2%;
 }
+
 .clientTableHead {
   font-weight: 600;
   padding: 30px !important;
@@ -145,6 +147,7 @@
   font-size: 20px;
   color: #136773;
 }
+
 .invitePatientBtn {
   padding: 0px 15px 0px 15px;
   border: 2px solid #fba622;
@@ -152,6 +155,7 @@
   color: #fba622;
   cursor: pointer;
 }
+
 .BackIconDiv {
   margin-left: 30px;
   height: 30px;
@@ -161,6 +165,7 @@
 #disabledDate .react-datepicker-wrapper {
   cursor: not-allowed !important;
 }
+
 #disabledDate .react-datepicker__input-container input {
   cursor: not-allowed !important;
 }
@@ -183,6 +188,7 @@
   from {
     background-color: rgba(255, 255, 255, 0);
   }
+
   to {
     background-color: #f6cf6437 !important;
   }
@@ -212,11 +218,13 @@
   .activityTable {
     height: 77vh;
   }
+
   .filterPoper {
     top: 25%;
     right: 3%;
   }
 }
+
 @media only screen and (max-width: 1440px) {
   #allTabletitlePatnts {
     width: 48vw !important;
@@ -228,11 +236,47 @@
     width: 49vw !important;
   }
 }
+
+@media only screen and (max-width: 1366px) {
+  #allTabletitlePatnts {
+    width: 36vw !important;
+  }
+
+  .css-h4jds-MuiFormControl-root-MuiTextField-root {
+    width: 50% !important;
+  }
+  .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 10.5px 14px !important;
+  }
+}
+
 @media only screen and (max-width: 1250px) {
   #allTabletitlePatnts {
     width: 53vw !important;
   }
 }
+
+@media only screen and (max-width: 1200px) {
+  .css-xk5gx8-MuiGrid-root {
+    width: 80% !important;
+  }
+
+  .css-15aevs4-MuiGrid-root {
+    width: 20% !important;
+  }
+
+  .user_name {
+    font-size: 16px;
+  }
+
+  .css-d3x8hd-MuiPaper-root-MuiTableContainer-root {
+    width: 60.5vw !important;
+  }
+  .css-9e0q92-MuiPaper-root-MuiTableContainer-root {
+    width: 60.7vw !important;
+  }
+}
+
 @media only screen and (max-width: 992px) {
   #allTabletitlePatnts {
     width: 67vw !important;
