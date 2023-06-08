@@ -20,6 +20,7 @@ import profiles from '../../../assets/icons/Profiles.svg';
 import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegistered.Popup';
 import UserCreated from '../general/UserCreated.Popup';
 import request from '../../../request';
+import emailValidation from '../../../utils/emailValidation';
 import UserAlreadyExist from '../general/UserAlreadyExist.Popup';
 
 const useOutlinedInputStyles = makeStyles({
@@ -123,9 +124,9 @@ export default function AddStaffMember({
       if (checked && !staffMemberCopy.expiry_date) {
         return toast.error('Please enter expiry date');
       }
-      const emailRegex = /^[\w-]+@screnrhealth\.com$/i;
-      if (staffMemberCopy.email && !emailRegex.test(staffMemberCopy.email)) {
-        return toast.error('Email should be in @screnrhealth.com format');
+      // this function will return true if email validation fails (for production only)
+      if (emailValidation(staffMemberCopy.email)) {
+        return;
       }
       const { data } = await request('post', '/admins/addStaff', formData);
 

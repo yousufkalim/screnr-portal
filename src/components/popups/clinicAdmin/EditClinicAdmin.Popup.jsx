@@ -19,6 +19,7 @@ import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import request from '../../../request';
 import edit from '../../../assets/icons/edit.svg';
+import emailValidation from '../../../utils/emailValidation';
 
 const useOutlinedInputStyles = makeStyles({
   root: {
@@ -165,9 +166,9 @@ export default function EditClinicAdmin({
       return toast.error('Please enter expiry date');
     }
 
-    const emailRegex = /^[\w-]+@screnrhealth\.com$/i;
-    if (clinicAdminCopy.email && !emailRegex.test(clinicAdminCopy.email)) {
-      return toast.error('Email should be in @screnrhealth.com format');
+    // this function will return true if email validation fails (for production only)
+    if (emailValidation(clinicAdminCopy.email)) {
+      return;
     }
     try {
       const { data } = await request('put', `/staff/editClinic/${clinicAdminDetails.id}`, formData);

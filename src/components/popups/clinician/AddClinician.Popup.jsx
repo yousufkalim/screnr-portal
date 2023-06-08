@@ -24,6 +24,7 @@ import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegistered.Popup
 import UserCreated from '../general/UserCreated.Popup';
 import UserAlreadyExist from '../general/UserAlreadyExist.Popup';
 import CustomPhoneInput from '../general/CustomPhoneInput.Popup';
+import emailValidation from '../../../utils/emailValidation';
 
 const useOutlinedInputStyles = makeStyles({
   root: {
@@ -154,9 +155,9 @@ export default function AddClinician({
       if (checked && !clinician.expiry_date) {
         return toast.error('Please enter expiry date');
       }
-      const emailRegex = /^[\w-]+@screnrhealth\.com$/i;
-      if (clinician.email && !emailRegex.test(clinician.email)) {
-        return toast.error('Email should be in @screnrhealth.com format');
+      // this function will return true if email validation fails (for production only)
+      if (emailValidation(clinician.email)) {
+        return;
       }
 
       // sending this data to api
