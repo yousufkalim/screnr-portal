@@ -23,6 +23,7 @@ import CustomPhoneInput from '../general/CustomPhoneInput.Popup';
 import { getMediaUrl } from '../../../config';
 import ReactSelect from '../../ReactSelect';
 import request from '../../../request';
+import emailValidation from '../../../utils/emailValidation';
 import { Store } from '../../../StoreContext';
 
 const useOutlinedInputStyles = makeStyles({
@@ -238,9 +239,9 @@ export default function EditPatient({
       return toast.error('Please enter expiry date');
     }
 
-    const emailRegex = /^[\w-]+@screnrhealth\.com$/i;
-    if (patientCopy.email && !emailRegex.test(patientCopy.email)) {
-      return toast.error('Email should be in @screnrhealth.com format');
+    // this function will return true if email validation fails (for production only)
+    if (emailValidation(patientCopy.email)) {
+      return;
     }
     // sending this data to api
     try {

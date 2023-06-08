@@ -18,6 +18,7 @@ import { getMediaUrl } from '../../../config';
 import 'react-datepicker/dist/react-datepicker.css';
 import edit from '../../../assets/icons/edit.svg';
 import AvatarComponent from '../../Avatar/Avatar.Component';
+import emailValidation from '../../../utils/emailValidation';
 import request from '../../../request';
 
 const useOutlinedInputStyles = makeStyles({
@@ -140,9 +141,9 @@ export default function EditStaffMember({
     if (checked && !staffMemberCopy.expiry_date) {
       return toast.error('Please enter expiry date');
     }
-    const emailRegex = /^[\w-]+@screnrhealth\.com$/i;
-    if (staffMemberCopy.email && !emailRegex.test(staffMemberCopy.email)) {
-      return toast.error('Email should be in @screnrhealth.com format');
+    // this function will return true if email validation fails (for production only)
+    if (emailValidation(staffMemberCopy.email)) {
+      return;
     }
     try {
       const { data } = await request('put', `/admins/editStaff/${staffMemberDetails.id}`, formData);
