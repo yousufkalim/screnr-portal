@@ -20,7 +20,7 @@ const api = async (method, uri, body) => {
       .catch((err) => {
         if (err?.response?.status === 403) {
           localStorage.removeItem('token');
-          window.location = '/login';
+          window.location = '/';
           toast.error(err?.response?.data?.message);
         } else {
           // eslint-disable-next-line no-console

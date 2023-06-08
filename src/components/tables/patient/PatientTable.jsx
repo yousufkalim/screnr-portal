@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState, Fragment } from 'react';
-// mui imports
 import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
@@ -12,17 +11,17 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
-// assets import
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
-// child component imports
 import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
+import request from '../../../request/index';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
@@ -39,6 +38,23 @@ export default function PatientTable({ patients, getPatients }) {
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
   const [page, setPage] = useState(0);
+  const [counter, setCounter] = useState({
+    report: '',
+    unReadMsg: '',
+  });
+
+  const handleReportAndMsgCounter = (patientId) => {
+    request('get', `/clinicians/unreadMesasgeAndUncheckedReport/${patientId}`)
+      .then((res) => {
+        setCounter({
+          report: res?.data?.uncheckedReport?.count,
+          unReadMsg: res?.data?.unreadMessage?.count,
+        });
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+      });
+  };
 
   const handleChangePage = async (event, newPage) => {
     await getPatients(newPage + 1);
@@ -180,6 +196,7 @@ export default function PatientTable({ patients, getPatients }) {
                   className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
                   onClick={() => {
                     setPatient(row);
+                    handleReportAndMsgCounter(row?.id);
                   }}
                 >
                   <TableCell align="left"> {row?.id} </TableCell>
@@ -293,21 +310,14 @@ export default function PatientTable({ patients, getPatients }) {
 
                     <TableCell>
                       <div className="notiCell">
-                        <Report />{' '}
-                        <p className="reportTxt">
-                          {' '}
-                          {`${patients?.uncheckedReport?.count || 0} Reports`}
-                        </p>
+                        <Report /> <p className="reportTxt">{counter?.report} Reports</p>
                       </div>
                     </TableCell>
 
                     <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
                       <div className="notiCell">
                         <Message />
-                        <p className="msgTxt">
-                          {' '}
-                          {`${patients?.unreadMessage?.count || 0} Messages`}{' '}
-                        </p>
+                        <p className="msgTxt">{counter?.unReadMsg} Messages</p>
                       </div>
                     </TableCell>
                     <TableCell>

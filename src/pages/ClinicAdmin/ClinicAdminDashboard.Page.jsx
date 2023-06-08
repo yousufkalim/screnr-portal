@@ -1,4 +1,4 @@
-import { React, useState, useCallback } from 'react';
+import { React, useState, useCallback, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/greenIcon.svg';
@@ -129,6 +129,10 @@ export default function ClinicAdminDashboard() {
       link: '/patients',
     },
   ];
+  useEffect(() => {
+    getClinicians();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="clinician_dashboard_main_div">

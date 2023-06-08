@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
@@ -21,6 +22,7 @@ import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
 import AddPatient from '../../popups/patient/AddPatient.Popup';
+import request from '../../../request/index';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
@@ -41,6 +43,23 @@ export default function PatientsByCliniciansTable({
   const navigate = useNavigate();
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
+  const [counter, setCounter] = useState({
+    report: '',
+    unReadMsg: '',
+  });
+
+  const handleReportAndMsgCounter = (patientId) => {
+    request('get', `/clinicians/unreadMesasgeAndUncheckedReport/${patientId}`)
+      .then((res) => {
+        setCounter({
+          report: res?.data?.uncheckedReport?.count,
+          unReadMsg: res?.data?.unreadMessage?.count,
+        });
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+      });
+  };
   const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 6,
     borderRadius: 5,
@@ -173,6 +192,7 @@ export default function PatientsByCliniciansTable({
                   className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
                   onClick={() => {
                     setPatient(row);
+                    handleReportAndMsgCounter(row?.id);
                   }}
                 >
                   <TableCell align="left"> {row?.id} </TableCell>
@@ -284,20 +304,14 @@ export default function PatientsByCliniciansTable({
                     <TableCell width="2%" />
                     <TableCell>
                       <div className="notiCell">
-                        <Report />{' '}
-                        <p className="reportTxt">
-                          {' '}
-                          {`${patients?.uncheckedReport?.count || 0} Reports`}
-                        </p>
+                        <Report />
+                        <p className="reportTxt">{counter?.report} Reports</p>
                       </div>
                     </TableCell>
                     <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
                       <div className="notiCell">
                         <Message />
-                        <p className="msgTxt">
-                          {' '}
-                          {`${patients?.unreadMessage?.count || 0} Messages`}{' '}
-                        </p>
+                        <p className="msgTxt">{counter?.unReadMsg} Messages</p>
                       </div>
                     </TableCell>
                     <TableCell>
