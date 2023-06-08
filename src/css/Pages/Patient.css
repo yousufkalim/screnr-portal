@@ -1014,18 +1014,10 @@
 }
 
 @media only screen and (max-width: 1366px) {
-  .clinic_cell {
-    font-size: 0.8rem !important;
-  }
-
   /* .css-2s90m6-MuiAvatar-root {
     height: 30px !important;
     width: 30px !important;
   } */
-
-  .clientTableHead {
-    font-size: 16px;
-  }
 
   .table_head {
     font-size: 12px !important;
@@ -1039,11 +1031,6 @@
   .table_cells {
     font-size: 0.7rem !important;
   }
-
-  .css-15aevs4-MuiGrid-root {
-    max-width: 17.833333%;
-  }
-
   .periodSelect {
     font-size: 11px;
   }

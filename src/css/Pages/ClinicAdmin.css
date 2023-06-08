@@ -115,6 +115,7 @@
   justify-content: space-between;
   padding: 10px 0px;
 }
+
 .status_bottom {
   border-bottom: 1px solid;
 }
@@ -135,7 +136,7 @@
 .iconAndHeading {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding-left: 1%;
   padding-right: 2%;
 }
@@ -242,11 +243,44 @@
     width: 36vw !important;
   }
 
+  .user_name {
+    font-size: 18px;
+  }
+
+  .staff_id {
+    font-size: 0.9rem;
+  }
+
+  .user_detail {
+    font-size: 0.7rem !important;
+  }
+
+  .sidebar_avatar {
+    background-color: #136773 !important;
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 26px !important;
+  }
+  .editIconSidebar {
+    right: 35%;
+  }
+  .clientTableHead {
+    font-size: 14px;
+    padding: 20px !important;
+  }
+
   .css-h4jds-MuiFormControl-root-MuiTextField-root {
     width: 50% !important;
   }
+
   .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
     padding: 10.5px 14px !important;
+  }
+  .user_name {
+    font-size: 18px;
+  }
+  .staff_id_2 {
+    font-size: 0.8rem;
   }
 }
 
@@ -272,6 +306,7 @@
   .css-d3x8hd-MuiPaper-root-MuiTableContainer-root {
     width: 60.5vw !important;
   }
+
   .css-9e0q92-MuiPaper-root-MuiTableContainer-root {
     width: 60.7vw !important;
   }
