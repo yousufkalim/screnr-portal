@@ -446,7 +446,7 @@ export default function AddPrescription({
               />
             </FormControl>
             <div className="prescriptionBtns" style={{ marginTop: '-3.5rem' }}>
-              <div>
+              <div className="prescriptions_btns">
                 <Button className="thresholdsBtn" onClick={() => setOpenAdjustRange(true)}>
                   Thresholds{' '}
                 </Button>

@@ -17,11 +17,12 @@
 .name_cell_dasdboard {
   font-size: 16px !important;
   font-weight: 500 !important;
-  color: #454238 !important ;
+  color: #454238 !important;
   margin-left: 8px;
   text-transform: capitalize !important;
   display: table-cell !important;
 }
+
 .staffEmailCell {
   font-size: 14px !important;
   font-weight: 400 !important;
@@ -31,12 +32,14 @@
 .dashboardChartTxt {
   font-weight: 500;
 }
+
 .cards_div {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   margin-top: 0.7rem;
 }
+
 .dashboard-table-txt {
   color: #136773;
   font-weight: 500;
@@ -118,7 +121,7 @@
 .table_cells {
   font-size: 1rem !important;
   font-weight: 400 !important;
-  color: #454238 !important ;
+  color: #454238 !important;
 }
 
 .table_title {
@@ -147,9 +150,15 @@
   height: 40px;
   border-radius: 100px;
 }
+.css-1oe3i1y-MuiTablePagination-root {
+  width: 100% !important;
+}
 @media only screen and (max-width: 1600px) {
   .dashboard_table_div {
     width: 59%;
+  }
+  .title {
+    width: 9.8rem;
   }
 }
 
@@ -158,14 +167,17 @@
   .table_cells {
     font-size: 0.9rem !important;
   }
+
   .dashboard_table_div {
     height: 53vh;
     width: 58%;
   }
+
   .chart_main_div {
     width: 38%;
     height: 350px;
   }
+
   .dashboard_main_div {
     max-height: 88vh;
   }
@@ -174,6 +186,16 @@
     width: 15%;
     height: 39px;
     border-radius: 100px;
+  }
+  .title {
+    width: 8.5rem;
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 1284px) {
+  .chart_main_div {
+    margin-left: 6%;
   }
 }
 
@@ -227,24 +249,29 @@
     font-size: 0.9rem;
   }
 }
+
 /* Customize ScrollBar */
 @supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee)) {
   ::-webkit-scrollbar {
     height: 0px;
     width: 5px;
   }
+
   ::-webkit-scrollbar-track {
     background: #f5f4f4;
     border-radius: 25px 25px 25px 25px;
   }
+
   ::-webkit-scrollbar-thumb {
     background: #dddcdc;
     border-radius: 25px 25px 25px 25px;
     width: 1px;
   }
+
   ::-webkit-scrollbar-thumb:hover {
     background: #ece7e7;
   }
+
   ::-webkit-scrollbar-thumb:horizontal {
     display: none;
   }
