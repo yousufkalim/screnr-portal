@@ -189,7 +189,7 @@ export default function AddClinicAdmin({
       if (data) {
         getClinicAdmins();
         setClinicAdmin({});
-        return toast.success('User added successfully');
+        return toast.success('User activated successfully');
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);

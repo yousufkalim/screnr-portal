@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 import CircularProgress from '@mui/material/CircularProgress';
 import ExcerciseChart from './ExcerciseChart';
-import ReportCard from '../../../components/cards/ReportCard.Component';
 import MultiCircularProgress from './OverallExcerciseScore';
 import { ReactComponent as TitleExcerciseIcon } from '../../../assets/icons/titleExcerciseIcon.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
@@ -212,17 +211,6 @@ function ExerciseDetails({ session, exercise }) {
         <div style={{ width: '90%', height: '80%', marginLeft: '3%' }}>
           <ExcerciseChart />
         </div>
-      </div>
-      <div
-        className="reportCardMsgDiv"
-        style={{
-          marginTop: '45px',
-          width: '74vw',
-          marginLeft: '30px',
-          marginBottom: '40px',
-        }}
-      >
-        <ReportCard title="Comments" />
       </div>
     </div>
   );

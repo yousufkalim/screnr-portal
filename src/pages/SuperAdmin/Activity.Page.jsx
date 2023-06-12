@@ -134,7 +134,7 @@ export default function Activity() {
           <ActivityTable activityLog={activityLog?.logs} />
         </Grid>
         <Grid xl={2.5} lg={2.5}>
-          <RightSidebar graph={activityLog?.graph} />
+          <RightSidebar logs={activityLog} />
         </Grid>
       </Grid>
       {EditPatientPopup}

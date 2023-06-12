@@ -13,8 +13,6 @@ import {
 import { labels, options } from '../../../utils/data';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-ChartJS.defaults.borderColor = '#655B96';
-
 export default function Chart({ clinicsPerMonth }) {
   const [chartArray, setChartArray] = useState([]);
 

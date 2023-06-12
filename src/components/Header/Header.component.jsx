@@ -15,7 +15,7 @@ import { ReactComponent as DashboardIcon } from '../../assets/components/HeaderI
 import { ReactComponent as ClinicAdminIcon } from '../../assets/components/HeaderIcons/ClinicAdminIcon.svg';
 import { ReactComponent as ClinicalIcon } from '../../assets/components/HeaderIcons/Clinical.svg';
 import { ReactComponent as PatientIcon } from '../../assets/components/HeaderIcons/Patient.svg';
-import { ReactComponent as PatientStatsIcon } from '../../assets/components/HeaderIcons/PatientStatsIcon.svg';
+// import { ReactComponent as PatientStatsIcon } from '../../assets/components/HeaderIcons/PatientStatsIcon.svg';
 
 const tabsByUser = {
   admin: [
@@ -39,11 +39,11 @@ const tabsByUser = {
       label: 'Patients',
       IconComponent: PatientIcon,
     },
-    {
-      path: '/patients/:id/exercise/reports',
-      label: 'Patient Statics',
-      IconComponent: PatientStatsIcon,
-    },
+    // {
+    //   path: '/patients/:id/exercise/reports',
+    //   label: 'Patient Statics',
+    //   IconComponent: PatientStatsIcon,
+    // },
   ],
   staff: [
     {
@@ -66,11 +66,11 @@ const tabsByUser = {
       label: 'Patients',
       IconComponent: PatientIcon,
     },
-    {
-      path: '/patients/:id/exercise/reports',
-      label: 'Patient Statics',
-      IconComponent: PatientStatsIcon,
-    },
+    // {
+    //   path: '/patients/:id/exercise/reports',
+    //   label: 'Patient Statics',
+    //   IconComponent: PatientStatsIcon,
+    // },
   ],
   clinic: [
     {
@@ -88,11 +88,11 @@ const tabsByUser = {
       path: '/patients',
       IconComponent: PatientIcon,
     },
-    {
-      label: 'Patient Statics',
-      path: '/patients/:id/exercise/reports',
-      IconComponent: PatientStatsIcon,
-    },
+    // {
+    //   label: 'Patient Statics',
+    //   path: '/patients/:id/exercise/reports',
+    //   IconComponent: PatientStatsIcon,
+    // },
   ],
   clinician: [
     {
@@ -105,11 +105,11 @@ const tabsByUser = {
       label: 'Patients',
       IconComponent: PatientIcon,
     },
-    {
-      path: '/patients/:id/exercise/reports',
-      label: 'Patient Statics',
-      IconComponent: PatientStatsIcon,
-    },
+    // {
+    //   path: '/patients/:id/exercise/reports',
+    //   label: 'Patient Statics',
+    //   IconComponent: PatientStatsIcon,
+    // },
   ],
   patient: [
     {
@@ -132,11 +132,11 @@ const tabsByUser = {
       label: 'Patients',
       IconComponent: PatientIcon,
     },
-    {
-      path: '/patients/:id/exercise/reports',
-      label: 'Patient Statics',
-      IconComponent: PatientStatsIcon,
-    },
+    // {
+    //   path: '/patients/:id/exercise/reports',
+    //   label: 'Patient Statics',
+    //   IconComponent: PatientStatsIcon,
+    // },
   ],
 };
 

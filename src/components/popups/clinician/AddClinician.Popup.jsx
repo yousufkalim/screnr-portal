@@ -207,7 +207,7 @@ export default function AddClinician({
       if (data) {
         getClinicians();
         setClinician({});
-        return toast.success('User added successfully');
+        return toast.success('User activated successfully');
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);

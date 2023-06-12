@@ -25,6 +25,7 @@ export default function Patient() {
   const [patients, setPatients] = useState({});
   const [breadcrumb, setBreadcrumb] = useState('');
   const [clinician, setClinician] = useState({});
+  const [activityLog, setActivityLog] = useState({});
 
   const getClinicName = (name) => setBreadcrumb(name);
   const handleDashboardNavClick = () => navigate('/admin/dashboard');
@@ -50,6 +51,13 @@ export default function Patient() {
       const { data } = await request('get', `/clinics/getClinician/${id}`);
       if (data) {
         setClinician(data?.user);
+        await request('get', `/logs/${id}`)
+          .then((res) => {
+            setActivityLog(res?.data);
+          })
+          .catch((error) => {
+            console.log('-->', error);
+          });
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -136,7 +144,7 @@ export default function Patient() {
           />
         </Grid>
         <Grid xl={2.5} lg={2.5}>
-          <RightSidebar />
+          <RightSidebar logs={activityLog} />
         </Grid>
         <div className="addBtn">
           <img

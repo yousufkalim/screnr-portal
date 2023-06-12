@@ -46,8 +46,9 @@ const options = {
 const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-export default function Chart({ graph }) {
-  const array = daysOfWeek.map((day) => graph?.data[day]);
+export default function Chart({ logs }) {
+  console.log('🚀 ~ file: Chart.Component.jsx:50 ~ Chart ~ logs:', logs);
+  const array = daysOfWeek.map((day) => logs?.graph?.data[day]);
 
   const data = {
     labels,
@@ -64,23 +65,23 @@ export default function Chart({ graph }) {
   return (
     <div className="patientListChart">
       <div className="timeChartDiv">
-        <span className="chartTime">{graph?.totalTracked}</span>
+        <span className="chartTime">{logs?.graph?.totalTracked}</span>
         <span className="chartSubtxt">Total</span>
         <span className="chartTimeTxt">TRACKED HOURS</span>
       </div>
       <div className="currentTimeStatsDiv">
         <div className="currentTimeSubDiv">
           <span className="chartDayTxt">Today</span>
-          <span className="chartCurrentTime">05:00:20</span>
+          <span className="chartCurrentTime">{logs?.loginHours}</span>
         </div>
       </div>
 
       <Bar options={options} data={data} className="patientChart" />
 
       <div className="periodDiv">
-        <p className="periodSelect">Last Week</p>
-        <p className="periodSelect">Today</p>
-        <p className="periodSelect">Last Month</p>
+        {/* <p className="periodSelect">Last Week</p> */}
+        {/* <p className="periodSelect">Today</p> */}
+        {/* <p className="periodSelect">Last Month</p> */}
       </div>
     </div>
   );

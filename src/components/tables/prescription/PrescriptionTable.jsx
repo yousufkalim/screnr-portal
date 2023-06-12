@@ -296,9 +296,9 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                             onClick={() => {
                               handleCloseCompleted(mainRow?.id);
                             }}
-                            disabled={
-                              !mainRow?.sessions?.some((item) => item.status === 'completed')
-                            }
+                            // disabled={
+                            //   !mainRow?.sessions?.some((item) => item.status === 'completed')
+                            // }
                           >
                             <Tick className="pIcon" />
                             <p className="actionMenus">Mark as Completed</p>

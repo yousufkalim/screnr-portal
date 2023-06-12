@@ -79,9 +79,9 @@
 }
 
 .listBtn_disabled {
-  width: 36%;
+  width: 26%;
   padding: 10px 0px !important;
-  border-radius: 20px !important;
+  border-radius: 15px !important;
   color: white !important;
   background-color: gray !important;
   text-transform: none !important;

@@ -156,8 +156,8 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
               Activity Log
             </p>
           </div>
-          <p className="totalActivity">Total Activity</p>
-          <p className="hrsTxt">(129 Hrs)</p>
+          {/* <p className="totalActivity">Total Activity</p> */}
+          {/* <p className="hrsTxt">(129 Hrs)</p> */}
         </>
       ) : (
         ''
