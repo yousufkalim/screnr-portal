@@ -200,11 +200,6 @@
   .dashboard_main_div {
     padding: 1.5rem 2rem 0rem 2rem;
   }
-
-  .table_icons {
-    height: 30px !important;
-    width: 30px !important;
-  }
 }
 
 @media only screen and (max-width: 992px) {
@@ -212,15 +207,7 @@
     font-size: 13px;
   }
 
-  .dashboard_div_2 {
-    flex-direction: column;
-  }
-
   .dashboard_table_div {
-    width: 100%;
-  }
-
-  .chart_main_div {
     width: 100%;
   }
 }

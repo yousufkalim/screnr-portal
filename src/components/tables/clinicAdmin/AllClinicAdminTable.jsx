@@ -97,7 +97,14 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
   }, [openFilter]);
 
   return (
-    <div className="allClinicAdminTable" id="clinicAdminTable">
+    <div
+      style={{
+        marginTop: '10vh',
+        height: '90vh',
+      }}
+      className="allClinicAdminTable"
+      id="clinicAdminTable"
+    >
       <TableContainer
         component={Paper}
         sx={{

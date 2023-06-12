@@ -53,6 +53,9 @@ export default function AddPrescription({
   handleMotionExerciseInfo,
   motionExerciseInfo,
   setMotionExerciseInfo,
+  validatingGeneratePrescription,
+  handleGeneratePrescription,
+  disableBtn,
 }) {
   const outlinedInputStyles = useOutlinedInputStyles();
   const [openAdjustRange, setOpenAdjustRange] = useState(false);
@@ -727,8 +730,18 @@ export default function AddPrescription({
           </>
         )}
       </Grid>
-      <Grid xl={5} lg={6}>
+      <Grid xl={5} lg={9}>
         <AddPrescriptionTable ExercisePrescriptionList={prescription} />
+        <div className="addPrescriptionBtn">
+          <Button
+            variant="contained"
+            disabled={disableBtn}
+            className={validatingGeneratePrescription}
+            onClick={() => handleGeneratePrescription()}
+          >
+            Generate Prescription
+          </Button>
+        </div>
       </Grid>
 
       {openAdjustRange && (

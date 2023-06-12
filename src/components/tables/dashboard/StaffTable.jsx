@@ -51,6 +51,7 @@ export default function TableComponent({
           },
           '@media (max-width: 1284px)': {
             width: '58vw',
+            overflow: 'auto',
           },
         }}
         className="tableContainer"
@@ -156,6 +157,7 @@ export default function TableComponent({
                     </div>
                   </TableCell>
                   <TableCell
+                    sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
                     align="left"
                     className="table_cells"
                     onClick={() => navigate(`/staff/${row.id}`)}
