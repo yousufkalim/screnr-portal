@@ -236,11 +236,10 @@ export default function PatientTable({
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '100%',
+          maxHeight: '98%',
           overflowX: 'hidden',
           boxShadow: '0',
           width: '94vw',
-          marginTop: '1%',
         }}
       >
         <div className="allTableHead">

@@ -46,13 +46,14 @@ export default function TableComponent({
           padding: '1% 0%',
           boxShadow: '0',
           width: '58vw',
-          '@media (max-width: 1600px)': {
-            width: '56vw',
-          },
           '@media (max-width: 1440px)': {
             width: '54vw',
           },
+          '@media (max-width: 1284px)': {
+            width: '58vw',
+          },
         }}
+        className="tableContainer"
       >
         <div className="table_title">
           <h3 className="dashboard-table-txt">List of staff members</h3>
@@ -64,7 +65,8 @@ export default function TableComponent({
           aria-label="simple table"
           sx={{
             [`& .${tableCellClasses.root}`]: {
-              borderBottom: 'none',
+              borderBottom: '1px solid transparent',
+              paddingBottom: '3%',
             },
           }}
         >
@@ -110,7 +112,12 @@ export default function TableComponent({
                 <TableRow
                   key={row.name}
                   className="tableRow"
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
+                  sx={{
+                    '&:last-child td, &:last-child th': {
+                      border: 0,
+                    },
+                    cursor: 'pointer',
+                  }}
                 >
                   <TableCell
                     align="left"
