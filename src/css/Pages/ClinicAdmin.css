@@ -210,6 +210,10 @@
   .bg {
     height: 85.5vh;
   }
+  #allTabletitlePatnts {
+    width: 36vw !important;
+    /* gap: 10px; */
+  }
 
   .allClinicAdminTable {
     background-color: rgb(246, 250, 251);
@@ -227,22 +231,15 @@
 }
 
 @media only screen and (max-width: 1440px) {
-  #allTabletitlePatnts {
-    width: 48vw !important;
-  }
 }
 
 @media only screen and (max-width: 1466px) {
-  #allTabletitlePatnts {
-    width: 49vw !important;
+  .css-h4jds-MuiFormControl-root-MuiTextField-root {
+    width: 63% !important;
   }
 }
 
 @media only screen and (max-width: 1366px) {
-  #allTabletitlePatnts {
-    width: 36vw !important;
-  }
-
   .user_name {
     font-size: 18px;
   }
@@ -268,10 +265,10 @@
     font-size: 14px;
     padding: 20px !important;
   }
-
+  /* 
   .css-h4jds-MuiFormControl-root-MuiTextField-root {
     width: 50% !important;
-  }
+  } */
 
   .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
     padding: 10.5px 14px !important;
@@ -285,9 +282,6 @@
 }
 
 @media only screen and (max-width: 1250px) {
-  #allTabletitlePatnts {
-    width: 53vw !important;
-  }
 }
 
 @media only screen and (max-width: 1200px) {
@@ -308,12 +302,18 @@
   }
 
   .css-9e0q92-MuiPaper-root-MuiTableContainer-root {
-    width: 60.7vw !important;
+    width: 56.7vw !important;
+  }
+  .bg {
+    width: 100%;
+  }
+  #allTabletitlePatnts {
+    gap: 10px;
   }
 }
 
-@media only screen and (max-width: 992px) {
-  #allTabletitlePatnts {
-    width: 67vw !important;
+@media only screen and (max-width: 1100px) {
+  .css-h4jds-MuiFormControl-root-MuiTextField-root {
+    width: 59% !important;
   }
 }
