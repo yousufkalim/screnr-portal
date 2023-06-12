@@ -76,6 +76,12 @@
   margin-top: 20px;
 }
 
+@media only screen and (max-width: 1200px) {
+  .bgReport {
+    width: 75%;
+  }
+}
+
 @media only screen and (max-width: 1600px) {
   .bgReportCard {
     height: 93%;
