@@ -133,23 +133,49 @@
   background-color: rgba(255, 184, 184, 0.169);
 }
 
-.painSurvey_submit_btn{
+.painSurvey_submit_btn {
   border: none;
   color: white;
-  background-color: #919B9B;
+  background-color: #919b9b;
   font-size: 1rem;
-  padding: .7rem 5rem .7rem 5rem;
+  padding: 0.7rem 5rem 0.7rem 5rem;
   border-radius: 15px;
   cursor: pointer;
 }
 
 @media only screen and (max-width: 1899px) {
-  .topSessionSec {
-    width: 33%;
-  }
-
   #painSurveyHeader {
     padding: 20px;
     margin-bottom: 20px;
+  }
+}
+@media only screen and (max-width: 1600px) {
+  .topSessionSec {
+    width: 29%;
+  }
+}
+@media only screen and (max-width: 1366px) {
+  .leftTxt {
+    font-size: 10px;
+  }
+  .rightTxt {
+    font-size: 12px;
+  }
+  .topSessionSec {
+    width: 28%;
+  }
+  .sessionHeader {
+    font-size: 14px;
+  }
+  .sessionDate {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 1250px) {
+  .topSessionSec {
+    width: 34%;
+  }
+  .surveyHeaderName {
+    font-size: 17px;
   }
 }
