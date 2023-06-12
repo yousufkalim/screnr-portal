@@ -273,3 +273,24 @@
     width: 100px;
   }
 }
+@media only screen and (max-width: 1200px) {
+  .jointScoreOuterDiv {
+    width: 100%;
+  }
+  .score_Bars {
+    width: 90px;
+    height: 119px;
+  }
+}
+@media only screen and (max-width: 1100px) {
+  .score_Bars {
+    width: 80px;
+    height: 110px;
+  }
+  .excercises_names {
+    font-size: 11px;
+  }
+  .score_Bar1 {
+    height: 140px;
+  }
+}
