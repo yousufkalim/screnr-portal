@@ -52,6 +52,7 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
           overflowX: 'hidden',
           boxShadow: '0',
           width: '77.8vw',
+          marginTop: '-10vh',
           '@media (max-width: 1600px)': {
             maxHeight: '96.3%',
             width: '73vw',
