@@ -80,6 +80,15 @@
   .bgReport {
     width: 75%;
   }
+  .exerciseReportTxt {
+    font-size: 15px;
+  }
+  .receiverName {
+    font-size: 14px !important;
+  }
+  .msgTimeStamp {
+    font-size: 11px;
+  }
 }
 
 @media only screen and (max-width: 1600px) {

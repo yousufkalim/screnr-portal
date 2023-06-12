@@ -210,12 +210,12 @@ export default function SearchScreen() {
                 onChange={(e) => setSearchQurrey(e.target.value)}
                 style={{
                   border: 'none',
-                  width: '90%',
                   color: 'grey',
                   fontSize: '15px',
                   outline: 'none',
                   background: 'transparent',
                   padding: '4px',
+                  width: '93%',
                 }}
               />
             </div>

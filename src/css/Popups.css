@@ -589,3 +589,17 @@
     max-height: 25rem;
   }
 }
+@media only screen and (max-width: 1200px) {
+  .css-cyxlny-MuiPaper-root-MuiDialog-paper {
+    width: 779px !important;
+  }
+  .css-1du2s54-MuiGrid-root {
+    width: 51%;
+  }
+  .css-w9ohz0-MuiModal-root-MuiDialog-root .MuiDialogContent-root {
+    padding-left: 35px !important;
+  }
+  .rangeRow p {
+    font-size: 12px;
+  }
+}

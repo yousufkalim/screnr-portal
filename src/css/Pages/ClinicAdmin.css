@@ -321,4 +321,7 @@
   .css-h4jds-MuiFormControl-root-MuiTextField-root {
     width: 59% !important;
   }
+  .css-1ar0sxj-MuiPaper-root-MuiTableContainer-root {
+    overflow-x: scroll !important;
+  }
 }

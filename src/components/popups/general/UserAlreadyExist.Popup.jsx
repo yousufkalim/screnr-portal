@@ -58,7 +58,7 @@ export default function UserAlreadyExist({
             <h1 className="genPresTxt genPresTxt_2">
               Sorry,this user already exists but is currently inactive.
             </h1>
-            <p className="genSubTxt">To active this user,please click on the button below.</p>
+            <p className="genSubTxt">To active this user, please click on the button below.</p>
           </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
