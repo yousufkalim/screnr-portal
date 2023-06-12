@@ -632,11 +632,9 @@
 }
 
 .addPrescriptionBtn {
-  position: absolute !important;
-  right: 6%;
-  bottom: 40%;
-
-  z-index: 1300 !important;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 
 .calenderIcon {
@@ -677,10 +675,9 @@
 .patientFilterPoper {
   position: absolute;
   background-color: white;
-  width: 24%;
   padding: 40px;
   border-radius: 20px;
-  top: 23%;
+  top: 100%;
   right: 15%;
   font-weight: 500;
   font-size: 14px;
@@ -841,10 +838,6 @@
   .actionDiv,
   .prescription_table_cells {
     font-size: 12px !important;
-  }
-
-  .addPrescriptionBtn {
-    bottom: 45%;
   }
 
   .generatePrescriptionBtn {
@@ -1148,10 +1141,6 @@
 
   .addMore {
     width: 14% !important;
-  }
-
-  .addPrescriptionBtn {
-    right: 8%;
   }
 
   .css-1s46rkj-MuiGrid-root {

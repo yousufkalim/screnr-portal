@@ -240,6 +240,9 @@ export default function PatientTable({
           overflowX: 'hidden',
           boxShadow: '0',
           width: '94vw',
+          '@media (max-width: 1284px)': {
+            overflow: 'auto',
+          },
         }}
       >
         <div className="allTableHead">
@@ -528,13 +531,15 @@ export default function PatientTable({
                     }}
                   >
                     <TableCell align="left"> {row.id} </TableCell>
-                    <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                      <AvatarComponent
-                        alt={`${row.first_name} ${row.last_name}`}
-                        className="header_avatar"
-                      />
+                    <TableCell align="left">
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <AvatarComponent
+                          alt={`${row.first_name} ${row.last_name}`}
+                          className="header_avatar"
+                        />
 
-                      <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
+                        <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
+                      </div>
                     </TableCell>
 
                     <TableCell align="center" className="table_cells">

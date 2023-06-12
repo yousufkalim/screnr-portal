@@ -17,6 +17,7 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
         background: '#F6FAFB',
         boxShadow: '0',
         ml: 5,
+        maxHeight: '100%',
         overflowX: 'hidden',
         // width: '58.7vw',
         // paddingLeft: 2,

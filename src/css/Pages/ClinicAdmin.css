@@ -25,7 +25,6 @@
 #clinicAdminTable {
   padding: 1.5rem 0 0.5rem 2rem;
   height: 90vh;
-  margin-top: 10vh;
   position: fixed;
   width: 100%;
 }
@@ -51,6 +50,7 @@
   justify-content: space-around;
   align-items: center;
   padding: 0px 20px;
+  position: relative;
 }
 
 #allTabletitlePatnts {

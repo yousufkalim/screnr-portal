@@ -44,7 +44,7 @@ export default function Prescription() {
 
   return (
     <>
-      <Grid container>
+      <Grid container sx={{ marginTop: '8vh', height: '92vh' }}>
         <Grid xl={2} lg={2.5}>
           <Sidebar
             patientId={id}

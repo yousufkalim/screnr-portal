@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
-import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import request from '../../request';
@@ -224,7 +223,7 @@ export default function AddPatientPrescription() {
 
   return (
     <>
-      <Grid container className="gridish">
+      <Grid sx={{ marginTop: '8vh', height: '92vh' }} container className="gridish">
         <Grid xl={2} lg={2.5}>
           <Sidebar
             patientId={patientId}
@@ -255,20 +254,13 @@ export default function AddPatientPrescription() {
                 handleMotionExerciseInfo={handleMotionExerciseInfo}
                 motionExerciseInfo={motionExerciseInfo}
                 setMotionExerciseInfo={setMotionExerciseInfo}
+                validatingGeneratePrescription={validatingGeneratePrescription}
+                handleGeneratePrescription={handleGeneratePrescription}
+                disableBtn={disableBtn}
               />
             </div>
           </div>
         </Grid>
-        <div className="addPrescriptionBtn">
-          <Button
-            variant="contained"
-            disabled={disableBtn}
-            className={validatingGeneratePrescription}
-            onClick={() => handleGeneratePrescription()}
-          >
-            Generate Prescription
-          </Button>
-        </div>
         {GeneratePrescriptionSection}
       </Grid>
       {EditPatientPopup}
