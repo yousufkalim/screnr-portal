@@ -160,7 +160,7 @@ export default function AddStaffMember({
       if (data) {
         getStaffMembers();
         setStaffMember({});
-        return toast.success('User added successfully');
+        return toast.success('User activated successfully');
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);

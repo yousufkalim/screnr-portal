@@ -130,8 +130,8 @@ export default function Sidebar({
           Activity Log
         </p>
       </div>
-      <p className="totalActivity">Total Activity</p>
-      <p className="hrsTxt">(129 Hrs)</p>
+      {/* <p className="totalActivity">Total Activity</p> */}
+      {/* <p className="hrsTxt">(129 Hrs)</p> */}
     </div>
   );
 }

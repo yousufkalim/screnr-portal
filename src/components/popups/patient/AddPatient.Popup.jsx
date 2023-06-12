@@ -32,7 +32,7 @@ const useOutlinedInputStyles = makeStyles({
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         border: '1px solid #E1E1E1 ',
-        borderRadius: '20px',
+        borderRadius: '15px',
         fontSize: 16,
         height: 55,
       },
@@ -255,7 +255,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     try {
       const { data } = await request('put', '/clinicians/editPatient/undefined', formData);
       if (data) {
-        toast.success('Patient added successfully');
+        toast.success('Patient activated successfully');
         getPatients();
         handleClose();
       }
@@ -498,54 +498,27 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
             </FormControl>
 
             <FormControl sx={{ mb: 2, width: '100%' }} variant="outlined">
-              <Select
-                // eslint-disable-next-line react/no-unstable-nested-components
-                IconComponent={(props) => (
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-                  <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
-                )}
-                displayEmpty
+              <TextField
                 sx={{
-                  '.MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#E1E1E1',
-                  },
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: ' #454238',
-                  },
-                  '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: ' #454238',
-                  },
-                  borderRadius: '20px',
+                  borderRadius: '15px',
                   input: {
-                    color: 'red',
+                    color: 'black',
                     fontSize: '14px',
                     fontWeight: '500',
-                    ml: 2,
+                    ml: 1,
                   },
                 }}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                id="outlined-name"
+                classes={outlinedInputStyles}
+                placeholder="Diagnosis"
+                size="normal"
                 name="diagnosis"
-                placeholder="Title"
                 value={userData.diagnosis}
                 onChange={handleUserDataChange}
                 inputProps={{
-                  sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
+                  maxLength: 20,
                 }}
-              >
-                <MenuItem value="">
-                  <span style={{ color: '#949494' }}>Select Diagnosis</span>
-                </MenuItem>
-                <MenuItem value="Cancer" style={{ color: '#949494' }}>
-                  Cancer
-                </MenuItem>
-                <MenuItem value="Typhoid" style={{ color: '#949494' }}>
-                  Typhoid
-                </MenuItem>
-                <MenuItem value="Backpain" style={{ color: '#949494' }}>
-                  Backpain
-                </MenuItem>
-              </Select>
+              />
             </FormControl>
             <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
               <Select

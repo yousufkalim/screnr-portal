@@ -23,7 +23,7 @@ const useOutlinedInputStyles = makeStyles({
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         border: '1px solid #E1E1E1 ',
-        borderRadius: '20px',
+        borderRadius: '17px',
         fontSize: 16,
         height: 55,
       },
@@ -323,7 +323,7 @@ export default function AddPrescription({
                 ))}
               </Select>
             </FormControl>
-            <FormControl sx={{ width: '32%', mr: 1.2 }} variant="outlined">
+            <FormControl sx={{ width: '30%', mr: 1.4 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -351,7 +351,7 @@ export default function AddPrescription({
                 }}
               />
             </FormControl>
-            <FormControl sx={{ width: '32%', mr: 1.2 }} variant="outlined">
+            <FormControl sx={{ width: '30%', mr: 1.4 }} variant="outlined">
               <TextField
                 sx={{
                   borderRadius: '20px',
@@ -366,7 +366,7 @@ export default function AddPrescription({
                 classes={outlinedInputStyles}
                 placeholder="Number of reps"
                 name="reps"
-                value={motionExerciseInfo.reps}
+                value={motionExerciseInfo?.reps}
                 onChange={(e) => {
                   if (
                     (/^\d{1,2}$/.test(e.target.value) &&
@@ -379,7 +379,7 @@ export default function AddPrescription({
                 }}
               />
             </FormControl>
-            <FormControl sx={{ width: '32%' }} variant="outlined">
+            <FormControl sx={{ width: '37%' }} variant="outlined">
               <Select
                 // eslint-disable-next-line react/no-unstable-nested-components
                 IconComponent={(props) => (
@@ -396,7 +396,7 @@ export default function AddPrescription({
                   '&:hover .MuiOutlinedInput-notchedOutline': {
                     borderColor: ' #454238',
                   },
-                  borderRadius: '20px',
+                  borderRadius: '17px',
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -414,8 +414,8 @@ export default function AddPrescription({
                 </MenuItem>
                 {rest?.map((item) => {
                   return (
-                    <MenuItem value={item.value}>
-                      <span className="optColor">{item.label}</span>
+                    <MenuItem value={item?.value}>
+                      <span className="optColor">{item?.label}</span>
                     </MenuItem>
                   );
                 })}
@@ -439,7 +439,7 @@ export default function AddPrescription({
                 classes={outlinedInputStyles}
                 placeholder="Special instruction"
                 name="instructions"
-                value={motionExerciseInfo.instructions}
+                value={motionExerciseInfo?.instructions}
                 onChange={(e) => {
                   handleMotionExerciseInfo(e.target.name, e.target.value);
                 }}
@@ -447,9 +447,9 @@ export default function AddPrescription({
             </FormControl>
             <div className="prescriptionBtns" style={{ marginTop: '-3.5rem' }}>
               <div className="prescriptions_btns">
-                <Button className="thresholdsBtn" onClick={() => setOpenAdjustRange(true)}>
+                {/* <Button className="thresholdsBtn" onClick={() => setOpenAdjustRange(true)}>
                   Thresholds{' '}
-                </Button>
+                </Button> */}
                 <FormControlLabel
                   sx={{
                     color: '#25C8B4',
