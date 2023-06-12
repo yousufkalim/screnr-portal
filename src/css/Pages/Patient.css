@@ -628,7 +628,7 @@
 }
 
 .gridish {
-  position: relative;
+  position: fixed;
 }
 
 .addPrescriptionBtn {
