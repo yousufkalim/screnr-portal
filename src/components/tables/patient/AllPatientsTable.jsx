@@ -476,7 +476,7 @@ export default function PatientTable({
               <TableCell
                 align="left"
                 className="table_head"
-                sx={{ width: '20%', '@media (max-width: 1600px)': { width: '34%' } }}
+                sx={{ width: '20%', '@media (max-width: 1600px)': { width: '10%' } }}
               >
                 Name
               </TableCell>
