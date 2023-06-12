@@ -9,7 +9,7 @@
   margin-top: 2rem;
   cursor: pointer;
 }
-.noDataTxt{
+.noDataTxt {
   color: rgba(145, 155, 155, 1) !important;
 }
 .receiver {
@@ -103,19 +103,26 @@
 }
 
 .backBtn {
-  margin-right: 20px !important;
+  /* margin-right: 20px !important; */
   cursor: pointer;
 }
 
 .bgMsg {
   background-color: rgb(246, 250, 251);
   height: 92vh;
+  width: 100%;
 }
 
 .emoji-open {
   position: absolute;
   bottom: 100%;
   right: 5%;
+}
+@media only screen and (max-width: 1920px) {
+  .css-1lshdhi-MuiFormControl-root-MuiTextField-root {
+    width: 75% !important;
+    margin-left: 0px !important;
+  }
 }
 
 @media only screen and (max-width: 1600px) {
@@ -131,5 +138,13 @@
   }
   .sender {
     padding-left: 20%;
+  }
+  .css-1lshdhi-MuiFormControl-root-MuiTextField-root {
+    width: 72% !important;
+  }
+}
+@media only screen and (max-width: 1366px) {
+  .css-1lshdhi-MuiFormControl-root-MuiTextField-root {
+    width: 70% !important;
   }
 }
