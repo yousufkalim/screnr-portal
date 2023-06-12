@@ -9,6 +9,7 @@ export default function CardWithIcon({
   LeftCircleClassName,
   cardClassName,
   link,
+  iconClassName,
 }) {
   const navigate = useNavigate();
   return (
@@ -18,7 +19,7 @@ export default function CardWithIcon({
       role="presentation"
       style={{ cursor: 'pointer' }}
     >
-      <Icon />
+      <Icon className={iconClassName} />
       <div className="card_content_div">
         <p className="amount">{amount}</p>
         <p className="title" id="title">

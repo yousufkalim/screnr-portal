@@ -75,7 +75,8 @@
   font-size: 14px;
   color: #919b9b;
   /* width: max-content; */
-  width: 11.5rem;
+  width: auto;
+  margin-right: 5px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -89,19 +90,32 @@
     color: #919b9b;
   }
 
+  .iconClass {
+    min-width: 45px;
+    min-width: 45px;
+  }
+
   .yellow_circle,
   .red_circle,
   .green_circle,
   .blue_circle {
     height: 100px;
     width: 96px;
+    min-width: 120px;
   }
 }
 
-@media only screen and (max-width: 1600px) {
-  .title {
-    width: 10rem;
-    font-size: 12px;
+@media only screen and (max-width: 1284px) {
+  .yellow_circle,
+  .red_circle,
+  .green_circle,
+  .blue_circle {
+    height: 90px;
+    min-width: 90px;
+  }
+
+  .iconClass {
+    min-width: 45px;
   }
 }
 
@@ -152,11 +166,5 @@
   .title {
     font-size: 0.8rem;
     color: #919b9b;
-  }
-}
-
-@media only screen and (min-width: 1700px) {
-  .title {
-    width: auto;
   }
 }

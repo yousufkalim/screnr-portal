@@ -79,9 +79,9 @@
 }
 
 .listBtn_disabled {
-  width: 36%;
+  width: 26%;
   padding: 10px 0px !important;
-  border-radius: 20px !important;
+  border-radius: 15px !important;
   color: white !important;
   background-color: gray !important;
   text-transform: none !important;
@@ -632,11 +632,9 @@
 }
 
 .addPrescriptionBtn {
-  position: absolute !important;
-  right: 6%;
-  bottom: 40%;
-
-  z-index: 1300 !important;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 
 .calenderIcon {
@@ -677,10 +675,9 @@
 .patientFilterPoper {
   position: absolute;
   background-color: white;
-  width: 24%;
   padding: 40px;
   border-radius: 20px;
-  top: 23%;
+  top: 100%;
   right: 15%;
   font-weight: 500;
   font-size: 14px;
@@ -841,10 +838,6 @@
   .actionDiv,
   .prescription_table_cells {
     font-size: 12px !important;
-  }
-
-  .addPrescriptionBtn {
-    bottom: 45%;
   }
 
   .generatePrescriptionBtn {
@@ -1040,9 +1033,11 @@
 
     width: 40%;
   }
+
   .thresholdsBtn {
     border-radius: 9px !important;
   }
+
   .listBtn_disabled {
     border-radius: 12px !important;
     font-size: 9px !important;
@@ -1051,7 +1046,7 @@
 
 @media only screen and (max-width: 1284px) {
   .css-1ex1afd-MuiTableCell-root {
-    font-size: 0.7rem !important;
+    font-size: 0.6rem !important;
   }
 
   .name_cell_dasdboard {
@@ -1103,6 +1098,7 @@
   .css-ahj2mt-MuiTypography-root {
     font-size: 10px !important;
   }
+
   .selectedOpt {
     font-size: 12px;
   }
@@ -1113,16 +1109,8 @@
 }
 
 @media only screen and (max-width: 1100px) {
-  .css-1ex1afd-MuiTableCell-root {
-    font-size: 0.5rem !important;
-  }
-
   .name_cell_dasdboard {
     font-size: 7px !important;
-  }
-
-  .css-179a09d-MuiTableCell-root {
-    padding: 7px !important;
   }
 
   .timeLog {
@@ -1141,10 +1129,6 @@
     width: 14% !important;
   }
 
-  .addPrescriptionBtn {
-    right: 8%;
-  }
-
   .css-1s46rkj-MuiGrid-root {
     width: 51%;
     margin-left: 2%;
@@ -1158,6 +1142,7 @@
   .css-ymgmpz-MuiFormControl-root {
     width: 30% !important;
   }
+
   .css-ahj2mt-MuiTypography-root {
     font-size: 8px !important;
   }

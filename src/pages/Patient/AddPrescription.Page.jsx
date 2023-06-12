@@ -1,6 +1,5 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useCallback } from 'react';
 import { Grid } from '@mui/material';
-import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import request from '../../request';
@@ -56,11 +55,15 @@ export default function AddPatientPrescription() {
     setSimpleExerciseInfo({ ...simpleExerciseInfo, [name]: value });
   };
 
-  const getPatientDataById = async () => {
-    await request('get', `/clinicians/getPatientDetail/${patientId}`).then((res) => {
-      setPatient(res?.data?.user);
-    });
-  };
+  const handlePatientDataById = useCallback(async () => {
+    await request('get', `/clinicians/getPatientDetail/${patientId}`)
+      .then((res) => {
+        setPatient(res?.data?.user);
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+      });
+  }, [patientId]);
 
   const handleExercideInfoReset = () => {
     setSimpleExerciseInfo({
@@ -72,7 +75,6 @@ export default function AddPatientPrescription() {
       rest: '',
       instructions: '',
     });
-
     setMotionExerciseInfo({
       type: 'motion',
       name: '',
@@ -177,8 +179,7 @@ export default function AddPatientPrescription() {
         setAllMotionExercise(res?.data?.exercises);
       })
       .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error('-->', error);
+        toast.error(error?.response?.data?.message);
       });
   };
 
@@ -209,22 +210,21 @@ export default function AddPatientPrescription() {
       openEditPatient={openEditPatientModal}
       setOpenEditPatient={setOpenEditPatientModal}
       patientDetails={patient}
-      getPatients={getPatientDataById}
+      getPatients={handlePatientDataById}
     />
   );
-
-  useEffect(() => {
-    getPatientDataById();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     handleGetAllExercise();
   }, []);
 
+  useEffect(() => {
+    handlePatientDataById();
+  }, [handlePatientDataById]);
+
   return (
     <>
-      <Grid container className="gridish">
+      <Grid sx={{ marginTop: '8vh', height: '92vh' }} container className="gridish">
         <Grid xl={2} lg={2.5}>
           <Sidebar
             patientId={patientId}
@@ -255,20 +255,13 @@ export default function AddPatientPrescription() {
                 handleMotionExerciseInfo={handleMotionExerciseInfo}
                 motionExerciseInfo={motionExerciseInfo}
                 setMotionExerciseInfo={setMotionExerciseInfo}
+                validatingGeneratePrescription={validatingGeneratePrescription}
+                handleGeneratePrescription={handleGeneratePrescription}
+                disableBtn={disableBtn}
               />
             </div>
           </div>
         </Grid>
-        <div className="addPrescriptionBtn">
-          <Button
-            variant="contained"
-            disabled={disableBtn}
-            className={validatingGeneratePrescription}
-            onClick={() => handleGeneratePrescription()}
-          >
-            Generate Prescription
-          </Button>
-        </div>
         {GeneratePrescriptionSection}
       </Grid>
       {EditPatientPopup}

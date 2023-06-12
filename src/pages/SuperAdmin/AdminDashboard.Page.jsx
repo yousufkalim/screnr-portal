@@ -67,6 +67,7 @@ export default function Dashboard() {
       icon2: Circle,
       className: 'yellow_circle',
       link: '/admin/dashboard',
+      iconClassName: 'iconClass',
     },
     {
       icon: Clinic,
@@ -78,6 +79,7 @@ export default function Dashboard() {
       icon2: RedCircle,
       className: 'red_circle',
       link: '/clinics',
+      iconClassName: 'iconClass',
     },
     {
       icon: Clinician,
@@ -89,6 +91,7 @@ export default function Dashboard() {
       icon2: GreenCircle,
       className: 'green_circle',
       link: '/clinicians',
+      iconClassName: 'iconClass',
     },
     {
       icon: Patients2,
@@ -100,6 +103,7 @@ export default function Dashboard() {
       icon2: BlueCircle,
       className: 'blue_circle',
       link: '/patients',
+      iconClassName: 'iconClass',
     },
   ];
 
@@ -116,6 +120,7 @@ export default function Dashboard() {
             LeftCircleClassName={item.className}
             cardClassName="card_main_div"
             link={item.link}
+            iconClassName={item.iconClassName}
           />
         ))}
       </div>

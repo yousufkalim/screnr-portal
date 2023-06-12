@@ -121,54 +121,41 @@ export default function PatientTable({
     !navigator.userAgent.match(/Opera|OPT\//);
 
   const handleCheck = async (event, value) => {
+    event.preventDefault();
+
     if (filter.filterType === 'exercise') {
-      if (event.target.checked) {
-        setFilter((prevFilter) => ({
-          ...prevFilter,
-          exerciseArray: [...prevFilter.exerciseArray, value],
-        }));
-        const arr = [...filter.exerciseArray, value];
+      const updatedExerciseArray = event.target.checked
+        ? [...filter.exerciseArray, value]
+        : filter.exerciseArray.filter((item) => item !== value);
 
-        await handleFilterAndSorting({
-          filterType: 'exercise',
-          filterValueArray: [...arr],
-        });
-      } else {
-        setFilter((prevFilter) => ({
-          ...prevFilter,
-          exerciseArray: prevFilter.exerciseArray.filter((item) => item !== value),
-        }));
-        const arr = filter.exerciseArray.filter((item) => item !== value);
+      setFilter((prevFilter) => ({
+        ...prevFilter,
+        exerciseArray: updatedExerciseArray,
+      }));
 
-        await handleFilterAndSorting({
-          filterType: 'exercise',
-          filterValueArray: [...arr],
-        });
-      }
+      await handleFilterAndSorting({
+        filterType: 'exercise',
+        filterValueArray: updatedExerciseArray,
+      });
     } else if (filter.filterType === 'diagnosis') {
-      if (event.target.checked) {
-        setFilter((prevFilter) => ({
-          ...prevFilter,
-          diagnosisArray: [...prevFilter.diagnosisArray, value],
-        }));
-      } else {
-        setFilter((prevFilter) => ({
-          ...prevFilter,
-          diagnosisArray: prevFilter.diagnosisArray.filter((item) => item !== value),
-        }));
-      }
+      const updatedDiagnosisArray = event.target.checked
+        ? [...filter.diagnosisArray, value]
+        : filter.diagnosisArray.filter((item) => item !== value);
+
+      setFilter((prevFilter) => ({
+        ...prevFilter,
+        diagnosisArray: updatedDiagnosisArray,
+      }));
+
       await handleFilterAndSorting({
         filterType: 'diagnosis',
-        filterValueArray: filter.diagnosisArray,
+        filterValueArray: updatedDiagnosisArray,
       });
-    } else {
-      event.preventDefault();
-      event.target.checked = false;
     }
   };
 
   const handleFilter = async (event) => {
-    setFilter({ ...filter, [event.target.name]: event.target.value });
+    setFilter({ ...filter, [event.target.name]: event.target.value, clinicNamefilter: '' });
     if (event.target.value === 'all') {
       await handleFilterAndSorting({ filterType: event.target.value });
     }
@@ -193,8 +180,9 @@ export default function PatientTable({
   };
 
   const handleAllClear = async () => {
-    setFilter({ ...filter, filterType: 'all' });
     setSorting({ ...sorting, sortBy: '' });
+    setFilter({ ...filter, filterType: 'all', clinicNamefilter: '' });
+
     await handleFilterAndSorting({ filterType: 'all' });
   };
 
@@ -236,11 +224,13 @@ export default function PatientTable({
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '100%',
+          maxHeight: '98%',
           overflowX: 'hidden',
           boxShadow: '0',
           width: '94vw',
-          marginTop: '1%',
+          '@media (max-width: 1284px)': {
+            overflow: 'auto',
+          },
         }}
       >
         <div className="allTableHead">
@@ -529,13 +519,15 @@ export default function PatientTable({
                     }}
                   >
                     <TableCell align="left"> {row.id} </TableCell>
-                    <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
-                      <AvatarComponent
-                        alt={`${row.first_name} ${row.last_name}`}
-                        className="header_avatar"
-                      />
+                    <TableCell align="left">
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <AvatarComponent
+                          alt={`${row.first_name} ${row.last_name}`}
+                          className="header_avatar"
+                        />
 
-                      <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
+                        <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
+                      </div>
                     </TableCell>
 
                     <TableCell align="center" className="table_cells">

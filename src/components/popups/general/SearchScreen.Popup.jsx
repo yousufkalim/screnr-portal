@@ -49,7 +49,7 @@ export default function SearchScreen() {
   };
 
   const handleSearch = async () => {
-    if (searchQurrey.length >= 3 && role) {
+    if (searchQurrey.length >= 1 && role) {
       setLoading(true);
       await request('get', `/clinicians/search?role=${role}&search=${searchQurrey}`)
         .then((res) => {

@@ -1,10 +1,10 @@
 .dashboard_main_div {
   width: 100vw;
-  max-height: 90vh;
   background-color: #f6fafb;
-  padding: 1.5rem 4rem 0rem 4rem;
-  position: relative !important;
-  padding-bottom: 8rem;
+  padding: 1.5rem 4rem 0 4rem;
+  position: fixed;
+  height: 90vh;
+  margin-top: 10vh;
 }
 
 .navigation {
@@ -150,15 +150,14 @@
   height: 40px;
   border-radius: 100px;
 }
+
 .css-1oe3i1y-MuiTablePagination-root {
   width: 100% !important;
 }
+
 @media only screen and (max-width: 1600px) {
   .dashboard_table_div {
     width: 59%;
-  }
-  .title {
-    width: 9.8rem;
   }
 }
 
@@ -178,17 +177,13 @@
     height: 350px;
   }
 
-  .dashboard_main_div {
-    max-height: 88vh;
-  }
-
   .imgDiv {
     width: 15%;
     height: 39px;
     border-radius: 100px;
   }
+
   .title {
-    width: 8.5rem;
     font-size: 10px;
   }
 }
@@ -216,6 +211,15 @@
 @media only screen and (max-width: 1100px) {
   .chart_main_div {
     width: 34%;
+    width: 36%;
+  }
+
+  .staffEmailCell {
+    font-size: 12px !important;
+  }
+
+  .dashboard_main_div {
+    padding: 1.5rem 2rem 0rem 2rem;
   }
 }
 
@@ -224,15 +228,7 @@
     font-size: 13px;
   }
 
-  .dashboard_div_2 {
-    flex-direction: column;
-  }
-
   .dashboard_table_div {
-    width: 100%;
-  }
-
-  .chart_main_div {
     width: 100%;
   }
 }

@@ -13,59 +13,79 @@ export default function Patient() {
   const [patients, setPatients] = useState([]);
   const [diaganosisFilter, setDiaganosisFilter] = useState([]);
   const [exerciseFilter, setExerciseFilter] = useState([]);
+  const [apiUrl, setApiUrl] = useState('/clinicians/allPatientsListWithFilters?sort=');
+  const [bodyObject, setBodyObject] = useState({
+    filter_type: '',
+    filter_value: '',
+  });
   const [filter, setFilter] = useState({
     filterType: 'all',
     clinicNamefilter: '',
     exerciseArray: [],
     diagnosisArray: [],
   });
+
   const [sorting, setSorting] = useState({
     sortBy: '',
   });
 
   const handleFilterAndSorting = async (item) => {
-    // const page1 = item?.page ?? 1;
-    let apiUrl = `/clinicians/allPatientsListWithFilters`;
-    const obj = {
-      filter_type: '',
-      filter_value: '',
-    };
+    const { filterType, clinicName, filterValueArray } = item || {};
 
-    switch (item?.filterType) {
-      case 'all':
-        obj.filter_type = item?.filterType;
-        obj.filter_value = '';
-        break;
-      case 'clinic':
-        obj.filter_type = item?.filterType;
-        obj.filter_value = item?.clinicName;
-        break;
-      case 'exercise':
-      case 'diagnosis':
-        obj.filter_type = item?.filterType;
-        obj.filter_value = item?.filterValueArray;
-        break;
-      default:
-        break;
+    if (filterType === 'all') {
+      setBodyObject((prevBodyObject) => ({
+        ...prevBodyObject,
+        filter_type: filterType,
+        filter_value: '',
+      }));
+    } else if (filterType === 'clinic') {
+      setBodyObject((prevBodyObject) => ({
+        ...prevBodyObject,
+        filter_type: filterType,
+        filter_value: clinicName,
+      }));
+    } else if (filterType === 'exercise' || filterType === 'diagnosis') {
+      setBodyObject((prevBodyObject) => ({
+        ...prevBodyObject,
+        filter_type: filterType,
+        filter_value: filterValueArray,
+      }));
     }
 
-    if (item?.sort) apiUrl += `?sort=${item?.sort}`;
-    if (item?.searchValue) apiUrl += `?search=${item?.searchValue}`;
-    try {
-      setLoading(true);
-      const res = await request('put', apiUrl, obj);
-      if (res?.data?.users) {
-        setPatients(res?.data?.users);
-      } else {
-        setPatients([]);
-      }
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      // eslint-disable-next-line no-console
-      console.error(`handleFilterAndSorting --> ${err}`);
+    if (item?.sort) {
+      setApiUrl(`/clinicians/allPatientsListWithFilters?sort=${item?.sort}`);
+    }
+    if (item?.searchValue) {
+      setApiUrl(`${apiUrl}?search=${item?.searchValue}`);
+    }
+    if (typeof filterValueArray === 'object' && filterValueArray?.length === 0) {
+      setBodyObject((prevBodyObject) => ({
+        ...prevBodyObject,
+        filter_type: 'all',
+        filter_value: '',
+      }));
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await request('put', apiUrl, bodyObject);
+        if (res?.data?.users) {
+          setPatients(res?.data?.users);
+        } else {
+          setPatients([]);
+        }
+        setLoading(false);
+      } catch (err) {
+        setLoading(false);
+        toast.error(err?.response?.data?.message);
+      }
+    };
+
+    fetchData();
+  }, [apiUrl, bodyObject]);
 
   const handleDynamicFilter = async () => {
     try {
@@ -96,22 +116,26 @@ export default function Patient() {
     />
   );
 
+  const AllPatients = (
+    <AllPatientTable
+      filter={filter}
+      sorting={sorting}
+      loading={loading}
+      patients={patients}
+      setFilter={setFilter}
+      setSorting={setSorting}
+      getPatients={handleFilterAndSorting}
+      exerciseFilter={exerciseFilter}
+      diaganosisFilter={diaganosisFilter}
+      setOpenAddPatient={setOpenAddPatient}
+      handleFilterAndSorting={handleFilterAndSorting}
+    />
+  );
+
   return (
     <Grid container>
       <Grid className="bgClinicianTable" xl={12} lg={12}>
-        <AllPatientTable
-          filter={filter}
-          sorting={sorting}
-          loading={loading}
-          patients={patients}
-          setFilter={setFilter}
-          setSorting={setSorting}
-          getPatients={handleFilterAndSorting}
-          exerciseFilter={exerciseFilter}
-          diaganosisFilter={diaganosisFilter}
-          setOpenAddPatient={setOpenAddPatient}
-          handleFilterAndSorting={handleFilterAndSorting}
-        />
+        {AllPatients}
       </Grid>
 
       <div className="addBtn">

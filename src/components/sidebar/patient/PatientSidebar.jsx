@@ -55,13 +55,15 @@ export default function Sidebar({
           navigate(`/patients/${patientId}/addPrescription/${selectedClinician}`);
         }}
       >
-        <Completed
-          className={
-            activityClicked || window.location.pathname === '/patients/:id/addPrescription'
-              ? 'iconActivity'
-              : ''
-          }
-        />
+        <div>
+          <Completed
+            className={
+              activityClicked || window.location.pathname === '/patients/:id/addPrescription'
+                ? 'iconActivity'
+                : ''
+            }
+          />
+        </div>
         <p
           className={
             activityClicked || window.location.pathname === '/patients/:id/addPrescription'
@@ -82,14 +84,16 @@ export default function Sidebar({
           setActivityClickedThree(false);
         }}
       >
-        <Msg
-          className={
-            activityClickedTwo ||
-            window.location.pathname === `/patients/${patientId}/messages/${selectedClinician}`
-              ? 'iconActivity'
-              : ''
-          }
-        />
+        <div>
+          <Msg
+            className={
+              activityClickedTwo ||
+              window.location.pathname === `/patients/${patientId}/messages/${selectedClinician}`
+                ? 'iconActivity'
+                : ''
+            }
+          />
+        </div>
         <p
           className={
             activityClickedTwo ||
@@ -111,14 +115,16 @@ export default function Sidebar({
           setActivityClickedTwo(false);
         }}
       >
-        <Activity
-          className={
-            activityClickedThree ||
-            window.location.pathname === `/patients/${patientId}/activity/${selectedClinician}`
-              ? 'iconActivity'
-              : ''
-          }
-        />
+        <div>
+          <Activity
+            className={
+              activityClickedThree ||
+              window.location.pathname === `/patients/${patientId}/activity/${selectedClinician}`
+                ? 'iconActivity'
+                : ''
+            }
+          />
+        </div>
         <p
           className={
             activityClickedThree ||
@@ -130,8 +136,8 @@ export default function Sidebar({
           Activity Log
         </p>
       </div>
-      <p className="totalActivity">Total Activity</p>
-      <p className="hrsTxt">(129 Hrs)</p>
+      {/* <p className="totalActivity">Total Activity</p> */}
+      {/* <p className="hrsTxt">(129 Hrs)</p> */}
     </div>
   );
 }

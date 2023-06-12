@@ -28,6 +28,10 @@ export const options = {
   },
   scales: {
     y: {
+      border: {
+        display: true,
+        color: '#655B96',
+      },
       grid: {
         display: false,
       },
@@ -36,6 +40,10 @@ export const options = {
       },
     },
     x: {
+      border: {
+        display: true,
+        color: '#655B96',
+      },
       grid: {
         display: false,
       },
@@ -46,27 +54,27 @@ export const options = {
 export const weeks = [
   {
     value: 1,
-    label: 'Week 1',
+    label: '1 Week',
   },
   {
     value: 2,
-    label: 'Week 2',
+    label: '2 Week',
   },
   {
     value: 3,
-    label: 'Week 3',
+    label: '3 Week',
   },
   {
     value: 4,
-    label: 'Week 4',
+    label: '4 Week',
   },
   {
     value: 5,
-    label: 'Week 5',
+    label: '5 Week',
   },
   {
     value: 6,
-    label: 'Week 6',
+    label: '6 Week',
   },
 ];
 

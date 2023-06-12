@@ -96,7 +96,7 @@ export default function Activity() {
   };
   return (
     <>
-      <Grid container>
+      <Grid sx={{ marginTop: '8vh' }} container>
         <Grid xl={2} lg={2.5}>
           {window.location.pathname === `/patients/${patientId}/activity/${clinicianId}` ? (
             <PatientSidebar
@@ -134,7 +134,7 @@ export default function Activity() {
           <ActivityTable activityLog={activityLog?.logs} />
         </Grid>
         <Grid xl={2.5} lg={2.5}>
-          <RightSidebar graph={activityLog?.graph} />
+          <RightSidebar logs={activityLog} />
         </Grid>
       </Grid>
       {EditPatientPopup}
