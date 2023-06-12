@@ -55,7 +55,7 @@ export default function TableComponent({
         }}
       >
         <div className="table_title">
-          <h3 className="dashboard-table-txt">List of staff Member</h3>
+          <h3 className="dashboard-table-txt">List of Staff Member</h3>
           <Button className="dashboard_table_head_btn" onClick={() => setOpenAddStaffMember(true)}>
             Invite member
           </Button>
