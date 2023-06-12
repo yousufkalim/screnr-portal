@@ -204,8 +204,8 @@
 
 .percentageValue {
   position: absolute;
-  right: 46%;
-  bottom: 52%;
+  right: 45%;
+  bottom: 57%;
 }
 
 .circularProgress {
@@ -1014,11 +1014,6 @@
 }
 
 @media only screen and (max-width: 1366px) {
-  /* .css-2s90m6-MuiAvatar-root {
-    height: 30px !important;
-    width: 30px !important;
-  } */
-
   .table_head {
     font-size: 12px !important;
   }
@@ -1057,7 +1052,6 @@
 @media only screen and (max-width: 1284px) {
   .css-1ex1afd-MuiTableCell-root {
     font-size: 0.7rem !important;
-    padding: 5px !important;
   }
 
   .name_cell_dasdboard {
@@ -1112,6 +1106,10 @@
   .selectedOpt {
     font-size: 12px;
   }
+  .right_sidebar {
+    width: 20vw;
+    padding-right: 16px;
+  }
 }
 
 @media only screen and (max-width: 1100px) {
@@ -1128,11 +1126,11 @@
   }
 
   .timeLog {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .lastLog {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .periodSelect {
@@ -1162,5 +1160,8 @@
   }
   .css-ahj2mt-MuiTypography-root {
     font-size: 8px !important;
+  }
+  .right_sidebar {
+    padding-right: 5%;
   }
 }
