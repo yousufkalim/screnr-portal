@@ -96,7 +96,7 @@ export default function Activity() {
   };
   return (
     <>
-      <Grid sx={{ marginTop: '8vh' }} container>
+      <Grid sx={{ marginTop: '8vh', position: 'fixed' }} container>
         <Grid xl={2} lg={2.5}>
           {window.location.pathname === `/patients/${patientId}/activity/${clinicianId}` ? (
             <PatientSidebar
