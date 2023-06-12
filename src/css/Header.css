@@ -1,3 +1,12 @@
+.tableContainer::-webkit-scrollbar-thumb {
+  background: rgba(19, 103, 115, 0.2);
+  border-radius: 1e6px;
+}
+
+.tableContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .app_logo {
   width: 90%;
 }
@@ -12,7 +21,7 @@
   padding-right: 3.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 999;
 }
@@ -22,6 +31,7 @@
   height: 40px;
   cursor: pointer;
 }
+
 .headerProfileImage {
   width: 100%;
   height: 100%;
@@ -69,6 +79,14 @@
 
 .menu_icon_div {
   display: none;
+}
+
+@media only screen and (max-width: 1284px) {
+  .header_avatar {
+    height: 25px !important;
+    width: 25px !important;
+    font-size: 12px !important;
+  }
 }
 
 @media only screen and (max-width: 992px) {

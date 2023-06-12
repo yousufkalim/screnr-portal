@@ -1058,9 +1058,11 @@
 
     width: 40%;
   }
+
   .thresholdsBtn {
     border-radius: 9px !important;
   }
+
   .listBtn_disabled {
     border-radius: 12px !important;
     font-size: 9px !important;
@@ -1069,8 +1071,7 @@
 
 @media only screen and (max-width: 1284px) {
   .css-1ex1afd-MuiTableCell-root {
-    font-size: 0.7rem !important;
-    padding: 5px !important;
+    font-size: 0.6rem !important;
   }
 
   .name_cell_dasdboard {
@@ -1122,22 +1123,15 @@
   .css-ahj2mt-MuiTypography-root {
     font-size: 10px !important;
   }
+
   .selectedOpt {
     font-size: 12px;
   }
 }
 
 @media only screen and (max-width: 1100px) {
-  .css-1ex1afd-MuiTableCell-root {
-    font-size: 0.5rem !important;
-  }
-
   .name_cell_dasdboard {
     font-size: 7px !important;
-  }
-
-  .css-179a09d-MuiTableCell-root {
-    padding: 7px !important;
   }
 
   .timeLog {
@@ -1173,6 +1167,7 @@
   .css-ymgmpz-MuiFormControl-root {
     width: 30% !important;
   }
+
   .css-ahj2mt-MuiTypography-root {
     font-size: 8px !important;
   }
