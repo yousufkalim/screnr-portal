@@ -90,7 +90,10 @@
 
 @media only screen and (max-width: 1200px) {
   .bgClinicianTable {
-    width: 64%;
+    width: 60%;
+  }
+  .css-d3x8hd-MuiPaper-root-MuiTableContainer-root {
+    width: 56.1vw !important;
   }
 }
 @media only screen and (max-width: 1366px) {
