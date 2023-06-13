@@ -102,7 +102,7 @@ export default function Patient() {
         width: '100%',
       }}
     >
-      <Grid container>
+      <Grid sx={{ flexWrap: 'unset' }} container>
         <Grid xl={2} lg={2.5}>
           <Sidebar
             id={id}

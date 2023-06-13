@@ -98,8 +98,11 @@ export default function ClinicAdmin() {
 
   return (
     <>
-      <Grid container sx={{ marginTop: '8vh', height: '92vh', position: 'fixed' }}>
-        <Grid xl={2.5} lg={2.5}>
+      <Grid
+        container
+        sx={{ flexFlow: 'unset', marginTop: '8vh', height: '92vh', position: 'fixed' }}
+      >
+        <Grid xs={3} xl={3} lg={2.5}>
           <Sidebar
             id={id}
             txt="staff/getClinic"
@@ -109,7 +112,7 @@ export default function ClinicAdmin() {
             open={openEditClinician}
           />
         </Grid>
-        <Grid className="bgClinicianTable" xl={10} lg={9.5}>
+        <Grid className="bgClinicianTable" xl={12} lg={9.5}>
           <div className="breadCrumb" style={{ display: 'flex' }}>
             <div
               className="navigationEntities"
