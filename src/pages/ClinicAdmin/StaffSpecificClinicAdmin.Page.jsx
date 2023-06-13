@@ -54,7 +54,7 @@ export default function ClinicAdmin() {
   return (
     <>
       <Grid sx={{ marginTop: '8vh', height: '92vh' }} container>
-        <Grid xl={2} lg={2.5}>
+        <Grid>
           <Sidebar
             id={id}
             txt="admins/getStaff"

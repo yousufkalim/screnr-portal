@@ -43,7 +43,7 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
   };
 
   return (
-    <div className="bgClinicianTable" id="clinicianTable">
+    <div style={{ position: 'unset' }} className="bgClinicianTable" id="clinicianTable">
       <TableContainer
         component={Paper}
         sx={{
@@ -51,7 +51,7 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
           maxHeight: '94%',
           overflowX: 'hidden',
           boxShadow: '0',
-          width: '77.8vw',
+          width: '74vw',
           marginTop: '-10vh',
           '@media (max-width: 1600px)': {
             maxHeight: '96.3%',

@@ -111,7 +111,7 @@ export default function ClinicAdminDashboard() {
         clinicianByClinic?.count?.clinicianCount?.count > 0
           ? `0${clinicianByClinic?.count?.clinicianCount?.count}`
           : clinicianByClinic?.count?.clinicianCount?.count || 0,
-      title: 'Total Clinician',
+      title: 'Total Clinicians',
       icon2: GreenCircle,
       className: 'green_circle',
       link: '/clinicians',

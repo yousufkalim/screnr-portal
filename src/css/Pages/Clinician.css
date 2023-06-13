@@ -53,7 +53,7 @@
   height: 90vh;
   margin-top: 10vh;
   position: fixed;
-  width: 100%;
+  width: 96%;
 }
 
 #patientsByClinicianTable {
@@ -76,12 +76,6 @@
 
   .breadCrumb {
     font-size: 10px;
-  }
-}
-
-@media only screen and (min-width: 1600px) and (max-width: 2200px) {
-  .cards_div_clinician_pg {
-    width: 78vw;
   }
 }
 
