@@ -214,6 +214,11 @@
     height: 85.5vh;
   }
 
+  #allTabletitlePatnts {
+    width: 36vw !important;
+    /* gap: 10px; */
+  }
+
   .allClinicAdminTable {
     background-color: rgb(246, 250, 251);
     height: 79vh;
@@ -230,6 +235,9 @@
   }
 }
 
+@media only screen and (max-width: 1440px) {
+}
+
 @media only screen and (max-width: 1466px) {
   #allTabletitlePatnts {
     width: 49vw !important;
@@ -241,6 +249,32 @@
     width: 36vw !important;
   }
 
+  .staff_id {
+    font-size: 0.9rem;
+  }
+
+  .user_detail {
+    font-size: 0.7rem !important;
+  }
+
+  .sidebar_avatar {
+    background-color: #136773 !important;
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 26px !important;
+  }
+
+  .editIconSidebar {
+    right: 35%;
+  }
+
+  .clientTableHead {
+    font-size: 14px;
+    padding: 20px !important;
+  }
+}
+
+/* 
   .css-h4jds-MuiFormControl-root-MuiTextField-root {
     width: 50% !important;
   }
@@ -261,10 +295,6 @@
     width: 80% !important;
   }
 
-  .css-15aevs4-MuiGrid-root {
-    width: 20% !important;
-  }
-
   .user_name {
     font-size: 16px;
   }
@@ -278,4 +308,4 @@
   #allTabletitlePatnts {
     width: 67vw !important;
   }
-}
+} */

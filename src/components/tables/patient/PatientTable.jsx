@@ -103,7 +103,7 @@ export default function PatientTable({ patients, getPatients }) {
 
   return (
     <div
-      style={{ marginTop: '0', position: 'unset' }}
+      style={{ marginTop: '0', position: 'unset', height: '66vh' }}
       className="bgClinicianTable"
       id="clinicianTable"
     >

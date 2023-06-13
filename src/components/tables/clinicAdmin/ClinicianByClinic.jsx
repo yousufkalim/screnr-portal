@@ -34,7 +34,11 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
   const navigate = useNavigate();
 
   return (
-    <div className="bgClinicianTable" id="clinicianTable">
+    <div
+      style={{ position: 'unset', marginTop: '0' }}
+      className="bgClinicianTable"
+      id="clinicianTable"
+    >
       <TableContainer
         component={Paper}
         sx={{

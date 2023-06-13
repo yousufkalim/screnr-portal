@@ -90,7 +90,7 @@ export default function UpdatePasswordPopup({ openUpdateModal, setOpenUpdateModa
   };
 
   return (
-    <div>
+    <div style={{ display: 'none' }}>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"

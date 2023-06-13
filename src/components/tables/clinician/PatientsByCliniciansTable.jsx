@@ -129,7 +129,7 @@ export default function PatientsByCliniciansTable({
           },
         }}
       >
-        <div className="iconAndHeading">
+        <div style={{ justifyContent: 'space-between' }} className="iconAndHeading">
           <h1 className="clientTableHead">List of Patients</h1>
           <span onClick={() => setOpenAddPatient(true)} className="invitePatientBtn">
             Invite Patient

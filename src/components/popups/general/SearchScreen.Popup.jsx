@@ -51,15 +51,17 @@ export default function SearchScreen() {
   const handleSearch = async () => {
     if (searchQurrey.length >= 1 && role) {
       setLoading(true);
-      await request('get', `/clinicians/search?role=${role}&search=${searchQurrey}`)
-        .then((res) => {
-          setSearchedData(res?.data?.users);
-          setLoading(false);
-        })
-        .catch((error) => {
-          toast.error(error.response.data.message);
-          setLoading(false);
-        });
+      setTimeout(async () => {
+        await request('get', `/clinicians/search?role=${role}&search=${searchQurrey}`)
+          .then((res) => {
+            setSearchedData(res?.data?.users);
+            setLoading(false);
+          })
+          .catch((error) => {
+            toast.error(error.response.data.message);
+            setLoading(false);
+          });
+      }, 500);
     } else if (searchQurrey.length === 0) {
       setSearchedData([]);
     }
@@ -158,6 +160,8 @@ export default function SearchScreen() {
         background: 'rgb(246, 250, 251)',
         padding: '5%',
         paddingTop: '2.7%',
+        marginTop: '6.5vh',
+        position: 'fixed',
       }}
     >
       <div

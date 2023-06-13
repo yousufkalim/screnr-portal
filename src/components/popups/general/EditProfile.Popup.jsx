@@ -92,7 +92,7 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
   };
 
   return (
-    <div>
+    <div style={{ display: 'none' }}>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
