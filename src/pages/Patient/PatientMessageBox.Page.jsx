@@ -115,7 +115,7 @@ export default function PatientMessageBox() {
   };
 
   return (
-    <Grid sx={{ marginTop: '8vh' }} container>
+    <Grid sx={{ marginTop: '8vh', position: 'fixed' }} container>
       <Grid xl={2} lg={2.5}>
         <Sidebar
           patientId={patientId}

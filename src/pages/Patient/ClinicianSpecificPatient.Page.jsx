@@ -92,7 +92,16 @@ export default function Patient() {
   }, []);
 
   return (
-    <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '100vh' }}>
+    <div
+      className="main_div"
+      style={{
+        background: 'rgb(246, 250, 251)',
+        height: '100vh',
+        marginTop: '8vh',
+        position: 'fixed',
+        width: '100%',
+      }}
+    >
       <Grid container>
         <Grid xl={2} lg={2.5}>
           <Sidebar

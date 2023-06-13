@@ -98,7 +98,7 @@ export default function ClinicAdmin() {
 
   return (
     <>
-      <Grid container sx={{ marginTop: '8vh', height: '92vh' }}>
+      <Grid container sx={{ marginTop: '8vh', height: '92vh', position: 'fixed' }}>
         <Grid xl={2} lg={2.5}>
           <Sidebar
             id={id}

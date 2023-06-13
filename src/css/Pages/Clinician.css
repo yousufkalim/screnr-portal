@@ -10,7 +10,6 @@
 
 .bgClinicianTable {
   background-color: rgb(246, 250, 251);
-  height: 100vh;
 }
 
 .notxt {
@@ -52,6 +51,7 @@
   height: 90vh;
   margin-top: 10vh;
   position: fixed;
+  width: 100%;
 }
 
 #patientsByClinicianTable {
@@ -90,11 +90,5 @@
 @media only screen and (max-width: 1710px) {
   .table_cells {
     padding: 5px;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .bgClinicianTable {
-    width: 100%;
   }
 }
