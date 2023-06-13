@@ -99,10 +99,9 @@
 .filterPoper {
   position: absolute;
   background-color: white;
-  width: 24%;
   padding: 40px;
   border-radius: 20px;
-  top: 29%;
+  top: 100%;
   right: 3%;
   font-weight: 500;
   font-size: 14px;
@@ -223,11 +222,6 @@
   .activityTable {
     height: 77vh;
   }
-
-  .filterPoper {
-    top: 25%;
-    right: 3%;
-  }
 }
 
 @media only screen and (max-width: 1440px) {
@@ -277,10 +271,6 @@
 
   .css-d3x8hd-MuiPaper-root-MuiTableContainer-root {
     width: 60.5vw !important;
-  }
-
-  .css-9e0q92-MuiPaper-root-MuiTableContainer-root {
-    width: 60.7vw !important;
   }
 }
 

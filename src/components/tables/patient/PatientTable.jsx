@@ -102,7 +102,11 @@ export default function PatientTable({ patients, getPatients }) {
   };
 
   return (
-    <div style={{ marginTop: '0' }} className="bgClinicianTable" id="clinicianTable">
+    <div
+      style={{ marginTop: '0', position: 'unset' }}
+      className="bgClinicianTable"
+      id="clinicianTable"
+    >
       <TableContainer
         component={Paper}
         sx={{
