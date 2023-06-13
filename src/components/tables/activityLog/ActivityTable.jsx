@@ -19,10 +19,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 export default function ActivityTable({ activityLog }) {
   const [page, setPage] = useState(0);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  const handleChangePage = (event, newPage) => setPage(newPage);
 
   return (
     <div className="activityTable">

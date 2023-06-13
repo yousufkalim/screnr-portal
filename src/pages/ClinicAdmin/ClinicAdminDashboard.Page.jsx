@@ -24,9 +24,9 @@ import { Store } from '../../StoreContext';
 
 export default function ClinicAdminDashboard() {
   const { user } = Store();
+  const [loading, setLoading] = useState(false);
   const [openAddClinican, setOpenAddClinican] = useState(false);
   const [clinicianByClinic, setClinicianByClinic] = useState({});
-  const [loading, setLoading] = useState(false);
 
   const getClinicians = useCallback(async () => {
     try {

@@ -1,7 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState } from 'react';
-
-// mui imports
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -29,9 +27,9 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function ClinicianTable({ clinicians, getClinicians, loading }) {
-  const [openEditClinican, setOpenEditClinican] = useState(false);
-  const [clinician, setClinician] = useState({});
   const navigate = useNavigate();
+  const [clinician, setClinician] = useState({});
+  const [openEditClinican, setOpenEditClinican] = useState(false);
 
   return (
     <div

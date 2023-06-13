@@ -38,7 +38,6 @@ const useStyles = makeStyles(() => ({
   },
   checked: {},
 }));
-
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
     backgroundColor: '#F6F6F6',
@@ -50,17 +49,17 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loading }) {
-  const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
-  const [clinicAdmin, setClinicAdmin] = useState({});
-  const [page, setPage] = useState(0);
-  const [openFilter, setOpenFilter] = useState(false);
-  const [search, setSearch] = useState('');
-
-  const navigate = useNavigate();
-  const [filter, setFilter] = useState('');
-  const click = useRef(null);
-  const filterRef = useRef(null);
   const classes = useStyles();
+  const click = useRef(null);
+  const navigate = useNavigate();
+  const filterRef = useRef(null);
+  const [page, setPage] = useState(0);
+  const [filter, setFilter] = useState('');
+  const [search, setSearch] = useState('');
+  const [clinicAdmin, setClinicAdmin] = useState({});
+  const [openFilter, setOpenFilter] = useState(false);
+  const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
+
   const handleChangePage = async (event, newPage) => {
     await getClinicAdmins('', '', newPage + 1);
     setPage(newPage);
