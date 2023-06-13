@@ -4,7 +4,7 @@
   padding: 1.5rem 4rem 0 4rem;
   position: fixed;
   height: 90vh;
-  margin-top: 10vh;
+  margin-top: 8vh;
 }
 
 .navigation {
@@ -173,7 +173,6 @@
   }
 
   .chart_main_div {
-    width: 38%;
     height: 350px;
   }
 
@@ -190,6 +189,33 @@
 
 @media only screen and (max-width: 1284px) {
   .chart_main_div {
+    width: 35%;
+  }
+
+  .css-186xryw-MuiPaper-root-MuiTableContainer-root {
+    width: 56vw !important;
+  }
+
+  .table_title {
+    font-size: 12px;
+  }
+
+  .dashboard_table_head_btn {
+    font-size: 0.7rem !important;
+  }
+
+  .chart_header_div {
+    font-size: 12px;
+  }
+
+  .dashboard_div_2 {
+    margin-top: 1rem;
+  }
+}
+
+@media only screen and (max-width: 1284px) {
+  .chart_main_div {
+    width: 34%;
     width: 36%;
   }
 

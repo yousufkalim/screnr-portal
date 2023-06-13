@@ -127,7 +127,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">
-            List of Clinician
+            List of Clinicians
             <span className="countStyle">{clinicians?.total?.count || 0}</span>
           </h1>
 

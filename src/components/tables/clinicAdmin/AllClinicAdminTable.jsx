@@ -61,7 +61,6 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
   const click = useRef(null);
   const filterRef = useRef(null);
   const classes = useStyles();
-
   const handleChangePage = async (event, newPage) => {
     await getClinicAdmins('', '', newPage + 1);
     setPage(newPage);
@@ -117,8 +116,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">
-            List of Clinic Admin&apos;s{' '}
-            <span className="countStyle">{clinicAdmins?.total?.count}</span>
+            List of Clinic Admins <span className="countStyle">{clinicAdmins?.total?.count}</span>
           </h1>
 
           <div className="allTableTitle" style={{ flexGrow: '0.15' }}>
@@ -205,7 +203,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
                 Clinic Name
               </TableCell>
               <TableCell className="table_head" align="center">
-                Clinicans
+                Clinicians
               </TableCell>
               <TableCell className="table_head" align="center">
                 Patients

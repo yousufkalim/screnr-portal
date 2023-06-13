@@ -46,11 +46,7 @@ export default function TableComponent({
           padding: '1% 0%',
           boxShadow: '0',
           width: '58vw',
-          '@media (max-width: 1440px)': {
-            width: '54vw',
-          },
           '@media (max-width: 1284px)': {
-            width: '58vw',
             overflow: 'auto',
           },
         }}

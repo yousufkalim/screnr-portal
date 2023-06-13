@@ -3,20 +3,24 @@
   height: 100vh !important;
   background-color: #f6fafb;
   padding: 2.5rem 4rem 0rem 4rem !important;
-  position: relative !important;
+  position: fixed;
   padding-bottom: 8rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  margin-top: 8vh;
 }
+
 .clinician_dashboard_left_div {
   width: 77%;
   max-height: 90vh;
 }
+
 .clinician_dashboard_right_div {
   width: 23%;
   max-height: 90vh;
 }
+
 .clinician_statsCards_div {
   display: flex;
   flex-direction: column;
@@ -24,12 +28,14 @@
   align-items: center;
   gap: 1rem;
 }
+
 .vertical_patient_info_card_div {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .vertical_patient_info_card {
   height: 120px;
   width: 49%;
@@ -40,6 +46,7 @@
   align-items: center;
   overflow: hidden;
 }
+
 .active_patients_details_div {
   display: flex;
   flex-direction: column;

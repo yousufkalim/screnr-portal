@@ -81,6 +81,32 @@
   display: none;
 }
 
+@media only screen and (max-width: 1366px) {
+  .app_logo {
+    width: 80%;
+  }
+
+  .nav_icons {
+    width: 13%;
+  }
+
+  .nav_icons_txt {
+    font-size: 12px;
+  }
+
+  .tab2_div {
+    padding: 0.8rem;
+  }
+
+  .card_main_div {
+    height: 90px;
+  }
+
+  .dashboard_div_2 {
+    margin-top: 1rem;
+  }
+}
+
 @media only screen and (max-width: 1284px) {
   .header_avatar {
     height: 25px !important;
