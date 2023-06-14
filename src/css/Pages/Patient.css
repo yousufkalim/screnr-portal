@@ -242,25 +242,31 @@
 .bgPrescription {
   background-color: rgb(246, 250, 251);
   height: max-content;
-  padding-bottom: 90px;
+  width: 80%;
+  margin-left: auto;
 }
 
 .bgAddPrescription {
   padding: 2rem 2rem 2rem 2rem;
-  width: 97%;
+  width: 98%;
 }
 
 .prescriptionHead {
   color: #136773;
   font-weight: 500;
   font-size: 20px;
-  padding-bottom: 13px !important;
+  padding-bottom: 13px;
 }
 
 .optColor {
   color: #919b9b;
   font-size: 14px;
   font-weight: 400;
+}
+
+.image_div {
+  display: flex;
+  align-items: center;
 }
 
 .selctedPresChoice {
@@ -272,6 +278,8 @@
   font-weight: 500;
   font-size: 14px;
   border-radius: 10px;
+  padding: 10px 13px;
+  white-space: pre;
   width: 45%;
 }
 
@@ -628,13 +636,53 @@
 }
 
 .gridish {
+  display: flex;
+  margin-top: 8vh;
+  width: 100%;
+}
+
+.sideBar_div {
+  width: 20%;
   position: fixed;
 }
 
 .addPrescriptionBtn {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 5%;
+  width: 100%;
+}
+
+.prescDetailsDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 20px;
+}
+
+.leftDetails {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Exersice_main_div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left_exercise {
+  width: 64%;
+}
+
+.prescTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sets_div {
+  display: flex;
 }
 
 .calenderIcon {
@@ -655,6 +703,7 @@
 
 .presChoice {
   width: 45%;
+  white-space: pre;
   display: flex;
   align-items: center;
   color: #919b9b;
@@ -689,10 +738,6 @@
 
 #filterPatientsTbl {
   /* margin-left: 3% !important; */
-}
-
-.selectedOpt {
-  padding: 1px;
 }
 
 .actionMenus {
@@ -772,8 +817,8 @@
 }
 
 .main_div_addPrescription {
-  height: 100vh;
   background-color: #f6fafb;
+  width: 100%;
 }
 
 .clinicianDP {
@@ -793,6 +838,15 @@
   justify-content: space-between;
   align-items: center;
   width: 46%;
+}
+
+.dateDivPrescription .react-datepicker-wrapper {
+  margin-top: 11px;
+  padding: 13.5px 14px;
+}
+
+.btn_div {
+  width: 150px;
 }
 
 @media only screen and (max-width: 1810px) {
@@ -818,19 +872,6 @@
     padding-bottom: 40px;
   }
 
-  .dateDivPrescription .react-datepicker-wrapper {
-    margin-top: 11px;
-    padding: 2.5%;
-  }
-
-  .prescriptionChoiceSec {
-    width: 70%;
-  }
-
-  .bgAddPrescription {
-    width: 100%;
-  }
-
   .actionIcon {
     margin-right: 6px;
   }
@@ -854,7 +895,7 @@
   .listBtn,
   .thresholdsBtn {
     padding: 10px 0px !important;
-    font-size: 10px !important;
+    font-size: 14px !important;
     width: 36%;
   }
 
@@ -962,10 +1003,6 @@
 }
 
 @media only screen and (max-width: 1536px) {
-  .main_div_addPrescription {
-    height: 60rem;
-  }
-
   .prescriptionHead {
     font-size: 17px;
   }
@@ -979,7 +1016,6 @@
   }
 
   .selctedPresChoice {
-    min-width: 11rem;
     margin-right: 2rem;
   }
 
@@ -1007,8 +1043,25 @@
 }
 
 @media only screen and (max-width: 1366px) {
+  .listTxtBtn {
+    font-size: 12px;
+    white-space: pre;
+  }
+
+  .left_exercise {
+    width: 42%;
+  }
+
+  .prescTable {
+    width: 56%;
+  }
+
   .clinic_cell {
     font-size: 0.8rem !important;
+  }
+
+  .prescriptionChoiceSec {
+    width: 80%;
   }
 
   /* .css-2s90m6-MuiAvatar-root {
@@ -1043,22 +1096,22 @@
 
   .listBtn_disabled {
     padding: 10px !important;
-    font-size: 10px !important;
-
+    font-size: 12px !important;
+    border-radius: 12px !important;
     width: 40%;
+    white-space: pre;
   }
 
   .thresholdsBtn {
     border-radius: 9px !important;
   }
-
-  .listBtn_disabled {
-    border-radius: 12px !important;
-    font-size: 9px !important;
-  }
 }
 
 @media only screen and (max-width: 1284px) {
+  .prescriptionChoiceSec {
+    width: 100%;
+  }
+
   .css-1ex1afd-MuiTableCell-root {
     font-size: 0.6rem !important;
   }
@@ -1095,10 +1148,6 @@
 
   .css-mgdjos-MuiGrid-root {
     width: 49%;
-  }
-
-  .selctedPresChoice {
-    min-width: 8rem;
   }
 
   .css-ymgmpz-MuiFormControl-root {

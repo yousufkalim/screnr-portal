@@ -1,5 +1,4 @@
 import { React, useState, useEffect, useCallback } from 'react';
-import { Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import request from '../../request';
@@ -43,9 +42,13 @@ export default function AddPatientPrescription() {
     reps: '',
     rest: '',
     instructions: '',
-    exercise: {},
+    exercise: 'default',
     screenshot: false,
   });
+  console.log(
+    '🚀 ~ file: AddPrescription.Page.jsx:48 ~ AddPatientPrescription ~ motionExerciseInfo:',
+    motionExerciseInfo,
+  );
 
   const handleMotionExerciseInfo = (name, value) => {
     setMotionExerciseInfo({ ...motionExerciseInfo, [name]: value });
@@ -224,8 +227,8 @@ export default function AddPatientPrescription() {
 
   return (
     <>
-      <Grid sx={{ marginTop: '8vh', height: '92vh' }} container className="gridish">
-        <Grid xl={2} lg={2.5}>
+      <div className="gridish">
+        <div className="sideBar_div">
           <Sidebar
             patientId={patientId}
             patientData={patient}
@@ -233,8 +236,8 @@ export default function AddPatientPrescription() {
             openEditpatientModal={openEditPatientModal}
             setOpenEditpatientModal={setOpenEditPatientModal}
           />
-        </Grid>
-        <Grid className="bgPrescription" xl={10} lg={9.5}>
+        </div>
+        <div className="bgPrescription">
           <div className="breadCrumb">
             Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescribe
             Exercise &gt;
@@ -261,9 +264,9 @@ export default function AddPatientPrescription() {
               />
             </div>
           </div>
-        </Grid>
+        </div>
         {GeneratePrescriptionSection}
-      </Grid>
+      </div>
       {EditPatientPopup}
     </>
   );
