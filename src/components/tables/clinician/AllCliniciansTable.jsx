@@ -373,7 +373,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
         />
       </TableContainer>
       <TablePagination
-        sx={{ color: '#919B9B' }}
+        sx={{ color: '#919B9B', width: '97%' }}
         component="div"
         rowsPerPageOptions={[]}
         count={clinicians?.total?.count || 0}

@@ -4,7 +4,7 @@
   padding: 1.5rem 4rem 0 4rem;
   position: fixed;
   height: 90vh;
-  margin-top: 8vh;
+  margin-top: 9vh;
 }
 
 .navigation {
@@ -155,12 +155,6 @@
   width: 100% !important;
 }
 
-@media only screen and (max-width: 1600px) {
-  .dashboard_table_div {
-    width: 59%;
-  }
-}
-
 @media only screen and (max-width: 1440px) {
   .name_cell_dasdboard,
   .table_cells {
@@ -169,7 +163,6 @@
 
   .dashboard_table_div {
     height: 53vh;
-    width: 58%;
   }
 
   .chart_main_div {
@@ -231,10 +224,6 @@
 @media only screen and (max-width: 992px) {
   .navigation {
     font-size: 13px;
-  }
-
-  .dashboard_table_div {
-    width: 100%;
   }
 }
 

@@ -17,12 +17,13 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
         background: '#F6FAFB',
         boxShadow: '0',
         ml: 5,
-        maxHeight: '100%',
+        maxHeight: '81%',
+        overflowY: 'auto',
         overflowX: 'hidden',
+        width: '93%',
         // width: '58.7vw',
         // paddingLeft: 2,
         '@media (max-width: 1600px)': {
-          width: '93%',
           ml: 4,
         },
       }}

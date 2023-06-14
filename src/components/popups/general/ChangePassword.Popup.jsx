@@ -124,7 +124,7 @@ export default function UpdatePasswordPopup({ openUpdateModal, setOpenUpdateModa
                 }}
                 id="outlined-password"
                 classes={outlinedInputStyles}
-                placeholder="Password"
+                placeholder="Old Password"
                 name="oldPassword"
                 value={oldPassword}
                 type={showOld ? 'text' : 'password'}

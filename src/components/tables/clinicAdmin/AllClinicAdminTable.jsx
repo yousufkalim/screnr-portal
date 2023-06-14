@@ -317,7 +317,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
         )}
       </TableContainer>
       <TablePagination
-        sx={{ color: '#919B9B' }}
+        sx={{ color: '#919B9B', width: '97%' }}
         component="div"
         rowsPerPageOptions={[]}
         count={clinicAdmins?.total?.count || 0}
