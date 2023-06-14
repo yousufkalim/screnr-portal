@@ -2,7 +2,7 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState, useRef, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import CircularProgress from '@mui/material/CircularProgress';
+// import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import { Table, Button, TextField } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
@@ -28,6 +28,7 @@ import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
 import request from '../../../request/index';
+import PieChartComponent from '../../charts/patient/PieChart.Component';
 
 const useStyles = makeStyles(() => ({
   radio: {
@@ -569,20 +570,17 @@ export default function PatientTable({
                         />
                       )}
                     </TableCell>
-                    <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
+                    <TableCell align="center">
                       <div className="circularBarCellAllPatients" style={{ alignItems: 'center' }}>
-                        <CircularProgress
-                          variant="determinate"
-                          thickness="4.5"
-                          value={100}
-                          size={55}
-                          sx={{
-                            color: '#FABB18',
-                          }}
-                        />
-                        <div className="percentageValue" style={{ color: 'black' }}>
-                          <span className="circularProgress">0%</span>
-                        </div>
+                        <PieChartComponent before={50} after={50} />
+                        {/* {row?.pain?.before > 0 && row?.pain?.after > 0 ? (
+                          <PieChartComponent
+                            before={row?.pain?.before ?? 50}
+                            after={row?.pain?.after ?? 50}
+                          />
+                        ) : (
+                          'No data'
+                        )} */}
                       </div>
                     </TableCell>
                   </StyledTableRow>

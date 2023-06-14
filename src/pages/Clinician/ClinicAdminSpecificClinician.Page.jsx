@@ -29,10 +29,7 @@ export default function ClinicAdmin() {
   const getClinicians = async (page = 1) => {
     setIsLoading(true);
     try {
-      const { data } = await request(
-        'get',
-        `/clinicians/getCliniciansByClinicId/${id}?page=${page}`,
-      );
+      const { data } = await request('get', `/clinics/getCliniciansByClinicId/${id}?page=${page}`);
       if (data) {
         setClinicians(data);
       }
