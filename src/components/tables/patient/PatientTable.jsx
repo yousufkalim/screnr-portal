@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState, Fragment } from 'react';
 import { styled } from '@mui/material/styles';
-import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -22,6 +21,7 @@ import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
 import request from '../../../request/index';
+import PieChartComponent from '../../charts/patient/PieChart.Component';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
@@ -275,36 +275,27 @@ export default function PatientTable({ patients, getPatients }) {
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{
-                      transform: 'rotate(270deg)',
-                      padding: '22px',
-                      paddingRight: '20px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '100px',
-                      marginLeft: '40px',
-                      '@media (max-width: 1500px)': { marginTop: '22px' },
-                    }}
+                    // sx={{
+                    //   padding: '22px',
+                    //   paddingRight: '20px',
+                    //   display: 'flex',
+                    //   alignItems: 'center',
+                    //   justifyContent: 'center',
+                    //   width: '100px',
+                    //   marginLeft: '40px',
+                    //   '@media (max-width: 1500px)': { marginTop: '22px' },
+                    // }}
                   >
-                    <div className="circularBarCell">
-                      <CircularProgress
-                        variant="determinate"
-                        thickness="4.5"
-                        value={100}
-                        size={55}
-                        sx={{
-                          color:
-                            row.pain <= 30
-                              ? '#FF5151'
-                              : row.pain > 30 && row.pain <= 79
-                              ? '#FABB18'
-                              : '#25CC7C',
-                        }}
-                      />
-                      <div className="percentageData">
-                        <span className="circularProgress">{row?.pain ?? 0}%</span>
-                      </div>
+                    <div className="circularBarCellAllPatients">
+                      <PieChartComponent before={50} after={50} />
+                      {/* {row?.pain?.before > 0 && row?.pain?.after > 0 ? (
+                          <PieChartComponent
+                            before={row?.pain?.before ?? 50}
+                            after={row?.pain?.after ?? 50}
+                          />
+                        ) : (
+                          'No data'
+                        )} */}
                     </div>
                   </TableCell>
                 </StyledTableRow>
