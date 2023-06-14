@@ -169,7 +169,7 @@ export default function EditPatient({
   };
 
   const getClinicians = async () => {
-    await request('get', `/clinicians/getCliniciansByClinicId/${clinicId}`)
+    await request('get', `/clinics/getCliniciansByClinicIdNonPaginated/${clinicId}`)
       .then((res) => {
         if (res.data) {
           setClinicians(

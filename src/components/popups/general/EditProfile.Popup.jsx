@@ -34,11 +34,17 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
   const { user } = Store();
   const updateStore = UpdateStore();
   const [values, setValues] = useState({
-    id: user.id,
     phone_number: user.phone_number,
     email: user.email,
     profile_pic: user.profile_pic || '',
   });
+
+  const roles = {
+    admin: 'Super Admin',
+    staff: 'Staff Admin',
+    clinic: 'Clinic Admin',
+    clinician: 'Clinician',
+  };
 
   const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
 
@@ -73,7 +79,7 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
       }
       Object.keys(values).map((key) => formData.append(key, values[key]));
 
-      const { data } = await request('put', '/admins/', formData);
+      const { data } = await request('post', '/auth/', formData);
       if (data) {
         updateStore({
           user: {
@@ -145,7 +151,7 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
               </div>
             </div>
             <h1 className="forgetPaswdTxt">{`${user.first_name} ${user.last_name}`}</h1>
-            <p className="enterEmailTxt">Superadmin</p>
+            <p className="enterEmailTxt">{roles[user?.role]}</p>
             <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
               <label className="pswdChangeTrack" htmlFor="phone">
                 <p className="inputDiv">

@@ -339,7 +339,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
                     }}
                     onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
-                    {row.patient.count}
+                    {row.patientActive.count}
                   </TableCell>
 
                   <TableCell align="center">
