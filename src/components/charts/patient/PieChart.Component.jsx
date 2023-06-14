@@ -22,7 +22,6 @@ function PieChartComponent({ before, after }) {
           display: false,
         },
       },
-
       x: {
         grid: {
           display: false,
@@ -39,8 +38,8 @@ function PieChartComponent({ before, after }) {
     datasets: [
       {
         data: [before, after],
-        backgroundColor: ['rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
-        borderColor: ['rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+        backgroundColor: ['rgba(37, 204, 124, 1)', 'rgba(250, 187, 24, 1)'],
+        borderColor: ['rgba(37, 204, 124, 1)', 'rgba(250, 187, 24, 1)'],
         borderWidth: 2,
       },
     ],
