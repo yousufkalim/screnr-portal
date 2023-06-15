@@ -60,7 +60,7 @@ export default function Sidebar({
             className={
               activityClicked || window.location.pathname === '/patients/:id/addPrescription'
                 ? 'iconActivity'
-                : ''
+                : 'notActivity'
             }
           />
         </div>
@@ -90,7 +90,7 @@ export default function Sidebar({
               activityClickedTwo ||
               window.location.pathname === `/patients/${patientId}/messages/${selectedClinician}`
                 ? 'iconActivity'
-                : ''
+                : 'notActivity'
             }
           />
         </div>
@@ -121,7 +121,7 @@ export default function Sidebar({
               activityClickedThree ||
               window.location.pathname === `/patients/${patientId}/activity/${selectedClinician}`
                 ? 'iconActivity'
-                : ''
+                : 'notActivity'
             }
           />
         </div>

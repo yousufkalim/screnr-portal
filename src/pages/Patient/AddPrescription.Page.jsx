@@ -45,10 +45,6 @@ export default function AddPatientPrescription() {
     exercise: 'default',
     screenshot: false,
   });
-  console.log(
-    '🚀 ~ file: AddPrescription.Page.jsx:48 ~ AddPatientPrescription ~ motionExerciseInfo:',
-    motionExerciseInfo,
-  );
 
   const handleMotionExerciseInfo = (name, value) => {
     setMotionExerciseInfo({ ...motionExerciseInfo, [name]: value });
@@ -86,7 +82,7 @@ export default function AddPatientPrescription() {
       reps: '',
       rest: '',
       instructions: '',
-      exercise: {},
+      exercise: 'default',
       screenshot: false,
     });
   };

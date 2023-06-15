@@ -8,10 +8,20 @@
   width: 74vw;
 }
 
+.table_cells {
+  width: 50% !important;
+}
+
+.rightSide_div {
+  width: 20%;
+}
+
 .bgClinicianTable {
   background-color: rgb(246, 250, 251);
   width: 100%;
   height: 100vh;
+  width: 60%;
+  margin-left: auto;
 }
 
 .notxt {

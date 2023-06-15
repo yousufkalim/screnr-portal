@@ -49,11 +49,11 @@
 }
 
 .prescriptionBtns2 {
-  margin-top: -12%;
   display: flex;
   justify-content: flex-end;
   cursor: pointer;
   font-weight: 500;
+  margin-top: 1rem;
 }
 
 .thresholdsBtn {
@@ -69,17 +69,18 @@
 }
 
 .listBtn {
-  width: 36%;
+  width: 100%;
   padding: 10px 0px !important;
   color: white !important;
   background-color: #136773 !important;
   text-transform: none !important;
   font-weight: 500 !important;
   font-size: 14px !important;
+  border-radius: 15px !important;
 }
 
 .listBtn_disabled {
-  width: 26%;
+  width: 100%;
   padding: 10px 0px !important;
   border-radius: 15px !important;
   color: white !important;
@@ -102,7 +103,6 @@
   width: 23%;
   padding: 10px;
   margin-bottom: 3%;
-  gap: 5%;
 }
 
 .patientListChart {
@@ -280,7 +280,6 @@
   border-radius: 10px;
   padding: 10px 13px;
   white-space: pre;
-  width: 45%;
 }
 
 #prescriptionTableHead {
@@ -377,7 +376,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 6.5%;
+  gap: 15px;
   color: #919b9b;
   cursor: pointer;
 }
@@ -385,7 +384,7 @@
 #prescriptionTable {
   margin: auto;
   padding: 2% 3% 0px 3%;
-  height: 79vh;
+  height: 72vh;
   overflow-y: scroll;
   margin-top: 20px;
 }
@@ -637,7 +636,7 @@
 
 .gridish {
   display: flex;
-  margin-top: 8vh;
+  margin-top: 9vh;
   width: 100%;
 }
 
@@ -679,6 +678,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 55%;
 }
 
 .sets_div {
@@ -696,18 +696,19 @@
 .prescriptionChoiceSec {
   margin-top: 2%;
   cursor: pointer;
+  gap: 20px;
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: max-content;
 }
 
 .presChoice {
-  width: 45%;
   white-space: pre;
   display: flex;
   align-items: center;
   color: #919b9b;
   font-weight: 500;
+  padding: 10px 13px;
   font-size: 14px;
 }
 
@@ -846,7 +847,7 @@
 }
 
 .btn_div {
-  width: 150px;
+  width: 26%;
 }
 
 @media only screen and (max-width: 1810px) {
@@ -864,10 +865,6 @@
 }
 
 @media only screen and (max-width: 1600px) {
-  .addMore {
-    width: 9%;
-  }
-
   .bgPrescription {
     padding-bottom: 40px;
   }
@@ -896,7 +893,6 @@
   .thresholdsBtn {
     padding: 10px 0px !important;
     font-size: 14px !important;
-    width: 36%;
   }
 
   .css-ahj2mt-MuiTypography-root {
@@ -923,7 +919,6 @@
   }
 
   .prescriptions_btns {
-    width: 69%;
     justify-content: start;
   }
 }
@@ -989,16 +984,6 @@
   }
 }
 
-@media only screen and (max-width: 1786px) {
-  .cards_div_patient_pg {
-    gap: 4%;
-  }
-
-  .addMore {
-    width: 7.5%;
-  }
-}
-
 @media only screen and (max-width: 1650px) {
 }
 
@@ -1014,27 +999,11 @@
   .selectedOpt {
     font-size: 13px;
   }
-
-  .selctedPresChoice {
-    margin-right: 2rem;
-  }
-
-  .presChoice {
-    min-width: 11rem;
-  }
-
-  .addMore {
-    width: 9.5%;
-  }
 }
 
 @media only screen and (max-width: 1420px) {
   .PatientTopSection {
     width: 73vw !important;
-  }
-
-  .addMore {
-    width: 10% !important;
   }
 
   .prescription_head {
@@ -1043,6 +1012,16 @@
 }
 
 @media only screen and (max-width: 1366px) {
+  .right_sidebar {
+    padding: 28% 0;
+  }
+
+  .generatePrescriptionBtn_diaabled {
+    width: 45% !important;
+    font-size: 12px !important;
+    white-space: pre !important;
+  }
+
   .listTxtBtn {
     font-size: 12px;
     white-space: pre;
@@ -1058,10 +1037,6 @@
 
   .clinic_cell {
     font-size: 0.8rem !important;
-  }
-
-  .prescriptionChoiceSec {
-    width: 80%;
   }
 
   /* .css-2s90m6-MuiAvatar-root {
@@ -1094,11 +1069,13 @@
     width: 31% !important;
   }
 
+  .btn_div {
+    width: 40%;
+  }
+
   .listBtn_disabled {
     padding: 10px !important;
     font-size: 12px !important;
-    border-radius: 12px !important;
-    width: 40%;
     white-space: pre;
   }
 
@@ -1108,10 +1085,6 @@
 }
 
 @media only screen and (max-width: 1284px) {
-  .prescriptionChoiceSec {
-    width: 100%;
-  }
-
   .css-1ex1afd-MuiTableCell-root {
     font-size: 0.6rem !important;
   }
@@ -1122,10 +1095,6 @@
 
   .periodSelect {
     font-size: 9.5px;
-  }
-
-  .addMore {
-    width: 12% !important;
   }
 
   .prescription_head {
@@ -1155,7 +1124,6 @@
   }
 
   .prescriptions_btns {
-    width: 73%;
   }
 
   .css-ahj2mt-MuiTypography-root {
@@ -1173,11 +1141,17 @@
 }
 
 @media only screen and (max-width: 1100px) {
+  .iconTimeClass {
+    width: 25%;
+  }
+
   .name_cell_dasdboard {
     font-size: 7px !important;
   }
 
-  .timeLog {
+  .timeLog,
+  .activityTxt,
+  .clickedActivity {
     font-size: 12px;
   }
 
@@ -1187,10 +1161,6 @@
 
   .periodSelect {
     font-size: 8.5px;
-  }
-
-  .addMore {
-    width: 14% !important;
   }
 
   .css-1s46rkj-MuiGrid-root {
