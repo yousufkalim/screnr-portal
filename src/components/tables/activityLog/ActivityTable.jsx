@@ -30,12 +30,12 @@ export default function ActivityTable({ activityLog }) {
           maxHeight: '84%',
           overflowX: 'hidden',
           boxShadow: '0',
-          width: '58.7vw',
+          width: '56vw',
           paddingLeft: 2,
-          '@media (max-width: 1600px)': {
-            maxHeight: '85.6%',
-            width: '54.7vw',
-          },
+          // '@media (max-width: 1600px)': {
+          //   maxHeight: '85.6%',
+          //   width: '54.7vw',
+          // },
         }}
       >
         <h1 className="clientTableHead">Activity Log</h1>

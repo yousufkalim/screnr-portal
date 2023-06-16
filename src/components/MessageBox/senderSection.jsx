@@ -5,11 +5,11 @@ const senderSection = ({ senderName, message }) => {
   return (
     <div className="sender">
       <div className="senderInfo">
-        <p className="senderName">{senderName}</p>
+        <div className="sender_name_msg">
+          <p className="senderName">{senderName}</p>
+          <p className="senderMsg">{message}</p>
+        </div>
         <AvatarComponent alt={senderName} className="header_avatar" />
-      </div>
-      <div>
-        <p className="senderMsg">{message}</p>
       </div>
     </div>
   );

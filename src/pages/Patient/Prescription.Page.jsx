@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react';
-import { Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
@@ -53,8 +52,8 @@ export default function Prescription() {
 
   return (
     <>
-      <Grid container sx={{ marginTop: '8vh', height: '92vh', position: 'fixed' }}>
-        <Grid xl={2} lg={2.5}>
+      <div className="gridish" style={{ position: 'fixed' }}>
+        <div className="sideBar_div">
           <Sidebar
             patientId={id}
             patientData={patient}
@@ -62,8 +61,8 @@ export default function Prescription() {
             setOpenEditpatientModal={setOpenEditpatientModal}
             selectedClinician={selectedClinician}
           />
-        </Grid>
-        <Grid className="bgPrescription" xl={10} lg={9.5}>
+        </div>
+        <div className="bgPrescription">
           <PatientTopSection
             allClinicians={allClinicians}
             patientData={patient}
@@ -76,7 +75,7 @@ export default function Prescription() {
             selectedClinicianId={selectedClinician}
             selectedClinicians={patient?.userData?.clinicians}
           />
-        </Grid>
+        </div>
         <div className="addBtn">
           <img
             src={addBtn}
@@ -88,7 +87,7 @@ export default function Prescription() {
             alt=""
           />
         </div>
-      </Grid>
+      </div>
       {EditpatientPopup}
     </>
   );
