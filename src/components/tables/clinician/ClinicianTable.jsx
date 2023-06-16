@@ -29,17 +29,15 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function ClinicianTable({ clinicians, getClinicians, loading }) {
-  const [openEditClinican, setOpenEditClinican] = useState(false);
-  const [clinician, setClinician] = useState({});
-  const [page, setPage] = useState(0);
   const navigate = useNavigate();
+  const [page, setPage] = useState(0);
+  const [clinician, setClinician] = useState({});
+  const [openEditClinican, setOpenEditClinican] = useState(false);
 
+  const handleBackIconClick = () => window.history.back();
   const handleChangePage = async (event, newPage) => {
     await getClinicians(newPage + 1);
     setPage(newPage);
-  };
-  const handleBackIconClick = () => {
-    window.history.back();
   };
 
   return (

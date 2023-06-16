@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react';
-// mui imports
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
@@ -74,6 +73,8 @@ export default function EditPatient({
   const { user } = Store();
   const [checked, setChecked] = useState(!!patientDetails?.expiry_date);
   const [clinicians, setClinicians] = useState([]);
+  // eslint-disable-next-line no-underscore-dangle
+  console.log('---->', moment(patientDetails?.expiry_date)?._d);
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -104,9 +105,13 @@ export default function EditPatient({
       email: patientDetails?.email,
       profile_pic: patientDetails?.profile_pic,
       phone_number: patientDetails?.phone_number,
-      // eslint-disable-next-line no-underscore-dangle
-      expiry_date: moment(patientDetails?.expiry_date)?._d || '',
     });
+    if (patientDetails?.expiry_date) {
+      // eslint-disable-next-line no-underscore-dangle
+      setPatient({ ...patientDetails, expiry_date: moment(patientDetails?.expiry_date)?._d || '' });
+      setChecked(true);
+    }
+
     setUserData({
       mrn_id: patientDetails?.userData?.mrn_id,
       diagnosis: patientDetails?.userData?.diagnosis || '',
@@ -561,7 +566,7 @@ export default function EditPatient({
                   dateFormat="MM-dd-yyyy"
                   onChange={expDateChange}
                   popperPlacement="bottom-start"
-                  selected={patient.expiry_date}
+                  selected={patient?.expiry_date}
                   placeholderText="Enter expiry date"
                 />
               </div>

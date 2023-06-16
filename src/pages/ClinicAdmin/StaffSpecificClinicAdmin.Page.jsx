@@ -12,11 +12,11 @@ import request from '../../request';
 export default function ClinicAdmin() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [staffMember, setStaffMember] = useState({});
+  const [clinicAdmins, setClinicAdmins] = useState({});
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
-  const [clinicAdmins, setClinicAdmins] = useState({});
-  const [staffMember, setStaffMember] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
 
   const getClinicAdmins = async (page = 1) => {
     setIsLoading(true);
@@ -32,9 +32,7 @@ export default function ClinicAdmin() {
     }
   };
 
-  const handleDashboardNavClick = () => {
-    navigate('/admin/dashboard');
-  };
+  const handleDashboardNavClick = () => navigate('/admin/dashboard');
 
   const getData = async () => {
     try {
