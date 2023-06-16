@@ -24,9 +24,7 @@ export default function Sidebar({
     setExpanded(!expanded);
     setToggleIcon(!toggleIcon);
   };
-  const handleActiveTab = (targetTab) => {
-    setActiveTab(targetTab);
-  };
+  const handleActiveTab = (targetTab) => setActiveTab(targetTab);
 
   return (
     <div className="left_side">

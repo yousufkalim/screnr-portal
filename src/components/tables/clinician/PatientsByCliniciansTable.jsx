@@ -41,8 +41,8 @@ export default function PatientsByCliniciansTable({
   setOpenAddPatient,
 }) {
   const navigate = useNavigate();
-  const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
+  const [openEditPatient, setOpenEditPatient] = useState(false);
   const [counter, setCounter] = useState({
     report: '',
     unReadMsg: '',
@@ -93,9 +93,7 @@ export default function PatientsByCliniciansTable({
       backgroundColor: '#25CC7C',
     },
   }));
-  const handlePatientProfile = (patientid) => {
-    navigate(`/patients/${patientid}/prescription`);
-  };
+  const handlePatientProfile = (patientid) => navigate(`/patients/${patientid}/prescription`);
 
   return (
     <div className="bgClinicianTable" id="patientsByClinicianTable">

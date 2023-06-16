@@ -5,9 +5,9 @@ import AllClinicAdminTable from '../../components/tables/clinicAdmin/AllClinicAd
 import request from '../../request';
 
 export default function ClinicAdmin() {
-  const [clinicAdmins, setClinicAdmins] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
   const abortControllerRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [clinicAdmins, setClinicAdmins] = useState({});
 
   const getClinicAdmins = async (sort, search, page = 1) => {
     setIsLoading(true);

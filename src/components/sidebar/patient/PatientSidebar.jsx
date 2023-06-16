@@ -1,8 +1,5 @@
 import { React, useState, useEffect } from 'react';
-
 import { useNavigate } from 'react-router-dom';
-
-// images import
 import { ReactComponent as Completed } from '../../../assets/components/Sidebar/Completed.svg';
 import { ReactComponent as Activity } from '../../../assets/components/TimeCard/activity.svg';
 import { ReactComponent as Msg } from '../../../assets/components/Sidebar/msg.svg';
@@ -15,11 +12,11 @@ export default function Sidebar({
   openEditpatientModal,
   setOpenEditpatientModal,
 }) {
+  const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   const [activityClickedTwo, setActivityClickedTwo] = useState(false);
   const [activityClickedThree, setActivityClickedThree] = useState(false);
 
-  const navigate = useNavigate();
   useEffect(() => {
     // Set the activityClicked state based on the current URL path
     const path = window.location.pathname;

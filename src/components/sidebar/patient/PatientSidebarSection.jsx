@@ -1,12 +1,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { React, useState } from 'react';
-
-// mui imports
 import Collapse from '@mui/material/Collapse';
-
 import moment from 'moment';
-// images import
 import { ReactComponent as Phone } from '../../../assets/components/Table/Call.svg';
 import { ReactComponent as Email } from '../../../assets/components/Table/SidebarEmail.svg';
 import { ReactComponent as Expiry } from '../../../assets/images/staffScreen/expiryDate.svg';
@@ -17,8 +13,6 @@ import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/
 // import { ReactComponent as RightArrow } from '../../../assets/components/Sidebar/right.svg';
 // import { ReactComponent as Up } from '../../../assets/components/Sidebar/up.svg';
 import edit from '../../../assets/icons/sidebarEdit.svg';
-
-// Avatar
 import AvatarComponent from '../../Avatar/Avatar.Component';
 
 export default function PatientSidebarSection({

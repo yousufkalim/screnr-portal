@@ -28,17 +28,15 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinicAdmins, loading }) {
-  const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
-  const [clinicAdmin, setClinicAdmin] = useState({});
-  const [page, setPage] = useState(0);
   const navigate = useNavigate();
+  const [page, setPage] = useState(0);
+  const [clinicAdmin, setClinicAdmin] = useState({});
+  const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
 
+  const handleBackIconClick = () => navigate('/admin/dashboard');
   const handleChangePage = async (event, newPage) => {
     await getClinicAdmins(newPage + 1);
     setPage(newPage);
-  };
-  const handleBackIconClick = () => {
-    navigate('/admin/dashboard');
   };
 
   return (
