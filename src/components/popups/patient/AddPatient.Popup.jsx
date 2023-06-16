@@ -136,7 +136,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     try {
       const { data } = await request(
         'get',
-        `/clinics/getCliniciansByClinicIdNonPaginated/${clinicId}`,
+        `/clinicians/getCliniciansByClinicIdNonPaginated/${clinicId}`,
       );
       if (data) {
         setClinicians(

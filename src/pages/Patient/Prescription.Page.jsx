@@ -24,7 +24,7 @@ export default function Prescription() {
         setPatient(res?.data?.user);
         setSelectedClinician(res?.data?.user?.userData?.clinicians[0]?.id);
         const ClinicId = res?.data?.user?.userData?.clinicians[0]?.userData?.clinic;
-        await request('get', `/clinics/getCliniciansByClinicId/${ClinicId}`)
+        await request('get', `/clinicians/getCliniciansByClinicIdNonPaginated/${ClinicId}`)
           .then((res1) => {
             setAllClinicians(res1?.data?.users);
           })
