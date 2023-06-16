@@ -92,9 +92,18 @@ export default function Patient() {
   }, []);
 
   return (
-    <div style={{ position: 'fixed' }} className="gridish">
-      <div className="gridish_child">
-        <div className="sideBar_div">
+    <div
+      className="main_div"
+      style={{
+        background: 'rgb(246, 250, 251)',
+        height: '100vh',
+        marginTop: '8vh',
+        position: 'fixed',
+        width: '100%',
+      }}
+    >
+      <Grid sx={{ flexWrap: 'unset' }} container>
+        <Grid xl={2} lg={2.5}>
           <Sidebar
             id={id}
             txt="clinics/getClinician"
@@ -103,7 +112,7 @@ export default function Patient() {
             open={openEditClinician}
             setOpen={setOpenEditClinician}
           />
-        </div>
+        </Grid>
 
         <Grid className="bgClinicianTable" xl={7.5} lg={7}>
           <div className="breadCrumb" style={{ display: 'flex' }}>
@@ -143,9 +152,9 @@ export default function Patient() {
             getPatients={getPatients}
           />
         </Grid>
-        <div className="rightSide_div">
+        <Grid xl={2.5} lg={2.5}>
           <RightSidebar logs={activityLog} />
-        </div>
+        </Grid>
         <div className="addBtn">
           <img
             src={addBtn}
@@ -162,7 +171,7 @@ export default function Patient() {
             setOpenAddPatient={setOpenAddPatient}
           />
         )}
-      </div>
+      </Grid>
 
       <EditClinician
         openEditClinican={openEditClinician}

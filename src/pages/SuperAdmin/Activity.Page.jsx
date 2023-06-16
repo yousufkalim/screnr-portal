@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Grid } from '@mui/material';
 import GenericSidebar from '../../components/sidebar/GenericLeftSidebar';
 import PatientSidebar from '../../components/sidebar/patient/PatientSidebar';
 import TimeCard from '../../components/cards/TimeCard.Component';
@@ -25,25 +26,21 @@ export default function Activity() {
       icon: Login,
       time: activityLog?.lastLogin,
       text: 'Last Login',
-      iconClass: 'iconTimeClass',
     },
     {
       icon: LoginCount,
       time: activityLog?.userSigninCount,
       text: 'Login count',
-      iconClass: 'iconTimeClass',
     },
     {
       icon: Clock,
       time: activityLog?.loginHours,
       text: 'Login Hours',
-      iconClass: 'iconTimeClass',
     },
     {
       icon: Logoff,
       time: activityLog?.lastLogout,
       text: 'Last Logoff',
-      iconClass: 'iconTimeClass',
     },
   ];
 
@@ -99,8 +96,8 @@ export default function Activity() {
   };
   return (
     <>
-      <div style={{ position: 'fixed' }} className="gridish">
-        <div className="sideBar_div">
+      <Grid sx={{ marginTop: '8vh', position: 'fixed' }} container>
+        <Grid xl={2} lg={2.5}>
           {window.location.pathname === `/patients/${patientId}/activity/${clinicianId}` ? (
             <PatientSidebar
               patientId={patientId}
@@ -117,8 +114,8 @@ export default function Activity() {
               getClinicName={getClinicName}
             />
           )}
-        </div>
-        <div className="bgClinicianTable">
+        </Grid>
+        <Grid className="bgClinicianTable" xl={7.5} lg={7}>
           <div className="breadCrumb">
             Dashboard &gt; Staff &gt; Lifeline Clinic &gt; Doctor &gt; {breadcrumb} &gt;
           </div>
@@ -126,7 +123,6 @@ export default function Activity() {
             <div className="cards_div_patient_pg">
               {cardsData?.map((item) => (
                 <TimeCard
-                  iconTimeClass={item.iconClass}
                   Icon={item.icon}
                   time={item.time}
                   text={item.text}
@@ -136,11 +132,11 @@ export default function Activity() {
             </div>
           </div>
           <ActivityTable activityLog={activityLog?.logs} />
-        </div>
-        <div className="rightSide_div">
+        </Grid>
+        <Grid xl={2.5} lg={2.5}>
           <RightSidebar logs={activityLog} />
-        </div>
-      </div>
+        </Grid>
+      </Grid>
       {EditPatientPopup}
     </>
   );

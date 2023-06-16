@@ -2,7 +2,7 @@
   background-color: #fff;
   align-items: center;
   border-radius: 20px;
-  width: 32% !important;
+  width: 342px !important;
   overflow: hidden;
 }
 
@@ -12,19 +12,21 @@
   flex-direction: row;
   justify-content: center;
   padding: 9% 0 5% 0;
-  gap: 10px;
 }
 
 .card_content_div2 {
+  margin-left: 15px;
   margin-top: 5px;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
+  margin-right: 20%;
 }
 
 .bottomStats {
   width: 100% !important;
+  height: 57px !important;
 }
 
 .statsGraphics {
@@ -44,16 +46,114 @@
   font-size: 12px;
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1680px) {
+  .stats_card_main_div {
+    width: 317px !important;
+  }
+
+  .card_content_div2 {
+    margin-left: 0px;
+    margin-right: 0%;
+  }
+
   .stats_card_content_div {
-    padding-bottom: 0;
+    justify-content: space-evenly;
+  }
+
+  .stats_card_main_div {
+    width: 297px !important;
+  }
+}
+
+@media only screen and (min-width: 1475px) {
+  .bottomStats {
+    height: 67px !important;
   }
 
   .statsGraphics {
-    height: 50px;
+    height: 58px;
+  }
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1500px) {
+  .stats_card_main_div {
+    width: 253px !important;
+    height: 162px !important;
+  }
+}
+
+@media screen and (min-width: 1500px) and (max-width: 1535px) {
+  .stats_card_main_div {
+    width: 264px !important;
+  }
+
+  .card_content_div2 {
+    margin-right: 15%;
+  }
+}
+
+@media screen and (min-width: 1536px) and (max-width: 1600px) {
+  .stats_card_main_div {
+    width: 282px !important;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .stats_card_main_div {
+    width: 240px !important;
+    height: 146px !important;
+  }
+
+  .bottomStats {
+    height: 51px !important;
+  }
+
+  .statsGraphics {
+    height: 60px;
+  }
+
+  .stats_card_content_div {
+    padding: 9% 0 9% 0;
   }
 
   .custom_icons {
     width: 50px;
+  }
+}
+
+@media only screen and (max-width: 1338px) {
+  .stats_card_main_div {
+    width: 230px !important;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .stats_card_main_div {
+    width: 224px !important;
+  }
+
+  .stats_card_content_div {
+    padding: 9% 0 11% 0;
+  }
+}
+
+@media only screen and (min-width: 1681px) {
+  .bottomStats {
+    height: 73px !important;
+  }
+
+  .statsGraphics {
+    height: 69qpx;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .stats_card_content_div {
+    gap: 5%;
+    margin-left: 2%;
+  }
+
+  .card_content_div2 {
+    width: 60%;
   }
 }

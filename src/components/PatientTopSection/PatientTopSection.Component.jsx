@@ -33,20 +33,9 @@ export default function PatientTopSection({
           />
         ))}
       </div>
-      <div className="addMore" style={{ cursor: 'default' }} role="presentation">
-        <div
-          className="addMore"
-          role="button"
-          tabIndex={0}
-          onKeyDown="none"
-          onClick={() => setOpenAssignClinicians(true)}
-        >
-          Add More
-          <div className="image_div">
-            <img src={AddMore} alt="" />
-          </div>
-        </div>
-      </div>
+      <p className="addMore" role="presentation" onClick={() => setOpenAssignClinicians(true)}>
+        Add More <img src={AddMore} alt="" />
+      </p>
       {openAssignClinicians && (
         <AssignClinicians
           cliniciansData={cliniciansData}

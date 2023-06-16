@@ -3,18 +3,15 @@
   background-color: white;
   border-radius: 20px;
   padding: 30px;
-  position: relative;
 }
 
 .msgSendBtn {
   margin-top: 2rem;
   cursor: pointer;
 }
-
-.noDataTxt {
+.noDataTxt{
   color: rgba(145, 155, 155, 1) !important;
 }
-
 .receiver {
   text-align: left;
   padding: 20px;
@@ -59,36 +56,26 @@
 .senderInfo {
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
   justify-content: flex-end;
 }
 
-.sender_name_msg {
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
-  gap: 5px;
-}
-
 .senderName {
+  margin-right: 15px;
   font-weight: 500;
   font-size: 16px;
-  color: #136773;
 }
 
 .senderMsg {
   font-weight: 500;
   font-size: 12px;
   color: #454238;
+  margin-right: 65px;
 }
 
 .chat-box__messages {
   height: 55vh;
-  overflow-y: auto;
-}
-
-.chat-box__messages::-webkit-scrollbar {
-  display: none;
+  overflow-y: scroll;
 }
 
 .chat-header {
@@ -139,11 +126,9 @@
   .chat-box {
     padding: 35px;
   }
-
   .receiver {
     padding-right: 20%;
   }
-
   .sender {
     padding-left: 20%;
   }

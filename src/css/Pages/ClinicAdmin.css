@@ -214,6 +214,11 @@
     height: 85.5vh;
   }
 
+  #allTabletitlePatnts {
+    width: 36vw !important;
+    /* gap: 10px; */
+  }
+
   .allClinicAdminTable {
     background-color: rgb(246, 250, 251);
     height: 79vh;
@@ -224,13 +229,24 @@
   }
 }
 
+@media only screen and (max-width: 1440px) {
+  #allTabletitlePatnts {
+    width: 48vw !important;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+}
+
+@media only screen and (max-width: 1466px) {
+  #allTabletitlePatnts {
+    width: 49vw !important;
+  }
+}
+
 @media only screen and (max-width: 1366px) {
   #allTabletitlePatnts {
-    width: 50% !important;
-  }
-
-  .allTableHead {
-    padding-top: 16px;
+    width: 36vw !important;
   }
 
   .staff_id {
