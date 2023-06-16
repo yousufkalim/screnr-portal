@@ -235,20 +235,7 @@
   }
 }
 
-@media only screen and (max-width: 1440px) {
-}
-
-@media only screen and (max-width: 1466px) {
-  #allTabletitlePatnts {
-    width: 49vw !important;
-  }
-}
-
 @media only screen and (max-width: 1366px) {
-  #allTabletitlePatnts {
-    width: 36vw !important;
-  }
-
   .staff_id {
     font-size: 0.9rem;
   }

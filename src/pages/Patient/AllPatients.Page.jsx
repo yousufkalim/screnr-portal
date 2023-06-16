@@ -134,7 +134,7 @@ export default function Patient() {
 
   return (
     <Grid container>
-      <Grid className="bgClinicianTable" xl={12} lg={12}>
+      <Grid sx={{ width: '100%' }} className="bgClinicianTable">
         {AllPatients}
       </Grid>
 
