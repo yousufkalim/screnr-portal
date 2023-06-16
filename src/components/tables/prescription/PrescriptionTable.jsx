@@ -49,7 +49,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
   const handleClose = () => {
     setSelectedPrescription({});
     setAnchorEl(null);
-    setOpenPrescriptionMenu(false);
   };
   const handleCloseEdit = () => {
     setAnchorEl(null);
@@ -141,6 +140,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     errored: <Error />,
     unchecked: <Incomplete />,
   };
+
   return (
     <div id="prescriptionTable">
       <h3 className="prescription_header">Prescription List</h3>
@@ -163,7 +163,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
               marginBottom: '25px',
               '@media only screen and (max-width: 1400px)': {
                 maxWidth: '73vw',
-                overflowX: 'auto',
               },
             }}
           >

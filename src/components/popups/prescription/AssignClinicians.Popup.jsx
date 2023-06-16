@@ -64,7 +64,7 @@ export default function AssignClinicians({
   };
 
   return (
-    <div style={{ display: 'none' }}>
+    <div>
       <BootstrapDialog
         fullWidth
         maxWidth="md"

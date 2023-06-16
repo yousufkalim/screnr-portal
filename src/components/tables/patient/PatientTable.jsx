@@ -104,8 +104,8 @@ export default function PatientTable({ patients, getPatients }) {
   return (
     <div
       style={{ marginTop: '0', position: 'unset', height: '66vh' }}
-      className="activityTable"
-      // id="clinicianTable"
+      className="bgClinicianTable"
+      id="clinicianTable"
     >
       <TableContainer
         component={Paper}
@@ -114,8 +114,15 @@ export default function PatientTable({ patients, getPatients }) {
           maxHeight: '84%',
           overflowX: 'hidden',
           boxShadow: '0',
+          width: '58.7vw',
           '@media (max-width: 1600px)': {
+            maxHeight: '85.6%',
+            width: '54.7vw',
             overflowX: 'scroll',
+          },
+          '@media (min-width: 1536px)': {
+            maxHeight: '85.6%',
+            width: '59vw',
           },
           '@media (max-width: 1535px)': {
             '&::-webkit-scrollbar': {
@@ -197,29 +204,35 @@ export default function PatientTable({ patients, getPatients }) {
                   }}
                 >
                   <TableCell align="left"> {row?.id} </TableCell>
-                  <TableCell align="left">
-                    <div className="image_div">
-                      {row.profile_pic ? (
-                        <div className="imgDivClinic">
-                          <img
-                            src={getMediaUrl(row.profile_pic)}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              borderRadius: '100px',
-                              objectFit: 'cover',
-                            }}
-                            alt=""
-                          />
-                        </div>
-                      ) : (
-                        <AvatarComponent
-                          alt={`${row.first_name} ${row.last_name}`}
-                          className="header_avatar"
+                  <TableCell
+                    align="left"
+                    sx={{
+                      display: 'flex',
+                      minHeight: '80%',
+                      paddingTop: '23px',
+                      '@media (max-width: 1600px)': { paddingBottom: '32px', paddingTop: '0px' },
+                    }}
+                  >
+                    {row.profile_pic ? (
+                      <div className="imgDivClinic">
+                        <img
+                          src={getMediaUrl(row.profile_pic)}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '100px',
+                            objectFit: 'cover',
+                          }}
+                          alt=""
                         />
-                      )}
-                      <div className="clinic_cell">{`${row.first_name} ${row.last_name}`}</div>
-                    </div>
+                      </div>
+                    ) : (
+                      <AvatarComponent
+                        alt={`${row.first_name} ${row.last_name}`}
+                        className="header_avatar"
+                      />
+                    )}
+                    <div className="clinic_cell">{`${row.first_name} ${row.last_name}`}</div>
                   </TableCell>
 
                   <TableCell align="center" className="table_cells">

@@ -139,16 +139,13 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
               setActivityClicked(true);
             }}
           >
-            <div className="image_div">
-              <Activity
-                className={
-                  activityClicked || window.location.pathname.includes('activity')
-                    ? 'iconActivity'
-                    : ''
-                }
-              />
-            </div>
-
+            <Activity
+              className={
+                activityClicked || window.location.pathname.includes('activity')
+                  ? 'iconActivity'
+                  : ''
+              }
+            />
             <p
               className={
                 activityClicked || window.location.pathname.includes('activity')

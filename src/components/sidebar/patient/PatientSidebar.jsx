@@ -52,12 +52,12 @@ export default function Sidebar({
           navigate(`/patients/${patientId}/addPrescription/${selectedClinician}`);
         }}
       >
-        <div className="image_div">
+        <div>
           <Completed
             className={
               activityClicked || window.location.pathname === '/patients/:id/addPrescription'
                 ? 'iconActivity'
-                : 'notActivity'
+                : ''
             }
           />
         </div>
@@ -81,13 +81,13 @@ export default function Sidebar({
           setActivityClickedThree(false);
         }}
       >
-        <div className="image_div">
+        <div>
           <Msg
             className={
               activityClickedTwo ||
               window.location.pathname === `/patients/${patientId}/messages/${selectedClinician}`
                 ? 'iconActivity'
-                : 'notActivity'
+                : ''
             }
           />
         </div>
@@ -112,13 +112,13 @@ export default function Sidebar({
           setActivityClickedTwo(false);
         }}
       >
-        <div className="image_div">
+        <div>
           <Activity
             className={
               activityClickedThree ||
               window.location.pathname === `/patients/${patientId}/activity/${selectedClinician}`
                 ? 'iconActivity'
-                : 'notActivity'
+                : ''
             }
           />
         </div>

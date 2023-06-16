@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Grid } from '@mui/material';
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import MessageBox from '../../components/MessageBox/MessageBox.Component';
 import request from '../../request/index';
@@ -16,6 +17,7 @@ export default function PatientMessageBox() {
   const [chatId, setChatId] = useState('');
   const [openEditpatientModal, setOpenEditpatientModal] = useState(false);
   const [lastKey, setLastKey] = useState({}); // for pagination
+  console.log('🚀 ~ file: PatientMessageBox.Page.jsx:20 ~ PatientMessageBox ~ lastKey:', lastKey);
 
   useEffect(() => {
     if (SocketConnection) {
@@ -113,8 +115,8 @@ export default function PatientMessageBox() {
   };
 
   return (
-    <div style={{ position: 'fixed' }} className="gridish">
-      <div className="sideBar_div">
+    <Grid sx={{ marginTop: '8vh', position: 'fixed' }} container>
+      <Grid xl={2} lg={2.5}>
         <Sidebar
           patientId={patientId}
           patientData={patient}
@@ -122,12 +124,12 @@ export default function PatientMessageBox() {
           openEditpatientModal={openEditpatientModal}
           setOpenEditpatientModal={setOpenEditpatientModal}
         />
-      </div>
-      <div className="bgPrescription">
+      </Grid>
+      <Grid className="bgMsg" xl={10} lg={9.5}>
         <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Messages &gt;
         </div>
-        <div style={{ height: '90vh' }} className="bgAddPrescription">
+        <div className="bgAddPrescription">
           <MessageBox
             patient={patient}
             allMessages={allMessages}
@@ -139,8 +141,8 @@ export default function PatientMessageBox() {
             setLastKey={setLastKey}
           />
         </div>
-      </div>
+      </Grid>
       {EditPatientPopup}
-    </div>
+    </Grid>
   );
 }
