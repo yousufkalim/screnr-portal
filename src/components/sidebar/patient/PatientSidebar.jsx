@@ -52,7 +52,7 @@ export default function Sidebar({
           navigate(`/patients/${patientId}/addPrescription/${selectedClinician}`);
         }}
       >
-        <div>
+        <div className="image_div">
           <Completed
             className={
               activityClicked || window.location.pathname === '/patients/:id/addPrescription'
@@ -81,7 +81,7 @@ export default function Sidebar({
           setActivityClickedThree(false);
         }}
       >
-        <div>
+        <div className="image_div">
           <Msg
             className={
               activityClickedTwo ||
@@ -112,7 +112,7 @@ export default function Sidebar({
           setActivityClickedTwo(false);
         }}
       >
-        <div>
+        <div className="image_div">
           <Activity
             className={
               activityClickedThree ||
