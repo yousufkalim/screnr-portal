@@ -6,13 +6,13 @@ import { ReactComponent as BlueCircle } from '../../assets/components/patientDet
 import { ReactComponent as ActivePatients } from '../../assets/components/patientDetailCards/activePatients.svg';
 import { ReactComponent as TotalPatients } from '../../assets/components/patientDetailCards/totalPatients.svg';
 import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/greenIcon.svg';
-import { ReactComponent as GreenStats } from '../../assets/components/StatsCard/greenStats.svg';
+import GreenStats from '../../assets/components/StatsCard/greenStats.svg';
 import { ReactComponent as YellowIcon } from '../../assets/components/StatsCard/yellowIcon.svg';
-import { ReactComponent as YellowStats } from '../../assets/components/StatsCard/yellowStats.svg';
+import YellowStats from '../../assets/components/StatsCard/yellowStats.svg';
 import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
-import { ReactComponent as RedStats } from '../../assets/components/StatsCard/redStats.svg';
+import RedStats from '../../assets/components/StatsCard/redStats.svg';
 import { ReactComponent as GrayIcon } from '../../assets/components/StatsCard/grayIcon.svg';
-import { ReactComponent as GrayStats } from '../../assets/components/StatsCard/grayStats.svg';
+import GrayStats from '../../assets/components/StatsCard/grayStats.svg';
 import request from '../../request';
 import PatientsTable from '../../components/tables/clinician/PatientsByCliniciansTable';
 import StatsCard from '../../components/cards/StatsCard.Component';
@@ -118,7 +118,7 @@ export default function ClinicianDashboard() {
               amount={item?.amount}
               title={item?.title}
               BottomStats={item?.icon2}
-              statsCardClassName="stats_card_main_div"
+              statsCardClassName="stats_card_main_div2"
             />
           ))}
         </div>

@@ -11,7 +11,7 @@ export default function StatsCard({ Icon, amount, title, BottomStats, statsCardC
         </div>
       </div>
       <div className="statsGraphics">
-        <BottomStats className="bottomStats" />
+        <img src={BottomStats} alt="" className="bottomStats" />
       </div>
     </div>
   );

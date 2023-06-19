@@ -4,11 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/greenIcon.svg';
-import { ReactComponent as GreenStats } from '../../assets/components/StatsCard/greenStats.svg';
+import GreenStats from '../../assets/components/StatsCard/greenStats.svg';
 import { ReactComponent as YellowIcon } from '../../assets/components/StatsCard/yellowIcon.svg';
-import { ReactComponent as YellowStats } from '../../assets/components/StatsCard/yellowStats.svg';
+import YellowStats from '../../assets/components/StatsCard/yellowStats.svg';
 import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
-import { ReactComponent as RedStats } from '../../assets/components/StatsCard/redStats.svg';
+import RedStats from '../../assets/components/StatsCard/redStats.svg';
 import Sidebar from '../../components/sidebar/GenericLeftSidebar';
 import StatsCard from '../../components/cards/StatsCard.Component';
 import PatientTable from '../../components/tables/patient/PatientTable';
@@ -132,7 +132,7 @@ export default function Patient() {
             <div> Doctor &gt;</div>
           </div>
           <div className="patientScreenCardsDiv">
-            <div className="cards_div_patient_pg">
+            <div style={{ marginBottom: '3%' }} className="cards_div_patient_pg">
               {cardsData.map((item) => (
                 <StatsCard
                   key={item?.title}

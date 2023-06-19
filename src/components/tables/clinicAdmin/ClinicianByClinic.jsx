@@ -41,14 +41,10 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '94%',
+          maxHeight: window.location.pathname === '/clinic/dashboard' ? '65%' : '94%',
           overflowX: 'hidden',
           boxShadow: '0',
           width: '100%',
-          '@media (max-width: 1600px)': {
-            maxHeight: '96.3%',
-            width: '73vw',
-          },
         }}
       >
         <div className="iconAndHeading">

@@ -53,11 +53,12 @@
   height: 90vh;
   margin-top: 10vh;
   position: fixed;
-  width: 96%;
+  width: auto;
 }
 
 #patientsByClinicianTable {
   padding: 2% 0px 2% 0px;
+  height: 66vh;
 }
 
 .breadCrumb {

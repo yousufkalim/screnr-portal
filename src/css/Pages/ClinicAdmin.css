@@ -36,6 +36,8 @@
 .bg {
   background-color: rgb(246, 250, 251);
   height: 89vh;
+  width: 80%;
+  margin-left: auto;
 }
 
 .allTableHead {
@@ -246,7 +248,11 @@
 
 @media only screen and (max-width: 1366px) {
   #allTabletitlePatnts {
-    width: 36vw !important;
+    width: 52% !important;
+  }
+
+  .allTableHead {
+    padding-top: 16px;
   }
 
   .staff_id {

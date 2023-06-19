@@ -14,6 +14,7 @@
   justify-content: space-between;
   margin-top: 4%;
   margin-left: 3.2%;
+  gap: 10px;
 }
 
 .right_sidebar_container {
@@ -102,7 +103,7 @@
   width: 23%;
   padding: 10px;
   margin-bottom: 3%;
-  gap: 5%;
+  gap: 10px;
 }
 
 .patientListChart {
@@ -989,19 +990,6 @@
   }
 }
 
-@media only screen and (max-width: 1786px) {
-  .cards_div_patient_pg {
-    gap: 4%;
-  }
-
-  .addMore {
-    width: 7.5%;
-  }
-}
-
-@media only screen and (max-width: 1650px) {
-}
-
 @media only screen and (max-width: 1536px) {
   .prescriptionHead {
     font-size: 17px;
@@ -1043,6 +1031,20 @@
 }
 
 @media only screen and (max-width: 1366px) {
+  .sets_div {
+    flex-direction: column;
+  }
+
+  .right_sidebar {
+    padding: 28% 0;
+  }
+
+  .generatePrescriptionBtn_diaabled {
+    width: 45% !important;
+    font-size: 12px !important;
+    white-space: pre !important;
+  }
+
   .listTxtBtn {
     font-size: 12px;
     white-space: pre;
@@ -1152,10 +1154,6 @@
 
   .css-ymgmpz-MuiFormControl-root {
     width: 31% !important;
-  }
-
-  .prescriptions_btns {
-    width: 73%;
   }
 
   .css-ahj2mt-MuiTypography-root {

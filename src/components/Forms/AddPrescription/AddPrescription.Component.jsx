@@ -344,7 +344,17 @@ export default function AddPrescription({
                 </Select>
               </FormControl>
               <div className="sets_div">
-                <FormControl sx={{ width: '30%', mr: 1.4 }} variant="outlined">
+                <FormControl
+                  sx={{
+                    width: '32%',
+                    mr: 1.4,
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                      marginBottom: '24px',
+                    },
+                  }}
+                  variant="outlined"
+                >
                   <TextField
                     sx={{
                       borderRadius: '20px',
@@ -372,7 +382,17 @@ export default function AddPrescription({
                     }}
                   />
                 </FormControl>
-                <FormControl sx={{ width: '30%', mr: 1.4 }} variant="outlined">
+                <FormControl
+                  sx={{
+                    width: '32%',
+                    mr: 1.4,
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                      marginBottom: '24px',
+                    },
+                  }}
+                  variant="outlined"
+                >
                   <TextField
                     sx={{
                       borderRadius: '20px',
@@ -400,7 +420,15 @@ export default function AddPrescription({
                     }}
                   />
                 </FormControl>
-                <FormControl sx={{ width: '37%' }} variant="outlined">
+                <FormControl
+                  sx={{
+                    width: '32%',
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                    },
+                  }}
+                  variant="outlined"
+                >
                   <Select
                     // eslint-disable-next-line react/no-unstable-nested-components
                     IconComponent={(props) => (
@@ -417,7 +445,7 @@ export default function AddPrescription({
                       '&:hover .MuiOutlinedInput-notchedOutline': {
                         borderColor: ' #454238',
                       },
-                      borderRadius: '17px',
+                      borderRadius: '20px',
                     }}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -620,16 +648,138 @@ export default function AddPrescription({
                 </MenuItem>
               </Select> */}
               </FormControl>
-              <FormControl sx={{ width: '32%', mr: 1.2 }} variant="outlined">
-                <TextField
+              <div className="sets_div">
+                <FormControl
                   sx={{
-                    // borderRadius: '20px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      ml: 1,
+                    width: '32%',
+                    mr: 1.4,
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                      marginBottom: '24px',
                     },
+                  }}
+                  variant="outlined"
+                >
+                  <TextField
+                    sx={{
+                      // borderRadius: '20px',
+                      input: {
+                        color: 'black',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                        ml: 1,
+                      },
+                    }}
+                    id="outlined-fname"
+                    classes={outlinedInputStyles}
+                    placeholder="Number of sets"
+                    name="sets"
+                    value={simpleExerciseInfo.sets}
+                    onChange={(e) => {
+                      if (
+                        (/^\d{1,2}$/.test(e.target.value) &&
+                          parseInt(e.target.value, 10) >= 1 &&
+                          parseInt(e.target.value, 10) <= 10) ||
+                        e.target.value === ''
+                      ) {
+                        handleSimpleExerciseInfo(e.target.name, e.target.value);
+                      }
+                    }}
+                  />
+                </FormControl>
+                <FormControl
+                  sx={{
+                    width: '32%',
+                    mr: 1.4,
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                      marginBottom: '24px',
+                    },
+                  }}
+                  variant="outlined"
+                >
+                  <TextField
+                    sx={{
+                      borderRadius: '20px',
+                      input: {
+                        color: 'black',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                        ml: 1,
+                      },
+                    }}
+                    id="outlined-fname"
+                    classes={outlinedInputStyles}
+                    placeholder="Number of reps"
+                    name="reps"
+                    value={simpleExerciseInfo.reps}
+                    onChange={(e) => {
+                      if (
+                        (/^\d{1,2}$/.test(e.target.value) &&
+                          parseInt(e.target.value, 10) >= 1 &&
+                          parseInt(e.target.value, 10) <= 15) ||
+                        e.target.value === ''
+                      ) {
+                        handleSimpleExerciseInfo(e.target.name, e.target.value);
+                      }
+                    }}
+                  />
+                </FormControl>
+                <FormControl
+                  sx={{
+                    width: '32%',
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                    },
+                  }}
+                  variant="outlined"
+                >
+                  <Select
+                    // eslint-disable-next-line react/no-unstable-nested-components
+                    IconComponent={(props) => (
+                      // eslint-disable-next-line react/jsx-props-no-spreading
+                      <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
+                    )}
+                    sx={{
+                      '.MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#E1E1E1',
+                      },
+                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: ' #454238',
+                      },
+                      '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: ' #454238',
+                      },
+                      borderRadius: '20px',
+                    }}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    inputProps={{
+                      sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
+                    }}
+                    name="rest"
+                    value={simpleExerciseInfo.rest || 'default'}
+                    onChange={(e) => {
+                      handleSimpleExerciseInfo(e.target.name, e.target.value);
+                    }}
+                  >
+                    <MenuItem value="default">
+                      <span className="optColor">Rest Between Sets</span>
+                    </MenuItem>
+                    {rest?.map((item) => {
+                      return (
+                        <MenuItem value={item.value}>
+                          <span className="optColor">{item.label}</span>
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              </div>
+              <FormControl sx={{ width: '100%', mt: 3, mb: 0 }} variant="outlined">
+                <TextareaAutosize
+                  style={{
+                    height: '132px',
                   }}
                   id="outlined-fname"
                   classes={outlinedInputStyles}

@@ -46,13 +46,12 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '94%',
+          maxHeight: '72%',
           overflowX: 'hidden',
           boxShadow: '0',
           width: '74vw',
           marginTop: '-10vh',
           '@media (max-width: 1600px)': {
-            maxHeight: '96.3%',
             width: '73vw',
           },
         }}
@@ -201,10 +200,7 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
       <TablePagination
         sx={{
           color: '#919B9B',
-          width: '100vw',
-          '@media screen and (max-width: 1400px)': {
-            width: '70vw',
-          },
+          width: '95%',
         }}
         component="div"
         rowsPerPageOptions={[]}
