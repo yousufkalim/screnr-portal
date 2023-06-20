@@ -242,7 +242,7 @@ export default function PatientTable({
           <div
             id="allTabletitlePatnts"
             className="allTableTitle"
-            style={{ flexGrow: !isSafari ? '0.15' : 'none' }}
+            style={{ flexGrow: !isSafari ? '0.35' : 'none' }}
           >
             <IconTextField value={search} handleChange={handleSearch} name="search" />
 

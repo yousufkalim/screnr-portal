@@ -1,5 +1,6 @@
 .mainLoginDiv {
   height: 150px;
+  display: flex;
 }
 
 .logoHeading {
@@ -16,7 +17,10 @@
 .loginScreenBG {
   background: #f6fafb;
   height: 100vh;
+  position: fixed;
+  width: 100%;
 }
+
 .forget-txt {
   width: fit-content;
   margin-left: auto;
@@ -71,6 +75,12 @@
   font-weight: 600 !important;
   font-size: 16px !important;
   text-transform: none !important;
+}
+
+@media only screen and (max-width: 1200px) {
+  .loginformHeading {
+    font-size: 28px;
+  }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1919px) {

@@ -1,3 +1,6 @@
-<svg width="391" height="120" viewBox="0 0 391 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.5 81.5C0.5 94.8406 1.74385 107.88 4.11784 120.5H391V-2.5H18.0385C6.77578 23.0887 0.5 51.5342 0.5 81.5Z" fill="currentColor"/>
+<svg width="340" height="120" viewBox="0 0 340 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.1">
+<circle cx="189.5" cy="100.5" r="189.5" fill="#FABB18"/>
+<circle cx="189.5" cy="100.5" r="189.5" fill="#0DAADC"/>
+</g>
 </svg>

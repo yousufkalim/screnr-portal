@@ -178,10 +178,11 @@ function MessageBox({
         value={newMessage}
         sx={{
           position: 'absolute',
-          bottom: '10%',
-          width: '75%',
-          ml: 4,
-          '@media (max-width: 1600px)': { width: '72%', ml: 0 },
+          bottom: '30px',
+          width: '100%',
+          left: '0',
+          pl: '20px',
+          pr: '20px',
         }}
         placeholder="Type a message here"
         onChange={(e) => {
@@ -193,7 +194,7 @@ function MessageBox({
           }
         }}
         InputProps={{
-          style: { alignItems: 'center' },
+          style: { alignItems: 'center', paddingTop: '10px' },
           endAdornment: (
             <InputAdornment position="end">
               <Emoji className="msgSendBtn" onClick={EmojiOpen} />

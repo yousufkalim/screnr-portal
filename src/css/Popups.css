@@ -131,6 +131,7 @@
 .genPresTxt_2 {
   font-size: 25px !important;
 }
+
 .genSubTxt {
   font-weight: 500;
   font-size: 12px;
@@ -184,11 +185,13 @@
   font-weight: 400;
   margin-bottom: 10px;
 }
+
 .delPopuptxt {
   font-size: 20px;
   font-weight: 600;
   margin-top: 40px;
 }
+
 .forgetPaswdTxt {
   font-size: 20px;
   font-weight: 600;
@@ -196,6 +199,7 @@
   color: #454238;
   padding-top: 3% !important;
 }
+
 .forgetPaswdTxtchng {
   font-size: 20px;
   font-weight: 600;
@@ -210,6 +214,7 @@
   color: #fba622;
   line-height: 2;
 }
+
 .pointer {
   cursor: pointer;
 }
@@ -250,7 +255,6 @@
 }
 
 .logoutBtn:hover {
-  border: none !important;
   background-color: #fba622 !important;
   color: white !important;
   width: 100% !important;
@@ -273,9 +277,11 @@
   line-height: 2;
   padding-bottom: 10px;
 }
+
 .clinicianDiv:hover .top_sec_avatar_disabled {
   background-color: #136773;
 }
+
 .clinicianDiv:hover .topSecDocName_disabled {
   color: #136773;
 }
@@ -342,10 +348,6 @@
 }
 
 .spaceOnRight {
-  margin-right: 15px;
-}
-
-.spaceRight {
   margin-right: 15px;
 }
 
@@ -477,6 +479,7 @@
 .blktxt {
   color: #454238;
 }
+
 #boldx {
   font-weight: 600 !important;
 }
@@ -544,6 +547,7 @@
 .react-tel-input .form-control:focus {
   border: 1px solid #454238 !important;
 }
+
 .react-tel-input .form-control:hover {
   border: 1px solid #454238 !important;
 }
@@ -574,17 +578,21 @@
 .react-tel-input .form-control:focus {
   caret-color: black;
 }
+
 .placeholerPhone .react-tel-input .form-control:focus {
   color: black !important;
 }
+
 #focus .react-tel-input .form-control {
   z-index: 1300 !important;
 }
+
 @media only screen and (max-width: 1536px) {
   .clinicianPopupTxt {
     font-size: 20px;
     font-weight: 500;
   }
+
   .jointImg {
     max-height: 25rem;
   }

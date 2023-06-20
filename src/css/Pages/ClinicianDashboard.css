@@ -66,3 +66,18 @@
   width: 100%;
   max-height: 90vh;
 }
+
+@media screen and (max-width: 1366px) {
+  .stats_circle {
+    position: relative;
+    right: -15px;
+  }
+
+  .total_active_patients {
+    font-size: 1.2rem;
+  }
+
+  .active_patients_title {
+    font-size: 12px;
+  }
+}

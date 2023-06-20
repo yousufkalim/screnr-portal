@@ -85,7 +85,7 @@ export default function ClinicianDashboard() {
                 <span className="active_patients_title">Active Patients</span>
               </div>
             </div>
-            <YellowCircle style={{ color: 'rgba(250, 187, 24, 0.12)' }} />
+            <YellowCircle className="stats_circle" style={{ color: 'rgba(250, 187, 24, 0.12)' }} />
           </div>
           <div className="vertical_patient_info_card">
             <div style={{ marginLeft: '4%', display: 'flex', gap: '1rem' }}>
@@ -97,7 +97,7 @@ export default function ClinicianDashboard() {
                 <span className="active_patients_title">Total Patients</span>
               </div>
             </div>
-            <BlueCircle style={{ color: 'rgba(13, 170, 220, 0.12)' }} />
+            <BlueCircle className="stats_circle" style={{ color: 'rgba(13, 170, 220, 0.12)' }} />
           </div>
         </div>
         <PatientsTable

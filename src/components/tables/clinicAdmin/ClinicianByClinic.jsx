@@ -41,7 +41,7 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: window.location.pathname === '/clinic/dashboard' ? '65%' : '94%',
+          maxHeight: window.location.pathname === '/clinic/dashboard' ? '68%' : '94%',
           overflowX: 'hidden',
           boxShadow: '0',
           width: '100%',

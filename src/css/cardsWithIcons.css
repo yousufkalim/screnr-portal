@@ -79,6 +79,10 @@
   margin-right: 5px;
 }
 
+.whiteSpace {
+  white-space: pre;
+}
+
 @media only screen and (max-width: 1440px) {
   .amount {
     font-size: 1.1rem;

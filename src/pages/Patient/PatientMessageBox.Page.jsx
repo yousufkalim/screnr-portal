@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Grid } from '@mui/material';
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import MessageBox from '../../components/MessageBox/MessageBox.Component';
 import request from '../../request/index';
@@ -115,8 +114,8 @@ export default function PatientMessageBox() {
   };
 
   return (
-    <Grid sx={{ marginTop: '8vh', position: 'fixed' }} container>
-      <Grid xl={2} lg={2.5}>
+    <div style={{ position: 'fixed' }} className="gridish">
+      <div className="sideBar_div">
         <Sidebar
           patientId={patientId}
           patientData={patient}
@@ -124,8 +123,8 @@ export default function PatientMessageBox() {
           openEditpatientModal={openEditpatientModal}
           setOpenEditpatientModal={setOpenEditpatientModal}
         />
-      </Grid>
-      <Grid className="bgMsg" xl={10} lg={9.5}>
+      </div>
+      <div className="bgMsg">
         <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Messages &gt;
         </div>
@@ -141,8 +140,8 @@ export default function PatientMessageBox() {
             setLastKey={setLastKey}
           />
         </div>
-      </Grid>
+      </div>
       {EditPatientPopup}
-    </Grid>
+    </div>
   );
 }
