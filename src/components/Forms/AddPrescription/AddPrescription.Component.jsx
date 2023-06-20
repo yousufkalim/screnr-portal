@@ -28,16 +28,20 @@ const useOutlinedInputStyles = makeStyles({
     boxSizing: 'border-box',
     '&:focus': {
       outline: '2px solid black',
-      // border: '2px solid black',
+    },
+    '&::placeholder': {
+      fontWeight: 500,
+      fontSize: '14px',
+      color: '#919B9B',
     },
   },
   root: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         border: '1px solid #E1E1E1 ',
-        borderRadius: '17px',
+        borderRadius: '20px',
         fontSize: 16,
-        height: 55,
+        // height: 55,
       },
       '&:hover fieldset': {
         borderColor: '#454238',
@@ -344,7 +348,17 @@ export default function AddPrescription({
                 </Select>
               </FormControl>
               <div className="sets_div">
-                <FormControl sx={{ width: '30%', mr: 1.4 }} variant="outlined">
+                <FormControl
+                  sx={{
+                    width: '32%',
+                    mr: 1.4,
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                      marginBottom: '24px',
+                    },
+                  }}
+                  variant="outlined"
+                >
                   <TextField
                     sx={{
                       borderRadius: '20px',
@@ -372,7 +386,17 @@ export default function AddPrescription({
                     }}
                   />
                 </FormControl>
-                <FormControl sx={{ width: '30%', mr: 1.4 }} variant="outlined">
+                <FormControl
+                  sx={{
+                    width: '32%',
+                    mr: 1.4,
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                      marginBottom: '24px',
+                    },
+                  }}
+                  variant="outlined"
+                >
                   <TextField
                     sx={{
                       borderRadius: '20px',
@@ -400,7 +424,16 @@ export default function AddPrescription({
                     }}
                   />
                 </FormControl>
-                <FormControl sx={{ width: '37%' }} variant="outlined">
+                <FormControl
+                  sx={{
+                    width: '32%',
+                    mr: 1.4,
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                    },
+                  }}
+                  variant="outlined"
+                >
                   <Select
                     // eslint-disable-next-line react/no-unstable-nested-components
                     IconComponent={(props) => (
@@ -417,7 +450,7 @@ export default function AddPrescription({
                       '&:hover .MuiOutlinedInput-notchedOutline': {
                         borderColor: ' #454238',
                       },
-                      borderRadius: '17px',
+                      borderRadius: '20px',
                     }}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -445,19 +478,10 @@ export default function AddPrescription({
               </div>
               <FormControl sx={{ width: '100%', mt: 3, mb: 0 }} variant="outlined">
                 <TextareaAutosize
-                  maxRows={5}
-                  sx={{
-                    border: '1px solid #E1E1E1 ',
-                    fontSize: 16,
-                    height: 55,
-                    borderRadius: '20px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      ml: 1,
-                    },
+                  style={{
+                    height: '132px',
                   }}
+                  maxRows={5}
                   id="outlined-fname"
                   className={outlinedInputStyles.textarea}
                   placeholder="Special instruction"
@@ -620,137 +644,164 @@ export default function AddPrescription({
                 </MenuItem>
               </Select> */}
               </FormControl>
-              <FormControl sx={{ width: '32%', mr: 1.2 }} variant="outlined">
-                <TextField
+              <div className="sets_div">
+                <FormControl
                   sx={{
-                    // borderRadius: '20px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      ml: 1,
+                    width: '32%',
+                    mr: 1.4,
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                      marginBottom: '24px',
                     },
                   }}
-                  id="outlined-fname"
-                  classes={outlinedInputStyles}
-                  placeholder="Number of sets"
-                  name="sets"
-                  value={simpleExerciseInfo.sets}
-                  onChange={(e) => {
-                    if (
-                      (/^\d{1,2}$/.test(e.target.value) &&
-                        parseInt(e.target.value, 10) >= 1 &&
-                        parseInt(e.target.value, 10) <= 10) ||
-                      e.target.value === ''
-                    ) {
-                      handleSimpleExerciseInfo(e.target.name, e.target.value);
-                    }
-                  }}
-                />
-              </FormControl>
-              <FormControl sx={{ width: '32%', mr: 1.2 }} variant="outlined">
-                <TextField
-                  sx={{
-                    borderRadius: '20px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '400',
-                      ml: 1,
-                    },
-                  }}
-                  id="outlined-fname"
-                  classes={outlinedInputStyles}
-                  placeholder="Number of reps"
-                  name="reps"
-                  value={simpleExerciseInfo.reps}
-                  onChange={(e) => {
-                    if (
-                      (/^\d{1,2}$/.test(e.target.value) &&
-                        parseInt(e.target.value, 10) >= 1 &&
-                        parseInt(e.target.value, 10) <= 15) ||
-                      e.target.value === ''
-                    ) {
-                      handleSimpleExerciseInfo(e.target.name, e.target.value);
-                    }
-                  }}
-                />
-              </FormControl>
-              <FormControl sx={{ width: '32%' }} variant="outlined">
-                <Select
-                  // eslint-disable-next-line react/no-unstable-nested-components
-                  IconComponent={(props) => (
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
-                  )}
-                  sx={{
-                    '.MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#E1E1E1',
-                    },
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      borderColor: ' #454238',
-                    },
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: ' #454238',
-                    },
-                    borderRadius: '20px',
-                  }}
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  inputProps={{
-                    sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
-                  }}
-                  name="rest"
-                  value={simpleExerciseInfo.rest || 'default'}
-                  onChange={(e) => {
-                    handleSimpleExerciseInfo(e.target.name, e.target.value);
-                  }}
+                  variant="outlined"
                 >
-                  <MenuItem value="default">
-                    <span className="optColor">Rest Between Sets</span>
-                  </MenuItem>
-                  {rest?.map((item) => {
-                    return (
-                      <MenuItem value={item.value}>
-                        <span className="optColor">{item.label}</span>
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-              <FormControl sx={{ width: '100%', mt: 3, mb: 3 }} variant="outlined">
-                <TextField
-                  multiline
-                  rows={5}
-                  maxRows={5}
+                  <TextField
+                    sx={{
+                      // borderRadius: '20px',
+                      input: {
+                        color: 'black',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                        ml: 1,
+                      },
+                    }}
+                    id="outlined-fname"
+                    classes={outlinedInputStyles}
+                    placeholder="Number of sets"
+                    name="sets"
+                    value={simpleExerciseInfo.sets}
+                    onChange={(e) => {
+                      if (
+                        (/^\d{1,2}$/.test(e.target.value) &&
+                          parseInt(e.target.value, 10) >= 1 &&
+                          parseInt(e.target.value, 10) <= 10) ||
+                        e.target.value === ''
+                      ) {
+                        handleSimpleExerciseInfo(e.target.name, e.target.value);
+                      }
+                    }}
+                  />
+                </FormControl>
+                <FormControl
                   sx={{
-                    borderRadius: '20px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      ml: 1,
+                    width: '32%',
+                    mr: 1.4,
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                      marginBottom: '24px',
                     },
                   }}
+                  variant="outlined"
+                >
+                  <TextField
+                    sx={{
+                      borderRadius: '20px',
+                      input: {
+                        color: 'black',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                        ml: 1,
+                      },
+                    }}
+                    id="outlined-fname"
+                    classes={outlinedInputStyles}
+                    placeholder="Number of reps"
+                    name="reps"
+                    value={simpleExerciseInfo.reps}
+                    onChange={(e) => {
+                      if (
+                        (/^\d{1,2}$/.test(e.target.value) &&
+                          parseInt(e.target.value, 10) >= 1 &&
+                          parseInt(e.target.value, 10) <= 15) ||
+                        e.target.value === ''
+                      ) {
+                        handleSimpleExerciseInfo(e.target.name, e.target.value);
+                      }
+                    }}
+                  />
+                </FormControl>
+                <FormControl
+                  sx={{
+                    width: '32%',
+                    mr: 1.4,
+                    '@media (max-width: 1366px)': {
+                      width: '100%',
+                    },
+                  }}
+                  variant="outlined"
+                >
+                  <Select
+                    // eslint-disable-next-line react/no-unstable-nested-components
+                    IconComponent={(props) => (
+                      // eslint-disable-next-line react/jsx-props-no-spreading
+                      <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
+                    )}
+                    sx={{
+                      '.MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#E1E1E1',
+                      },
+                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: ' #454238',
+                      },
+                      '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: ' #454238',
+                      },
+                      borderRadius: '20px',
+                    }}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    inputProps={{
+                      sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
+                    }}
+                    name="rest"
+                    value={simpleExerciseInfo.rest || 'default'}
+                    onChange={(e) => {
+                      handleSimpleExerciseInfo(e.target.name, e.target.value);
+                    }}
+                  >
+                    <MenuItem value="default">
+                      <span className="optColor">Rest Between Sets</span>
+                    </MenuItem>
+                    {rest?.map((item) => {
+                      return (
+                        <MenuItem value={item.value}>
+                          <span className="optColor">{item.label}</span>
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              </div>
+              <FormControl sx={{ width: '100%', mt: 3, mb: 0 }} variant="outlined">
+                <TextareaAutosize
+                  style={{
+                    height: '132px',
+                  }}
+                  maxRows={5}
                   id="outlined-fname"
-                  classes={outlinedInputStyles}
+                  className={outlinedInputStyles.textarea}
                   placeholder="Special instruction"
                   name="instructions"
-                  value={simpleExerciseInfo.instructions}
+                  value={motionExerciseInfo?.instructions}
                   onChange={(e) => {
-                    handleSimpleExerciseInfo(e.target.name, e.target.value);
+                    handleMotionExerciseInfo(e.target.name, e.target.value);
                   }}
                 />
               </FormControl>
               <div className="prescriptionBtns2">
-                <Button
-                  disabled={!validatingListBtn}
-                  className={validatingListBtn ? 'listBtn' : 'listBtn_disabled'}
-                  onClick={handleAddToList}
-                >
-                  <span className="listTxtBtn">Add to List</span>
-                  <List />
-                </Button>
+                <div className="btn_div">
+                  <Button
+                    disabled={!validatingListBtn}
+                    className={validatingListBtn ? 'listBtn' : 'listBtn_disabled'}
+                    onClick={handleAddToList}
+                  >
+                    <span className="listTxtBtn">Add to List</span>
+                    <div className="image_div">
+                      <List />
+                    </div>
+                  </Button>
+                </div>
               </div>
             </>
           )}

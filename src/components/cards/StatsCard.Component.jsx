@@ -7,11 +7,11 @@ export default function StatsCard({ Icon, amount, title, BottomStats, statsCardC
         <Icon className="custom_icons" />
         <div className="card_content_div2">
           <span className="amount">{amount}</span>
-          <span className="title">{title}</span>
+          <span className="title whiteSpace">{title}</span>
         </div>
       </div>
       <div className="statsGraphics">
-        <BottomStats className="bottomStats" />
+        <img src={BottomStats} alt="" className="bottomStats" />
       </div>
     </div>
   );

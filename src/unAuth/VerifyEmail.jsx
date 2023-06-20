@@ -94,8 +94,8 @@ export default function VerifyEmail() {
   return (
     <div className="loginScreenBG">
       <Grid container>
-        <Grid lg={12} xl={12} className="mainLoginDiv" />
-        <Grid lg={6.5} xl={6.5}>
+        <Grid xs={12} sm={12} lg={12} xl={12} className="mainLoginDiv" />
+        <Grid xs={6.5} sm={6.5} lg={6.5} xl={6.5}>
           <div className="logoDiv">
             <img src={Logo} className="loginPglogo" alt="" />
           </div>

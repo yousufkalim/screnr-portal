@@ -5,6 +5,7 @@
   margin-left: 2rem;
   margin-top: 1rem;
 }
+
 .buttonDiv {
   display: flex;
   justify-content: space-between;
@@ -12,6 +13,7 @@
   width: 47%;
   margin-left: 1.5%;
 }
+
 #optionButtons {
   color: #136773;
   border-radius: 17px;
@@ -32,15 +34,21 @@
 }
 
 .buttonLogos {
-  width: 25%;
   margin-right: 8px;
 }
+
 @media only screen and (min-width: 1630px) {
   .buttonDiv {
     width: 50%;
   }
 }
+
 @media only screen and (max-width: 1400px) {
+  #optionButtons,
+  #optionButtons_selected {
+    font-size: 12px;
+  }
+
   .buttonDiv {
     width: 50%;
   }

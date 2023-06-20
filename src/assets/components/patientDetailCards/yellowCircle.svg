@@ -1,3 +1,5 @@
 <svg width="341" height="120" viewBox="0 0 341 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="189.5" cy="100.5" r="189.5" fill="currentColor"/>
+<g opacity="0.1">
+<circle cx="189.5" cy="100.5" r="189.5" fill="#FABB18"/>
+</g>
 </svg>

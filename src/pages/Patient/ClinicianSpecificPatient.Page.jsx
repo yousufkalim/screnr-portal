@@ -4,11 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/greenIcon.svg';
-import { ReactComponent as GreenStats } from '../../assets/components/StatsCard/greenStats.svg';
+import GreenStats from '../../assets/components/StatsCard/greenStats.svg';
 import { ReactComponent as YellowIcon } from '../../assets/components/StatsCard/yellowIcon.svg';
-import { ReactComponent as YellowStats } from '../../assets/components/StatsCard/yellowStats.svg';
+import YellowStats from '../../assets/components/StatsCard/yellowStats.svg';
 import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
-import { ReactComponent as RedStats } from '../../assets/components/StatsCard/redStats.svg';
+import RedStats from '../../assets/components/StatsCard/redStats.svg';
 import Sidebar from '../../components/sidebar/GenericLeftSidebar';
 import StatsCard from '../../components/cards/StatsCard.Component';
 import PatientTable from '../../components/tables/patient/PatientTable';
@@ -92,18 +92,9 @@ export default function Patient() {
   }, []);
 
   return (
-    <div
-      className="main_div"
-      style={{
-        background: 'rgb(246, 250, 251)',
-        height: '100vh',
-        marginTop: '8vh',
-        position: 'fixed',
-        width: '100%',
-      }}
-    >
-      <Grid sx={{ flexWrap: 'unset' }} container>
-        <Grid xl={2} lg={2.5}>
+    <div style={{ position: 'fixed' }} className="gridish">
+      <div className="gridish_child">
+        <div className="sideBar_div">
           <Sidebar
             id={id}
             txt="clinics/getClinician"
@@ -112,7 +103,7 @@ export default function Patient() {
             open={openEditClinician}
             setOpen={setOpenEditClinician}
           />
-        </Grid>
+        </div>
 
         <Grid className="bgClinicianTable" xl={7.5} lg={7}>
           <div className="breadCrumb" style={{ display: 'flex' }}>
@@ -132,7 +123,7 @@ export default function Patient() {
             <div> Doctor &gt;</div>
           </div>
           <div className="patientScreenCardsDiv">
-            <div className="cards_div_patient_pg">
+            <div style={{ marginBottom: '3%' }} className="cards_div_patient_pg">
               {cardsData.map((item) => (
                 <StatsCard
                   key={item?.title}
@@ -152,9 +143,9 @@ export default function Patient() {
             getPatients={getPatients}
           />
         </Grid>
-        <Grid xl={2.5} lg={2.5}>
+        <div className="rightSide_div">
           <RightSidebar logs={activityLog} />
-        </Grid>
+        </div>
         <div className="addBtn">
           <img
             src={addBtn}
@@ -171,7 +162,7 @@ export default function Patient() {
             setOpenAddPatient={setOpenAddPatient}
           />
         )}
-      </Grid>
+      </div>
 
       <EditClinician
         openEditClinican={openEditClinician}

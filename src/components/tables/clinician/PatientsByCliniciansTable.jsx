@@ -96,24 +96,16 @@ export default function PatientsByCliniciansTable({
   const handlePatientProfile = (patientid) => navigate(`/patients/${patientid}/prescription`);
 
   return (
-    <div className="bgClinicianTable" id="patientsByClinicianTable">
+    <div id="patientsByClinicianTable">
       <TableContainer
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '84%',
-          overflowX: 'hidden',
+          maxHeight: '95%',
+          overflowX: 'auto',
+          overflowY: 'auto',
           boxShadow: '0',
           width: '100%',
-          '@media (max-width: 1600px)': {
-            maxHeight: '85.6%',
-            width: '100%',
-            overflowX: 'scroll',
-          },
-          '@media (min-width: 1536px)': {
-            maxHeight: '85.6%',
-            width: '100%',
-          },
           '@media (max-width: 1535px)': {
             '&::-webkit-scrollbar': {
               height: '6px',
@@ -194,15 +186,7 @@ export default function PatientsByCliniciansTable({
                   }}
                 >
                   <TableCell align="left"> {row?.id} </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      display: 'flex',
-                      minHeight: '80%',
-                      paddingTop: '23px',
-                      '@media (max-width: 1600px)': { paddingBottom: '32px', paddingTop: '0px' },
-                    }}
-                  >
+                  <TableCell align="left">
                     {row.profile_pic ? (
                       <div className="imgDivClinic">
                         <img
@@ -217,12 +201,14 @@ export default function PatientsByCliniciansTable({
                         />
                       </div>
                     ) : (
-                      <AvatarComponent
-                        alt={`${row.first_name} ${row.last_name}`}
-                        className="header_avatar"
-                      />
+                      <div style={{ display: 'flex' }}>
+                        <AvatarComponent
+                          alt={`${row.first_name} ${row.last_name}`}
+                          className="header_avatar"
+                        />
+                        <div className="clinic_cell">{`${row.first_name} ${row.last_name}`}</div>
+                      </div>
                     )}
-                    <div className="clinic_cell">{`${row.first_name} ${row.last_name}`}</div>
                   </TableCell>
                   <TableCell align="center" className="table_cells">
                     {row?.userData?.diagnosis}

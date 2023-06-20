@@ -67,12 +67,17 @@
 }
 
 .user_exp_detail {
-  width: 68%;
+  width: 70%;
   font-size: 0.9rem;
   margin: 0 auto;
   color: #ff5151;
   display: flex;
-  padding-left: 5%;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.spaceRight {
+  white-space: pre;
 }
 
 .patient_exp_detail {
@@ -86,6 +91,7 @@
 .detail_expiry {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .activityTxt {
@@ -247,49 +253,12 @@
   text-overflow: ellipsis;
 }
 
-@media only screen and (max-width: 1899px) {
-  .spaceRight {
-    margin-right: 14px;
-  }
-
-  .user_exp_detail {
-    width: 85%;
-    padding-left: 7%;
-  }
-}
-
-@media only screen and (min-width: 1899px) {
-  .user_exp_detail {
-    padding-left: 0%;
-  }
-}
-
-@media only screen and (max-width: 1340px) {
-  .user_exp_detail {
-    width: 80% !important;
-  }
-}
-
-@media only screen and (max-width: 1300px) {
-  .user_exp_detail {
-    width: 85% !important;
-  }
-}
-
-@media only screen and (max-width: 1600px) {
-  .activityTxt {
-    font-size: 14px;
-  }
-}
-
-@media screen and (min-width: 1536px) and (max-width: 1600px) {
-  .user_exp_detail {
-    width: 85% !important;
-    padding-left: 2%;
-  }
-}
-
 @media only screen and (max-width: 1383px) {
+  .spaceRight {
+    font-size: 12px;
+    white-space: unset;
+  }
+
   .user_detail {
     font-size: 0.8rem !important;
   }
@@ -297,30 +266,9 @@
   .xnewww {
     width: 80% !important;
   }
-
-  .activityTxt {
-    width: 90% !important;
-  }
-
-  .user_exp_detail {
-    width: 80% !important;
-    padding-left: 2%;
-  }
-
-  .clickedActivity {
-    margin-left: 6%;
-  }
 }
 
 @media only screen and (max-width: 1200px) {
-  .clickedActivity {
-    font-size: 15px;
-  }
-
-  .activityTxt {
-    font-size: 10px;
-  }
-
   .user_detail {
     font-size: 0.7rem !important;
   }
@@ -331,8 +279,9 @@
 }
 
 @media only screen and (max-width: 1100px) {
-  .activityTxt {
-    font-size: 9px;
+  .iconActivity,
+  .notActivity {
+    width: 90%;
   }
 
   .table_header {

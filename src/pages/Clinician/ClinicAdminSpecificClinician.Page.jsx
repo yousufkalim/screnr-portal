@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as Circle } from '../../assets/components/CardWithIcon/yellowIcon.svg';
@@ -95,11 +94,8 @@ export default function ClinicAdmin() {
 
   return (
     <>
-      <Grid
-        container
-        sx={{ flexFlow: 'unset', marginTop: '8vh', height: '92vh', position: 'fixed' }}
-      >
-        <Grid xs={3} xl={3} lg={2.5}>
+      <div style={{ position: 'fixed' }} className="gridish">
+        <div className="sideBar_div">
           <Sidebar
             id={id}
             txt="staff/getClinic"
@@ -108,8 +104,8 @@ export default function ClinicAdmin() {
             setOpen={setOpenEditClinician}
             open={openEditClinician}
           />
-        </Grid>
-        <Grid className="bgClinicianTable" xl={12} lg={9.5}>
+        </div>
+        <div style={{ width: '80%', marginLeft: 'auto' }} className="bgClinicianTable">
           <div className="breadCrumb" style={{ display: 'flex' }}>
             <div
               className="navigationEntities"
@@ -145,7 +141,7 @@ export default function ClinicAdmin() {
               loading={isLoading}
             />
           </div>
-        </Grid>
+        </div>
         <div className="addBtn">
           <img
             src={addBtn}
@@ -162,7 +158,7 @@ export default function ClinicAdmin() {
           setOpenAddClinican={setOpenAddClinican}
           getClinicians={getClinicians}
         />
-      </Grid>
+      </div>
 
       <EditClinicAdmin
         openEditClinicAdmin={openEditClinician}

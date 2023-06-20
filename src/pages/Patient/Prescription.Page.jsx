@@ -53,8 +53,8 @@ export default function Prescription() {
 
   return (
     <>
-      <Grid container sx={{ marginTop: '8vh', height: '92vh', position: 'fixed' }}>
-        <Grid xl={2} lg={2.5}>
+      <div style={{ position: 'fixed' }} className="gridish">
+        <div className="sideBar_div">
           <Sidebar
             patientId={id}
             patientData={patient}
@@ -62,7 +62,7 @@ export default function Prescription() {
             setOpenEditpatientModal={setOpenEditpatientModal}
             selectedClinician={selectedClinician}
           />
-        </Grid>
+        </div>
         <Grid className="bgPrescription" xl={10} lg={9.5}>
           <PatientTopSection
             allClinicians={allClinicians}
@@ -88,7 +88,7 @@ export default function Prescription() {
             alt=""
           />
         </div>
-      </Grid>
+      </div>
       {EditpatientPopup}
     </>
   );

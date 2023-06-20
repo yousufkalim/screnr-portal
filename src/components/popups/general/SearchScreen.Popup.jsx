@@ -160,7 +160,7 @@ export default function SearchScreen() {
         background: 'rgb(246, 250, 251)',
         padding: '5%',
         paddingTop: '2.7%',
-        marginTop: '6.5vh',
+        marginTop: '9vh',
         position: 'fixed',
       }}
     >
@@ -238,43 +238,55 @@ export default function SearchScreen() {
             <div className="table_title">
               <div className="buttonDiv">
                 <Button
+                  className="search_for_button"
                   id={role === 'staff' ? 'optionButtons_selected' : 'optionButtons'}
                   name="staff"
                   onClick={(e) => {
                     handleRole(e);
                   }}
                 >
-                  <StaffMember style={{ width: '15%', marginRight: '8px' }} />
+                  <div className="image_div">
+                    <StaffMember className="buttonLogos" />
+                  </div>
                   Staff Member
                 </Button>
                 <Button
+                  className="search_for_button"
                   id={role === 'clinic' ? 'optionButtons_selected' : 'optionButtons'}
                   name="clinic"
                   onClick={(e) => {
                     handleRole(e);
                   }}
                 >
-                  <ClinicsLogo className="buttonLogos" />
+                  <div className="image_div">
+                    <ClinicsLogo className="buttonLogos" />
+                  </div>
                   Clinics
                 </Button>
                 <Button
+                  className="search_for_button"
                   id={role === 'clinician' ? 'optionButtons_selected' : 'optionButtons'}
                   name="clinician"
                   onClick={(e) => {
                     handleRole(e);
                   }}
                 >
-                  <ClinicianLogo className="buttonLogos" />
+                  <div className="image_div">
+                    <ClinicianLogo className="buttonLogos" />
+                  </div>
                   Clinician
                 </Button>
                 <Button
+                  className="search_for_button"
                   id={role === 'patient' ? 'optionButtons_selected' : 'optionButtons'}
                   name="patient"
                   onClick={(e) => {
                     handleRole(e);
                   }}
                 >
-                  <PatientsLogo className="buttonLogos" />
+                  <div className="image_div">
+                    <PatientsLogo className="buttonLogos" />
+                  </div>
                   Patient
                 </Button>
               </div>

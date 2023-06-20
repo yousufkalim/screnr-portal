@@ -61,7 +61,7 @@ export default function ClinicAdmin() {
 
   return (
     <Grid container>
-      <Grid className="bg" xl={12} lg={12}>
+      <Grid className="bg" sx={{ marginLeft: 'unset', width: '100%' }} xl={12} lg={12}>
         <AllClinicAdminTable
           clinicAdmins={clinicAdmins}
           getClinicAdmins={getClinicAdmins}

@@ -17,7 +17,7 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
         background: '#F6FAFB',
         boxShadow: '0',
         ml: 5,
-        maxHeight: '81%',
+        maxHeight: '380px',
         overflowY: 'auto',
         overflowX: 'hidden',
         width: '93%',
@@ -47,9 +47,6 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
             <TableCell className="table_head" id="prescriptionTableHead" align="left">
               Name
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
             <TableCell className="table_head" id="prescriptionTableHead" align="center">
               Sets
             </TableCell>
@@ -77,9 +74,6 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
                   {row?.name}
                 </div>
               </TableCell>
-              <TableCell />
-              <TableCell />
-              <TableCell />
               <TableCell align="center" className="prescription_table_cells">
                 {row?.sets}
               </TableCell>

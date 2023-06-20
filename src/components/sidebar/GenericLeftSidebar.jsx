@@ -120,10 +120,12 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
       {info?.expiry_date ? (
         <div className="user_exp_detail">
           <span className="detail_expiry">
-            <Expiry className="spaceOnRight" />
+            <div className="image_div">
+              <Expiry className="spaceOnRight" />
+            </div>
             <p className="spaceRight">Expiry Date </p>
           </span>
-          <p> {moment(info?.expiry_date).format('MM-DD-YYYY')}</p>
+          <p className="spaceRight"> {moment(info?.expiry_date).format('MM-DD-YYYY')}</p>
         </div>
       ) : (
         ''
@@ -139,13 +141,16 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
               setActivityClicked(true);
             }}
           >
-            <Activity
-              className={
-                activityClicked || window.location.pathname.includes('activity')
-                  ? 'iconActivity'
-                  : ''
-              }
-            />
+            <div className="image_div">
+              <Activity
+                className={
+                  activityClicked || window.location.pathname.includes('activity')
+                    ? 'iconActivity'
+                    : ''
+                }
+              />
+            </div>
+
             <p
               className={
                 activityClicked || window.location.pathname.includes('activity')

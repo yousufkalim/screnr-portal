@@ -2,13 +2,13 @@ import { React, useState, useCallback, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/greenIcon.svg';
-import { ReactComponent as GreenStats } from '../../assets/components/StatsCard/greenStats.svg';
+import GreenStats from '../../assets/components/StatsCard/greenStats.svg';
 import { ReactComponent as YellowIcon } from '../../assets/components/StatsCard/yellowIcon.svg';
-import { ReactComponent as YellowStats } from '../../assets/components/StatsCard/yellowStats.svg';
+import YellowStats from '../../assets/components/StatsCard/yellowStats.svg';
 import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
-import { ReactComponent as RedStats } from '../../assets/components/StatsCard/redStats.svg';
+import RedStats from '../../assets/components/StatsCard/redStats.svg';
 import { ReactComponent as GrayIcon } from '../../assets/components/StatsCard/grayIcon.svg';
-import { ReactComponent as GrayStats } from '../../assets/components/StatsCard/grayStats.svg';
+import GrayStats from '../../assets/components/StatsCard/grayStats.svg';
 import { ReactComponent as Patients } from '../../assets/components/CardWithIcon/patientsIcon.svg';
 import { ReactComponent as Clinician } from '../../assets/components/CardWithIcon/clinician.svg';
 import { ReactComponent as Patients2 } from '../../assets/components/CardWithIcon/patients.svg';
@@ -165,7 +165,7 @@ export default function ClinicAdminDashboard() {
               amount={item?.amount}
               title={item?.title}
               BottomStats={item?.icon2}
-              statsCardClassName="stats_card_main_div"
+              statsCardClassName="stats_card_main_div2"
             />
           ))}
         </div>

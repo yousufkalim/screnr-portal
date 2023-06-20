@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react';
-import { Grid } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import addBtn from '../../assets/icons/addBtn.svg';
@@ -51,8 +50,8 @@ export default function ClinicAdmin() {
 
   return (
     <>
-      <Grid sx={{ marginTop: '8vh', height: '92vh' }} container>
-        <Grid>
+      <div style={{ position: 'fixed' }} className="gridish">
+        <div className="sideBar_div">
           <Sidebar
             id={id}
             txt="admins/getStaff"
@@ -60,8 +59,8 @@ export default function ClinicAdmin() {
             open={openEditStaffMember}
             setOpen={setOpenEditStaffMember}
           />
-        </Grid>
-        <Grid className="bg" xl={10} lg={9.5}>
+        </div>
+        <div className="bg">
           <div
             className="main_div"
             style={{
@@ -86,7 +85,7 @@ export default function ClinicAdmin() {
               loading={isLoading}
             />
           </div>
-        </Grid>
+        </div>
         <div className="addBtn">
           <img
             src={addBtn}
@@ -102,7 +101,7 @@ export default function ClinicAdmin() {
           getClinicAdmins={getClinicAdmins}
           staffAdminId={id}
         />
-      </Grid>
+      </div>
       {openEditStaffMember && (
         <EditStaffMember
           openEditStaffMember={openEditStaffMember}
