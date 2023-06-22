@@ -6,17 +6,19 @@ import MessageBox from '../../components/MessageBox/MessageBox.Component';
 import request from '../../request/index';
 import EditPatient from '../../components/popups/patient/EditPatient.Popup';
 import SocketConnection from '../../helper/socket';
+import { Store } from '../../StoreContext';
 
 export default function PatientMessageBox() {
   const params = useParams();
   const { patientId, clinicianId } = params;
+  const store = Store();
+  const { user } = store;
   const [patient, setPatient] = useState({});
   const [clinician, setClinician] = useState({});
   const [allMessages, setAllMessages] = useState([]);
   const [chatId, setChatId] = useState('');
   const [openEditpatientModal, setOpenEditpatientModal] = useState(false);
   const [lastKey, setLastKey] = useState({}); // for pagination
-  console.log('🚀 ~ file: PatientMessageBox.Page.jsx:20 ~ PatientMessageBox ~ lastKey:', lastKey);
 
   useEffect(() => {
     if (SocketConnection) {
@@ -59,13 +61,23 @@ export default function PatientMessageBox() {
   };
 
   const getClinicianById = async () => {
-    await request('get', `/clinics/getClinician/${clinicianId}`)
-      .then((res) => {
-        setClinician(res?.data?.user);
-      })
-      .catch((error) => {
-        toast.error(error?.response?.data?.message);
-      });
+    if (user?.role === 'clinician') {
+      await request('get', `/auth/userDetails`)
+        .then((res) => {
+          setClinician(res?.data?.user);
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.message);
+        });
+    } else {
+      await request('get', `/clinics/getClinician/${clinicianId}`)
+        .then((res) => {
+          setClinician(res?.data?.user);
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.message);
+        });
+    }
   };
 
   const chat = async () => {
