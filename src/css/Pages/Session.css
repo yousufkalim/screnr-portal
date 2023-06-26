@@ -7,21 +7,26 @@
   max-width: 74vw;
   padding: 2rem 2rem 2rem 2rem;
 }
+
 .arrows {
   cursor: pointer;
 }
+
 .SessionsHeading {
   display: flex;
   justify-content: space-between;
 }
+
 .leftside_title {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .backIcon_button {
   margin-right: 20px;
 }
+
 .dateTitle {
   margin-right: 20px;
   font-size: 18px;
@@ -30,6 +35,7 @@
   font-weight: 500;
   line-height: 27px;
 }
+
 .dateExcercise {
   background-color: #f6fafb;
   padding: 6px;
@@ -39,6 +45,7 @@
   font-size: 16px;
   font-weight: 500;
 }
+
 .excerciseDay {
   color: #fba622;
   font-weight: 500;
@@ -46,14 +53,17 @@
   font-family: 'Poppins';
   line-height: 30px;
 }
+
 .excercise_name_heading {
   margin-top: 20px;
   display: flex;
   align-items: center;
 }
+
 .excerciseNameIcon {
   margin-right: 10px;
 }
+
 .excercise_details {
   display: flex;
   max-width: 25vw;
@@ -61,6 +71,7 @@
   height: 45px;
   margin-top: 30px;
 }
+
 .setNumber {
   width: 48%;
   background-color: #f6fafb;
@@ -69,11 +80,13 @@
   display: flex;
   padding: 4%;
 }
+
 .text_rep_set {
   font-size: 12px;
   font-weight: 400;
   color: #919b9b;
 }
+
 .set_rep_valueNumber {
   font-size: 22px;
   margin-left: 8px;
@@ -100,6 +113,7 @@
   margin-top: 20px;
   width: 70%;
 }
+
 .score_Bars {
   height: 135px;
   background-color: rgba(17, 162, 131, 0.05);
@@ -111,6 +125,7 @@
   align-items: center;
   position: relative;
 }
+
 .score_Bar1 {
   height: 160px;
   background-color: rgba(17, 162, 131, 0.05);
@@ -122,6 +137,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .performanceGraphDiv {
   height: 450px;
   background-color: #fff;
@@ -131,6 +147,7 @@
   border-radius: 15px;
   padding-bottom: 40px;
 }
+
 .performanceTitle {
   padding-top: 40px;
   padding-left: 3.5%;
@@ -141,6 +158,7 @@
   line-height: 27px;
   padding-bottom: 20px;
 }
+
 .excercise_name_p {
   color: #136773;
   font-family: 'poppins';
@@ -148,6 +166,7 @@
   line-height: 24px;
   font-size: 16px;
 }
+
 .excercises_names {
   color: #000000;
   font-weight: 500;
@@ -157,12 +176,14 @@
   padding-top: 12px;
   padding-bottom: 12px;
 }
+
 .excercise_percent {
   color: #000000;
   font-family: 'Poppins';
   font-weight: 500;
   line-height: 17px;
 }
+
 .scoreText {
   color: #919b9b;
   font-size: 8px;
@@ -170,6 +191,7 @@
   font-family: 'poppins';
   line-height: 12px;
 }
+
 .performanceName_colors {
   display: flex;
   flex-direction: row;
@@ -177,6 +199,7 @@
   justify-content: space-between;
   max-width: 100%;
 }
+
 .colorDotsDiv {
   display: flex;
   flex-direction: row;
@@ -186,12 +209,15 @@
   margin-right: 5%;
   margin-top: 20px;
 }
+
 .colorDots {
   display: flex;
   align-items: center;
+  gap: 3px;
+  margin-left: 5px;
 }
+
 .colortxt {
-  margin-left: 8px;
   font-size: 12px;
   color: #202a3e;
   font-family: 'Poppins';
@@ -209,6 +235,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .overallScoreGraph {
   position: absolute;
   max-height: fit-content;
@@ -217,58 +244,79 @@
   justify-content: center;
   flex-direction: column;
 }
+
 .overAll_Arrows {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
+
 .colorDotsDiv2 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
 @media only screen and (max-width: 1750px) {
   .bgAddPrescriptionSessions {
     height: 30rem;
   }
+
   .excercise_details {
     max-width: 27rem;
   }
+
   .jointScoreOuterDiv {
     width: 80%;
   }
+
   .score_Bars {
     width: 109px;
   }
 }
+
 @media only screen and (max-width: 1500px) {
   .jointScoreOuterDiv {
     width: 90%;
   }
+
   .score_Bars {
     width: 105px;
   }
+
   .excerciseDay {
     font-size: 17px;
   }
+
   .jointScoreHeading {
     font-size: 16.5px;
   }
+
   .dateTitle {
     font-size: 16.5px;
   }
+
   .dateExcercise {
     font-size: 14.5px;
   }
+
   .set_rep_valueNumber {
     font-size: 20px;
   }
 }
+
 @media only screen and (max-width: 1300px) {
   .jointScoreOuterDiv {
     width: 95%;
+    gap: 10px;
   }
+
+  .colortxt,
+  .excercises_names {
+    font-size: 9px;
+  }
+
   .score_Bars {
     width: 100px;
   }

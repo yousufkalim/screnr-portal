@@ -65,7 +65,7 @@
 
 .bgReport {
   background-color: rgb(246, 250, 251);
-  height: 100vh;
+  width: 100%;
 }
 
 .bgReportCard {

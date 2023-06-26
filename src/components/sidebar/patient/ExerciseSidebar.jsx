@@ -30,7 +30,9 @@ export default function Sidebar({
     <div className="left_side">
       <PatientSidebarSection patientData={patient} />
       <div className="activityLeft" role="presentation">
-        <Exercise className={expanded ? 'iconActivity' : ''} />
+        <div className="image_div">
+          <Exercise className={expanded ? 'iconActivity' : ''} />
+        </div>
         <div
           className="dropdownIcons"
           onClick={() => {
@@ -90,15 +92,19 @@ export default function Sidebar({
         onClick={() => handleActiveTab('Pain Survey')}
         className={activeTab === 'Pain Survey' ? 'selectedExActivity' : 'activityEx'}
       >
-        <Survey className="exIcon" />
-        <p className="exTxt">Pain Survey</p>
+        <div className="image_div">
+          <Survey className="exIcon" />
+        </div>
+        <p className="activityTxt">Pain Survey</p>
       </div>
       <div
         onClick={() => handleActiveTab('Reports')}
         className={activeTab === 'Reports' ? 'selectedExActivity' : 'activityEx'}
       >
-        <Msg className="exIcon" />
-        <p className="exTxt">Reports</p>
+        <div className="image_div">
+          <Msg className="exIcon" />
+        </div>
+        <p className="activityTxt">Reports</p>
       </div>
     </div>
   );
