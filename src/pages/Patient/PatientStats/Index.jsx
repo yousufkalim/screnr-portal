@@ -42,8 +42,8 @@ export default function Index() {
   }, []);
 
   return (
-    <Grid container>
-      <Grid xl={2} lg={2.5}>
+    <div className="gridish">
+      <div className="sideBar_div">
         <Sidebar
           activeTab={activeTab}
           session={session}
@@ -52,8 +52,8 @@ export default function Index() {
           setActiveTab={setActiveTab}
           handleGetExerciseById={handleGetExerciseById}
         />
-      </Grid>
-      <Grid xl={10} lg={9.5}>
+      </div>
+      <div style={{ width: '80%', marginLeft: 'auto' }}>
         {activeTab === 'Reports' ? (
           <Reports session={session} />
         ) : activeTab === 'Pain Survey' ? (
@@ -61,7 +61,7 @@ export default function Index() {
         ) : (
           activeTab === 'exercise' && <ExerciseDetails session={session} exercise={exercise} />
         )}
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 }

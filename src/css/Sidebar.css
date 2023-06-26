@@ -216,7 +216,7 @@
   width: 70%;
   align-items: center;
   text-decoration: none;
-  cursor: default;
+  cursor: pointer;
 }
 
 .activityEx {
@@ -224,7 +224,7 @@
   width: 70%;
   align-items: center;
   text-decoration: none;
-  cursor: default;
+  cursor: pointer;
   font-weight: 600;
   font-size: 16px;
   color: #919b9b;
@@ -279,6 +279,11 @@
 }
 
 @media only screen and (max-width: 1100px) {
+  .selectedItemExercise,
+  .itemExercise {
+    font-size: 12px;
+  }
+
   .iconActivity,
   .notActivity {
     width: 90%;

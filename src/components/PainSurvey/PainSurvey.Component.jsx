@@ -87,17 +87,17 @@ export default function SurveyPain({ session, prescription, handleFeedBack, surv
         </Collapse>
 
         {expanded ? (
-          <OpenArrow onClick={() => setExpanded(!expanded)} className="painSurveyArrow" />
+          <OpenArrow
+            onClick={() => setExpanded(!expanded)}
+            className="painSurveyArrow"
+            style={{
+              transform: 'rotateX(180deg)',
+            }}
+          />
         ) : (
           <>
             <p className="arowDownTxt">Not reviewed yet</p>
-            <OpenArrow
-              onClick={() => setExpanded(!expanded)}
-              className="painSurveyArrow"
-              style={{
-                transform: 'rotateX(180deg)',
-              }}
-            />
+            <OpenArrow onClick={() => setExpanded(!expanded)} className="painSurveyArrow" />
           </>
         )}
       </div>

@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from 'react';
-import { Grid } from '@mui/material';
 import { toast } from 'react-toastify';
 import request from '../../../request';
 import SurveyPain from '../../../components/PainSurvey/PainSurvey.Component';
@@ -36,8 +35,8 @@ export default function PainSurvey({ session, prescription }) {
       });
   };
   return (
-    <Grid container>
-      <Grid className="bgMsg" xl={12} lg={12}>
+    <div style={{ marginLeft: 'auto', width: '100%' }}>
+      <div className="bgMsg" style={{ marginLeft: 'unset', width: '100%' }}>
         <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
           Pain Survey &gt;
@@ -51,12 +50,12 @@ export default function PainSurvey({ session, prescription }) {
             surveyText={surveyText}
           />
         </div>
-      </Grid>
+      </div>
       <div className="addBtn">
         <button className="painSurvey_submit_btn" type="submit" onClick={handlePainSurveySubmit}>
           Submit
         </button>
       </div>
-    </Grid>
+    </div>
   );
 }

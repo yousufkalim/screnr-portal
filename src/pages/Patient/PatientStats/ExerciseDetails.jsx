@@ -13,7 +13,7 @@ import { ReactComponent as YellowDot } from '../../../assets/icons/sessionGraphC
 
 function ExerciseDetails({ session, exercise }) {
   return (
-    <div className="bg_main_div_sessions" style={{ height: '85rem', background: '#F6FAFB' }}>
+    <div className="bg_main_div_sessions" style={{ background: '#F6FAFB', paddingBottom: '40px' }}>
       <div className="breadCrumb">
         Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
         Session &gt;

@@ -1,12 +1,11 @@
 import { React } from 'react';
-import { Grid } from '@mui/material';
 import RightSidebar from '../../../components/sidebar/patient/PatientListRightSidebar';
 import ReportCard from '../../../components/cards/ReportCard.Component';
 
 export default function Reports({ session }) {
   return (
-    <Grid container>
-      <Grid className="bgReport" xl={9} lg={9}>
+    <div style={{ display: 'flex' }}>
+      <div className="bgReport">
         <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
           Reports &gt;
@@ -28,10 +27,10 @@ export default function Reports({ session }) {
             );
           })}
         </div>
-      </Grid>
-      <Grid xl={3} lg={3}>
+      </div>
+      <div>
         <RightSidebar />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 }
