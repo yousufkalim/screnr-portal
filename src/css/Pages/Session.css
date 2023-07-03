@@ -58,6 +58,7 @@
   margin-top: 20px;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
 }
 
 .excerciseNameIcon {
@@ -115,9 +116,9 @@
 }
 
 .score_Bars {
-  height: 135px;
+  height: 155px;
   background-color: rgba(17, 162, 131, 0.05);
-  width: 110px;
+  width: 128px;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -144,6 +145,7 @@
   margin-top: 40px;
   width: 74vw;
   margin-left: 30px;
+  margin-bottom: 3rem;
   border-radius: 15px;
   padding-bottom: 40px;
 }

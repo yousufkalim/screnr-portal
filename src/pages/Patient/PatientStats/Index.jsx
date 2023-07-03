@@ -3,6 +3,7 @@
 import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Sidebar from '../../../components/sidebar/patient/ExerciseSidebar';
 import Reports from './Reports';
 import PainSurvey from './PainSurvey';
@@ -17,22 +18,37 @@ export default function Index() {
   const [exercise, setExercise] = useState({});
   const [prescription, setPrescription] = useState({});
   const [activeTab, setActiveTab] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleGetSessionById = async () => {
-    await request('get', `/clinicians/sessions/getSessionDetails/${sessionId}`).then((res) => {
-      setSession(res?.data?.session);
-      setPatient(res?.data?.session?.patient);
-      setPrescription(res?.data?.prescription);
-      setExercise(res?.data?.session?.exercises[0]);
-    });
+    setLoading(true);
+    await request('get', `/clinicians/sessions/getSessionDetails/${sessionId}`)
+      .then((res) => {
+        setLoading(false);
+        setSession(res?.data?.session);
+        setPatient(res?.data?.session?.patient);
+        setPrescription(res?.data?.prescription);
+        setExercise(res?.data?.session?.exercises[0]);
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error(error?.response?.data?.message);
+      });
   };
 
   const handleGetExerciseById = async (targetExerciseId) => {
-    await request('get', `/clinicians/prescribedExercises/getExercise/${targetExerciseId}`).then(
-      (res) => {
+    setLoading(true);
+    await request('get', `/clinicians/prescribedExercises/getExercise/${targetExerciseId}`)
+      .then((res) => {
+        setLoading(false);
+
         setExercise(res?.data?.prescribedExercises);
-      },
-    );
+      })
+      .catch((error) => {
+        setLoading(false);
+
+        toast.error(error?.response?.data?.message);
+      });
   };
 
   useEffect(() => {
@@ -59,7 +75,15 @@ export default function Index() {
         ) : activeTab === 'Pain Survey' ? (
           <PainSurvey session={session} prescription={prescription} />
         ) : (
-          activeTab === 'exercise' && <ExerciseDetails session={session} exercise={exercise} />
+          activeTab === 'exercise' && (
+            <ExerciseDetails
+              session={session}
+              exercise={exercise}
+              loading={loading}
+              results={exercise?.results}
+              exerciseDetails={exercise?.exercise}
+            />
+          )
         )}
       </div>
     </div>
