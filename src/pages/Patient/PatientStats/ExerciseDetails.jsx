@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import CircularProgress from '@mui/material/CircularProgress';
-import ExcerciseChart from './ExcerciseChart';
-import MultiCircularProgress from './OverallExcerciseScore';
+// import MultiCircularProgress from './OverallExcerciseScore';
+import { CircularProgress } from '@mui/material';
+
 import { ReactComponent as TitleExcerciseIcon } from '../../../assets/icons/titleExcerciseIcon.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 import { ReactComponent as LeftArrow } from '../../../assets/icons/ArrowIcon1.svg';
@@ -10,8 +10,106 @@ import { ReactComponent as RightArrow } from '../../../assets/icons/ArrowIcon2.s
 import { ReactComponent as RedDot } from '../../../assets/icons/sessionGraphColorDot1.svg';
 import { ReactComponent as GreenDot } from '../../../assets/icons/sessionGraphColorDot2.svg';
 import { ReactComponent as YellowDot } from '../../../assets/icons/sessionGraphColorDot3.svg';
+import ScoreCard from '../../../components/ScoreCard/scoreCard';
+import ExerciseTable from '../../../components/tables/exerciseDetail/exerciseTable';
 
-function ExerciseDetails({ session, exercise }) {
+function ExerciseDetails({ session, exercise, results, exerciseDetails, loading }) {
+  const [targetExercise, setTargetExercise] = useState({
+    set: [],
+    setCount: 1,
+    rep: {},
+    repCount: 1,
+  });
+
+  const handleSetCounterAdd = () => {
+    if (targetExercise.setCount < results.length) {
+      setTargetExercise((prevExercise) => ({
+        ...prevExercise,
+        setCount: prevExercise.setCount + 1,
+        repCount: 1, // Reset the rep counter to 1 when changing sets
+        set: results[prevExercise.setCount], // Get the next set
+        rep: results[prevExercise.setCount][0], // Set rep to the first rep in the new set
+      }));
+    }
+  };
+
+  const handleRepCounterAdd = () => {
+    if (targetExercise.repCount < targetExercise.set.length) {
+      setTargetExercise((prevExercise) => ({
+        ...prevExercise,
+        repCount: prevExercise.repCount + 1,
+        rep: prevExercise.set[prevExercise.repCount], // Get the next rep in the current set
+      }));
+    } else {
+      // If we reach the last rep in the current set, move to the next set
+      handleSetCounterAdd();
+    }
+  };
+
+  const handleSetCounterSubtract = () => {
+    if (targetExercise.setCount > 1) {
+      setTargetExercise((prevExercise) => ({
+        ...prevExercise,
+        setCount: prevExercise.setCount - 1,
+        repCount: 1, // Reset the rep counter to 1 when changing sets
+        set: results[prevExercise.setCount - 2], // Get the previous set
+        rep: results[prevExercise.setCount - 2][0], // Set rep to the first rep in the previous set
+      }));
+    }
+  };
+
+  const handleRepCounterSubtract = () => {
+    if (targetExercise.repCount > 1) {
+      setTargetExercise((prevExercise) => ({
+        ...prevExercise,
+        repCount: prevExercise.repCount - 1,
+        rep: prevExercise.set[prevExercise.repCount - 2], // Get the previous rep in the current set
+      }));
+    } else {
+      // If we are at the first rep of the current set, move to the previous set
+      // eslint-disable-next-line no-lonely-if
+      if (targetExercise.setCount > 1) {
+        setTargetExercise((prevExercise) => ({
+          ...prevExercise,
+          setCount: prevExercise.setCount - 1,
+          repCount: results[prevExercise.setCount - 2].length, // Set rep to the last rep in the previous set
+          set: results[prevExercise.setCount - 2], // Get the previous set
+          rep: results[prevExercise.setCount - 2][results[prevExercise.setCount - 2].length - 1], // Set rep to the last rep in the previous set
+        }));
+      }
+    }
+  };
+
+  const handleGetScore = (bodyPartName) => {
+    const mergedArray = [].concat(
+      ...Object.values(
+        targetExercise?.rep?.rep_packet?.angles.find((item) => {
+          return item?.name === bodyPartName;
+        }).value,
+      ),
+    );
+
+    const lowest = Math.min(...mergedArray);
+    const highest = Math.max(...mergedArray);
+    const minVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.min_val;
+    const maxVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.max_val;
+    const lowDiff = lowest - minVal > 0 ? lowest - minVal : 0;
+    const highDiff = maxVal - highest > 0 ? maxVal - highest : 0;
+    const temp = ((lowDiff + highDiff) / (maxVal - minVal)) * 100;
+    return Math.round(100 - temp);
+  };
+
+  useEffect(() => {
+    // Check if the results array exists and is not empty
+    if (results && results.length > 0) {
+      setTargetExercise((prevExercise) => ({
+        ...prevExercise,
+        set: results[0],
+        rep: results[0][0],
+      }));
+    }
+  }, [results]);
+
   return (
     <div className="bg_main_div_sessions" style={{ background: '#F6FAFB', paddingBottom: '40px' }}>
       <div className="breadCrumb">
@@ -37,10 +135,18 @@ function ExerciseDetails({ session, exercise }) {
         </div>
 
         <div className="excercise_name_heading">
-          <div className="excerciseNameIcon">
+          <div
+            className="excerciseNameIcon"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '.7rem',
+            }}
+          >
             <TitleExcerciseIcon />
+            <p className="excercise_name_p">{exercise?.name}</p>
           </div>
-          <p className="excercise_name_p">{exercise?.name}</p>
         </div>
         <div className="excercise_details">
           <div className="setNumber">
@@ -48,9 +154,9 @@ function ExerciseDetails({ session, exercise }) {
               <p>set Number</p>
             </div>
             <div className="set_rep_valueNumber">
-              <LeftArrow className="arrows" />
-              <p>{exercise?.sets}</p>
-              <RightArrow className="arrows" />
+              <LeftArrow className="arrows" onClick={handleSetCounterSubtract} />
+              <p>{targetExercise?.setCount}</p>
+              <RightArrow className="arrows" onClick={handleSetCounterAdd} />
             </div>
           </div>
           <div className="setNumber">
@@ -58,8 +164,9 @@ function ExerciseDetails({ session, exercise }) {
               <p>Rep number</p>
             </div>
             <div className="set_rep_valueNumber">
-              <LeftArrow className="arrows" /> <p>{exercise?.reps}</p>
-              <RightArrow className="arrows" />
+              <LeftArrow className="arrows" onClick={handleRepCounterSubtract} />
+              <p>{targetExercise?.repCount}</p>
+              <RightArrow className="arrows" onClick={handleRepCounterAdd} />
             </div>
           </div>
         </div>
@@ -74,13 +181,35 @@ function ExerciseDetails({ session, exercise }) {
                 <p className="excercises_names">Overall</p>
                 <RightArrow className="arrows" />
               </div>
-              <MultiCircularProgress />
+
+              <CircularProgress
+                variant="determinate"
+                thickness="8"
+                value={targetExercise?.rep?.screnr_compliance || 0}
+                size={65}
+                sx={{
+                  color:
+                    // eslint-disable-next-line no-nested-ternary
+                    targetExercise?.rep?.screnr_compliance >= 80 &&
+                    targetExercise?.rep?.screnr_compliance <= 100
+                      ? '#25CC7C'
+                      : targetExercise?.rep?.screnr_compliance >= 60 &&
+                        targetExercise?.rep?.screnr_compliance <= 80
+                      ? '#FABB18'
+                      : '#FF5151',
+                }}
+              />
+
               <div className="graphData">
-                <p className="excercise_percent">00</p> <p className="scoreText">Score</p>
+                <p className="excercise_percent">
+                  {Math.round(targetExercise?.rep?.screnr_compliance) || 0}
+                </p>{' '}
+                <p className="scoreText">Score</p>
               </div>
               <div className="colorDotsDiv2">
                 <div className="colorDots">
-                  <RedDot /> <p className="colortxt">Low</p>
+                  <RedDot />
+                  <p className="colortxt">Low</p>
                 </div>
                 <div className="colorDots">
                   <GreenDot />
@@ -93,124 +222,18 @@ function ExerciseDetails({ session, exercise }) {
               </div>
             </div>
           </div>
-          <div className="score_Bars">
-            <p className="excercises_names">Super Arm</p>{' '}
-            <div>
-              <CircularProgress
-                variant="determinate"
-                thickness="8"
-                value={0}
-                size={60}
-                sx={{ color: '#FABB18' }}
-              />
-              <div className="graphData">
-                <p className="excercise_percent">00</p> <p className="scoreText">Score</p>
-              </div>
-            </div>
-          </div>
-          <div className="score_Bars">
-            <p className="excercises_names">Thigh Angle</p>{' '}
-            <div>
-              <CircularProgress
-                variant="determinate"
-                thickness="8"
-                value={0}
-                size={60}
-                sx={{ color: '#FF5151' }}
-              />
-              <div className="graphData">
-                <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
-              </div>
-            </div>
-          </div>
-          <div className="score_Bars">
-            <div>
-              <p className="excercises_names">Spine Angle</p>{' '}
-            </div>
-            <div>
-              <CircularProgress
-                variant="determinate"
-                thickness="8"
-                value={0}
-                size={60}
-                sx={{ color: '#25CC7C' }}
-              />
-              <div className="graphData">
-                <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
-              </div>
-            </div>
-          </div>
-          <div className="score_Bars">
-            <p className="excercises_names">Ankle Flexion</p>{' '}
-            <div>
-              <CircularProgress
-                variant="determinate"
-                thickness="8"
-                value={0}
-                size={60}
-                sx={{ color: '#FABB18' }}
-              />
-              <div className="graphData">
-                <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
-              </div>
-            </div>
-          </div>
-          <div className="score_Bars">
-            <p className="excercises_names">Shin Angle</p>{' '}
-            <div>
-              <CircularProgress
-                variant="determinate"
-                thickness="8"
-                value={0}
-                size={60}
-                sx={{ color: '#FF5151' }}
-              />
-              <div className="graphData">
-                <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
-              </div>
-            </div>
-          </div>
-          <div className="score_Bars">
-            <p className="excercises_names">Upper Arm</p>{' '}
-            <div>
-              <CircularProgress
-                variant="determinate"
-                thickness="8"
-                value={0}
-                size={60}
-                sx={{ color: '#25CC7C' }}
-              />
-              <div className="graphData">
-                <p className="excercise_percent">0</p> <p className="scoreText">Score</p>
-              </div>
-            </div>
-          </div>
+          {targetExercise?.rep?.rep_packet?.scores?.map((item) => (
+            <ScoreCard
+              bodyPart={item?.name.replace(/[0-9_]+/g, ' ').trim()}
+              scoreValue={handleGetScore(item.name)}
+              key={item.name}
+            />
+          ))}
         </div>
       </div>
 
       <div className="performanceGraphDiv">
-        <div className="performanceName_colors" style={{ display: 'flex' }}>
-          <div className="performanceTitle">
-            <p>Performance Graph</p>
-          </div>
-          <div className="colorDotsDiv">
-            <div className="colorDots">
-              <GreenDot />
-              <p className="colortxt">Low</p>
-            </div>
-            <div className="colorDots">
-              <YellowDot />
-              <p className="colortxt">Medium</p>
-            </div>
-            <div className="colorDots">
-              <RedDot />
-              <p className="colortxt">High</p>
-            </div>
-          </div>
-        </div>
-        <div style={{ width: '90%', height: '80%', marginLeft: '3%' }}>
-          <ExcerciseChart />
-        </div>
+        <ExerciseTable feedback={targetExercise?.rep?.rep_packet?.feedback} loading={loading} />
       </div>
     </div>
   );
