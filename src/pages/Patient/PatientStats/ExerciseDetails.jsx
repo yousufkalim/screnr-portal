@@ -18,7 +18,15 @@ import ScoreCard from '../../../components/ScoreCard/scoreCard';
 import ExerciseTable from '../../../components/tables/exerciseDetail/exerciseTable';
 import ScreenShotViewer from '../../../components/ScreenShotViewer/index';
 
+const dumyImages = [
+  'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
+  'https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg',
+  'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
+  'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
+];
 function ExerciseDetails({ session, exercise, results, exerciseDetails, loading }) {
+  console.log('🚀 ~ file: ExerciseDetails.jsx:28 ~ ExerciseDetails ~ exercise:', exercise);
+
   const [targetExercise, setTargetExercise] = useState({
     set: [],
     setCount: 1,
@@ -26,7 +34,8 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
     repCount: 1,
   });
   const [toggleIcon, setToggleIcon] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
   const handleExpandClick = () => {
     setToggleIcon(!toggleIcon);
   };
@@ -109,6 +118,24 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
     return Math.round(100 - temp);
   };
 
+  const handleSelectedImage = (index) => {
+    setSelectedImageIndex(index);
+  };
+
+  const handleNextImage = () => {
+    setSelectedImageIndex((prevIndex) =>
+      prevIndex === dumyImages.length - 1 ? dumyImages.length - 1 : prevIndex + 1,
+    );
+  };
+
+  const handlePrevImage = () => {
+    setSelectedImageIndex((prevIndex) => (prevIndex === 0 ? 0 : prevIndex - 1));
+  };
+
+  const handleClose = () => {
+    setSelectedImageIndex(null);
+  };
+
   useEffect(() => {
     // Check if the results array exists and is not empty
     if (results && results.length > 0) {
@@ -120,21 +147,14 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
     }
   }, [results]);
 
-  const dumyImages = [
-    'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
-    'https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg',
-    'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
-    'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
-  ];
-  const handleSelectedImage = (image) => {
-    setSelectedImage(image);
-  };
-
-  const handleClose = () => {
-    setSelectedImage(null);
-  };
-  return selectedImage ? (
-    <ScreenShotViewer selectedImage={selectedImage} handleClose={handleClose} />
+  return selectedImageIndex !== null ? (
+    <ScreenShotViewer
+      dumyImages={dumyImages}
+      selectedImageIndex={selectedImageIndex}
+      handleClose={handleClose}
+      handleNextImage={handleNextImage}
+      handlePrevImage={handlePrevImage}
+    />
   ) : (
     <div className="bg_main_div_sessions" style={{ background: '#F6FAFB', paddingBottom: '40px' }}>
       <div className="breadCrumb">
@@ -227,7 +247,7 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
 
               <div className="graphData">
                 <p className="excercise_percent">
-                  {Math.round(targetExercise?.rep?.screnr_compliance) || 0}
+                  {Math.round(targetExercise?.rep?.screnr_compliance) ?? 0}
                 </p>{' '}
                 <p className="scoreText">Score</p>
               </div>
@@ -256,7 +276,11 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
           ))}
         </div>
       </div>
-      <div className="screenShotDiv" onClick={handleExpandClick}>
+      <div
+        className="screenShotDiv"
+        onClick={handleExpandClick}
+        style={{ display: exercise?.type === 'motion' ? 'flex' : 'none' }}
+      >
         <div className="screenShotTitleDiv">
           <span>Screen Shots</span>
           {toggleIcon ? (
@@ -277,14 +301,14 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
       </div>
       <Collapse in={toggleIcon} timeout="auto" className="screenShotsPhotoCollapse">
         <div className="screenShotImagesDiv">
-          {dumyImages?.map((item) => (
+          {dumyImages?.map((item, index) => (
             <img
               src={item}
               key={item}
-              alt=""
+              alt={`screenShotImages${index + 1}`}
               className="screenShotImages"
               onClick={() => {
-                handleSelectedImage(item);
+                handleSelectedImage(index);
               }}
             />
           ))}
