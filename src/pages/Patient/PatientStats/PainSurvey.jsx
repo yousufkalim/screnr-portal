@@ -21,10 +21,6 @@ export default function PainSurvey({ session, prescription }) {
     setSurvey(newSurvey);
   };
 
-  useEffect(() => {
-    setSurvey(session?.survey);
-  }, [session]);
-
   const handlePainSurveySubmit = async () => {
     await request('put', `/clinicians/sessions/getSession/${session.id}`, { survey })
       .then(() => {
@@ -34,6 +30,11 @@ export default function PainSurvey({ session, prescription }) {
         toast.error(error?.response?.data?.message);
       });
   };
+
+  useEffect(() => {
+    setSurvey(session?.survey);
+  }, [session]);
+
   return (
     <div style={{ marginLeft: 'auto', width: '100%' }}>
       <div className="bgMsg" style={{ marginLeft: 'unset', width: '100%' }}>

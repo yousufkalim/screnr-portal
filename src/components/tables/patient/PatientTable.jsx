@@ -274,15 +274,11 @@ export default function PatientTable({ patients, getPatients }) {
                     // }}
                   >
                     <div className="circularBarCellAllPatients">
-                      <PieChartComponent before={50} after={50} />
-                      {/* {row?.pain?.before > 0 && row?.pain?.after > 0 ? (
-                          <PieChartComponent
-                            before={row?.pain?.before ?? 50}
-                            after={row?.pain?.after ?? 50}
-                          />
-                        ) : (
-                          'No data'
-                        )} */}
+                      {row?.pain?.before > 0 && row?.pain?.after > 0 ? (
+                        <PieChartComponent before={row?.pain?.before} after={row?.pain?.after} />
+                      ) : (
+                        'No data'
+                      )}
                     </div>
                   </TableCell>
                 </StyledTableRow>

@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 // import MultiCircularProgress from './OverallExcerciseScore';
 import { CircularProgress } from '@mui/material';
-
+import Collapse from '@mui/material/Collapse';
 import { ReactComponent as TitleExcerciseIcon } from '../../../assets/icons/titleExcerciseIcon.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 import { ReactComponent as LeftArrow } from '../../../assets/icons/ArrowIcon1.svg';
@@ -10,8 +13,10 @@ import { ReactComponent as RightArrow } from '../../../assets/icons/ArrowIcon2.s
 import { ReactComponent as RedDot } from '../../../assets/icons/sessionGraphColorDot1.svg';
 import { ReactComponent as GreenDot } from '../../../assets/icons/sessionGraphColorDot2.svg';
 import { ReactComponent as YellowDot } from '../../../assets/icons/sessionGraphColorDot3.svg';
+import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
 import ScoreCard from '../../../components/ScoreCard/scoreCard';
 import ExerciseTable from '../../../components/tables/exerciseDetail/exerciseTable';
+import ScreenShotViewer from '../../../components/ScreenShotViewer/index';
 
 function ExerciseDetails({ session, exercise, results, exerciseDetails, loading }) {
   const [targetExercise, setTargetExercise] = useState({
@@ -20,6 +25,11 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
     rep: {},
     repCount: 1,
   });
+  const [toggleIcon, setToggleIcon] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const handleExpandClick = () => {
+    setToggleIcon(!toggleIcon);
+  };
 
   const handleSetCounterAdd = () => {
     if (targetExercise.setCount < results.length) {
@@ -110,7 +120,22 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
     }
   }, [results]);
 
-  return (
+  const dumyImages = [
+    'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
+    'https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg',
+    'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
+    'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
+  ];
+  const handleSelectedImage = (image) => {
+    setSelectedImage(image);
+  };
+
+  const handleClose = () => {
+    setSelectedImage(null);
+  };
+  return selectedImage ? (
+    <ScreenShotViewer selectedImage={selectedImage} handleClose={handleClose} />
+  ) : (
     <div className="bg_main_div_sessions" style={{ background: '#F6FAFB', paddingBottom: '40px' }}>
       <div className="breadCrumb">
         Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
@@ -231,6 +256,40 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
           ))}
         </div>
       </div>
+      <div className="screenShotDiv" onClick={handleExpandClick}>
+        <div className="screenShotTitleDiv">
+          <span>Screen Shots</span>
+          {toggleIcon ? (
+            <OpenArrow
+              style={{
+                cursor: 'pointer',
+              }}
+            />
+          ) : (
+            <OpenArrow
+              style={{
+                transform: 'rotateX(180deg)',
+                cursor: 'pointer',
+              }}
+            />
+          )}
+        </div>
+      </div>
+      <Collapse in={toggleIcon} timeout="auto" className="screenShotsPhotoCollapse">
+        <div className="screenShotImagesDiv">
+          {dumyImages?.map((item) => (
+            <img
+              src={item}
+              key={item}
+              alt=""
+              className="screenShotImages"
+              onClick={() => {
+                handleSelectedImage(item);
+              }}
+            />
+          ))}
+        </div>
+      </Collapse>
 
       <div className="performanceGraphDiv">
         <ExerciseTable feedback={targetExercise?.rep?.rep_packet?.feedback} loading={loading} />

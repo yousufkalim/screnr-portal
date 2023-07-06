@@ -57,7 +57,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     setOpenPrescriptionMenu(false);
   };
   const handleCloseCompleted = async (prescriptionId) => {
-    await request('put', `/admins/prescriptions/complete/${prescriptionId}`);
+    await request('put', `/clinicians/prescriptions/completePrescription/${prescriptionId}`);
     setAnchorEl(null);
     setOpenPrescriptionMenu(false);
   };

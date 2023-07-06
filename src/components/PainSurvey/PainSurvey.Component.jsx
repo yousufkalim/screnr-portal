@@ -22,10 +22,11 @@ export default function SurveyPain({ session, prescription, handleFeedBack, surv
       <div className="questionaire">
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           {session?.survey?.map((item, index) => {
+            const questionNum = index + 1;
             return (
               <div className="quesDiv">
                 <div className="quesSec">
-                  <p className="leftTxt">Question 1:</p>
+                  <p className="leftTxt">Question {questionNum}:</p>
                   <p className="rightTxt">{item?.question}</p>
                 </div>
                 <div className="quesSec">
