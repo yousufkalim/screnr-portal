@@ -118,7 +118,7 @@
 .score_Bars {
   height: 155px;
   background-color: rgba(17, 162, 131, 0.05);
-  width: 128px;
+  width: 158px;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -148,6 +148,58 @@
   margin-bottom: 3rem;
   border-radius: 15px;
   padding-bottom: 40px;
+}
+
+.screenShotDiv {
+  height: 5rem;
+  background-color: #fff;
+  margin-top: 40px;
+  width: 93%;
+  margin-left: 30px;
+  margin-bottom: 1.1rem;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.screenShotTitleDiv {
+  height: 5rem;
+  border-radius: 15px;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 86%;
+  color: #136773;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.screenShotsPhotoCollapse {
+  background-color: #fff;
+  width: 93%;
+  margin-left: 30px;
+  border-radius: 15px;
+}
+.screenShotImagesDiv {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+.screenShotImages {
+  border-radius: 10px;
+  width: 8rem;
+  height: 6rem;
+  object-fit: cover;
+  cursor: pointer;
+}
+.screenShotImages:hover {
+  outline: 5px solid #136773;
 }
 
 .performanceTitle {
@@ -274,7 +326,7 @@
   }
 
   .score_Bars {
-    width: 109px;
+    width: 139px;
   }
 }
 
@@ -284,7 +336,7 @@
   }
 
   .score_Bars {
-    width: 105px;
+    width: 135px;
   }
 
   .excerciseDay {
@@ -320,6 +372,6 @@
   }
 
   .score_Bars {
-    width: 100px;
+    width: 130px;
   }
 }
