@@ -52,7 +52,11 @@ function ExerciseTable({ loading, feedback }) {
         >
           <TableHead>
             <TableRow sx={{ height: '20px' }}>
-              <TableCell align="left" sx={{ width: '20%' }} className="table_head">
+              <TableCell
+                align="left"
+                sx={{ width: '20%', paddingLeft: '2.5%' }}
+                className="table_head"
+              >
                 Body Part Name
               </TableCell>
               <TableCell className="table_head" align="center">
@@ -82,11 +86,14 @@ function ExerciseTable({ loading, feedback }) {
             ) : feedback?.length > 0 ? (
               feedback?.map((item) => (
                 <StyledTableRow key={item} className="tableRow">
-                  <TableCell align="left" sx={{ display: 'flex', paddingTop: '12%' }}>
+                  <TableCell
+                    align="left"
+                    sx={{ display: 'flex', paddingTop: '12%', paddingLeft: '12%' }}
+                  >
                     {item?.name.replace(/[0-9_]+/g, ' ').trim()}
                   </TableCell>
                   <TableCell align="center" className="table_cells">
-                    {item?.value?.feedback}
+                    {item?.value?.feedback ? item?.value?.feedback : '-'}
                   </TableCell>
                   <TableCell align="center" className="table_cells">
                     {item?.value?.failed_rule ? (

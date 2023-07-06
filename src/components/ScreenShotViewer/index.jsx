@@ -3,7 +3,16 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
 
-const index = ({ selectedImage, handleClose }) => {
+const index = ({
+  selectedImageIndex,
+  handleClose,
+  handlePrevImage,
+  handleNextImage,
+  dumyImages,
+}) => {
+  const isFirstImage = selectedImageIndex === 0;
+  const isLastImage = selectedImageIndex === dumyImages.length - 1;
+
   return (
     <div
       style={{
@@ -19,7 +28,7 @@ const index = ({ selectedImage, handleClose }) => {
       }}
     >
       <img
-        src={selectedImage}
+        src={dumyImages[selectedImageIndex]}
         alt="Selected Image"
         style={{ maxWidth: '100%', maxHeight: '70vh', borderRadius: '7px' }}
       />
@@ -37,6 +46,42 @@ const index = ({ selectedImage, handleClose }) => {
         }}
       >
         &times;
+      </div>
+      <div
+        onClick={handlePrevImage}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '3.6%',
+          transform: 'translateY(-50%)',
+          background: 'transparent',
+          border: 'none',
+          color: '#fff',
+          fontSize: '70px',
+          cursor: 'pointer',
+          visibility: isFirstImage ? 'hidden' : 'visible',
+        }}
+        disabled={isFirstImage}
+      >
+        &#8249;
+      </div>
+      <div
+        onClick={handleNextImage}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          right: '3.6%',
+          transform: 'translateY(-50%)',
+          background: 'transparent',
+          border: 'none',
+          color: '#fff',
+          fontSize: '70px',
+          cursor: 'pointer',
+          visibility: isLastImage ? 'hidden' : 'visible',
+        }}
+        disabled={isLastImage}
+      >
+        &#8250;
       </div>
     </div>
   );
