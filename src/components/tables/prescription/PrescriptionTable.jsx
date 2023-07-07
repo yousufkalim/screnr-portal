@@ -408,7 +408,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         </TableCell>
                         <TableCell align="center">
                           <div>
-                            {row?.survey.length ? (
+                            {row?.survey?.length ? (
                               <PieChartComponent
                                 before={row?.survey[0]?.answer}
                                 after={row?.survey[1]?.answer}
