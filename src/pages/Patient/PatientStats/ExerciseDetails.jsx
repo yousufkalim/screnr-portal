@@ -296,7 +296,7 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
       </div>
       <Collapse in={toggleIcon} timeout="auto" className="screenShotsPhotoCollapse">
         <div className="screenShotImagesDiv">
-          {exercise?.screenshots.length > 0 &&
+          {exercise?.screenshots?.length > 0 &&
             exercise?.screenshots?.map((item, index) => {
               return (
                 <img

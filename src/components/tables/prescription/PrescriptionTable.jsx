@@ -392,13 +392,15 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                               thickness="40"
                               sx={{ width: '80%' }}
                             />
-                          ) : (
+                          ) : row?.avg_score > 79 ? (
                             <GreenLinearProgress
                               variant="determinate"
                               value={row?.avg_score}
                               thickness="40"
                               sx={{ width: '80%' }}
                             />
+                          ) : (
+                            ''
                           )}
                         </TableCell>
                         <TableCell align="center" className="table_cells">
