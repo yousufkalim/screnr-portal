@@ -28,6 +28,7 @@ import { ReactComponent as Tick } from '../../../assets/components/Table/markTic
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import EditPrescription from '../../popups/prescription/EditPrescription.Popup';
 import request from '../../../request';
+import PieChartComponent from '../../charts/patient/PieChart.Component';
 
 export default function PrescriptionTable({ patientId, selectedClinicianId }) {
   const navigate = useNavigate();
@@ -140,6 +141,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     errored: <Error />,
     unchecked: <Incomplete />,
   };
+  console.log('--->', prescriptionList);
   return (
     <div id="prescriptionTable">
       <h3 className="prescription_header">Prescription List</h3>
@@ -375,25 +377,25 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                           {moment(row?.date).format('DD/MM/YYYY')}
                         </TableCell>
                         <TableCell align="center" className="table_cells">
-                          <span className="linearPresProgress">{`${0}%`}</span>
-                          {0 <= 30 ? (
+                          <span className="linearPresProgress">{`${row?.avg_score ?? 0}%`}</span>
+                          {row?.avg_score <= 30 ? (
                             <RedLinearProgress
                               variant="determinate"
-                              value={0}
+                              value={row?.avg_score}
                               thickness="40"
                               sx={{ width: '80%' }}
                             />
-                          ) : 0 > 30 && 0 <= 79 ? (
+                          ) : row?.avg_score > 30 && row?.avg_score <= 79 ? (
                             <YellowLinearProgress
                               variant="determinate"
-                              value={0}
+                              value={row?.avg_score}
                               thickness="40"
                               sx={{ width: '80%' }}
                             />
                           ) : (
                             <GreenLinearProgress
                               variant="determinate"
-                              value={0}
+                              value={row?.avg_score}
                               thickness="40"
                               sx={{ width: '80%' }}
                             />
@@ -402,34 +404,16 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         <TableCell align="center" className="table_cells">
                           {row?.survey ? 'Done' : 'Not Done'}
                         </TableCell>
-                        <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
+                        <TableCell align="center">
                           <div>
-                            {0 <= 30 ? (
-                              <CircularProgress
-                                variant="determinate"
-                                thickness="4.5"
-                                value={0}
-                                size={45}
-                                sx={{ color: '#FF5151' }}
-                              />
-                            ) : 0 > 30 && 0 <= 79 ? (
-                              <CircularProgress
-                                variant="determinate"
-                                thickness="4.5"
-                                value={0}
-                                size={45}
-                                sx={{ color: '#FABB18' }}
+                            {row?.survey.length ? (
+                              <PieChartComponent
+                                before={row?.survey[0]?.answer}
+                                after={row?.survey[1]?.answer}
                               />
                             ) : (
-                              <CircularProgress
-                                variant="determinate"
-                                thickness="4.5"
-                                value={0}
-                                size={45}
-                                sx={{ color: '#25CC7C' }}
-                              />
+                              'N/A'
                             )}
-                            <span className="circularProgressPrescription">{`${0}%`}</span>
                           </div>
                         </TableCell>
                         <TableCell />
