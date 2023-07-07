@@ -8,78 +8,38 @@ const index = ({
   handleClose,
   handlePrevImage,
   handleNextImage,
-  dumyImages,
+  screenshots,
 }) => {
   const isFirstImage = selectedImageIndex === 0;
-  const isLastImage = selectedImageIndex === dumyImages.length - 1;
+  const isLastImage = selectedImageIndex === screenshots.length - 1;
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(0, 0, 0, 0.8)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <div className="screenshotReviewer-main-container">
       <img
-        src={dumyImages[selectedImageIndex]}
+        src={`https://screnr-api-dev.falconweb.app/${screenshots[selectedImageIndex]}`}
         alt="Selected Image"
-        style={{ maxWidth: '100%', maxHeight: '70vh', borderRadius: '7px' }}
+        className="screenshotReviewer-image"
       />
-      <div
-        onClick={handleClose}
-        style={{
-          position: 'absolute',
-          top: '9%',
-          right: '3.6%',
-          background: 'transparent',
-          border: 'none',
-          color: '#fff',
-          fontSize: '50px',
-          cursor: 'pointer',
-        }}
-      >
+      <div onClick={handleClose} className="screenshotReviewer-image-close-btn">
         &times;
       </div>
       <div
+        disabled={isFirstImage}
         onClick={handlePrevImage}
+        className="screenshotReviewer-image-next-btn"
         style={{
-          position: 'absolute',
-          top: '50%',
-          left: '3.6%',
-          transform: 'translateY(-50%)',
-          background: 'transparent',
-          border: 'none',
-          color: '#fff',
-          fontSize: '70px',
-          cursor: 'pointer',
           visibility: isFirstImage ? 'hidden' : 'visible',
         }}
-        disabled={isFirstImage}
       >
         &#8249;
       </div>
       <div
+        disabled={isLastImage}
         onClick={handleNextImage}
+        className="screenshotReviewer-image-prev-btn"
         style={{
-          position: 'absolute',
-          top: '50%',
-          right: '3.6%',
-          transform: 'translateY(-50%)',
-          background: 'transparent',
-          border: 'none',
-          color: '#fff',
-          fontSize: '70px',
-          cursor: 'pointer',
           visibility: isLastImage ? 'hidden' : 'visible',
         }}
-        disabled={isLastImage}
       >
         &#8250;
       </div>

@@ -18,7 +18,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { ReactComponent as Action } from '../../../assets/components/Table/dots.svg';
 import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
-import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as Complete } from '../../../assets/components/Table/check.svg';
 import { ReactComponent as Pending } from '../../../assets/components/Table/uncheck.svg';
 import { ReactComponent as Error } from '../../../assets/components/Table/Error.svg';
@@ -347,25 +346,20 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                 <>
                   <TableHead>
                     <TableRow>
-                      <TableCell align="left" size="small" className="table_header">
+                      <TableCell align="center" size="small" className="table_header">
                         Date
                       </TableCell>
-                      <TableCell align="left" size="small" className="table_header">
-                        Score
-                      </TableCell>
-                      <TableCell align="left" size="small" className="table_header">
+                      <TableCell align="center" size="small" className="table_header">
                         Avg.Performance
                       </TableCell>
                       <TableCell align="center" size="small" className="table_header">
                         Survey
                       </TableCell>
                       <TableCell align="center" size="small" className="table_header">
-                        Messages
-                      </TableCell>
-                      <TableCell align="center" size="small" className="table_header">
                         Pain Scale
                       </TableCell>
-                      <TableCell align="center" size="small" className="table_header">
+                      <TableCell />
+                      <TableCell align="left" size="small" className="table_header">
                         Status
                       </TableCell>
                     </TableRow>
@@ -377,15 +371,8 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         key={row?.id}
                         onClick={() => handleSearchLogoClick(row?.id)}
                       >
-                        <TableCell align="left">{moment(row?.date).format('DD/MM/YYYY')}</TableCell>
-                        <TableCell align="left" className="table_cells">
-                          <div
-                            className={
-                              0 < 5 ? 'scoreRed' : 0 <= 5 && 0 < 8 ? 'scoreYellow' : 'scoreGreen'
-                            }
-                          >
-                            {`${0}/10`}
-                          </div>
+                        <TableCell align="center">
+                          {moment(row?.date).format('DD/MM/YYYY')}
                         </TableCell>
                         <TableCell align="center" className="table_cells">
                           <span className="linearPresProgress">{`${0}%`}</span>
@@ -414,9 +401,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         </TableCell>
                         <TableCell align="center" className="table_cells">
                           {row?.survey ? 'Done' : 'Not Done'}
-                        </TableCell>
-                        <TableCell align="center" className="table_cells">
-                          <Message />
                         </TableCell>
                         <TableCell align="center" sx={{ transform: 'rotate(270deg)' }}>
                           <div>
@@ -448,7 +432,8 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                             <span className="circularProgressPrescription">{`${0}%`}</span>
                           </div>
                         </TableCell>
-                        <TableCell align="center">{sessionStatus[row.status]}</TableCell>
+                        <TableCell />
+                        <TableCell align="left">{sessionStatus[row.status]}</TableCell>
                       </StyledTableRow>
                     ))}
                   </TableBody>

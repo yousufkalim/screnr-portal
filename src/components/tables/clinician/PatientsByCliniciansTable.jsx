@@ -224,7 +224,7 @@ export default function PatientsByCliniciansTable({
                       padding: '3%',
                     }}
                   >
-                    {row.completion ?? '0'}%
+                    {Math.round(row.completion) ?? '-'}%
                   </TableCell>
                   <TableCell align="center">
                     <span className="linearProgress">{`${row?.performance ?? 0}%`}</span>
@@ -265,7 +265,7 @@ export default function PatientsByCliniciansTable({
                       {row?.pain?.before > 0 && row?.pain?.after > 0 ? (
                         <PieChartComponent before={row?.pain?.before} after={row?.pain?.after} />
                       ) : (
-                        'No data'
+                        'N/A'
                       )}
                     </div>
                   </TableCell>

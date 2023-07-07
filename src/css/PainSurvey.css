@@ -6,8 +6,8 @@
 }
 
 .questionaire {
-  background-color: white;
-  padding: 30px;
+  background-color: transparent;
+  padding: 6px;
   border-radius: 20px;
   height: fit-content;
   max-height: 65vh;
@@ -15,35 +15,64 @@
 }
 
 .quesDiv {
-  border: 1px solid #a7a7a749;
+  background-color: #fff;
   border-radius: 20px;
   padding: 20px 0px;
   margin-bottom: 30px;
-  overflow: scroll;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .quesSec {
-  border-bottom: 1px solid #a7a7a749;
+  /* border-bottom: 1px solid #a7a7a749; */
   padding: 20px 25px;
   display: flex;
-  width: 100%;
+  width: 40%;
   align-items: center;
   justify-content: space-between;
-  text-align: left;
 }
 
-.leftTxt {
+.ansSec {
+  /* border-bottom: 1px solid #a7a7a749; */
+  padding: 20px 25px;
+  display: flex;
+  width: 60%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* .leftTxt {
   color: #919b9b;
   font-weight: 500;
   font-size: 12px;
   flex-basis: 8%;
+} */
+
+.leftTxt {
+  color: #136773;
+  flex-basis: 90%;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .rightTxt {
-  flex-basis: 90%;
   color: #454238;
+  flex-basis: 90%;
   font-weight: 500;
   font-size: 14px;
+}
+
+.painScale {
+  width: 65%;
+  height: 8rem;
+  display: flex;
+  border-radius: 7px;
+}
+.painScaleColorDiv {
+  flex-basis: 10%;
 }
 
 .surveyHeaderName {
@@ -133,12 +162,12 @@
   background-color: rgba(255, 184, 184, 0.169);
 }
 
-.painSurvey_submit_btn{
+.painSurvey_submit_btn {
   border: none;
   color: white;
-  background-color: #919B9B;
+  background-color: #919b9b;
   font-size: 1rem;
-  padding: .7rem 5rem .7rem 5rem;
+  padding: 0.7rem 5rem 0.7rem 5rem;
   border-radius: 15px;
   cursor: pointer;
 }

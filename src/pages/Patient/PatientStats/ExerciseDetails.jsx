@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -18,15 +19,7 @@ import ScoreCard from '../../../components/ScoreCard/scoreCard';
 import ExerciseTable from '../../../components/tables/exerciseDetail/exerciseTable';
 import ScreenShotViewer from '../../../components/ScreenShotViewer/index';
 
-const dumyImages = [
-  'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
-  'https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg',
-  'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
-  'https://thumbs.dreamstime.com/b/demo-text-businessman-dark-vintage-background-108609906.jpg',
-];
 function ExerciseDetails({ session, exercise, results, exerciseDetails, loading }) {
-  console.log('🚀 ~ file: ExerciseDetails.jsx:28 ~ ExerciseDetails ~ exercise:', exercise);
-
   const [targetExercise, setTargetExercise] = useState({
     set: [],
     setCount: 1,
@@ -124,7 +117,9 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
 
   const handleNextImage = () => {
     setSelectedImageIndex((prevIndex) =>
-      prevIndex === dumyImages.length - 1 ? dumyImages.length - 1 : prevIndex + 1,
+      prevIndex === exercise?.screenshots?.length - 1
+        ? exercise?.screenshots.length - 1
+        : prevIndex + 1,
     );
   };
 
@@ -149,7 +144,7 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
 
   return selectedImageIndex !== null ? (
     <ScreenShotViewer
-      dumyImages={dumyImages}
+      screenshots={exercise?.screenshots}
       selectedImageIndex={selectedImageIndex}
       handleClose={handleClose}
       handleNextImage={handleNextImage}
@@ -301,17 +296,20 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
       </div>
       <Collapse in={toggleIcon} timeout="auto" className="screenShotsPhotoCollapse">
         <div className="screenShotImagesDiv">
-          {dumyImages?.map((item, index) => (
-            <img
-              src={item}
-              key={item}
-              alt={`screenShotImages${index + 1}`}
-              className="screenShotImages"
-              onClick={() => {
-                handleSelectedImage(index);
-              }}
-            />
-          ))}
+          {exercise?.screenshots.length > 0 &&
+            exercise?.screenshots?.map((item, index) => {
+              return (
+                <img
+                  src={`https://screnr-api-dev.falconweb.app/${item}`}
+                  key={item}
+                  alt={`screenShotImages${index + 1}`}
+                  className="screenShotImages"
+                  onClick={() => {
+                    handleSelectedImage(index);
+                  }}
+                />
+              );
+            })}
         </div>
       </Collapse>
 

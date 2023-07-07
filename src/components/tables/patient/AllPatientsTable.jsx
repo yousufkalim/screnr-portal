@@ -545,7 +545,7 @@ export default function PatientTable({
                         padding: '3%',
                       }}
                     >
-                      {row.completion ?? '0%'}
+                      {Math.round(row.completion) ?? '-'}%
                     </TableCell>
 
                     <TableCell align="center">
@@ -575,7 +575,7 @@ export default function PatientTable({
                         {row?.pain?.before > 0 && row?.pain?.after > 0 ? (
                           <PieChartComponent before={row?.pain?.before} after={row?.pain?.after} />
                         ) : (
-                          'No data'
+                          'N/A'
                         )}
                       </div>
                     </TableCell>

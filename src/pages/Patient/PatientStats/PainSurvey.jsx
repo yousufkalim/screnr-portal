@@ -1,35 +1,18 @@
 import { React, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import request from '../../../request';
 import SurveyPain from '../../../components/PainSurvey/PainSurvey.Component';
 
 export default function PainSurvey({ session, prescription }) {
   const [survey, setSurvey] = useState(session?.survey);
-  const [surveyText, setSurveyText] = useState('');
 
-  const handleFeedBack = (targetFeedback, targetIndex) => {
-    setSurveyText(targetFeedback);
-    const newSurvey = survey.map((obj, index) => {
-      if (index === targetIndex) {
-        return {
-          ...obj,
-          feedback: targetFeedback,
-        };
-      }
-      return obj;
-    });
-    setSurvey(newSurvey);
-  };
-
-  const handlePainSurveySubmit = async () => {
-    await request('put', `/clinicians/sessions/getSession/${session.id}`, { survey })
-      .then(() => {
-        toast.success('Survey added successfully');
-      })
-      .catch((error) => {
-        toast.error(error?.response?.data?.message);
-      });
-  };
+  // const handlePainSurveySubmit = async () => {
+  //   await request('put', `/clinicians/sessions/getSession/${session.id}`, { survey })
+  //     .then(() => {
+  //       toast.success('Survey added successfully');
+  //     })
+  //     .catch((error) => {
+  //       toast.error(error?.response?.data?.message);
+  //     });
+  // };
 
   useEffect(() => {
     setSurvey(session?.survey);
@@ -43,19 +26,8 @@ export default function PainSurvey({ session, prescription }) {
           Pain Survey &gt;
         </div>
         <div className="bgPainSurvey">
-          <SurveyPain
-            session={session}
-            prescription={prescription}
-            survey={survey}
-            handleFeedBack={handleFeedBack}
-            surveyText={surveyText}
-          />
+          <SurveyPain session={session} prescription={prescription} survey={survey} />
         </div>
-      </div>
-      <div className="addBtn">
-        <button className="painSurvey_submit_btn" type="submit" onClick={handlePainSurveySubmit}>
-          Submit
-        </button>
       </div>
     </div>
   );
