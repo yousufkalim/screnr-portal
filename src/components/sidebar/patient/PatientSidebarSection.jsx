@@ -47,7 +47,7 @@ export default function PatientSidebarSection({
       </div>
       <div className="sideBarInfo">
         <div className="user_name">
-          {`${patientData?.first_name} ${patientData?.last_name}` || ''}
+          {`${patientData?.first_name ?? ''} ${patientData?.last_name}` ?? ''}
         </div>
         <div className="staff_id">
           Patient ID: <span className="staff_id_2">{patientData?.id || ''}</span>

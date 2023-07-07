@@ -26,6 +26,7 @@ export default function Patient() {
   const [breadcrumb, setBreadcrumb] = useState('');
   const [clinician, setClinician] = useState({});
   const [activityLog, setActivityLog] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const getClinicName = (name) => setBreadcrumb(name);
   const handleDashboardNavClick = () => navigate('/admin/dashboard');
@@ -34,14 +35,17 @@ export default function Patient() {
 
   const getPatients = async (page = 1) => {
     try {
+      setLoading(true);
       const { data } = await request(
         'get',
         `/clinicians/getPatientsByClinicianId/${id}?page=${page}`,
       );
       if (data) {
         setPatients(data);
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       toast.error(error?.response?.data?.message);
     }
   };
@@ -141,6 +145,7 @@ export default function Patient() {
             patients={patients}
             setOpenAddPatient={setOpenAddPatient}
             getPatients={getPatients}
+            loading={loading}
           />
         </Grid>
         <div className="rightSide_div">

@@ -183,9 +183,10 @@
 .screenShotImagesDiv {
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: 30px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1.4rem;

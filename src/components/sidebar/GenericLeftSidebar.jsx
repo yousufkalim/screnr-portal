@@ -82,7 +82,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
                 />
               ) : (
                 <AvatarComponent
-                  alt={`${info?.first_name} ${info?.last_name}`}
+                  alt={`${info?.first_name ?? ''} ${info?.last_name ?? ''}`}
                   className="sidebar_avatar"
                 />
               )}
@@ -102,7 +102,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
         />
       </div>
       <div className="sideBarInfo">
-        <div className="user_name"> {`${info?.first_name} ${info?.last_name}`}</div>
+        <div className="user_name"> {`${info?.first_name ?? ''} ${info?.last_name ?? ''}`}</div>
         <div className="staff_id" style={{ display: txt.includes('Clinician') ? 'none' : '' }}>
           {roleTxt}: <span className="staff_id_2">{result}</span>
         </div>

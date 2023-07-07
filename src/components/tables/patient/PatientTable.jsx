@@ -33,7 +33,7 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function PatientTable({ patients, getPatients }) {
+export default function PatientTable({ patients, getPatients, loading }) {
   const navigate = useNavigate();
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
@@ -148,14 +148,14 @@ export default function PatientTable({ patients, getPatients }) {
         >
           <TableHead>
             <TableRow sx={{ height: '20px' }}>
-              <TableCell align="left" className="table_head" sx={{ width: '2%' }}>
+              <TableCell align="left" className="table_head" sx={{ width: '4%' }}>
                 ID
               </TableCell>
               <TableCell
                 align="left"
                 className="table_head"
                 sx={{
-                  width: '20%',
+                  width: '18%',
                   '@media (max-width: 1600px)': { width: '34%' },
                 }}
               >
@@ -186,150 +186,172 @@ export default function PatientTable({ patients, getPatients }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {patients?.users?.map((row) => (
-              <>
-                <StyledTableRow
-                  key={row.id}
-                  className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
-                  onClick={() => {
-                    setPatient(row);
-                    handleReportAndMsgCounter(row?.id);
-                  }}
-                >
-                  <TableCell align="left"> {row?.id} </TableCell>
-                  <TableCell align="left">
-                    <div className="image_div">
-                      {row.profile_pic ? (
-                        <div className="imgDivClinic">
-                          <img
-                            src={getMediaUrl(row.profile_pic)}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              borderRadius: '100px',
-                              objectFit: 'cover',
-                            }}
-                            alt=""
-                          />
-                        </div>
-                      ) : (
-                        <AvatarComponent
-                          alt={`${row.first_name} ${row.last_name}`}
-                          className="header_avatar"
-                        />
-                      )}
-                      <div className="clinic_cell">{`${row.first_name} ${row.last_name}`}</div>
-                    </div>
-                  </TableCell>
-
-                  <TableCell align="center" className="table_cells">
-                    {row.userData?.diagnosis}
-                  </TableCell>
-                  <TableCell align="center" className="table_cells">
-                    {row?.prescription}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    className="table_cells"
-                    id="completion_cell"
+            {loading ? (
+              <TableRow>
+                <TableCell colSpan={7} align="center">
+                  <LinearProgress
                     sx={{
-                      padding: '3%',
+                      '& .MuiLinearProgress-barColorPrimary': {
+                        backgroundColor: '#f6fafb',
+                      },
+                      '& .MuiLinearProgress-barColorSecondary': {
+                        backgroundColor: '#f6fafb',
+                      },
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
+            ) : patients?.users?.length > 0 ? (
+              patients?.users?.map((row) => (
+                <>
+                  <StyledTableRow
+                    key={row.id}
+                    className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}
+                    onClick={() => {
+                      setPatient(row);
+                      handleReportAndMsgCounter(row?.id);
                     }}
                   >
-                    {row.completion ?? '0'}%
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="linearProgress">{`${row?.performance ?? 0}%`}</span>
-                    {row.performance <= 30 ? (
-                      <RedLinearProgress
-                        variant="determinate"
-                        value={row.performance}
-                        thickness="40"
-                      />
-                    ) : row.performance > 30 && row.performance <= 79 ? (
-                      <YellowLinearProgress
-                        variant="determinate"
-                        value={row.performance}
-                        thickness="40"
-                      />
-                    ) : (
-                      <GreenLinearProgress
-                        variant="determinate"
-                        value={row.performance}
-                        thickness="40"
-                      />
-                    )}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    // sx={{
-                    //   padding: '22px',
-                    //   paddingRight: '20px',
-                    //   display: 'flex',
-                    //   alignItems: 'center',
-                    //   justifyContent: 'center',
-                    //   width: '100px',
-                    //   marginLeft: '40px',
-                    //   '@media (max-width: 1500px)': { marginTop: '22px' },
-                    // }}
-                  >
-                    <div className="circularBarCellAllPatients">
-                      {row?.pain?.before > 0 && row?.pain?.after > 0 ? (
-                        <PieChartComponent before={row?.pain?.before} after={row?.pain?.after} />
-                      ) : (
-                        'No data'
-                      )}
-                    </div>
-                  </TableCell>
-                </StyledTableRow>
-                {patient?.id === row?.id ? (
-                  <TableRow className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}>
-                    <TableCell width="2%" />
-
-                    <TableCell>
-                      <div className="notiCell">
-                        <Report /> <p className="reportTxt">{counter?.report} Reports</p>
+                    <TableCell align="left"> {row?.id} </TableCell>
+                    <TableCell align="left">
+                      <div className="image_div">
+                        {row.profile_pic ? (
+                          <div className="imgDivClinic">
+                            <img
+                              src={getMediaUrl(row.profile_pic)}
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                                borderRadius: '100px',
+                                objectFit: 'cover',
+                              }}
+                              alt=""
+                            />
+                          </div>
+                        ) : (
+                          <AvatarComponent
+                            alt={`${row.first_name} ${row.last_name}`}
+                            className="header_avatar"
+                          />
+                        )}
+                        <div className="clinic_cell">{`${row.first_name} ${row.last_name}`}</div>
                       </div>
                     </TableCell>
 
-                    <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
-                      <div className="notiCell">
-                        <Message />
-                        <p className="msgTxt">{counter?.unReadMsg} Messages</p>
-                      </div>
+                    <TableCell align="center" className="table_cells">
+                      {row.userData?.diagnosis}
                     </TableCell>
-                    <TableCell>
-                      <div className="notiCell">{}</div>
+                    <TableCell align="center" className="table_cells">
+                      {row?.prescription}
                     </TableCell>
-                    <TableCell />
-                    <TableCell />
                     <TableCell
-                      style={{
-                        display: 'flex',
-                        gap: '5px',
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                      align="center"
+                      className="table_cells"
+                      id="completion_cell"
+                      sx={{
+                        padding: '3%',
                       }}
                     >
-                      <Edit
-                        className="table_icons"
-                        onClick={() => {
-                          setOpenEditPatient(true);
-                          setPatient(row);
-                        }}
-                      />
-
-                      <Profile
-                        className="table_icons"
-                        onClick={() => handlePatientProfile(row.id)}
-                      />
+                      {Math.round(row.completion) ?? '-'}%
                     </TableCell>
-                  </TableRow>
-                ) : (
-                  ''
-                )}
+                    <TableCell align="center">
+                      <span className="linearProgress">{`${row?.performance ?? 0}%`}</span>
+                      {row.performance <= 30 ? (
+                        <RedLinearProgress
+                          variant="determinate"
+                          value={row.performance}
+                          thickness="40"
+                        />
+                      ) : row.performance > 30 && row.performance <= 79 ? (
+                        <YellowLinearProgress
+                          variant="determinate"
+                          value={row.performance}
+                          thickness="40"
+                        />
+                      ) : (
+                        <GreenLinearProgress
+                          variant="determinate"
+                          value={row.performance}
+                          thickness="40"
+                        />
+                      )}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      // sx={{
+                      //   padding: '22px',
+                      //   paddingRight: '20px',
+                      //   display: 'flex',
+                      //   alignItems: 'center',
+                      //   justifyContent: 'center',
+                      //   width: '100px',
+                      //   marginLeft: '40px',
+                      //   '@media (max-width: 1500px)': { marginTop: '22px' },
+                      // }}
+                    >
+                      <div className="circularBarCellAllPatients">
+                        {row?.pain?.before > 0 && row?.pain?.after > 0 ? (
+                          <PieChartComponent before={row?.pain?.before} after={row?.pain?.after} />
+                        ) : (
+                          'N/A'
+                        )}
+                      </div>
+                    </TableCell>
+                  </StyledTableRow>
+                  {patient?.id === row?.id ? (
+                    <TableRow className={patient.id === row.id ? 'clrTableRow' : 'tableRow'}>
+                      <TableCell width="2%" />
+                      <TableCell>
+                        <div className="notiCell">
+                          <Report /> <p className="reportTxt">{counter?.report} Reports</p>
+                        </div>
+                      </TableCell>
+                      <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
+                        <div className="notiCell">
+                          <Message />
+                          <p className="msgTxt">{counter?.unReadMsg} Messages</p>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="notiCell">{}</div>
+                      </TableCell>
+                      <TableCell />
+                      <TableCell />
+                      <TableCell
+                        style={{
+                          display: 'flex',
+                          gap: '5px',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Edit
+                          className="table_icons"
+                          onClick={() => {
+                            setOpenEditPatient(true);
+                            setPatient(row);
+                          }}
+                        />
+
+                        <Profile
+                          className="table_icons"
+                          onClick={() => handlePatientProfile(row.id)}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    ''
+                  )}
+                </>
+              ))
+            ) : (
+              <>
+                <TableCell align="center" />
+                <TableCell align="left" className="noDataTxt">
+                  No Patient found
+                </TableCell>
               </>
-            ))}
+            )}
           </TableBody>
         </Table>
 
