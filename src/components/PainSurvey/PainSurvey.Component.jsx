@@ -1,12 +1,23 @@
-import { useState } from 'react';
-import Collapse from '@mui/material/Collapse';
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable eqeqeq */
+import React from 'react';
 import moment from 'moment';
 import { ReactComponent as Back } from '../../assets/icons/backBtn.svg';
-import { ReactComponent as OpenArrow } from '../../assets/components/Sidebar/openArrow.svg';
+import PainSurveyIcon from '../../assets/icons/painSurveyIcon.svg';
 
-export default function SurveyPain({ session, prescription, handleFeedBack, surveyText }) {
-  const [expanded, setExpanded] = useState(true);
-
+export default function SurveyPain({ session, prescription }) {
+  const painScaleBoxColors = [
+    'rgba(81, 170, 132, 1)',
+    'rgba(100, 200, 97, 1)',
+    'rgba(191, 201, 55, 1)',
+    'rgba(241, 227, 50, 1)',
+    'rgba(253, 216, 49, 1)',
+    'rgba(253, 187, 44, 1)',
+    'rgba(253, 144, 37, 1)',
+    'rgba(252, 102, 34, 1)',
+    'rgba(219, 44, 24, 1)',
+    'rgba(184, 54, 51, 1)',
+  ];
   return (
     <div>
       <div id="painSurveyHeader">
@@ -20,87 +31,73 @@ export default function SurveyPain({ session, prescription, handleFeedBack, surv
         </div>
       </div>
       <div className="questionaire">
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          {session?.survey?.map((item, index) => {
-            const questionNum = index + 1;
-            return (
-              <div className="quesDiv">
-                <div className="quesSec">
-                  <p className="leftTxt">Question {questionNum}:</p>
-                  <p className="rightTxt">{item?.question}</p>
-                </div>
-                <div className="quesSec">
-                  <p className="leftTxt">Answer</p>
-                  <p className="rightTxt">{item?.answer}</p>
-                </div>
-                <div className="feedbackSec">
-                  <p className="feedbackLeftTxt">Feedback</p>
-                  <input
-                    disabled={item.feedback}
-                    type="text"
-                    name="feedback"
-                    className="feedbackInput"
-                    placeholder="Write feedback to send to patient..."
-                    value={item.feedback ?? surveyText}
-                    onChange={(e) => handleFeedBack(e.target.value, index)}
-                  />
-                </div>
+        {session?.survey?.map((item, Isurvey) => {
+          return (
+            <div className="quesDiv">
+              <div className="quesSec">
+                <p className="leftTxt">{item?.question}</p>
               </div>
-            );
-          })}
-
-          {/* <div className="quesDiv">
-            <div className="quesSec">
-              <p className="leftTxt">Question 2:</p>
-              <p className="rightTxt">What is the Lorem Ipsum?</p>
+              <div
+                className="ansSec"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: Isurvey == session?.survey.length - 1 ? 'center' : 'flex-end',
+                }}
+              >
+                {Isurvey == session?.survey.length - 1 ? (
+                  <div>
+                    <p className="rightTxt">{item?.answer}</p>
+                  </div>
+                ) : (
+                  <div className="painScale">
+                    {painScaleBoxColors?.map((color, index) => {
+                      return (
+                        <div style={{ width: '100%' }}>
+                          <div
+                            className="painScaleColorDiv"
+                            style={{
+                              backgroundColor: color,
+                              height: '85%',
+                              borderTopLeftRadius: index === 0 ? '10px' : '',
+                              borderBottomLeftRadius: index === 0 ? '10px' : '',
+                              borderTopRightRadius:
+                                index === painScaleBoxColors.length - 1 ? '10px' : '',
+                              borderBottomRightRadius:
+                                index === painScaleBoxColors.length - 1 ? '10px' : '',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                            key={color}
+                          >
+                            <img
+                              src={PainSurveyIcon}
+                              style={{
+                                display: item?.answer == index ? 'inline-block' : 'none',
+                                paddingInline: '3px',
+                                width: '95%',
+                              }}
+                              alt=""
+                            />
+                          </div>
+                          <div
+                            style={{
+                              textAlign: 'center',
+                              color: item?.answer == index ? '#25C8B4' : '',
+                            }}
+                          >
+                            {index}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="quesSec">
-              <p className="leftTxt">Answer</p>
-              <p className="rightTxt">
-                <FormControlLabel
-                  value="Admin Name"
-                  checked
-                  control={<Radio style={{ color: '#25C8B4' }} />}
-                  label={
-                    <Typography
-                      style={{
-                        color: '#25C8B4',
-                        textAlign: 'left',
-                        fontWeight: '500',
-                        fontSize: '12px',
-                      }}
-                    >
-                      Lorem Ipsum
-                    </Typography>
-                  }
-                />
-              </p>
-            </div>
-            <div className="feedbackSec">
-              <p className="feedbackLeftTxt">Feedback</p>
-              <input
-                type="text"
-                className="feedbackInput"
-                placeholder="Write feedback to send to patient..."
-              />
-            </div>
-          </div> */}
-        </Collapse>
-
-        {expanded ? (
-          <OpenArrow
-            onClick={() => setExpanded(!expanded)}
-            className="painSurveyArrow"
-            style={{
-              transform: 'rotateX(180deg)',
-            }}
-          />
-        ) : (
-          <>
-            <p className="arowDownTxt">Not reviewed yet</p>
-            <OpenArrow onClick={() => setExpanded(!expanded)} className="painSurveyArrow" />
-          </>
-        )}
+          );
+        })}
       </div>
     </div>
   );
