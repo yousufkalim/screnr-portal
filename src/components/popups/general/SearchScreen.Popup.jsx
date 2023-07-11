@@ -13,7 +13,7 @@ import { Button } from '@mui/material';
 import { toast } from 'react-toastify';
 import LinearProgress from '@mui/material/LinearProgress';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
-import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
+// import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 import { ReactComponent as StaffMember } from '../../../assets/icons/staffMember.svg';
 import { ReactComponent as ClinicsLogo } from '../../../assets/icons/ClinicsLogo.svg';
 import { ReactComponent as ClinicianLogo } from '../../../assets/icons/ClinicianLogo.svg';
@@ -370,13 +370,13 @@ export default function SearchScreen() {
                           handleEdit(item?.role);
                         }}
                       />
-                      <Delete
+                      {/* <Delete
                         className="table_icons"
                         onClick={() => {
                           setOpenDeletePopup(true);
                           setUserData(item);
                         }}
-                      />
+                      /> */}
                     </TableCell>
                   </TableRow>
                 ))
