@@ -69,7 +69,6 @@ export default function EditClinician({
   getClinicians,
   table,
 }) {
-  console.log('🚀 ~ file: EditClinician.Popup.jsx:72 ~ clinicianDetails:', clinicianDetails);
   const [checked, setChecked] = useState(false);
   const [clinician, setClinician] = useState({});
   const [userData, setUserData] = useState({ title: clinicianDetails?.userData?.title || '' });
