@@ -113,7 +113,7 @@ export default function ProfilePopup({
                     />
                   ) : (
                     <AvatarComponent
-                      alt={`${user.first_name} ${user.last_name}`}
+                      alt={`${user.first_name || ''} ${user.last_name || ''}`}
                       className="profile_popups_avatar"
                     />
                   )}
@@ -130,7 +130,7 @@ export default function ProfilePopup({
                 </label>
               </div>
             </div>
-            <h1 className="forgetPaswdTxt">{`${user.first_name} ${user.last_name}`}</h1>
+            <h1 className="forgetPaswdTxt">{`${user.first_name || ''} ${user.last_name || ''}`}</h1>
             <p className="enterEmailTxt">{roles[user?.role]}</p>
             <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
               <div className="pswdChangeTrack" htmlFor="phone">
@@ -150,7 +150,7 @@ export default function ProfilePopup({
                 </p>
 
                 <p className="blktxt" id="fontWeight">
-                  {user.email}
+                  {user.email || ''}
                 </p>
               </div>
             </FormControl>
@@ -180,7 +180,7 @@ export default function ProfilePopup({
               <div className="pswdChangeTrack">
                 <p className="blktxt">Account Created</p>
                 <p className="blktxt" id="boldx">
-                  {moment(user.createdAt).format('MM-DD-YYYY')}
+                  {moment(user?.createdAt).format('MM-DD-YYYY')}
                 </p>
               </div>
             </FormControl>
