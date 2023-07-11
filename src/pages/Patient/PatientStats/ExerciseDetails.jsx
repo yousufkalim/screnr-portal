@@ -20,12 +20,20 @@ import ExerciseTable from '../../../components/tables/exerciseDetail/exerciseTab
 import ScreenShotViewer from '../../../components/ScreenShotViewer/index';
 
 function ExerciseDetails({ session, exercise, results, exerciseDetails, loading }) {
+  console.log(
+    '🚀 ~ file: ExerciseDetails.jsx:23 ~ ExerciseDetails ~ exerciseDetails:',
+    exerciseDetails,
+  );
   const [targetExercise, setTargetExercise] = useState({
     set: [],
     setCount: 1,
     rep: {},
     repCount: 1,
   });
+  console.log(
+    '🚀 ~ file: ExerciseDetails.jsx:29 ~ ExerciseDetails ~ targetExercise:',
+    targetExercise,
+  );
   const [toggleIcon, setToggleIcon] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 

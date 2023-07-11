@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { toast } from 'react-toastify';
 import { ReactComponent as Action } from '../../../assets/components/Table/dots.svg';
 import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
 import { ReactComponent as Complete } from '../../../assets/components/Table/check.svg';
@@ -56,11 +57,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     setOpenEditPrescription(true);
     setOpenPrescriptionMenu(false);
   };
-  const handleCloseCompleted = async (prescriptionId) => {
-    await request('put', `/clinicians/prescriptions/completePrescription/${prescriptionId}`);
-    setAnchorEl(null);
-    setOpenPrescriptionMenu(false);
-  };
   const handlePrescriptionList = async () => {
     setLoading(true);
     await request(
@@ -71,12 +67,26 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
         setLoading(false);
         setPrescriptionList(res?.data?.prescriptions);
       })
-      .catch((err) => {
+      .catch((error) => {
         setLoading(false);
-        // eslint-disable-next-line no-console
-        console.error(`handlePrescriptionList---> ${err}`);
+        toast.error(error?.response?.data?.message);
       });
   };
+  const handleCloseCompleted = async (prescriptionId) => {
+    setLoading(true);
+    await request('put', `/clinicians/prescriptions/completePrescription/${prescriptionId}`)
+      .then(() => {
+        setLoading(false);
+        setAnchorEl(null);
+        setOpenPrescriptionMenu(false);
+        handlePrescriptionList();
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error(error?.response?.data?.message);
+      });
+  };
+
   const handleSearchLogoClick = (sessionId) => {
     navigate(`/patients/${sessionId}/exercise/exerciseDetails`);
   };
@@ -141,7 +151,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     errored: <Error />,
     unchecked: <Incomplete />,
   };
-  console.log('--->', prescriptionList);
   return (
     <div id="prescriptionTable">
       <h3 className="prescription_header">Prescription List</h3>
@@ -251,65 +260,68 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     </div>
                   </TableCell>
                   <TableCell align="right">
-                    <div>
-                      <Action
-                        className="pointer"
-                        aria-controls={open ? 'basic-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                        onClick={(e) => handleClick(e, mainRow)}
-                      />
-                      {openPrescriptionMenu ? (
-                        <Menu
-                          id="basic-menu"
-                          anchorEl={anchorEl}
-                          open={open}
-                          onClose={handleClose}
-                          MenuListProps={{
-                            'aria-labelledby': 'basic-button',
+                    {mainRow.status !== 'completed' ? (
+                      <div>
+                        <Action
+                          className="pointer"
+                          aria-controls={open ? 'basic-menu' : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={open ? 'true' : undefined}
+                          onClick={(e) => {
+                            handleClick(e, mainRow);
                           }}
-                          PaperProps={{
-                            style: {
-                              backgroundColor: '#F6FAFB',
-                              boxShadow: '1',
-                              border: '1px ',
-                              borderColor: 'black',
-                              borderRadius: '15px',
-                            },
-                          }}
-                        >
-                          <MenuItem
-                            className="editMenuItem"
-                            role="presentation"
-                            onClick={() => {
-                              handleCloseEdit();
+                        />
+                        {openPrescriptionMenu && selectedPrescription.id === mainRow.id ? (
+                          <Menu
+                            id="basic-menu"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                            MenuListProps={{
+                              'aria-labelledby': 'basic-button',
+                            }}
+                            PaperProps={{
+                              style: {
+                                backgroundColor: '#F6FAFB',
+                                boxShadow: '1',
+                                border: '1px ',
+                                borderColor: 'black',
+                                borderRadius: '15px',
+                              },
                             }}
                           >
-                            <Edit
-                              className="pIcon"
-                              style={{
-                                filter:
-                                  'brightness(0) saturate(100%) invert(66%) sepia(69%) saturate(1538%) hue-rotate(344deg) brightness(107%) contrast(97%)',
+                            <MenuItem
+                              className="editMenuItem"
+                              role="presentation"
+                              onClick={() => {
+                                handleCloseEdit();
                               }}
-                            />
-                            <p className="actionMenus">Edit Prescription</p>
-                          </MenuItem>
-                          <MenuItem
-                            onClick={() => {
-                              handleCloseCompleted(mainRow?.id);
-                            }}
-                            // disabled={
-                            //   !mainRow?.sessions?.some((item) => item.status === 'completed')
-                            // }
-                          >
-                            <Tick className="pIcon" />
-                            <p className="actionMenus">Mark as Completed</p>
-                          </MenuItem>
-                        </Menu>
-                      ) : (
-                        ''
-                      )}
-                    </div>
+                            >
+                              <Edit
+                                className="pIcon"
+                                style={{
+                                  filter:
+                                    'brightness(0) saturate(100%) invert(66%) sepia(69%) saturate(1538%) hue-rotate(344deg) brightness(107%) contrast(97%)',
+                                }}
+                              />
+                              <p className="actionMenus">Edit Prescription</p>
+                            </MenuItem>
+                            <MenuItem
+                              onClick={() => {
+                                handleCloseCompleted(mainRow?.id);
+                              }}
+                            >
+                              <Tick className="pIcon" />
+                              <p className="actionMenus">Mark as Completed</p>
+                            </MenuItem>
+                          </Menu>
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                    ) : (
+                      <Tick className="pIcon" />
+                    )}
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -407,7 +419,14 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                           {row?.survey ? 'Done' : 'Not Done'}
                         </TableCell>
                         <TableCell align="center">
-                          <div>
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              marginRight: '12px',
+                            }}
+                          >
                             {row?.survey?.length ? (
                               <PieChartComponent
                                 before={row?.survey[0]?.answer}
@@ -437,7 +456,11 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
           </TableContainer>
         ))
       ) : (
-        <h1 className="NoPrescriptionTxt">No Prescription From This Clinician</h1>
+        <h1 className="NoPrescriptionTxt">
+          {prescriptionList && prescriptionList.length > 0
+            ? 'No Prescription From This Clinician'
+            : 'Loading...'}
+        </h1>
       )}
     </div>
   );

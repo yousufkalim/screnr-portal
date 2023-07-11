@@ -69,6 +69,7 @@ export default function EditClinician({
   getClinicians,
   table,
 }) {
+  console.log('🚀 ~ file: EditClinician.Popup.jsx:72 ~ clinicianDetails:', clinicianDetails);
   const [checked, setChecked] = useState(false);
   const [clinician, setClinician] = useState({});
   const [userData, setUserData] = useState({ title: clinicianDetails?.userData?.title || '' });
@@ -94,7 +95,9 @@ export default function EditClinician({
 
     setClinician(clinicAdminTemp);
     setUserData({
-      clinic: clinicianDetails?.userData?.clinic.id,
+      clinic: clinicianDetails?.userData?.clinic.id
+        ? clinicianDetails?.userData?.clinic.id
+        : clinicianDetails?.userData?.clinic,
       title: clinicianDetails?.userData?.title || '',
     });
   }, [clinicianDetails, table]);
