@@ -85,7 +85,7 @@ export default function PatientSidebarSection({
               <Expiry />
               <p>Expiry Date</p>
             </span>
-            <p>{moment(patientData?.expiry_date).format('DD/MM/YYYY')}</p>
+            <p>{moment(patientData?.expiry_date).format('MM/DD/YYYY')}</p>
           </div>
         )}
       </Collapse>

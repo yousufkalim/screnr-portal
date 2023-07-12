@@ -87,7 +87,7 @@ export default function ActivityTable({ activityLog }) {
                   {row?.description}
                 </TableCell>
                 <TableCell align="center" className="table_cells">
-                  {moment(row?.time).format('DD/MM/YYYY')}
+                  {moment(row?.time).format('MM/DD/YYYY')}
                 </TableCell>
                 <TableCell align="center" className="table_cells">
                   {row?.type}

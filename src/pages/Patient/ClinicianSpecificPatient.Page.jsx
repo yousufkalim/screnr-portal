@@ -60,7 +60,7 @@ export default function Patient() {
             setActivityLog(res?.data);
           })
           .catch((error) => {
-            console.log('-->', error);
+            toast.error(error?.response?.data?.message);
           });
       }
     } catch (error) {

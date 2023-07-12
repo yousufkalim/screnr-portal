@@ -3,6 +3,7 @@ import { TextField } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import EmojiPicker from 'emoji-picker-react';
 import { makeStyles } from '@mui/styles';
+import { toast } from 'react-toastify';
 import { ReactComponent as Send } from '../../assets/icons/sendMsg.svg';
 import { ReactComponent as Emoji } from '../../assets/icons/emoji.svg';
 import { ReactComponent as Dots } from '../../assets/icons/threedots.svg';
@@ -93,7 +94,7 @@ function MessageBox({
           }
         })
         .catch((error) => {
-          console.log(error);
+          toast.error(error?.response?.data?.message);
         });
     }
   };

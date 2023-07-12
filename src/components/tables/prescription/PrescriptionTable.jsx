@@ -255,7 +255,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     <div>
                       <p>Date</p>
                       <p className="prescription_head">
-                        {moment(mainRow?.start_date).format('DD/MM/YYYY')}
+                        {moment(mainRow?.start_date).format('MM/DD/YYYY')}
                       </p>
                     </div>
                   </TableCell>
@@ -386,7 +386,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         onClick={() => handleSearchLogoClick(row?.id)}
                       >
                         <TableCell align="center">
-                          {moment(row?.date).format('DD/MM/YYYY')}
+                          {moment(row?.date).format('MM/DD/YYYY')}
                         </TableCell>
                         <TableCell align="center" className="table_cells">
                           <span className="linearPresProgress">{`${row?.avg_score ?? 0}%`}</span>
