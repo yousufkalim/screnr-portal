@@ -47,7 +47,6 @@ const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 export default function Chart({ logs }) {
-  console.log('🚀 ~ file: Chart.Component.jsx:50 ~ Chart ~ logs:', logs);
   const array = daysOfWeek.map((day) => logs?.graph?.data[day]);
 
   const data = {

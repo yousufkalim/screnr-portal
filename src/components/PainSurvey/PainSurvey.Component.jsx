@@ -25,7 +25,7 @@ export default function SurveyPain({ session, prescription }) {
           <div className="topSessionSec">
             <Back className="backBtn" />
             <p className="sessionHeader">Session Date</p>
-            <p className="sessionDate">{moment(session?.date).format('DD/MM/YYYY')}</p>
+            <p className="sessionDate">{moment(session?.date).format('MM/DD/YYYY')}</p>
           </div>
           <div className="surveyHeaderName">{prescription?.name}</div>
         </div>

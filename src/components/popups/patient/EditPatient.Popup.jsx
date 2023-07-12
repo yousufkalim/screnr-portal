@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { React, useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -73,9 +74,6 @@ export default function EditPatient({
   const { user } = Store();
   const [checked, setChecked] = useState(!!patientDetails?.expiry_date);
   const [clinicians, setClinicians] = useState([]);
-  // eslint-disable-next-line no-underscore-dangle
-  console.log('---->', moment(patientDetails?.expiry_date)?._d);
-
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 
@@ -85,7 +83,6 @@ export default function EditPatient({
     email: patientDetails?.email,
     profile_pic: patientDetails?.profile_pic,
     phone_number: patientDetails?.phone_number,
-    // eslint-disable-next-line no-underscore-dangle
     expiry_date: moment(patientDetails?.expiry_date)?._d || '',
   });
 
@@ -190,8 +187,7 @@ export default function EditPatient({
         }
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error(`getClinicians --> ${err}`);
+        toast.error(err?.response?.data?.message);
       });
   };
 

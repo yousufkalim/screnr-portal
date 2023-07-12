@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import GenericSidebar from '../../components/sidebar/GenericLeftSidebar';
 import PatientSidebar from '../../components/sidebar/patient/PatientSidebar';
 import TimeCard from '../../components/cards/TimeCard.Component';
@@ -49,7 +50,7 @@ export default function Activity() {
         setPatientData(res?.data?.user);
       })
       .catch((error) => {
-        console.log('-->', error);
+        toast.error(error?.response?.data?.message);
       });
   };
 
@@ -60,7 +61,7 @@ export default function Activity() {
           setActivityLog(res?.data);
         })
         .catch((error) => {
-          console.log('-->', error);
+          toast.error(error?.response?.data?.message);
         });
     } else if (window.location.pathname === `/patients/${patientId}/activity/${clinicianId}`) {
       await request('get', `/logs/${patientId}`)
@@ -68,7 +69,7 @@ export default function Activity() {
           setActivityLog(res?.data);
         })
         .catch((error) => {
-          console.log('-->', error);
+          toast.error(error?.response?.data?.message);
         });
     }
   };

@@ -172,7 +172,7 @@ export default function AddPrescription({
             <div className="dateDivPrescription">
               <DatePicker
                 showPopperArrow
-                dateFormat="dd/MM/yyyy"
+                dateFormat="MM/dd/yyyy"
                 name="date"
                 placeholderText="Start date"
                 popperPlacement="bottom-start"
