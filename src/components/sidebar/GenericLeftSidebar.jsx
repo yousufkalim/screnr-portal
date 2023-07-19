@@ -110,11 +110,11 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
       <div className="sidebarSubDiv">
         <div className="user_detail">
           <Phone className="spaceOnRight" />
-          {PhoneFormat(info?.phone_number)}
+          {info?.phone_number ? PhoneFormat(info?.phone_number) : ''}
         </div>
         <div className="user_detail">
           <Email className="spaceOnRight" />
-          <div className="xnewww"> {info?.email}</div>
+          <div className="xnewww"> {info?.email ?? ''}</div>
         </div>
       </div>
       {info?.expiry_date ? (

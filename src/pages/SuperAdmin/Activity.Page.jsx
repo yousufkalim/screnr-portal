@@ -82,7 +82,9 @@ export default function Activity() {
       getPatients={handleGetPatientData}
     />
   );
-
+  const getClinicName = (name) => {
+    setBreadcrumb(name);
+  };
   useEffect(() => {
     if (window.location.pathname === `/patients/${patientId}/activity/${clinicianId}`) {
       handleGetPatientData();
@@ -91,9 +93,6 @@ export default function Activity() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getClinicName = (name) => {
-    setBreadcrumb(name);
-  };
   return (
     <>
       <div style={{ position: 'fixed' }} className="gridish">

@@ -535,7 +535,7 @@ export default function PatientTable({
                       {row?.userData?.diagnosis}
                     </TableCell>
                     <TableCell align="center" className="table_cells">
-                      {row.prescription ?? '-'}
+                      {row.prescription ?? 'N/A'}
                     </TableCell>
                     <TableCell
                       align="center"

@@ -93,7 +93,7 @@ function ExerciseTable({ loading, feedback }) {
                     {item?.name.replace(/[0-9_]+/g, ' ').trim()}
                   </TableCell>
                   <TableCell align="center" className="table_cells">
-                    {item?.value?.feedback ? item?.value?.feedback : '-'}
+                    {item?.value?.feedback ? item?.value?.feedback : 'N/A'}
                   </TableCell>
                   <TableCell align="center" className="table_cells">
                     {item?.value?.failed_rule ? (

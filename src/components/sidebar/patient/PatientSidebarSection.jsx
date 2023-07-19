@@ -60,22 +60,22 @@ export default function PatientSidebarSection({
         </div>
         <div className="user_detail" id="gapAdd">
           <Medical />
-          {patientData?.userData?.diagnosis}
+          {patientData?.userData?.diagnosis ?? ''}
         </div>
         <div className="user_detail" id="gapAdd">
           <Body />
-          {patientData?.userData?.location}
+          {patientData?.userData?.location ?? ''}
         </div>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <div className="sidebarSubDiv2">
           <div className="user_detail" id="gapAdd">
             <Phone />
-            {patientData?.phone_number}
+            {patientData?.phone_number ?? ''}
           </div>
           <div className="user_detail" id="gapAdd">
             <Email />
-            <div className="xnewww">{patientData?.email}</div>
+            <div className="xnewww">{patientData?.email ?? ''}</div>
           </div>
         </div>
         <br />

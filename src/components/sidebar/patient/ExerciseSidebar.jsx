@@ -81,7 +81,7 @@ export default function Sidebar({
                     setActiveItem(exercise.name);
                   }}
                 >
-                  {exercise?.name}
+                  {exercise?.name ?? ''}
                 </div>
               ))}
             </div>

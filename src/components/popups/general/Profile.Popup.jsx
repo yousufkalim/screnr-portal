@@ -97,9 +97,9 @@ export default function ProfilePopup({
               <div className="imgDivPopupProfile">
                 {/* Avatar to be used */}
                 <label htmlFor="profilePic">
-                  {user.profile_pic ? (
+                  {user?.profile_pic ? (
                     <img
-                      src={getMediaUrl(user.profile_pic)}
+                      src={getMediaUrl(user?.profile_pic)}
                       className="pointer"
                       id="selectedImg"
                       style={{
@@ -113,7 +113,7 @@ export default function ProfilePopup({
                     />
                   ) : (
                     <AvatarComponent
-                      alt={`${user.first_name || ''} ${user.last_name || ''}`}
+                      alt={`${user.first_name ?? ''} ${user.last_name ?? ''}`}
                       className="profile_popups_avatar"
                     />
                   )}
@@ -139,7 +139,7 @@ export default function ProfilePopup({
                 </p>
                 <p className="blktxt" id="fontWeight">
                   {' '}
-                  {PhoneFormat(user.phone_number)}
+                  {user?.phone_number ? PhoneFormat(user?.phone_number) : ''}
                 </p>
               </div>
             </FormControl>
@@ -148,9 +148,8 @@ export default function ProfilePopup({
                 <p className="inputDiv">
                   <Mail className="customFieldIcon" /> Email
                 </p>
-
                 <p className="blktxt" id="fontWeight">
-                  {user.email || ''}
+                  {user?.email ?? ''}
                 </p>
               </div>
             </FormControl>
@@ -158,7 +157,11 @@ export default function ProfilePopup({
             <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
               <div className="pswdChangeTrack">
                 <p>Last Password Change</p>
-                <p>{moment(user.last_password_changed).format('MM-DD-YYYY')}</p>
+                <p>
+                  {user?.last_password_changed
+                    ? moment(user?.last_password_changed).format('MM-DD-YYYY')
+                    : ''}
+                </p>
               </div>
             </FormControl>
             <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
@@ -180,7 +183,7 @@ export default function ProfilePopup({
               <div className="pswdChangeTrack">
                 <p className="blktxt">Account Created</p>
                 <p className="blktxt" id="boldx">
-                  {moment(user?.createdAt).format('MM-DD-YYYY')}
+                  {user?.createdAt ? moment(user?.createdAt).format('MM-DD-YYYY') : ''}
                 </p>
               </div>
             </FormControl>
