@@ -113,13 +113,13 @@ export default function Dashboard() {
       <div className="cards_div">
         {cardsData.map((item) => (
           <CardWithIcon
-            Icon={item.icon}
-            amount={item.amount}
-            title={item.title}
-            CircleIcon={item.icon2}
-            LeftCircleClassName={item.className}
+            Icon={item?.icon}
+            amount={item?.amount}
+            title={item?.title}
+            CircleIcon={item?.icon2}
+            LeftCircleClassName={item?.className}
             cardClassName="card_main_div"
-            link={item.link}
+            link={item?.link}
             iconClassName={item.iconClassName}
           />
         ))}

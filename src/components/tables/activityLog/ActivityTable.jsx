@@ -24,6 +24,23 @@ export default function ActivityTable({ activityLog }) {
     setPage(newPage);
   };
 
+  const setDurationFormat = (milliseconds) => {
+    let result;
+    if (milliseconds >= 1000 && milliseconds < 60000) {
+      const seconds = Math.floor(milliseconds / 1000);
+      result = `${seconds} second${seconds > 0 && seconds !== 1 ? 's' : ''}`;
+    } else if (milliseconds >= 60000 && milliseconds < 3600000) {
+      const minutes = Math.floor(milliseconds / 60000);
+      result = `${minutes} minute${minutes > 0 && minutes !== 1 ? 's' : ''}`;
+    } else if (milliseconds >= 3600000) {
+      const hours = Math.floor(milliseconds / 3600000);
+      result = `${hours} hour${hours > 0 && hours !== 1 ? 's' : ''}`;
+    } else {
+      result = `${milliseconds} millisecond${milliseconds > 0 && milliseconds !== 1 ? 's' : ''}`;
+    }
+    return result;
+  };
+
   return (
     <div className="activityTable">
       <TableContainer
@@ -73,7 +90,7 @@ export default function ActivityTable({ activityLog }) {
           </TableHead>
           <TableBody>
             {activityLog?.slice(page * 4, page * 4 + 4).map((row) => (
-              <StyledTableRow key={row.id}>
+              <StyledTableRow key={row?.id}>
                 <TableCell
                   align="left"
                   className="table_cells"
@@ -81,7 +98,7 @@ export default function ActivityTable({ activityLog }) {
                     display: 'flex',
                     paddingTop: '6%',
                     paddingBottom: '6%',
-                    fontWeight: '500!important',
+                    fontWeight: '500 !important',
                   }}
                 >
                   {row?.description}
@@ -96,7 +113,7 @@ export default function ActivityTable({ activityLog }) {
                   {moment(row?.time).format('hh:mm:ss')} GMT
                 </TableCell>
                 <TableCell align="center" className="table_cells">
-                  {row?.time_spent}
+                  {setDurationFormat(row?.time_spent)}
                 </TableCell>
               </StyledTableRow>
             ))}
