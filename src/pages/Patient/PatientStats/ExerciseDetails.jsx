@@ -18,6 +18,7 @@ import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/
 import ScoreCard from '../../../components/ScoreCard/scoreCard';
 import ExerciseTable from '../../../components/tables/exerciseDetail/exerciseTable';
 import ScreenShotViewer from '../../../components/ScreenShotViewer/index';
+import { getMediaUrl } from '../../../config';
 
 function ExerciseDetails({ session, exercise, results, exerciseDetails, loading }) {
   const [targetExercise, setTargetExercise] = useState({
@@ -300,7 +301,7 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
             exercise?.screenshots?.map((item, index) => {
               return (
                 <img
-                  src={`https://screnr-api-dev.falconweb.app/${item}`}
+                  src={getMediaUrl(item)}
                   key={item}
                   alt={`screenShotImages${index + 1}`}
                   className="screenShotImages"

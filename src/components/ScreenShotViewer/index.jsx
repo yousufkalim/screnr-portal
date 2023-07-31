@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
+import { getMediaUrl } from '../../config';
 
 const index = ({
   selectedImageIndex,
@@ -16,7 +17,7 @@ const index = ({
   return (
     <div className="screenshotReviewer-main-container">
       <img
-        src={`https://screnr-api-dev.falconweb.app/${screenshots[selectedImageIndex]}`}
+        src={getMediaUrl(screenshots[selectedImageIndex])}
         alt="Selected Image"
         className="screenshotReviewer-image"
       />
