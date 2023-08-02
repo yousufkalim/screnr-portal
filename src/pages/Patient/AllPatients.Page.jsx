@@ -2,7 +2,7 @@
 import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { toast } from 'react-toastify';
-import addBtn from '../../assets/icons/addBtn.svg';
+// import addBtn from '../../assets/icons/addBtn.svg';
 import AllPatientTable from '../../components/tables/patient/AllPatientsTable';
 import AddNewPatient from '../../components/popups/patient/AddPatient.Popup';
 import request from '../../request';
@@ -67,24 +67,25 @@ export default function Patient() {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const res = await request('put', apiUrl, bodyObject);
-        if (res?.data?.users) {
-          setPatients(res?.data?.users);
-        } else {
-          setPatients([]);
-        }
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-        toast.error(err?.response?.data?.message);
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const res = await request('put', apiUrl, bodyObject);
+      if (res?.data?.users) {
+        setPatients(res?.data?.users);
+      } else {
+        setPatients([]);
       }
-    };
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      toast.error(err?.response?.data?.message);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiUrl, bodyObject]);
 
   const handleDynamicFilter = async () => {
@@ -108,6 +109,7 @@ export default function Patient() {
     handleDynamicFilter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const addNewPatientPopup = openAddPatient && (
     <AddNewPatient
       openAddPatient={openAddPatient}
@@ -124,7 +126,7 @@ export default function Patient() {
       patients={patients}
       setFilter={setFilter}
       setSorting={setSorting}
-      getPatients={handleFilterAndSorting}
+      getPatients={fetchData}
       exerciseFilter={exerciseFilter}
       diaganosisFilter={diaganosisFilter}
       setOpenAddPatient={setOpenAddPatient}
@@ -138,7 +140,7 @@ export default function Patient() {
         {AllPatients}
       </Grid>
 
-      <div className="addBtn">
+      {/* <div className="addBtn">
         <img
           alt=""
           src={addBtn}
@@ -146,7 +148,7 @@ export default function Patient() {
           className="pointer"
           onClick={() => setOpenAddPatient(true)}
         />
-      </div>
+      </div> */}
       {addNewPatientPopup}
     </Grid>
   );

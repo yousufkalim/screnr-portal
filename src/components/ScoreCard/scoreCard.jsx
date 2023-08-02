@@ -22,7 +22,7 @@ function ScoreCard({ bodyPart, scoreValue }) {
           }}
         />
         <div className="graphData">
-          <p className="excercise_percent">{scoreValue || 0}</p> <p className="scoreText">Score</p>
+          <p className="excercise_percent">{scoreValue || 0}</p>
         </div>
       </div>
     </div>

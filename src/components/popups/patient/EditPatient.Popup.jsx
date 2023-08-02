@@ -10,14 +10,14 @@ import Typography from '@mui/material/Typography';
 import { FormControl, TextField } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+// import MenuItem from '@mui/material/MenuItem';
+// import Select from '@mui/material/Select';
 import ClearIcon from '@mui/icons-material/Clear';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import edit from '../../../assets/icons/edit.svg';
-import dropdown from '../../../assets/icons/downArrow.svg';
+// import dropdown from '../../../assets/icons/downArrow.svg';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import CustomPhoneInput from '../general/CustomPhoneInput.Popup';
 import { getMediaUrl } from '../../../config';
@@ -89,11 +89,12 @@ export default function EditPatient({
   const [userData, setUserData] = useState({
     mrn_id: patientDetails?.userData?.mrn_id,
     diagnosis: patientDetails?.userData?.diagnosis || '',
-    location: patientDetails?.userData?.location || '',
+    location: patientDetails?.userData?.location || [],
     clinicians: patientDetails?.userData?.clinicians || [],
     // eslint-disable-next-line no-underscore-dangle
     dob: moment(patientDetails?.userData?.dob)._d || '',
   });
+  console.log('🚀 ~ file: EditPatient.Popup.jsx:97 ~ userData:', userData);
 
   const setPatientData = () => {
     setPatient({
@@ -112,7 +113,7 @@ export default function EditPatient({
     setUserData({
       mrn_id: patientDetails?.userData?.mrn_id,
       diagnosis: patientDetails?.userData?.diagnosis || '',
-      location: patientDetails?.userData?.location || '',
+      location: patientDetails?.userData?.location || [],
       clinicians: patientDetails?.userData?.clinicians || [],
       // eslint-disable-next-line no-underscore-dangle
       dob: moment(patientDetails?.userData?.dob)._d || '',
@@ -227,6 +228,13 @@ export default function EditPatient({
         userData[key].forEach((value, index) => {
           formData.append(`userData[${key}][${index}]`, value);
         });
+      } else if (key === 'location') {
+        // if the key is 'location', loop over the array and append each value to the formData object
+        userData[key].forEach((value, index) => {
+          formData.append(`userData[${key}][${index}]`, value);
+        });
+
+        // formData.append(`userData[${key}]`, userData[key]);
       } else {
         // for other properties, simply append the value to the formData object
         formData.append(`userData[${key}]`, userData[key]);
@@ -258,6 +266,21 @@ export default function EditPatient({
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
+    }
+  };
+
+  const handlePainLocationChange = (targetLocation) => {
+    const isLocationChecked = userData.location.includes(targetLocation);
+
+    if (isLocationChecked) {
+      // If the targetLocation is checked, remove it from the location array
+      setUserData({
+        ...userData,
+        location: userData.location.filter((location) => location !== targetLocation),
+      });
+    } else {
+      // If the targetLocation is not checked, add it to the location array
+      setUserData({ ...userData, location: [...userData.location, targetLocation] });
     }
   };
 
@@ -458,7 +481,94 @@ export default function EditPatient({
                 }}
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
+            <FormControl
+              sx={{
+                mb: 1,
+                ml: 0.5,
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                color: '#fba622',
+              }}
+              variant="outlined"
+            >
+              <FormControlLabel
+                label="Left"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('left')}
+                    onChange={() => {
+                      handlePainLocationChange('left');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Right"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('right')}
+                    onChange={() => {
+                      handlePainLocationChange('right');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Posterior"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('posterior')}
+                    onChange={() => {
+                      handlePainLocationChange('posterior');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Anterior"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('anterior')}
+                    onChange={() => {
+                      handlePainLocationChange('anterior');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Medial"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('medial')}
+                    onChange={() => {
+                      handlePainLocationChange('medial');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Lateral"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('lateral')}
+                    onChange={() => {
+                      handlePainLocationChange('lateral');
+                    }}
+                  />
+                }
+              />
+            </FormControl>
+            {/* <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
               <Select
                 displayEmpty
                 id="demo-simple-select"
@@ -515,7 +625,7 @@ export default function EditPatient({
                   <span style={{ color: '#949494' }}>Lateral</span>
                 </MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
 
             <FormControl
               sx={{
