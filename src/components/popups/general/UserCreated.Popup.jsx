@@ -43,17 +43,14 @@ export default function UserCreated({ openUserCreated, setOpenUserCreated }) {
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
       >
+        <ClearIcon className="loginClearIcon" onClick={handleClose} />
+
         <DialogContent>
-          <div className="loginClearIconCopy">
-            <ClearIcon onClick={handleClose} />
-          </div>
-          <div>
-            <Typography>
-              <Icon />
-              <h1 className="genPresTxt">New User Added!</h1>
-              <p className="genSubTxt">User successfuly added to the list!</p>
-            </Typography>
-          </div>
+          <Typography>
+            <Icon />
+            <h1 className="genPresTxt">New User Added!</h1>
+            <p className="genSubTxt">User successfuly added to the list!</p>
+          </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleClose} className="usrAddedBtn" variant="contained">
