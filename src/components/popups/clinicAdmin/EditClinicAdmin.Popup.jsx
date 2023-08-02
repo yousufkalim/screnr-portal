@@ -201,267 +201,281 @@ export default function EditClinicAdmin({
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
       >
-        <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
-          <Typography gutterBottom>
-            <h1 className="addPopupTxt">Edit Clinic Admin</h1>
-            <p className="addPopupSubTxt"> </p>
-            <div>
-              <div className="imgDivPopup">
-                {/* Avatar to be used */}
-                <label htmlFor="edit_profilePic">
-                  <input
-                    name="profile_pic"
-                    type="file"
-                    id="edit_profilePic"
-                    accept=".png, .jpg, .jpeg"
-                    onChange={handleSelectedFile}
-                    className="noDisplay"
-                  />
-
-                  {clinicAdmin.profile_pic ? (
-                    <img
-                      src={getMediaUrl(clinicAdmin.profile_pic)}
-                      className="pointer"
-                      id="edit_selectedImg"
-                      style={{
-                        width: '100%',
-                        borderRadius: '100px',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                      alt=""
+          <div className="loginClearIconCopy">
+            <ClearIcon onClick={handleClose} />
+          </div>
+          <div>
+            <Typography gutterBottom>
+              <h1 className="addPopupTxt">Edit Clinic Admin</h1>
+              <p className="addPopupSubTxt"> </p>
+              <div>
+                <div className="imgDivPopup">
+                  {/* Avatar to be used */}
+                  <label htmlFor="edit_profilePic">
+                    <input
+                      name="profile_pic"
+                      type="file"
+                      id="edit_profilePic"
+                      accept=".png, .jpg, .jpeg"
+                      onChange={handleSelectedFile}
+                      className="noDisplay"
                     />
-                  ) : (
-                    <AvatarComponent
-                      alt={`${clinicAdmin?.first_name} ${clinicAdmin?.last_name}`}
-                      className="popups_avatar"
-                    />
-                  )}
-                  <img src={edit} className="addImgIcon" alt="" />
-                </label>
+
+                    {clinicAdmin.profile_pic ? (
+                      <img
+                        src={getMediaUrl(clinicAdmin.profile_pic)}
+                        className="pointer"
+                        id="edit_selectedImg"
+                        style={{
+                          width: '100%',
+                          borderRadius: '100px',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                        alt=""
+                      />
+                    ) : (
+                      <AvatarComponent
+                        alt={`${clinicAdmin?.first_name} ${clinicAdmin?.last_name}`}
+                        className="popups_avatar"
+                      />
+                    )}
+                    <img src={edit} className="addImgIcon" alt="" />
+                  </label>
+                </div>
               </div>
-            </div>
-            <FormControl sx={{ mt: 3, width: '100%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-fname"
-                classes={outlinedInputStyles}
-                placeholder="Clinic Name"
-                size="normal"
-                name="clinic_name"
-                value={userData.clinic_name}
-                onChange={handleUserDataChange}
-                inputProps={{
-                  maxLength: 20,
-                }}
-              />
-            </FormControl>
-            <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 1.5 }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-fname"
-                classes={outlinedInputStyles}
-                placeholder="First Name"
-                size="normal"
-                name="first_name"
-                value={clinicAdmin.first_name}
-                onChange={handleChange}
-                inputProps={{
-                  maxLength: 20,
-                }}
-              />
-            </FormControl>
-            <FormControl sx={{ mb: 2, mt: 2.7, width: '48.5%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-last-name"
-                classes={outlinedInputStyles}
-                placeholder="Last name"
-                size="normal"
-                type="text"
-                name="last_name"
-                value={clinicAdmin.last_name}
-                onChange={handleChange}
-                inputProps={{
-                  maxLength: 20,
-                }}
-              />
-            </FormControl>
-
-            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-email"
-                classes={outlinedInputStyles}
-                placeholder="Email"
-                size="normal"
-                type="email"
-                name="email"
-                value={clinicAdmin.email}
-                onChange={handleChange}
-              />
-            </FormControl>
-
-            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <div className="edit-phone-input">
-                <PhoneInput
-                  country="us"
-                  onlyCountries={['us']}
-                  value={clinicAdmin.phone_number}
-                  onChange={(value) => {
-                    setClinicAdmin({ ...clinicAdmin, phone_number: value });
-                  }}
-                  disableDropdown
-                  countryCodeEditable={false}
-                  disableCountryGuess
-                />
-              </div>
-            </FormControl>
-
-            <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-fname"
-                classes={outlinedInputStyles}
-                placeholder="Address"
-                size="normal"
-                name="address"
-                value={userData.address}
-                onChange={handleUserDataChange}
-                inputProps={{
-                  maxLength: 50,
-                }}
-              />
-            </FormControl>
-
-            <FormControl sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }} variant="outlined">
-              <p className="genderTxt"> Gender</p>
-              <span>
-                <Button
-                  className={clinicAdmin.gender === 'male' ? 'selectGender' : 'genderBtn'}
-                  variant="contained"
-                  sx={{ width: '130px' }}
-                  onClick={() => {
-                    handleGenderSelection('male');
-                  }}
-                >
-                  Male
-                </Button>
-                <Button
-                  className={clinicAdmin.gender === 'female' ? 'selectGender' : 'genderBtn'}
-                  variant="contained"
-                  onClick={() => {
-                    handleGenderSelection('female');
-                  }}
-                >
-                  Female
-                </Button>
-                <Button
-                  className={clinicAdmin.gender === 'non-binary' ? 'selectGender' : 'genderBtn'}
-                  variant="contained"
-                  onClick={() => {
-                    handleGenderSelection('non-binary');
-                  }}
-                >
-                  Non-binary
-                </Button>
-              </span>
-            </FormControl>
-
-            <FormControl
-              sx={{
-                textAlign: 'left',
-                width: '100%',
-                ml: 0.6,
-              }}
-            >
-              <FormControlLabel
-                sx={{
-                  color: '#136773',
-                  textAlign: 'left',
-                  fontSize: '40px',
-                  width: 'fit-content',
-                }}
-                control={
-                  <Checkbox onChange={handleCheck} checked={checked} style={{ color: '#136773' }} />
-                }
-                label={
-                  <Typography
-                    style={{
-                      color: '#136773',
-                      textAlign: 'left',
+              <FormControl sx={{ mt: 3, width: '100%' }} variant="outlined">
+                <TextField
+                  sx={{
+                    borderRadius: '20px',
+                    input: {
+                      color: 'black',
+                      fontSize: '14px',
                       fontWeight: '500',
+                      ml: 1,
+                    },
+                  }}
+                  id="outlined-fname"
+                  classes={outlinedInputStyles}
+                  placeholder="Clinic Name"
+                  size="normal"
+                  name="clinic_name"
+                  value={userData.clinic_name}
+                  onChange={handleUserDataChange}
+                  inputProps={{
+                    maxLength: 20,
+                  }}
+                />
+              </FormControl>
+              <FormControl sx={{ mb: 1, mt: 2.7, width: '48.5%', mr: 1.5 }} variant="outlined">
+                <TextField
+                  sx={{
+                    borderRadius: '20px',
+                    input: {
+                      color: 'black',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      ml: 1,
+                    },
+                  }}
+                  id="outlined-fname"
+                  classes={outlinedInputStyles}
+                  placeholder="First Name"
+                  size="normal"
+                  name="first_name"
+                  value={clinicAdmin.first_name}
+                  onChange={handleChange}
+                  inputProps={{
+                    maxLength: 20,
+                  }}
+                />
+              </FormControl>
+              <FormControl sx={{ mb: 2, mt: 2.7, width: '48.5%' }} variant="outlined">
+                <TextField
+                  sx={{
+                    borderRadius: '20px',
+                    input: {
+                      color: 'black',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      ml: 1,
+                    },
+                  }}
+                  id="outlined-last-name"
+                  classes={outlinedInputStyles}
+                  placeholder="Last name"
+                  size="normal"
+                  type="text"
+                  name="last_name"
+                  value={clinicAdmin.last_name}
+                  onChange={handleChange}
+                  inputProps={{
+                    maxLength: 20,
+                  }}
+                />
+              </FormControl>
+
+              <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
+                <TextField
+                  sx={{
+                    borderRadius: '20px',
+                    input: {
+                      color: 'black',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      ml: 1,
+                    },
+                  }}
+                  id="outlined-email"
+                  classes={outlinedInputStyles}
+                  placeholder="Email"
+                  size="normal"
+                  type="email"
+                  name="email"
+                  value={clinicAdmin.email}
+                  onChange={handleChange}
+                />
+              </FormControl>
+
+              <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
+                <div className="edit-phone-input">
+                  <PhoneInput
+                    country="us"
+                    onlyCountries={['us']}
+                    value={clinicAdmin.phone_number}
+                    onChange={(value) => {
+                      setClinicAdmin({ ...clinicAdmin, phone_number: value });
+                    }}
+                    disableDropdown
+                    countryCodeEditable={false}
+                    disableCountryGuess
+                  />
+                </div>
+              </FormControl>
+
+              <FormControl
+                sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }}
+                variant="outlined"
+              >
+                <TextField
+                  sx={{
+                    borderRadius: '20px',
+                    input: {
+                      color: 'black',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      ml: 1,
+                    },
+                  }}
+                  id="outlined-fname"
+                  classes={outlinedInputStyles}
+                  placeholder="Address"
+                  size="normal"
+                  name="address"
+                  value={userData.address}
+                  onChange={handleUserDataChange}
+                  inputProps={{
+                    maxLength: 50,
+                  }}
+                />
+              </FormControl>
+
+              <FormControl
+                sx={{ mb: 1, mt: 1, width: '100%', textAlign: 'left' }}
+                variant="outlined"
+              >
+                <p className="genderTxt"> Gender</p>
+                <span>
+                  <Button
+                    className={clinicAdmin.gender === 'male' ? 'selectGender' : 'genderBtn'}
+                    variant="contained"
+                    sx={{ width: '130px' }}
+                    onClick={() => {
+                      handleGenderSelection('male');
                     }}
                   >
-                    Want to Add expiry date
-                  </Typography>
-                }
-              />
-            </FormControl>
-            <FormControl
-              sx={{
-                textAlign: 'left',
-                width: '100%',
-              }}
-            >
-              <div className="date-div2" id={!checked ? 'disabledDate' : ''}>
-                <DatePicker
-                  showPopperArrow
-                  dateFormat="MM-dd-yyyy"
-                  name="expiry_date"
-                  onChange={dateChange}
-                  disabled={!checked}
-                  selected={clinicAdmin?.expiry_date}
-                  placeholderText="Enter expiry date"
-                  popperPlacement="bottom-start"
-                  showYearDropdown
-                  minDate={tomorrow}
-                  disablePast
+                    Male
+                  </Button>
+                  <Button
+                    className={clinicAdmin.gender === 'female' ? 'selectGender' : 'genderBtn'}
+                    variant="contained"
+                    onClick={() => {
+                      handleGenderSelection('female');
+                    }}
+                  >
+                    Female
+                  </Button>
+                  <Button
+                    className={clinicAdmin.gender === 'non-binary' ? 'selectGender' : 'genderBtn'}
+                    variant="contained"
+                    onClick={() => {
+                      handleGenderSelection('non-binary');
+                    }}
+                  >
+                    Non-binary
+                  </Button>
+                </span>
+              </FormControl>
+
+              <FormControl
+                sx={{
+                  textAlign: 'left',
+                  width: '100%',
+                  ml: 0.6,
+                }}
+              >
+                <FormControlLabel
+                  sx={{
+                    color: '#136773',
+                    textAlign: 'left',
+                    fontSize: '40px',
+                    width: 'fit-content',
+                  }}
+                  control={
+                    <Checkbox
+                      onChange={handleCheck}
+                      checked={checked}
+                      style={{ color: '#136773' }}
+                    />
+                  }
+                  label={
+                    <Typography
+                      style={{
+                        color: '#136773',
+                        textAlign: 'left',
+                        fontWeight: '500',
+                      }}
+                    >
+                      Want to Add expiry date
+                    </Typography>
+                  }
                 />
-              </div>
-            </FormControl>
-          </Typography>
+              </FormControl>
+              <FormControl
+                sx={{
+                  textAlign: 'left',
+                  width: '100%',
+                }}
+              >
+                <div className="date-div2" id={!checked ? 'disabledDate' : ''}>
+                  <DatePicker
+                    showPopperArrow
+                    dateFormat="MM-dd-yyyy"
+                    name="expiry_date"
+                    onChange={dateChange}
+                    disabled={!checked}
+                    selected={clinicAdmin?.expiry_date}
+                    placeholderText="Enter expiry date"
+                    popperPlacement="bottom-start"
+                    showYearDropdown
+                    minDate={tomorrow}
+                    disablePast
+                  />
+                </div>
+              </FormControl>
+            </Typography>
+          </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">

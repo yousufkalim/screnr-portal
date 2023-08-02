@@ -44,14 +44,17 @@ export default function SomethingWrong({ openSomethingWrong, setOpenSomethingWro
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
       >
-        <ClearIcon className="loginClearIcon" onClick={handleClose} />
-
         <DialogContent className="">
-          <Typography>
-            <Icon style={{ zIndex: '1300' }} />
-            <h1 className="genPresTxt">Something Wrong</h1>
-            <p className="genSubTxt"> </p>
-          </Typography>
+          <div className="loginClearIconCopy">
+            <ClearIcon onClick={handleClose} />
+          </div>
+          <div>
+            <Typography>
+              <Icon style={{ zIndex: '1300' }} />
+              <h1 className="genPresTxt">Something Wrong</h1>
+              <p className="genSubTxt"> </p>
+            </Typography>
+          </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleClose} className="wrngBtn" variant="contained">

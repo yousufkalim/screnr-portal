@@ -164,145 +164,149 @@ export default function EditPrescription({
           },
         }}
       >
-        <ClearIcon className="loginClearIcon" onClick={handleClose} />
+        <div className="loginClearIconCopy">
+          <ClearIcon onClick={handleClose} />
+        </div>
         <DialogContent>
-          <Typography gutterBottom>
-            <h1 className="clinicianPopupTxt">Edit Prescription</h1>
+          <div>
+            <Typography gutterBottom>
+              <h1 className="clinicianPopupTxt">Edit Prescription</h1>
 
-            <FormControl sx={{ mb: 1, mt: 2, width: '100%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: '#949494',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 1,
-                  },
-                }}
-                id="outlined-name"
-                classes={outlinedInputStyles}
-                placeholder="Add prescription name"
-                size="normal"
-                value={prescriptionName}
-                onChange={(e) => {
-                  setPrescriptionName(e.target.value);
-                }}
-              />
-            </FormControl>
+              <FormControl sx={{ mb: 1, mt: 2, width: '100%' }} variant="outlined">
+                <TextField
+                  sx={{
+                    borderRadius: '20px',
+                    input: {
+                      color: '#949494',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      ml: 1,
+                    },
+                  }}
+                  id="outlined-name"
+                  classes={outlinedInputStyles}
+                  placeholder="Add prescription name"
+                  size="normal"
+                  value={prescriptionName}
+                  onChange={(e) => {
+                    setPrescriptionName(e.target.value);
+                  }}
+                />
+              </FormControl>
 
-            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1 }} variant="outlined">
-              <Select
-                // eslint-disable-next-line react/no-unstable-nested-components
-                IconComponent={(props) => (
-                  <img
-                    src={dropdown}
-                    style={{
-                      margin: '1% 2%',
-                      filter:
-                        'brightness(0) saturate(100%) invert(66%) sepia(69%) saturate(1538%) hue-rotate(344deg) brightness(107%) contrast(97%)',
-                    }}
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    {...props}
-                    alt=""
-                  />
-                )}
-                displayEmpty
-                sx={{
-                  '.MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#E1E1E1',
-                  },
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: ' #454238',
-                  },
-                  '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: ' #454238',
-                  },
-                  borderRadius: '20px',
-                  input: {
-                    color: 'red',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 2,
-                  },
-                }}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={prescriptionDuration || 'default'}
-                inputProps={{
-                  sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
-                }}
-                onChange={(e) => {
-                  setPrescriptionDuration(e.target.value);
-                }}
-              >
-                <MenuItem value="default">
-                  <span style={{ color: '#949494' }}>Select Duration</span>
-                </MenuItem>
-                {weeks.map((item) => (
-                  <MenuItem value={item?.value}>
-                    <span style={{ color: '#949494' }}>{item?.label}</span>
+              <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1 }} variant="outlined">
+                <Select
+                  // eslint-disable-next-line react/no-unstable-nested-components
+                  IconComponent={(props) => (
+                    <img
+                      src={dropdown}
+                      style={{
+                        margin: '1% 2%',
+                        filter:
+                          'brightness(0) saturate(100%) invert(66%) sepia(69%) saturate(1538%) hue-rotate(344deg) brightness(107%) contrast(97%)',
+                      }}
+                      // eslint-disable-next-line react/jsx-props-no-spreading
+                      {...props}
+                      alt=""
+                    />
+                  )}
+                  displayEmpty
+                  sx={{
+                    '.MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#E1E1E1',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: ' #454238',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: ' #454238',
+                    },
+                    borderRadius: '20px',
+                    input: {
+                      color: 'red',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      ml: 2,
+                    },
+                  }}
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={prescriptionDuration || 'default'}
+                  inputProps={{
+                    sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
+                  }}
+                  onChange={(e) => {
+                    setPrescriptionDuration(e.target.value);
+                  }}
+                >
+                  <MenuItem value="default">
+                    <span style={{ color: '#949494' }}>Select Duration</span>
                   </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                  {weeks.map((item) => (
+                    <MenuItem value={item?.value}>
+                      <span style={{ color: '#949494' }}>{item?.label}</span>
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
-            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-              <Select
-                // eslint-disable-next-line react/no-unstable-nested-components
-                IconComponent={(props) => (
-                  <img
-                    src={dropdown}
-                    style={{
-                      margin: '1% 2%',
-                      filter:
-                        'brightness(0) saturate(100%) invert(66%) sepia(69%) saturate(1538%) hue-rotate(344deg) brightness(107%) contrast(97%)',
-                    }}
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    {...props}
-                    alt=""
-                  />
-                )}
-                displayEmpty
-                sx={{
-                  '.MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#E1E1E1',
-                  },
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: ' #454238',
-                  },
-                  '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: ' #454238',
-                  },
-                  borderRadius: '20px',
-                  input: {
-                    color: 'red',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 2,
-                  },
-                }}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={prescriptionFrequency || 'default'}
-                inputProps={{
-                  sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
-                }}
-                onChange={(e) => {
-                  setPrescriptionFrequency(e.target.value);
-                }}
-              >
-                <MenuItem value="default">
-                  <span style={{ color: '#949494' }}>Weekly Frequency</span>
-                </MenuItem>
-                {frequency.map((item) => (
-                  <MenuItem value={item?.value}>
-                    <span style={{ color: '#949494' }}>{item?.label}</span>
+              <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
+                <Select
+                  // eslint-disable-next-line react/no-unstable-nested-components
+                  IconComponent={(props) => (
+                    <img
+                      src={dropdown}
+                      style={{
+                        margin: '1% 2%',
+                        filter:
+                          'brightness(0) saturate(100%) invert(66%) sepia(69%) saturate(1538%) hue-rotate(344deg) brightness(107%) contrast(97%)',
+                      }}
+                      // eslint-disable-next-line react/jsx-props-no-spreading
+                      {...props}
+                      alt=""
+                    />
+                  )}
+                  displayEmpty
+                  sx={{
+                    '.MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#E1E1E1',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: ' #454238',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: ' #454238',
+                    },
+                    borderRadius: '20px',
+                    input: {
+                      color: 'red',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      ml: 2,
+                    },
+                  }}
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={prescriptionFrequency || 'default'}
+                  inputProps={{
+                    sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
+                  }}
+                  onChange={(e) => {
+                    setPrescriptionFrequency(e.target.value);
+                  }}
+                >
+                  <MenuItem value="default">
+                    <span style={{ color: '#949494' }}>Weekly Frequency</span>
                   </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Typography>
+                  {frequency.map((item) => (
+                    <MenuItem value={item?.value}>
+                      <span style={{ color: '#949494' }}>{item?.label}</span>
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Typography>
+          </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button

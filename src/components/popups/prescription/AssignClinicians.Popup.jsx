@@ -76,33 +76,37 @@ export default function AssignClinicians({
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
       >
-        <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
-          <Typography gutterBottom>
-            <h1 className="clinicianPopupTxt">Assign more Clinicians</h1>
-            <div className="clinicianParentDiv">
-              {allClinicians?.map((clinician) => {
-                const isSelected = selectedClinicians.some((c) => c.id === clinician.id);
-                const avatarClassName = isSelected ? 'top_sec_avatar' : 'top_sec_avatar_disabled';
-                const pTagClassName = isSelected ? 'topSecDocName' : 'topSecDocName_disabled';
-                return (
-                  <div
-                    className={isSelected ? 'selectedClinicianDiv' : 'clinicianDiv'}
-                    role="presentation"
-                    onClick={() => selectClinician(clinician)}
-                  >
-                    <AvatarComponent
-                      alt={`${clinician?.first_name} ${clinician?.last_name}`}
-                      className={avatarClassName}
-                    />
-                    <p className={pTagClassName}>
-                      {`${clinician?.first_name} ${clinician?.last_name}`}{' '}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </Typography>
+          <div className="loginClearIconCopy">
+            <ClearIcon onClick={handleClose} />
+          </div>
+          <div>
+            <Typography gutterBottom>
+              <h1 className="clinicianPopupTxt">Assign more Clinicians</h1>
+              <div className="clinicianParentDiv">
+                {allClinicians?.map((clinician) => {
+                  const isSelected = selectedClinicians.some((c) => c.id === clinician.id);
+                  const avatarClassName = isSelected ? 'top_sec_avatar' : 'top_sec_avatar_disabled';
+                  const pTagClassName = isSelected ? 'topSecDocName' : 'topSecDocName_disabled';
+                  return (
+                    <div
+                      className={isSelected ? 'selectedClinicianDiv' : 'clinicianDiv'}
+                      role="presentation"
+                      onClick={() => selectClinician(clinician)}
+                    >
+                      <AvatarComponent
+                        alt={`${clinician?.first_name} ${clinician?.last_name}`}
+                        className={avatarClassName}
+                      />
+                      <p className={pTagClassName}>
+                        {`${clinician?.first_name} ${clinician?.last_name}`}{' '}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </Typography>
+          </div>
         </DialogContent>
       </BootstrapDialog>
     </div>
