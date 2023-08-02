@@ -185,158 +185,162 @@ export default function AddStaffMember({
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
       >
-        <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
-          <Typography gutterBottom>
-            <h1 className="addPopupTxt">Add Staff Member</h1>
-            <p className="addPopupSubTxt"> </p>
-            <div>
-              <div className="imgDivPopup">
-                <label htmlFor="profilePic">
-                  <input
-                    name="profile_pic"
-                    type="file"
-                    id="profilePic"
-                    accept=".png, .jpg, .jpeg"
-                    onChange={handleSelectedFile}
-                  />
-
-                  <img
-                    src={profiles}
-                    className="pointer"
-                    id="selectedImg"
-                    style={{
-                      width: '100%',
-                      borderRadius: '100px',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                    alt=""
-                  />
-                  <img src={edit} className="addImgIcon" alt="" />
-                </label>
-              </div>
-            </div>
-            {/* N */}
-            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%', mr: 1.5 }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                  },
-                }}
-                id="outlined-fname"
-                classes={outlinedInputStyles}
-                placeholder="First Name"
-                size="normal"
-                name="first_name"
-                value={staffMember.first_name}
-                onChange={handleChange}
-                inputProps={{
-                  maxLength: 20,
-                }}
-              />
-            </FormControl>
-            <FormControl sx={{ mb: 1, mt: 3, width: '48.5%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                  },
-                }}
-                id="outlined-name"
-                classes={outlinedInputStyles}
-                placeholder="Last Name"
-                size="normal"
-                name="last_name"
-                onChange={handleChange}
-                value={staffMember.last_name}
-                inputProps={{
-                  maxLength: 20,
-                }}
-              />
-            </FormControl>
-            <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: 'black',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                  },
-                }}
-                id="outlined-email"
-                classes={outlinedInputStyles}
-                placeholder="Email"
-                size="normal"
-                name="email"
-                onChange={handleChange}
-                value={staffMember.email}
-              />
-            </FormControl>
-            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
+          <div className="loginClearIconCopy">
+            <ClearIcon onClick={handleClose} />
+          </div>
+          <div>
+            <Typography gutterBottom>
+              <h1 className="addPopupTxt">Add Staff Member</h1>
+              <p className="addPopupSubTxt"> </p>
               <div>
-                <CustomPhoneInput setUserInfo={setStaffMember} userInfo={staffMember} />
-              </div>
-            </FormControl>
+                <div className="imgDivPopup">
+                  <label htmlFor="profilePic">
+                    <input
+                      name="profile_pic"
+                      type="file"
+                      id="profilePic"
+                      accept=".png, .jpg, .jpeg"
+                      onChange={handleSelectedFile}
+                    />
 
-            <FormControl
-              sx={{
-                textAlign: 'left',
-                width: '100%',
-              }}
-            >
-              <FormControlLabel
-                sx={{
-                  color: '#136773',
-                  textAlign: 'left',
-                  fontSize: '40px',
-                  width: 'fit-content',
-                }}
-                control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
-                label={
-                  <Typography
-                    style={{
-                      color: '#136773',
-                      textAlign: 'left',
-                      fontWeight: '500',
-                    }}
-                  >
-                    Want to Add expiry date
-                  </Typography>
-                }
-              />
-            </FormControl>
-            <FormControl
-              sx={{
-                textAlign: 'left',
-                width: '100%',
-              }}
-            >
-              <div className="date-div" id={!checked ? 'disabledDate' : ''}>
-                <DatePicker
-                  showPopperArrow
-                  dateFormat="MM-dd-yyyy"
-                  name="expiry_date"
-                  onChange={dateChange}
-                  disabled={!checked}
-                  selected={staffMember.expiry_date}
-                  placeholderText="Enter expiry date"
-                  popperPlacement="bottom-start"
-                  showYearDropdown
-                  minDate={tomorrow}
-                  disablePast
-                />
+                    <img
+                      src={profiles}
+                      className="pointer"
+                      id="selectedImg"
+                      style={{
+                        width: '100%',
+                        borderRadius: '100px',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                      alt=""
+                    />
+                    <img src={edit} className="addImgIcon" alt="" />
+                  </label>
+                </div>
               </div>
-            </FormControl>
-          </Typography>
+              {/* N */}
+              <FormControl sx={{ mb: 1, mt: 3, width: '48.5%', mr: 1.5 }} variant="outlined">
+                <TextField
+                  sx={{
+                    borderRadius: '20px',
+                    input: {
+                      color: 'black',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                    },
+                  }}
+                  id="outlined-fname"
+                  classes={outlinedInputStyles}
+                  placeholder="First Name"
+                  size="normal"
+                  name="first_name"
+                  value={staffMember.first_name}
+                  onChange={handleChange}
+                  inputProps={{
+                    maxLength: 20,
+                  }}
+                />
+              </FormControl>
+              <FormControl sx={{ mb: 1, mt: 3, width: '48.5%' }} variant="outlined">
+                <TextField
+                  sx={{
+                    borderRadius: '20px',
+                    input: {
+                      color: 'black',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                    },
+                  }}
+                  id="outlined-name"
+                  classes={outlinedInputStyles}
+                  placeholder="Last Name"
+                  size="normal"
+                  name="last_name"
+                  onChange={handleChange}
+                  value={staffMember.last_name}
+                  inputProps={{
+                    maxLength: 20,
+                  }}
+                />
+              </FormControl>
+              <FormControl sx={{ mb: 2, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
+                <TextField
+                  sx={{
+                    borderRadius: '20px',
+                    input: {
+                      color: 'black',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                    },
+                  }}
+                  id="outlined-email"
+                  classes={outlinedInputStyles}
+                  placeholder="Email"
+                  size="normal"
+                  name="email"
+                  onChange={handleChange}
+                  value={staffMember.email}
+                />
+              </FormControl>
+              <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
+                <div>
+                  <CustomPhoneInput setUserInfo={setStaffMember} userInfo={staffMember} />
+                </div>
+              </FormControl>
+
+              <FormControl
+                sx={{
+                  textAlign: 'left',
+                  width: '100%',
+                }}
+              >
+                <FormControlLabel
+                  sx={{
+                    color: '#136773',
+                    textAlign: 'left',
+                    fontSize: '40px',
+                    width: 'fit-content',
+                  }}
+                  control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
+                  label={
+                    <Typography
+                      style={{
+                        color: '#136773',
+                        textAlign: 'left',
+                        fontWeight: '500',
+                      }}
+                    >
+                      Want to Add expiry date
+                    </Typography>
+                  }
+                />
+              </FormControl>
+              <FormControl
+                sx={{
+                  textAlign: 'left',
+                  width: '100%',
+                }}
+              >
+                <div className="date-div" id={!checked ? 'disabledDate' : ''}>
+                  <DatePicker
+                    showPopperArrow
+                    dateFormat="MM-dd-yyyy"
+                    name="expiry_date"
+                    onChange={dateChange}
+                    disabled={!checked}
+                    selected={staffMember.expiry_date}
+                    placeholderText="Enter expiry date"
+                    popperPlacement="bottom-start"
+                    showYearDropdown
+                    minDate={tomorrow}
+                    disablePast
+                  />
+                </div>
+              </FormControl>
+            </Typography>
+          </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">

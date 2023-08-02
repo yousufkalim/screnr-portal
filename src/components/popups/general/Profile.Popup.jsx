@@ -90,104 +90,110 @@ export default function ProfilePopup({
           },
         }}
       >
-        <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
-          <Typography gutterBottom>
-            <div>
-              <div className="imgDivPopupProfile">
-                {/* Avatar to be used */}
-                <label htmlFor="profilePic">
-                  {user?.profile_pic ? (
+          <div className="loginClearIconCopy">
+            <ClearIcon onClick={handleClose} />
+          </div>
+          <div>
+            <Typography gutterBottom>
+              <div>
+                <div className="imgDivPopupProfile">
+                  {/* Avatar to be used */}
+                  <label htmlFor="profilePic">
+                    {user?.profile_pic ? (
+                      <img
+                        src={getMediaUrl(user?.profile_pic)}
+                        className="pointer"
+                        id="selectedImg"
+                        style={{
+                          width: '122px',
+                          borderRadius: '100px',
+                          height: '100%',
+                          objectFit: 'cover',
+                          border: ' 3px solid #faa017',
+                        }}
+                        alt=""
+                      />
+                    ) : (
+                      <AvatarComponent
+                        alt={`${user.first_name ?? ''} ${user.last_name ?? ''}`}
+                        className="profile_popups_avatar"
+                      />
+                    )}
                     <img
-                      src={getMediaUrl(user?.profile_pic)}
-                      className="pointer"
-                      id="selectedImg"
-                      style={{
-                        width: '122px',
-                        borderRadius: '100px',
-                        height: '100%',
-                        objectFit: 'cover',
-                        border: ' 3px solid #faa017',
+                      src={edit}
+                      className="addDPIcon"
+                      role="presentation"
+                      onClick={() => {
+                        setOpenEditProfilePopup(true);
+                        setOpenProfilePopup(false);
                       }}
                       alt=""
                     />
-                  ) : (
-                    <AvatarComponent
-                      alt={`${user.first_name ?? ''} ${user.last_name ?? ''}`}
-                      className="profile_popups_avatar"
-                    />
-                  )}
-                  <img
-                    src={edit}
-                    className="addDPIcon"
+                  </label>
+                </div>
+              </div>
+              <h1 className="forgetPaswdTxt">{`${user.first_name || ''} ${
+                user.last_name || ''
+              }`}</h1>
+              <p className="enterEmailTxt">{roles[user?.role]}</p>
+              <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
+                <div className="pswdChangeTrack" htmlFor="phone">
+                  <p className="inputDiv">
+                    <Phone className="customFieldIcon" /> Phone Number
+                  </p>
+                  <p className="blktxt" id="fontWeight">
+                    {' '}
+                    {user?.phone_number ? PhoneFormat(user?.phone_number) : ''}
+                  </p>
+                </div>
+              </FormControl>
+              <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
+                <div className="pswdChangeTrack" htmlFor="email">
+                  <p className="inputDiv">
+                    <Mail className="customFieldIcon" /> Email
+                  </p>
+                  <p className="blktxt" id="fontWeight">
+                    {user?.email ?? ''}
+                  </p>
+                </div>
+              </FormControl>
+
+              <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
+                <div className="pswdChangeTrack">
+                  <p>Last Password Change</p>
+                  <p>
+                    {user?.last_password_changed
+                      ? moment(user?.last_password_changed).format('MM-DD-YYYY')
+                      : ''}
+                  </p>
+                </div>
+              </FormControl>
+              <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
+                <div className="pswdChangeTrack">
+                  <p className="blktxt">Password</p>
+                  <p
+                    className="passwordChangeTxt"
                     role="presentation"
                     onClick={() => {
-                      setOpenEditProfilePopup(true);
+                      setOpenPasswordPopup(true);
                       setOpenProfilePopup(false);
                     }}
-                    alt=""
-                  />
-                </label>
-              </div>
-            </div>
-            <h1 className="forgetPaswdTxt">{`${user.first_name || ''} ${user.last_name || ''}`}</h1>
-            <p className="enterEmailTxt">{roles[user?.role]}</p>
-            <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
-              <div className="pswdChangeTrack" htmlFor="phone">
-                <p className="inputDiv">
-                  <Phone className="customFieldIcon" /> Phone Number
-                </p>
-                <p className="blktxt" id="fontWeight">
-                  {' '}
-                  {user?.phone_number ? PhoneFormat(user?.phone_number) : ''}
-                </p>
-              </div>
-            </FormControl>
-            <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
-              <div className="pswdChangeTrack" htmlFor="email">
-                <p className="inputDiv">
-                  <Mail className="customFieldIcon" /> Email
-                </p>
-                <p className="blktxt" id="fontWeight">
-                  {user?.email ?? ''}
-                </p>
-              </div>
-            </FormControl>
-
-            <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
-              <div className="pswdChangeTrack">
-                <p>Last Password Change</p>
-                <p>
-                  {user?.last_password_changed
-                    ? moment(user?.last_password_changed).format('MM-DD-YYYY')
-                    : ''}
-                </p>
-              </div>
-            </FormControl>
-            <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
-              <div className="pswdChangeTrack">
-                <p className="blktxt">Password</p>
-                <p
-                  className="passwordChangeTxt"
-                  role="presentation"
-                  onClick={() => {
-                    setOpenPasswordPopup(true);
-                    setOpenProfilePopup(false);
-                  }}
-                >
-                  Change Password
-                </p>
-              </div>
-            </FormControl>
-            <FormControl sx={{ mb: 1, width: '85%' }} variant="outlined">
-              <div className="pswdChangeTrack">
-                <p className="blktxt">Account Created</p>
-                <p className="blktxt" id="boldx">
-                  {user?.createdAt ? moment(user?.createdAt).format('MM-DD-YYYY') : ''}
-                </p>
-              </div>
-            </FormControl>
-          </Typography>
+                  >
+                    Change Password
+                  </p>
+                </div>
+              </FormControl>
+              <FormControl sx={{ mb: 1, width: '85%' }} variant="outlined">
+                <div className="pswdChangeTrack">
+                  <p className="blktxt">Account Created</p>
+                  <p className="blktxt" id="boldx">
+                    {user?.createdAt ? moment(user?.createdAt).format('MM-DD-YYYY') : ''}
+                  </p>
+                </div>
+              </FormControl>
+            </Typography>
+          </div>
         </DialogContent>
         <DialogActions sx={{ width: '84%' }}>
           <Button onClick={handleLogout} className="logoutBtn" variant="contained">
