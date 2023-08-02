@@ -31,15 +31,6 @@
   color: #fba622;
 }
 
-.loginClearIconCopy {
-  display: flex;
-  justify-content: end;
-  z-index: 1300;
-  cursor: pointer;
-  color: #fba622;
-  margin-top: -3%;
-}
-
 .resetPasswordBtn:hover,
 .logInBtn:hover {
   background-color: #faa017 !important;

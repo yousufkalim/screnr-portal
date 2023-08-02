@@ -7,14 +7,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
 import { FormControl, TextField } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import ClearIcon from '@mui/icons-material/Clear';
 import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
-// import add from '../../../assets/icons/add.svg';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import add from '../../../assets/icons/add.svg';
 import edit from '../../../assets/icons/edit.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
@@ -76,7 +76,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
   const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
   const [exisitingButInactive, setExisitingButInactive] = useState(false);
   const [added, setAdded] = useState(false);
-  const [userData, setUserData] = useState({ diagnosis: '', location: '', clinicians: [] });
+  const [userData, setUserData] = useState({ diagnosis: '', location: [], clinicians: [] });
   const outlinedInputStyles = useOutlinedInputStyles();
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -87,7 +87,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     setChecked(false);
     setClinicians([]);
     setSelectedClinic('');
-    setUserData({ diagnosis: '', location: '', clinicians: [] });
+    setUserData({ diagnosis: '', location: [], clinicians: [] });
   };
 
   const handleCheck = (event) => setChecked(event.target.checked);
@@ -179,6 +179,10 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         formData.append(key, patient[key]);
       });
 
+      if (userData.location.length && userData.location.length < 0) {
+        return toast.error('Pain location cannot be empty');
+      }
+
       // append properties from userData in formdata
       Object.keys(userData).forEach((key) => {
         if (key === 'clinicians') {
@@ -186,6 +190,13 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
           userData[key].forEach((value, index) => {
             formData.append(`userData[${key}][${index}]`, value);
           });
+        } else if (key === 'location') {
+          // if the key is 'location', loop over the array and append each value to the formData object
+          userData[key].forEach((value, index) => {
+            formData.append(`userData[${key}][${index}]`, value);
+          });
+
+          // formData.append(`userData[${key}]`, userData[key]);
         } else {
           // for other properties, simply append the value to the formData object
           formData.append(`userData[${key}]`, userData[key]);
@@ -273,6 +284,21 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openAddPatient]);
 
+  const handlePainLocationChange = (targetLocation) => {
+    const isLocationChecked = userData.location.includes(targetLocation);
+
+    if (isLocationChecked) {
+      // If the targetLocation is checked, remove it from the location array
+      setUserData({
+        ...userData,
+        location: userData.location.filter((location) => location !== targetLocation),
+      });
+    } else {
+      // If the targetLocation is not checked, add it to the location array
+      setUserData({ ...userData, location: [...userData.location, targetLocation] });
+    }
+  };
+
   return (
     <>
       <BootstrapDialog
@@ -287,358 +313,442 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
       >
+        <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
-          <div className="loginClearIconCopy">
-            <ClearIcon onClick={handleClose} />
-          </div>
-          <div>
-            <Typography gutterBottom>
-              <h1 className="clinicianPopupTxt">Add New Patient</h1>
-              <p className="clinicianSubTxt"> </p>
-              <div>
-                <div className="imgDivPopup">
-                  <label htmlFor="patient_AddProfile_Pic">
-                    <input
-                      name="profile_pic"
-                      type="file"
-                      id="patient_AddProfile_Pic"
-                      accept=".png, .jpg, .jpeg"
-                      onChange={handleSelectedFile}
-                      className="noDisplay"
-                    />
-                    <img
-                      src={profiles}
-                      className="pointer"
-                      id="patientDP"
-                      style={{
-                        width: '100%',
-                        borderRadius: '100px',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                      alt=""
-                    />
-                    <img src={edit} className="addImgIcon" alt="" />
-                  </label>
-                </div>
+          <Typography gutterBottom>
+            <h1 className="clinicianPopupTxt">Add New Patient</h1>
+            <p className="clinicianSubTxt"> </p>
+            <div>
+              <div className="imgDivPopup">
+                <label htmlFor="patient_AddProfile_Pic">
+                  <input
+                    name="profile_pic"
+                    type="file"
+                    id="patient_AddProfile_Pic"
+                    accept=".png, .jpg, .jpeg"
+                    onChange={handleSelectedFile}
+                    className="noDisplay"
+                  />
+                  <img
+                    src={profiles}
+                    className="pointer"
+                    id="patientDP"
+                    style={{
+                      width: '100%',
+                      borderRadius: '100px',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                    alt=""
+                  />
+                  <img src={edit} className="addImgIcon" alt="" />
+                </label>
               </div>
+            </div>
 
-              <FormControl
+            <FormControl
+              sx={{
+                mt: 3,
+                width: '100%',
+                display: user?.role === 'clinician' || user?.role === 'clinic' ? 'none' : '',
+              }}
+              variant="outlined"
+            >
+              <Select
+                // eslint-disable-next-line react/no-unstable-nested-components
+                IconComponent={(props) => (
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
+                )}
+                displayEmpty
                 sx={{
-                  mt: 3,
-                  width: '100%',
-                  display: user?.role === 'clinician' || user?.role === 'clinic' ? 'none' : '',
+                  '.MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#E1E1E1',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 2,
+                  },
                 }}
-                variant="outlined"
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                name="clinic_name"
+                placeholder="Title"
+                value={selectedClinic}
+                onChange={handleSelectedClinic}
+                inputProps={{
+                  sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
+                }}
               >
-                <Select
-                  // eslint-disable-next-line react/no-unstable-nested-components
-                  IconComponent={(props) => (
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
-                  )}
-                  displayEmpty
-                  sx={{
-                    '.MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#E1E1E1',
-                    },
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      borderColor: ' #454238',
-                    },
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: ' #454238',
-                    },
-                    borderRadius: '20px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      ml: 2,
-                    },
-                  }}
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  name="clinic_name"
-                  placeholder="Title"
-                  value={selectedClinic}
-                  onChange={handleSelectedClinic}
-                  inputProps={{
-                    sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
-                  }}
-                >
-                  <MenuItem value="">
-                    <span style={{ color: '#949494' }}>Select Clinic Name</span>
+                <MenuItem value="">
+                  <span style={{ color: '#949494' }}>Select Clinic Name</span>
+                </MenuItem>
+                {clinics?.users?.map((row) => (
+                  <MenuItem value={row.id}>
+                    <span style={{ color: '#949494' }}>{row.userData.clinic_name}</span>
                   </MenuItem>
-                  {clinics?.users?.map((row) => (
-                    <MenuItem value={row.id}>
-                      <span style={{ color: '#949494' }}>{row.userData.clinic_name}</span>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl
-                sx={{ mt: 2, width: '100%', display: user?.role === 'clinician' ? 'none' : '' }}
-                variant="outlined"
-              >
-                <ReactSelect dataOptions={clinicians} setUserData={setUserData} />
-              </FormControl>
-              <FormControl sx={{ mb: 1, mt: 2, width: '100%' }} variant="outlined">
-                <TextField
-                  sx={{
-                    borderRadius: '20px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      ml: 1,
-                    },
-                  }}
-                  id="outlined-name"
-                  classes={outlinedInputStyles}
-                  placeholder="MRN (customizable Unique id)"
-                  size="normal"
-                  name="mrn_id"
-                  value={userData.mrn_id}
-                  onChange={handleUserDataChange}
-                />
-              </FormControl>
-
-              <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
-                <TextField
-                  sx={{
-                    borderRadius: '20px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      ml: 1,
-                    },
-                  }}
-                  id="outlined-name"
-                  classes={outlinedInputStyles}
-                  placeholder="First Name"
-                  size="normal"
-                  name="first_name"
-                  value={patient.first_name}
-                  onChange={handlePatientChange}
-                  inputProps={{
-                    maxLength: 20,
-                  }}
-                />
-              </FormControl>
-
-              <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-                <TextField
-                  sx={{
-                    borderRadius: '20px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      ml: 1,
-                    },
-                  }}
-                  id="outlined-name"
-                  classes={outlinedInputStyles}
-                  placeholder="Last Name"
-                  size="normal"
-                  name="last_name"
-                  value={patient.last_name}
-                  onChange={handlePatientChange}
-                  inputProps={{
-                    maxLength: 20,
-                  }}
-                />
-              </FormControl>
-
-              <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
-                <TextField
-                  sx={{
-                    borderRadius: '20px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      ml: 1,
-                    },
-                  }}
-                  id="outlined-email"
-                  classes={outlinedInputStyles}
-                  placeholder="Email"
-                  size="normal"
-                  type="email"
-                  name="email"
-                  value={patient.email}
-                  onChange={handlePatientChange}
-                />
-              </FormControl>
-
-              <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
-                <CustomPhoneInput setUserInfo={setPatient} userInfo={patient} />
-              </FormControl>
-
-              <FormControl
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl
+              sx={{ mt: 2, width: '100%', display: user?.role === 'clinician' ? 'none' : '' }}
+              variant="outlined"
+            >
+              <ReactSelect dataOptions={clinicians} setUserData={setUserData} />
+            </FormControl>
+            <FormControl sx={{ mb: 1, mt: 2, width: '100%' }} variant="outlined">
+              <TextField
                 sx={{
-                  textAlign: 'left',
-                  width: '100%',
-                  mb: 2,
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 1,
+                  },
                 }}
-              >
-                <div className="date-div">
-                  <DatePicker
-                    showPopperArrow
-                    dateFormat="MM-dd-yyyy"
-                    name="date"
-                    selected={userData.dob}
-                    onChange={dobChange}
-                    placeholderText="Date of birth"
-                    popperPlacement="bottom-start"
-                    showYearDropdown
-                    openToDate={new Date('01/01/2005')}
-                    maxDate={new Date()}
+                id="outlined-name"
+                classes={outlinedInputStyles}
+                placeholder="Unique ID (MRN, Patient ID etc.)."
+                size="normal"
+                name="mrn_id"
+                value={userData.mrn_id}
+                onChange={handleUserDataChange}
+              />
+            </FormControl>
+
+            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
+              <TextField
+                sx={{
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 1,
+                  },
+                }}
+                id="outlined-name"
+                classes={outlinedInputStyles}
+                placeholder="First Name"
+                size="normal"
+                name="first_name"
+                value={patient.first_name}
+                onChange={handlePatientChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
+              />
+            </FormControl>
+
+            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
+              <TextField
+                sx={{
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 1,
+                  },
+                }}
+                id="outlined-name"
+                classes={outlinedInputStyles}
+                placeholder="Last Name"
+                size="normal"
+                name="last_name"
+                value={patient.last_name}
+                onChange={handlePatientChange}
+                inputProps={{
+                  maxLength: 20,
+                }}
+              />
+            </FormControl>
+
+            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
+              <TextField
+                sx={{
+                  borderRadius: '20px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 1,
+                  },
+                }}
+                id="outlined-email"
+                classes={outlinedInputStyles}
+                placeholder="Email"
+                size="normal"
+                type="email"
+                name="email"
+                value={patient.email}
+                onChange={handlePatientChange}
+              />
+            </FormControl>
+
+            <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
+              <CustomPhoneInput setUserInfo={setPatient} userInfo={patient} />
+            </FormControl>
+
+            <FormControl
+              sx={{
+                textAlign: 'left',
+                width: '100%',
+                mb: 2,
+              }}
+            >
+              <div className="date-div">
+                <DatePicker
+                  showPopperArrow
+                  dateFormat="MM-dd-yyyy"
+                  name="date"
+                  selected={userData.dob}
+                  onChange={dobChange}
+                  placeholderText="Date of birth"
+                  popperPlacement="bottom-start"
+                  showYearDropdown
+                  openToDate={new Date('01/01/2005')}
+                  maxDate={new Date()}
+                />
+              </div>
+            </FormControl>
+
+            <FormControl sx={{ mb: 2, width: '100%' }} variant="outlined">
+              <TextField
+                sx={{
+                  borderRadius: '15px',
+                  input: {
+                    color: 'black',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 1,
+                  },
+                }}
+                id="outlined-name"
+                classes={outlinedInputStyles}
+                placeholder="Diagnosis"
+                size="normal"
+                name="diagnosis"
+                value={userData.diagnosis}
+                onChange={handleUserDataChange}
+                inputProps={{
+                  maxLength: 50,
+                }}
+              />
+            </FormControl>
+            <FormControl
+              sx={{
+                mb: 1,
+                ml: 0.5,
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                color: '#fba622',
+              }}
+              variant="outlined"
+            >
+              <FormControlLabel
+                label="Left"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('left')}
+                    onChange={() => {
+                      handlePainLocationChange('left');
+                    }}
                   />
-                </div>
-              </FormControl>
-
-              <FormControl sx={{ mb: 2, width: '100%' }} variant="outlined">
-                <TextField
-                  sx={{
-                    borderRadius: '15px',
-                    input: {
-                      color: 'black',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      ml: 1,
-                    },
-                  }}
-                  id="outlined-name"
-                  classes={outlinedInputStyles}
-                  placeholder="Diagnosis"
-                  size="normal"
-                  name="diagnosis"
-                  value={userData.diagnosis}
-                  onChange={handleUserDataChange}
-                  inputProps={{
-                    maxLength: 20,
-                  }}
-                />
-              </FormControl>
-              <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  displayEmpty
-                  inputProps={{
-                    sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
-                    'aria-label': 'Without label',
-                  }}
-                  // eslint-disable-next-line react/no-unstable-nested-components
-                  IconComponent={(props) => (
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
-                  )}
-                  sx={{
-                    '.MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#E1E1E1',
-                    },
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      borderColor: ' #454238',
-                    },
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: ' #454238',
-                    },
-                    borderRadius: '20px',
-                    input: {
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      ml: 2,
-                    },
-                  }}
-                  name="location"
-                  value={userData.location}
-                  onChange={handleUserDataChange}
-                >
-                  <MenuItem disabled selected value="">
-                    <span style={{ color: '#949494' }}>Location</span>
-                  </MenuItem>
-                  <MenuItem value="left">
-                    <span style={{ color: '#949494' }}>Left</span>
-                  </MenuItem>
-                  <MenuItem value="right">
-                    <span style={{ color: '#949494' }}>Right</span>
-                  </MenuItem>
-                  <MenuItem value="posterior">
-                    <span style={{ color: '#949494' }}>Posterior</span>
-                  </MenuItem>
-                  <MenuItem value="anterior">
-                    <span style={{ color: '#949494' }}>Anterior</span>
-                  </MenuItem>
-                  <MenuItem value="medial">
-                    <span style={{ color: '#949494' }}>Medial</span>
-                  </MenuItem>
-                  <MenuItem value="lateral">
-                    <span style={{ color: '#949494' }}>Lateral</span>
-                  </MenuItem>
-                </Select>
-              </FormControl>
-
-              <FormControl
-                sx={{
-                  textAlign: 'left',
-                  width: '100%',
-                  ml: 0.6,
-                }}
-              >
-                <FormControlLabel
-                  sx={{
-                    color: '#136773',
-                    textAlign: 'left',
-                    fontSize: '40px',
-                    width: 'fit-content',
-                  }}
-                  control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
-                  label={
-                    <Typography
-                      style={{
-                        color: '#136773',
-                        textAlign: 'left',
-                        fontWeight: '500',
-                      }}
-                    >
-                      Want to Add expiry date
-                    </Typography>
-                  }
-                />
-              </FormControl>
-              <FormControl
-                sx={{
-                  textAlign: 'left',
-                  width: '100%',
-                }}
-              >
-                <div className="date-div" id={!checked ? 'disabledDate' : ''}>
-                  <DatePicker
-                    showPopperArrow
-                    dateFormat="MM-dd-yyyy"
-                    name="expiry_date"
-                    selected={patient.expiry_date}
-                    onChange={expDateChange}
-                    disabled={!checked}
-                    placeholderText="Enter expiry date"
-                    popperPlacement="bottom-start"
-                    showYearDropdown
-                    minDate={tomorrow}
-                    disablePast
+                }
+              />
+              <FormControlLabel
+                label="Right"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('right')}
+                    onChange={() => {
+                      handlePainLocationChange('right');
+                    }}
                   />
-                </div>
-              </FormControl>
-            </Typography>
-          </div>
+                }
+              />
+              <FormControlLabel
+                label="Posterior"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('posterior')}
+                    onChange={() => {
+                      handlePainLocationChange('posterior');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Anterior"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('anterior')}
+                    onChange={() => {
+                      handlePainLocationChange('anterior');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Medial"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('medial')}
+                    onChange={() => {
+                      handlePainLocationChange('medial');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Lateral"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('lateral')}
+                    onChange={() => {
+                      handlePainLocationChange('lateral');
+                    }}
+                  />
+                }
+              />
+            </FormControl>
+
+            {/* <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                displayEmpty
+                inputProps={{
+                  sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
+                  'aria-label': 'Without label',
+                }}
+                // eslint-disable-next-line react/no-unstable-nested-components
+                IconComponent={(props) => (
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
+                )}
+                sx={{
+                  '.MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#E1E1E1',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: ' #454238',
+                  },
+                  borderRadius: '20px',
+                  input: {
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    ml: 2,
+                  },
+                }}
+                name="location"
+                value={userData.location}
+                onChange={handleUserDataChange}
+              >
+                <MenuItem disabled selected value="">
+                  <span style={{ color: '#949494' }}>Location</span>
+                </MenuItem>
+                <MenuItem value="left">
+                  <span style={{ color: '#949494' }}>Left</span>
+                </MenuItem>
+                <MenuItem value="right">
+                  <span style={{ color: '#949494' }}>Right</span>
+                </MenuItem>
+                <MenuItem value="posterior">
+                  <span style={{ color: '#949494' }}>Posterior</span>
+                </MenuItem>
+                <MenuItem value="anterior">
+                  <span style={{ color: '#949494' }}>Anterior</span>
+                </MenuItem>
+                <MenuItem value="medial">
+                  <span style={{ color: '#949494' }}>Medial</span>
+                </MenuItem>
+                <MenuItem value="lateral">
+                  <span style={{ color: '#949494' }}>Lateral</span>
+                </MenuItem>
+              </Select>
+            </FormControl> */}
+
+            <FormControl
+              sx={{
+                textAlign: 'left',
+                width: '100%',
+                ml: 0.6,
+              }}
+            >
+              <FormControlLabel
+                sx={{
+                  color: '#136773',
+                  textAlign: 'left',
+                  fontSize: '40px',
+                  width: 'fit-content',
+                }}
+                control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
+                label={
+                  <Typography
+                    style={{
+                      color: '#136773',
+                      textAlign: 'left',
+                      fontWeight: '500',
+                    }}
+                  >
+                    Want to Add expiry date
+                  </Typography>
+                }
+              />
+            </FormControl>
+            <FormControl
+              sx={{
+                textAlign: 'left',
+                width: '100%',
+              }}
+            >
+              <div className="date-div" id={!checked ? 'disabledDate' : ''}>
+                <DatePicker
+                  showPopperArrow
+                  dateFormat="MM-dd-yyyy"
+                  name="expiry_date"
+                  selected={patient.expiry_date}
+                  onChange={expDateChange}
+                  disabled={!checked}
+                  placeholderText="Enter expiry date"
+                  popperPlacement="bottom-start"
+                  showYearDropdown
+                  minDate={tomorrow}
+                  disablePast
+                />
+              </div>
+            </FormControl>
+          </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             <p className="sendInviteTxt">Send Invite</p>{' '}
-            {/* <img src={add} className="spaceOnLeft" alt="" /> */}
+            <img src={add} className="spaceOnLeft" alt="" />
           </Button>
         </DialogActions>
       </BootstrapDialog>

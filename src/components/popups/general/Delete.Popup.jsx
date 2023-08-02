@@ -34,10 +34,15 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function DeleteModal({ openDeletePopup, setOpenDeletePopup, item, txt, getData }) {
   const handleClose = () => setOpenDeletePopup(false);
   const handleDelete = async () => {
-    await request('delete', `/${txt}/${item.id}`);
-    getData();
-    handleClose();
-    toast.success('Deleted successfully');
+    await request('delete', `/${txt}/${item.id}`)
+      .then(() => {
+        getData();
+        handleClose();
+        toast.success('Deleted successfully');
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+      });
   };
 
   return (

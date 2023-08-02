@@ -7,13 +7,13 @@ import moment from 'moment';
 // import MultiCircularProgress from './OverallExcerciseScore';
 import { CircularProgress } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
-import { ReactComponent as TitleExcerciseIcon } from '../../../assets/icons/titleExcerciseIcon.svg';
+// import { ReactComponent as TitleExcerciseIcon } from '../../../assets/icons/titleExcerciseIcon.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 import { ReactComponent as LeftArrow } from '../../../assets/icons/ArrowIcon1.svg';
 import { ReactComponent as RightArrow } from '../../../assets/icons/ArrowIcon2.svg';
-import { ReactComponent as RedDot } from '../../../assets/icons/sessionGraphColorDot1.svg';
-import { ReactComponent as GreenDot } from '../../../assets/icons/sessionGraphColorDot2.svg';
-import { ReactComponent as YellowDot } from '../../../assets/icons/sessionGraphColorDot3.svg';
+// import { ReactComponent as RedDot } from '../../../assets/icons/sessionGraphColorDot1.svg';
+// import { ReactComponent as GreenDot } from '../../../assets/icons/sessionGraphColorDot2.svg';
+// import { ReactComponent as YellowDot } from '../../../assets/icons/sessionGraphColorDot3.svg';
 import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
 import ScoreCard from '../../../components/ScoreCard/scoreCard';
 import ExerciseTable from '../../../components/tables/exerciseDetail/exerciseTable';
@@ -182,17 +182,17 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '.7rem',
+              // gap: '.7rem',
             }}
           >
-            <TitleExcerciseIcon />
+            {/* <TitleExcerciseIcon /> */}
             <p className="excercise_name_p">{exercise?.name}</p>
           </div>
         </div>
         <div className="excercise_details">
           <div className="setNumber">
             <div className="text_rep_set">
-              <p>set Number</p>
+              <p>Set Number</p>
             </div>
             <div className="set_rep_valueNumber">
               <LeftArrow className="arrows" onClick={handleSetCounterSubtract} />
@@ -202,7 +202,7 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
           </div>
           <div className="setNumber">
             <div className="text_rep_set">
-              <p>Rep number</p>
+              <p>Rep Number</p>
             </div>
             <div className="set_rep_valueNumber">
               <LeftArrow className="arrows" onClick={handleRepCounterSubtract} />
@@ -218,16 +218,16 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
           <div className="score_Bar1">
             <div className="overallScoreGraph">
               <div className="overAll_Arrows">
-                <LeftArrow className="arrows" />
-                <p className="excercises_names">Overall</p>
-                <RightArrow className="arrows" />
+                {/* <LeftArrow className="arrows" /> */}
+                <p className="excercises_names">Performance</p>
+                {/* <RightArrow className="arrows" /> */}
               </div>
 
               <CircularProgress
                 variant="determinate"
                 thickness="8"
                 value={targetExercise?.rep?.screnr_compliance || 0}
-                size={65}
+                size={60}
                 sx={{
                   color:
                     // eslint-disable-next-line no-nested-ternary
@@ -244,10 +244,9 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
               <div className="graphData">
                 <p className="excercise_percent">
                   {Math.round(targetExercise?.rep?.screnr_compliance) ?? 0}
-                </p>{' '}
-                <p className="scoreText">Score</p>
+                </p>
               </div>
-              <div className="colorDotsDiv2">
+              {/* <div className="colorDotsDiv2">
                 <div className="colorDots">
                   <RedDot />
                   <p className="colortxt">Low</p>
@@ -260,7 +259,7 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
                   <YellowDot />
                   <p className="colortxt">High</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           {targetExercise?.rep?.rep_packet?.scores?.map((item) => (

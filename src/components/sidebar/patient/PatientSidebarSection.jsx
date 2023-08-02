@@ -20,6 +20,7 @@ export default function PatientSidebarSection({
   openEditpatientModal,
   setOpenEditpatientModal,
 }) {
+  console.log('🚀 ~ file: PatientSidebarSection.jsx:23 ~ patientData:', patientData);
   const [expanded, setExpanded] = useState('');
   const [toggleIcon, setToggleIcon] = useState(false);
   const handleExpandClick = () => {
@@ -50,7 +51,7 @@ export default function PatientSidebarSection({
           {`${patientData?.first_name ?? ''} ${patientData?.last_name}` ?? ''}
         </div>
         <div className="staff_id">
-          Patient ID: <span className="staff_id_2">{patientData?.id || ''}</span>
+          Patient ID: <span className="staff_id_2">{patientData?.userData?.mrn_id || ''}</span>
         </div>
       </div>
       <div className="sidebarSubDiv">
