@@ -110,81 +110,85 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
           style: { borderRadius: 20, background: 'white', width: 800 },
         }}
       >
-        <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
-          <Typography gutterBottom>
-            <div>
-              <div className="imgDivPopupProfile">
-                {/* Avatar to be used */}
-                <label htmlFor="profilePic">
-                  <input
-                    name="profile_pic"
-                    type="file"
-                    id="profilePic"
-                    className="noDisplay"
-                    accept=".png, .jpg, .jpeg"
-                    onChange={handleSelectedFile}
-                  />
+          <div className="loginClearIconCopy">
+            <ClearIcon onClick={handleClose} />
+          </div>
+          <div>
+            <Typography gutterBottom>
+              <div>
+                <div className="imgDivPopupProfile">
+                  {/* Avatar to be used */}
+                  <label htmlFor="profilePic">
+                    <input
+                      name="profile_pic"
+                      type="file"
+                      id="profilePic"
+                      className="noDisplay"
+                      accept=".png, .jpg, .jpeg"
+                      onChange={handleSelectedFile}
+                    />
 
-                  {values?.profile_pic ? (
-                    <img
-                      src={getMediaUrl(values?.profile_pic)}
-                      className="pointer"
-                      id="selectedProfileImg"
-                      style={{
-                        width: '122px',
-                        borderRadius: '100px',
-                        height: '100%',
-                        objectFit: 'cover',
-                        border: ' 3px solid #faa017',
-                      }}
-                      alt=""
-                    />
-                  ) : (
-                    <AvatarComponent
-                      alt={`${user.first_name} ${user.last_name}`}
-                      className="profile_popups_avatar"
-                    />
-                  )}
-                  <img src={edit} className="addDPIcon" alt="" />
-                </label>
+                    {values?.profile_pic ? (
+                      <img
+                        src={getMediaUrl(values?.profile_pic)}
+                        className="pointer"
+                        id="selectedProfileImg"
+                        style={{
+                          width: '122px',
+                          borderRadius: '100px',
+                          height: '100%',
+                          objectFit: 'cover',
+                          border: ' 3px solid #faa017',
+                        }}
+                        alt=""
+                      />
+                    ) : (
+                      <AvatarComponent
+                        alt={`${user.first_name} ${user.last_name}`}
+                        className="profile_popups_avatar"
+                      />
+                    )}
+                    <img src={edit} className="addDPIcon" alt="" />
+                  </label>
+                </div>
               </div>
-            </div>
-            <h1 className="forgetPaswdTxt">{`${user.first_name} ${user.last_name}`}</h1>
-            <p className="enterEmailTxt">{roles[user?.role]}</p>
-            <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
-              <label className="pswdChangeTrack" htmlFor="phone">
-                <p className="inputDiv">
-                  <Phone className="customFieldIcon" /> Phone Number
-                </p>
-                <input
-                  className="customInput"
-                  id="phone"
-                  type="text"
-                  name="phone_number"
-                  maxLength="10"
-                  minLength="10"
-                  value={values.phone_number}
-                  onChange={handlePhoneNumberChange}
-                />
-              </label>
-            </FormControl>
-            <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
-              <label className="pswdChangeTrack" htmlFor="email">
-                <p className="inputDiv">
-                  <Mail className="customFieldIcon" /> Email
-                </p>
-                <input
-                  className="customInput"
-                  id="email"
-                  name="email"
-                  type="text"
-                  value={values.email}
-                  onChange={handleChange}
-                />
-              </label>
-            </FormControl>
-          </Typography>
+              <h1 className="forgetPaswdTxt">{`${user.first_name} ${user.last_name}`}</h1>
+              <p className="enterEmailTxt">{roles[user?.role]}</p>
+              <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
+                <label className="pswdChangeTrack" htmlFor="phone">
+                  <p className="inputDiv">
+                    <Phone className="customFieldIcon" /> Phone Number
+                  </p>
+                  <input
+                    className="customInput"
+                    id="phone"
+                    type="text"
+                    name="phone_number"
+                    maxLength="10"
+                    minLength="10"
+                    value={values.phone_number}
+                    onChange={handlePhoneNumberChange}
+                  />
+                </label>
+              </FormControl>
+              <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
+                <label className="pswdChangeTrack" htmlFor="email">
+                  <p className="inputDiv">
+                    <Mail className="customFieldIcon" /> Email
+                  </p>
+                  <input
+                    className="customInput"
+                    id="email"
+                    name="email"
+                    type="text"
+                    value={values.email}
+                    onChange={handleChange}
+                  />
+                </label>
+              </FormControl>
+            </Typography>
+          </div>
         </DialogContent>
         <DialogActions sx={{ width: '84%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">

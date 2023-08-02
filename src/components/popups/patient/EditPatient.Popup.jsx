@@ -276,8 +276,8 @@ export default function EditPatient({
         }}
       >
         <DialogContent>
-          <div>
-            <ClearIcon className="loginClearIcon" onClick={handleClose} />
+          <div className="loginClearIconCopy">
+            <ClearIcon onClick={handleClose} />
           </div>
           <div>
             <Typography gutterBottom>
