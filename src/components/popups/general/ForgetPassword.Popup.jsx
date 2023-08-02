@@ -81,35 +81,39 @@ export default function ForgetPasswordPopup({
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
       >
-        <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
-          <Typography>
-            <h1 className="forgetPaswdTxt">Forgot Password</h1>
-            <p className="enterEmailTxt">
-              Enter your email so we can send you a verification email
-            </p>
+          <div className="loginClearIconCopy">
+            <ClearIcon onClick={handleClose} />
+          </div>
+          <div>
+            <Typography>
+              <h1 className="forgetPaswdTxt">Forgot Password</h1>
+              <p className="enterEmailTxt">
+                Enter your email so we can send you a verification email
+              </p>
 
-            <FormControl sx={{ mb: 1, mt: 4, width: '100%' }} variant="outlined">
-              <TextField
-                sx={{
-                  borderRadius: '20px',
-                  input: {
-                    color: '#000000',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    marginLeft: '20px',
-                  },
-                }}
-                id="outlined-email"
-                classes={outlinedInputStyles}
-                placeholder="Enter Your Email"
-                size="normal"
-                value={email}
-                type={email}
-                onChange={handleInput}
-              />
-            </FormControl>
-          </Typography>
+              <FormControl sx={{ mb: 1, mt: 4, width: '100%' }} variant="outlined">
+                <TextField
+                  sx={{
+                    borderRadius: '20px',
+                    input: {
+                      color: '#000000',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      marginLeft: '20px',
+                    },
+                  }}
+                  id="outlined-email"
+                  classes={outlinedInputStyles}
+                  placeholder="Enter Your Email"
+                  size="normal"
+                  value={email}
+                  type={email}
+                  onChange={handleInput}
+                />
+              </FormControl>
+            </Typography>
+          </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleForgetPassword} className="resetPasswordBtn" variant="contained">

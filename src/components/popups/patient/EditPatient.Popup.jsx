@@ -298,8 +298,11 @@ export default function EditPatient({
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
       >
-        <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
+          <div className="loginClearIconCopy">
+            <ClearIcon onClick={handleClose} />
+          </div>
+          <div>
           <Typography gutterBottom>
             <h1 className="clinicianPopupTxt">Edit Patient</h1>
             <p className="clinicianSubTxt"> </p>

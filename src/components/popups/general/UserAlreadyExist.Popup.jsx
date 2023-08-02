@@ -49,17 +49,20 @@ export default function UserAlreadyExist({
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
       >
-        <ClearIcon className="loginClearIcon" onClick={handleClose} />
-
         <DialogContent>
-          <Typography>
-            {/* need to show avatar/display pic of inactive user here instead of this icon */}
-            <Icon />
-            <h1 className="genPresTxt genPresTxt_2">
-              Sorry,this user already exists but is currently inactive.
-            </h1>
-            <p className="genSubTxt">To active this user,please click on the button below.</p>
-          </Typography>
+          <div className="loginClearIconCopy">
+            <ClearIcon onClick={handleClose} />
+          </div>
+          <div>
+            <Typography>
+              {/* need to show avatar/display pic of inactive user here instead of this icon */}
+              <Icon />
+              <h1 className="genPresTxt genPresTxt_2">
+                Sorry,this user already exists but is currently inactive.
+              </h1>
+              <p className="genSubTxt">To active this user,please click on the button below.</p>
+            </Typography>
+          </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button
