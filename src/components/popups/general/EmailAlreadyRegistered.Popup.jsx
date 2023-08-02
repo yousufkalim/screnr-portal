@@ -44,17 +44,14 @@ export default function EmailAlreadyRegisteredPopup({ openExistingEmail, setOpen
           style: { borderRadius: 20, background: '#FFFFFF' },
         }}
       >
+        <ClearIcon className="loginClearIcon" onClick={handleClose} />
+
         <DialogContent>
-          <div className="loginClearIconCopy">
-            <ClearIcon onClick={handleClose} />
-          </div>
-          <div>
-            <Typography>
-              <Icon />
-              <h1 className="genPresTxt">Sorry, this email is already registered!</h1>
-              <p className="genSubTxt">PLease try again with a different email address. </p>
-            </Typography>
-          </div>
+          <Typography>
+            <Icon />
+            <h1 className="genPresTxt">Sorry, this email is already registered!</h1>
+            <p className="genSubTxt">PLease try again with a different email address. </p>
+          </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleClose} className="tryAnotherBtn" variant="contained">

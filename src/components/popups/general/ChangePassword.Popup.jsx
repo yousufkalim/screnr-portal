@@ -102,165 +102,157 @@ export default function UpdatePasswordPopup({ openUpdateModal, setOpenUpdateModa
           style: { borderRadius: 20, background: 'white', width: 800 },
         }}
       >
+        <ClearIcon className="loginClearIcon" onClick={handleClose} />
         <DialogContent>
-          <div className="loginClearIconCopy">
-            <ClearIcon onClick={handleClose} />
-          </div>
-          <div>
-            <Typography gutterBottom>
-              <h1 className="forgetPaswdTxtchng">Change Password</h1>
-              <p className="enterEmailTxt">Enter your new password to update!</p>
+          <Typography gutterBottom>
+            <h1 className="forgetPaswdTxtchng">Change Password</h1>
+            <p className="enterEmailTxt">Enter your new password to update!</p>
 
-              <FormControl sx={{ mt: 4, mb: 2, width: '85%' }} variant="outlined">
-                <TextField
-                  sx={{
-                    backgroundColor: 'white',
-                    borderRadius: '25px',
-                    input: {
-                      color: '#454238',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      '&::placeholder': {
-                        opacity: '1 !important',
-                      },
+            <FormControl sx={{ mt: 4, mb: 2, width: '85%' }} variant="outlined">
+              <TextField
+                sx={{
+                  backgroundColor: 'white',
+                  borderRadius: '25px',
+                  input: {
+                    color: '#454238',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    '&::placeholder': {
+                      opacity: '1 !important',
                     },
-                  }}
-                  id="outlined-password"
-                  classes={outlinedInputStyles}
-                  placeholder="Old Password"
-                  name="oldPassword"
-                  value={oldPassword}
-                  type={showOld ? 'text' : 'password'}
-                  onChange={handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      // eslint-disable-next-line react/jsx-wrap-multilines
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={() => setShowPassword({ ...showPassword, showOld: !showOld })}
-                          onMouseDown={() =>
-                            setShowPassword({ ...showPassword, showOld: !showOld })
-                          }
-                          edge="end"
-                          sx={{ color: '#FBA622' }}
-                        >
-                          {showOld ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                    style: {
-                      color: '#8C8C8C',
-                      fontSize: '19px',
-                      fontWeight: '700',
+                  },
+                }}
+                id="outlined-password"
+                classes={outlinedInputStyles}
+                placeholder="Old Password"
+                name="oldPassword"
+                value={oldPassword}
+                type={showOld ? 'text' : 'password'}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    // eslint-disable-next-line react/jsx-wrap-multilines
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowPassword({ ...showPassword, showOld: !showOld })}
+                        onMouseDown={() => setShowPassword({ ...showPassword, showOld: !showOld })}
+                        edge="end"
+                        sx={{ color: '#FBA622' }}
+                      >
+                        {showOld ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                  style: {
+                    color: '#8C8C8C',
+                    fontSize: '19px',
+                    fontWeight: '700',
+                  },
+                }}
+              />
+            </FormControl>
+            <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
+              <TextField
+                sx={{
+                  backgroundColor: 'white',
+                  borderRadius: '25px',
+                  input: {
+                    color: '#454238',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    '&::placeholder': {
+                      opacity: '1 !important',
                     },
-                  }}
-                />
-              </FormControl>
-              <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
-                <TextField
-                  sx={{
-                    backgroundColor: 'white',
-                    borderRadius: '25px',
-                    input: {
-                      color: '#454238',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      '&::placeholder': {
-                        opacity: '1 !important',
-                      },
-                    },
-                  }}
-                  id="outlined-password"
-                  classes={outlinedInputStyles}
-                  placeholder="New Password"
-                  name="newPassword"
-                  size="normal"
-                  varient="filled"
-                  value={newPassword}
-                  type={showNew ? 'text' : 'password'}
-                  onChange={handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      // eslint-disable-next-line react/jsx-wrap-multilines
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={() => setShowPassword({ ...showPassword, showNew: !showNew })}
-                          onMouseDown={() =>
-                            setShowPassword({ ...showPassword, showNew: !showNew })
-                          }
-                          edge="end"
-                          sx={{ color: '#FBA622' }}
-                        >
-                          {showNew ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                    style: {
-                      color: '#8C8C8C',
-                      fontSize: '19px',
-                      fontWeight: '700',
-                    },
-                  }}
-                />
-              </FormControl>
+                  },
+                }}
+                id="outlined-password"
+                classes={outlinedInputStyles}
+                placeholder="New Password"
+                name="newPassword"
+                size="normal"
+                varient="filled"
+                value={newPassword}
+                type={showNew ? 'text' : 'password'}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    // eslint-disable-next-line react/jsx-wrap-multilines
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowPassword({ ...showPassword, showNew: !showNew })}
+                        onMouseDown={() => setShowPassword({ ...showPassword, showNew: !showNew })}
+                        edge="end"
+                        sx={{ color: '#FBA622' }}
+                      >
+                        {showNew ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                  style: {
+                    color: '#8C8C8C',
+                    fontSize: '19px',
+                    fontWeight: '700',
+                  },
+                }}
+              />
+            </FormControl>
 
-              <FormControl sx={{ mb: 1, width: '85%' }} variant="outlined">
-                <TextField
-                  sx={{
-                    backgroundColor: 'white',
-                    borderRadius: '25px',
-                    input: {
-                      color: '#454238',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      '&::placeholder': {
-                        opacity: '1 !important',
-                      },
+            <FormControl sx={{ mb: 1, width: '85%' }} variant="outlined">
+              <TextField
+                sx={{
+                  backgroundColor: 'white',
+                  borderRadius: '25px',
+                  input: {
+                    color: '#454238',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    '&::placeholder': {
+                      opacity: '1 !important',
                     },
-                  }}
-                  id="outlined-password"
-                  classes={outlinedInputStyles}
-                  placeholder="Confirm Password"
-                  name="confirmPassword"
-                  size="normal"
-                  varient="filled"
-                  value={confirmPassword}
-                  type={showConfirm ? 'text' : 'password'}
-                  onChange={handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      // eslint-disable-next-line react/jsx-wrap-multilines
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={() => {
-                            setShowPassword({ ...showPassword, showConfirm: !showConfirm });
-                          }}
-                          onMouseDown={() =>
-                            setShowPassword({
-                              ...showPassword,
-                              showConfirm: !showConfirm,
-                            })
-                          }
-                          edge="end"
-                          sx={{ color: '#FBA622' }}
-                        >
-                          {showConfirm ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                    style: {
-                      color: '#8C8C8C',
-                      fontSize: '19px',
-                      fontWeight: '700',
-                    },
-                  }}
-                />
-              </FormControl>
-            </Typography>
-          </div>
+                  },
+                }}
+                id="outlined-password"
+                classes={outlinedInputStyles}
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                size="normal"
+                varient="filled"
+                value={confirmPassword}
+                type={showConfirm ? 'text' : 'password'}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    // eslint-disable-next-line react/jsx-wrap-multilines
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => {
+                          setShowPassword({ ...showPassword, showConfirm: !showConfirm });
+                        }}
+                        onMouseDown={() =>
+                          setShowPassword({
+                            ...showPassword,
+                            showConfirm: !showConfirm,
+                          })
+                        }
+                        edge="end"
+                        sx={{ color: '#FBA622' }}
+                      >
+                        {showConfirm ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                  style: {
+                    color: '#8C8C8C',
+                    fontSize: '19px',
+                    fontWeight: '700',
+                  },
+                }}
+              />
+            </FormControl>
+          </Typography>
         </DialogContent>
         <DialogActions sx={{ width: '84%' }}>
           <Button onClick={handleForgetPassword} className="resetPasswordBtn" variant="contained">
