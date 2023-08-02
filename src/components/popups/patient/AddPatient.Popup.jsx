@@ -345,7 +345,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 </label>
               </div>
             </div>
-
             <FormControl
               sx={{
                 mt: 3,
@@ -425,7 +424,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 onChange={handleUserDataChange}
               />
             </FormControl>
-
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
@@ -449,7 +447,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 }}
               />
             </FormControl>
-
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
               <TextField
                 sx={{
@@ -473,7 +470,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 }}
               />
             </FormControl>
-
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%', mr: 1.5 }} variant="outlined">
               <TextField
                 sx={{
@@ -495,11 +491,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 onChange={handlePatientChange}
               />
             </FormControl>
-
             <FormControl sx={{ mb: 1, mt: 1, width: '48.5%' }} variant="outlined">
               <CustomPhoneInput setUserInfo={setPatient} userInfo={patient} />
             </FormControl>
-
             <FormControl
               sx={{
                 textAlign: 'left',
@@ -522,7 +516,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 />
               </div>
             </FormControl>
-
             <FormControl sx={{ mb: 2, width: '100%' }} variant="outlined">
               <TextField
                 sx={{
@@ -546,6 +539,16 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 }}
               />
             </FormControl>
+            <Typography
+              style={{
+                color: 'black',
+                textAlign: 'left',
+                fontWeight: '500',
+              }}
+            >
+              Pain Location
+            </Typography>
+
             <FormControl
               sx={{
                 mb: 1,
@@ -562,6 +565,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
             >
               <FormControlLabel
                 label="Left"
+                style={{ color: 'black' }}
                 control={
                   <Checkbox
                     style={{ color: '#fba622' }}
@@ -574,6 +578,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
               />
               <FormControlLabel
                 label="Right"
+                style={{ color: 'black' }}
                 control={
                   <Checkbox
                     style={{ color: '#fba622' }}
@@ -586,6 +591,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
               />
               <FormControlLabel
                 label="Posterior"
+                style={{ color: 'black' }}
                 control={
                   <Checkbox
                     style={{ color: '#fba622' }}
@@ -598,6 +604,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
               />
               <FormControlLabel
                 label="Anterior"
+                style={{ color: 'black' }}
                 control={
                   <Checkbox
                     style={{ color: '#fba622' }}
@@ -610,6 +617,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
               />
               <FormControlLabel
                 label="Medial"
+                style={{ color: 'black' }}
                 control={
                   <Checkbox
                     style={{ color: '#fba622' }}
@@ -622,6 +630,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
               />
               <FormControlLabel
                 label="Lateral"
+                style={{ color: 'black' }}
                 control={
                   <Checkbox
                     style={{ color: '#fba622' }}
@@ -633,7 +642,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 }
               />
             </FormControl>
-
             {/* <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
               <Select
                 labelId="demo-simple-select-label"
@@ -692,7 +700,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 </MenuItem>
               </Select>
             </FormControl> */}
-
             <FormControl
               sx={{
                 textAlign: 'left',
