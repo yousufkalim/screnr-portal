@@ -11,6 +11,7 @@ import DatePicker from 'react-datepicker';
 import dropdown from '../../../assets/icons/dropdownOrange.svg';
 import { ReactComponent as ExpiryDate } from '../../../assets/icons/expiryDate.svg';
 import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
+import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 import { ReactComponent as List } from '../../../assets/icons/list.svg';
 import AddPrescriptionTable from '../../tables/prescription/AddPrescriptionTable';
@@ -94,7 +95,20 @@ export default function AddPrescription({
 
   return (
     <div className="addPrescription">
-      <h3 className="prescriptionHead">Add Prescription Details</h3>
+      <h3
+        className="prescriptionHead"
+        style={{ display: 'flex', alignItem: 'center', justifyContent: 'flex-start', gap: '1rem' }}
+      >
+        <BackIcon
+          style={{
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            window.history.back();
+          }}
+        />{' '}
+        Add Prescription Details
+      </h3>
       <div className="prescDetailsDiv">
         <div className="leftDetails">
           <FormControl sx={{ mt: 3, width: '98%', mr: 2 }} variant="outlined">

@@ -24,11 +24,13 @@ import { ReactComponent as Report } from '../../../assets/components/Table/repor
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
 import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
+import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
 import request from '../../../request/index';
 import PieChartComponent from '../../charts/patient/PieChart.Component';
+import DeleteModal from '../../popups/general/Delete.Popup';
 
 const useStyles = makeStyles(() => ({
   radio: {
@@ -110,6 +112,8 @@ export default function PatientTable({
   const click = useRef(null);
   const filterRef = useRef(null);
   const classes = useStyles();
+  const [openDeletePopup, setOpenDeletePopup] = useState(false);
+  const [deleteUser, setDeleteUser] = useState({});
   const [counter, setCounter] = useState({
     report: '',
     unReadMsg: '',
@@ -219,6 +223,29 @@ export default function PatientTable({
     };
   }, [openFilter]);
 
+  const handleDeletePatient = (item) => {
+    setOpenDeletePopup(true);
+    setDeleteUser(item);
+  };
+
+  const DeleteUserPopup = openDeletePopup && (
+    <DeleteModal
+      openDeletePopup={openDeletePopup}
+      setOpenDeletePopup={setOpenDeletePopup}
+      item={deleteUser}
+      getData={getPatients}
+      txt="clinicians/deletePatient"
+    />
+  );
+  const editPatientPopup = openEditPatient && (
+    <EditPatient
+      openEditPatient={openEditPatient}
+      setOpenEditPatient={setOpenEditPatient}
+      patientDetails={editPatient}
+      getPatients={getPatients}
+    />
+  );
+
   return (
     <div className="allClinicAdminTable" id="clinicianTable">
       <TableContainer
@@ -236,7 +263,7 @@ export default function PatientTable({
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">
-            List of Patients <span className="countStyle">{patients?.length}</span>
+            List Of Patients <span className="countStyle">{patients?.length}</span>
           </h1>
 
           <div
@@ -446,7 +473,7 @@ export default function PatientTable({
               </div>
             )}
             <Button className="dashboard_table_head_btn" onClick={() => setOpenAddPatient(true)}>
-              Invite patient
+              Add New Patient
             </Button>
           </div>
         </div>
@@ -607,6 +634,7 @@ export default function PatientTable({
                           justifyContent: 'center',
                         }}
                       >
+                        <Delete className="table_icons" onClick={() => handleDeletePatient(row)} />
                         <Edit
                           className="table_icons"
                           onClick={() => {
@@ -635,13 +663,8 @@ export default function PatientTable({
             )}
           </TableBody>
         </Table>
-
-        <EditPatient
-          openEditPatient={openEditPatient}
-          setOpenEditPatient={setOpenEditPatient}
-          patientDetails={editPatient}
-          getPatients={getPatients}
-        />
+        {editPatientPopup}
+        {DeleteUserPopup}
       </TableContainer>
     </div>
   );

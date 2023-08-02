@@ -7,13 +7,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
 import { FormControl, TextField } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import ClearIcon from '@mui/icons-material/Clear';
 import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import add from '../../../assets/icons/add.svg';
 import edit from '../../../assets/icons/edit.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
@@ -76,7 +76,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
   const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
   const [exisitingButInactive, setExisitingButInactive] = useState(false);
   const [added, setAdded] = useState(false);
-  const [userData, setUserData] = useState({ diagnosis: '', location: '', clinicians: [] });
+  const [userData, setUserData] = useState({ diagnosis: '', location: [], clinicians: [] });
   const outlinedInputStyles = useOutlinedInputStyles();
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -87,7 +87,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     setChecked(false);
     setClinicians([]);
     setSelectedClinic('');
-    setUserData({ diagnosis: '', location: '', clinicians: [] });
+    setUserData({ diagnosis: '', location: [], clinicians: [] });
   };
 
   const handleCheck = (event) => setChecked(event.target.checked);
@@ -179,6 +179,10 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         formData.append(key, patient[key]);
       });
 
+      if (userData.location.length && userData.location.length < 0) {
+        return toast.error('Pain location cannot be empty');
+      }
+
       // append properties from userData in formdata
       Object.keys(userData).forEach((key) => {
         if (key === 'clinicians') {
@@ -186,6 +190,13 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
           userData[key].forEach((value, index) => {
             formData.append(`userData[${key}][${index}]`, value);
           });
+        } else if (key === 'location') {
+          // if the key is 'location', loop over the array and append each value to the formData object
+          userData[key].forEach((value, index) => {
+            formData.append(`userData[${key}][${index}]`, value);
+          });
+
+          // formData.append(`userData[${key}]`, userData[key]);
         } else {
           // for other properties, simply append the value to the formData object
           formData.append(`userData[${key}]`, userData[key]);
@@ -272,6 +283,21 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openAddPatient]);
+
+  const handlePainLocationChange = (targetLocation) => {
+    const isLocationChecked = userData.location.includes(targetLocation);
+
+    if (isLocationChecked) {
+      // If the targetLocation is checked, remove it from the location array
+      setUserData({
+        ...userData,
+        location: userData.location.filter((location) => location !== targetLocation),
+      });
+    } else {
+      // If the targetLocation is not checked, add it to the location array
+      setUserData({ ...userData, location: [...userData.location, targetLocation] });
+    }
+  };
 
   return (
     <>
@@ -392,7 +418,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 }}
                 id="outlined-name"
                 classes={outlinedInputStyles}
-                placeholder="MRN (customizable Unique id)"
+                placeholder="Unique ID (MRN, Patient ID etc.)."
                 size="normal"
                 name="mrn_id"
                 value={userData.mrn_id}
@@ -516,11 +542,99 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 value={userData.diagnosis}
                 onChange={handleUserDataChange}
                 inputProps={{
-                  maxLength: 20,
+                  maxLength: 50,
                 }}
               />
             </FormControl>
-            <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
+            <FormControl
+              sx={{
+                mb: 1,
+                ml: 0.5,
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                color: '#fba622',
+              }}
+              variant="outlined"
+            >
+              <FormControlLabel
+                label="Left"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('left')}
+                    onChange={() => {
+                      handlePainLocationChange('left');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Right"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('right')}
+                    onChange={() => {
+                      handlePainLocationChange('right');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Posterior"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('posterior')}
+                    onChange={() => {
+                      handlePainLocationChange('posterior');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Anterior"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('anterior')}
+                    onChange={() => {
+                      handlePainLocationChange('anterior');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Medial"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('medial')}
+                    onChange={() => {
+                      handlePainLocationChange('medial');
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="Lateral"
+                control={
+                  <Checkbox
+                    style={{ color: '#fba622' }}
+                    checked={userData.location.includes('lateral')}
+                    onChange={() => {
+                      handlePainLocationChange('lateral');
+                    }}
+                  />
+                }
+              />
+            </FormControl>
+
+            {/* <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -577,7 +691,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                   <span style={{ color: '#949494' }}>Lateral</span>
                 </MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
 
             <FormControl
               sx={{
