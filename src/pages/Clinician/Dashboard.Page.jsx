@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import addBtn from '../../assets/icons/addBtn.svg';
+// import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as YellowCircle } from '../../assets/components/patientDetailCards/yellowCircle.svg';
 import { ReactComponent as BlueCircle } from '../../assets/components/patientDetailCards/blueCircle.svg';
 import { ReactComponent as ActivePatients } from '../../assets/components/patientDetailCards/activePatients.svg';
@@ -22,7 +22,7 @@ export default function ClinicianDashboard() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [patientsByClinician, setPatientsByClinician] = useState({});
   const [loading, setLoading] = useState(false);
-  const openAddPatientModal = () => setOpenAddPatient(true);
+  // const openAddPatientModal = () => setOpenAddPatient(true);
 
   const getPatients = async () => {
     try {
@@ -123,7 +123,7 @@ export default function ClinicianDashboard() {
           ))}
         </div>
       </div>
-      <div className="addBtn2">
+      {/* <div className="addBtn2">
         <img
           src={addBtn}
           className="pointer"
@@ -131,7 +131,7 @@ export default function ClinicianDashboard() {
           alt=""
           onClick={openAddPatientModal}
         />
-      </div>
+      </div> */}
       {openAddPatient && (
         <AddNewPatient
           getPatients={getPatients}

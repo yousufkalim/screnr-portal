@@ -322,7 +322,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
                     className="table_cells"
                     onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
-                    {row.userData.title}.
+                    {row?.userData?.title ? row?.userData?.title : '-'}.
                   </TableCell>
                   <TableCell
                     align="center"

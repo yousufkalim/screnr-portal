@@ -28,9 +28,11 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function GeneratePrescription({
   openGeneratePrescription,
   setOpenGeneratePrescription,
+  goBackToProfile,
 }) {
   const handleClose = () => {
     setOpenGeneratePrescription(false);
+    goBackToProfile();
   };
 
   return (

@@ -13,6 +13,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { toast } from 'react-toastify';
 import dropdown from '../../../assets/icons/downArrow.svg';
 import request from '../../../request';
+import { weeks, frequency } from '../../../utils/data';
 
 const useOutlinedInputStyles = makeStyles({
   root: {
@@ -55,56 +56,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     backgroundColor: 'rgba(0, 0, 0, 6%)',
   },
 }));
-
-const weeks = [
-  {
-    value: 1,
-    label: 'Week 1',
-  },
-  {
-    value: 2,
-    label: 'Week 2',
-  },
-  {
-    value: 3,
-    label: 'Week 3',
-  },
-  {
-    value: 4,
-    label: 'Week 4',
-  },
-  {
-    value: 5,
-    label: 'Week 5',
-  },
-  {
-    value: 6,
-    label: 'Week 6',
-  },
-];
-
-const frequency = [
-  {
-    value: 1,
-    label: '1 Times',
-  },
-  {
-    value: 2,
-    label: '2 Times',
-  },
-  {
-    value: 3,
-    label: '3 Times',
-  },
-  {
-    value: 4,
-    label: '4 Times',
-  },
-  {
-    value: 5,
-    label: '5 Times',
-  },
-];
 
 export default function EditPrescription({
   openEditPrescription,

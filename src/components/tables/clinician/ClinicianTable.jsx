@@ -140,13 +140,12 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
                       <span className="clinicNametxt">{`Clinic: ${row.userData.clinic.userData.clinic_name}`}</span>
                     </div>
                   </TableCell>
-
                   <TableCell
                     align="center"
                     className="table_cells"
                     onClick={() => navigate(`/clinicians/${row.id}`)}
                   >
-                    {`${row.userData.title}.`}
+                    {row.userData.title ? `${row.userData.title}.` : '-'}
                   </TableCell>
                   <TableCell
                     align="center"

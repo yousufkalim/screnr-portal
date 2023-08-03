@@ -1,5 +1,5 @@
 import { React, useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import request from '../../request';
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
@@ -9,6 +9,7 @@ import EditPatient from '../../components/popups/patient/EditPatient.Popup';
 
 export default function AddPatientPrescription() {
   const params = useParams();
+  const navigate = useNavigate();
   const { patientId, clinicianId } = params;
   const [openGeneratePrescription, setOpenGeneratePrescription] = useState(false);
   const [openEditPatientModal, setOpenEditPatientModal] = useState(false);
@@ -197,10 +198,14 @@ export default function AddPatientPrescription() {
     ? 'generatePrescriptionBtn'
     : 'generatePrescriptionBtn_diaabled';
 
+  const goBackToProfile = () => {
+    navigate(`/patients/${patientId}/prescription`);
+  };
   const GeneratePrescriptionSection = openGeneratePrescription && (
     <GeneratePrescription
       openGeneratePrescription={openGeneratePrescription}
       setOpenGeneratePrescription={setOpenGeneratePrescription}
+      goBackToProfile={goBackToProfile}
     />
   );
 
@@ -257,6 +262,7 @@ export default function AddPatientPrescription() {
                 validatingGeneratePrescription={validatingGeneratePrescription}
                 handleGeneratePrescription={handleGeneratePrescription}
                 disableBtn={disableBtn}
+                goBackToProfile={goBackToProfile}
               />
             </div>
           </div>

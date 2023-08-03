@@ -44,6 +44,7 @@ function MessageBox({
   handleSendMessage,
   setLastKey,
   lastKey,
+  goBackToProfile,
 }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -135,7 +136,12 @@ function MessageBox({
         <div className="headerInfo">
           <div className="receivrInfo">
             <div className="iconsSec">
-              <Back className="backBtn" />
+              <Back
+                className="backBtn"
+                onClick={() => {
+                  goBackToProfile();
+                }}
+              />
               <AvatarComponent
                 // src={getMediaUrl(patient?.profile_pic)}
                 alt={`${patient?.first_name} ${patient?.last_name}`}
