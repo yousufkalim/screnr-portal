@@ -65,7 +65,7 @@ export default function PatientSidebarSection({
         </div>
         <div className="user_detail" id="gapAdd">
           <Body />
-          {patientData?.userData?.location ?? ''}
+          {patientData?.userData?.location.join(', ') ?? ''}
         </div>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>

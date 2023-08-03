@@ -69,7 +69,8 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
       })
       .catch((error) => {
         setLoading(false);
-        toast.error(error?.response?.data?.message);
+        console.log('error', error?.response?.data?.message);
+        // toast.error(error?.response?.data?.message);
       });
   };
   const handleCloseCompleted = async (prescriptionId) => {
@@ -456,11 +457,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
           </TableContainer>
         ))
       ) : (
-        <h1 className="NoPrescriptionTxt">
-          {prescriptionList && prescriptionList.length > 0
-            ? 'No Prescription From This Clinician'
-            : 'Loading...'}
-        </h1>
+        <h1 className="NoPrescriptionTxt">No Prescription Found</h1>
       )}
     </div>
   );

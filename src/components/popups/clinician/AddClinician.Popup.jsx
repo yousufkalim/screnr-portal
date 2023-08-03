@@ -144,10 +144,17 @@ export default function AddClinician({
         formData.append(key, clinician[key]);
       });
 
-      // append properties from userData in formdata
-      Object.keys(userData).forEach((key) => {
-        formData.append(`userData[${key}]`, userData[key]);
-      });
+      // // append properties from userData in formdata
+      // Object.keys(userData).forEach((key) => {
+      //   formData.append(`userData[${key}]`, userData[key]);
+      // });
+      if (userData.clinic) {
+        formData.append(`userData[clinic]`, userData.clinic);
+      }
+
+      if (userData.title) {
+        formData.append(`userData[title]`, userData.title);
+      }
 
       if (clinician.phone_number && clinician.phone_number.length < 11) {
         return toast.error('Phone number must contain 10 digits');
@@ -300,7 +307,9 @@ export default function AddClinician({
                     sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
                   }}
                 >
-                  <MenuItem value="">Title</MenuItem>
+                  <MenuItem value="" disabled>
+                    Select Title
+                  </MenuItem>
                   <MenuItem value="Mr">Mr.</MenuItem>
                   <MenuItem value="Mrs">Mrs.</MenuItem>
                   <MenuItem value="Miss">Miss.</MenuItem>

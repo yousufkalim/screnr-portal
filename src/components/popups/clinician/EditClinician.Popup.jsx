@@ -162,9 +162,17 @@ export default function EditClinician({
     });
 
     // append properties from userData in formdata
-    Object.keys(userData).forEach((key) => {
-      formData.append(`userData[${key}]`, userData[key]);
-    });
+    // Object.keys(userData).forEach((key) => {
+    //   formData.append(`userData[${key}]`, userData[key]);
+    // });
+
+    if (userData.clinic) {
+      formData.append(`userData[clinic]`, userData.clinic);
+    }
+
+    if (userData.title) {
+      formData.append(`userData[title]`, userData.title);
+    }
 
     if (clinicianCopy.phone_number && clinicianCopy.phone_number.length < 11) {
       return toast.error('Phone number must contain 10 digits');

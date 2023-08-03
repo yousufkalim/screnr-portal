@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import MessageBox from '../../components/MessageBox/MessageBox.Component';
@@ -10,6 +10,7 @@ import { Store } from '../../StoreContext';
 
 export default function PatientMessageBox() {
   const params = useParams();
+  const navigate = useNavigate();
   const { patientId, clinicianId } = params;
   const store = Store();
   const { user } = store;
@@ -124,6 +125,9 @@ export default function PatientMessageBox() {
       });
     }
   };
+  const goBackToProfile = () => {
+    navigate(`/patients/${patientId}/prescription`);
+  };
 
   return (
     <div style={{ position: 'fixed' }} className="gridish">
@@ -150,6 +154,7 @@ export default function PatientMessageBox() {
             handleSendMessage={handleSendMessage}
             lastKey={lastKey}
             setLastKey={setLastKey}
+            goBackToProfile={goBackToProfile}
           />
         </div>
       </div>

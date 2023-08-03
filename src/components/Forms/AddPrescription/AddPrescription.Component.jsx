@@ -73,6 +73,7 @@ export default function AddPrescription({
   validatingGeneratePrescription,
   handleGeneratePrescription,
   disableBtn,
+  goBackToProfile,
 }) {
   const outlinedInputStyles = useOutlinedInputStyles();
   const [openAdjustRange, setOpenAdjustRange] = useState(false);
@@ -104,7 +105,7 @@ export default function AddPrescription({
             cursor: 'pointer',
           }}
           onClick={() => {
-            window.history.back();
+            goBackToProfile();
           }}
         />{' '}
         Add Prescription Details
@@ -478,7 +479,7 @@ export default function AddPrescription({
                     }}
                   >
                     <MenuItem value="default">
-                      <span className="optColor">Rest Between Sets</span>
+                      <span className="optColor">Rest between sets</span>
                     </MenuItem>
                     {rest?.map((item) => {
                       return (

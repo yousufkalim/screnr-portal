@@ -98,7 +98,7 @@ function ExerciseTable({ loading, feedback }) {
                   <TableCell align="center" className="table_cells">
                     {item?.value?.failed_rule ? (
                       <img
-                        src={Tick}
+                        src={Cross}
                         alt=""
                         style={{
                           width: '1.5rem',
@@ -106,7 +106,7 @@ function ExerciseTable({ loading, feedback }) {
                       />
                     ) : (
                       <img
-                        src={Cross}
+                        src={Tick}
                         alt=""
                         style={{
                           width: '1.5rem',
