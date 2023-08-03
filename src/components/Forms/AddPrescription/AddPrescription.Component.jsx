@@ -59,6 +59,7 @@ const useOutlinedInputStyles = makeStyles({
 
 export default function AddPrescription({
   prescription,
+  setPrescription,
   simpleExerciseInfo,
   handleAddToList,
   handlePrescriptionDetails,
@@ -821,7 +822,10 @@ export default function AddPrescription({
           )}
         </div>
         <div className="prescTable">
-          <AddPrescriptionTable ExercisePrescriptionList={prescription} />
+          <AddPrescriptionTable
+            ExercisePrescriptionList={prescription}
+            setExercisePrescriptionList={setPrescription}
+          />
           <div className="addPrescriptionBtn">
             <Button
               variant="contained"

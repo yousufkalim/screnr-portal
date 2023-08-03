@@ -246,6 +246,7 @@ export default function AddPatientPrescription() {
                 patientId={patientId}
                 dateChange={dateChange}
                 prescription={prescription}
+                setPrescription={setPrescription}
                 handleAddToList={handleAddToList}
                 allMotionExercise={allMotionExercise}
                 simpleExerciseInfo={simpleExerciseInfo}

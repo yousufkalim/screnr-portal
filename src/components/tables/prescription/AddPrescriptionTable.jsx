@@ -7,8 +7,25 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
 import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
+import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 
-export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
+export default function AddPrescriptionTable({
+  ExercisePrescriptionList,
+  setExercisePrescriptionList,
+}) {
+  console.log(
+    '🚀 ~ file: AddPrescriptionTable.jsx:16 ~ ExercisePrescriptionList:',
+    ExercisePrescriptionList.exercises,
+  );
+  const handleDeleteFromList = (targetIndex) => {
+    const tempList = [...ExercisePrescriptionList.exercises];
+    tempList.splice(targetIndex, 1);
+
+    setExercisePrescriptionList((prevExercisePrescriptionList) => ({
+      ...prevExercisePrescriptionList,
+      exercises: tempList,
+    }));
+  };
   return (
     <TableContainer
       component={Paper}
@@ -41,10 +58,10 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
       >
         <TableHead>
           <TableRow>
-            <TableCell align="left" className="table_head" id="prescriptionTableHead">
+            <TableCell className="table_head" id="prescriptionTableHead" align="center">
               #no
             </TableCell>
-            <TableCell className="table_head" id="prescriptionTableHead" align="left">
+            <TableCell className="table_head" id="prescriptionTableHead" align="center">
               Name
             </TableCell>
             <TableCell className="table_head" id="prescriptionTableHead" align="center">
@@ -55,6 +72,9 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
             </TableCell>
             <TableCell className="table_head" id="prescriptionTableHead" align="center">
               Rest
+            </TableCell>
+            <TableCell className="table_head" id="prescriptionTableHead" align="center">
+              Action
             </TableCell>
           </TableRow>
         </TableHead>
@@ -83,6 +103,15 @@ export default function AddPrescriptionTable({ ExercisePrescriptionList }) {
               </TableCell>
               <TableCell align="center" className="prescription_table_cells">
                 {row?.rest}
+              </TableCell>
+              <TableCell align="center" className="prescription_table_cells">
+                <Delete
+                  style={{ cursor: 'pointer' }}
+                  className="table-icons"
+                  onClick={() => {
+                    handleDeleteFromList(index);
+                  }}
+                />
               </TableCell>
             </TableRow>
           ))}
