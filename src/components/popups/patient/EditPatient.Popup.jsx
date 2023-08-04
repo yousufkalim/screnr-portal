@@ -488,6 +488,15 @@ export default function EditPatient({
                   }}
                 />
               </FormControl>
+              <Typography
+                style={{
+                  color: 'black',
+                  textAlign: 'left',
+                  fontWeight: '500',
+                }}
+              >
+                Pain Location
+              </Typography>
               <FormControl
                 sx={{
                   mb: 1,
@@ -504,6 +513,7 @@ export default function EditPatient({
               >
                 <FormControlLabel
                   label="Left"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -516,6 +526,7 @@ export default function EditPatient({
                 />
                 <FormControlLabel
                   label="Right"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -528,6 +539,7 @@ export default function EditPatient({
                 />
                 <FormControlLabel
                   label="Posterior"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -540,6 +552,7 @@ export default function EditPatient({
                 />
                 <FormControlLabel
                   label="Anterior"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -552,6 +565,7 @@ export default function EditPatient({
                 />
                 <FormControlLabel
                   label="Medial"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -564,6 +578,7 @@ export default function EditPatient({
                 />
                 <FormControlLabel
                   label="Lateral"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -633,6 +648,40 @@ export default function EditPatient({
                 </MenuItem>
               </Select>
             </FormControl> */}
+              {/* <FormControl
+                sx={{
+                  textAlign: 'left',
+                  width: '100%',
+                  ml: 0.6,
+                }}
+              >
+                <FormControlLabel
+                  sx={{
+                    color: '#136773',
+                    textAlign: 'left',
+                    fontSize: '40px',
+                    width: 'fit-content',
+                  }}
+                  control={
+                    <Checkbox
+                      // onChange={handleCheck}
+                      // checked={checked}
+                      style={{ color: '#136773' }}
+                    />
+                  }
+                  label={
+                    <Typography
+                      style={{
+                        color: 'black',
+                        textAlign: 'left',
+                        fontWeight: '500',
+                      }}
+                    >
+                      Click to disable this user
+                    </Typography>
+                  }
+                />
+              </FormControl> */}
 
               <FormControl
                 sx={{
@@ -690,6 +739,9 @@ export default function EditPatient({
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             <p className="sendInviteTxt">Save Changes</p>{' '}
+          </Button>
+          <Button className="resetPasswordBtn" variant="contained">
+            De-Activate User
           </Button>
         </DialogActions>
       </BootstrapDialog>

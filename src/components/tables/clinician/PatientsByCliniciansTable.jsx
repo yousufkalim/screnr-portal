@@ -202,7 +202,7 @@ export default function PatientsByCliniciansTable({
                       handleReportAndMsgCounter(row?.id);
                     }}
                   >
-                    <TableCell align="left"> {row?.id} </TableCell>
+                    <TableCell align="left"> {row?.userData?.mrn_id} </TableCell>
                     <TableCell align="left">
                       {row.profile_pic ? (
                         <div className="imgDivClinic">

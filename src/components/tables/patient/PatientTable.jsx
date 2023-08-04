@@ -212,7 +212,7 @@ export default function PatientTable({ patients, getPatients, loading }) {
                       handleReportAndMsgCounter(row?.id);
                     }}
                   >
-                    <TableCell align="left"> {row?.id} </TableCell>
+                    <TableCell align="left"> {row?.userData?.mrn_id} </TableCell>
                     <TableCell align="left">
                       <div className="image_div">
                         {row.profile_pic ? (
