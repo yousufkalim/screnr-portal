@@ -106,10 +106,23 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
     const highest = Math.max(...mergedArray);
     const minVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.min_val;
     const maxVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.max_val;
-    const lowDiff = lowest - minVal > 0 ? lowest - minVal : 0;
-    const highDiff = maxVal - highest > 0 ? maxVal - highest : 0;
-    const temp = ((lowDiff + highDiff) / (maxVal - minVal)) * 100;
-    return Math.round(100 - temp);
+    // if (highest < minVal) {
+    //   return 0;
+    // }
+    // const lowDiff = lowest - minVal > 0 ? lowest - minVal : 0;
+    // const highDiff = maxVal - highest > 0 ? maxVal - highest : 0;
+    // const temp = ((lowDiff + highDiff) / (maxVal - minVal)) * 100;
+    // return Math.round(100 - temp);
+
+    const intersectionMin = Math.max(lowest, minVal);
+    const intersectionMax = Math.min(highest, maxVal);
+    // Calculate the length of the intersection range
+    const intersectionLength = Math.max(0, intersectionMax - intersectionMin);
+    // Calculate the length of the coverage range
+    const coverageRangeLength = highest - lowest;
+    // Calculate the coverage percentage
+    const coveragePercentage = (intersectionLength / coverageRangeLength) * 100;
+    return Math.round(coveragePercentage);
   };
 
   const handleSelectedImage = (index) => {
@@ -131,6 +144,12 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
   const handleClose = () => {
     setSelectedImageIndex(null);
   };
+
+  function capitalizeFirstLetterOfEachWord(inputString) {
+    const words = inputString?.split(' ');
+    const capitalizedWords = words?.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+    return capitalizedWords?.join(' ');
+  }
 
   useEffect(() => {
     // Check if the results array exists and is not empty
@@ -186,7 +205,7 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
             }}
           >
             {/* <TitleExcerciseIcon /> */}
-            <p className="excercise_name_p">{exercise?.name}</p>
+            <p className="excercise_name_p">{capitalizeFirstLetterOfEachWord(exercise?.name)}</p>
           </div>
         </div>
         <div className="excercise_details">
@@ -222,7 +241,6 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
                 <p className="excercises_names">Performance</p>
                 {/* <RightArrow className="arrows" /> */}
               </div>
-
               <CircularProgress
                 variant="determinate"
                 thickness="8"

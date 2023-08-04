@@ -414,7 +414,40 @@ export default function EditClinician({
                   </Button>
                 </span>
               </FormControl>
-
+              {/* <FormControl
+                sx={{
+                  textAlign: 'left',
+                  width: '100%',
+                  ml: 0.6,
+                }}
+              >
+                <FormControlLabel
+                  sx={{
+                    color: '#136773',
+                    textAlign: 'left',
+                    fontSize: '40px',
+                    width: 'fit-content',
+                  }}
+                  control={
+                    <Checkbox
+                      // onChange={handleCheck}
+                      // checked={checked}
+                      style={{ color: '#136773' }}
+                    />
+                  }
+                  label={
+                    <Typography
+                      style={{
+                        color: 'black',
+                        textAlign: 'left',
+                        fontWeight: '500',
+                      }}
+                    >
+                      Click to disable this user
+                    </Typography>
+                  }
+                />
+              </FormControl> */}
               <FormControl
                 sx={{
                   textAlign: 'left',
@@ -477,6 +510,9 @@ export default function EditClinician({
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             <p className="sendInviteTxt">Save Changes</p>{' '}
+          </Button>
+          <Button className="resetPasswordBtn" variant="contained">
+            De-Activate User
           </Button>
         </DialogActions>
       </BootstrapDialog>

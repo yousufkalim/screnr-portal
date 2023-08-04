@@ -549,6 +549,15 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                   }}
                 />
               </FormControl>
+              <Typography
+                style={{
+                  color: 'black',
+                  textAlign: 'left',
+                  fontWeight: '500',
+                }}
+              >
+                Pain Location
+              </Typography>
               <FormControl
                 sx={{
                   mb: 1,
@@ -565,6 +574,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
               >
                 <FormControlLabel
                   label="Left"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -577,6 +587,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 />
                 <FormControlLabel
                   label="Right"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -589,6 +600,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 />
                 <FormControlLabel
                   label="Posterior"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -601,6 +613,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 />
                 <FormControlLabel
                   label="Anterior"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -613,6 +626,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 />
                 <FormControlLabel
                   label="Medial"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
@@ -625,6 +639,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 />
                 <FormControlLabel
                   label="Lateral"
+                  style={{ color: 'black' }}
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}

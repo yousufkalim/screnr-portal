@@ -546,7 +546,7 @@ export default function PatientTable({
                       handleReportAndMsgCounter(row?.id);
                     }}
                   >
-                    <TableCell align="left"> {row.id} </TableCell>
+                    <TableCell align="left"> {row?.userData?.mrn_id} </TableCell>
                     <TableCell align="left">
                       <div style={{ display: 'flex', alignItems: 'center' }}>
                         <AvatarComponent
