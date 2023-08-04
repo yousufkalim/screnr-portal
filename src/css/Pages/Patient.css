@@ -675,7 +675,7 @@
 }
 
 .left_exercise {
-  width: 64%;
+  width: 53%;
 }
 
 .prescTable {
@@ -1058,6 +1058,7 @@
 
   .table_head {
     font-size: 12px !important;
+    text-align: center !important;
   }
 
   .css-1ex1afd-MuiTableCell-root {

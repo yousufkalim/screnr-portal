@@ -15,6 +15,16 @@ import { toast } from 'react-toastify';
 import delConfirm from '../../../assets/images/deletePopup/delConfirm.svg';
 import request from '../../../request';
 
+// onClick={() => {
+//   setExercisePrescriptionList((prevExercisePrescriptionList) => ({
+//     ...prevExercisePrescriptionList,
+//     exercises: prevExercisePrescriptionList.exercises.filter(
+//       (exercise) => exercise.name !== row.name
+//     ),
+//   }));
+//   console.log('Updated Exercise', ExercisePrescriptionList?.exercises);
+// }}
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-root': {
     borderRadius: '25px',
@@ -33,6 +43,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 export default function DeleteModal({ openDeletePopup, setOpenDeletePopup, item, txt, getData }) {
   const handleClose = () => setOpenDeletePopup(false);
+
   const handleDelete = async () => {
     await request('delete', `/${txt}/${item.id}`)
       .then(() => {
