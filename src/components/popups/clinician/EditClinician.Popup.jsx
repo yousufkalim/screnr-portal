@@ -200,7 +200,17 @@ export default function EditClinician({
       toast.error(error?.response?.data?.message);
     }
   };
-
+  const handleDeleteUser = async (targetUserId) => {
+    await request('delete', `/clinics/deleteClinician/${targetUserId}`)
+      .then(() => {
+        toast.success('Clinician de-actived successfully');
+        handleClose();
+        getClinicians();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <BootstrapDialog
@@ -508,11 +518,17 @@ export default function EditClinician({
           </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
+          <Button
+            className="deactivateUserBtn"
+            variant="contained"
+            onClick={() => {
+              handleDeleteUser(clinicianDetails?.id);
+            }}
+          >
+            De-Activate User
+          </Button>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             <p className="sendInviteTxt">Save Changes</p>{' '}
-          </Button>
-          <Button className="resetPasswordBtn" variant="contained">
-            De-Activate User
           </Button>
         </DialogActions>
       </BootstrapDialog>

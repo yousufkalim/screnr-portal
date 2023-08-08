@@ -67,6 +67,14 @@ export default function ClinicianDashboard() {
     },
   ];
 
+  const addNewPatientPopup = openAddPatient && (
+    <AddNewPatient
+      getPatients={getPatients}
+      openAddPatient={openAddPatient}
+      setOpenAddPatient={setOpenAddPatient}
+    />
+  );
+
   useEffect(() => {
     getPatients();
   }, [openAddPatient]);
@@ -132,13 +140,7 @@ export default function ClinicianDashboard() {
           onClick={openAddPatientModal}
         />
       </div> */}
-      {openAddPatient && (
-        <AddNewPatient
-          getPatients={getPatients}
-          openAddPatient={openAddPatient}
-          setOpenAddPatient={setOpenAddPatient}
-        />
-      )}
+      {addNewPatientPopup}
     </div>
   );
 }

@@ -6,8 +6,10 @@ import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import AddPrescription from '../../components/Forms/AddPrescription/AddPrescription.Component';
 import GeneratePrescription from '../../components/popups/prescription/PrescriptionGenerated.popup';
 import EditPatient from '../../components/popups/patient/EditPatient.Popup';
+import { Store } from '../../StoreContext';
 
 export default function AddPatientPrescription() {
+  const { user } = Store();
   const params = useParams();
   const navigate = useNavigate();
   const { patientId, clinicianId } = params;
@@ -239,10 +241,16 @@ export default function AddPatientPrescription() {
           />
         </div>
         <div className="bgPrescription">
-          <div className="breadCrumb">
-            Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescribe
-            Exercise &gt;
-          </div>
+          {user?.role === 'clinician' ? (
+            <div className="breadCrumb">
+              Dashboard &gt; {patient?.first_name} {patient?.last_name} &gt; Prescribe Exercise &gt;
+            </div>
+          ) : (
+            <div className="breadCrumb">
+              Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescribe
+              Exercise &gt;
+            </div>
+          )}
           <div className="main_div_addPrescription">
             <div className="bgAddPrescription">
               <AddPrescription

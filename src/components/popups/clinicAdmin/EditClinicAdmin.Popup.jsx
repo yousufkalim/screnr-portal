@@ -187,6 +187,19 @@ export default function EditClinicAdmin({
     setChecked(event.target.checked);
   };
 
+  const handleDeleteUser = async (targetUserId) => {
+    await request('delete', `/staff/deleteClinic/${targetUserId}`)
+      .then((res) => {
+        console.log(res);
+        toast.success('Clinic Admin de-actived successfully');
+        setOpenEditClinicAdmin(false);
+        getClinicAdmins();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <BootstrapDialog
@@ -511,11 +524,17 @@ export default function EditClinicAdmin({
           </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
+          <Button
+            className="deactivateUserBtn"
+            variant="contained"
+            onClick={() => {
+              handleDeleteUser(clinicAdminDetails?.id);
+            }}
+          >
+            De-Activate User
+          </Button>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             <p className="sendInviteTxt">Save Changes</p>{' '}
-          </Button>
-          <Button className="resetPasswordBtn" variant="contained">
-            De-Activate User
           </Button>
         </DialogActions>
       </BootstrapDialog>

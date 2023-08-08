@@ -158,6 +158,19 @@ export default function EditStaffMember({
       toast.error(error?.response?.data?.message);
     }
   };
+  const handleDeleteUser = async (targetUserId) => {
+    await request('delete', `/admins/deleteStaff/${targetUserId}`)
+      .then(() => {
+        toast.success('Staff Member de-actived successfully');
+        handleClose();
+        setOpenEditStaffMember(false);
+        getData();
+        getStaffMembers();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -395,11 +408,17 @@ export default function EditStaffMember({
             width: '100%',
           }}
         >
+          <Button
+            className="deactivateUserBtn"
+            variant="contained"
+            onClick={() => {
+              handleDeleteUser(staffMemberDetails?.id);
+            }}
+          >
+            De-Activate User
+          </Button>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             Save Changes
-          </Button>
-          <Button className="resetPasswordBtn" variant="contained">
-            De-Activate User
           </Button>
         </DialogActions>
       </BootstrapDialog>

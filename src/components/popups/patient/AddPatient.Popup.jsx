@@ -14,7 +14,8 @@ import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import add from '../../../assets/icons/add.svg';
+import moment from 'moment';
+// import add from '../../../assets/icons/add.svg';
 import edit from '../../../assets/icons/edit.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
@@ -90,7 +91,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     setUserData({ diagnosis: '', location: [], clinicians: [] });
   };
 
-  const handleCheck = (event) => setChecked(event.target.checked);
+  // const handleCheck = (event) => setChecked(event.target.checked);
   const handlePatientChange = (e) => setPatient({ ...patient, [e.target.name]: e.target.value });
   const handleUserDataChange = (e) => setUserData({ ...userData, [e.target.name]: e.target.value });
 
@@ -170,7 +171,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         formData.append(`userData[clinicians][0]`, [user?.id]);
       }
 
-      if (patient.expiry_date && !checked) {
+      if (
+        moment(patient.expiry_date).format('dd/mm/yyyy') === moment(tomorrow).format('dd/mm/yyyy')
+      ) {
         delete patient.expiry_date;
         setPatient({ ...patient });
       }
@@ -207,9 +210,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         return toast.error('Phone number must contain 10 digits');
       }
 
-      if (checked && !patient.expiry_date) {
-        return toast.error('Please enter expiry date');
-      }
+      // if (checked && !patient.expiry_date) {
+      //   return toast.error('Please enter expiry date');
+      // }
 
       // this function will return true if email validation fails (for production only)
       if (emailValidation(patient.email)) {
@@ -426,6 +429,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                   name="mrn_id"
                   value={userData.mrn_id}
                   onChange={handleUserDataChange}
+                  inputProps={{
+                    maxLength: 5,
+                  }}
                 />
               </FormControl>
 
@@ -711,7 +717,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
               </Select>
             </FormControl> */}
 
-              <FormControl
+              {/* <FormControl
                 sx={{
                   textAlign: 'left',
                   width: '100%',
@@ -738,23 +744,26 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                     </Typography>
                   }
                 />
-              </FormControl>
+              </FormControl> */}
               <FormControl
                 sx={{
                   textAlign: 'left',
                   width: '100%',
                 }}
               >
-                <div className="date-div" id={!checked ? 'disabledDate' : ''}>
+                <div
+                  className="date-div"
+                  // id={!checked ? 'disabledDate' : ''}
+                >
                   <DatePicker
                     showPopperArrow
                     dateFormat="MM-dd-yyyy"
                     name="expiry_date"
                     selected={patient.expiry_date}
                     onChange={expDateChange}
-                    disabled={!checked}
+                    // disabled={!checked}
                     placeholderText="Enter expiry date"
-                    popperPlacement="bottom-start"
+                    // popperPlacement="bottom-start"
                     showYearDropdown
                     minDate={tomorrow}
                     disablePast
@@ -766,8 +775,8 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p className="sendInviteTxt">Send Invite</p>{' '}
-            <img src={add} className="spaceOnLeft" alt="" />
+            <p className="sendInviteTxt">Add new patient</p>{' '}
+            {/* <img src={add} className="spaceOnLeft" alt="" /> */}
           </Button>
         </DialogActions>
       </BootstrapDialog>
@@ -777,7 +786,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
           setOpenExistingEmail={setAlreadyExisitingUser}
         />
       )}
-
       {added && <UserCreated openUserCreated={added} setOpenUserCreated={setAdded} />}
       {exisitingButInactive && (
         <UserAlreadyExist

@@ -17,9 +17,11 @@ import { ReactComponent as Profile } from '../../../assets/components/Table/Prof
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
+import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
+import DeleteModal from '../../popups/general/Delete.Popup';
 import request from '../../../request/index';
 import PieChartComponent from '../../charts/patient/PieChart.Component';
 
@@ -38,6 +40,8 @@ export default function PatientTable({ patients, getPatients, loading }) {
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
   const [page, setPage] = useState(0);
+  const [openDeletePopup, setOpenDeletePopup] = useState(false);
+  const [deleteUser, setDeleteUser] = useState({});
   const [counter, setCounter] = useState({
     report: '',
     unReadMsg: '',
@@ -100,6 +104,30 @@ export default function PatientTable({ patients, getPatients, loading }) {
   const handlePatientProfile = (patientid) => {
     navigate(`/patients/${patientid}/prescription`);
   };
+
+  const handleDeletePatient = (item) => {
+    setOpenDeletePopup(true);
+    setDeleteUser(item);
+  };
+
+  const editPatientPopup = openEditPatient && (
+    <EditPatient
+      openEditPatient={openEditPatient}
+      setOpenEditPatient={setOpenEditPatient}
+      patientDetails={patient}
+      getPatients={getPatients}
+    />
+  );
+
+  const DeleteUserPopup = openDeletePopup && (
+    <DeleteModal
+      openDeletePopup={openDeletePopup}
+      setOpenDeletePopup={setOpenDeletePopup}
+      item={deleteUser}
+      getData={getPatients}
+      txt="clinicians/deletePatient"
+    />
+  );
 
   return (
     <div
@@ -237,7 +265,6 @@ export default function PatientTable({ patients, getPatients, loading }) {
                         <div className="clinic_cell">{`${row.first_name} ${row.last_name}`}</div>
                       </div>
                     </TableCell>
-
                     <TableCell align="center" className="table_cells">
                       {row.userData?.diagnosis}
                     </TableCell>
@@ -325,6 +352,7 @@ export default function PatientTable({ patients, getPatients, loading }) {
                           justifyContent: 'center',
                         }}
                       >
+                        <Delete className="table_icons" onClick={() => handleDeletePatient(row)} />
                         <Edit
                           className="table_icons"
                           onClick={() => {
@@ -354,15 +382,8 @@ export default function PatientTable({ patients, getPatients, loading }) {
             )}
           </TableBody>
         </Table>
-
-        {openEditPatient && (
-          <EditPatient
-            openEditPatient={openEditPatient}
-            setOpenEditPatient={setOpenEditPatient}
-            patientDetails={patient}
-            getPatients={getPatients}
-          />
-        )}
+        {editPatientPopup}
+        {DeleteUserPopup}
       </TableContainer>
       <TablePagination
         component="div"

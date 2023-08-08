@@ -31,6 +31,7 @@ import EditPatient from '../../popups/patient/EditPatient.Popup';
 import request from '../../../request/index';
 import PieChartComponent from '../../charts/patient/PieChart.Component';
 import DeleteModal from '../../popups/general/Delete.Popup';
+import { getMediaUrl } from '../../../config';
 
 const useStyles = makeStyles(() => ({
   radio: {
@@ -549,10 +550,29 @@ export default function PatientTable({
                     <TableCell align="left"> {row?.userData?.mrn_id} </TableCell>
                     <TableCell align="left">
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <AvatarComponent
+                        {row?.profile_pic ? (
+                          <div className="imgDivClinic">
+                            <img
+                              src={getMediaUrl(row.profile_pic)}
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                                borderRadius: '100px',
+                                objectFit: 'cover',
+                              }}
+                              alt=""
+                            />
+                          </div>
+                        ) : (
+                          <AvatarComponent
+                            alt={`${row.first_name} ${row.last_name}`}
+                            className="header_avatar"
+                          />
+                        )}
+                        {/* <AvatarComponent
                           alt={`${row.first_name} ${row.last_name}`}
                           className="header_avatar"
-                        />
+                        /> */}
 
                         <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
                       </div>

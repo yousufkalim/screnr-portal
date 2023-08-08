@@ -17,9 +17,11 @@ import { ReactComponent as Edit } from '../../../assets/components/Table/alert.s
 import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
 import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
+import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
+import DeleteModal from '../../popups/general/Delete.Popup';
 import AddPatient from '../../popups/patient/AddPatient.Popup';
 import request from '../../../request/index';
 import PieChartComponent from '../../charts/patient/PieChart.Component';
@@ -44,6 +46,8 @@ export default function PatientsByCliniciansTable({
   const navigate = useNavigate();
   const [patient, setPatient] = useState('');
   const [openEditPatient, setOpenEditPatient] = useState(false);
+  const [openDeletePopup, setOpenDeletePopup] = useState(false);
+  const [deleteUser, setDeleteUser] = useState({});
   const [counter, setCounter] = useState({
     report: '',
     unReadMsg: '',
@@ -95,7 +99,20 @@ export default function PatientsByCliniciansTable({
     },
   }));
   const handlePatientProfile = (patientid) => navigate(`/patients/${patientid}/prescription`);
+  const handleDeletePatient = (item) => {
+    setOpenDeletePopup(true);
+    setDeleteUser(item);
+  };
 
+  const DeleteUserPopup = openDeletePopup && (
+    <DeleteModal
+      openDeletePopup={openDeletePopup}
+      setOpenDeletePopup={setOpenDeletePopup}
+      item={deleteUser}
+      getData={getPatients}
+      txt="clinicians/deletePatient"
+    />
+  );
   return (
     <div id="patientsByClinicianTable">
       <TableContainer
@@ -204,7 +221,7 @@ export default function PatientsByCliniciansTable({
                   >
                     <TableCell align="left"> {row?.userData?.mrn_id} </TableCell>
                     <TableCell align="left">
-                      {row.profile_pic ? (
+                      {row?.profile_pic ? (
                         <div className="imgDivClinic">
                           <img
                             src={getMediaUrl(row.profile_pic)}
@@ -315,6 +332,7 @@ export default function PatientsByCliniciansTable({
                           justifyContent: 'center',
                         }}
                       >
+                        <Delete className="table_icons" onClick={() => handleDeletePatient(row)} />
                         <Edit
                           className="table_icons"
                           onClick={() => {
@@ -352,6 +370,7 @@ export default function PatientsByCliniciansTable({
             getPatients={getPatients}
           />
         )}
+        {DeleteUserPopup}
 
         {openAddPatient && (
           <AddPatient

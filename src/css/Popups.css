@@ -10,7 +10,7 @@
 }
 
 .deactivateUserBtn {
-  background-color: #fba622 !important;
+  background-color: #136773 !important;
   width: 100% !important;
   border-radius: 20px !important;
   padding: 2.2% 0px !important;
@@ -57,10 +57,9 @@
   box-shadow: 0 2px 20px -5px rgb(190, 124, 37) !important;
 }
 
-.deactivateUserBtn:hover,
-.logInBtn:hover {
-  background-color: #faa017 !important;
-  box-shadow: 0 2px 20px -5px rgb(190, 124, 37) !important;
+.deactivateUserBtn:hover {
+  background-color: #136773 !important;
+  box-shadow: 0 2px 20px -5px rgb(19, 103, 115) !important;
 }
 
 .rangeBtn {
