@@ -17,8 +17,10 @@ import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
+import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import EditClinician from '../../popups/clinician/EditClinician.Popup';
+import DeleteModal from '../../popups/general/Delete.Popup';
 import { getMediaUrl } from '../../../config';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import PhoneFormat from '../../../utils/PhoneFormat';
@@ -52,7 +54,6 @@ const StyledTableRow = styled(TableRow)(() => ({
 export default function AllCliniciansTable({ clinicians, getClinicians, loading }) {
   const [openEditClinician, setOpenEditClinician] = useState(false);
   const [clinician, setClinician] = useState({});
-
   const [filter, setFilter] = useState({
     sortBy: '',
     status: '',
@@ -64,6 +65,8 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
   const filterRef = useRef(null);
   const navigate = useNavigate();
   const classes = useStyles();
+  const [openDeletePopup, setOpenDeletePopup] = useState(false);
+  const [deleteUser, setDeleteUser] = useState({});
 
   const handleChangePage = async (event, newPage) => {
     await getClinicians(filter.sortBy, search, filter.status, newPage + 1);
@@ -106,6 +109,20 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
     };
   }, [openFilter]);
 
+  const handleDeleteClinician = (item) => {
+    setOpenDeletePopup(true);
+    setDeleteUser(item);
+  };
+
+  const DeleteUserPopup = openDeletePopup && (
+    <DeleteModal
+      openDeletePopup={openDeletePopup}
+      setOpenDeletePopup={setOpenDeletePopup}
+      item={deleteUser}
+      getData={getClinicians}
+      txt="clinics/deleteClinician"
+    />
+  );
   return (
     <div
       style={{
@@ -350,6 +367,11 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
                         setClinician(row);
                       }}
                     />
+                    <Delete
+                      className="table_icons"
+                      onClick={() => handleDeleteClinician(row)}
+                      style={{ marginLeft: '.5rem' }}
+                    />
                   </TableCell>
                 </StyledTableRow>
               ))
@@ -371,6 +393,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
           clinicianDetails={clinician}
           getClinicians={getClinicians}
         />
+        {DeleteUserPopup}
       </TableContainer>
       <TablePagination
         sx={{ color: '#919B9B', width: '97%' }}

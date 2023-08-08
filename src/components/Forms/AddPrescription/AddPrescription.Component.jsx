@@ -234,7 +234,7 @@ export default function AddPrescription({
               }}
             >
               <MenuItem value="default">
-                <span className="optColor">Weekly Frequency</span>
+                <span className="optColor">Weekly Sessions</span>
               </MenuItem>
               {frequency.map((item) => {
                 return (
