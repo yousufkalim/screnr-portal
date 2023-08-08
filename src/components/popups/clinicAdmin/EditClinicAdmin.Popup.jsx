@@ -150,6 +150,10 @@ export default function EditClinicAdmin({
     if (typeof clinicAdminCopy.profile_pic !== 'object') {
       delete clinicAdminCopy.profile_pic;
     }
+    if (!clinicAdminCopy.gender) {
+      delete clinicAdminCopy.gender;
+      setClinicAdmin({ ...clinicAdminCopy });
+    }
 
     Object.keys(clinicAdminCopy).forEach((key) => {
       formData.append(key, clinicAdminCopy[key]);
