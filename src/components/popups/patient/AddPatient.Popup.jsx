@@ -177,6 +177,11 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         delete patient.expiry_date;
         setPatient({ ...patient });
       }
+      if (patient.expiry_date === null) {
+        delete patient.expiry_date;
+        setPatient({ ...patient });
+      }
+
       // append properties from patient in formdata
       Object.keys(patient).forEach((key) => {
         formData.append(key, patient[key]);

@@ -146,9 +146,9 @@
 }
 
 .imgDiv {
-  width: 10%;
+  width: 40px;
   height: 40px;
-  border-radius: 100px;
+  border-radius: 50%;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -166,9 +166,9 @@
   }
 
   .imgDiv {
-    width: 15%;
-    height: 39px;
-    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
   }
 
   .title {

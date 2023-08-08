@@ -109,17 +109,17 @@ export default function ClinicianDashboard() {
           </div>
         </div>
         <PatientsTable
-          patients={patientsByClinician}
-          getPatients={getPatients}
           loading={loading}
           setLoading={setLoading}
+          getPatients={getPatients}
+          patients={patientsByClinician}
           openAddPatient={openAddPatient}
           setOpenAddPatient={setOpenAddPatient}
         />
       </div>
       <div className="clinician_dashboard_right_div">
         <div className="clinician_statsCards_div">
-          {cardsData.map((item) => (
+          {cardsData?.map((item) => (
             <StatsCard
               key={item?.title}
               Icon={item?.icon}

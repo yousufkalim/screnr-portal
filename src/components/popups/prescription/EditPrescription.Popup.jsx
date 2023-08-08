@@ -247,7 +247,7 @@ export default function EditPrescription({
                   }}
                 >
                   <MenuItem value="default">
-                    <span style={{ color: '#949494' }}>Weekly Frequency</span>
+                    <span style={{ color: '#949494' }}>Weekly Sessions</span>
                   </MenuItem>
                   {frequency.map((item) => (
                     <MenuItem value={item?.value}>
