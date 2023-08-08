@@ -777,7 +777,7 @@ export default function AddPrescription({
                     }}
                   >
                     <MenuItem value="default">
-                      <span className="optColor">Rest Between Sets</span>
+                      <span className="optColor">Rest between sets</span>
                     </MenuItem>
                     {rest?.map((item) => {
                       return (
