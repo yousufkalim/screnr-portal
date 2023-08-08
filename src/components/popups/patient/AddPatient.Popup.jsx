@@ -528,6 +528,8 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                     showYearDropdown
                     openToDate={new Date('01/01/2005')}
                     maxDate={new Date()}
+                    scrollableYearDropdown
+                    yearDropdownItemNumber={100}
                   />
                 </div>
               </FormControl>

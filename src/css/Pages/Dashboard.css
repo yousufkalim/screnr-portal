@@ -269,7 +269,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #dddcdc;
+    background: #ece7e7;
     border-radius: 25px 25px 25px 25px;
     width: 1px;
   }
@@ -278,7 +278,7 @@
     background: #ece7e7;
   }
 
-  ::-webkit-scrollbar-thumb:horizontal {
+  /* ::-webkit-scrollbar-thumb:horizontal {
     display: none;
-  }
+  } */
 }
