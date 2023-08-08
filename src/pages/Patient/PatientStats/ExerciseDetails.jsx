@@ -208,13 +208,20 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
         <div className="SessionsHeading">
           <div className="leftside_title">
             <div className="backIcon_button">
-              <BackIcon className="arrows" />
+              <BackIcon
+                className="arrows"
+                onClick={() => {
+                  window.history.back();
+                }}
+              />
             </div>
             <div className="dateTitle">
               <p>Session Date</p>
             </div>
             <div className="dateExcercise">
-              <p>{moment(session?.date).format('MM/DD/YYYY')}</p>
+              <p>
+                {session?.status === 'completed' && moment(session?.updatedAt).format('MM/DD/YYYY')}
+              </p>
             </div>
           </div>
           <div className="excerciseDay">
