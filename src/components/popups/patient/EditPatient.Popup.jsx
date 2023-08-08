@@ -10,14 +10,12 @@ import Typography from '@mui/material/Typography';
 import { FormControl, TextField } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import Select from '@mui/material/Select';
 import ClearIcon from '@mui/icons-material/Clear';
 import { toast } from 'react-toastify';
 import moment from 'moment';
+import CloseIcon from '@mui/icons-material/Close';
 import DatePicker from 'react-datepicker';
 import edit from '../../../assets/icons/edit.svg';
-// import dropdown from '../../../assets/icons/downArrow.svg';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import CustomPhoneInput from '../general/CustomPhoneInput.Popup';
 import { getMediaUrl } from '../../../config';
@@ -94,7 +92,6 @@ export default function EditPatient({
     // eslint-disable-next-line no-underscore-dangle
     dob: moment(patientDetails?.userData?.dob)._d || '',
   });
-  console.log('🚀 ~ file: EditPatient.Popup.jsx:97 ~ userData:', userData);
 
   const setPatientData = () => {
     setPatient({
@@ -133,10 +130,6 @@ export default function EditPatient({
 
   const handleClose = () => {
     setOpenEditPatient(false);
-  };
-
-  const handleCheck = (event) => {
-    setChecked(event.target.checked);
   };
 
   const handlePatientChange = (e) => {
@@ -207,7 +200,10 @@ export default function EditPatient({
     // Create a new FormData object
     const formData = new FormData();
 
-    if (patientCopy.expiry_date && !checked) {
+    if (
+      moment(patient.expiry_date).format('dd/mm/yyyy') === moment(tomorrow).format('dd/mm/yyyy') ||
+      ''
+    ) {
       delete patientCopy.expiry_date;
       setPatient({ ...patientCopy });
     }
@@ -284,6 +280,18 @@ export default function EditPatient({
     }
   };
 
+  const handleDeleteUser = async (targetUserId) => {
+    await request('delete', `/clinicians/deletePatient/${targetUserId}`)
+      .then((res) => {
+        console.log(res);
+        handleClose();
+        getPatients();
+        toast.success('Patient de-actived successfully');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <BootstrapDialog
@@ -368,6 +376,9 @@ export default function EditPatient({
                   classes={outlinedInputStyles}
                   onChange={handleUserDataChange}
                   placeholder="MRN (customized unique id)"
+                  inputProps={{
+                    maxLength: 5,
+                  }}
                 />
               </FormControl>
 
@@ -484,7 +495,7 @@ export default function EditPatient({
                   value={userData.diagnosis}
                   onChange={handleUserDataChange}
                   inputProps={{
-                    maxLength: 20,
+                    maxLength: 50,
                   }}
                 />
               </FormControl>
@@ -590,158 +601,65 @@ export default function EditPatient({
                   }
                 />
               </FormControl>
-              {/* <FormControl sx={{ mb: 1, width: '100%' }} variant="outlined">
-              <Select
-                displayEmpty
-                id="demo-simple-select"
-                labelId="demo-simple-select-label"
-                inputProps={{
-                  sx: { padding: '14.5px', textAlign: 'left', ml: 1 },
-                  'aria-label': 'Without label',
-                }}
-                // eslint-disable-next-line react/no-unstable-nested-components
-                IconComponent={(props) => (
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-                  <img src={dropdown} style={{ margin: '1% 2%' }} {...props} alt="" />
-                )}
-                sx={{
-                  '.MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#E1E1E1',
-                  },
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: ' #454238',
-                  },
-                  '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: ' #454238',
-                  },
-                  borderRadius: '20px',
-                  input: {
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    ml: 2,
-                  },
-                }}
-                name="location"
-                value={userData.location}
-                onChange={handleUserDataChange}
-              >
-                <MenuItem disabled selected value="">
-                  <span style={{ color: '#949494' }}>Location</span>
-                </MenuItem>
-                <MenuItem value="left">
-                  <span style={{ color: '#949494' }}>Left</span>
-                </MenuItem>
-                <MenuItem value="right">
-                  <span style={{ color: '#949494' }}>Right</span>
-                </MenuItem>
-                <MenuItem value="posterior">
-                  <span style={{ color: '#949494' }}>Posterior</span>
-                </MenuItem>
-                <MenuItem value="anterior">
-                  <span style={{ color: '#949494' }}>Anterior</span>
-                </MenuItem>
-                <MenuItem value="medical">
-                  <span style={{ color: '#949494' }}>Medial</span>
-                </MenuItem>
-                <MenuItem value="lateral">
-                  <span style={{ color: '#949494' }}>Lateral</span>
-                </MenuItem>
-              </Select>
-            </FormControl> */}
-              {/* <FormControl
-                sx={{
-                  textAlign: 'left',
-                  width: '100%',
-                  ml: 0.6,
-                }}
-              >
-                <FormControlLabel
-                  sx={{
-                    color: '#136773',
-                    textAlign: 'left',
-                    fontSize: '40px',
-                    width: 'fit-content',
-                  }}
-                  control={
-                    <Checkbox
-                      // onChange={handleCheck}
-                      // checked={checked}
-                      style={{ color: '#136773' }}
-                    />
-                  }
-                  label={
-                    <Typography
-                      style={{
-                        color: 'black',
-                        textAlign: 'left',
-                        fontWeight: '500',
-                      }}
-                    >
-                      Click to disable this user
-                    </Typography>
-                  }
-                />
-              </FormControl> */}
-
-              <FormControl
-                sx={{
-                  textAlign: 'left',
-                  width: '100%',
-                  ml: 0.6,
-                }}
-              >
-                <FormControlLabel
-                  sx={{
-                    color: '#136773',
-                    textAlign: 'left',
-                    fontSize: '40px',
-                    width: 'fit-content',
-                  }}
-                  control={<Checkbox onChange={handleCheck} style={{ color: '#136773' }} />}
-                  label={
-                    <Typography
-                      style={{
-                        color: '#136773',
-                        textAlign: 'left',
-                        fontWeight: '500',
-                      }}
-                    >
-                      Want to Add expiry date
-                    </Typography>
-                  }
-                />
-              </FormControl>
               <FormControl
                 sx={{
                   textAlign: 'left',
                   width: '100%',
                 }}
               >
-                <div className="date-div" id={!checked ? 'disabledDate' : ''}>
+                <div
+                  className="date-div"
+                  style={{
+                    position: 'relative',
+                  }}
+                >
                   <DatePicker
                     disablePast
                     showPopperArrow
                     showYearDropdown
                     name="expiry_date"
                     minDate={tomorrow}
-                    disabled={!checked}
                     dateFormat="MM-dd-yyyy"
                     onChange={expDateChange}
                     popperPlacement="bottom-start"
                     selected={patient?.expiry_date}
                     placeholderText="Enter expiry date"
                   />
+                  {patient?.expiry_date && patient?.expiry_date !== '' ? (
+                    <CloseIcon
+                      onClick={() => {
+                        setPatient({
+                          ...patient,
+                          expiry_date: '',
+                        });
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: '38%',
+                        right: '2%',
+                        cursor: 'pointer',
+                      }}
+                    />
+                  ) : (
+                    ''
+                  )}
                 </div>
               </FormControl>
             </Typography>
           </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
+          <Button
+            className="deactivateUserBtn"
+            variant="contained"
+            onClick={() => {
+              handleDeleteUser(patientDetails?.id);
+            }}
+          >
+            De-Activate User
+          </Button>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             <p className="sendInviteTxt">Save Changes</p>{' '}
-          </Button>
-          <Button className="resetPasswordBtn" variant="contained">
-            De-Activate User
           </Button>
         </DialogActions>
       </BootstrapDialog>

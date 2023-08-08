@@ -20,7 +20,6 @@ export default function PatientSidebarSection({
   openEditpatientModal,
   setOpenEditpatientModal,
 }) {
-  console.log('🚀 ~ file: PatientSidebarSection.jsx:23 ~ patientData:', patientData);
   const [expanded, setExpanded] = useState('');
   const [toggleIcon, setToggleIcon] = useState(false);
   const handleExpandClick = () => {
@@ -61,11 +60,24 @@ export default function PatientSidebarSection({
         </div>
         <div className="user_detail" id="gapAdd">
           <Medical />
-          {patientData?.userData?.diagnosis ?? ''}
+          {patientData?.userData?.diagnosis ?? '-'}
         </div>
         <div className="user_detail" id="gapAdd">
           <Body />
-          {patientData?.userData?.location.join(', ') ?? ''}
+          <div
+            style={{
+              overflow: 'hidden',
+              display: 'flex',
+              alignItems: 'flex-start',
+              justifyContent: 'flex-start',
+              gap: '.5rem',
+              flexWrap: 'wrap',
+            }}
+          >
+            {patientData?.userData?.location?.map((item) => {
+              return <p>{item}</p>;
+            }) ?? ''}
+          </div>
         </div>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
