@@ -357,6 +357,7 @@
 .msgTxt {
   color: #fba622;
   margin-left: 6px;
+  white-space: pre;
 }
 
 .clrTableRow {
@@ -916,6 +917,7 @@
 
   .patient_cell {
     font-size: 0.9rem !important;
+    white-space: pre;
   }
 
   .circularProgress {
@@ -1036,11 +1038,11 @@
   }
 
   .left_exercise {
-    width: 42%;
+    width: 50%;
   }
 
   .prescTable {
-    width: 56%;
+    width: 50%;
   }
 
   .clinic_cell {
@@ -1058,7 +1060,7 @@
 
   .table_head {
     font-size: 12px !important;
-    text-align: center !important;
+    /* text-align: center !important; */
   }
 
   .css-1ex1afd-MuiTableCell-root {

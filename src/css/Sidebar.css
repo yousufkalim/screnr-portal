@@ -252,7 +252,11 @@
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
-
+@media only screen and (max-width: 1442px) {
+  .activityLeft {
+    width: 76%;
+  }
+}
 @media only screen and (max-width: 1383px) {
   .spaceRight {
     font-size: 12px;
@@ -267,7 +271,12 @@
     width: 80% !important;
   }
 }
-
+@media only screen and (max-width: 1328px) {
+  .activityTxt {
+    margin-left: 8%;
+    font-size: 14px;
+  }
+}
 @media only screen and (max-width: 1200px) {
   .user_detail {
     font-size: 0.7rem !important;
@@ -275,6 +284,9 @@
 
   .sidebarSubDiv2 {
     width: 154px;
+  }
+  .activityTxt {
+    font-size: 13px;
   }
 }
 

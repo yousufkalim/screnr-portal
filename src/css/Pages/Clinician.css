@@ -72,7 +72,7 @@
 }
 
 .breadCrumb {
-  padding: 1.3rem 0 0rem 3rem;
+  padding: 3% 0 0rem 5%;
   color: #919b9b;
   width: 100%;
   font-size: 14px;
@@ -93,6 +93,11 @@
 @media only screen and (max-width: 1710px) {
   .table_cells {
     padding: 5px;
+  }
+}
+@media only screen and (max-width: 1600px) {
+  .table_cells {
+    width: 30%;
   }
 }
 

@@ -47,7 +47,7 @@
   justify-content: end;
   z-index: 1300;
   cursor: pointer;
-  color: #fba622;
+  color: black;
   margin-top: -3%;
 }
 
@@ -238,7 +238,7 @@
   font-size: 22px;
   font-weight: 600;
   color: #fba622;
-  line-height: 2;
+  line-height: 1;
 }
 
 .pointer {
