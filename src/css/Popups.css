@@ -592,6 +592,7 @@
   font-weight: 500;
   position: absolute;
   left: 20px;
+  pointer-events: none;
   cursor: text;
   top: 17px;
   left: 16px;

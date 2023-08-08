@@ -121,10 +121,10 @@ export default function PatientTable({ patients, getPatients, loading }) {
             '&::-webkit-scrollbar': {
               height: '6px',
             },
-            '&::-webkit-scrollbar-track:vertical': {
+            '&::-webkit-scrollbar-thumb': {
               background: '#f5f4f4',
             },
-            '&::-webkit-scrollbar-track:horizontal': {
+            '&::-webkit-scrollbar-track': {
               background: '#dddcdc',
             },
           },
