@@ -74,6 +74,8 @@ export default function EditClinicAdmin({
   const [clinicAdmin, setClinicAdmin] = useState({});
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+  const futureYear = new Date();
+  futureYear.setFullYear(futureYear.getFullYear() + 10);
 
   const dateChange = (e) => {
     setClinicAdmin({
@@ -510,7 +512,6 @@ export default function EditClinicAdmin({
               >
                 <div className="date-div2" id={!checked ? 'disabledDate' : ''}>
                   <DatePicker
-                    showPopperArrow
                     dateFormat="MM-dd-yyyy"
                     name="expiry_date"
                     onChange={dateChange}
@@ -521,6 +522,9 @@ export default function EditClinicAdmin({
                     showYearDropdown
                     minDate={tomorrow}
                     disablePast
+                    scrollableYearDropdown
+                    maxDate={futureYear}
+                    yearDropdownItemNumber={10}
                   />
                 </div>
               </FormControl>

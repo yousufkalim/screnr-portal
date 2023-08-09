@@ -81,6 +81,8 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
   const outlinedInputStyles = useOutlinedInputStyles();
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+  const futureYear = new Date();
+  futureYear.setFullYear(futureYear.getFullYear() + 10);
 
   const handleClose = () => {
     setOpenAddPatient(false);
@@ -523,7 +525,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
               >
                 <div className="date-div">
                   <DatePicker
-                    showPopperArrow
                     dateFormat="MM-dd-yyyy"
                     name="date"
                     selected={userData.dob}
@@ -533,8 +534,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                     showYearDropdown
                     openToDate={new Date('01/01/2005')}
                     maxDate={new Date()}
+                    minDate={new Date(1904, 12)}
                     scrollableYearDropdown
-                    yearDropdownItemNumber={100}
+                    yearDropdownItemNumber={150}
                   />
                 </div>
               </FormControl>
@@ -763,7 +765,6 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                   // id={!checked ? 'disabledDate' : ''}
                 >
                   <DatePicker
-                    showPopperArrow
                     dateFormat="MM-dd-yyyy"
                     name="expiry_date"
                     selected={patient.expiry_date}
@@ -774,6 +775,9 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                     showYearDropdown
                     minDate={tomorrow}
                     disablePast
+                    scrollableYearDropdown
+                    maxDate={futureYear}
+                    yearDropdownItemNumber={10}
                   />
                 </div>
               </FormControl>
