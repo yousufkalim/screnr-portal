@@ -72,8 +72,11 @@ export default function EditPatient({
   const { user } = Store();
   const [checked, setChecked] = useState(!!patientDetails?.expiry_date);
   const [clinicians, setClinicians] = useState([]);
+
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+  const futureYear = new Date();
+  futureYear.setFullYear(futureYear.getFullYear() + 10);
 
   const [patient, setPatient] = useState({
     first_name: patientDetails?.first_name,
@@ -478,6 +481,10 @@ export default function EditPatient({
                     popperPlacement="bottom-start"
                     placeholderText="Date of birth"
                     openToDate={new Date('01/01/2005')}
+                    minDate={new Date(1904, 12)}
+                    maxDate={new Date()}
+                    scrollableYearDropdown
+                    yearDropdownItemNumber={150}
                   />
                 </div>
               </FormControl>
@@ -621,7 +628,6 @@ export default function EditPatient({
                 >
                   <DatePicker
                     disablePast
-                    showPopperArrow
                     showYearDropdown
                     name="expiry_date"
                     minDate={tomorrow}
@@ -630,6 +636,9 @@ export default function EditPatient({
                     popperPlacement="bottom-start"
                     selected={patient?.expiry_date}
                     placeholderText="Enter expiry date"
+                    scrollableYearDropdown
+                    maxDate={futureYear}
+                    yearDropdownItemNumber={10}
                   />
                   {patient?.expiry_date && patient?.expiry_date !== '' ? (
                     <CloseIcon

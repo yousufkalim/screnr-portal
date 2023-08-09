@@ -71,6 +71,8 @@ export default function EditStaffMember({
   const [staffMember, setStaffMember] = useState({});
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+  const futureYear = new Date();
+  futureYear.setFullYear(futureYear.getFullYear() + 10);
 
   useEffect(() => {
     const tempStaffMember = {
@@ -386,7 +388,6 @@ export default function EditStaffMember({
               >
                 <div className="date-div2" id={!checked ? 'disabledDate' : ''}>
                   <DatePicker
-                    showPopperArrow
                     dateFormat="MM-dd-yyyy"
                     name="expiry_date"
                     onChange={dateChange}
@@ -397,6 +398,9 @@ export default function EditStaffMember({
                     showYearDropdown
                     minDate={tomorrow}
                     disablePast
+                    scrollableYearDropdown
+                    maxDate={futureYear}
+                    yearDropdownItemNumber={10}
                   />
                 </div>
               </FormControl>

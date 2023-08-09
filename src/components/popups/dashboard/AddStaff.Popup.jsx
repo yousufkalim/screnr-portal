@@ -76,6 +76,8 @@ export default function AddStaffMember({
   const outlinedInputStyles = useOutlinedInputStyles();
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+  const futureYear = new Date();
+  futureYear.setFullYear(futureYear.getFullYear() + 10);
 
   const handleClose = () => {
     setOpenAddStaffMember(false);
@@ -325,7 +327,6 @@ export default function AddStaffMember({
               >
                 <div className="date-div" id={!checked ? 'disabledDate' : ''}>
                   <DatePicker
-                    showPopperArrow
                     dateFormat="MM-dd-yyyy"
                     name="expiry_date"
                     onChange={dateChange}
@@ -336,6 +337,9 @@ export default function AddStaffMember({
                     showYearDropdown
                     minDate={tomorrow}
                     disablePast
+                    scrollableYearDropdown
+                    maxDate={futureYear}
+                    yearDropdownItemNumber={10}
                   />
                 </div>
               </FormControl>

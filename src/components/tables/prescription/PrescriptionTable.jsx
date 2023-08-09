@@ -191,6 +191,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
               sx={{
                 [`& .${tableCellClasses.root}`]: {
                   borderBottom: 'none',
+                  verticalAlign: 'baseline',
                 },
               }}
             >
@@ -201,7 +202,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     size="small"
                     className="prescription_head"
                     sx={{
-                      paddingTop: '20px',
                       minWidth: '8rem',
                       maxWidth: '8rem',
                       textTransform: 'capitalize',
@@ -214,7 +214,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     size="small"
                     className="table_header"
                     sx={{
-                      paddingTop: '20px',
                       minWidth: '8rem',
                       maxWidth: '8rem',
                       textAlign: 'center',
