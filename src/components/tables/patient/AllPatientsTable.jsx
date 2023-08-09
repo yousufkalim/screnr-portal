@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-nested-ternary */
 import { React, useState, useRef, useEffect } from 'react';
@@ -25,6 +27,7 @@ import { ReactComponent as Message } from '../../../assets/components/Table/emai
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
 import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
 import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
+// import PatientMenu from '../../patientMenu';
 import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
@@ -627,6 +630,80 @@ export default function PatientTable({
                       </div>
                     </TableCell>
                   </StyledTableRow>
+                  {/* <TableRow>
+                    <TableCell
+                      colSpan={7}
+                      style={{ paddingBottom: 2, paddingTop: 2 }}
+                      align="center"
+                    >
+                      {openMenu ? (
+                        <OpenArrow
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => setOpenMenu(!openMenu)}
+                        />
+                      ) : (
+                        <OpenArrow
+                          onClick={() => setOpenMenu(!openMenu)}
+                          style={{
+                            transform: 'rotateX(180deg)',
+                            cursor: 'pointer',
+                          }}
+                        />
+                      )}
+                    </TableCell>
+                  </TableRow> */}
+                  {/* <Collapse in={openMenu} timeout="auto">
+                    <TableRow className={patient?.id === row?.id ? 'clrTableRow' : 'tableRow'}>
+                      <TableCell width="2%" />
+                      <TableCell>
+                        <div className="notiCell">
+                          <Report /> <p className="reportTxt">{counter?.report} Reports</p>
+                        </div>
+                      </TableCell>
+                      <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
+                        <div className="notiCell">
+                          <Message />
+                          <p className="msgTxt">{counter?.unReadMsg} Messages</p>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="notiCell" />
+                      </TableCell>
+                      <TableCell />
+                      <TableCell />
+                      <TableCell
+                        style={{
+                          display: 'flex',
+                          gap: '15px',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Delete className="table_icons" onClick={() => handleDeletePatient(row)} />
+                        <Edit
+                          className="table_icons"
+                          onClick={() => {
+                            setOpenEditPatient(true);
+                            setEditPatient(row);
+                          }}
+                        />
+                        <Profile
+                          className="table_icons"
+                          onClick={() => handlePatientProfile(row.id)}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  </Collapse> */}
+                  {/* <PatientMenu
+                    row={row}
+                    patient={patient}
+                    counter={counter}
+                    handleDeletePatient={handleDeletePatient}
+                    handlePatientProfile={handlePatientProfile}
+                    setEditPatient={setEditPatient}
+                    setOpenEditPatient={setOpenEditPatient}
+                  /> */}
+
                   {patient?.id === row?.id ? (
                     <TableRow className={patient?.id === row?.id ? 'clrTableRow' : 'tableRow'}>
                       <TableCell width="2%" />

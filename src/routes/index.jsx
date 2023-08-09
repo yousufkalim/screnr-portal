@@ -38,7 +38,7 @@ const AllRoutes = [
 
   // routes for all data
   {
-    path: '/clinician/dasboard',
+    path: '/clinician/dashboard',
     element: <ClinicianDashboard />,
     protected: true,
     roles: ['admin', 'staff', 'clinic', 'clinician'],
