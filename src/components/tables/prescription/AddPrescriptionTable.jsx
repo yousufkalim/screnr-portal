@@ -33,16 +33,16 @@ export default function AddPrescriptionTable({
         borderRadius: '20px',
         background: '#F6FAFB',
         boxShadow: '0',
-        ml: 5,
+        ml: 'auto',
         maxHeight: '380px',
         overflowY: 'auto',
         overflowX: 'hidden',
-        width: '93%',
+        width: '97%',
         // width: '58.7vw',
         // paddingLeft: 2,
-        '@media (max-width: 1600px)': {
-          ml: 4,
-        },
+        // '@media (max-width: 1600px)': {
+        //   ml: 4,
+        // },
       }}
     >
       <h1 className="PrescriptionTableHead">Exercise Prescription</h1>

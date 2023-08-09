@@ -397,7 +397,7 @@ a {
 #prescriptionTable {
   margin: auto;
   padding: 2% 3% 0px 3%;
-  height: 70vh;
+  height: 50%;
   overflow-y: auto;
   margin-top: 20px;
   overflow-x: hidden;
@@ -926,6 +926,7 @@ a {
 
   .patient_cell {
     font-size: 0.9rem !important;
+    white-space: pre;
   }
 
   .circularProgress {
@@ -998,9 +999,6 @@ a {
   }
 }
 
-@media only screen and (max-width: 1650px) {
-}
-
 @media only screen and (max-width: 1536px) {
   .prescriptionHead {
     font-size: 17px;
@@ -1046,11 +1044,11 @@ a {
   }
 
   .left_exercise {
-    width: 42%;
+    width: 50%;
   }
 
   .prescTable {
-    width: 56%;
+    width: 50%;
   }
 
   .clinic_cell {
@@ -1068,7 +1066,7 @@ a {
 
   .table_head {
     font-size: 12px !important;
-    text-align: center !important;
+    /* text-align: center !important; */
   }
 
   .css-1ex1afd-MuiTableCell-root {
@@ -1142,9 +1140,6 @@ a {
     width: 31% !important;
   }
 
-  .prescriptions_btns {
-  }
-
   .css-ahj2mt-MuiTypography-root {
     font-size: 10px !important;
   }
@@ -1171,7 +1166,7 @@ a {
   .timeLog,
   .activityTxt,
   .clickedActivity {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .lastLog {
