@@ -1,15 +1,18 @@
 import { React } from 'react';
 import RightSidebar from '../../../components/sidebar/patient/PatientListRightSidebar';
 import ReportCard from '../../../components/cards/ReportCard.Component';
+import Breadcrumbs from '../../../components/BreadCrumbs/BreadCrumbs';
 
-export default function Reports({ session }) {
+export default function Reports({ session, sessionID }) {
+  const breadCrumb = `${session?.patient?.first_name} ${session?.patient?.last_name}`;
   return (
     <div style={{ display: 'flex' }}>
       <div className="bgReport">
-        <div className="breadCrumb">
+        <Breadcrumbs ClinicName={breadCrumb} sessionID={sessionID} />
+        {/* <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
           Reports &gt;
-        </div>
+        </div> */}
         <div className="bgReportCard">
           {session?.exercises?.map((item) => {
             return (

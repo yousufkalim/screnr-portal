@@ -8,6 +8,7 @@ import PrescriptionTable from '../../components/tables/prescription/Prescription
 import request from '../../request';
 import EditPatient from '../../components/popups/patient/EditPatient.Popup';
 import addBtn from '../../assets/icons/addBtn.svg';
+import Breadcrumbs from '../../components/BreadCrumbs/BreadCrumbs';
 
 export default function Prescription() {
   const navigate = useNavigate();
@@ -17,11 +18,13 @@ export default function Prescription() {
   const [allClinicians, setAllClinicians] = useState('');
   const [openEditpatientModal, setOpenEditpatientModal] = useState(false);
   const [selectedClinician, setSelectedClinician] = useState('');
+  const [breadcrumb, setBreadcrumb] = useState('');
 
   const getPatients = async () => {
     await request('get', `/clinicians/getPatientDetail/${id}`)
       .then(async (res) => {
         setPatient(res?.data?.user);
+        setBreadcrumb(`${res?.data?.user?.first_name} ${res?.data?.user?.last_name}`);
         setSelectedClinician(res?.data?.user?.userData?.clinicians[0]?.id);
         const ClinicId = res?.data?.user?.userData?.clinicians[0]?.userData?.clinic;
         await request('get', `/clinicians/getCliniciansByClinicIdNonPaginated/${ClinicId}`)
@@ -64,6 +67,7 @@ export default function Prescription() {
           />
         </div>
         <Grid className="bgPrescription" xl={10} lg={9.5}>
+          <Breadcrumbs ClinicName={breadcrumb} />
           <PatientTopSection
             allClinicians={allClinicians}
             patientData={patient}

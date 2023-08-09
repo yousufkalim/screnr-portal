@@ -1,7 +1,8 @@
 import { React, useEffect, useState } from 'react';
+import Breadcrumbs from '../../../components/BreadCrumbs/BreadCrumbs';
 import SurveyPain from '../../../components/PainSurvey/PainSurvey.Component';
 
-export default function PainSurvey({ session, prescription }) {
+export default function PainSurvey({ session, prescription, breadCrumb, sessionID }) {
   const [survey, setSurvey] = useState(session?.survey);
 
   // const handlePainSurveySubmit = async () => {
@@ -21,10 +22,11 @@ export default function PainSurvey({ session, prescription }) {
   return (
     <div style={{ marginLeft: 'auto', width: '100%' }}>
       <div className="bgMsg" style={{ marginLeft: 'unset', width: '100%' }}>
-        <div className="breadCrumb">
+        <Breadcrumbs ClinicName={breadCrumb} sessionID={sessionID} />
+        {/* <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
           Pain Survey &gt;
-        </div>
+        </div> */}
         <div className="bgPainSurvey">
           <SurveyPain session={session} prescription={prescription} survey={survey} />
         </div>

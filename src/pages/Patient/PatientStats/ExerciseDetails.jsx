@@ -19,8 +19,17 @@ import ScoreCard from '../../../components/ScoreCard/scoreCard';
 import ExerciseTable from '../../../components/tables/exerciseDetail/exerciseTable';
 import ScreenShotViewer from '../../../components/ScreenShotViewer/index';
 import { getMediaUrl } from '../../../config';
+import Breadcrumbs from '../../../components/BreadCrumbs/BreadCrumbs';
 
-function ExerciseDetails({ session, exercise, results, exerciseDetails, loading }) {
+function ExerciseDetails({
+  session,
+  exercise,
+  results,
+  exerciseDetails,
+  loading,
+  breadCrumb,
+  sessionID,
+}) {
   const [targetExercise, setTargetExercise] = useState({
     set: [],
     setCount: 1,
@@ -172,10 +181,11 @@ function ExerciseDetails({ session, exercise, results, exerciseDetails, loading 
     />
   ) : (
     <div className="bg_main_div_sessions" style={{ background: '#F6FAFB', paddingBottom: '40px' }}>
-      <div className="breadCrumb">
+      <Breadcrumbs ClinicName={breadCrumb} sessionID={sessionID} />
+      {/* <div className="breadCrumb">
         Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
         Session &gt;
-      </div>
+      </div> */}
       <div className="bgAddPrescriptionSessions">
         <div className="SessionsHeading">
           <div className="leftside_title">

@@ -23,10 +23,9 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
       const { data } = await request('get', `/${txt}/${id}`);
       if (data) {
         setInfo(data?.user);
-
-        if (txt.includes('Clinician')) {
-          getClinicName(data?.user?.userData?.clinic?.userData?.clinic_name);
-        } else getClinicName(data?.user?.userData?.clinic_name);
+        if (txt.includes('staff')) {
+          getClinicName(data?.user?.userData?.clinic_name);
+        } else getClinicName(`${data?.user?.first_name} ${data?.user?.last_name}`);
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);

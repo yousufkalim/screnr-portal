@@ -6,10 +6,10 @@ import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import AddPrescription from '../../components/Forms/AddPrescription/AddPrescription.Component';
 import GeneratePrescription from '../../components/popups/prescription/PrescriptionGenerated.popup';
 import EditPatient from '../../components/popups/patient/EditPatient.Popup';
-import { Store } from '../../StoreContext';
+import Breadcrumbs from '../../components/BreadCrumbs/BreadCrumbs';
 
 export default function AddPatientPrescription() {
-  const { user } = Store();
+  // const { user } = Store();
   const params = useParams();
   const navigate = useNavigate();
   const { patientId, clinicianId } = params;
@@ -56,11 +56,12 @@ export default function AddPatientPrescription() {
   const handleSimpleExerciseInfo = (name, value) => {
     setSimpleExerciseInfo({ ...simpleExerciseInfo, [name]: value });
   };
-
+  const [breadcrumb, setBreadCrumb] = useState('');
   const handlePatientDataById = useCallback(async () => {
     await request('get', `/clinicians/getPatientDetail/${patientId}`)
       .then((res) => {
         setPatient(res?.data?.user);
+        setBreadCrumb(`${res?.data?.user?.first_name} ${res?.data?.user?.last_name}`);
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message);
@@ -241,7 +242,7 @@ export default function AddPatientPrescription() {
           />
         </div>
         <div className="bgPrescription">
-          {user?.role === 'clinician' ? (
+          {/* {user?.role === 'clinician' ? (
             <div className="breadCrumb">
               Dashboard &gt; {patient?.first_name} {patient?.last_name} &gt; Prescribe Exercise &gt;
             </div>
@@ -250,7 +251,9 @@ export default function AddPatientPrescription() {
               Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescribe
               Exercise &gt;
             </div>
-          )}
+          )} */}
+          <Breadcrumbs ClinicName={breadcrumb} />
+
           <div className="main_div_addPrescription">
             <div className="bgAddPrescription">
               <AddPrescription
