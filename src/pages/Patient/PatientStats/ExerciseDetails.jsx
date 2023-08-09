@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -171,6 +172,33 @@ function ExerciseDetails({
     }
   }, [results]);
 
+  const percentageOfGraph =
+    targetExercise?.rep?.screnr_compliance > 0 && targetExercise?.rep?.screnr_compliance <= 10
+      ? '#FF5151'
+      : targetExercise?.rep?.screnr_compliance > 10 && targetExercise?.rep?.screnr_compliance <= 30
+      ? '#C2623B'
+      : targetExercise?.rep?.screnr_compliance > 30 && targetExercise?.rep?.screnr_compliance <= 40
+      ? '#D0A34D'
+      : targetExercise?.rep?.screnr_compliance > 40 && targetExercise?.rep?.screnr_compliance <= 50
+      ? '#E7D270'
+      : targetExercise?.rep?.screnr_compliance > 50 && targetExercise?.rep?.screnr_compliance <= 55
+      ? '#F0E570'
+      : targetExercise?.rep?.screnr_compliance > 55 && targetExercise?.rep?.screnr_compliance <= 65
+      ? '#E0EE66'
+      : targetExercise?.rep?.screnr_compliance > 65 && targetExercise?.rep?.screnr_compliance <= 70
+      ? '#CAE662'
+      : targetExercise?.rep?.screnr_compliance > 70 && targetExercise?.rep?.screnr_compliance <= 75
+      ? '#A9D55D'
+      : targetExercise?.rep?.screnr_compliance > 75 && targetExercise?.rep?.screnr_compliance <= 80
+      ? '#AED05D'
+      : targetExercise?.rep?.screnr_compliance > 80 && targetExercise?.rep?.screnr_compliance <= 85
+      ? '#97C755'
+      : targetExercise?.rep?.screnr_compliance > 85 && targetExercise?.rep?.screnr_compliance <= 90
+      ? '#7EB252'
+      : targetExercise?.rep?.screnr_compliance > 90 && targetExercise?.rep?.screnr_compliance <= 95
+      ? '#7EB45A'
+      : '#669851';
+
   return selectedImageIndex !== null ? (
     <ScreenShotViewer
       screenshots={exercise?.screenshots}
@@ -190,13 +218,20 @@ function ExerciseDetails({
         <div className="SessionsHeading">
           <div className="leftside_title">
             <div className="backIcon_button">
-              <BackIcon className="arrows" />
+              <BackIcon
+                className="arrows"
+                onClick={() => {
+                  window.history.back();
+                }}
+              />
             </div>
             <div className="dateTitle">
               <p>Session Date</p>
             </div>
             <div className="dateExcercise">
-              <p>{moment(session?.date).format('MM/DD/YYYY')}</p>
+              <p>
+                {session?.status === 'completed' && moment(session?.updatedAt).format('MM/DD/YYYY')}
+              </p>
             </div>
           </div>
           <div className="excerciseDay">
@@ -253,25 +288,17 @@ function ExerciseDetails({
               </div>
               <CircularProgress
                 variant="determinate"
-                thickness="8"
+                thickness="6"
                 value={targetExercise?.rep?.screnr_compliance || 0}
-                size={60}
+                size={80}
                 sx={{
-                  color:
-                    // eslint-disable-next-line no-nested-ternary
-                    targetExercise?.rep?.screnr_compliance >= 80 &&
-                    targetExercise?.rep?.screnr_compliance <= 100
-                      ? '#25CC7C'
-                      : targetExercise?.rep?.screnr_compliance >= 60 &&
-                        targetExercise?.rep?.screnr_compliance <= 80
-                      ? '#FABB18'
-                      : '#FF5151',
+                  color: percentageOfGraph,
                 }}
               />
 
               <div className="graphData">
                 <p className="excercise_percent">
-                  {Math.round(targetExercise?.rep?.screnr_compliance) ?? 0}
+                  {Math.round(targetExercise?.rep?.screnr_compliance) ?? 0}%
                 </p>
               </div>
               {/* <div className="colorDotsDiv2">

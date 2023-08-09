@@ -22,6 +22,8 @@ import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin.Popup';
 import AvatarComponent from '../../Avatar/Avatar.Component';
 import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import { getMediaUrl } from '../../../config';
+import DeleteModal from '../../popups/general/Delete.Popup';
+import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 
 const useStyles = makeStyles(() => ({
   radio: {
@@ -59,6 +61,8 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
   const [clinicAdmin, setClinicAdmin] = useState({});
   const [openFilter, setOpenFilter] = useState(false);
   const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
+  const [openDeletePopup, setOpenDeletePopup] = useState(false);
+  const [deleteUser, setDeleteUser] = useState({});
 
   const handleChangePage = async (event, newPage) => {
     await getClinicAdmins('', '', newPage + 1);
@@ -93,6 +97,21 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
       document.removeEventListener('mousedown', handleCloseFilter);
     };
   }, [openFilter]);
+
+  const handleDeleteClinician = (item) => {
+    setOpenDeletePopup(true);
+    setDeleteUser(item);
+  };
+
+  const DeleteUserPopup = openDeletePopup && (
+    <DeleteModal
+      openDeletePopup={openDeletePopup}
+      setOpenDeletePopup={setOpenDeletePopup}
+      item={deleteUser}
+      getData={getClinicAdmins}
+      txt="staff/deleteClinic"
+    />
+  );
 
   return (
     <div
@@ -291,6 +310,11 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
                         setClinicAdmin(row);
                       }}
                     />
+                    <Delete
+                      className="table_icons"
+                      onClick={() => handleDeleteClinician(row)}
+                      style={{ marginLeft: '.5rem' }}
+                    />
                   </TableCell>
                 </StyledTableRow>
               ))
@@ -314,6 +338,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
             table="allClinicAdminsTable"
           />
         )}
+        {DeleteUserPopup}
       </TableContainer>
       <TablePagination
         sx={{ color: '#919B9B', width: '97%' }}

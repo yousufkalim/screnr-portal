@@ -28,13 +28,13 @@ function ClinicianInfoTab({ userData, clinicianData, selectedClinician, setSelec
             userData?.id === clinicianData?.id ? 'topSecDocName' : 'topSecDocName_disabled'
           }
         >{`${clinicianData?.first_name} ${clinicianData?.last_name}`}</p>
-        <p
+        {/* <p
           className={
             userData?.id === clinicianData?.id ? 'topSecExpertise' : 'topSecExpertise_disabled'
           }
         >
           {clinicianData?.userData?.title}
-        </p>
+        </p> */}
       </div>
     </div>
   ) : (

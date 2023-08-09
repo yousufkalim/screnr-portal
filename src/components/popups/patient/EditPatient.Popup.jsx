@@ -201,10 +201,16 @@ export default function EditPatient({
     const formData = new FormData();
 
     if (
-      moment(patient.expiry_date).format('dd/mm/yyyy') === moment(tomorrow).format('dd/mm/yyyy') ||
+      moment(patientCopy.expiry_date).format('dd/mm/yyyy') ===
+        moment(tomorrow).format('dd/mm/yyyy') ||
       ''
     ) {
       delete patientCopy.expiry_date;
+      setPatient({ ...patientCopy });
+    }
+
+    if (patientCopy.expiry_date === null) {
+      delete patient.expiry_date;
       setPatient({ ...patientCopy });
     }
 

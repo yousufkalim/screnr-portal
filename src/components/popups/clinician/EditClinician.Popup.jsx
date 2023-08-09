@@ -156,6 +156,11 @@ export default function EditClinician({
       delete clinicianCopy.profile_pic;
     }
 
+    if (!clinicianCopy.gender) {
+      delete clinicianCopy.gender;
+      setClinician({ ...clinicianCopy });
+    }
+
     // append properties from clinicianCopy in formdata
     Object.keys(clinicianCopy).forEach((key) => {
       formData.append(key, clinicianCopy[key]);
