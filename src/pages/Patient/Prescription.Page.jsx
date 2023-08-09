@@ -66,7 +66,7 @@ export default function Prescription() {
             selectedClinician={selectedClinician}
           />
         </div>
-        <Grid className="bgPrescription" xl={10} lg={9.5}>
+        <Grid className="bgPrescription" xl={10} lg={9.5} sx={{ height: '100vh' }}>
           <Breadcrumbs ClinicName={breadcrumb} />
           <PatientTopSection
             allClinicians={allClinicians}
