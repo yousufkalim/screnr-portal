@@ -87,7 +87,15 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
         toast.error(error?.response?.data?.message);
       });
   };
-
+  const handleUpdateSessionStatus = (targetSessionId) => {
+    request('get', `/clinicians/sessions/addSessionStatus/${targetSessionId}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const handleSearchLogoClick = (sessionId) => {
     navigate(`/patients/${sessionId}/exercise/exerciseDetails`);
   };
@@ -384,7 +392,10 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                       <StyledTableRow
                         className="tableRow"
                         key={row?.id}
-                        onClick={() => handleSearchLogoClick(row?.id)}
+                        onClick={() => {
+                          handleSearchLogoClick(row?.id);
+                          handleUpdateSessionStatus(row?.id);
+                        }}
                       >
                         <TableCell align="center">
                           {moment(row?.date).format('MM/DD/YYYY')}

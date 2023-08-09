@@ -208,7 +208,7 @@ export default function EditClinician({
   const handleDeleteUser = async (targetUserId) => {
     await request('delete', `/clinics/deleteClinician/${targetUserId}`)
       .then(() => {
-        toast.success('Clinician de-actived successfully');
+        toast.success('Clinician Deactivated successfully');
         handleClose();
         getClinicians();
       })
@@ -530,7 +530,7 @@ export default function EditClinician({
               handleDeleteUser(clinicianDetails?.id);
             }}
           >
-            De-Activate User
+            Deactivate User
           </Button>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             <p className="sendInviteTxt">Save Changes</p>{' '}

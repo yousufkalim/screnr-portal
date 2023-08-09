@@ -40,9 +40,7 @@ function ExerciseDetails({
   const [toggleIcon, setToggleIcon] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
-  const handleExpandClick = () => {
-    setToggleIcon(!toggleIcon);
-  };
+  const handleExpandClick = () => setToggleIcon(!toggleIcon);
 
   const handleSetCounterAdd = () => {
     if (targetExercise.setCount < results.length) {
@@ -226,11 +224,12 @@ function ExerciseDetails({
               />
             </div>
             <div className="dateTitle">
-              <p>Session Date</p>
+              <p>Exercise Performed Date</p>
             </div>
             <div className="dateExcercise">
               <p>
-                {session?.status === 'completed' && moment(session?.updatedAt).format('MM/DD/YYYY')}
+                {exercise?.status === 'completed' &&
+                  moment(exercise?.completedAt || exercise?.updatedAt).format('MM/DD/YYYY')}
               </p>
             </div>
           </div>

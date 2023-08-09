@@ -42,7 +42,7 @@ const loggedInUser = {
   admin: '/admin/dashboard',
   staff: '/staff/dashboard',
   clinic: '/clinic/dashboard',
-  clinician: '/clinician/dasboard',
+  clinician: '/clinician/dashboard',
   patient: '/patient/dashboard',
 };
 

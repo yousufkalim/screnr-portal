@@ -33,7 +33,9 @@ export default function PatientSidebarSection({
     <>
       <div className="mainAvatarDiv">
         <AvatarComponent
-          alt={`${patientData?.first_name} ${patientData?.last_name}` || ''}
+          alt={
+            patientData?.first_name ? `${patientData?.first_name} ${patientData?.last_name}` : ''
+          }
           className="sidebar_avatar"
         />
         <img
@@ -47,10 +49,13 @@ export default function PatientSidebarSection({
       </div>
       <div className="sideBarInfo">
         <div className="user_name">
-          {`${patientData?.first_name ?? ''} ${patientData?.last_name}` ?? ''}
+          {patientData?.first_name ? `${patientData?.first_name} ${patientData?.last_name}` : ''}
         </div>
         <div className="staff_id">
-          Patient ID: <span className="staff_id_2">{patientData?.userData?.mrn_id || ''}</span>
+          Patient ID:{' '}
+          <span className="staff_id_2">
+            {patientData?.userData?.mrn_id ? patientData?.userData?.mrn_id : ''}
+          </span>
         </div>
       </div>
       <div className="sidebarSubDiv">

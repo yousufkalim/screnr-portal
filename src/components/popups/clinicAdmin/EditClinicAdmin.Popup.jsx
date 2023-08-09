@@ -195,7 +195,7 @@ export default function EditClinicAdmin({
     await request('delete', `/staff/deleteClinic/${targetUserId}`)
       .then((res) => {
         console.log(res);
-        toast.success('Clinic Admin de-actived successfully');
+        toast.success('Clinic Admin Deactivated successfully');
         setOpenEditClinicAdmin(false);
         getClinicAdmins();
       })
@@ -535,7 +535,7 @@ export default function EditClinicAdmin({
               handleDeleteUser(clinicAdminDetails?.id);
             }}
           >
-            De-Activate User
+            Deactivate User
           </Button>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             <p className="sendInviteTxt">Save Changes</p>{' '}
