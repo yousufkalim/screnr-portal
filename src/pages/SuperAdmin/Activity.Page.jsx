@@ -12,6 +12,7 @@ import { ReactComponent as Clock } from '../../assets/components/TimeCard/clock.
 import { ReactComponent as Login } from '../../assets/components/TimeCard/login.svg';
 import { ReactComponent as LoginCount } from '../../assets/components/TimeCard/loginCount.svg';
 import { ReactComponent as Logoff } from '../../assets/components/TimeCard/logoff.svg';
+import Breadcrumbs from '../../components/BreadCrumbs/BreadCrumbs';
 
 export default function Activity() {
   const params = useParams();
@@ -48,6 +49,7 @@ export default function Activity() {
     await request('get', `/clinicians/getPatientDetail/${patientId}`)
       .then((res) => {
         setPatientData(res?.data?.user);
+        setBreadcrumb(`${res?.data?.user?.first_name} ${res?.data?.user?.last_name}`);
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message);
@@ -115,9 +117,10 @@ export default function Activity() {
           )}
         </div>
         <div className="bgClinicianTable">
-          <div className="breadCrumb">
+          <Breadcrumbs ClinicName={breadcrumb} />
+          {/* <div className="breadCrumb">
             Dashboard &gt; Staff &gt; Lifeline Clinic &gt; Doctor &gt; {breadcrumb} &gt;
-          </div>
+          </div> */}
           <div className="patientScreenCardsDiv">
             <div className="cards_div_patient_pg">
               {cardsData?.map((item) => (

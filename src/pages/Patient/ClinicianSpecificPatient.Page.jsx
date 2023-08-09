@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/greenIcon.svg';
@@ -16,9 +16,10 @@ import AddNewPatient from '../../components/popups/patient/AddPatient.Popup';
 import EditClinician from '../../components/popups/clinician/EditClinician.Popup';
 import RightSidebar from '../../components/sidebar/patient/PatientListRightSidebar';
 import request from '../../request';
+import Breadcrumbs from '../../components/BreadCrumbs/BreadCrumbs';
 
 export default function Patient() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { id } = useParams();
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [openEditClinician, setOpenEditClinician] = useState(false);
@@ -29,9 +30,9 @@ export default function Patient() {
   const [loading, setLoading] = useState(false);
 
   const getClinicName = (name) => setBreadcrumb(name);
-  const handleDashboardNavClick = () => navigate('/admin/dashboard');
-  const handleStaffNavClick = () => window.history.back();
-  const handleClinicNavClick = () => window.history.back();
+  // const handleDashboardNavClick = () => navigate('/admin/dashboard');
+  // const handleStaffNavClick = () => window.history.back();
+  // const handleClinicNavClick = () => window.history.back();
 
   const getPatients = async (page = 1) => {
     try {
@@ -110,7 +111,7 @@ export default function Patient() {
         </div>
 
         <Grid className="bgClinicianTable" xl={7.5} lg={7}>
-          <div className="breadCrumb" style={{ display: 'flex' }}>
+          {/* <div className="breadCrumb" style={{ display: 'flex' }}>
             <div
               className="navigationEntities"
               onClick={handleDashboardNavClick}
@@ -125,7 +126,9 @@ export default function Patient() {
               {breadcrumb} &gt;
             </div>
             <div> Doctor &gt;</div>
-          </div>
+          </div> */}
+          <Breadcrumbs ClinicName={breadcrumb} />
+
           <div className="patientScreenCardsDiv">
             <div style={{ marginBottom: '3%' }} className="cards_div_patient_pg">
               {cardsData.map((item) => (

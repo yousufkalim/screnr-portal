@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import addBtn from '../../assets/icons/addBtn.svg';
 import { ReactComponent as Circle } from '../../assets/components/CardWithIcon/yellowIcon.svg';
 import { ReactComponent as TotalClinicians } from '../../assets/components/CardWithIcon/patientsIcon.svg';
@@ -14,6 +14,7 @@ import ClinicianTable from '../../components/tables/clinician/ClinicianTable';
 import AddClinician from '../../components/popups/clinician/AddClinician.Popup';
 import EditClinicAdmin from '../../components/popups/clinicAdmin/EditClinicAdmin.Popup';
 import request from '../../request';
+import Breadcrumbs from '../../components/BreadCrumbs/BreadCrumbs';
 
 export default function ClinicAdmin() {
   const [openAddClinican, setOpenAddClinican] = useState(false);
@@ -23,7 +24,6 @@ export default function ClinicAdmin() {
   const [isLoading, setIsLoading] = useState(false);
   const [breadcrumb, setBreadcrumb] = useState('');
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const getClinicians = async (page = 1) => {
     setIsLoading(true);
@@ -53,13 +53,13 @@ export default function ClinicAdmin() {
   const getClinicName = (name) => {
     setBreadcrumb(name);
   };
-  const handleDashboardNavClick = () => {
-    navigate('/admin/dashboard');
-  };
+  // const handleDashboardNavClick = () => {
+  //   navigate('/admin/dashboard');
+  // };
 
-  const handleStaffNavClick = () => {
-    window.history.back();
-  };
+  // const handleStaffNavClick = () => {
+  //   window.history.back();
+  // };
 
   useEffect(() => {
     getClinicians();
@@ -106,7 +106,7 @@ export default function ClinicAdmin() {
           />
         </div>
         <div style={{ width: '80%', marginLeft: 'auto' }} className="bgClinicianTable">
-          <div className="breadCrumb" style={{ display: 'flex' }}>
+          {/* <div className="breadCrumb" style={{ display: 'flex' }}>
             <div
               className="navigationEntities"
               onClick={handleDashboardNavClick}
@@ -118,8 +118,8 @@ export default function ClinicAdmin() {
               Staff &gt;
             </div>
             <div> {breadcrumb} Clinic &gt;</div>
-          </div>
-
+          </div> */}
+          <Breadcrumbs ClinicName={breadcrumb} />
           <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '85vh' }}>
             <div className="clinicianScreenCardsDiv">
               <div className="cards_div_clinician_pg">

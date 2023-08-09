@@ -19,14 +19,20 @@ export default function Index() {
   const [prescription, setPrescription] = useState({});
   const [activeTab, setActiveTab] = useState('');
   const [loading, setLoading] = useState(false);
+  const [breadCrumb, setBreadCrumb] = useState('');
+  const [sessionID, setSessionId] = useState();
 
   const handleGetSessionById = async () => {
     setLoading(true);
     await request('get', `/clinicians/sessions/getSessionDetails/${sessionId}`)
       .then((res) => {
+        setSessionId(res?.data?.prescription?.patient);
         setLoading(false);
         setSession(res?.data?.session);
         setPatient(res?.data?.session?.patient);
+        setBreadCrumb(
+          `${res?.data?.session?.patient?.first_name} ${res?.data?.session?.patient?.last_name}`,
+        );
         setPrescription(res?.data?.prescription);
         setExercise(res?.data?.session?.exercises[0]);
       })
@@ -35,7 +41,6 @@ export default function Index() {
         toast.error(error?.response?.data?.message);
       });
   };
-
   const handleGetExerciseById = async (targetExerciseId) => {
     setLoading(true);
     await request('get', `/clinicians/prescribedExercises/getExercise/${targetExerciseId}`)
@@ -71,9 +76,14 @@ export default function Index() {
       </div>
       <div style={{ width: '80%', marginLeft: 'auto' }}>
         {activeTab === 'Reports' ? (
-          <Reports session={session} />
+          <Reports session={session} sessionID={sessionID} />
         ) : activeTab === 'Pain Survey' ? (
-          <PainSurvey session={session} prescription={prescription} />
+          <PainSurvey
+            session={session}
+            prescription={prescription}
+            breadCrumb={breadCrumb}
+            sessionID={sessionID}
+          />
         ) : (
           activeTab === 'exercise' && (
             <ExerciseDetails
@@ -82,6 +92,8 @@ export default function Index() {
               loading={loading}
               results={exercise?.results}
               exerciseDetails={exercise?.exercise}
+              breadCrumb={breadCrumb}
+              sessionID={sessionID}
             />
           )
         )}

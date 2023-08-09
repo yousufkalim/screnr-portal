@@ -7,6 +7,7 @@ import request from '../../request/index';
 import EditPatient from '../../components/popups/patient/EditPatient.Popup';
 import SocketConnection from '../../helper/socket';
 import { Store } from '../../StoreContext';
+import Breadcrumbs from '../../components/BreadCrumbs/BreadCrumbs';
 
 export default function PatientMessageBox() {
   const params = useParams();
@@ -20,6 +21,7 @@ export default function PatientMessageBox() {
   const [chatId, setChatId] = useState('');
   const [openEditpatientModal, setOpenEditpatientModal] = useState(false);
   const [lastKey, setLastKey] = useState({}); // for pagination
+  const [breadCrumb, setBreadCrumb] = useState('');
 
   useEffect(() => {
     if (SocketConnection) {
@@ -55,6 +57,7 @@ export default function PatientMessageBox() {
     await request('get', `/clinicians/getPatientDetail/${patientId}`)
       .then((res) => {
         setPatient(res?.data?.user);
+        setBreadCrumb(`${res?.data?.user?.first_name} ${res?.data?.user?.last_name}`);
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message);
@@ -141,9 +144,10 @@ export default function PatientMessageBox() {
         />
       </div>
       <div className="bgMsg">
-        <div className="breadCrumb">
+        <Breadcrumbs ClinicName={breadCrumb} />
+        {/* <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Messages &gt;
-        </div>
+        </div> */}
         <div className="bgAddPrescription">
           <MessageBox
             patient={patient}
