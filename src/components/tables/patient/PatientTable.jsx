@@ -142,10 +142,8 @@ export default function PatientTable({ patients, getPatients, loading }) {
           maxHeight: '84%',
           overflowX: 'hidden',
           boxShadow: '0',
-          '@media (max-width: 1728px)': {
+          '@media (max-width: 1850px)': {
             overflowX: 'scroll',
-          },
-          '@media (max-width: 1535px)': {
             '&::-webkit-scrollbar': {
               height: '6px',
             },
