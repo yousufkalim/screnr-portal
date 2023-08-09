@@ -163,7 +163,7 @@ export default function EditStaffMember({
   const handleDeleteUser = async (targetUserId) => {
     await request('delete', `/admins/deleteStaff/${targetUserId}`)
       .then(() => {
-        toast.success('Staff Member de-actived successfully');
+        toast.success('Staff Member Deactivated successfully');
         handleClose();
         setOpenEditStaffMember(false);
         getData();
@@ -419,7 +419,7 @@ export default function EditStaffMember({
               handleDeleteUser(staffMemberDetails?.id);
             }}
           >
-            De-Activate User
+            Deactivate User
           </Button>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             Save Changes

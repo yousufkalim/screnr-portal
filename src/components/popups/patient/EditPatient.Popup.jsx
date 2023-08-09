@@ -295,7 +295,7 @@ export default function EditPatient({
         console.log(res);
         handleClose();
         getPatients();
-        toast.success('Patient de-actived successfully');
+        toast.success('Patient Deactivated successfully');
       })
       .catch((error) => {
         console.log(error);
@@ -384,7 +384,7 @@ export default function EditPatient({
                   value={userData?.mrn_id}
                   classes={outlinedInputStyles}
                   onChange={handleUserDataChange}
-                  placeholder="MRN (customized unique id)"
+                  placeholder="Unique ID (MRN, Patient ID, etc.)"
                   inputProps={{
                     maxLength: 5,
                   }}
@@ -671,7 +671,7 @@ export default function EditPatient({
               handleDeleteUser(patientDetails?.id);
             }}
           >
-            De-Activate User
+            Deactivate User
           </Button>
           <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
             <p className="sendInviteTxt">Save Changes</p>{' '}

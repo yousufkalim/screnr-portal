@@ -118,26 +118,22 @@ export default function Patient() {
     />
   );
 
-  const AllPatients = (
-    <AllPatientTable
-      filter={filter}
-      sorting={sorting}
-      loading={loading}
-      patients={patients}
-      setFilter={setFilter}
-      setSorting={setSorting}
-      getPatients={fetchData}
-      exerciseFilter={exerciseFilter}
-      diaganosisFilter={diaganosisFilter}
-      setOpenAddPatient={setOpenAddPatient}
-      handleFilterAndSorting={handleFilterAndSorting}
-    />
-  );
-
   return (
     <Grid container>
       <Grid sx={{ width: '100%' }} className="bgClinicianTable">
-        {AllPatients}
+        <AllPatientTable
+          filter={filter}
+          sorting={sorting}
+          loading={loading}
+          patients={patients}
+          setFilter={setFilter}
+          setSorting={setSorting}
+          getPatients={fetchData}
+          exerciseFilter={exerciseFilter}
+          diaganosisFilter={diaganosisFilter}
+          setOpenAddPatient={setOpenAddPatient}
+          handleFilterAndSorting={handleFilterAndSorting}
+        />
       </Grid>
 
       {/* <div className="addBtn">

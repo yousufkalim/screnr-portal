@@ -173,7 +173,7 @@ export default function AddClinician({
       const { data } = await request('post', '/clinics/addClinician', formData);
 
       if (data) {
-        toast.success('Clinic Admin added successfully');
+        toast.success('Clinician added successfully');
         getClinicians();
         setAdded(true);
         handleClose();

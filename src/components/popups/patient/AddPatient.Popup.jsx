@@ -431,7 +431,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                   }}
                   id="outlined-name"
                   classes={outlinedInputStyles}
-                  placeholder="Unique ID (MRN, Patient ID etc.)."
+                  placeholder="Unique ID (MRN, Patient ID, etc.)"
                   size="normal"
                   name="mrn_id"
                   value={userData.mrn_id}
