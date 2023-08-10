@@ -503,13 +503,13 @@ export default function PatientTable({
               patients?.map((row) => (
                 <PatientDetailSection
                   row={row}
-                  handlePatientProfile={handlePatientProfile}
-                  setPatient={setPatient}
-                  handleReportAndMsgCounter={handleReportAndMsgCounter}
                   patient={patient}
                   counter={counter}
-                  handleDeletePatient={handleDeletePatient}
+                  setPatient={setPatient}
                   setOpenEditPatient={setOpenEditPatient}
+                  handleDeletePatient={handleDeletePatient}
+                  handlePatientProfile={handlePatientProfile}
+                  handleReportAndMsgCounter={handleReportAndMsgCounter}
                   setEditPatient={setEditPatient}
                 />
               ))
