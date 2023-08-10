@@ -473,6 +473,7 @@ export default function PatientTable({
                 Pain (s)
               </TableCell>
               <TableCell
+                className="table_head"
                 style={{
                   paddingLeft: 1,
                   paddingRight: 1,
