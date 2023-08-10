@@ -209,7 +209,6 @@ export default function PatientTable({ patients, getPatients, loading }) {
               >
                 Pain (s)
               </TableCell>
-              <TableCell className="table_head">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

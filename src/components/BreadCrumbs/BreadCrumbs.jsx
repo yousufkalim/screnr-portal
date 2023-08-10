@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
-function Breadcrumbs({ ClinicName, sessionID }) {
+function Breadcrumbs({ ClinicName, sessionID, activeTab }) {
   const location = useLocation();
   const params = useParams();
   const { id, patientId, clinicianId } = params;
@@ -19,6 +19,15 @@ function Breadcrumbs({ ClinicName, sessionID }) {
       }
     }
   }, [id, patientId, clinicianId, sessionID]);
+  const handleActiveTab = (targetActiveTab, segment) => {
+    if (targetActiveTab === 'Pain Survey') {
+      return 'Pain Survey >';
+    }
+    if (targetActiveTab === 'Reports') {
+      return 'Reports >';
+    }
+    return `${segment} > `;
+  };
 
   return (
     <ul>
@@ -39,7 +48,7 @@ function Breadcrumbs({ ClinicName, sessionID }) {
               </Link>
               {segments[2] && (
                 <Link to=" " className="breadcrumbs">
-                  {segments[2]} &gt;{' '}
+                  {handleActiveTab(activeTab, segments[2])}
                 </Link>
               )}
             </div>
