@@ -56,14 +56,15 @@ const GreenLinearProgress = styled(LinearProgress)(({ theme }) => ({
     backgroundColor: '#25CC7C',
   },
 }));
+
 function Index({
   row,
-  handlePatientProfile,
+  patient,
   setPatient,
   handleReportAndMsgCounter,
-  patient,
   counter,
   handleDeletePatient,
+  handlePatientProfile,
   setOpenEditPatient,
   setEditPatient,
 }) {
