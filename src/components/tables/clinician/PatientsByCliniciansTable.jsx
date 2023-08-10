@@ -190,6 +190,7 @@ export default function PatientsByCliniciansTable({
               >
                 Pain (s)
               </TableCell>
+              <TableCell className="table_head">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

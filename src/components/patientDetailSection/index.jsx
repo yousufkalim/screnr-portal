@@ -163,14 +163,14 @@ function Index({
             )}
           </div>
         </TableCell>
-        <TableCell>
+        <TableCell style={{ cursor: 'default' }}>
           {openMenu ? (
             <OpenArrow
               style={{ cursor: 'pointer' }}
               onClick={() => {
                 setOpenMenu(!openMenu);
                 setPatient(row);
-                handleReportAndMsgCounter(row?.id);
+                // handleReportAndMsgCounter(row?.id);
               }}
             />
           ) : (

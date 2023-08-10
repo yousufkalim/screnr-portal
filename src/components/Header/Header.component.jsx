@@ -96,7 +96,7 @@ const tabsByUser = {
   ],
   clinician: [
     {
-      path: '/clinician/dasboard',
+      path: '/clinician/dashboard',
       label: 'Dashboard',
       IconComponent: DashboardIcon,
     },
@@ -144,7 +144,7 @@ const redirectPathByRole = {
   admin: '/admin/dashboard',
   staff: '/staff/dashboard',
   clinic: '/clinic/dashboard',
-  clinician: '/clinician/dasboard',
+  clinician: '/clinician/dashboard',
   patient: '/patient/dashboard',
 };
 
