@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState, useRef, useEffect } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
-import { Table, Button, TextField } from '@mui/material';
+import { Table, Button, TextField, TablePagination } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -73,6 +73,7 @@ export default function PatientTable({
     report: '',
     unReadMsg: '',
   });
+  const [page, setPage] = useState(0);
 
   const isSafari =
     navigator.vendor.match(/apple/i) &&
@@ -183,6 +184,11 @@ export default function PatientTable({
     setDeleteUser(item);
   };
 
+  const handleChangePage = async (event, newPage) => {
+    await getPatients(filter.sortBy, search, filter.status, newPage + 1);
+    setPage(newPage);
+  };
+
   const DeleteUserPopup = openDeletePopup && (
     <DeleteModal
       openDeletePopup={openDeletePopup}
@@ -207,7 +213,7 @@ export default function PatientTable({
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '98%',
+          maxHeight: '95%',
           overflowX: 'hidden',
           boxShadow: '0',
           width: '94vw',
@@ -218,7 +224,7 @@ export default function PatientTable({
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">
-            List Of Patients <span className="countStyle">{patients?.length}</span>
+            List Of Patients <span className="countStyle">{patients?.users?.length}</span>
           </h1>
 
           <div
@@ -499,8 +505,8 @@ export default function PatientTable({
                   />
                 </TableCell>
               </TableRow>
-            ) : patients?.length > 0 ? (
-              patients?.map((row) => (
+            ) : patients?.users?.length > 0 ? (
+              patients?.users.map((row) => (
                 <PatientDetailSection
                   row={row}
                   patient={patient}
@@ -526,6 +532,15 @@ export default function PatientTable({
         {editPatientPopup}
         {DeleteUserPopup}
       </TableContainer>
+      <TablePagination
+        sx={{ color: '#919B9B' }}
+        component="div"
+        rowsPerPageOptions={[]}
+        count={patients?.total || 0}
+        rowsPerPage={patients?.limit || 10}
+        page={page}
+        onPageChange={handleChangePage}
+      />
     </div>
   );
 }
