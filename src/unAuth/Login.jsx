@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { Grid, IconButton, InputLabel } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -12,7 +11,7 @@ import { toast } from 'react-toastify';
 import request from '../request';
 import Logo from '../assets/icons/Logo.svg';
 import Vector from '../assets/images/login/loginPgImg.svg';
-import { Store, UpdateStore } from '../StoreContext';
+import { UpdateStore } from '../StoreContext';
 import ForgetPasswordPopup from '../components/popups/general/ForgetPassword.Popup';
 
 const useOutlinedInputStyles = makeStyles({
@@ -47,21 +46,20 @@ const loggedInUser = {
 };
 
 export default function Login() {
-  const navigate = useNavigate();
-  const { loggedIn, user } = Store();
+  // const navigate = useNavigate();
+  // const { loggedIn, user } = Store();
   const updateStore = UpdateStore();
   const [userData, setUserData] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
   const [openForgetPasswordPopup, setOpenForgetPasswordPopup] = useState(false);
 
-  useEffect(() => {
-    if (loggedIn) {
-      navigate(`${loggedInUser[user?.role]}`);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
-
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     navigate(`${loggedInUser[user?.role]}`);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [loggedIn]);
   const handleChange = (e) => setUserData({ ...userData, [e.target.name]: e.target.value });
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
@@ -70,8 +68,8 @@ export default function Login() {
     request('post', '/auth/login', userData)
       .then((res) => {
         localStorage.setItem('token', res?.data?.token);
-        updateStore({ user: res.data.user, loggedIn: true });
         window.location = loggedInUser[res.data.user.role];
+        updateStore({ user: res.data.user, loggedIn: true });
         setUserData({ email: '', password: '' });
       })
       .catch((error) => {
