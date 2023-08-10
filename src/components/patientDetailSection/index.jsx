@@ -195,13 +195,13 @@ function Index({
             'tableRow'
           }
         >
-          <TableCell width="2%" />
-          <TableCell>
+          <TableCell />
+          <TableCell sx={{ width: '15%' }}>
             <div className="notiCell">
               <Report /> <p className="reportTxt">{counter?.report} Reports</p>
             </div>
           </TableCell>
-          <TableCell sx={{ '@media (max-width: 1600px)': { width: '30%' } }}>
+          <TableCell sx={{ width: '15%' }}>
             <div className="notiCell">
               <Message />
               <p className="msgTxt">{counter?.unReadMsg} Messages</p>
