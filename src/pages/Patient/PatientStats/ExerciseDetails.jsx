@@ -30,6 +30,7 @@ function ExerciseDetails({
   loading,
   breadCrumb,
   sessionID,
+  activeTab,
 }) {
   const [targetExercise, setTargetExercise] = useState({
     set: [],
@@ -207,7 +208,7 @@ function ExerciseDetails({
     />
   ) : (
     <div className="bg_main_div_sessions" style={{ background: '#F6FAFB', paddingBottom: '40px' }}>
-      <Breadcrumbs ClinicName={breadCrumb} sessionID={sessionID} />
+      <Breadcrumbs ClinicName={breadCrumb} sessionID={sessionID} activeTab={activeTab} />
       {/* <div className="breadCrumb">
         Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
         Session &gt;

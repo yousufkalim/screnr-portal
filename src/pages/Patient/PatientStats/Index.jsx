@@ -76,13 +76,14 @@ export default function Index() {
       </div>
       <div style={{ width: '80%', marginLeft: 'auto' }}>
         {activeTab === 'Reports' ? (
-          <Reports session={session} sessionID={sessionID} />
+          <Reports session={session} sessionID={sessionID} activeTab={activeTab} />
         ) : activeTab === 'Pain Survey' ? (
           <PainSurvey
             session={session}
             prescription={prescription}
             breadCrumb={breadCrumb}
             sessionID={sessionID}
+            activeTab={activeTab}
           />
         ) : (
           activeTab === 'exercise' && (
@@ -94,6 +95,7 @@ export default function Index() {
               exerciseDetails={exercise?.exercise}
               breadCrumb={breadCrumb}
               sessionID={sessionID}
+              activeTab={activeTab}
             />
           )
         )}

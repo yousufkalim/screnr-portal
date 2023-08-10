@@ -433,6 +433,10 @@ a {
   padding: 1.2% 2%;
 }
 
+.vertical_middle {
+  vertical-align: middle !important;
+}
+
 .prescription_head {
   font-size: 15px !important;
   color: #454238 !important;

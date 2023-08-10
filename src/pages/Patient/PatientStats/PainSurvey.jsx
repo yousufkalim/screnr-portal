@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react';
 import Breadcrumbs from '../../../components/BreadCrumbs/BreadCrumbs';
 import SurveyPain from '../../../components/PainSurvey/PainSurvey.Component';
 
-export default function PainSurvey({ session, prescription, breadCrumb, sessionID }) {
+export default function PainSurvey({ session, prescription, breadCrumb, sessionID, activeTab }) {
   const [survey, setSurvey] = useState(session?.survey);
 
   // const handlePainSurveySubmit = async () => {
@@ -22,7 +22,7 @@ export default function PainSurvey({ session, prescription, breadCrumb, sessionI
   return (
     <div style={{ marginLeft: 'auto', width: '100%' }}>
       <div className="bgMsg" style={{ marginLeft: 'unset', width: '100%' }}>
-        <Breadcrumbs ClinicName={breadCrumb} sessionID={sessionID} />
+        <Breadcrumbs ClinicName={breadCrumb} sessionID={sessionID} activeTab={activeTab} />
         {/* <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
           Pain Survey &gt;

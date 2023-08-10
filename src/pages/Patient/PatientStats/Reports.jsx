@@ -3,12 +3,12 @@ import RightSidebar from '../../../components/sidebar/patient/PatientListRightSi
 import ReportCard from '../../../components/cards/ReportCard.Component';
 import Breadcrumbs from '../../../components/BreadCrumbs/BreadCrumbs';
 
-export default function Reports({ session, sessionID }) {
+export default function Reports({ session, sessionID, activeTab }) {
   const breadCrumb = `${session?.patient?.first_name} ${session?.patient?.last_name}`;
   return (
     <div style={{ display: 'flex' }}>
       <div className="bgReport">
-        <Breadcrumbs ClinicName={breadCrumb} sessionID={sessionID} />
+        <Breadcrumbs ClinicName={breadCrumb} sessionID={sessionID} activeTab={activeTab} />
         {/* <div className="breadCrumb">
           Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Prescription &gt;
           Reports &gt;
