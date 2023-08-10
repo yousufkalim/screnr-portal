@@ -200,7 +200,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                   <TableCell
                     align="center"
                     size="small"
-                    className="prescription_head"
+                    className="prescription_head vertical_middle"
                     sx={{
                       minWidth: '8rem',
                       maxWidth: '8rem',
@@ -381,7 +381,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         Pain Scale
                       </TableCell>
                       <TableCell />
-                      <TableCell align="left" size="small" className="table_header">
+                      <TableCell align="center" size="small" className="table_header">
                         Status
                       </TableCell>
                     </TableRow>
@@ -396,10 +396,12 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                           handleUpdateSessionStatus(row?.id);
                         }}
                       >
-                        <TableCell align="center">
-                          {moment(row?.date).format('MM/DD/YYYY')}
+                        <TableCell align="center" className="vertical_middle">
+                          {row.status === 'completed'
+                            ? moment(row?.date).format('MM/DD/YYYY')
+                            : '-'}
                         </TableCell>
-                        <TableCell align="center" className="table_cells">
+                        <TableCell align="center" className="table_cells vertical_middle">
                           <span className="linearPresProgress">{`${row?.avg_score ?? 0}%`}</span>
                           {row?.avg_score <= 30 ? (
                             <RedLinearProgress
@@ -426,10 +428,10 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                             ''
                           )}
                         </TableCell>
-                        <TableCell align="center" className="table_cells">
+                        <TableCell align="center" className="table_cells vertical_middle">
                           {row?.survey ? 'Done' : 'Not Done'}
                         </TableCell>
-                        <TableCell align="center">
+                        <TableCell align="center" className="vertical_middle">
                           <div
                             style={{
                               display: 'flex',
@@ -449,7 +451,9 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                           </div>
                         </TableCell>
                         <TableCell />
-                        <TableCell align="left">{sessionStatus[row.status]}</TableCell>
+                        <TableCell className="vertical_middle" align="center">
+                          {sessionStatus[row.status]}
+                        </TableCell>
                       </StyledTableRow>
                     ))}
                   </TableBody>
