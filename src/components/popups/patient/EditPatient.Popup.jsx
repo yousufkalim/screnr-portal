@@ -254,7 +254,7 @@ export default function EditPatient({
       return toast.error('Phone number must contain 10 digits');
     }
     if (checked && !patientCopy.expiry_date) {
-      return toast.error('Please enter expiry date');
+      return toast.error('Please enter expiration date');
     }
 
     // this function will return true if email validation fails (for production only)
@@ -639,7 +639,7 @@ export default function EditPatient({
                     onChange={expDateChange}
                     popperPlacement="bottom-start"
                     selected={patient?.expiry_date}
-                    placeholderText="Enter expiry date"
+                    placeholderText="Enter expiration date"
                     scrollableYearDropdown
                     maxDate={futureYear}
                     yearDropdownItemNumber={10}

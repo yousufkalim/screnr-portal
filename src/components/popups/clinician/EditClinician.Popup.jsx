@@ -185,7 +185,7 @@ export default function EditClinician({
       return toast.error('Phone number must contain 10 digits');
     }
     if (checked && !clinicianCopy.expiry_date) {
-      return toast.error('Please enter expiry date');
+      return toast.error('Please enter expiration date');
     }
     // this function will return true if email validation fails (for production only)
     if (emailValidation(clinicianCopy.email)) {
@@ -494,7 +494,7 @@ export default function EditClinician({
                         fontWeight: '500',
                       }}
                     >
-                      Want to Add expiry date
+                      Want to Add expiration date
                     </Typography>
                   }
                 />
@@ -512,7 +512,7 @@ export default function EditClinician({
                     onChange={dateChange}
                     disabled={!checked}
                     selected={clinician?.expiry_date}
-                    placeholderText="Enter expiry date"
+                    placeholderText="Enter expiration date"
                     popperPlacement="bottom-start"
                     showYearDropdown
                     minDate={tomorrow}
