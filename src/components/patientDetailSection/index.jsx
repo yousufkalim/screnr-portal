@@ -4,15 +4,16 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
+import { toast } from 'react-toastify';
 import { ReactComponent as Edit } from '../../assets/components/Table/alert.svg';
 import { ReactComponent as Report } from '../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../assets/components/Table/email.svg';
 import { ReactComponent as OpenArrow } from '../../assets/components/Sidebar/openArrow.svg';
-// import { ReactComponent as Profile } from '../../assets/components/Table/Profile.svg';
 import { ReactComponent as Delete } from '../../assets/components/Table/alert1.svg';
 import PieChartComponent from '../charts/patient/PieChart.Component';
 import { getMediaUrl } from '../../config';
 import AvatarComponent from '../Avatar/Avatar.Component';
+import request from '../../request/index';
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(even)': {
@@ -59,16 +60,31 @@ const GreenLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 function Index({
   row,
-  patient,
+  // patient,
   setPatient,
-  handleReportAndMsgCounter,
-  counter,
   handleDeletePatient,
   handlePatientProfile,
   setOpenEditPatient,
   setEditPatient,
 }) {
   const [openMenu, setOpenMenu] = useState(false);
+  const [counter, setCounter] = useState({
+    report: '',
+    unReadMsg: '',
+  });
+
+  const handleReportAndMsgCounter = (patientId) => {
+    request('get', `/clinicians/unreadMesasgeAndUncheckedReport/${patientId}`)
+      .then((res) => {
+        setCounter({
+          report: res?.data?.uncheckedReport?.count,
+          unReadMsg: res?.data?.unreadMessage?.count,
+        });
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+      });
+  };
   const handleArrowClicked = () => {
     if (!openMenu) {
       setOpenMenu(!openMenu);
@@ -180,13 +196,8 @@ function Index({
           />
         </TableCell>
       </StyledTableRow>
-      {openMenu && patient?.id === row?.id ? (
-        <TableRow
-          className={
-            // patient?.id === row?.id ? 'clrTableRow' :
-            'tableRow'
-          }
-        >
+      {openMenu ? (
+        <TableRow className="tableRow">
           <TableCell />
           <TableCell sx={{ width: '15%' }}>
             <div className="notiCell">

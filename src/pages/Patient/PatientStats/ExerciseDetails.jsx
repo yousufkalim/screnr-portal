@@ -5,16 +5,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-// import MultiCircularProgress from './OverallExcerciseScore';
 import { CircularProgress } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
-// import { ReactComponent as TitleExcerciseIcon } from '../../../assets/icons/titleExcerciseIcon.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 import { ReactComponent as LeftArrow } from '../../../assets/icons/ArrowIcon1.svg';
 import { ReactComponent as RightArrow } from '../../../assets/icons/ArrowIcon2.svg';
-// import { ReactComponent as RedDot } from '../../../assets/icons/sessionGraphColorDot1.svg';
-// import { ReactComponent as GreenDot } from '../../../assets/icons/sessionGraphColorDot2.svg';
-// import { ReactComponent as YellowDot } from '../../../assets/icons/sessionGraphColorDot3.svg';
 import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
 import ScoreCard from '../../../components/ScoreCard/scoreCard';
 import ExerciseTable from '../../../components/tables/exerciseDetail/exerciseTable';

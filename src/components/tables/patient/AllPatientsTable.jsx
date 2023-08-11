@@ -15,18 +15,10 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import { toast } from 'react-toastify';
-// import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
-// import { ReactComponent as Report } from '../../../assets/components/Table/report.svg';
-// import { ReactComponent as Message } from '../../../assets/components/Table/email.svg';
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
-// import { ReactComponent as Profile } from '../../../assets/components/Table/Profile.svg';
-// import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
-// import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
 import PatientDetailSection from '../../patientDetailSection';
 import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
-import request from '../../../request/index';
 import DeleteModal from '../../popups/general/Delete.Popup';
 
 const useStyles = makeStyles(() => ({
@@ -69,10 +61,6 @@ export default function PatientTable({
   const classes = useStyles();
   const [openDeletePopup, setOpenDeletePopup] = useState(false);
   const [deleteUser, setDeleteUser] = useState({});
-  const [counter, setCounter] = useState({
-    report: '',
-    unReadMsg: '',
-  });
   const [page, setPage] = useState(0);
 
   const isSafari =
@@ -145,19 +133,6 @@ export default function PatientTable({
     setFilter({ ...filter, filterType: 'all', clinicNamefilter: '' });
 
     await handleFilterAndSorting({ filterType: 'all' });
-  };
-
-  const handleReportAndMsgCounter = (patientId) => {
-    request('get', `/clinicians/unreadMesasgeAndUncheckedReport/${patientId}`)
-      .then((res) => {
-        setCounter({
-          report: res?.data?.uncheckedReport?.count,
-          unReadMsg: res?.data?.unreadMessage?.count,
-        });
-      })
-      .catch((error) => {
-        toast.error(error?.response?.data?.message);
-      });
   };
 
   useEffect(() => {
@@ -505,12 +480,12 @@ export default function PatientTable({
                 <PatientDetailSection
                   row={row}
                   patient={patient}
-                  counter={counter}
+                  // counter={counter}
                   setPatient={setPatient}
                   setOpenEditPatient={setOpenEditPatient}
                   handleDeletePatient={handleDeletePatient}
                   handlePatientProfile={handlePatientProfile}
-                  handleReportAndMsgCounter={handleReportAndMsgCounter}
+                  // handleReportAndMsgCounter={handleReportAndMsgCounter}
                   setEditPatient={setEditPatient}
                 />
               ))

@@ -49,7 +49,7 @@ export default function Chart({ clinicsPerMonth }) {
   return (
     <>
       <div className="chart_header_div">
-        <span className="dashboardChartTxt">Clinics Addition</span>
+        <span className="dashboardChartTxt">Clinics Added</span>
         <span className="chart_header_span">
           <div className="chart_header_orange_dot" />
           Clinics Counter
