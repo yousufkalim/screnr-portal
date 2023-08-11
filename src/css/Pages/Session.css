@@ -174,12 +174,14 @@
   font-size: 1.1rem;
   cursor: pointer;
 }
+
 .screenShotsPhotoCollapse {
   background-color: #fff;
   width: 93%;
   margin-left: 30px;
   border-radius: 15px;
 }
+
 .screenShotImagesDiv {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -191,6 +193,7 @@
   flex-wrap: wrap;
   gap: 1.4rem;
 }
+
 .screenShotImages {
   border-radius: 10px;
   width: 8rem;
@@ -198,6 +201,7 @@
   object-fit: cover;
   cursor: pointer;
 }
+
 .screenShotImages:hover {
   outline: 5px solid #136773;
 }
@@ -281,13 +285,15 @@
 
 .graphData {
   position: absolute;
-  top: 55%;
   width: 100%;
-  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  top: 50%;
+  right: 50%;
+  width: 100%;
+  transform: translate(50%, 50%);
 }
 
 .overallScoreGraph {

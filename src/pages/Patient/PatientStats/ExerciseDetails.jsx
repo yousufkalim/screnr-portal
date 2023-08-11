@@ -165,7 +165,6 @@ function ExerciseDetails({
       }));
     }
   }, [results]);
-
   const percentageOfGraph =
     targetExercise?.rep?.screnr_compliance > 0 && targetExercise?.rep?.screnr_compliance <= 10
       ? '#FF5151'
@@ -293,7 +292,10 @@ function ExerciseDetails({
 
               <div className="graphData">
                 <p className="excercise_percent">
-                  {Math.round(targetExercise?.rep?.screnr_compliance) ?? 0}%
+                  {targetExercise?.rep?.screnr_compliance
+                    ? Math.round(targetExercise?.rep?.screnr_compliance)
+                    : 0}
+                  %
                 </p>
               </div>
               {/* <div className="colorDotsDiv2">
