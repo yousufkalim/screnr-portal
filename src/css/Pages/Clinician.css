@@ -96,8 +96,10 @@
   }
 }
 
-@media only screen and (max-width: 1366px) {
-  .clinic_cell {
+@media only screen and (max-width: 1440px) {
+  .clinic_cell,
+  .reportTxt,
+  .msgTxt {
     font-size: 0.7rem !important;
   }
 

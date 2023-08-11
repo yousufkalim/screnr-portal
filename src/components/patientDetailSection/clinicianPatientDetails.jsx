@@ -207,9 +207,7 @@ function ClinicianPatientDetails({
               <p className="msgTxt">{counter?.unReadMsg} Messages</p>
             </div>
           </TableCell>
-          <TableCell>
-            <div className="notiCell">{}</div>
-          </TableCell>
+          <TableCell>{/* <div className="notiCell">{}</div> */}</TableCell>
           <TableCell />
           <TableCell />
           <TableCell

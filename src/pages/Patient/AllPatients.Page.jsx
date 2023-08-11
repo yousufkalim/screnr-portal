@@ -10,7 +10,7 @@ import request from '../../request';
 export default function Patient() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [patients, setPatients] = useState([]);
+  const [patients, setPatients] = useState();
   const [diaganosisFilter, setDiaganosisFilter] = useState([]);
   const [exerciseFilter, setExerciseFilter] = useState([]);
   const [apiUrl, setApiUrl] = useState('/clinicians/allPatientsListWithFilters?sort=');
@@ -71,10 +71,10 @@ export default function Patient() {
     try {
       setLoading(true);
       const res = await request('put', apiUrl, bodyObject);
-      if (res?.data?.users) {
-        setPatients(res?.data?.users);
+      if (res?.data) {
+        setPatients(res?.data);
       } else {
-        setPatients([]);
+        setPatients();
       }
       setLoading(false);
     } catch (err) {
