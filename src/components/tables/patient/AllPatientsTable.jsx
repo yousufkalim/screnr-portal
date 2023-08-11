@@ -143,7 +143,7 @@ export default function PatientTable({
   const handleAllClear = async () => {
     setSorting({ ...sorting, sortBy: '' });
     setFilter({ ...filter, filterType: 'all', clinicNamefilter: '' });
-
+    setOpenFilter(false);
     await handleFilterAndSorting({ filterType: 'all' });
   };
 
