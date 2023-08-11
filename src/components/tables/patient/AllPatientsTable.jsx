@@ -206,7 +206,6 @@ export default function PatientTable({
       getPatients={getPatients}
     />
   );
-
   return (
     <div className="allClinicAdminTable" id="clinicianTable">
       <TableContainer
@@ -224,7 +223,7 @@ export default function PatientTable({
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">
-            List Of Patients <span className="countStyle">{patients?.users?.length}</span>
+            List Of Patients <span className="countStyle">{patients?.total}</span>
           </h1>
 
           <div
@@ -452,17 +451,13 @@ export default function PatientTable({
               <TableCell align="left" className="table_head" sx={{ width: '2%' }}>
                 ID
               </TableCell>
-              <TableCell
-                align="left"
-                className="table_head"
-                // sx={{ width: '20%', '@media (max-width: 1600px)': { width: '34%' } }}
-              >
+              <TableCell align="left" className="table_head" sx={{ width: '15%' }}>
                 Name
               </TableCell>
-              <TableCell className="table_head" align="center">
+              <TableCell className="table_head" align="center" sx={{ width: '15%' }}>
                 Diagnosis
               </TableCell>
-              <TableCell className="table_head" align="center">
+              <TableCell className="table_head" align="center" sx={{ width: '15%' }}>
                 Prescription
               </TableCell>
               <TableCell className="table_head" align="center">

@@ -1027,7 +1027,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1440px) {
   .sets_div {
     flex-direction: column;
   }
@@ -1053,10 +1053,6 @@ a {
 
   .prescTable {
     width: 50%;
-  }
-
-  .clinic_cell {
-    font-size: 0.8rem !important;
   }
 
   /* .css-2s90m6-MuiAvatar-root {

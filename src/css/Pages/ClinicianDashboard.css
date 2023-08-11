@@ -67,7 +67,7 @@
   max-height: 90vh;
 }
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1440px) {
   .stats_circle {
     position: relative;
     right: -15px;

@@ -69,6 +69,15 @@ function Index({
   setEditPatient,
 }) {
   const [openMenu, setOpenMenu] = useState(false);
+  const handleArrowClicked = () => {
+    if (!openMenu) {
+      setOpenMenu(!openMenu);
+      setPatient(row);
+      handleReportAndMsgCounter(row?.id);
+    } else {
+      setOpenMenu(!openMenu);
+    }
+  };
 
   return (
     <>
@@ -165,28 +174,15 @@ function Index({
           </div>
         </TableCell>
         <TableCell style={{ cursor: 'default' }}>
-          {openMenu ? (
-            <OpenArrow
-              style={{ cursor: 'pointer' }}
-              onClick={() => {
-                setOpenMenu(!openMenu);
-                setPatient(row);
-                // handleReportAndMsgCounter(row?.id);
-              }}
-            />
-          ) : (
-            <OpenArrow
-              onClick={() => {
-                setOpenMenu(!openMenu);
-                setPatient(row);
-                handleReportAndMsgCounter(row?.id);
-              }}
-              style={{
-                transform: 'rotateX(180deg)',
-                cursor: 'pointer',
-              }}
-            />
-          )}
+          <OpenArrow
+            onClick={() => {
+              handleArrowClicked();
+            }}
+            style={{
+              transform: !openMenu ? 'rotateX(180deg)' : '',
+              cursor: 'pointer',
+            }}
+          />
         </TableCell>
       </StyledTableRow>
       {openMenu && patient?.id === row?.id ? (
