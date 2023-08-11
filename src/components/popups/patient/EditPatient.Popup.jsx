@@ -216,6 +216,10 @@ export default function EditPatient({
       delete patient.expiry_date;
       setPatient({ ...patientCopy });
     }
+    if (patientCopy.createdAt) {
+      delete patientCopy.createdAt;
+      setPatient({ ...patientCopy });
+    }
 
     if (typeof patientCopy.profile_pic !== 'object') {
       delete patientCopy.profile_pic;
