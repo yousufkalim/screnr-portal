@@ -222,7 +222,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
       }
 
       // if (checked && !patient.expiry_date) {
-      //   return toast.error('Please enter expiry date');
+      //   return toast.error('Please enter expiration date');
       // }
 
       // this function will return true if email validation fails (for production only)
@@ -753,7 +753,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                         fontWeight: '500',
                       }}
                     >
-                      Want to Add expiry date
+                      Want to Add expiration date
                     </Typography>
                   }
                 />
@@ -774,7 +774,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                     selected={patient.expiry_date}
                     onChange={expDateChange}
                     // disabled={!checked}
-                    placeholderText="Enter expiry date"
+                    placeholderText="Enter expiration date"
                     // popperPlacement="bottom-start"
                     showYearDropdown
                     minDate={tomorrow}

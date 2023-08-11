@@ -122,7 +122,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
             <div className="image_div">
               <Expiry className="spaceOnRight" />
             </div>
-            <p className="spaceRight">Expiry Date </p>
+            <p className="spaceRight">Expiration Date </p>
           </span>
           <p className="spaceRight"> {moment(info?.expiry_date).format('MM-DD-YYYY')}</p>
         </div>

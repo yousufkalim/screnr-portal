@@ -101,7 +101,7 @@ export default function PatientSidebarSection({
           <div className="patient_exp_detail">
             <span className="detail_expiry" id="gapAdd">
               <Expiry />
-              <p>Expiry Date</p>
+              <p>Expiration Date</p>
             </span>
             <p>{moment(patientData?.expiry_date).format('MM/DD/YYYY')}</p>
           </div>

@@ -169,7 +169,7 @@ export default function EditClinicAdmin({
       return toast.error('Phone number must contain 10 digits');
     }
     if (checked && !clinicAdminCopy.expiry_date) {
-      return toast.error('Please enter expiry date');
+      return toast.error('Please enter expiration date');
     }
 
     // this function will return true if email validation fails (for production only)
@@ -499,7 +499,7 @@ export default function EditClinicAdmin({
                         fontWeight: '500',
                       }}
                     >
-                      Want to Add expiry date
+                      Want to Add expiration date
                     </Typography>
                   }
                 />
@@ -517,7 +517,7 @@ export default function EditClinicAdmin({
                     onChange={dateChange}
                     disabled={!checked}
                     selected={clinicAdmin?.expiry_date}
-                    placeholderText="Enter expiry date"
+                    placeholderText="Enter expiration date"
                     popperPlacement="bottom-start"
                     showYearDropdown
                     minDate={tomorrow}

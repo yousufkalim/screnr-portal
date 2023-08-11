@@ -141,7 +141,7 @@ export default function EditStaffMember({
     }
 
     if (checked && !staffMemberCopy.expiry_date) {
-      return toast.error('Please enter expiry date');
+      return toast.error('Please enter expiration date');
     }
     // this function will return true if email validation fails (for production only)
     if (emailValidation(staffMemberCopy.email)) {
@@ -375,7 +375,7 @@ export default function EditStaffMember({
                         fontWeight: '500',
                       }}
                     >
-                      Want to Add expiry date
+                      Want to Add expiration date
                     </Typography>
                   }
                 />
@@ -393,7 +393,7 @@ export default function EditStaffMember({
                     onChange={dateChange}
                     disabled={!checked}
                     selected={staffMember?.expiry_date}
-                    placeholderText="Enter expiry date"
+                    placeholderText="Enter expiration date"
                     popperPlacement="bottom-start"
                     showYearDropdown
                     minDate={tomorrow}
