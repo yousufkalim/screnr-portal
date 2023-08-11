@@ -68,47 +68,35 @@ function ClinicianDashboardPatientTable({
   handlePatientProfile,
 }) {
   const [openMenu, setOpenMenu] = useState(false);
-
   return (
     <>
-      <StyledTableRow
-        key={row.id}
-        className={
-          // patient.id === row.id ? 'clrTableRow' :
-          'tableRow'
-        }
-        // onClick={() => {
-        //   setPatient(row);
-        //   handleReportAndMsgCounter(row?.id);
-        // }}
-      >
+      <StyledTableRow key={row.id} className="tableRow">
         <TableCell align="left" onClick={() => handlePatientProfile(row.id)}>
-          {' '}
-          {row?.userData?.mrn_id}{' '}
+          {row?.userData?.mrn_id}
         </TableCell>
         <TableCell align="left" onClick={() => handlePatientProfile(row.id)}>
-          {row?.profile_pic ? (
-            <div className="imgDivClinic">
-              <img
-                src={getMediaUrl(row.profile_pic)}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '100px',
-                  objectFit: 'cover',
-                }}
-                alt=""
-              />
-            </div>
-          ) : (
-            <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+            {row?.profile_pic ? (
+              <div className="imgDivClinic">
+                <img
+                  src={getMediaUrl(row?.profile_pic)}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '100px',
+                    objectFit: 'cover',
+                  }}
+                  alt=""
+                />
+              </div>
+            ) : (
               <AvatarComponent
                 alt={`${row.first_name} ${row.last_name}`}
                 className="header_avatar"
               />
-              <div className="clinic_cell">{`${row.first_name} ${row.last_name}`}</div>
-            </div>
-          )}
+            )}
+            <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
+          </div>
         </TableCell>
         <TableCell
           align="center"

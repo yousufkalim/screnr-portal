@@ -107,11 +107,6 @@ function Index({
                 className="header_avatar"
               />
             )}
-            {/* <AvatarComponent
-            alt={`${row.first_name} ${row.last_name}`}
-            className="header_avatar"
-          /> */}
-
             <div className="patient_cell">{`${row.first_name} ${row.last_name}`}</div>
           </div>
         </TableCell>
