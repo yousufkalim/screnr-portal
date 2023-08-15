@@ -298,6 +298,18 @@
   font-size: 16px !important;
   text-transform: none !important;
 }
+.logoutBtnloading {
+  border: 1px solid #dfdcd7 !important;
+  background-color: #dcdbd9 !important;
+  color: #fba622 !important;
+  width: 100% !important;
+  border-radius: 20px !important;
+  padding: 2.1% 0px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+}
 
 .logoutBtn:hover {
   background-color: #fba622 !important;
