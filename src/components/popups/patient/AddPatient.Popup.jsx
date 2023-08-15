@@ -6,6 +6,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 import { FormControl, TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -70,6 +71,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPatients }) {
   const { user } = Store();
   const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [clinicians, setClinicians] = useState([]);
   const [clinics, setClinics] = useState({});
   const [patient, setPatient] = useState({});
@@ -230,14 +232,17 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         return;
       }
       // sending this data to api
+      setLoading(true);
       const { data } = await request('post', '/clinicians/addPatient', formData);
       if (data) {
         toast.success('Patient added successfully');
         getPatients();
         setAdded(true);
         handleClose();
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       if (error.response.status === 409) {
         setAlreadyExisitingUser(true);
       }
@@ -789,7 +794,17 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
           </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
-          <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
+          <Button
+            onClick={handleSubmit}
+            className={loading ? 'resetPasswordBtnloading' : 'resetPasswordBtn'}
+            variant="contained"
+            disabled={loading}
+          >
+            {loading && (
+              <div style={{ height: 'inherit' }} className="progressContainer">
+                <CircularProgress className="whiteCircularProgress" size={20} />
+              </div>
+            )}
             <p className="sendInviteTxt">Add new patient</p>{' '}
             {/* <img src={add} className="spaceOnLeft" alt="" /> */}
           </Button>

@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { FormControl, TextField } from '@mui/material';
@@ -68,6 +69,7 @@ export default function EditStaffMember({
   getData,
 }) {
   const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [staffMember, setStaffMember] = useState({});
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -147,17 +149,20 @@ export default function EditStaffMember({
     if (emailValidation(staffMemberCopy.email)) {
       return;
     }
+    setLoading(true);
     try {
       const { data } = await request('put', `/admins/editStaff/${staffMemberDetails.id}`, formData);
       if (data) {
+        setLoading(false);
         handleClose();
+        toast.success('Staff Member edited successfully');
         setOpenEditStaffMember(false);
         getData();
         getStaffMembers();
-        toast.success('Staff Member edited successfully');
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
+      setLoading(false);
     }
   };
   const handleDeleteUser = async (targetUserId) => {
@@ -421,7 +426,17 @@ export default function EditStaffMember({
           >
             Deactivate User
           </Button>
-          <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
+          <Button
+            onClick={handleSubmit}
+            className={loading ? 'resetPasswordBtnloading' : 'resetPasswordBtn'}
+            variant="contained"
+            disabled={loading}
+          >
+            {loading && (
+              <div style={{ height: 'inherit' }} className="progressContainer">
+                <CircularProgress className="whiteCircularProgress" size={20} />
+              </div>
+            )}
             Save Changes
           </Button>
         </DialogActions>

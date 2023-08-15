@@ -5,6 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 import { FormControl, TextField } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Checkbox from '@mui/material/Checkbox';
@@ -70,6 +71,7 @@ export default function EditClinician({
   table,
 }) {
   const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [clinician, setClinician] = useState({});
   const [userData, setUserData] = useState({ title: clinicianDetails?.userData?.title || '' });
   const outlinedInputStyles = useOutlinedInputStyles();
@@ -191,7 +193,7 @@ export default function EditClinician({
     if (emailValidation(clinicianCopy.email)) {
       return;
     }
-
+    setLoading(true);
     try {
       const { data } = await request(
         'put',
@@ -202,9 +204,11 @@ export default function EditClinician({
         toast.success('Clinician updated successfully');
         handleClose();
         getClinicians();
+        setLoading(false);
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
+      setLoading(false);
     }
   };
   const handleDeleteUser = async (targetUserId) => {
@@ -536,7 +540,17 @@ export default function EditClinician({
           >
             Deactivate User
           </Button>
-          <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
+          <Button
+            onClick={handleSubmit}
+            className={loading ? 'resetPasswordBtnloading' : 'resetPasswordBtn'}
+            variant="contained"
+            disabled={loading}
+          >
+            {loading && (
+              <div style={{ height: 'inherit' }} className="progressContainer">
+                <CircularProgress className="whiteCircularProgress" size={20} />
+              </div>
+            )}
             <p className="sendInviteTxt">Save Changes</p>{' '}
           </Button>
         </DialogActions>
