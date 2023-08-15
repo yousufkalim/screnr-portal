@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useLayoutEffect } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
@@ -67,7 +67,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPatients }) {
+export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPatients, info }) {
   const { user } = Store();
   const [checked, setChecked] = useState(false);
   const [clinicians, setClinicians] = useState([]);
@@ -289,6 +289,13 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
     }
   };
 
+  useLayoutEffect(() => {
+    if (info) {
+      setSelectedClinic(info?.userData?.clinic?.id);
+      getClinicians(info?.userData?.clinic?.id);
+    }
+  }, [info]);
+
   useEffect(() => {
     if (user?.role !== 'clinician' && user?.role !== 'clinic') {
       getAllClinics();
@@ -420,7 +427,11 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                 sx={{ mt: 2, width: '100%', display: user?.role === 'clinician' ? 'none' : '' }}
                 variant="outlined"
               >
-                <ReactSelect dataOptions={clinicians} setUserData={setUserData} />
+                <ReactSelect
+                  dataOptions={clinicians}
+                  clinicianData={info}
+                  setUserData={setUserData}
+                />
               </FormControl>
               <FormControl sx={{ mb: 1, mt: 2, width: '100%' }} variant="outlined">
                 <TextField

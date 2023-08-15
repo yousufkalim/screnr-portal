@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import AvatarComponent from '../Avatar/Avatar.Component';
 
-export default function ReactSelect({ dataOptions, setUserData, userData }) {
+export default function ReactSelect({ dataOptions, setUserData, userData, clinicianData }) {
   const [options, setOptions] = useState([]);
   const [selected, setSelected] = useState([]);
   const [preSelected] = useState(
@@ -11,6 +11,10 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
       optName: `${doctor?.first_name} ${doctor?.last_name}`,
     })) ?? [],
   );
+
+  const temppp = dataOptions.find((item) => {
+    return item.id === clinicianData?.id;
+  });
 
   useEffect(() => {
     setOptions(dataOptions);
@@ -29,7 +33,14 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
       return prev.filter((_) => _.id !== opt.id);
     });
   };
-
+  useEffect(() => {
+    if (temppp) {
+      setSelected([temppp]);
+      setOptions((prev) => {
+        return prev.filter((_) => _.id !== temppp.id);
+      });
+    }
+  }, [temppp]);
   const handleUnselect = (opt) => {
     setSelected((prev) => {
       return prev.filter((_) => _.id !== opt.id);
