@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import { makeStyles } from '@mui/styles';
+import CircularProgress from '@mui/material/CircularProgress';
 import ClearIcon from '@mui/icons-material/Clear';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
@@ -53,6 +54,7 @@ export default function ForgetPasswordPopup({
   setOpenForgetPasswordPopup,
 }) {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
 
   const handleInput = (e) => setEmail(e.target.value);
@@ -62,9 +64,19 @@ export default function ForgetPasswordPopup({
     if (!email) {
       return toast.error('Please enter your email');
     }
-    await request('put', `/auth/forgot/${email}`);
-    handleClose();
-    return toast.success('Please check your email to reset your password');
+    setLoading(true);
+    try {
+      await request('put', `/auth/forgot/${email}`);
+      handleClose();
+      toast.success('Please check your email to reset your password');
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        toast.error('No such user exists');
+      } else {
+        toast.error('something went wrong');
+      }
+    }
+    setLoading(false);
   };
 
   return (
@@ -116,7 +128,18 @@ export default function ForgetPasswordPopup({
           </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
-          <Button onClick={handleForgetPassword} className="resetPasswordBtn" variant="contained">
+          <Button
+            onClick={handleForgetPassword}
+            // className="resetPasswordBtn"
+            variant="contained"
+            className={loading ? 'resetPasswordBtnloading' : 'resetPasswordBtn'}
+            disabled={loading}
+          >
+            {loading && (
+              <div style={{ height: 'inherit' }} className="progressContainer">
+                <CircularProgress className="whiteCircularProgress" size={20} />
+              </div>
+            )}
             Send Reset Instructions
           </Button>
         </DialogActions>

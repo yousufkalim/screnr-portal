@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 import TableCell from '@mui/material/TableCell';
 import { ReactComponent as Edit } from '../../assets/components/Table/alert.svg';
 // import { ReactComponent as Profile } from '../../assets/components/Table/Profile.svg';
 import { ReactComponent as Report } from '../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../assets/components/Table/email.svg';
-import { ReactComponent as Delete } from '../../assets/components/Table/alert1.svg';
+// import { ReactComponent as Delete } from '../../assets/components/Table/alert1.svg';
 import { ReactComponent as OpenArrow } from '../../assets/components/Sidebar/openArrow.svg';
 import { getMediaUrl } from '../../config';
 import AvatarComponent from '../Avatar/Avatar.Component';
@@ -212,7 +214,11 @@ function ClinicianDashboardPatientTable({
               justifyContent: 'center',
             }}
           >
-            <Delete className="table_icons" onClick={() => handleDeletePatient(row)} />
+            <VisibilityOff
+              style={{ color: '#FAA017' }}
+              className="table_icons"
+              onClick={() => handleDeletePatient(row)}
+            />
             <Edit
               className="table_icons"
               onClick={() => {

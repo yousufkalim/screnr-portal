@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import Dialog from '@mui/material/Dialog';
+import CircularProgress from '@mui/material/CircularProgress';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
@@ -15,6 +16,7 @@ import DatePicker from 'react-datepicker';
 import CustomPhoneInput from '../general/CustomPhoneInput.Popup';
 import 'react-datepicker/dist/react-datepicker.css';
 import arrow from '../../../assets/icons/RightArrow.svg';
+import arrow2 from '../../../assets/icons/RightArrowDisable.svg';
 import edit from '../../../assets/icons/edit.svg';
 import profiles from '../../../assets/icons/Profiles.svg';
 import EmailAlreadyRegisteredPopup from '../general/EmailAlreadyRegistered.Popup';
@@ -70,6 +72,7 @@ export default function AddStaffMember({
   const [checked, setChecked] = useState(false);
   const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
   const [exisitingButInactive, setExisitingButInactive] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [added, setAdded] = useState(false);
   const [staffMember, setStaffMember] = useState({});
 
@@ -108,6 +111,7 @@ export default function AddStaffMember({
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     try {
       e.preventDefault();
       const staffMemberCopy = { ...staffMember };
@@ -137,8 +141,10 @@ export default function AddStaffMember({
         setStaffMember({});
         setAdded(true);
         handleClose();
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       if (error.response.status === 409) {
         setAlreadyExisitingUser(true);
       }
@@ -347,8 +353,18 @@ export default function AddStaffMember({
           </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
-          <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
-            <p>Send Invite</p> <img src={arrow} className="arrowIcon" alt="" />
+          <Button
+            onClick={handleSubmit}
+            className={loading ? 'resetPasswordBtnloading' : 'resetPasswordBtn'}
+            variant="contained"
+            disabled={loading}
+          >
+            {loading && (
+              <div style={{ height: 'inherit' }} className="progressContainer">
+                <CircularProgress className="whiteCircularProgress" size={20} />
+              </div>
+            )}
+            <p>Send Invite</p> <img src={loading ? arrow2 : arrow} className="arrowIcon" alt="" />
           </Button>
         </DialogActions>
       </BootstrapDialog>

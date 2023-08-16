@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Grid, IconButton, InputLabel } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import { makeStyles } from '@mui/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
@@ -49,6 +50,7 @@ export default function Login() {
   // const navigate = useNavigate();
   // const { loggedIn, user } = Store();
   const updateStore = UpdateStore();
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
@@ -65,6 +67,7 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     request('post', '/auth/login', userData)
       .then((res) => {
         localStorage.setItem('token', res?.data?.token);
@@ -73,6 +76,7 @@ export default function Login() {
         setUserData({ email: '', password: '' });
       })
       .catch((error) => {
+        setLoading(false);
         toast.error(error?.response?.data?.message);
       });
   };
@@ -196,7 +200,18 @@ export default function Login() {
                 </div>
               </FormControl>
 
-              <Button className="logInBtn" variant="contained" onClick={handleSubmit}>
+              <Button
+                // className="logInBtn"
+                className={loading ? 'logInBtnloading' : 'logInBtn'}
+                variant="contained"
+                disabled={loading}
+                onClick={handleSubmit}
+              >
+                {loading && (
+                  <div style={{ height: 'inherit' }} className="progressContainer">
+                    <CircularProgress className="whiteCircularProgress" size={20} />
+                  </div>
+                )}
                 Login
               </Button>
             </Grid>

@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
+import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
@@ -16,6 +17,8 @@ import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import add from '../../../assets/icons/add.svg';
+import add2 from '../../../assets/icons/addDisable.svg';
+
 import profiles from '../../../assets/icons/Profiles.svg';
 import edit from '../../../assets/icons/edit.svg';
 import dropdown from '../../../assets/icons/downArrow.svg';
@@ -76,6 +79,7 @@ export default function AddClinician({
   const [userData, setUserData] = useState({ clinic: clinicAdminId, title: '' });
   const [alreadyExisitingUser, setAlreadyExisitingUser] = useState(false);
   const [exisitingButInactive, setExisitingButInactive] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [added, setAdded] = useState(false);
   const outlinedInputStyles = useOutlinedInputStyles();
   const tomorrow = new Date();
@@ -168,12 +172,13 @@ export default function AddClinician({
       if (emailValidation(clinician.email)) {
         return;
       }
-
+      setLoading(true);
       // sending this data to api
       const { data } = await request('post', '/clinics/addClinician', formData);
 
       if (data) {
         toast.success('Clinician added successfully');
+        setLoading(false);
         getClinicians();
         setAdded(true);
         handleClose();
@@ -182,6 +187,7 @@ export default function AddClinician({
         setUserData({ clinic: clinicAdminId, title: '' });
       }
     } catch (error) {
+      setLoading(false);
       if (error.response.status === 409) {
         setAlreadyExisitingUser(true);
       }
@@ -494,9 +500,19 @@ export default function AddClinician({
           </div>
         </DialogContent>
         <DialogActions sx={{ width: '100%' }}>
-          <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
+          <Button
+            onClick={handleSubmit}
+            className={loading ? 'resetPasswordBtnloading' : 'resetPasswordBtn'}
+            variant="contained"
+            disabled={loading}
+          >
+            {loading && (
+              <div style={{ height: 'inherit' }} className="progressContainer">
+                <CircularProgress className="whiteCircularProgress" size={20} />
+              </div>
+            )}
             <p className="sendInviteTxt">Send Invite</p>{' '}
-            <img src={add} className="spaceOnLeft" alt="" />
+            <img src={loading ? add2 : add} className="spaceOnLeft" alt="" />
           </Button>
         </DialogActions>
       </BootstrapDialog>
