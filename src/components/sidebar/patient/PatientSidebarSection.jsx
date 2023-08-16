@@ -65,12 +65,14 @@ export default function PatientSidebarSection({
           </div>
           {moment().diff(patientData?.userData?.dob, 'years')}
         </div>
-        <div className="user_detail" id="gapAdd">
-          <div className="image_div">
-            <Medical />
+        {patientData?.userData?.diagnosis && (
+          <div className="user_detail" id="gapAdd">
+            <div className="image_div">
+              <Medical />
+            </div>
+            <p style={{ whiteSpace: 'break-spaces' }}>{patientData?.userData?.diagnosis ?? '-'}</p>
           </div>
-          <p style={{ whiteSpace: 'break-spaces' }}>{patientData?.userData?.diagnosis ?? '-'}</p>
-        </div>
+        )}
         <div className="user_detail" id="gapAdd">
           <div className="image_div">
             <Body />

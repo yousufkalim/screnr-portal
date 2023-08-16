@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
+import { Store } from '../../StoreContext';
 
 function Breadcrumbs({ ClinicName, sessionID, activeTab }) {
   const location = useLocation();
@@ -7,7 +8,8 @@ function Breadcrumbs({ ClinicName, sessionID, activeTab }) {
   const { id, patientId, clinicianId } = params;
   const segments = location.pathname.split('/').filter((segment) => segment !== '');
   const [navTo, setNavTo] = useState('');
-
+  const { user } = Store();
+  console.log('useruser', user?.role);
   useEffect(() => {
     if (id || patientId || clinicianId || sessionID) {
       if (window.location.pathname.includes('clinicians')) {
@@ -28,13 +30,25 @@ function Breadcrumbs({ ClinicName, sessionID, activeTab }) {
     }
     return `${segment} > `;
   };
+  let dashboardLink = '';
 
+  if (user.role === 'admin') {
+    dashboardLink = '/admin/dashboard';
+  } else if (user.role === 'clinic') {
+    dashboardLink = '/clinic/dashboard';
+  } else if (user.role === 'staff') {
+    dashboardLink = '/staff/dashboard';
+  } else if (user.role === 'clinician') {
+    dashboardLink = '/clinician/dashboard';
+  } else {
+    dashboardLink = '/';
+  }
   return (
     <ul>
       <div className="breadCrumb" style={{ display: 'flex' }}>
         <div className="navigationEntities">
-          <Link className="breadcrumbs" to="/">
-            Dashboard &gt;{' '}
+          <Link className="breadcrumbs" to={dashboardLink}>
+            Dashboard &gt;
           </Link>
         </div>
         {segments.slice(0, 1).map((segment, index) => (
