@@ -77,13 +77,13 @@ export default function DeleteModal({ openDeletePopup, setOpenDeletePopup, item,
             <img src={delConfirm} alt="" />
             <h1 className="delPopuptxt">Are you sure?</h1>
 
-            <p className="enterEmailTxt">You won’t be able to revert this!</p>
+            <p className="enterEmailTxt">You can activate this user later!</p>
             <div className="hl-del" />
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDelete} className="delBtn" variant="contained">
-            Delete
+            Deactivate
           </Button>
           <Button onClick={handleClose} className="closeBtn" variant="outlined">
             Cancel

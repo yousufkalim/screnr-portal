@@ -372,7 +372,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         Date
                       </TableCell>
                       <TableCell align="center" size="small" className="table_header">
-                        Avg.Performance
+                        Performance
                       </TableCell>
                       <TableCell align="center" size="small" className="table_header">
                         Survey

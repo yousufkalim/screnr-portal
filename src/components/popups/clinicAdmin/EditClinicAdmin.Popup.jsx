@@ -5,6 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import { makeStyles } from '@mui/styles';
 import DialogActions from '@mui/material/DialogActions';
+import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import { FormControl, TextField } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
@@ -69,6 +70,7 @@ export default function EditClinicAdmin({
 }) {
   const outlinedInputStyles = useOutlinedInputStyles();
   const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [userData, setUserData] = useState({});
   const [clinicAdmin, setClinicAdmin] = useState({});
@@ -176,6 +178,7 @@ export default function EditClinicAdmin({
     if (emailValidation(clinicAdminCopy.email)) {
       return;
     }
+    setLoading(true);
     try {
       const { data } = await request('put', `/staff/editClinic/${clinicAdminDetails.id}`, formData);
       if (data) {
@@ -183,9 +186,11 @@ export default function EditClinicAdmin({
         setOpenEditClinicAdmin(false);
         getClinicAdmins();
         handleClose();
+        setLoading(false);
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
+      setLoading(false);
     }
   };
 
@@ -541,7 +546,17 @@ export default function EditClinicAdmin({
           >
             Deactivate User
           </Button>
-          <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
+          <Button
+            onClick={handleSubmit}
+            className={loading ? 'resetPasswordBtnloading' : 'resetPasswordBtn'}
+            variant="contained"
+            disabled={loading}
+          >
+            {loading && (
+              <div style={{ height: 'inherit' }} className="progressContainer">
+                <CircularProgress className="whiteCircularProgress" size={20} />
+              </div>
+            )}
             <p className="sendInviteTxt">Save Changes</p>{' '}
           </Button>
         </DialogActions>

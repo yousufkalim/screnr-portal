@@ -1,5 +1,6 @@
-import { React } from 'react';
+import { React, useState } from 'react';
 import { styled } from '@mui/material/styles';
+import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import ClearIcon from '@mui/icons-material/Clear';
 import DialogContent from '@mui/material/DialogContent';
@@ -52,8 +53,10 @@ export default function ProfilePopup({
   const handleClose = () => {
     setOpenProfilePopup(false);
   };
+  const [loading, setLoading] = useState(false);
 
   const handleLogout = () => {
+    setLoading(true);
     request('patch', '/auth/logout/')
       .then(() => {
         window.location = '/login';
@@ -61,6 +64,7 @@ export default function ProfilePopup({
         updateStore({ user: {}, loggedIn: false });
       })
       .catch((error) => {
+        setLoading(false);
         toast.error(error.response.data.message);
       });
   };
@@ -196,7 +200,18 @@ export default function ProfilePopup({
           </div>
         </DialogContent>
         <DialogActions sx={{ width: '84%' }}>
-          <Button onClick={handleLogout} className="logoutBtn" variant="contained">
+          <Button
+            onClick={handleLogout}
+            // className="logoutBtn"
+            className={loading ? 'logoutBtnloading' : 'logoutBtn'}
+            variant="contained"
+            disabled={loading}
+          >
+            {loading && (
+              <div style={{ height: 'inherit' }} className="progressContainer">
+                <CircularProgress className="whiteCircularProgress" size={20} />
+              </div>
+            )}
             <p className="logoutTxt"> Logout</p>
             <Arrow className="logoutArrow" />
           </Button>
