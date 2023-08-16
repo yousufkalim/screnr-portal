@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+// import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TableCell from '@mui/material/TableCell';
+import { ReactComponent as VisibilityOff } from '../../assets/icons/eyess.svg';
+
 import { ReactComponent as Edit } from '../../assets/components/Table/alert.svg';
 // import { ReactComponent as Profile } from '../../assets/components/Table/Profile.svg';
 import { ReactComponent as Report } from '../../assets/components/Table/report.svg';
@@ -215,7 +216,7 @@ function ClinicianDashboardPatientTable({
             }}
           >
             <VisibilityOff
-              style={{ color: '#FAA017' }}
+              // style={{ color: '#FAA017' }}
               className="table_icons"
               onClick={() => handleDeletePatient(row)}
             />

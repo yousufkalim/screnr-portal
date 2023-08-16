@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+// import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -12,6 +12,7 @@ import TablePagination from '@mui/material/TablePagination';
 import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from 'react-router-dom';
+import { ReactComponent as VisibilityOff } from '../../../assets/icons/eyess.svg';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 // import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 import AvatarComponent from '../../Avatar/Avatar.Component';
@@ -171,7 +172,6 @@ export default function TableComponent({
                         }}
                       />
                       <VisibilityOff
-                        style={{ color: '#FAA017' }}
                         className="table_icons"
                         onClick={() => {
                           setStaffMember(row);
