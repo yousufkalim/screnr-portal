@@ -49,7 +49,7 @@ export default function DeleteModal({ openDeletePopup, setOpenDeletePopup, item,
       .then(() => {
         getData();
         handleClose();
-        toast.success('Deleted successfully');
+        toast.success('Deactivated successfully');
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message);
