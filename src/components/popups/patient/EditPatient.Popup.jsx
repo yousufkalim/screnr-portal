@@ -393,7 +393,7 @@ export default function EditPatient({
                   onChange={handleUserDataChange}
                   placeholder="Unique ID (MRN, Patient ID, etc.)"
                   inputProps={{
-                    maxLength: 5,
+                    maxLength: 10,
                   }}
                 />
               </FormControl>
