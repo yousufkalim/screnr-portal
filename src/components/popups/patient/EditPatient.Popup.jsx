@@ -8,6 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Typography from '@mui/material/Typography';
 import { FormControl, TextField } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -72,6 +73,7 @@ export default function EditPatient({
   const { user } = Store();
   const [checked, setChecked] = useState(!!patientDetails?.expiry_date);
   const [clinicians, setClinicians] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -262,6 +264,7 @@ export default function EditPatient({
       return;
     }
     // sending this data to api
+    setLoading(true);
     try {
       const { data } = await request(
         'put',
@@ -272,8 +275,10 @@ export default function EditPatient({
         handleClose();
         getPatients();
         toast.success('Patient updated successfully');
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       toast.error(error?.response?.data?.message);
     }
   };
@@ -677,7 +682,17 @@ export default function EditPatient({
           >
             Deactivate User
           </Button>
-          <Button onClick={handleSubmit} className="resetPasswordBtn" variant="contained">
+          <Button
+            onClick={handleSubmit}
+            className={loading ? 'resetPasswordBtnloading' : 'resetPasswordBtn'}
+            variant="contained"
+            disabled={loading}
+          >
+            {loading && (
+              <div style={{ height: 'inherit' }} className="progressContainer">
+                <CircularProgress className="whiteCircularProgress" size={20} />
+              </div>
+            )}
             <p className="sendInviteTxt">Save Changes</p>{' '}
           </Button>
         </DialogActions>

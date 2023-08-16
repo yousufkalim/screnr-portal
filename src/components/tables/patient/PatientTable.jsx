@@ -164,7 +164,7 @@ export default function PatientTable({ patients, getPatients, loading }) {
           <TableBody>
             {loading ? (
               <TableRow>
-                <TableCell colSpan={7} align="center">
+                <TableCell colSpan={8} align="center">
                   <LinearProgress
                     sx={{
                       '& .MuiLinearProgress-barColorPrimary': {
