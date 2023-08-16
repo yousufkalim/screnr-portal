@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+// import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { styled } from '@mui/material/styles';
 import { toast } from 'react-toastify';
+import CircularProgress from '@mui/material/CircularProgress';
 import { ReactComponent as Edit } from '../../assets/components/Table/alert.svg';
 import { ReactComponent as Report } from '../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../assets/components/Table/email.svg';
@@ -25,39 +26,39 @@ const StyledTableRow = styled(TableRow)(() => ({
     borderBottom: '1px solid transparent',
   },
 }));
-const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 6,
-  borderRadius: 5,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
-    backgroundColor: '#FF5151',
-  },
-}));
-const YellowLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 6,
-  borderRadius: 5,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
-    backgroundColor: '#FABB18',
-  },
-}));
-const GreenLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 6,
-  borderRadius: 5,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
-    backgroundColor: '#25CC7C',
-  },
-}));
+// const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
+//   height: 6,
+//   borderRadius: 5,
+//   [`&.${linearProgressClasses.colorPrimary}`]: {
+//     backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+//   },
+//   [`& .${linearProgressClasses.bar}`]: {
+//     borderRadius: 5,
+//     backgroundColor: '#FF5151',
+//   },
+// }));
+// const YellowLinearProgress = styled(LinearProgress)(({ theme }) => ({
+//   height: 6,
+//   borderRadius: 5,
+//   [`&.${linearProgressClasses.colorPrimary}`]: {
+//     backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+//   },
+//   [`& .${linearProgressClasses.bar}`]: {
+//     borderRadius: 5,
+//     backgroundColor: '#FABB18',
+//   },
+// }));
+// const GreenLinearProgress = styled(LinearProgress)(({ theme }) => ({
+//   height: 6,
+//   borderRadius: 5,
+//   [`&.${linearProgressClasses.colorPrimary}`]: {
+//     backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+//   },
+//   [`& .${linearProgressClasses.bar}`]: {
+//     borderRadius: 5,
+//     backgroundColor: '#25CC7C',
+//   },
+// }));
 
 function Index({
   row,
@@ -94,6 +95,47 @@ function Index({
     } else {
       setOpenMenu(!openMenu);
     }
+  };
+
+  const percentageOfGraph = (targetRow) => {
+    // eslint-disable-next-line no-unused-expressions
+    if (targetRow?.performance > 0 && targetRow?.performance <= 10) {
+      return '#FF5151';
+    }
+    if (targetRow?.performance > 10 && targetRow?.performance <= 30) {
+      return '#C2623B';
+    }
+    if (targetRow?.performance > 30 && targetRow?.performance <= 40) {
+      return '#D0A34D';
+    }
+    if (targetRow?.performance > 40 && targetRow?.performance <= 50) {
+      return '#E7D270';
+    }
+    if (targetRow?.performance > 50 && targetRow?.performance <= 55) {
+      return '#F0E570';
+    }
+    if (targetRow?.performance > 55 && targetRow?.performance <= 65) {
+      return '#E0EE66';
+    }
+    if (targetRow?.performance > 65 && targetRow?.performance <= 70) {
+      return '#CAE662';
+    }
+    if (targetRow?.performance > 70 && targetRow?.performance <= 75) {
+      return '#A9D55D';
+    }
+    if (targetRow?.performance > 75 && targetRow?.performance <= 80) {
+      return '#AED05D';
+    }
+    if (targetRow?.performance > 80 && targetRow?.performance <= 85) {
+      return '#97C755';
+    }
+    if (targetRow?.performance > 85 && targetRow?.performance <= 90) {
+      return '#7EB252';
+    }
+    if (targetRow?.performance > 90 && targetRow?.performance <= 95) {
+      return '#7EB45A';
+    }
+    return '#669851';
   };
 
   return (
@@ -163,8 +205,8 @@ function Index({
         </TableCell>
 
         <TableCell align="center" onClick={() => handlePatientProfile(row.id)}>
-          <span className="linearProgress">{`${row?.performance ?? 0}%`}</span>
-          {row.performance <= 30 ? (
+          {/* <span className="linearProgress">{`${row?.performance ?? 0}%`}</span> */}
+          {/* {row.performance <= 30 ? (
             <RedLinearProgress variant="determinate" value={row.performance} thickness="40" />
           ) : row.performance > 30 && row.performance <= 79 ? (
             <YellowLinearProgress variant="determinate" value={row.performance} thickness="40" />
@@ -174,7 +216,28 @@ function Index({
               value={row.performance ?? 0}
               thickness="40"
             />
-          )}
+          )} */}
+          <div style={{ position: 'relative' }}>
+            <CircularProgress
+              variant="determinate"
+              thickness="6"
+              value={row?.performance || 0}
+              size={70}
+              sx={{
+                color: percentageOfGraph(row),
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                right: '42%',
+                bottom: '42%',
+                fontSize: '15px',
+              }}
+            >
+              {row?.performance ? Math.round(row?.performance) : 0}%
+            </div>
+          </div>
         </TableCell>
         <TableCell align="center" onClick={() => handlePatientProfile(row.id)}>
           <div className="circularBarCellAllPatients" style={{ alignItems: 'center' }}>

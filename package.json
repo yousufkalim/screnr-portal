@@ -1,5 +1,5 @@
 {
-  "name": "Screnr-Admin",
+  "name": "Screnr-Portal",
   "version": "0.1.0",
   "private": true,
   "repository": {
@@ -12,8 +12,8 @@
     "url": "https://github.com/falconitconsultant/screnr-admin/issues"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.10.16",
     "@mui/material": "^5.10.17",
     "@mui/styles": "^5.10.16",

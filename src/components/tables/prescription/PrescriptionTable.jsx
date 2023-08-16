@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+// import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -114,39 +114,79 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
       borderBottom: '1px solid transparent',
     },
   }));
-  const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
-    height: 6,
-    borderRadius: 5,
-    [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
-    },
-    [`& .${linearProgressClasses.bar}`]: {
-      borderRadius: 5,
-      backgroundColor: '#FF5151',
-    },
-  }));
-  const YellowLinearProgress = styled(LinearProgress)(({ theme }) => ({
-    height: 6,
-    borderRadius: 5,
-    [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
-    },
-    [`& .${linearProgressClasses.bar}`]: {
-      borderRadius: 5,
-      backgroundColor: '#FABB18',
-    },
-  }));
-  const GreenLinearProgress = styled(LinearProgress)(({ theme }) => ({
-    height: 6,
-    borderRadius: 5,
-    [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
-    },
-    [`& .${linearProgressClasses.bar}`]: {
-      borderRadius: 5,
-      backgroundColor: '#25CC7C',
-    },
-  }));
+  // const RedLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  //   height: 6,
+  //   borderRadius: 5,
+  //   [`&.${linearProgressClasses.colorPrimary}`]: {
+  //     backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+  //   },
+  //   [`& .${linearProgressClasses.bar}`]: {
+  //     borderRadius: 5,
+  //     backgroundColor: '#FF5151',
+  //   },
+  // }));
+  // const YellowLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  //   height: 6,
+  //   borderRadius: 5,
+  //   [`&.${linearProgressClasses.colorPrimary}`]: {
+  //     backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+  //   },
+  //   [`& .${linearProgressClasses.bar}`]: {
+  //     borderRadius: 5,
+  //     backgroundColor: '#FABB18',
+  //   },
+  // }));
+  // const GreenLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  //   height: 6,
+  //   borderRadius: 5,
+  //   [`&.${linearProgressClasses.colorPrimary}`]: {
+  //     backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+  //   },
+  //   [`& .${linearProgressClasses.bar}`]: {
+  //     borderRadius: 5,
+  //     backgroundColor: '#25CC7C',
+  //   },
+  // }));
+  const percentageOfGraph = (row) => {
+    // eslint-disable-next-line no-unused-expressions
+    if (row?.avg_score > 0 && row?.avg_score <= 10) {
+      return '#FF5151';
+    }
+    if (row?.avg_score > 10 && row?.avg_score <= 30) {
+      return '#C2623B';
+    }
+    if (row?.avg_score > 30 && row?.avg_score <= 40) {
+      return '#D0A34D';
+    }
+    if (row?.avg_score > 40 && row?.avg_score <= 50) {
+      return '#E7D270';
+    }
+    if (row?.avg_score > 50 && row?.avg_score <= 55) {
+      return '#F0E570';
+    }
+    if (row?.avg_score > 55 && row?.avg_score <= 65) {
+      return '#E0EE66';
+    }
+    if (row?.avg_score > 65 && row?.avg_score <= 70) {
+      return '#CAE662';
+    }
+    if (row?.avg_score > 70 && row?.avg_score <= 75) {
+      return '#A9D55D';
+    }
+    if (row?.avg_score > 75 && row?.avg_score <= 80) {
+      return '#AED05D';
+    }
+    if (row?.avg_score > 80 && row?.avg_score <= 85) {
+      return '#97C755';
+    }
+    if (row?.avg_score > 85 && row?.avg_score <= 90) {
+      return '#7EB252';
+    }
+    if (row?.avg_score > 90 && row?.avg_score <= 95) {
+      return '#7EB45A';
+    }
+    return '#669851';
+  };
 
   useEffect(() => {
     handlePrescriptionList();
@@ -402,7 +442,28 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                             : '-'}
                         </TableCell>
                         <TableCell align="center" className="table_cells vertical_middle">
-                          <span className="linearPresProgress">{`${row?.avg_score ?? 0}%`}</span>
+                          <div style={{ position: 'relative' }}>
+                            <CircularProgress
+                              variant="determinate"
+                              thickness="6"
+                              value={row?.avg_score || 0}
+                              size={60}
+                              sx={{
+                                color: percentageOfGraph(row),
+                              }}
+                            />
+                            <div
+                              style={{
+                                position: 'absolute',
+                                right: '42%',
+                                bottom: '42%',
+                                fontSize: '15px',
+                              }}
+                            >
+                              {row?.avg_score ? Math.round(row?.avg_score) : 0}%
+                            </div>
+                          </div>
+                          {/* <span className="linearPresProgress">{`${row?.avg_score ?? 0}%`}</span>
                           {row?.avg_score <= 30 ? (
                             <RedLinearProgress
                               variant="determinate"
@@ -426,7 +487,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                             />
                           ) : (
                             ''
-                          )}
+                          )} */}
                         </TableCell>
                         <TableCell align="center" className="table_cells vertical_middle">
                           {row?.survey ? 'Done' : 'Not Done'}
