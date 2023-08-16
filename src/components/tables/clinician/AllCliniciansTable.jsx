@@ -3,6 +3,7 @@ import { React, useState, useRef, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
@@ -17,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
-import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
+// import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import EditClinician from '../../popups/clinician/EditClinician.Popup';
 import DeleteModal from '../../popups/general/Delete.Popup';
@@ -367,10 +368,10 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
                         setClinician(row);
                       }}
                     />
-                    <Delete
+                    <VisibilityOff
                       className="table_icons"
                       onClick={() => handleDeleteClinician(row)}
-                      style={{ marginLeft: '.5rem' }}
+                      style={{ marginLeft: '.5rem', color: '#FAA017' }}
                     />
                   </TableCell>
                 </StyledTableRow>

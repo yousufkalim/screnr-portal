@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
@@ -23,7 +24,7 @@ import AvatarComponent from '../../Avatar/Avatar.Component';
 import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import { getMediaUrl } from '../../../config';
 import DeleteModal from '../../popups/general/Delete.Popup';
-import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
+// import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 
 const useStyles = makeStyles(() => ({
   radio: {
@@ -310,10 +311,10 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
                         setClinicAdmin(row);
                       }}
                     />
-                    <Delete
+                    <VisibilityOff
                       className="table_icons"
                       onClick={() => handleDeleteClinician(row)}
-                      style={{ marginLeft: '.5rem' }}
+                      style={{ marginLeft: '.5rem', color: '#FAA017' }}
                     />
                   </TableCell>
                 </StyledTableRow>
