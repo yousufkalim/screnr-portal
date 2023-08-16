@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 // import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import CircularProgress from '@mui/material/CircularProgress';
 import { styled } from '@mui/material/styles';
 import { toast } from 'react-toastify';
-import CircularProgress from '@mui/material/CircularProgress';
+import { ReactComponent as VisibilityOff } from '../../assets/icons/eyess.svg';
 import { ReactComponent as Edit } from '../../assets/components/Table/alert.svg';
 import { ReactComponent as Report } from '../../assets/components/Table/report.svg';
 import { ReactComponent as Message } from '../../assets/components/Table/email.svg';
@@ -287,11 +287,7 @@ function Index({
               justifyContent: 'center',
             }}
           >
-            <VisibilityOff
-              style={{ color: '#FAA017' }}
-              className="table_icons"
-              onClick={() => handleDeletePatient(row)}
-            />
+            <VisibilityOff className="table_icons" onClick={() => handleDeletePatient(row)} />
             <Edit
               className="table_icons"
               onClick={() => {
