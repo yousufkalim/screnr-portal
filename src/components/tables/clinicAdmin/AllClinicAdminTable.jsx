@@ -4,7 +4,8 @@ import { styled } from '@mui/material/styles';
 import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+// import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
@@ -16,6 +17,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
+import { ReactComponent as VisibilityOff } from '../../../assets/icons/eyess.svg';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
 import { ReactComponent as Cross } from '../../../assets/icons/crossIcon.svg';
@@ -314,7 +316,7 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
                     <VisibilityOff
                       className="table_icons"
                       onClick={() => handleDeleteClinician(row)}
-                      style={{ marginLeft: '.5rem', color: '#FAA017' }}
+                      style={{ marginLeft: '.5rem' }}
                     />
                   </TableCell>
                 </StyledTableRow>
