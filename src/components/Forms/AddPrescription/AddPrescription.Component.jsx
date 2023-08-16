@@ -95,6 +95,12 @@ export default function AddPrescription({
 
   const today = new Date().toISOString();
 
+  function capitalizeFirstLetterOfEachWord(inputString) {
+    const words = inputString?.split(' ');
+    const capitalizedWords = words?.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+    return capitalizedWords?.join(' ');
+  }
+
   return (
     <div className="addPrescription">
       <h3
@@ -358,7 +364,9 @@ export default function AddPrescription({
                   </MenuItem>
                   {allMotionExercise?.map((item) => (
                     <MenuItem value={item}>
-                      <span className="optColor">{item?.name}</span>
+                      <span className="optColor">
+                        {capitalizeFirstLetterOfEachWord(item?.name)}
+                      </span>
                     </MenuItem>
                   ))}
                 </Select>
@@ -368,7 +376,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                       marginBottom: '24px',
                     },
@@ -406,7 +414,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                       marginBottom: '24px',
                     },
@@ -444,7 +452,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                     },
                   }}
@@ -665,7 +673,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                       marginBottom: '24px',
                     },
@@ -703,7 +711,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                       marginBottom: '24px',
                     },
@@ -741,7 +749,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                     },
                   }}
@@ -823,10 +831,7 @@ export default function AddPrescription({
           )}
         </div>
         <div className="prescTable">
-          <AddPrescriptionTable
-            ExercisePrescriptionList={prescription}
-            setExercisePrescriptionList={setPrescription}
-          />
+          <AddPrescriptionTable prescription={prescription} setPrescription={setPrescription} />
           <div className="addPrescriptionBtn">
             <Button
               variant="contained"

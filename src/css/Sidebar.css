@@ -254,7 +254,7 @@
   text-overflow: ellipsis;
 }
 
-@media only screen and (max-width: 1383px) {
+@media only screen and (max-width: 1440px) {
   .spaceRight {
     font-size: 12px;
     white-space: unset;

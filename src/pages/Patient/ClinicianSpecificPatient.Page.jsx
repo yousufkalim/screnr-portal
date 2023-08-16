@@ -28,6 +28,7 @@ export default function Patient() {
   const [clinician, setClinician] = useState({});
   const [activityLog, setActivityLog] = useState({});
   const [loading, setLoading] = useState(false);
+  const [info, setInformation] = useState({});
 
   const getClinicName = (name) => setBreadcrumb(name);
   // const handleDashboardNavClick = () => navigate('/admin/dashboard');
@@ -107,6 +108,7 @@ export default function Patient() {
             getClinicName={getClinicName}
             open={openEditClinician}
             setOpen={setOpenEditClinician}
+            setInformation={setInformation}
           />
         </div>
 
@@ -168,6 +170,7 @@ export default function Patient() {
             getPatients={getPatients}
             openAddPatient={openAddPatient}
             setOpenAddPatient={setOpenAddPatient}
+            info={info}
           />
         )}
       </div>

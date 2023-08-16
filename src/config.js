@@ -1,5 +1,5 @@
-let baseUrl = 'https://screnr-api-dev.falconweb.app/api/v1';
-let socketURI = 'https://screnr-api-dev.falconweb.app';
+let baseUrl = 'http://localhost:5000/api/v1';
+let socketURI = 'http://localhost:5000';
 
 if (window.location.host === 'screnr-admin-dev.falconweb.app') {
   baseUrl = 'https://screnr-api-dev.falconweb.app/api/v1';
