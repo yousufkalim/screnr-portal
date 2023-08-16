@@ -13,7 +13,15 @@ import request from '../../request';
 import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 
-export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, open }) {
+export default function LeftSidebar({
+  getClinicName,
+  id,
+  txt,
+  roleTxt,
+  setOpen,
+  open,
+  setInformation,
+}) {
   const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
@@ -23,6 +31,7 @@ export default function LeftSidebar({ getClinicName, id, txt, roleTxt, setOpen, 
       const { data } = await request('get', `/${txt}/${id}`);
       if (data) {
         setInfo(data?.user);
+        setInformation(data?.user);
         if (txt.includes('staff')) {
           getClinicName(data?.user?.userData?.clinic_name);
         } else getClinicName(`${data?.user?.first_name} ${data?.user?.last_name}`);

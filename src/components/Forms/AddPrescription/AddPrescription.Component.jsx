@@ -376,7 +376,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                       marginBottom: '24px',
                     },
@@ -414,7 +414,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                       marginBottom: '24px',
                     },
@@ -452,7 +452,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                     },
                   }}
@@ -673,7 +673,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                       marginBottom: '24px',
                     },
@@ -711,7 +711,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                       marginBottom: '24px',
                     },
@@ -749,7 +749,7 @@ export default function AddPrescription({
                   sx={{
                     width: '32%',
                     mr: 1.4,
-                    '@media (max-width: 1366px)': {
+                    '@media (max-width: 1440px)': {
                       width: '100%',
                     },
                   }}
