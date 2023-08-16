@@ -74,52 +74,55 @@ export default function EditPatient({
   const [checked, setChecked] = useState(!!patientDetails?.expiry_date);
   const [clinicians, setClinicians] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const futureYear = new Date();
   futureYear.setFullYear(futureYear.getFullYear() + 10);
 
   const [patient, setPatient] = useState({
-    first_name: patientDetails?.first_name,
-    last_name: patientDetails?.last_name,
-    email: patientDetails?.email,
-    profile_pic: patientDetails?.profile_pic,
-    phone_number: patientDetails?.phone_number,
-    expiry_date: moment(patientDetails?.expiry_date)?._d || '',
+    // first_name: patientDetails?.first_name,
+    // last_name: patientDetails?.last_name,
+    // email: patientDetails?.email,
+    // profile_pic: patientDetails?.profile_pic,
+    // phone_number: patientDetails?.phone_number,
+    // expiry_date: patientDetails?.expiry_date ? moment(patientDetails?.expiry_date)?._d : '',
   });
 
   const [userData, setUserData] = useState({
-    mrn_id: patientDetails?.userData?.mrn_id,
-    diagnosis: patientDetails?.userData?.diagnosis || '',
-    location: patientDetails?.userData?.location || [],
-    clinicians: patientDetails?.userData?.clinicians || [],
-    // eslint-disable-next-line no-underscore-dangle
-    dob: moment(patientDetails?.userData?.dob)._d || '',
+    // mrn_id: patientDetails?.userData?.mrn_id,
+    // diagnosis: patientDetails?.userData?.diagnosis || '',
+    // location: patientDetails?.userData?.location || [],
+    // clinicians: patientDetails?.userData?.clinicians || [],
+    // // eslint-disable-next-line no-underscore-dangle
+    // dob: moment(patientDetails?.userData?.dob)._d || '',
   });
 
   const setPatientData = () => {
-    setPatient({
+    const tempPatient = {
       first_name: patientDetails?.first_name,
       last_name: patientDetails?.last_name,
       email: patientDetails?.email,
       profile_pic: patientDetails?.profile_pic,
       phone_number: patientDetails?.phone_number,
-    });
+    };
+
     if (patientDetails?.expiry_date) {
       // eslint-disable-next-line no-underscore-dangle
-      setPatient({ ...patientDetails, expiry_date: moment(patientDetails?.expiry_date)?._d || '' });
+      tempPatient.expiry_date = moment(patientDetails?.expiry_date)?._d;
       setChecked(true);
     }
 
-    setUserData({
+    const tempUserData = {
       mrn_id: patientDetails?.userData?.mrn_id,
       diagnosis: patientDetails?.userData?.diagnosis || '',
       location: patientDetails?.userData?.location || [],
       clinicians: patientDetails?.userData?.clinicians || [],
       // eslint-disable-next-line no-underscore-dangle
       dob: moment(patientDetails?.userData?.dob)._d || '',
-    });
+    };
+
+    setUserData(tempUserData);
+    setPatient(tempPatient);
   };
 
   useEffect(() => {
@@ -172,11 +175,11 @@ export default function EditPatient({
   const getClinicians = async () => {
     await request('get', `/clinicians/getCliniciansByClinicIdNonPaginated/${clinicId}`)
       .then((res) => {
-        if (res.data) {
+        if (res?.data) {
           setClinicians(
-            res.data.users
+            res.data?.users
               .filter((dr) => userData?.clinicians?.filter((_) => _.id === dr.id).length === 0)
-              .map((doctor) => {
+              ?.map((doctor) => {
                 return {
                   id: doctor?.id,
                   optName: `${doctor?.first_name} ${doctor?.last_name}`,
@@ -514,7 +517,7 @@ export default function EditPatient({
                   placeholder="Diagnosis"
                   size="normal"
                   name="diagnosis"
-                  value={userData.diagnosis}
+                  value={userData?.diagnosis}
                   onChange={handleUserDataChange}
                   inputProps={{
                     maxLength: 50,
@@ -550,7 +553,7 @@ export default function EditPatient({
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
-                      checked={userData.location.includes('left')}
+                      checked={userData?.location?.includes('left')}
                       onChange={() => {
                         handlePainLocationChange('left');
                       }}
@@ -563,7 +566,7 @@ export default function EditPatient({
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
-                      checked={userData.location.includes('right')}
+                      checked={userData?.location?.includes('right')}
                       onChange={() => {
                         handlePainLocationChange('right');
                       }}
@@ -576,7 +579,7 @@ export default function EditPatient({
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
-                      checked={userData.location.includes('posterior')}
+                      checked={userData?.location?.includes('posterior')}
                       onChange={() => {
                         handlePainLocationChange('posterior');
                       }}
@@ -589,7 +592,7 @@ export default function EditPatient({
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
-                      checked={userData.location.includes('anterior')}
+                      checked={userData?.location?.includes('anterior')}
                       onChange={() => {
                         handlePainLocationChange('anterior');
                       }}
@@ -602,7 +605,7 @@ export default function EditPatient({
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
-                      checked={userData.location.includes('medial')}
+                      checked={userData?.location?.includes('medial')}
                       onChange={() => {
                         handlePainLocationChange('medial');
                       }}
@@ -615,7 +618,7 @@ export default function EditPatient({
                   control={
                     <Checkbox
                       style={{ color: '#fba622' }}
-                      checked={userData.location.includes('lateral')}
+                      checked={userData?.location?.includes('lateral')}
                       onChange={() => {
                         handlePainLocationChange('lateral');
                       }}
