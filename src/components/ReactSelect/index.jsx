@@ -6,7 +6,7 @@ export default function ReactSelect({ dataOptions, setUserData, userData }) {
   const [options, setOptions] = useState([]);
   const [selected, setSelected] = useState([]);
   const [preSelected] = useState(
-    userData?.clinicians?.map((doctor) => ({
+    userData?.clinicians.map((doctor) => ({
       id: doctor?.id,
       optName: `${doctor?.first_name} ${doctor?.last_name}`,
     })) ?? [],

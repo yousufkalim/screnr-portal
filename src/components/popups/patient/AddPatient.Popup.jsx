@@ -446,7 +446,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
                   value={userData.mrn_id}
                   onChange={handleUserDataChange}
                   inputProps={{
-                    maxLength: 5,
+                    maxLength: 10,
                   }}
                 />
               </FormControl>
