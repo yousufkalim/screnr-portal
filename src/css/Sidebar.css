@@ -72,8 +72,8 @@
   margin: 0 auto;
   color: #ff5151;
   display: flex;
-  justify-content: space-between;
-  gap: 15px;
+  /* justify-content: space-between; */
+  gap: 10px;
 }
 
 .spaceRight {
@@ -259,6 +259,9 @@
     font-size: 12px;
     white-space: unset;
   }
+  .user_exp_detail {
+    width: 72% !important;
+  }
 
   .user_detail {
     font-size: 0.8rem !important;
@@ -274,7 +277,21 @@
     font-size: 12px;
   }
 }
-
+@media only screen and (max-width: 1390px) {
+  .user_exp_detail {
+    width: 77% !important;
+  }
+}
+@media only screen and (max-width: 1321px) {
+  .user_exp_detail {
+    width: 79% !important;
+  }
+}
+@media only screen and (max-width: 1289px) {
+  .user_exp_detail {
+    width: 82% !important;
+  }
+}
 @media only screen and (max-width: 1200px) {
   .user_detail {
     font-size: 0.7rem !important;
