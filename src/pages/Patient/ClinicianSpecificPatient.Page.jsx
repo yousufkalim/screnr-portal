@@ -28,13 +28,9 @@ export default function Patient() {
   const [clinician, setClinician] = useState({});
   const [activityLog, setActivityLog] = useState({});
   const [loading, setLoading] = useState(false);
-  const [info, setInformation] = useState({});
+  const [information, setInformation] = useState({});
 
   const getClinicName = (name) => setBreadcrumb(name);
-  // const handleDashboardNavClick = () => navigate('/admin/dashboard');
-  // const handleStaffNavClick = () => window.history.back();
-  // const handleClinicNavClick = () => window.history.back();
-
   const getPatients = async (page = 1) => {
     try {
       setLoading(true);
@@ -170,7 +166,7 @@ export default function Patient() {
             getPatients={getPatients}
             openAddPatient={openAddPatient}
             setOpenAddPatient={setOpenAddPatient}
-            info={info}
+            info={information}
           />
         )}
       </div>

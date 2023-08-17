@@ -9,7 +9,7 @@ function Breadcrumbs({ ClinicName, sessionID, activeTab }) {
   const segments = location.pathname.split('/').filter((segment) => segment !== '');
   const [navTo, setNavTo] = useState('');
   const { user } = Store();
-  console.log('useruser', user?.role);
+
   useEffect(() => {
     if (id || patientId || clinicianId || sessionID) {
       if (window.location.pathname.includes('clinicians')) {
@@ -21,6 +21,7 @@ function Breadcrumbs({ ClinicName, sessionID, activeTab }) {
       }
     }
   }, [id, patientId, clinicianId, sessionID]);
+
   const handleActiveTab = (targetActiveTab, segment) => {
     if (targetActiveTab === 'Pain Survey') {
       return 'Pain Survey >';

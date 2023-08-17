@@ -19,6 +19,7 @@ export default function AddPatientPrescription() {
   const [allMotionExercise, setAllMotionExercise] = useState([]);
   const [exerciseType, setExerciseType] = useState('motion');
   const [disableBtn, setDisableBtn] = useState(false);
+  const [breadcrumb, setBreadCrumb] = useState('');
   const [prescription, setPrescription] = useState({
     name: '',
     start_date: new Date(),
@@ -52,11 +53,9 @@ export default function AddPatientPrescription() {
   const handleMotionExerciseInfo = (name, value) => {
     setMotionExerciseInfo({ ...motionExerciseInfo, [name]: value });
   };
-
   const handleSimpleExerciseInfo = (name, value) => {
     setSimpleExerciseInfo({ ...simpleExerciseInfo, [name]: value });
   };
-  const [breadcrumb, setBreadCrumb] = useState('');
   const handlePatientDataById = useCallback(async () => {
     await request('get', `/clinicians/getPatientDetail/${patientId}`)
       .then((res) => {
@@ -257,24 +256,24 @@ export default function AddPatientPrescription() {
           <div className="main_div_addPrescription">
             <div className="bgAddPrescription">
               <AddPrescription
-                exerciseType={exerciseType}
-                setExerciseType={setExerciseType}
                 patientId={patientId}
+                disableBtn={disableBtn}
                 dateChange={dateChange}
+                exerciseType={exerciseType}
                 prescription={prescription}
+                goBackToProfile={goBackToProfile}
+                setExerciseType={setExerciseType}
                 setPrescription={setPrescription}
                 handleAddToList={handleAddToList}
                 allMotionExercise={allMotionExercise}
                 simpleExerciseInfo={simpleExerciseInfo}
-                handlePrescriptionDetails={handlePrescriptionDetails}
-                handleSimpleExerciseInfo={handleSimpleExerciseInfo}
-                handleMotionExerciseInfo={handleMotionExerciseInfo}
                 motionExerciseInfo={motionExerciseInfo}
                 setMotionExerciseInfo={setMotionExerciseInfo}
-                validatingGeneratePrescription={validatingGeneratePrescription}
+                handleSimpleExerciseInfo={handleSimpleExerciseInfo}
+                handleMotionExerciseInfo={handleMotionExerciseInfo}
+                handlePrescriptionDetails={handlePrescriptionDetails}
                 handleGeneratePrescription={handleGeneratePrescription}
-                disableBtn={disableBtn}
-                goBackToProfile={goBackToProfile}
+                validatingGeneratePrescription={validatingGeneratePrescription}
               />
             </div>
           </div>

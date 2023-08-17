@@ -31,7 +31,9 @@ export default function LeftSidebar({
       const { data } = await request('get', `/${txt}/${id}`);
       if (data) {
         setInfo(data?.user);
-        setInformation(data?.user);
+        if (txt.includes('clinics')) {
+          setInformation(data?.user);
+        }
         if (txt.includes('staff')) {
           getClinicName(data?.user?.userData?.clinic_name);
         } else getClinicName(`${data?.user?.first_name} ${data?.user?.last_name}`);

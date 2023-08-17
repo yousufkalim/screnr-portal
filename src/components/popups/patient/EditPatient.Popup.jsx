@@ -303,14 +303,13 @@ export default function EditPatient({
 
   const handleDeleteUser = async (targetUserId) => {
     await request('delete', `/clinicians/deletePatient/${targetUserId}`)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         handleClose();
         getPatients();
         toast.success('Patient Deactivated successfully');
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error?.response?.data?.message);
       });
   };
   return (

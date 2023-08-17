@@ -200,14 +200,13 @@ export default function EditClinicAdmin({
 
   const handleDeleteUser = async (targetUserId) => {
     await request('delete', `/staff/deleteClinic/${targetUserId}`)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         toast.success('Clinic Admin Deactivated successfully');
         setOpenEditClinicAdmin(false);
         getClinicAdmins();
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error?.response?.data?.message);
       });
   };
 
