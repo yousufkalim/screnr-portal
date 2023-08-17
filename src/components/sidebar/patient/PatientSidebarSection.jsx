@@ -14,6 +14,7 @@ import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/
 // import { ReactComponent as Up } from '../../../assets/components/Sidebar/up.svg';
 import edit from '../../../assets/icons/sidebarEdit.svg';
 import AvatarComponent from '../../Avatar/Avatar.Component';
+import { getMediaUrl } from '../../../config';
 
 export default function PatientSidebarSection({
   patientData,
@@ -28,23 +29,53 @@ export default function PatientSidebarSection({
   };
 
   const handleEditIconClick = () => setOpenEditpatientModal(!openEditpatientModal);
-
   return (
     <>
       <div className="mainAvatarDiv">
-        <AvatarComponent
-          alt={
-            patientData?.first_name ? `${patientData?.first_name} ${patientData?.last_name}` : ''
-          }
-          className="sidebar_avatar"
-        />
+        <div>
+          <div className="imgDivSide">
+            {/* Avatar to be used */}
+            <label htmlFor="profilePic">
+              <input
+                name="profile_pic"
+                type="file"
+                id="profilePic"
+                accept=".png, .jpg, .jpeg"
+                disabled
+                // onChange={handleSelectedFile}
+              />
+              {patientData?.profile_pic ? (
+                <img
+                  src={getMediaUrl(patientData?.profile_pic)}
+                  className="pointer"
+                  id="selectedImg"
+                  style={{
+                    width: '100%',
+                    borderRadius: '100px',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                  alt=""
+                />
+              ) : (
+                <AvatarComponent
+                  alt={`${patientData?.first_name ?? ''} ${patientData?.last_name ?? ''}`}
+                  className="sidebar_avatar"
+                />
+              )}
+            </label>
+          </div>
+        </div>
         <img
           src={edit}
           alt=""
           className="editIconSidebar"
-          onClick={() => {
-            handleEditIconClick();
-          }}
+          onClick={handleEditIconClick}
+          // onKeyDown={(event) => {
+          //   if (event?.key === 'Enter' || event?.key === ' ') {
+          //     handleEditIconClick();
+          //   }
+          // }}
         />
       </div>
       <div className="sideBarInfo">

@@ -22,7 +22,6 @@ import request from '../../../request';
 //       (exercise) => exercise.name !== row.name
 //     ),
 //   }));
-//   console.log('Updated Exercise', ExercisePrescriptionList?.exercises);
 // }}
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
