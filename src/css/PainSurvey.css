@@ -27,7 +27,6 @@
 }
 
 .quesSec {
-  /* border-bottom: 1px solid #a7a7a749; */
   padding: 20px 25px;
   display: flex;
   width: 40%;
@@ -36,20 +35,12 @@
 }
 
 .ansSec {
-  /* border-bottom: 1px solid #a7a7a749; */
   padding: 20px 25px;
   display: flex;
   width: 60%;
   align-items: center;
   justify-content: space-between;
 }
-
-/* .leftTxt {
-  color: #919b9b;
-  font-weight: 500;
-  font-size: 12px;
-  flex-basis: 8%;
-} */
 
 .leftTxt {
   color: #136773;

@@ -200,6 +200,8 @@
   height: 6rem;
   object-fit: cover;
   cursor: pointer;
+  transform: scaleX(-1);
+  filter: FlipH;
 }
 
 .screenShotImages:hover {

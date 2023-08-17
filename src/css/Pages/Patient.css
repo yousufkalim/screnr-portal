@@ -558,9 +558,13 @@ a {
 
 .exerciseItems li {
   list-style: none;
-  color: #454238;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: capitalize;
+  font-size: 15px !important;
+  color: #454238 !important;
+}
+.excerciseItemHeading {
+  padding-bottom: 4px !important;
 }
 
 .customOptions {
@@ -1036,6 +1040,9 @@ a {
   .prescription_head {
     font-size: 13px !important;
   }
+  .exerciseItems li {
+    font-size: 13px !important;
+  }
 }
 
 @media only screen and (max-width: 1440px) {
@@ -1128,9 +1135,9 @@ a {
   .prescription_head {
     font-size: 11px !important;
   }
-  /* .exerciseItems li {
+  .exerciseItems li {
     font-size: 11px !important;
-  } */
+  }
 
   .table_header {
     font-size: 0.7rem !important;
