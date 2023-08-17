@@ -277,7 +277,7 @@ export default function AddPrescription({
               <div className="image_div">
                 <Program className={exerciseType === 'simple' ? 'iconClicked' : 'choiceIcon'} />
               </div>
-              <p className="selectedOpt">Exercise Program</p>
+              <p className="selectedOpt">Custom Program</p>
             </div>
           </div>
           {exerciseType === 'motion' ? (
