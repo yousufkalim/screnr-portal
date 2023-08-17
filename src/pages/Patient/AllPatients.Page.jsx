@@ -1,18 +1,16 @@
-// eslint-disable-next-line import/no-named-as-default-member
 import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { toast } from 'react-toastify';
-// import addBtn from '../../assets/icons/addBtn.svg';
 import AllPatientTable from '../../components/tables/patient/AllPatientsTable';
 import AddNewPatient from '../../components/popups/patient/AddPatient.Popup';
 import request from '../../request';
 
 export default function Patient() {
-  const [openAddPatient, setOpenAddPatient] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [patients, setPatients] = useState();
-  const [diaganosisFilter, setDiaganosisFilter] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [exerciseFilter, setExerciseFilter] = useState([]);
+  const [openAddPatient, setOpenAddPatient] = useState(false);
+  const [diaganosisFilter, setDiaganosisFilter] = useState([]);
   const [apiUrl, setApiUrl] = useState('/clinicians/allPatientsListWithFilters?sort=');
   const [bodyObject, setBodyObject] = useState({
     filter_type: '',
@@ -101,22 +99,13 @@ export default function Patient() {
   };
 
   useEffect(() => {
-    handleFilterAndSorting();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     handleDynamicFilter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const addNewPatientPopup = openAddPatient && (
-    <AddNewPatient
-      openAddPatient={openAddPatient}
-      getPatients={handleFilterAndSorting}
-      setOpenAddPatient={setOpenAddPatient}
-    />
-  );
+  useEffect(() => {
+    handleFilterAndSorting();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Grid container>
@@ -135,17 +124,13 @@ export default function Patient() {
           handleFilterAndSorting={handleFilterAndSorting}
         />
       </Grid>
-
-      {/* <div className="addBtn">
-        <img
-          alt=""
-          src={addBtn}
-          role="presentation"
-          className="pointer"
-          onClick={() => setOpenAddPatient(true)}
+      {openAddPatient && (
+        <AddNewPatient
+          getPatients={fetchData}
+          openAddPatient={openAddPatient}
+          setOpenAddPatient={setOpenAddPatient}
         />
-      </div> */}
-      {addNewPatientPopup}
+      )}
     </Grid>
   );
 }
