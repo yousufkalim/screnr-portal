@@ -274,13 +274,22 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                   >
                     <div>
                       <p>Duration</p>
-                      <p className="prescription_head">{mainRow?.duration} week</p>
+                      {mainRow?.duration === 1 ? (
+                        <p className="prescription_head">{mainRow?.duration} week</p>
+                      ) : (
+                        <p className="prescription_head">{mainRow?.duration} weeks</p>
+                      )}
                     </div>
                   </TableCell>
                   <TableCell align="left" size="small" className="table_header">
                     <div>
                       <p>Frequency</p>
-                      <p className="prescription_head">{mainRow?.frequency} Time</p>
+
+                      {mainRow?.frequency === 1 ? (
+                        <p className="prescription_head">{mainRow?.frequency} Time</p>
+                      ) : (
+                        <p className="prescription_head">{mainRow?.frequency} Times</p>
+                      )}
                     </div>
                   </TableCell>
                   <TableCell align="left" size="small" className="table_header">
