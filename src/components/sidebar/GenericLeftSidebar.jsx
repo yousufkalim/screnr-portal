@@ -35,8 +35,10 @@ export default function LeftSidebar({
           setInformation(data?.user);
         }
         if (txt.includes('staff')) {
-          getClinicName(data?.user?.userData?.clinic_name);
-        } else getClinicName(`${data?.user?.first_name} ${data?.user?.last_name}`);
+          getClinicName(`${data?.user?.userData?.clinic_name}`);
+        } else {
+          getClinicName(`hamza ${data?.user?.first_name} ${data?.user?.last_name}`);
+        }
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -46,7 +48,7 @@ export default function LeftSidebar({
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, []);
 
   const handleEditIconClick = () => {
     setOpen(!open);

@@ -29,7 +29,7 @@ function Breadcrumbs({ ClinicName, sessionID, activeTab }) {
     if (targetActiveTab === 'Reports') {
       return 'Reports >';
     }
-    return `${segment} > `;
+    return `${segment.replace(/([a-z])([A-Z])/g, '$1 $2')} >`;
   };
   let dashboardLink = '';
 
