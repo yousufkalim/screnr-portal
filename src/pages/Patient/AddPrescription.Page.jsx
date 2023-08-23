@@ -1,12 +1,14 @@
 import { React, useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 import request from '../../request';
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import AddPrescription from '../../components/Forms/AddPrescription/AddPrescription.Component';
 import GeneratePrescription from '../../components/popups/prescription/PrescriptionGenerated.popup';
 import EditPatient from '../../components/popups/patient/EditPatient.Popup';
 import Breadcrumbs from '../../components/BreadCrumbs/BreadCrumbs';
+import ExpiryDateExtend from '../../components/popups/prescription/ExpiryDateExtend.Popup';
 
 export default function AddPatientPrescription() {
   // const { user } = Store();
@@ -19,7 +21,9 @@ export default function AddPatientPrescription() {
   const [allMotionExercise, setAllMotionExercise] = useState([]);
   const [exerciseType, setExerciseType] = useState('motion');
   const [disableBtn, setDisableBtn] = useState(false);
+  const [openExtendDate, setOpenExtendDate] = useState(false);
   const [breadcrumb, setBreadCrumb] = useState('');
+  const [selectedStartDate, setSelectedStartDate] = useState('');
   const [prescription, setPrescription] = useState({
     name: '',
     start_date: new Date(),
@@ -130,10 +134,15 @@ export default function AddPatientPrescription() {
   };
 
   const dateChange = (e) => {
-    setPrescription({
-      ...prescription,
-      start_date: e,
-    });
+    if (moment(e).isAfter(moment(patient?.expiry_date))) {
+      setOpenExtendDate(true);
+      setSelectedStartDate(e);
+    } else {
+      setPrescription({
+        ...prescription,
+        start_date: e,
+      });
+    }
   };
 
   const handlePrescriptionDetailsReset = () => {
@@ -200,23 +209,32 @@ export default function AddPatientPrescription() {
     ? 'generatePrescriptionBtn'
     : 'generatePrescriptionBtn_diaabled';
 
-  const goBackToProfile = () => {
-    navigate(`/patients/${patientId}/prescription`);
-  };
+  const goBackToProfile = () => navigate(`/patients/${patientId}/prescription`);
+
   const GeneratePrescriptionSection = openGeneratePrescription && (
     <GeneratePrescription
+      goBackToProfile={goBackToProfile}
       openGeneratePrescription={openGeneratePrescription}
       setOpenGeneratePrescription={setOpenGeneratePrescription}
-      goBackToProfile={goBackToProfile}
     />
   );
 
   const EditPatientPopup = openEditPatientModal && (
     <EditPatient
-      openEditPatient={openEditPatientModal}
-      setOpenEditPatient={setOpenEditPatientModal}
       patientDetails={patient}
       getPatients={handlePatientDataById}
+      openEditPatient={openEditPatientModal}
+      setOpenEditPatient={setOpenEditPatientModal}
+    />
+  );
+  const ExpiryDateExtendPopup = openExtendDate && (
+    <ExpiryDateExtend
+      patientId={patientId}
+      open={openExtendDate}
+      setOpen={setOpenExtendDate}
+      prescription={prescription}
+      setPrescription={setPrescription}
+      selectedStartDate={selectedStartDate}
     />
   );
 
@@ -252,7 +270,6 @@ export default function AddPatientPrescription() {
             </div>
           )} */}
           <Breadcrumbs ClinicName={breadcrumb} />
-
           <div className="main_div_addPrescription">
             <div className="bgAddPrescription">
               <AddPrescription
@@ -281,6 +298,7 @@ export default function AddPatientPrescription() {
         {GeneratePrescriptionSection}
       </div>
       {EditPatientPopup}
+      {ExpiryDateExtendPopup}
     </>
   );
 }
