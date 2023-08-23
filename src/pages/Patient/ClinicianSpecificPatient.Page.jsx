@@ -29,6 +29,7 @@ export default function Patient() {
   const [activityLog, setActivityLog] = useState({});
   const [loading, setLoading] = useState(false);
   const [information, setInformation] = useState({});
+  const [bool, setBool] = useState(false);
 
   const getClinicName = (name) => setBreadcrumb(name);
   const getPatients = async (page = 1) => {
@@ -105,6 +106,7 @@ export default function Patient() {
             open={openEditClinician}
             setOpen={setOpenEditClinician}
             setInformation={setInformation}
+            bool={bool}
           />
         </div>
 
@@ -176,6 +178,7 @@ export default function Patient() {
         setOpenEditClinican={setOpenEditClinician}
         clinicianDetails={clinician}
         getClinicians={getClinicians}
+        setBool={setBool}
       />
     </div>
   );

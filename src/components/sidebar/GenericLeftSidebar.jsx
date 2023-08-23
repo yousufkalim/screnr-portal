@@ -21,6 +21,7 @@ export default function LeftSidebar({
   setOpen,
   open,
   setInformation,
+  bool,
 }) {
   const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
@@ -37,7 +38,7 @@ export default function LeftSidebar({
         if (txt.includes('staff')) {
           getClinicName(`${data?.user?.userData?.clinic_name}`);
         } else {
-          getClinicName(`hamza ${data?.user?.first_name} ${data?.user?.last_name}`);
+          getClinicName(`${data?.user?.first_name} ${data?.user?.last_name}`);
         }
       }
     } catch (error) {
@@ -48,7 +49,7 @@ export default function LeftSidebar({
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [bool]);
 
   const handleEditIconClick = () => {
     setOpen(!open);

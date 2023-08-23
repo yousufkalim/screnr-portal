@@ -69,6 +69,7 @@ export default function EditClinician({
   setOpenEditClinican,
   getClinicians,
   table,
+  setBool,
 }) {
   const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -203,6 +204,7 @@ export default function EditClinician({
       if (data) {
         toast.success('Clinician updated successfully');
         handleClose();
+        setBool(true);
         getClinicians();
         setLoading(false);
       }
