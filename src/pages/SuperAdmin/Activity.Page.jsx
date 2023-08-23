@@ -5,6 +5,7 @@ import GenericSidebar from '../../components/sidebar/GenericLeftSidebar';
 import PatientSidebar from '../../components/sidebar/patient/PatientSidebar';
 import TimeCard from '../../components/cards/TimeCard.Component';
 import ActivityTable from '../../components/tables/activityLog/ActivityTable';
+import EditClinician from '../../components/popups/clinician/EditClinician.Popup';
 import RightSidebar from '../../components/sidebar/patient/PatientListRightSidebar';
 import request from '../../request/index';
 import EditPatient from '../../components/popups/patient/EditPatient.Popup';
@@ -19,8 +20,11 @@ export default function Activity() {
   const { patientId, clinicianId } = params;
   const [patientData, setPatientData] = useState({});
   const [openEditPatientModal, setOpenEditPatientModal] = useState(false);
+  const [openEditClinicianModal, setOpenEditClinicianModal] = useState(false);
   const [breadcrumb, setBreadcrumb] = useState('');
   const [activityLog, setActivityLog] = useState({});
+  const [information, setInformation] = useState({});
+  const [bool, setBool] = useState(false);
 
   const cardsData = [
     {
@@ -44,7 +48,7 @@ export default function Activity() {
       text: 'Last Logoff',
     },
   ];
-
+  console.log(information, 'information');
   const getClinicName = (name) => {
     setBreadcrumb(name);
   };
@@ -58,6 +62,15 @@ export default function Activity() {
         toast.error(error?.response?.data?.message);
       });
   };
+  // const handleGetClinicianData = async () => {
+  //   await request('get', `/clinics/getClinician/${information?.id}`)
+  //     .then((res) => {
+  //       setInformation(res?.data?.user);
+  //     })
+  //     .catch((error) => {
+  //       toast.error(error?.response?.data?.message);
+  //     });
+  // };
   const handleGetActivityLog = async () => {
     if (window.location.pathname === `/clinicians/${clinicianId}/activity`) {
       await request('get', `/logs/${clinicianId}`)
@@ -87,6 +100,14 @@ export default function Activity() {
       getPatients={handleGetPatientData}
     />
   );
+  const EditClinicianPopup = openEditClinicianModal && (
+    <EditClinician
+      clinicianDetails={information}
+      openEditClinican={openEditClinicianModal}
+      setOpenEditClinican={setOpenEditClinicianModal}
+      setBool={setBool}
+    />
+  );
   useEffect(() => {
     if (window.location.pathname === `/patients/${patientId}/activity/${clinicianId}`) {
       handleGetPatientData();
@@ -113,6 +134,10 @@ export default function Activity() {
               txt="clinics/getClinician"
               roleTxt="Clinic"
               getClinicName={getClinicName}
+              setOpen={setOpenEditClinicianModal}
+              open={openEditClinicianModal}
+              setInformation={setInformation}
+              bool={bool}
             />
           )}
         </div>
@@ -140,6 +165,7 @@ export default function Activity() {
         </div>
       </div>
       {EditPatientPopup}
+      {EditClinicianPopup}
     </>
   );
 }
