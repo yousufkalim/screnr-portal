@@ -250,7 +250,7 @@ function ExerciseDetails({
         <div className="excercise_details">
           <div className="setNumber">
             <div className="text_rep_set">
-              <p>Set Number</p>
+              <p>Set</p>
             </div>
             <div className="set_rep_valueNumber">
               <LeftArrow className="arrows" onClick={handleSetCounterSubtract} />
@@ -260,7 +260,7 @@ function ExerciseDetails({
           </div>
           <div className="setNumber">
             <div className="text_rep_set">
-              <p>Rep Number</p>
+              <p>Repetition</p>
             </div>
             <div className="set_rep_valueNumber">
               <LeftArrow className="arrows" onClick={handleRepCounterSubtract} />

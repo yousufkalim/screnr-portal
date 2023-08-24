@@ -445,33 +445,38 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                           handleUpdateSessionStatus(row?.id);
                         }}
                       >
-                        <TableCell align="center" className="vertical_middle">
+                        <TableCell align="center" className="prescription_head vertical_middle">
                           {row.status === 'completed'
                             ? moment(row?.date).format('MM/DD/YYYY')
                             : '-'}
                         </TableCell>
-                        <TableCell align="center" className="table_cells vertical_middle">
-                          <div style={{ position: 'relative' }}>
-                            <CircularProgress
-                              variant="determinate"
-                              thickness="6"
-                              value={row?.avg_score || 0}
-                              size={60}
-                              sx={{
-                                color: percentageOfGraph(row),
-                              }}
-                            />
-                            <div
-                              style={{
-                                position: 'absolute',
-                                right: '42%',
-                                bottom: '42%',
-                                fontSize: '15px',
-                              }}
-                            >
-                              {row?.avg_score ? Math.round(row?.avg_score) : 0}%
+                        <TableCell align="center" className="prescription_head vertical_middle">
+                          {row?.avg_score ? (
+                            <div style={{ position: 'relative' }}>
+                              <CircularProgress
+                                variant="determinate"
+                                thickness="6"
+                                value={row?.avg_score}
+                                size={60}
+                                sx={{
+                                  color: percentageOfGraph(row),
+                                }}
+                              />
+                              <div
+                                style={{
+                                  position: 'absolute',
+                                  right: '42%',
+                                  bottom: '42%',
+                                  fontSize: '15px',
+                                }}
+                              >
+                                {Math.round(row?.avg_score)}%
+                              </div>
                             </div>
-                          </div>
+                          ) : (
+                            '0%'
+                          )}
+
                           {/* <span className="linearPresProgress">{`${row?.avg_score ?? 0}%`}</span>
                           {row?.avg_score <= 30 ? (
                             <RedLinearProgress
@@ -498,10 +503,10 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                             ''
                           )} */}
                         </TableCell>
-                        <TableCell align="center" className="table_cells vertical_middle">
+                        <TableCell align="center" className="prescription_head vertical_middle">
                           {row?.survey ? 'Done' : 'Not Done'}
                         </TableCell>
-                        <TableCell align="center" className="vertical_middle">
+                        <TableCell align="center" className="prescription_head vertical_middle">
                           <div
                             style={{
                               display: 'flex',
@@ -521,7 +526,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                           </div>
                         </TableCell>
                         <TableCell />
-                        <TableCell className="vertical_middle" align="center">
+                        <TableCell className="prescription_head vertical_middle" align="center">
                           {sessionStatus[row.status]}
                         </TableCell>
                       </StyledTableRow>

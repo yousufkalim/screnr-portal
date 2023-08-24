@@ -46,6 +46,7 @@ function MessageBox({
   lastKey,
   goBackToProfile,
 }) {
+  console.log('🚀 ~ file: MessageBox.Component.jsx:49 ~ patient:', patient);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [open, setOpen] = useState(false);
@@ -136,12 +137,7 @@ function MessageBox({
         <div className="headerInfo">
           <div className="receivrInfo">
             <div className="iconsSec">
-              <Back
-                className="backBtn"
-                onClick={() => {
-                  goBackToProfile();
-                }}
-              />
+              <Back className="backBtn" onClick={goBackToProfile} />
               <AvatarComponent
                 // src={getMediaUrl(patient?.profile_pic)}
                 alt={`${patient?.first_name} ${patient?.last_name}`}
@@ -153,7 +149,7 @@ function MessageBox({
                 {patient?.first_name} {patient?.last_name}
               </p>
               <p className="patientId">
-                Patient ID: <span style={{ color: '#FBA622' }}>{patient?.id}</span>
+                Patient ID: <span style={{ color: '#FBA622' }}>{patient?.userData?.mrn_id}</span>
               </p>
             </div>
           </div>
