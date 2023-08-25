@@ -32,7 +32,7 @@ function ScoreCard({ bodyPart, scoreValue }) {
   return (
     <div className="score_Bars">
       <p className="excercises_names">{bodyPart}</p>{' '}
-      <div>
+      <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
         <CircularProgress
           variant="determinate"
           thickness="6"

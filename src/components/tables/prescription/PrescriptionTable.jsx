@@ -240,7 +240,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                   <TableCell
                     align="center"
                     size="small"
-                    className="prescription_head vertical_middle"
+                    className="prescription_head_title vertical_middle"
                     sx={{
                       minWidth: '8rem',
                       maxWidth: '8rem',
@@ -452,7 +452,13 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         </TableCell>
                         <TableCell align="center" className="prescription_head vertical_middle">
                           {row?.avg_score ? (
-                            <div style={{ position: 'relative' }}>
+                            <div
+                              style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                position: 'relative',
+                              }}
+                            >
                               <CircularProgress
                                 variant="determinate"
                                 thickness="6"
@@ -465,8 +471,9 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                               <div
                                 style={{
                                   position: 'absolute',
-                                  right: '42%',
-                                  bottom: '42%',
+                                  right: '50%',
+                                  bottom: '50%',
+                                  transform: 'translate(50%,50%)',
                                   fontSize: '15px',
                                 }}
                               >
