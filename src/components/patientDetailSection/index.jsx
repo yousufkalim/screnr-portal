@@ -217,7 +217,7 @@ function Index({
               thickness="40"
             />
           )} */}
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
             <CircularProgress
               variant="determinate"
               thickness="6"
@@ -230,8 +230,9 @@ function Index({
             <div
               style={{
                 position: 'absolute',
-                right: '42%',
-                bottom: '42%',
+                right: '50%',
+                transform: 'translate(50%,50%)',
+                bottom: '50%',
                 fontSize: '15px',
               }}
             >

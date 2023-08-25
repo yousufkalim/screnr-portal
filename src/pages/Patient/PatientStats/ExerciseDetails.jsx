@@ -280,24 +280,27 @@ function ExerciseDetails({
                 <p className="excercises_names">Performance</p>
                 {/* <RightArrow className="arrows" /> */}
               </div>
-              <CircularProgress
-                variant="determinate"
-                thickness="6"
-                value={targetExercise?.rep?.screnr_compliance || 0}
-                size={80}
-                sx={{
-                  color: percentageOfGraph,
-                }}
-              />
+              <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress
+                  variant="determinate"
+                  thickness="6"
+                  value={targetExercise?.rep?.screnr_compliance || 0}
+                  size={80}
+                  sx={{
+                    color: percentageOfGraph,
+                  }}
+                />
 
-              <div className="graphData">
-                <p className="excercise_percent">
-                  {targetExercise?.rep?.screnr_compliance
-                    ? Math.round(targetExercise?.rep?.screnr_compliance)
-                    : 0}
-                  %
-                </p>
+                <div className="graphData">
+                  <p className="excercise_percent">
+                    {targetExercise?.rep?.screnr_compliance
+                      ? Math.round(targetExercise?.rep?.screnr_compliance)
+                      : 0}
+                    %
+                  </p>
+                </div>
               </div>
+
               {/* <div className="colorDotsDiv2">
                 <div className="colorDots">
                   <RedDot />

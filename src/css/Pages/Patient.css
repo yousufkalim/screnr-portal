@@ -443,6 +443,12 @@ a {
   padding-top: 4px;
 }
 
+.prescription_head_title {
+  font-size: 16px !important;
+  color: #454238 !important;
+  padding-top: 4px;
+}
+
 .prescription_cell {
   color: #136773;
   font-weight: 500;
@@ -563,6 +569,7 @@ a {
   font-size: 15px !important;
   color: #454238 !important;
 }
+
 .excerciseItemHeading {
   padding-bottom: 4px !important;
 }
@@ -801,6 +808,7 @@ a {
   padding: 0.5rem;
   margin-bottom: 13px;
 }
+
 .circleAround {
   display: flex;
   align-items: center;
@@ -1040,6 +1048,11 @@ a {
   .prescription_head {
     font-size: 13px !important;
   }
+
+  .prescription_head_title {
+    font-size: 14px !important;
+  }
+
   .exerciseItems li {
     font-size: 13px !important;
   }
@@ -1135,6 +1148,7 @@ a {
   .prescription_head {
     font-size: 11px !important;
   }
+
   .exerciseItems li {
     font-size: 11px !important;
   }
