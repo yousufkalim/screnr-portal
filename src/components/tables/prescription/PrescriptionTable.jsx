@@ -16,14 +16,14 @@ import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import { ReactComponent as Action } from '../../../assets/components/Table/dots.svg';
 import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
-import { ReactComponent as Complete } from '../../../assets/components/Table/check.svg';
-import { ReactComponent as Pending } from '../../../assets/components/Table/uncheck.svg';
-import { ReactComponent as Error } from '../../../assets/components/Table/Error.svg';
-import { ReactComponent as Inprogress } from '../../../assets/components/Table/inprogress.svg';
-import { ReactComponent as Incomplete } from '../../../assets/components/Table/Incomplete.svg';
+// import { ReactComponent as Complete } from '../../../assets/components/Table/check.svg';
+// import { ReactComponent as Pending } from '../../../assets/components/Table/uncheck.svg';
+// import { ReactComponent as Error } from '../../../assets/components/Table/Error.svg';
+// import { ReactComponent as Inprogress } from '../../../assets/components/Table/inprogress.svg';
+// import { ReactComponent as Incomplete } from '../../../assets/components/Table/Incomplete.svg';
 import { ReactComponent as Edit } from '../../../assets/icons/editIcon.svg';
 import { ReactComponent as Tick } from '../../../assets/components/Table/markTick.svg';
 import AvatarComponent from '../../Avatar/Avatar.Component';
@@ -73,20 +73,20 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
         // toast.error(error?.response?.data?.message);
       });
   };
-  const handleCloseCompleted = async (prescriptionId) => {
-    setLoading(true);
-    await request('put', `/clinicians/prescriptions/completePrescription/${prescriptionId}`)
-      .then(() => {
-        setLoading(false);
-        setAnchorEl(null);
-        setOpenPrescriptionMenu(false);
-        handlePrescriptionList();
-      })
-      .catch((error) => {
-        setLoading(false);
-        toast.error(error?.response?.data?.message);
-      });
-  };
+  // const handleCloseCompleted = async (prescriptionId) => {
+  //   setLoading(true);
+  //   await request('put', `/clinicians/prescriptions/completePrescription/${prescriptionId}`)
+  //     .then(() => {
+  //       setLoading(false);
+  //       setAnchorEl(null);
+  //       setOpenPrescriptionMenu(false);
+  //       handlePrescriptionList();
+  //     })
+  //     .catch((error) => {
+  //       setLoading(false);
+  //       toast.error(error?.response?.data?.message);
+  //     });
+  // };
   const handleUpdateSessionStatus = (targetSessionId) => {
     request('get', `/clinicians/sessions/addSessionStatus/${targetSessionId}`)
       .then((res) => {
@@ -193,13 +193,13 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patientId, selectedClinicianId]);
 
-  const sessionStatus = {
-    pending: <Pending />,
-    'in-progress': <Inprogress />,
-    completed: <Complete />,
-    errored: <Error />,
-    unchecked: <Incomplete />,
-  };
+  // const sessionStatus = {
+  //   pending: <Pending />,
+  //   'in-progress': <Inprogress />,
+  //   completed: <Complete />,
+  //   errored: <Error />,
+  //   unchecked: <Incomplete />,
+  // };
   return (
     <div id="prescriptionTable">
       <h3 className="prescription_header">Prescription List</h3>
@@ -330,6 +330,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         />
                         {openPrescriptionMenu && selectedPrescription.id === mainRow.id ? (
                           <Menu
+                            defaultValue={0}
                             id="basic-menu"
                             anchorEl={anchorEl}
                             open={open}
@@ -363,14 +364,14 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                               />
                               <p className="actionMenus">Edit Prescription</p>
                             </MenuItem>
-                            <MenuItem
+                            {/* <MenuItem
                               onClick={() => {
                                 handleCloseCompleted(mainRow?.id);
                               }}
                             >
                               <Tick className="pIcon" />
                               <p className="actionMenus">Mark as Completed</p>
-                            </MenuItem>
+                            </MenuItem> */}
                           </Menu>
                         ) : (
                           ''
@@ -430,9 +431,9 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         Pain Scale
                       </TableCell>
                       <TableCell />
-                      <TableCell align="center" size="small" className="table_header">
+                      {/* <TableCell align="center" size="small" className="table_header">
                         Status
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -534,8 +535,9 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         </TableCell>
                         <TableCell />
                         <TableCell className="prescription_head vertical_middle" align="center">
-                          {sessionStatus[row.status]}
+                          {/* {sessionStatus[row.status]} */}
                         </TableCell>
+                        <TableCell className="prescription_head vertical_middle" align="center" />
                       </StyledTableRow>
                     ))}
                   </TableBody>
