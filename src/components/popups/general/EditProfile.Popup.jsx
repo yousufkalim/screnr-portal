@@ -194,7 +194,7 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
                     className="customInput"
                     id="phone"
                     type="text"
-                    name="last_number"
+                    name="phone_number"
                     maxLength="10"
                     minLength="10"
                     value={values.phone_number}
