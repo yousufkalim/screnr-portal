@@ -72,7 +72,7 @@ function ClinicianPatientDetails({
   handleDeletePatient,
 }) {
   const [openMenu, setOpenMenu] = useState(false);
-
+  const fullName = `${row.first_name} ${row.last_name}`;
   return (
     <>
       <StyledTableRow
@@ -83,7 +83,9 @@ function ClinicianPatientDetails({
         }
       >
         <TableCell align="left" onClick={() => handlePatientProfile(row.id)}>
-          {row?.userData?.mrn_id}
+          {row?.userData?.mrn_id.length > 4
+            ? `${row?.userData?.mrn_id.slice(0, 4)}...`
+            : row?.userData?.mrn_id}
         </TableCell>
         <TableCell align="left" onClick={() => handlePatientProfile(row.id)}>
           <div className="image_div">
@@ -106,7 +108,11 @@ function ClinicianPatientDetails({
                 className="header_avatar"
               />
             )}
-            <div className="clinic_cell">{`${row.first_name} ${row.last_name}`}</div>
+            <p className="clinic_cell">
+              {fullName.length > 5
+                ? `${fullName.slice(0, 5)}...`
+                : `${row.first_name} ${row.last_name}`}
+            </p>
           </div>
         </TableCell>
         <TableCell
