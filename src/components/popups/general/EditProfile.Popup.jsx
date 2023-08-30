@@ -34,6 +34,8 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
   const { user } = Store();
   const updateStore = UpdateStore();
   const [values, setValues] = useState({
+    first_name: user.first_name,
+    last_name: user.last_name,
     phone_number: user.phone_number,
     email: user.email,
     profile_pic: user.profile_pic || '',
@@ -84,6 +86,8 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
         updateStore({
           user: {
             ...user,
+            first_name: data.user.first_name,
+            last_name: data.user.last_name,
             email: data.user.email,
             phone_number: data.user.phone_number,
             profile_pic: data.user.profile_pic,
@@ -156,6 +160,32 @@ export default function EditProfilePopup({ openEditProfilePopup, setOpenEditProf
               <h1 className="forgetPaswdTxt">{`${user.first_name} ${user.last_name}`}</h1>
               <p className="enterEmailTxt">{roles[user?.role]}</p>
               <FormControl sx={{ mb: 2, mt: 6, width: '85%' }} variant="outlined">
+                <label className="pswdChangeTrack" htmlFor="first_name">
+                  <p className="inputDiv">First Name</p>
+                  <input
+                    className="customInput"
+                    type="text"
+                    id="first_name"
+                    name="first_name"
+                    value={values.first_name}
+                    onChange={handleChange}
+                  />
+                </label>
+              </FormControl>
+              <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
+                <label className="pswdChangeTrack" htmlFor="last_name">
+                  <p className="inputDiv">Last Name</p>
+                  <input
+                    className="customInput"
+                    id="last_name"
+                    type="text"
+                    name="last_name"
+                    value={values.last_name}
+                    onChange={handleChange}
+                  />
+                </label>
+              </FormControl>
+              <FormControl sx={{ mb: 2, width: '85%' }} variant="outlined">
                 <label className="pswdChangeTrack" htmlFor="phone">
                   <p className="inputDiv">
                     <Phone className="customFieldIcon" /> Phone Number
