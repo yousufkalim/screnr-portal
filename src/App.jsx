@@ -27,7 +27,7 @@ function App() {
   const navigate = useNavigate();
 
   const isAuthenticated = async () => {
-    const { data } = await axios.get(`${baseUrl}/auth`, {
+    const { data } = await axios.get(`${baseUrl}/auth/userDetails`, {
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${userToken}`,
