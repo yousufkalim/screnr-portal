@@ -102,17 +102,20 @@ export default function LeftSidebar({
             </label>
           </div>
         </div>
-        <img
-          src={edit}
-          alt=""
-          className="editIconSidebar"
-          onClick={handleEditIconClick}
-          onKeyDown={(event) => {
-            if (event?.key === 'Enter' || event?.key === ' ') {
-              handleEditIconClick();
-            }
-          }}
-        />
+        <div className="tooltip">
+          <img
+            src={edit}
+            alt=""
+            className="editIconSidebar"
+            onClick={handleEditIconClick}
+            onKeyDown={(event) => {
+              if (event?.key === 'Enter' || event?.key === ' ') {
+                handleEditIconClick();
+              }
+            }}
+          />
+          <span className="tooltiptext">Edit</span>
+        </div>
       </div>
       <div className="sideBarInfo">
         <div className="user_name"> {`${info?.first_name ?? ''} ${info?.last_name ?? ''}`}</div>

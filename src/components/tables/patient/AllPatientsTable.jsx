@@ -436,7 +436,7 @@ export default function PatientTable({
                 Prescription
               </TableCell>
               <TableCell className="table_head" align="center">
-                Completion rate
+                Date of Last Activity
               </TableCell>
               <TableCell className="table_head" align="center">
                 Performance
