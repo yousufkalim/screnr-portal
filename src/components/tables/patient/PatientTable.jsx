@@ -143,7 +143,7 @@ export default function PatientTable({ patients, getPatients, loading }) {
                 Prescription
               </TableCell>
               <TableCell className="table_head" align="center">
-                Completion
+                Date of Last Activity
               </TableCell>
               <TableCell className="table_head" align="center">
                 Performance
