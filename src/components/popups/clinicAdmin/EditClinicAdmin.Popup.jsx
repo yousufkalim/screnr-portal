@@ -524,7 +524,7 @@ export default function EditClinicAdmin({
                     placeholderText="Enter expiration date"
                     popperPlacement="bottom-start"
                     showYearDropdown
-                    minDate={tomorrow}
+                    // minDate={tomorrow}
                     disablePast
                     scrollableYearDropdown
                     maxDate={futureYear}

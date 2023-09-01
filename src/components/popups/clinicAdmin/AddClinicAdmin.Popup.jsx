@@ -171,6 +171,7 @@ export default function AddClinicAdmin({
         setAlreadyExisitingUser(true);
       }
       if (error.response.status === 418) {
+        setClinicAdmin({ ...clinicAdmin, id: error.response.data.id });
         setExisitingButInactive(true);
       }
       toast.error(error?.response?.data?.message);
@@ -196,7 +197,7 @@ export default function AddClinicAdmin({
     formData.append('active', 'true');
     formData.append('activateUser', 'true');
     try {
-      const { data } = await request('put', '/staff/editClinic/undefined', formData);
+      const { data } = await request('patch', `/staff/activateClinic/${clinicAdmin.id}`, formData);
       if (data) {
         getClinicAdmins();
         setClinicAdmin({});

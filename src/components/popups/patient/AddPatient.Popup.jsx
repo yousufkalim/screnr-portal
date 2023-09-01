@@ -247,6 +247,7 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
         setAlreadyExisitingUser(true);
       }
       if (error.response.status === 418) {
+        setPatient({ ...patient, id: error.response.data.id });
         setExisitingButInactive(true);
       }
       toast.error(error?.response?.data?.message);
@@ -283,7 +284,11 @@ export default function AddNewPatient({ openAddPatient, setOpenAddPatient, getPa
 
     // sending this data to api
     try {
-      const { data } = await request('put', '/clinicians/editPatient/undefined', formData);
+      const { data } = await request(
+        'patch',
+        `/clinicians/activatePatient/${patient.id}`,
+        formData,
+      );
       if (data) {
         toast.success('Patient activated successfully');
         getPatients();

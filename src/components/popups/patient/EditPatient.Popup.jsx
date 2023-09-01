@@ -641,7 +641,7 @@ export default function EditPatient({
                     disablePast
                     showYearDropdown
                     name="expiry_date"
-                    minDate={tomorrow}
+                    // minDate={tomorrow}
                     dateFormat="MM-dd-yyyy"
                     onChange={expDateChange}
                     popperPlacement="bottom-start"

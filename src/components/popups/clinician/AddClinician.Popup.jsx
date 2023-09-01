@@ -192,6 +192,7 @@ export default function AddClinician({
         setAlreadyExisitingUser(true);
       }
       if (error.response.status === 418) {
+        setClinician({ ...clinician, id: error.response.data.id });
         setExisitingButInactive(true);
       }
       toast.error(error?.response?.data?.message);
@@ -200,7 +201,6 @@ export default function AddClinician({
 
   const handleActivate = async () => {
     const formData = new FormData();
-
     if (clinician.expiry_date && !checked) {
       delete clinician.expiry_date;
       setClinician({ ...clinician });
@@ -217,7 +217,11 @@ export default function AddClinician({
     formData.append('active', 'true');
     formData.append('activateUser', 'true');
     try {
-      const { data } = await request('put', '/clinics/editClinician/undefined', formData);
+      const { data } = await request(
+        'patch',
+        `/clinics/activateClinician/${clinician.id}`,
+        formData,
+      );
 
       if (data) {
         getClinicians();

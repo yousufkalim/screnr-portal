@@ -191,6 +191,7 @@ export default function PatientTable({
           overflowX: 'hidden',
           boxShadow: '0',
           width: '94vw',
+          minHeight: '95%',
           '@media (max-width: 1284px)': {
             overflow: 'auto',
           },
