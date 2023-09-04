@@ -47,6 +47,7 @@ export default function ExpiryDateExtend({
           ...prescription,
           start_date: selectedStartDate,
         });
+        handleClose();
       })
       .catch((error) => {
         console.log(error);

@@ -134,9 +134,11 @@ export default function AddPatientPrescription() {
   };
 
   const dateChange = (e) => {
-    if (moment(e).isAfter(moment(patient?.expiry_date))) {
-      setOpenExtendDate(true);
-      setSelectedStartDate(e);
+    if (patient?.expiry_date) {
+      if (moment(e).isAfter(moment(patient?.expiry_date))) {
+        setOpenExtendDate(true);
+        setSelectedStartDate(e);
+      }
     } else {
       setPrescription({
         ...prescription,
