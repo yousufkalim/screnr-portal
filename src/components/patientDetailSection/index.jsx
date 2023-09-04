@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import CircularProgress from '@mui/material/CircularProgress';
 import { styled } from '@mui/material/styles';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 import { ReactComponent as VisibilityOff } from '../../assets/icons/eyess.svg';
 import { ReactComponent as Edit } from '../../assets/components/Table/alert.svg';
 import { ReactComponent as Report } from '../../assets/components/Table/report.svg';
@@ -201,7 +202,7 @@ function Index({
           }}
           onClick={() => handlePatientProfile(row.id)}
         >
-          {Math.round(row.completion) ?? '-'}%
+          {row.completion ? moment(row.completion).format('YYYY-MM-D') : '-'}
         </TableCell>
 
         <TableCell align="center" onClick={() => handlePatientProfile(row.id)}>
