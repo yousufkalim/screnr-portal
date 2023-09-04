@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { ReactComponent as Action } from '../../../assets/components/Table/dots.svg';
 import { ReactComponent as OpenArrow } from '../../../assets/components/Sidebar/openArrow.svg';
 // import { ReactComponent as Complete } from '../../../assets/components/Table/check.svg';
@@ -73,20 +73,20 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
         // toast.error(error?.response?.data?.message);
       });
   };
-  // const handleCloseCompleted = async (prescriptionId) => {
-  //   setLoading(true);
-  //   await request('put', `/clinicians/prescriptions/completePrescription/${prescriptionId}`)
-  //     .then(() => {
-  //       setLoading(false);
-  //       setAnchorEl(null);
-  //       setOpenPrescriptionMenu(false);
-  //       handlePrescriptionList();
-  //     })
-  //     .catch((error) => {
-  //       setLoading(false);
-  //       toast.error(error?.response?.data?.message);
-  //     });
-  // };
+  const handleCloseCompleted = async (prescriptionId) => {
+    setLoading(true);
+    await request('put', `/clinicians/prescriptions/completePrescription/${prescriptionId}`)
+      .then(() => {
+        setLoading(false);
+        setAnchorEl(null);
+        setOpenPrescriptionMenu(false);
+        handlePrescriptionList();
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error(error?.response?.data?.message);
+      });
+  };
   const handleUpdateSessionStatus = (targetSessionId) => {
     request('get', `/clinicians/sessions/addSessionStatus/${targetSessionId}`)
       .then((res) => {
@@ -370,14 +370,14 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                               />
                               <p className="actionMenus">Edit Prescription</p>
                             </MenuItem>
-                            {/* <MenuItem
+                            <MenuItem
                               onClick={() => {
                                 handleCloseCompleted(mainRow?.id);
                               }}
                             >
                               <Tick className="pIcon" />
                               <p className="actionMenus">Mark as Completed</p>
-                            </MenuItem> */}
+                            </MenuItem>
                           </Menu>
                         ) : (
                           ''
