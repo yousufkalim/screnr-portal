@@ -8,6 +8,7 @@
   font-size: 16px !important;
   text-transform: none !important;
 }
+
 .resetPasswordBtnloading {
   background-color: #dcdbd9 !important;
   width: 100% !important;
@@ -18,11 +19,13 @@
   font-size: 16px !important;
   text-transform: none !important;
 }
+
 .whiteCircularProgress {
   color: white !important;
   display: flex;
   align-items: center;
 }
+
 .progressContainer {
   display: inline-flex;
   align-items: center;
@@ -276,6 +279,7 @@
   margin: auto;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 #profilePic {
@@ -298,6 +302,7 @@
   font-size: 16px !important;
   text-transform: none !important;
 }
+
 .logoutBtnloading {
   border: 1px solid #dfdcd7 !important;
   background-color: #dcdbd9 !important;
@@ -426,9 +431,9 @@
 }
 
 .addDPIcon {
-  position: relative;
-  top: -27px;
-  right: -34px;
+  position: absolute;
+  bottom: 0;
+  right: 17px;
   cursor: pointer;
 }
 
@@ -643,6 +648,23 @@
 
 #focus .react-tel-input .form-control {
   z-index: 1300 !important;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: rgb(42, 39, 39);
+  color: #fff;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+  left: 100px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
 @media only screen and (max-width: 1536px) {

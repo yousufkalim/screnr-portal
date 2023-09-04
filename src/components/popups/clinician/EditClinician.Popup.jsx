@@ -203,9 +203,9 @@ export default function EditClinician({
       );
       if (data) {
         toast.success('Clinician updated successfully');
+        getClinicians();
         handleClose();
         setBool(true);
-        getClinicians();
         setLoading(false);
       }
     } catch (error) {
@@ -521,7 +521,7 @@ export default function EditClinician({
                     placeholderText="Enter expiration date"
                     popperPlacement="bottom-start"
                     showYearDropdown
-                    minDate={tomorrow}
+                    // minDate={tomorrow}
                     disablePast
                     scrollableYearDropdown
                     maxDate={futureYear}

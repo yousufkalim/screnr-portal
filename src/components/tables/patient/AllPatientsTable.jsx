@@ -191,6 +191,7 @@ export default function PatientTable({
           overflowX: 'hidden',
           boxShadow: '0',
           width: '94vw',
+          minHeight: '95%',
           '@media (max-width: 1284px)': {
             overflow: 'auto',
           },
@@ -436,7 +437,7 @@ export default function PatientTable({
                 Prescription
               </TableCell>
               <TableCell className="table_head" align="center">
-                Completion rate
+                Date of Last Activity
               </TableCell>
               <TableCell className="table_head" align="center">
                 Performance

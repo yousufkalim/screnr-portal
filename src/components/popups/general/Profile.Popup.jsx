@@ -100,30 +100,30 @@ export default function ProfilePopup({
           </div>
           <div>
             <Typography gutterBottom>
-              <div>
-                <div className="imgDivPopupProfile">
-                  {/* Avatar to be used */}
-                  <label htmlFor="profilePic">
-                    {user?.profile_pic ? (
-                      <img
-                        src={getMediaUrl(user?.profile_pic)}
-                        className="pointer"
-                        id="selectedImg"
-                        style={{
-                          width: '122px',
-                          borderRadius: '100px',
-                          height: '100%',
-                          objectFit: 'cover',
-                          border: ' 3px solid #faa017',
-                        }}
-                        alt=""
-                      />
-                    ) : (
-                      <AvatarComponent
-                        alt={`${user.first_name ?? ''} ${user.last_name ?? ''}`}
-                        className="profile_popups_avatar"
-                      />
-                    )}
+              <div className="imgDivPopupProfile">
+                {/* Avatar to be used */}
+                <label htmlFor="profilePic">
+                  {user?.profile_pic ? (
+                    <img
+                      src={getMediaUrl(user?.profile_pic)}
+                      className="pointer"
+                      id="selectedImg"
+                      style={{
+                        width: '122px',
+                        borderRadius: '100px',
+                        height: '100%',
+                        objectFit: 'cover',
+                        border: ' 3px solid #faa017',
+                      }}
+                      alt=""
+                    />
+                  ) : (
+                    <AvatarComponent
+                      alt={`${user.first_name ?? ''} ${user.last_name ?? ''}`}
+                      className="profile_popups_avatar"
+                    />
+                  )}
+                  <div className="tooltip">
                     <img
                       src={edit}
                       className="addDPIcon"
@@ -134,9 +134,11 @@ export default function ProfilePopup({
                       }}
                       alt=""
                     />
-                  </label>
-                </div>
+                    <span className="tooltiptext">Edit</span>
+                  </div>
+                </label>
               </div>
+
               <h1 className="forgetPaswdTxt">{`${user.first_name || ''} ${
                 user.last_name || ''
               }`}</h1>

@@ -116,7 +116,6 @@ export default function AddStaffMember({
       e.preventDefault();
       const staffMemberCopy = { ...staffMember };
       const formData = new FormData();
-
       if (staffMemberCopy.expiry_date && !checked) {
         delete staffMemberCopy.expiry_date;
         setStaffMember({ ...staffMemberCopy });
@@ -135,8 +134,8 @@ export default function AddStaffMember({
         return;
       }
       const { data } = await request('post', '/admins/addStaff', formData);
-
       if (data) {
+        // setStaffMember({ ...staffMemberCopy, id: data?.id });
         getStaffMembers();
         setStaffMember({});
         setAdded(true);
@@ -149,12 +148,12 @@ export default function AddStaffMember({
         setAlreadyExisitingUser(true);
       }
       if (error.response.status === 418) {
+        setStaffMember({ ...staffMember, id: error.response.data.id });
         setExisitingButInactive(true);
       }
       toast.error(error?.response?.data?.message);
     }
   };
-
   const handleActivate = async () => {
     const staffMemberCopy = { ...staffMember };
     const formData = new FormData();
@@ -164,7 +163,7 @@ export default function AddStaffMember({
     formData.append('activateUser', true);
 
     try {
-      const { data } = await request('put', '/admins/editStaff/undefined', formData);
+      const { data } = await request('patch', `/admins/activateStaff/${staffMember.id}`, formData);
       if (data) {
         getStaffMembers();
         setStaffMember({});
