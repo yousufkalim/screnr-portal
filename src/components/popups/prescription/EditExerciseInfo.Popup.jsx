@@ -143,7 +143,7 @@ export default function EditExerciseInfo({
                     }}
                     id="outlined-fname"
                     classes={outlinedInputStyles}
-                    placeholder="Number of sets"
+                    placeholder="Sets"
                     name="sets"
                     value={sets}
                     onChange={(e) => {
@@ -176,7 +176,7 @@ export default function EditExerciseInfo({
                     }}
                     id="outlined-fname"
                     classes={outlinedInputStyles}
-                    placeholder="Number of reps"
+                    placeholder="Reps"
                     name="reps"
                     value={reps}
                     onChange={(e) => {
@@ -227,7 +227,7 @@ export default function EditExerciseInfo({
                     }}
                   >
                     <MenuItem value="default" disabled>
-                      <span className="optColor">Rest between sets</span>
+                      <span className="optColor">Rest</span>
                     </MenuItem>
                     {rest?.map((item) => {
                       return (

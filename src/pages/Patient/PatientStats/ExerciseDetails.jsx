@@ -219,7 +219,7 @@ function ExerciseDetails({
               />
             </div>
             <div className="dateTitle">
-              <p>Exercise Performed Date</p>
+              <p>Date</p>
             </div>
             <div className="dateExcercise">
               <p>
