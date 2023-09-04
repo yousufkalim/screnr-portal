@@ -52,18 +52,22 @@ function ExerciseTable({ loading, feedback }) {
         >
           <TableHead>
             <TableRow sx={{ height: '20px' }}>
-              <TableCell
+              {/* <TableCell
                 align="left"
                 sx={{ width: '20%', paddingLeft: '2.5%' }}
                 className="table_head"
               >
                 Body Part Name
+              </TableCell> */}
+              <TableCell
+                className="table_head"
+                align="left"
+                sx={{ width: '20%', paddingLeft: '2.5%' }}
+              >
+                Performance Check
               </TableCell>
               <TableCell className="table_head" align="center">
-                Feedback
-              </TableCell>
-              <TableCell className="table_head" align="center">
-                Rule
+                Results
               </TableCell>
             </TableRow>
           </TableHead>
@@ -86,13 +90,13 @@ function ExerciseTable({ loading, feedback }) {
             ) : feedback?.length > 0 ? (
               feedback?.map((item) => (
                 <StyledTableRow key={item} className="tableRow">
-                  <TableCell
+                  {/* <TableCell
                     align="left"
                     sx={{ display: 'flex', paddingTop: '12%', paddingLeft: '12%' }}
                   >
                     {item?.name.replace(/[0-9_]+/g, ' ').trim()}
-                  </TableCell>
-                  <TableCell align="center" className="table_cells">
+                  </TableCell> */}
+                  <TableCell align="left" className="table_cells" sx={{ paddingLeft: '2.2%' }}>
                     {item?.value?.feedback ? item?.value?.feedback : 'N/A'}
                   </TableCell>
                   <TableCell align="center" className="table_cells">
