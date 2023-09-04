@@ -95,7 +95,7 @@ export default function AddPrescriptionTable({ prescription, setPrescription }) 
           <TableHead>
             <TableRow>
               <TableCell className="table_head" id="prescriptionTableHead" align="center">
-                #no
+                No.
               </TableCell>
               <TableCell className="table_head" id="prescriptionTableHead" align="center">
                 Name
@@ -121,10 +121,7 @@ export default function AddPrescriptionTable({ prescription, setPrescription }) 
                   {`${index + 1}.`}
                 </TableCell>
                 <TableCell align="center" className="table_cells">
-                  <div
-                    className="actionDiv"
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                  >
+                  <div className="actionDiv" style={{ display: 'flex', alignItems: 'center' }}>
                     {row?.type === 'motion' ? (
                       <MotionCapture className="actionIcon" />
                     ) : (

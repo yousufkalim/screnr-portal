@@ -68,12 +68,12 @@ export default function Chart({ logs }) {
         <span className="chartSubtxt">Total</span>
         <span className="chartTimeTxt">TRACKED HOURS</span>
       </div>
-      <div className="currentTimeStatsDiv">
+      {/* <div className="currentTimeStatsDiv">
         <div className="currentTimeSubDiv">
           <span className="chartDayTxt">Today</span>
           <span className="chartCurrentTime">{logs?.loginHours}</span>
         </div>
-      </div>
+      </div> */}
 
       <Bar options={options} data={data} className="patientChart" />
 

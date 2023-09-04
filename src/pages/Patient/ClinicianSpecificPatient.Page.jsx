@@ -143,7 +143,6 @@ export default function Patient() {
               ))}
             </div>
           </div>
-
           <PatientTable
             patients={patients}
             setOpenAddPatient={setOpenAddPatient}

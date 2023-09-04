@@ -93,8 +93,8 @@ export default function AddPrescription({
     motionExerciseInfo.rest &&
     motionExerciseInfo.exercise;
 
-  const today = new Date().toISOString();
-
+  // const today = new Date().toISOString();
+  const today = new Date();
   function capitalizeFirstLetterOfEachWord(inputString) {
     const words = inputString?.split(' ');
     const capitalizedWords = words?.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
@@ -395,7 +395,7 @@ export default function AddPrescription({
                     }}
                     id="outlined-fname"
                     classes={outlinedInputStyles}
-                    placeholder="Number of sets"
+                    placeholder="Sets"
                     name="sets"
                     value={motionExerciseInfo.sets}
                     onChange={(e) => {
@@ -433,7 +433,7 @@ export default function AddPrescription({
                     }}
                     id="outlined-fname"
                     classes={outlinedInputStyles}
-                    placeholder="Number of reps"
+                    placeholder="Reps"
                     name="reps"
                     value={motionExerciseInfo?.reps}
                     onChange={(e) => {
@@ -488,7 +488,7 @@ export default function AddPrescription({
                     }}
                   >
                     <MenuItem value="default">
-                      <span className="optColor">Rest between sets</span>
+                      <span className="optColor">Rest</span>
                     </MenuItem>
                     {rest?.map((item) => {
                       return (
@@ -692,7 +692,7 @@ export default function AddPrescription({
                     }}
                     id="outlined-fname"
                     classes={outlinedInputStyles}
-                    placeholder="Number of sets"
+                    placeholder="Sets"
                     name="sets"
                     value={simpleExerciseInfo.sets}
                     onChange={(e) => {
@@ -730,7 +730,7 @@ export default function AddPrescription({
                     }}
                     id="outlined-fname"
                     classes={outlinedInputStyles}
-                    placeholder="Number of reps"
+                    placeholder="Reps"
                     name="reps"
                     value={simpleExerciseInfo.reps}
                     onChange={(e) => {
@@ -785,7 +785,7 @@ export default function AddPrescription({
                     }}
                   >
                     <MenuItem value="default">
-                      <span className="optColor">Rest between sets</span>
+                      <span className="optColor">Rest</span>
                     </MenuItem>
                     {rest?.map((item) => {
                       return (
