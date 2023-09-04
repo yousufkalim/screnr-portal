@@ -151,6 +151,15 @@
   border-radius: 50%;
 }
 
+.action_btn {
+  border-radius: 20px;
+  padding: 5px 10px;
+  border: 2px solid #fba622;
+  color: #fba622;
+  background: none;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 1440px) {
   .name_cell_dasdboard,
   .table_cells {

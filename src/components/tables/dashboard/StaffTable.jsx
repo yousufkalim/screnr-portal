@@ -12,6 +12,8 @@ import TablePagination from '@mui/material/TablePagination';
 import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from 'react-router-dom';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import { ReactComponent as VisibilityOff } from '../../../assets/icons/eyess.svg';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 // import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
@@ -26,6 +28,9 @@ export default function TableComponent({
   staffMembers,
   getStaffMembers,
   loading,
+  handleChangeCheck,
+  checked,
+  activateUser,
 }) {
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
   const [openDeletePopup, setOpenDeletePopup] = useState(false);
@@ -56,6 +61,20 @@ export default function TableComponent({
       >
         <div className="table_title">
           <h3 className="dashboard-table-txt">List of Staff Members</h3>
+          <FormControlLabel
+            required
+            control={
+              <Switch
+                size="small"
+                color="primary"
+                checked={checked}
+                onChange={handleChangeCheck}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+            }
+            label="Deactivated Users"
+            sx={{ color: '#136773' }}
+          />
           <Button className="dashboard_table_head_btn" onClick={() => setOpenAddStaffMember(true)}>
             Invite member
           </Button>
@@ -164,20 +183,32 @@ export default function TableComponent({
                   </TableCell>
                   <TableCell align="left">
                     <div className="table_action_div">
-                      <Edit
-                        className="table_icons"
-                        onClick={() => {
-                          setStaffMember(row);
-                          setOpenEditStaffMember(true);
-                        }}
-                      />
-                      <VisibilityOff
-                        className="table_icons"
-                        onClick={() => {
-                          setStaffMember(row);
-                          setOpenDeletePopup(true);
-                        }}
-                      />
+                      {!checked ? (
+                        <>
+                          <Edit
+                            className="table_icons"
+                            onClick={() => {
+                              setStaffMember(row);
+                              setOpenEditStaffMember(true);
+                            }}
+                          />
+                          <VisibilityOff
+                            className="table_icons"
+                            onClick={() => {
+                              setStaffMember(row);
+                              setOpenDeletePopup(true);
+                            }}
+                          />
+                        </>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => activateUser(row.id)}
+                          className="action_btn"
+                        >
+                          Active
+                        </button>
+                      )}
                     </div>
                   </TableCell>
                 </TableRow>
