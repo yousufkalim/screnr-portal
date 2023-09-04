@@ -78,7 +78,7 @@ export default function PatientSidebarSection({
             //   }
             // }}
           />
-          <span className="tooltiptext">Edit</span>
+          <span className="tooltiptext">Edit Profile</span>
         </div>
       </div>
       <div className="sideBarInfo">

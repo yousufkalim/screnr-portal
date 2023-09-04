@@ -200,6 +200,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
   //   errored: <Error />,
   //   unchecked: <Incomplete />,
   // };
+
   return (
     <div id="prescriptionTable">
       <h3 className="prescription_header">Prescription List</h3>
@@ -261,7 +262,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                   >
                     <div className="exerciseItems">
                       <p className="excerciseItemHeading">Exercise</p>
-                      {mainRow?.sessions[0].exercises?.map((item) => {
+                      {mainRow?.sessions[0]?.exercises?.map((item) => {
                         return <li key={item?.name}>{item?.name}</li>;
                       })}
                     </div>
@@ -270,7 +271,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                     align="left"
                     size="small"
                     className="table_header"
-                    style={{ width: '14%' }}
+                    style={{ maxWidth: '8rem' }}
                   >
                     <div>
                       <p>Duration</p>
@@ -292,7 +293,12 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                       )}
                     </div>
                   </TableCell>
-                  <TableCell align="left" size="small" className="table_header">
+                  <TableCell
+                    style={{ minWidth: '8rem', maxWidth: '8rem' }}
+                    align="left"
+                    size="small"
+                    className="table_header"
+                  >
                     <div>
                       <p>Assign by</p>
                       <div style={{ display: 'flex', marginTop: '7px', alignItems: 'center' }}>

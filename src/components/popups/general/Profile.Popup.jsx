@@ -134,7 +134,7 @@ export default function ProfilePopup({
                       }}
                       alt=""
                     />
-                    <span className="tooltiptext">Edit</span>
+                    <span className="tooltiptext">Edit Profile</span>
                   </div>
                 </label>
               </div>
