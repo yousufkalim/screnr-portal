@@ -97,6 +97,19 @@ function ExerciseDetails({
     }
   };
 
+  const jointNames = (bodyPart) => {
+    const formattedName = bodyPart
+      .split('_')
+      .filter((word) => word !== 'angle')
+      .map((word, index) => (
+        <React.Fragment key={word}>
+          {index > 0 && ' '}
+          {word.charAt(0).toUpperCase() + word.slice(1)}
+        </React.Fragment>
+      ));
+    return formattedName;
+  };
+
   const handleGetScore = (bodyPartName) => {
     const mergedArray = [].concat(
       ...Object.values(
@@ -110,14 +123,6 @@ function ExerciseDetails({
     const highest = Math.max(...mergedArray);
     const minVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.min_val;
     const maxVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.max_val;
-    // if (highest < minVal) {
-    //   return 0;
-    // }
-    // const lowDiff = lowest - minVal > 0 ? lowest - minVal : 0;
-    // const highDiff = maxVal - highest > 0 ? maxVal - highest : 0;
-    // const temp = ((lowDiff + highDiff) / (maxVal - minVal)) * 100;
-    // return Math.round(100 - temp);
-
     const intersectionMin = Math.max(lowest, minVal);
     const intersectionMax = Math.min(highest, maxVal);
     // Calculate the length of the intersection range
@@ -319,7 +324,7 @@ function ExerciseDetails({
           </div>
           {targetExercise?.rep?.rep_packet?.scores?.map((item) => (
             <ScoreCard
-              bodyPart={item?.name.replace(/[0-9_]+/g, ' ').trim()}
+              bodyPart={jointNames(item?.name)}
               scoreValue={handleGetScore(item.name)}
               key={item.name}
             />
