@@ -9,11 +9,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
-import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from 'react-router-dom';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { Typography } from '@mui/material';
 import { ReactComponent as VisibilityOff } from '../../../assets/icons/eyess.svg';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 // import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
@@ -24,7 +24,7 @@ import PhoneFormat from '../../../utils/PhoneFormat';
 import DeleteModal from '../../popups/general/Delete.Popup';
 
 export default function TableComponent({
-  setOpenAddStaffMember,
+  // setOpenAddStaffMember,
   staffMembers,
   getStaffMembers,
   loading,
@@ -64,20 +64,26 @@ export default function TableComponent({
           <FormControlLabel
             required
             control={
-              <Switch
-                size="small"
-                color="primary"
-                checked={checked}
-                onChange={handleChangeCheck}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
+              <>
+                <Typography sx={{ color: checked ? '' : '#136773', fontSize: '14px' }}>
+                  Active Users
+                </Typography>
+                <Switch
+                  size="small"
+                  color="default"
+                  checked={checked}
+                  onChange={handleChangeCheck}
+                  inputProps={{ 'aria-label': 'ant design' }}
+                />
+                <Typography sx={{ color: checked ? '#136773' : '', fontSize: '14px' }}>
+                  Inactive Users
+                </Typography>
+              </>
             }
-            label="Deactivated Users"
-            sx={{ color: '#136773' }}
           />
-          <Button className="dashboard_table_head_btn" onClick={() => setOpenAddStaffMember(true)}>
+          {/* <Button className="dashboard_table_head_btn" onClick={() => setOpenAddStaffMember(true)}>
             Invite member
-          </Button>
+          </Button> */}
         </div>
         <Table
           aria-label="simple table"
@@ -206,7 +212,7 @@ export default function TableComponent({
                           onClick={() => activateUser(row.id)}
                           className="action_btn"
                         >
-                          Active
+                          Activate
                         </button>
                       )}
                     </div>
