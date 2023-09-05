@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
 import { React, useState } from 'react';
 import { styled } from '@mui/material/styles';
@@ -11,7 +12,7 @@ import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from 'react-router-dom';
-import { FormControlLabel, Switch, Typography } from '@mui/material';
+// import { FormControlLabel, Switch, Typography } from '@mui/material';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 import EditClinician from '../../popups/clinician/EditClinician.Popup';
@@ -98,7 +99,7 @@ export default function ClinicianTable({
             <h1 className="clientTableHead">List of Clinicians</h1>
           </div>
 
-          <FormControlLabel
+          {/* <FormControlLabel
             required
             control={
               <>
@@ -117,7 +118,21 @@ export default function ClinicianTable({
                 </Typography>
               </>
             }
-          />
+          /> */}
+          <div className="button-container">
+            <button
+              className={checked ? 'button active' : 'button inactive'}
+              onClick={handleChangeCheck}
+            >
+              Active Users
+            </button>
+            <button
+              className={checked ? 'button inactive' : 'button active'}
+              onClick={handleChangeCheck}
+            >
+              Inactive Users
+            </button>
+          </div>
         </div>
 
         <Table

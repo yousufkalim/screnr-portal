@@ -1,10 +1,11 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
 import { React, useState, useEffect, useRef } from 'react';
 import { styled } from '@mui/material/styles';
-import { Table, Typography } from '@mui/material';
+import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import Switch from '@mui/material/Switch';
+// import Switch from '@mui/material/Switch';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
@@ -145,7 +146,7 @@ export default function AllClinicAdminTable({
             List of Clinic Admins <span className="countStyle">{clinicAdmins?.total?.count}</span>
           </h1>
           <div className="allTableTitle" style={{ flexGrow: '0.15' }}>
-            <FormControlLabel
+            {/* <FormControlLabel
               required
               control={
                 <>
@@ -164,7 +165,21 @@ export default function AllClinicAdminTable({
                   </Typography>
                 </>
               }
-            />
+            /> */}
+            <div className="button-container">
+              <button
+                className={checked ? 'button active' : 'button inactive'}
+                onClick={handleChangeCheck}
+              >
+                Active Users
+              </button>
+              <button
+                className={checked ? 'button inactive' : 'button active'}
+                onClick={handleChangeCheck}
+              >
+                Inactive Users
+              </button>
+            </div>
             <IconTextField value={search} handleChange={handleSearch} name="search" />
             {filter && (
               <div className="selectedFilter">
