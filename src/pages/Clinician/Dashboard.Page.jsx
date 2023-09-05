@@ -22,13 +22,18 @@ export default function ClinicianDashboard() {
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [patientsByClinician, setPatientsByClinician] = useState({});
   const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(true);
+
   // const openAddPatientModal = () => setOpenAddPatient(true);
+  const handleChangeCheck = () => {
+    setChecked(!checked);
+  };
 
   const getPatients = async () => {
     try {
       setLoading(true);
 
-      const { data } = await request('get', '/clinicians/dashboard');
+      const { data } = await request('get', `/clinicians/dashboard&&active=${checked}`);
       if (data) {
         setPatientsByClinician(data);
         setLoading(false);
@@ -37,6 +42,16 @@ export default function ClinicianDashboard() {
       setLoading(false);
       toast.error(error?.response?.data?.message);
     }
+  };
+  const activateUser = (userId) => {
+    request('patch', `/clinicians/activatePatient/${userId}`)
+      .then((res) => {
+        console.log(res);
+        getPatients();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const cardsData = [
@@ -77,7 +92,8 @@ export default function ClinicianDashboard() {
 
   useEffect(() => {
     getPatients();
-  }, [openAddPatient]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openAddPatient, checked]);
 
   return (
     <div className="clinician_dashboard_main_div">
@@ -115,6 +131,9 @@ export default function ClinicianDashboard() {
           patients={patientsByClinician}
           openAddPatient={openAddPatient}
           setOpenAddPatient={setOpenAddPatient}
+          checked={checked}
+          handleChangeCheck={handleChangeCheck}
+          activateUser={activateUser}
         />
       </div>
       <div className="clinician_dashboard_right_div">

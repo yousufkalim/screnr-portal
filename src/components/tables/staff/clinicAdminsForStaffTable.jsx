@@ -25,7 +25,14 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loading }) {
+export default function AllClinicAdminTable({
+  clinicAdmins,
+  getClinicAdmins,
+  loading,
+  checked,
+  handleChangeCheck,
+  activateUser,
+}) {
   const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
   const [clinicAdmin, setClinicAdmin] = useState({});
@@ -66,6 +73,22 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
       >
         <div className="allTableHead">
           <h1 className="clientTableHead">List of Clinic Admins</h1>
+          <div className="button-container">
+            <button
+              type="button"
+              className={checked ? 'button active' : 'button inactive'}
+              onClick={handleChangeCheck}
+            >
+              Active Users
+            </button>
+            <button
+              type="button"
+              className={checked ? 'button inactive' : 'button active'}
+              onClick={handleChangeCheck}
+            >
+              Inactive Users
+            </button>
+          </div>
         </div>
         <Table
           sx={{
@@ -165,13 +188,23 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
                   </TableCell>
 
                   <TableCell align="center">
-                    <Edit
-                      className="table_icons"
-                      onClick={() => {
-                        setOpenEditClinicAdmin(true);
-                        setClinicAdmin(row);
-                      }}
-                    />
+                    {checked ? (
+                      <Edit
+                        className="table_icons"
+                        onClick={() => {
+                          setOpenEditClinicAdmin(true);
+                          setClinicAdmin(row);
+                        }}
+                      />
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => activateUser(row.id)}
+                        className="action_btn"
+                      >
+                        Activate
+                      </button>
+                    )}
                   </TableCell>
                 </StyledTableRow>
               ))

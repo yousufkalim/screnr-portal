@@ -24,6 +24,9 @@ export default function PatientsByCliniciansTable({
   getPatients,
   openAddPatient,
   setOpenAddPatient,
+  checked,
+  handleChangeCheck,
+  activateUser,
 }) {
   const navigate = useNavigate();
   const [patient, setPatient] = useState('');
@@ -89,9 +92,28 @@ export default function PatientsByCliniciansTable({
       >
         <div style={{ justifyContent: 'space-between' }} className="iconAndHeading">
           <h1 className="clientTableHead">List of Patients</h1>
-          <span onClick={() => setOpenAddPatient(true)} className="invitePatientBtn">
-            Add new patient
-          </span>
+          <div style={{ display: 'flex', gap: '5px' }}>
+            <div className="button-container">
+              <button
+                type="button"
+                className={checked ? 'button active' : 'button inactive'}
+                onClick={handleChangeCheck}
+              >
+                Active Users
+              </button>
+              <button
+                type="button"
+                className={checked ? 'button inactive' : 'button active'}
+                onClick={handleChangeCheck}
+              >
+                Inactive Users
+              </button>
+            </div>
+
+            <span onClick={() => setOpenAddPatient(true)} className="invitePatientBtn">
+              Add new patient
+            </span>
+          </div>
         </div>
 
         <Table
@@ -170,6 +192,8 @@ export default function PatientsByCliniciansTable({
                   handleDeletePatient={handleDeletePatient}
                   setOpenEditPatient={setOpenEditPatient}
                   handlePatientProfile={handlePatientProfile}
+                  checked={checked}
+                  activateUser={activateUser}
                 />
               ))
             ) : (
