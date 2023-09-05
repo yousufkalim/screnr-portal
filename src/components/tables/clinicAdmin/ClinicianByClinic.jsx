@@ -34,6 +34,7 @@ export default function ClinicianTable({
   loading,
   handleChangeCheck,
   checked,
+  activateUser,
 }) {
   const navigate = useNavigate();
   const [clinician, setClinician] = useState({});
@@ -182,13 +183,23 @@ export default function ClinicianTable({
                   </TableCell>
 
                   <TableCell align="center">
-                    <Edit
-                      className="table_icons"
-                      onClick={() => {
-                        setClinician(row);
-                        setOpenEditClinican(true);
-                      }}
-                    />
+                    {checked ? (
+                      <Edit
+                        className="table_icons"
+                        onClick={() => {
+                          setClinician(row);
+                          setOpenEditClinican(true);
+                        }}
+                      />
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => activateUser(row.id)}
+                        className="action_btn"
+                      >
+                        Activate
+                      </button>
+                    )}
                   </TableCell>
                 </StyledTableRow>
               ))
