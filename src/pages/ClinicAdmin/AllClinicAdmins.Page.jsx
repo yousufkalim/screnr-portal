@@ -8,8 +8,7 @@ export default function ClinicAdmin() {
   const abortControllerRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [clinicAdmins, setClinicAdmins] = useState({});
-  const [checked, setChecked] = useState(false);
-
+  const [checked, setChecked] = useState(true);
   const getClinicAdmins = async (sort, search, page = 1) => {
     setIsLoading(true);
     try {
@@ -48,14 +47,14 @@ export default function ClinicAdmin() {
       toast.error(error?.response?.data?.message);
     }
   };
+
   const activateUser = (userId) => {
     request('patch', `    /staffs/activateClinic/${userId}`)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         getClinicAdmins();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(' ~ file: AllClinicAdmins.Page.jsx:57 ~ activateUser ~ err:', err);
       });
   };
   const handleChangeCheck = () => {

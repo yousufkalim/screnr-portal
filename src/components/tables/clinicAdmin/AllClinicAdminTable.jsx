@@ -345,7 +345,7 @@ export default function AllClinicAdminTable({
                   </TableCell>
 
                   <TableCell align="center">
-                    {!checked ? (
+                    {checked ? (
                       <>
                         <Edit
                           className="table_icons"
