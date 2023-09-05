@@ -16,15 +16,14 @@ export default function ClinicAdmin() {
   const [clinicAdmins, setClinicAdmins] = useState({});
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
-  const [deActivatedUsers, setDeactivatedUsers] = useState(true);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const getClinicAdmins = async (page = 1) => {
     setIsLoading(true);
     try {
       const { data } = await request(
         'get',
-        `/staff/getClinicsByStaffId/${id}?page=${page}&&active=${deActivatedUsers}`,
+        `/staff/getClinicsByStaffId/${id}?page=${page}&&active=${checked}`,
       );
       if (data) {
         setClinicAdmins(data);
@@ -39,7 +38,6 @@ export default function ClinicAdmin() {
   const handleDashboardNavClick = () => navigate('/admin/dashboard');
   const handleChangeCheck = () => {
     setChecked(!checked);
-    setDeactivatedUsers(!deActivatedUsers);
   };
 
   const getData = async () => {
@@ -55,7 +53,7 @@ export default function ClinicAdmin() {
     getClinicAdmins();
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deActivatedUsers]);
+  }, [checked]);
 
   return (
     <>

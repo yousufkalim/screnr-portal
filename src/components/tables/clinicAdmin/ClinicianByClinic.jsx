@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
 import { React, useState } from 'react';
 import { styled } from '@mui/material/styles';
@@ -10,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from 'react-router-dom';
+// import { FormControlLabel, Switch, Typography } from '@mui/material';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import EditClinician from '../../popups/clinician/EditClinician.Popup';
 import { getMediaUrl } from '../../../config';
@@ -26,11 +28,17 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function ClinicianTable({ clinicians, getClinicians, loading }) {
+export default function ClinicianTable({
+  clinicians,
+  getClinicians,
+  loading,
+  handleChangeCheck,
+  checked,
+}) {
   const navigate = useNavigate();
   const [clinician, setClinician] = useState({});
   const [openEditClinican, setOpenEditClinican] = useState(false);
-
+  console.log('checkedchecked', checked);
   return (
     <div
       style={{ position: 'unset', marginTop: '0' }}
@@ -47,8 +55,28 @@ export default function ClinicianTable({ clinicians, getClinicians, loading }) {
           width: '100%',
         }}
       >
-        <div className="iconAndHeading">
+        {/* <div className="iconAndHeading">
           <h1 className="clientTableHead">List of Clinicians</h1>
+        </div> */}
+        <div className="iconAndHeading" id="spaceBetween">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h1 className="clientTableHead">List of Clinicians</h1>
+          </div>
+
+          <div className="button-container">
+            <button
+              className={checked ? 'button active' : 'button inactive'}
+              onClick={handleChangeCheck}
+            >
+              Active Users
+            </button>
+            <button
+              className={checked ? 'button inactive' : 'button active'}
+              onClick={handleChangeCheck}
+            >
+              Inactive Users
+            </button>
+          </div>
         </div>
         <Table
           sx={{

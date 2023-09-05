@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
 import { React, useState } from 'react';
 import { styled } from '@mui/material/styles';
@@ -11,7 +12,7 @@ import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import { useNavigate } from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
-import { FormControlLabel, Switch, Typography } from '@mui/material';
+// import { FormControlLabel, Switch, Typography } from '@mui/material';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin.Popup';
@@ -71,11 +72,11 @@ export default function ClinicAdminTable({
             <h1 className="clientTableHead">List of Clinic Admins</h1>
           </div>
 
-          <FormControlLabel
+          {/* <FormControlLabel
             required
             control={
               <>
-                <Typography sx={{ color: checked ? '' : '#136773', fontSize: '14px' }}>
+                <Typography sx={{ color: checked ? '#919b9b' : '#136773', fontSize: '14px' }}>
                   Active Users
                 </Typography>
                 <Switch
@@ -85,12 +86,26 @@ export default function ClinicAdminTable({
                   onChange={handleChangeCheck}
                   inputProps={{ 'aria-label': 'ant design' }}
                 />
-                <Typography sx={{ color: checked ? '#136773' : '', fontSize: '14px' }}>
+                <Typography sx={{ color: checked ? '#136773' : '#919b9b', fontSize: '14px' }}>
                   Inactive Users
                 </Typography>
               </>
             }
-          />
+          /> */}
+          <div className="button-container">
+            <button
+              className={checked ? 'button active' : 'button inactive'}
+              onClick={handleChangeCheck}
+            >
+              Active Users
+            </button>
+            <button
+              className={checked ? 'button inactive' : 'button active'}
+              onClick={handleChangeCheck}
+            >
+              Inactive Users
+            </button>
+          </div>
         </div>
 
         <Table

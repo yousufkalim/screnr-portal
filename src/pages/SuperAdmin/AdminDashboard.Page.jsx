@@ -22,8 +22,7 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [staffMembers, setStaffMembers] = useState({});
   const [clinicsPerMonth, setClinicsPerMonth] = useState([]);
-  const [checked, setChecked] = useState(false);
-  const [deActivatedUsers, setDeactivatedUsers] = useState(true);
+  const [checked, setChecked] = useState(true);
   const [count, setCount] = useState({
     staffCount: 0,
     clinicianCount: 0,
@@ -34,10 +33,7 @@ export default function Dashboard() {
   const getStaffMembers = async (page = 1) => {
     setIsLoading(true);
     try {
-      const { data } = await request(
-        'get',
-        `/admins/dashboard?page=${page}&&active=${deActivatedUsers}`,
-      );
+      const { data } = await request('get', `/admins/dashboard?page=${page}&&active=${checked}`);
       if (data) {
         setStaffMembers(data);
         setCount({
@@ -70,12 +66,11 @@ export default function Dashboard() {
 
   const handleChangeCheck = () => {
     setChecked(!checked);
-    setDeactivatedUsers(!deActivatedUsers);
   };
   useEffect(() => {
     getStaffMembers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deActivatedUsers]);
+  }, [checked]);
 
   const cardsData = [
     {

@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
 import { useState } from 'react';
 import Table from '@mui/material/Table';
@@ -11,9 +12,6 @@ import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from 'react-router-dom';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import { Typography } from '@mui/material';
 import { ReactComponent as VisibilityOff } from '../../../assets/icons/eyess.svg';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 // import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
@@ -61,27 +59,20 @@ export default function TableComponent({
       >
         <div className="table_title">
           <h3 className="dashboard-table-txt">List of Staff Members</h3>
-          <FormControlLabel
-            required
-            control={
-              <>
-                <Typography sx={{ color: checked ? '' : '#136773', fontSize: '14px' }}>
-                  Active Users
-                </Typography>
-                <Switch
-                  size="small"
-                  color="default"
-                  checked={checked}
-                  onChange={handleChangeCheck}
-                  inputProps={{ 'aria-label': 'ant design' }}
-                />
-                <Typography sx={{ color: checked ? '#136773' : '', fontSize: '14px' }}>
-                  Inactive Users
-                </Typography>
-              </>
-            }
-          />
-
+          <div className="button-container">
+            <button
+              className={checked ? 'button active' : 'button inactive'}
+              onClick={handleChangeCheck}
+            >
+              Active Users
+            </button>
+            <button
+              className={checked ? 'button inactive' : 'button active'}
+              onClick={handleChangeCheck}
+            >
+              Inactive Users
+            </button>
+          </div>
           {/* <Button className="dashboard_table_head_btn" onClick={() => setOpenAddStaffMember(true)}>
             Invite member
           </Button> */}

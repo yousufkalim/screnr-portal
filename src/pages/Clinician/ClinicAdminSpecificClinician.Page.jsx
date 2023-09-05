@@ -23,8 +23,7 @@ export default function ClinicAdmin() {
   const [clinicianData, setClinicianData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [breadcrumb, setBreadcrumb] = useState('');
-  const [deActivatedUsers, setDeactivatedUsers] = useState(true);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
   const { id } = useParams();
 
   const getClinicians = async (page = 1) => {
@@ -32,7 +31,7 @@ export default function ClinicAdmin() {
     try {
       const { data } = await request(
         'get',
-        `/clinics/getCliniciansByClinicId/${id}?page=${page}&&active=${deActivatedUsers}`,
+        `/clinics/getCliniciansByClinicId/${id}?page=${page}&&active=${checked}`,
       );
       if (data) {
         setClinicians(data);
@@ -67,13 +66,12 @@ export default function ClinicAdmin() {
   // };
   const handleChangeCheck = () => {
     setChecked(!checked);
-    setDeactivatedUsers(!deActivatedUsers);
   };
   useEffect(() => {
     getClinicians();
     getClinicianData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deActivatedUsers]);
+  }, [checked]);
 
   const cardsData = [
     {

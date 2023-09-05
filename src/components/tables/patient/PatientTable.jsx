@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
 import { React, useState, Fragment } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -17,7 +18,13 @@ import DeleteModal from '../../popups/general/Delete.Popup';
 import request from '../../../request/index';
 import ClinicianPatientDetails from '../../patientDetailSection/clinicianPatientDetails';
 
-export default function PatientTable({ patients, getPatients, loading }) {
+export default function PatientTable({
+  patients,
+  getPatients,
+  loading,
+  handleChangeCheck,
+  checked,
+}) {
   const navigate = useNavigate();
   const [openEditPatient, setOpenEditPatient] = useState(false);
   const [patient, setPatient] = useState('');
@@ -105,11 +112,28 @@ export default function PatientTable({ patients, getPatients, loading }) {
           },
         }}
       >
-        <div className="iconAndHeading">
-          <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
-            <BackIcon />
+        <div className="iconAndHeading" id="spaceBetween">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
+              <BackIcon />
+            </div>
+            <h1 className="clientTableHead">List of Patients</h1>
           </div>
-          <h1 className="clientTableHead">List of Patients</h1>
+
+          <div className="button-container">
+            <button
+              className={checked ? 'button active' : 'button inactive'}
+              onClick={handleChangeCheck}
+            >
+              Active Users
+            </button>
+            <button
+              className={checked ? 'button inactive' : 'button active'}
+              onClick={handleChangeCheck}
+            >
+              Inactive Users
+            </button>
+          </div>
         </div>
 
         <Table
