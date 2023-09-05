@@ -38,7 +38,6 @@ export default function ClinicianTable({
   const navigate = useNavigate();
   const [clinician, setClinician] = useState({});
   const [openEditClinican, setOpenEditClinican] = useState(false);
-  console.log('checkedchecked', checked);
   return (
     <div
       style={{ position: 'unset', marginTop: '0' }}

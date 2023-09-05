@@ -20,11 +20,16 @@ export default function Dashboard() {
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
   const [clinicAdmins, setClinicAdmins] = useState({});
   const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(true);
+
+  const handleChangeCheck = () => {
+    setChecked(!checked);
+  };
 
   const getClinicAdmins = async () => {
     try {
       setLoading(true);
-      const { data } = await request('get', `/staff/dashboard`);
+      const { data } = await request('get', `/staff/dashboard&&active=${checked}`);
       if (data) {
         setClinicAdmins(data);
         setLoading(false);
@@ -39,9 +44,20 @@ export default function Dashboard() {
     setOpenAddClinicAdmin(true);
   };
 
+  const activateUser = (userId) => {
+    request('patch', `/staffs/activateClinic/${userId}`)
+      .then((res) => {
+        console.log(res);
+        getClinicAdmins();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     getClinicAdmins();
-  }, [openAddClinicAdmin]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openAddClinicAdmin, checked]);
 
   const cardsData = [
     {
@@ -113,6 +129,9 @@ export default function Dashboard() {
           clinicAdmins={clinicAdmins}
           getClinicAdmins={getClinicAdmins}
           loading={loading}
+          checked={checked}
+          handleChangeCheck={handleChangeCheck}
+          activateUser={activateUser}
         />
       </div>
       <div className="addBtn2">

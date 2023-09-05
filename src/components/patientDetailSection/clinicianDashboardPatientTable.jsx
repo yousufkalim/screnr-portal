@@ -69,8 +69,11 @@ function ClinicianDashboardPatientTable({
   handleDeletePatient,
   setOpenEditPatient,
   handlePatientProfile,
+  checked,
+  activateUser,
 }) {
   const [openMenu, setOpenMenu] = useState(false);
+
   const percentageOfGraph = (targetRow) => {
     // eslint-disable-next-line no-unused-expressions
     if (targetRow?.performance > 0 && targetRow?.performance <= 10) {
@@ -276,18 +279,26 @@ function ClinicianDashboardPatientTable({
               justifyContent: 'center',
             }}
           >
-            <VisibilityOff
-              // style={{ color: '#FAA017' }}
-              className="table_icons"
-              onClick={() => handleDeletePatient(row)}
-            />
-            <Edit
-              className="table_icons"
-              onClick={() => {
-                setOpenEditPatient(true);
-                setPatient(row);
-              }}
-            />
+            {checked ? (
+              <>
+                <VisibilityOff
+                  // style={{ color: '#FAA017' }}
+                  className="table_icons"
+                  onClick={() => handleDeletePatient(row)}
+                />
+                <Edit
+                  className="table_icons"
+                  onClick={() => {
+                    setOpenEditPatient(true);
+                    setPatient(row);
+                  }}
+                />
+              </>
+            ) : (
+              <button type="button" onClick={() => activateUser(row.id)} className="action_btn">
+                Activate
+              </button>
+            )}
 
             {/* <Profile className="table_icons" onClick={() => handlePatientProfile(row.id)} /> */}
           </TableCell>
