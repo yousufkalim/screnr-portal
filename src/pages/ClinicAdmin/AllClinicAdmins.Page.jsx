@@ -8,7 +8,7 @@ export default function ClinicAdmin() {
   const abortControllerRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [clinicAdmins, setClinicAdmins] = useState({});
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const getClinicAdmins = async (sort, search, page = 1) => {
     setIsLoading(true);
