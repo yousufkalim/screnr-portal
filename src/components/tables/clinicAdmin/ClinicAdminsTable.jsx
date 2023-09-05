@@ -36,6 +36,7 @@ export default function ClinicAdminTable({
   loading,
   handleChangeCheck,
   checked,
+  activateUser,
 }) {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
@@ -205,13 +206,23 @@ export default function ClinicAdminTable({
                   </TableCell>
 
                   <TableCell align="center">
-                    <Edit
-                      className="table_icons"
-                      onClick={() => {
-                        setOpenEditClinicAdmin(true);
-                        setClinicAdmin(row);
-                      }}
-                    />
+                    {checked ? (
+                      <Edit
+                        className="table_icons"
+                        onClick={() => {
+                          setOpenEditClinicAdmin(true);
+                          setClinicAdmin(row);
+                        }}
+                      />
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => activateUser(row.id)}
+                        className="action_btn"
+                      >
+                        Activate
+                      </button>
+                    )}
                   </TableCell>
                 </StyledTableRow>
               ))

@@ -67,6 +67,17 @@ export default function ClinicAdmin() {
   const handleChangeCheck = () => {
     setChecked(!checked);
   };
+
+  const activateUser = (userId) => {
+    request('patch', `/clinics/activateClinician/${userId}`)
+      .then(() => {
+        getClinicians();
+      })
+      .catch((err) => {
+        console.log(' ~ file: StaffSpecificClinicAdmin.Page.jsx:58 ~ activateUser ~ err:', err);
+      });
+  };
+
   useEffect(() => {
     getClinicians();
     getClinicianData();
@@ -147,6 +158,7 @@ export default function ClinicAdmin() {
               loading={isLoading}
               handleChangeCheck={handleChangeCheck}
               checked={checked}
+              activateUser={activateUser}
             />
           </div>
         </div>
