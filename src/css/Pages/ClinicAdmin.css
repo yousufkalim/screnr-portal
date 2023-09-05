@@ -141,7 +141,9 @@
   padding-left: 1%;
   padding-right: 2%;
 }
-
+#spaceBetween {
+  justify-content: space-between !important;
+}
 .clientTableHead {
   font-weight: 600;
   padding: 30px !important;

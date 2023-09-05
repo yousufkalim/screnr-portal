@@ -81,6 +81,7 @@ export default function TableComponent({
               </>
             }
           />
+
           {/* <Button className="dashboard_table_head_btn" onClick={() => setOpenAddStaffMember(true)}>
             Invite member
           </Button> */}

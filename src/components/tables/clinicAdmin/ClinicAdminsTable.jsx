@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import { useNavigate } from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
+import { FormControlLabel, Switch, Typography } from '@mui/material';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 import EditClinicAdmin from '../../popups/clinicAdmin/EditClinicAdmin.Popup';
@@ -27,7 +28,14 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinicAdmins, loading }) {
+export default function ClinicAdminTable({
+  staffAdminId,
+  clinicAdmins,
+  getClinicAdmins,
+  loading,
+  handleChangeCheck,
+  checked,
+}) {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [clinicAdmin, setClinicAdmin] = useState({});
@@ -55,12 +63,36 @@ export default function ClinicAdminTable({ staffAdminId, clinicAdmins, getClinic
           },
         }}
       >
-        <div className="iconAndHeading">
-          <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
-            <BackIcon />
+        <div className="iconAndHeading" id="spaceBetween">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
+              <BackIcon />
+            </div>
+            <h1 className="clientTableHead">List of Clinic Admins</h1>
           </div>
-          <h1 className="clientTableHead">List of Clinic Admins</h1>
+
+          <FormControlLabel
+            required
+            control={
+              <>
+                <Typography sx={{ color: checked ? '' : '#136773', fontSize: '14px' }}>
+                  Active Users
+                </Typography>
+                <Switch
+                  size="small"
+                  color="default"
+                  checked={checked}
+                  onChange={handleChangeCheck}
+                  inputProps={{ 'aria-label': 'ant design' }}
+                />
+                <Typography sx={{ color: checked ? '#136773' : '', fontSize: '14px' }}>
+                  Inactive Users
+                </Typography>
+              </>
+            }
+          />
         </div>
+
         <Table
           sx={{
             [`& .${tableCellClasses.root}`]: {
