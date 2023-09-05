@@ -32,6 +32,7 @@ export default function Patient() {
   const [bool, setBool] = useState(false);
   const [checked, setChecked] = useState(true);
   const getClinicName = (name) => setBreadcrumb(name);
+
   const getPatients = async (page = 1) => {
     try {
       setLoading(true);
@@ -48,6 +49,17 @@ export default function Patient() {
       toast.error(error?.response?.data?.message);
     }
   };
+
+  const activateUser = (userId) => {
+    request('patch', `/staffs/activateClinic/${userId}`)
+      .then(() => {
+        getPatients();
+      })
+      .catch((err) => {
+        console.log(' ~ file: StaffSpecificClinicAdmin.Page.jsx:58 ~ activateUser ~ err:', err);
+      });
+  };
+
   const handleChangeCheck = () => {
     setChecked(!checked);
   };
@@ -147,11 +159,12 @@ export default function Patient() {
           </div>
           <PatientTable
             patients={patients}
-            setOpenAddPatient={setOpenAddPatient}
-            getPatients={getPatients}
-            loading={loading}
-            handleChangeCheck={handleChangeCheck}
             checked={checked}
+            loading={loading}
+            getPatients={getPatients}
+            activateUser={activateUser}
+            handleChangeCheck={handleChangeCheck}
+            setOpenAddPatient={setOpenAddPatient}
           />
         </Grid>
         <div className="rightSide_div">

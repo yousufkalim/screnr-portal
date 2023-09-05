@@ -181,7 +181,7 @@ export default function TableComponent({
                   </TableCell>
                   <TableCell align="left">
                     <div className="table_action_div">
-                      {!checked ? (
+                      {checked ? (
                         <>
                           <Edit
                             className="table_icons"
