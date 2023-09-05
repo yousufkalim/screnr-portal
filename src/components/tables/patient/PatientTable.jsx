@@ -24,6 +24,7 @@ export default function PatientTable({
   loading,
   handleChangeCheck,
   checked,
+  activateUser,
 }) {
   const navigate = useNavigate();
   const [openEditPatient, setOpenEditPatient] = useState(false);
@@ -212,6 +213,8 @@ export default function PatientTable({
                   handleDeletePatient={handleDeletePatient}
                   handlePatientProfile={handlePatientProfile}
                   handleReportAndMsgCounter={handleReportAndMsgCounter}
+                  activateUser={activateUser}
+                  checked={checked}
                 />
               ))
             ) : (

@@ -71,6 +71,8 @@ function ClinicianPatientDetails({
   counter,
   handlePatientProfile,
   handleDeletePatient,
+  activateUser,
+  checked,
 }) {
   const [openMenu, setOpenMenu] = useState(false);
   const fullName = `${row.first_name} ${row.last_name}`;
@@ -228,14 +230,22 @@ function ClinicianPatientDetails({
               justifyContent: 'center',
             }}
           >
-            <VisibilityOff className="table_icons" onClick={() => handleDeletePatient(row)} />
-            <Edit
-              className="table_icons"
-              onClick={() => {
-                setOpenEditPatient(true);
-                setPatient(row);
-              }}
-            />
+            {checked ? (
+              <>
+                <VisibilityOff className="table_icons" onClick={() => handleDeletePatient(row)} />
+                <Edit
+                  className="table_icons"
+                  onClick={() => {
+                    setOpenEditPatient(true);
+                    setPatient(row);
+                  }}
+                />
+              </>
+            ) : (
+              <button type="button" onClick={() => activateUser(row.id)} className="action_btn">
+                Activate
+              </button>
+            )}
 
             {/* <Profile className="table_icons" onClick={() => handlePatientProfile(row.id)} /> */}
           </TableCell>
