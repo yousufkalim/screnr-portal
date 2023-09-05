@@ -53,7 +53,6 @@ export default function Dashboard() {
   };
 
   const activateUser = (userId) => {
-    console.log(userId, 'userId');
     request('patch', `/admins/activateStaff/${userId}`)
       .then((res) => {
         console.log(res);

@@ -8,14 +8,11 @@ export default function AllClinicians() {
   const [clinicians, setClinicians] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const abortControllerRef = useRef(null);
+  const [checked, setChecked] = useState(true);
 
-  useEffect(() => {
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
-  }, []);
+  const handleChangeCheck = () => {
+    setChecked(!checked);
+  };
 
   const getClinicians = async (sort, search, status, page = 1) => {
     if (abortControllerRef.current) {
@@ -36,6 +33,8 @@ export default function AllClinicians() {
       apiUrl += `&status=${status}`;
     }
     setIsLoading(true);
+    apiUrl += `&&active=${checked}`;
+
     try {
       const { data } = await request(
         'get',
@@ -56,9 +55,27 @@ export default function AllClinicians() {
     }
   };
 
+  const activateUser = (userId) => {
+    request('patch', `/clinics/activateClinician/${userId}`)
+      .then(() => {
+        getClinicians();
+      })
+      .catch((err) => {
+        console.log('file: AllClinicians.Page.jsx:63 ~ activateUser ~ err:', err);
+      });
+  };
+
   useEffect(() => {
     getClinicians();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked]);
+
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
   }, []);
 
   return (
@@ -68,6 +85,9 @@ export default function AllClinicians() {
           clinicians={clinicians}
           getClinicians={getClinicians}
           loading={isLoading}
+          checked={checked}
+          handleChangeCheck={handleChangeCheck}
+          activateUser={activateUser}
         />
       </Grid>
     </Grid>

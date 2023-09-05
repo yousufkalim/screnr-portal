@@ -1,11 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState, useEffect, useRef } from 'react';
 import { styled } from '@mui/material/styles';
-import { Table } from '@mui/material';
+import { Table, Typography } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-// import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+import Switch from '@mui/material/Switch';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
@@ -26,7 +25,6 @@ import AvatarComponent from '../../Avatar/Avatar.Component';
 import IconTextField from '../../CustomTextInput/CustomTextfield.Component';
 import { getMediaUrl } from '../../../config';
 import DeleteModal from '../../popups/general/Delete.Popup';
-// import { ReactComponent as Delete } from '../../../assets/components/Table/alert1.svg';
 
 const useStyles = makeStyles(() => ({
   radio: {
@@ -53,7 +51,14 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loading }) {
+export default function AllClinicAdminTable({
+  clinicAdmins,
+  getClinicAdmins,
+  loading,
+  activateUser,
+  checked,
+  handleChangeCheck,
+}) {
   const classes = useStyles();
   const click = useRef(null);
   const navigate = useNavigate();
@@ -139,8 +144,27 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
           <h1 className="clientTableHead">
             List of Clinic Admins <span className="countStyle">{clinicAdmins?.total?.count}</span>
           </h1>
-
           <div className="allTableTitle" style={{ flexGrow: '0.15' }}>
+            <FormControlLabel
+              required
+              control={
+                <>
+                  <Typography sx={{ color: checked ? '' : '#136773', fontSize: '12px' }}>
+                    Active Users
+                  </Typography>
+                  <Switch
+                    size="small"
+                    color="default"
+                    checked={checked}
+                    onChange={handleChangeCheck}
+                    inputProps={{ 'aria-label': 'ant design' }}
+                  />
+                  <Typography sx={{ color: checked ? '#136773' : '', fontSize: '12px' }}>
+                    Inactive Users
+                  </Typography>
+                </>
+              }
+            />
             <IconTextField value={search} handleChange={handleSearch} name="search" />
             {filter && (
               <div className="selectedFilter">
@@ -306,18 +330,30 @@ export default function AllClinicAdminTable({ clinicAdmins, getClinicAdmins, loa
                   </TableCell>
 
                   <TableCell align="center">
-                    <Edit
-                      className="table_icons"
-                      onClick={() => {
-                        setOpenEditClinicAdmin(true);
-                        setClinicAdmin(row);
-                      }}
-                    />
-                    <VisibilityOff
-                      className="table_icons"
-                      onClick={() => handleDeleteClinician(row)}
-                      style={{ marginLeft: '.5rem' }}
-                    />
+                    {!checked ? (
+                      <>
+                        <Edit
+                          className="table_icons"
+                          onClick={() => {
+                            setOpenEditClinicAdmin(true);
+                            setClinicAdmin(row);
+                          }}
+                        />
+                        <VisibilityOff
+                          className="table_icons"
+                          onClick={() => handleDeleteClinician(row)}
+                          style={{ marginLeft: '.5rem' }}
+                        />
+                      </>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => activateUser(row.id)}
+                        className="action_btn"
+                      >
+                        Activate
+                      </button>
+                    )}
                   </TableCell>
                 </StyledTableRow>
               ))

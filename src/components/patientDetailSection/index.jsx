@@ -69,6 +69,8 @@ function Index({
   handlePatientProfile,
   setOpenEditPatient,
   setEditPatient,
+  activateUser,
+  checked,
 }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [counter, setCounter] = useState({
@@ -289,14 +291,35 @@ function Index({
               justifyContent: 'center',
             }}
           >
-            <VisibilityOff className="table_icons" onClick={() => handleDeletePatient(row)} />
-            <Edit
-              className="table_icons"
-              onClick={() => {
-                setOpenEditPatient(true);
-                setEditPatient(row);
-              }}
-            />
+            {checked ? (
+              <>
+                <VisibilityOff className="table_icons" onClick={() => handleDeletePatient(row)} />
+                <Edit
+                  className="table_icons"
+                  onClick={() => {
+                    setOpenEditPatient(true);
+                    setEditPatient(row);
+                  }}
+                />
+
+                {/* <Edit
+                          className="table_icons"
+                          onClick={() => {
+                            setOpenEditClinician(true);
+                            setClinician(row);
+                          }}
+                        />
+                        <VisibilityOff
+                          className="table_icons"
+                          onClick={() => handleDeleteClinician(row)}
+                          style={{ marginLeft: '.5rem' }}
+                        /> */}
+              </>
+            ) : (
+              <button type="button" onClick={() => activateUser(row?.id)} className="action_btn">
+                Activate
+              </button>
+            )}
           </TableCell>
           <TableCell />
           {/* <TableCell>

@@ -26,6 +26,11 @@ export default function Patient() {
   const [sorting, setSorting] = useState({
     sortBy: '',
   });
+  const [checked, setChecked] = useState(true);
+
+  const handleChangeCheck = () => {
+    setChecked(!checked);
+  };
 
   const handleFilterAndSorting = async (item) => {
     const { filterType, clinicName, filterValueArray } = item || {};
@@ -68,7 +73,8 @@ export default function Patient() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const res = await request('put', apiUrl, bodyObject);
+      const url = `${apiUrl}&&active=${checked}`;
+      const res = await request('put', url, bodyObject);
       if (res?.data) {
         setPatients(res?.data);
       } else {
@@ -81,10 +87,20 @@ export default function Patient() {
     }
   };
 
+  const activateUser = (userId) => {
+    request('patch', `/clinics/activateClinician/${userId}`)
+      .then(() => {
+        fetchData();
+      })
+      .catch((err) => {
+        console.log(' file: AllPatients.Page.jsx:91 ~ activateUser ~ err:', err);
+      });
+  };
+
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [apiUrl, bodyObject]);
+  }, [apiUrl, bodyObject, checked]);
 
   const handleDynamicFilter = async () => {
     try {
@@ -122,6 +138,9 @@ export default function Patient() {
           diaganosisFilter={diaganosisFilter}
           setOpenAddPatient={setOpenAddPatient}
           handleFilterAndSorting={handleFilterAndSorting}
+          checked={checked}
+          activateUser={activateUser}
+          handleChangeCheck={handleChangeCheck}
         />
       </Grid>
       {openAddPatient && (
