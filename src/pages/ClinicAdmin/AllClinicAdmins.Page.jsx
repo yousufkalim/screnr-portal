@@ -9,6 +9,7 @@ export default function ClinicAdmin() {
   const [isLoading, setIsLoading] = useState(false);
   const [clinicAdmins, setClinicAdmins] = useState({});
   const [checked, setChecked] = useState(true);
+
   const getClinicAdmins = async (sort, search, page = 1) => {
     setIsLoading(true);
     try {
