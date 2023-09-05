@@ -188,7 +188,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
                       },
                     }}
                   >
-                    <FormControlLabel
+                    {/* <FormControlLabel
                       value="active"
                       control={
                         <Radio classes={{ root: classes.radio, checked: classes.checked }} />
@@ -201,7 +201,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
                         <Radio classes={{ root: classes.radio, checked: classes.checked }} />
                       }
                       label="Inactive"
-                    />
+                    /> */}
                   </RadioGroup>
                 </div>
 
@@ -234,7 +234,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Number of Patients"
                   />
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     value="patient-active"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Active Patients"
@@ -243,7 +243,7 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
                     value="patient-in-active"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}
                     label="Inactive Patients"
-                  />
+                  /> */}
                   <FormControlLabel
                     value="patient-error"
                     control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />}

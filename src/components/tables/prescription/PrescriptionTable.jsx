@@ -200,7 +200,6 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
   //   errored: <Error />,
   //   unchecked: <Incomplete />,
   // };
-
   return (
     <div id="prescriptionTable">
       <h3 className="prescription_header">Prescription List</h3>
@@ -395,25 +394,29 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                   <TableCell align="left" />
                   <TableCell align="left" />
                   <TableCell align="center">
-                    {isOpen[index] ? (
-                      <OpenArrow
-                        onClick={() => {
-                          toggleOpen(index);
-                        }}
-                        style={{
-                          cursor: 'pointer',
-                        }}
-                      />
+                    {mainRow.sessions.length > 0 ? (
+                      isOpen[index] ? (
+                        <OpenArrow
+                          onClick={() => {
+                            toggleOpen(index);
+                          }}
+                          style={{
+                            cursor: 'pointer',
+                          }}
+                        />
+                      ) : (
+                        <OpenArrow
+                          onClick={() => {
+                            toggleOpen(index);
+                          }}
+                          style={{
+                            transform: 'rotateX(180deg)',
+                            cursor: 'pointer',
+                          }}
+                        />
+                      )
                     ) : (
-                      <OpenArrow
-                        onClick={() => {
-                          toggleOpen(index);
-                        }}
-                        style={{
-                          transform: 'rotateX(180deg)',
-                          cursor: 'pointer',
-                        }}
-                      />
+                      ''
                     )}
                   </TableCell>
                   <TableCell align="left" />
