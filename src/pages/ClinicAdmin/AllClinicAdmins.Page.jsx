@@ -48,14 +48,14 @@ export default function ClinicAdmin() {
       toast.error(error?.response?.data?.message);
     }
   };
+
   const activateUser = (userId) => {
     request('patch', `    /staffs/activateClinic/${userId}`)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         getClinicAdmins();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(' ~ file: AllClinicAdmins.Page.jsx:57 ~ activateUser ~ err:', err);
       });
   };
   const handleChangeCheck = () => {
