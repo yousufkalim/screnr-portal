@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
 import { React, useState, useRef, useEffect } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -13,6 +14,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+// import Switch from '@mui/material/Switch';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { ReactComponent as Filter } from '../../../assets/icons/filtersIcon.svg';
@@ -49,6 +51,9 @@ export default function PatientTable({
   setFilter,
   sorting,
   setSorting,
+  checked,
+  activateUser,
+  handleChangeCheck,
 }) {
   const navigate = useNavigate();
   const [openEditPatient, setOpenEditPatient] = useState(false);
@@ -207,6 +212,40 @@ export default function PatientTable({
             className="allTableTitle"
             style={{ flexGrow: !isSafari ? '0.35' : 'none' }}
           >
+            {/* <FormControlLabel
+              required
+              control={
+                <>
+                  <Typography sx={{ color: checked ? '#136773' : '', fontSize: '12px' }}>
+                    Active Users
+                  </Typography>
+                  <Switch
+                    size="small"
+                    color="default"
+                    checked={!checked}
+                    onChange={handleChangeCheck}
+                    inputProps={{ 'aria-label': 'ant design' }}
+                  />
+                  <Typography sx={{ color: checked ? '' : '#136773', fontSize: '12px' }}>
+                    Inactive Users
+                  </Typography>
+                </>
+              }
+            /> */}
+            <div className="button-container">
+              <button
+                className={checked ? 'button active' : 'button inactive'}
+                onClick={handleChangeCheck}
+              >
+                Active Users
+              </button>
+              <button
+                className={checked ? 'button inactive' : 'button active'}
+                onClick={handleChangeCheck}
+              >
+                Inactive Users
+              </button>
+            </div>
             <IconTextField value={search} handleChange={handleSearch} name="search" />
 
             <Filter
@@ -370,7 +409,7 @@ export default function PatientTable({
                     },
                   }}
                 >
-                  <p className="filterHead "> Sort By</p>
+                  <p className="filterHead">Sort By</p>
 
                   <FormControlLabel
                     value="diagnosis"
@@ -488,6 +527,8 @@ export default function PatientTable({
                   handlePatientProfile={handlePatientProfile}
                   // handleReportAndMsgCounter={handleReportAndMsgCounter}
                   setEditPatient={setEditPatient}
+                  activateUser={activateUser}
+                  checked={checked}
                 />
               ))
             ) : (

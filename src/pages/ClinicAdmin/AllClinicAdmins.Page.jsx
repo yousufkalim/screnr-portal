@@ -1,13 +1,14 @@
 import { React, useState, useEffect, useRef } from 'react';
 import { Grid } from '@mui/material';
 import { toast } from 'react-toastify';
-import AllClinicAdminTable from '../../components/tables/clinicAdmin/AllClinicAdminTable';
 import request from '../../request';
+import AllClinicAdminTable from '../../components/tables/clinicAdmin/AllClinicAdminTable';
 
 export default function ClinicAdmin() {
   const abortControllerRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [clinicAdmins, setClinicAdmins] = useState({});
+  const [checked, setChecked] = useState(false);
 
   const getClinicAdmins = async (sort, search, page = 1) => {
     setIsLoading(true);
@@ -27,6 +28,8 @@ export default function ClinicAdmin() {
         apiUrl += `&search=${search}`;
       }
 
+      apiUrl += `&&active=${checked}`;
+
       const { data } = await request(
         'get',
         apiUrl,
@@ -45,11 +48,24 @@ export default function ClinicAdmin() {
       toast.error(error?.response?.data?.message);
     }
   };
+  const activateUser = (userId) => {
+    request('patch', `    /staffs/activateClinic/${userId}`)
+      .then((res) => {
+        console.log(res);
+        getClinicAdmins();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleChangeCheck = () => {
+    setChecked(!checked);
+  };
 
   useEffect(() => {
     getClinicAdmins();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [checked]);
 
   useEffect(() => {
     return () => {
@@ -66,6 +82,9 @@ export default function ClinicAdmin() {
           clinicAdmins={clinicAdmins}
           getClinicAdmins={getClinicAdmins}
           loading={isLoading}
+          activateUser={activateUser}
+          checked={checked}
+          handleChangeCheck={handleChangeCheck}
         />
       </Grid>
     </Grid>

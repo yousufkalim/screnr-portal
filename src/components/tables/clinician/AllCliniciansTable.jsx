@@ -1,9 +1,11 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
 import { React, useState, useRef, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+// import Switch from '@mui/material/Switch';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
@@ -52,7 +54,14 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function AllCliniciansTable({ clinicians, getClinicians, loading }) {
+export default function AllCliniciansTable({
+  clinicians,
+  getClinicians,
+  loading,
+  checked,
+  handleChangeCheck,
+  activateUser,
+}) {
   const [openEditClinician, setOpenEditClinician] = useState(false);
   const [clinician, setClinician] = useState({});
   const [filter, setFilter] = useState({
@@ -150,6 +159,40 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
           </h1>
 
           <div className="allTableTitle" style={{ flexGrow: '0.15' }}>
+            {/* <FormControlLabel
+              required
+              control={
+                <>
+                  <Typography sx={{ color: checked ? '#136773' : '', fontSize: '12px' }}>
+                    Active Users
+                  </Typography>
+                  <Switch
+                    size="small"
+                    color="default"
+                    checked={!checked}
+                    onChange={handleChangeCheck}
+                    inputProps={{ 'aria-label': 'ant design' }}
+                  />
+                  <Typography sx={{ color: checked ? '' : '#136773', fontSize: '12px' }}>
+                    Inactive Users
+                  </Typography>
+                </>
+              }
+            /> */}
+            <div className="button-container">
+              <button
+                className={checked ? 'button active' : 'button inactive'}
+                onClick={handleChangeCheck}
+              >
+                Active Users
+              </button>
+              <button
+                className={checked ? 'button inactive' : 'button active'}
+                onClick={handleChangeCheck}
+              >
+                Inactive Users
+              </button>
+            </div>
             <IconTextField value={search} handleChange={handleSearch} name="search" />
 
             <Filter
@@ -361,18 +404,30 @@ export default function AllCliniciansTable({ clinicians, getClinicians, loading 
                   </TableCell>
 
                   <TableCell align="center">
-                    <Edit
-                      className="table_icons"
-                      onClick={() => {
-                        setOpenEditClinician(true);
-                        setClinician(row);
-                      }}
-                    />
-                    <VisibilityOff
-                      className="table_icons"
-                      onClick={() => handleDeleteClinician(row)}
-                      style={{ marginLeft: '.5rem' }}
-                    />
+                    {checked ? (
+                      <>
+                        <Edit
+                          className="table_icons"
+                          onClick={() => {
+                            setOpenEditClinician(true);
+                            setClinician(row);
+                          }}
+                        />
+                        <VisibilityOff
+                          className="table_icons"
+                          onClick={() => handleDeleteClinician(row)}
+                          style={{ marginLeft: '.5rem' }}
+                        />
+                      </>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => activateUser(row.id)}
+                        className="action_btn"
+                      >
+                        Activate
+                      </button>
+                    )}
                   </TableCell>
                 </StyledTableRow>
               ))

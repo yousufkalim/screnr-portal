@@ -19,10 +19,13 @@ function IconTextField({ value, handleChange, disabled }) {
         },
       }}
       placeholder="Search"
+      type="text"
+      // autoComplete="new-password"
       value={value}
       onChange={handleChange}
       disabled={disabled}
       InputProps={{
+        autoComplete: 'new-password',
         endAdornment: (
           <InputAdornment position="end">
             <Search className="pointer" />

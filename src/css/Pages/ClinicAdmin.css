@@ -141,7 +141,44 @@
   padding-left: 1%;
   padding-right: 2%;
 }
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 175px;
+  /* margin: 20px; */
+  border-radius: 17px;
+  background-color: #b3b5b5;
+}
 
+.button {
+  flex: 1;
+  padding: 6px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 17px;
+  /* transition: 'background-color' 0.3s; */
+}
+
+.active {
+  background-color: #136773;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.inactive {
+  background-color: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 9px;
+  font-weight: 400;
+}
+#spaceBetween {
+  justify-content: space-between !important;
+}
 .clientTableHead {
   font-weight: 600;
   padding: 30px !important;
@@ -149,7 +186,10 @@
   font-size: 20px;
   color: #136773;
 }
-
+.pricing_btn_an {
+  background-color: transparent;
+  border-radius: 12px;
+}
 .invitePatientBtn {
   padding: 0px 15px 0px 15px;
   border: 2px solid #fba622;

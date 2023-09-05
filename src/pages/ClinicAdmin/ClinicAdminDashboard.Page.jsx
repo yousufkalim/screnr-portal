@@ -27,11 +27,11 @@ export default function ClinicAdminDashboard() {
   const [loading, setLoading] = useState(false);
   const [openAddClinican, setOpenAddClinican] = useState(false);
   const [clinicianByClinic, setClinicianByClinic] = useState({});
-
+  const [checked, setChecked] = useState(true);
   const getClinicians = useCallback(async () => {
     try {
       setLoading(true);
-      const { data } = await request('get', `/clinics/dashboard`);
+      const { data } = await request('get', `/clinics/dashboard&&active=${checked}`);
       if (data) {
         setClinicianByClinic(data);
         setLoading(false);
@@ -41,8 +41,11 @@ export default function ClinicAdminDashboard() {
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
-  }, []);
+  }, [checked]);
 
+  const handleChangeCheck = () => {
+    setChecked(!checked);
+  };
   const openAddPatientModal = () => {
     setOpenAddClinican(true);
     getClinicians();
@@ -132,7 +135,7 @@ export default function ClinicAdminDashboard() {
   useEffect(() => {
     getClinicians();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [checked]);
 
   return (
     <div className="clinician_dashboard_main_div">
@@ -154,6 +157,8 @@ export default function ClinicAdminDashboard() {
           clinicians={clinicianByClinic}
           getClinicians={getClinicians}
           loading={loading}
+          handleChangeCheck={handleChangeCheck}
+          checked={checked}
         />
       </div>
       <div className="clinician_dashboard_right_div">

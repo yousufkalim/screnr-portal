@@ -16,11 +16,15 @@ export default function ClinicAdmin() {
   const [clinicAdmins, setClinicAdmins] = useState({});
   const [openAddClinicAdmin, setOpenAddClinicAdmin] = useState(false);
   const [openEditStaffMember, setOpenEditStaffMember] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const getClinicAdmins = async (page = 1) => {
     setIsLoading(true);
     try {
-      const { data } = await request('get', `/staff/getClinicsByStaffId/${id}?page=${page}`);
+      const { data } = await request(
+        'get',
+        `/staff/getClinicsByStaffId/${id}?page=${page}&&active=${checked}`,
+      );
       if (data) {
         setClinicAdmins(data);
       }
@@ -32,6 +36,9 @@ export default function ClinicAdmin() {
   };
 
   const handleDashboardNavClick = () => navigate('/admin/dashboard');
+  const handleChangeCheck = () => {
+    setChecked(!checked);
+  };
 
   const getData = async () => {
     try {
@@ -46,7 +53,7 @@ export default function ClinicAdmin() {
     getClinicAdmins();
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [checked]);
 
   return (
     <>
@@ -83,6 +90,8 @@ export default function ClinicAdmin() {
               clinicAdmins={clinicAdmins}
               getClinicAdmins={getClinicAdmins}
               loading={isLoading}
+              handleChangeCheck={handleChangeCheck}
+              checked={checked}
             />
           </div>
         </div>

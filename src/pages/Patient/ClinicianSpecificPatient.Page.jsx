@@ -30,14 +30,14 @@ export default function Patient() {
   const [loading, setLoading] = useState(false);
   const [information, setInformation] = useState({});
   const [bool, setBool] = useState(false);
-
+  const [checked, setChecked] = useState(true);
   const getClinicName = (name) => setBreadcrumb(name);
   const getPatients = async (page = 1) => {
     try {
       setLoading(true);
       const { data } = await request(
         'get',
-        `/clinicians/getPatientsByClinicianId/${id}?page=${page}`,
+        `/clinicians/getPatientsByClinicianId/${id}?page=${page}&&active=${checked}`,
       );
       if (data) {
         setPatients(data);
@@ -48,7 +48,9 @@ export default function Patient() {
       toast.error(error?.response?.data?.message);
     }
   };
-
+  const handleChangeCheck = () => {
+    setChecked(!checked);
+  };
   const getClinicians = async () => {
     try {
       const { data } = await request('get', `/clinics/getClinician/${id}`);
@@ -92,7 +94,7 @@ export default function Patient() {
     getPatients();
     getClinicians();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [checked]);
 
   return (
     <div style={{ position: 'fixed' }} className="gridish">
@@ -148,6 +150,8 @@ export default function Patient() {
             setOpenAddPatient={setOpenAddPatient}
             getPatients={getPatients}
             loading={loading}
+            handleChangeCheck={handleChangeCheck}
+            checked={checked}
           />
         </Grid>
         <div className="rightSide_div">
