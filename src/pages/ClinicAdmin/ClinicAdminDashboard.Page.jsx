@@ -50,7 +50,16 @@ export default function ClinicAdminDashboard() {
     setOpenAddClinican(true);
     getClinicians();
   };
-
+  const activateUser = (userId) => {
+    request('patch', `/clinic/activateClinician/${userId}`)
+      .then((res) => {
+        console.log(res);
+        getClinicians();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const cardsData = [
     {
       icon: GreenIcon,
@@ -159,6 +168,7 @@ export default function ClinicAdminDashboard() {
           loading={loading}
           handleChangeCheck={handleChangeCheck}
           checked={checked}
+          activateUser={activateUser}
         />
       </div>
       <div className="clinician_dashboard_right_div">
