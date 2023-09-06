@@ -11,16 +11,38 @@ const index = ({
   handleNextImage,
   screenshots,
 }) => {
+  const sideName = screenshots[selectedImageIndex].split('_')[1];
+  const setName = screenshots[selectedImageIndex].split('_')[2];
+  const repName = screenshots[selectedImageIndex].split('_')[3].split('.')[0];
+
   const isFirstImage = selectedImageIndex === 0;
   const isLastImage = selectedImageIndex === screenshots.length - 1;
 
   return (
     <div className="screenshotReviewer-main-container">
-      <img
-        src={getMediaUrl(screenshots[selectedImageIndex])}
-        alt="Selected Image"
-        className="screenshotReviewer-image"
-      />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
+          Side : {sideName}
+        </span>
+        <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
+          Set no. : {setName}
+        </span>
+        <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
+          Rep no. : {repName}
+        </span>
+        <img
+          src={getMediaUrl(`${screenshots[selectedImageIndex]}`)}
+          alt="Selected Image"
+          className="screenshotReviewer-image"
+        />
+      </div>
+
       <div onClick={handleClose} className="screenshotReviewer-image-close-btn">
         &times;
       </div>

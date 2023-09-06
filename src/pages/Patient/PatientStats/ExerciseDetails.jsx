@@ -21,7 +21,7 @@ function ExerciseDetails({
   session,
   exercise,
   results,
-  exerciseDetails,
+  // exerciseDetails,
   loading,
   breadCrumb,
   sessionID,
@@ -33,6 +33,9 @@ function ExerciseDetails({
     rep: {},
     repCount: 1,
   });
+
+  const [scores, setScores] = useState([]);
+  console.log('🚀 ~ file: ExerciseDetails.jsx:38 ~ scores:', scores);
   const [toggleIcon, setToggleIcon] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
@@ -110,29 +113,29 @@ function ExerciseDetails({
     return formattedName;
   };
 
-  const handleGetScore = (bodyPartName) => {
-    const mergedArray = [].concat(
-      ...Object.values(
-        targetExercise?.rep?.rep_packet?.angles.find((item) => {
-          return item?.name === bodyPartName;
-        }).value,
-      ),
-    );
+  // const handleGetScore = (bodyPartName) => {
+  //   const mergedArray = [].concat(
+  //     ...Object.values(
+  //       targetExercise?.rep?.rep_packet?.angles.find((item) => {
+  //         return item?.name === bodyPartName;
+  //       }).value,
+  //     ),
+  //   );
 
-    const lowest = Math.min(...mergedArray);
-    const highest = Math.max(...mergedArray);
-    const minVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.min_val;
-    const maxVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.max_val;
-    const intersectionMin = Math.max(lowest, minVal);
-    const intersectionMax = Math.min(highest, maxVal);
-    // Calculate the length of the intersection range
-    const intersectionLength = Math.max(0, intersectionMax - intersectionMin);
-    // Calculate the length of the coverage range
-    const coverageRangeLength = highest - lowest;
-    // Calculate the coverage percentage
-    const coveragePercentage = (intersectionLength / coverageRangeLength) * 100;
-    return Math.round(coveragePercentage);
-  };
+  //   const lowest = Math.min(...mergedArray);
+  //   const highest = Math.max(...mergedArray);
+  //   const minVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.min_val;
+  //   const maxVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.max_val;
+  //   const intersectionMin = Math.max(lowest, minVal);
+  //   const intersectionMax = Math.min(highest, maxVal);
+  //   // Calculate the length of the intersection range
+  //   const intersectionLength = Math.max(0, intersectionMax - intersectionMin);
+  //   // Calculate the length of the coverage range
+  //   const coverageRangeLength = highest - lowest;
+  //   // Calculate the coverage percentage
+  //   const coveragePercentage = (intersectionLength / coverageRangeLength) * 100;
+  //   return Math.round(coveragePercentage);
+  // };
 
   const handleSelectedImage = (index) => {
     setSelectedImageIndex(index);
@@ -170,6 +173,7 @@ function ExerciseDetails({
       }));
     }
   }, [results]);
+
   const percentageOfGraph =
     targetExercise?.rep?.screnr_compliance > 0 && targetExercise?.rep?.screnr_compliance <= 10
       ? '#FF5151'
@@ -196,6 +200,21 @@ function ExerciseDetails({
       : targetExercise?.rep?.screnr_compliance > 90 && targetExercise?.rep?.screnr_compliance <= 95
       ? '#7EB45A'
       : '#669851';
+
+  const handleScoreFromData = () => {
+    const tempArray = [];
+    // eslint-disable-next-line no-unused-expressions
+    targetExercise?.rep?.angle_scores &&
+      Object?.entries(targetExercise?.rep?.angle_scores)?.map(([key, value]) =>
+        tempArray.push({ name: [key], score: value }),
+      );
+    setScores(tempArray);
+  };
+
+  useEffect(() => {
+    handleScoreFromData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [targetExercise]);
 
   return selectedImageIndex !== null ? (
     <ScreenShotViewer
@@ -289,7 +308,7 @@ function ExerciseDetails({
                 <CircularProgress
                   variant="determinate"
                   thickness="6"
-                  value={targetExercise?.rep?.screnr_compliance || 0}
+                  value={targetExercise?.rep?.screnr_performance || 0}
                   size={80}
                   sx={{
                     color: percentageOfGraph,
@@ -298,8 +317,8 @@ function ExerciseDetails({
 
                 <div className="graphData">
                   <p className="excercise_percent">
-                    {targetExercise?.rep?.screnr_compliance
-                      ? Math.round(targetExercise?.rep?.screnr_compliance)
+                    {targetExercise?.rep?.screnr_performance
+                      ? Math.round(targetExercise?.rep?.screnr_performance)
                       : 0}
                     %
                   </p>
@@ -322,11 +341,11 @@ function ExerciseDetails({
               </div> */}
             </div>
           </div>
-          {targetExercise?.rep?.rep_packet?.scores?.map((item) => (
+          {scores.map((item) => (
             <ScoreCard
-              bodyPart={jointNames(item?.name)}
-              scoreValue={handleGetScore(item.name)}
-              key={item.name}
+              bodyPart={jointNames(item?.name[0])}
+              scoreValue={item?.score}
+              key={item?.value}
             />
           ))}
         </div>
@@ -374,7 +393,7 @@ function ExerciseDetails({
       </Collapse>
 
       <div className="performanceGraphDiv">
-        <ExerciseTable feedback={targetExercise?.rep?.rep_packet?.feedback} loading={loading} />
+        <ExerciseTable feedback={targetExercise?.rep?.feedback_details} loading={loading} />
       </div>
     </div>
   );
