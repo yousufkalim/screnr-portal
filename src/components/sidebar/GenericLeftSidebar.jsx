@@ -12,6 +12,7 @@ import AvatarComponent from '../Avatar/Avatar.Component';
 import request from '../../request';
 import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
+import Chart from '../charts/patient/Chart.Component';
 
 export default function LeftSidebar({
   getClinicName,
@@ -22,7 +23,9 @@ export default function LeftSidebar({
   open,
   setInformation,
   bool,
+  activityLog,
 }) {
+  const { pathname } = window.location;
   const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
   const [info, setInfo] = useState({});
@@ -177,6 +180,11 @@ export default function LeftSidebar({
               Activity Log
             </p>
           </div>
+          {pathname === `/clinicians/${id}` && (
+            <div className="chartDiv">
+              <Chart logs={activityLog} />
+            </div>
+          )}
           {/* <p className="totalActivity">Total Activity</p> */}
           {/* <p className="hrsTxt">(129 Hrs)</p> */}
         </>
