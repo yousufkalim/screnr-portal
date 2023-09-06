@@ -100,7 +100,7 @@ export default function PatientTable({
           overflowX: 'hidden',
           boxShadow: '0',
           '@media (max-width: 1850px)': {
-            overflowX: 'scroll',
+            overflowX: 'auto',
             '&::-webkit-scrollbar': {
               height: '6px',
             },
