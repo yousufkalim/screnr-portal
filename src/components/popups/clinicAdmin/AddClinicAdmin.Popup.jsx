@@ -88,7 +88,7 @@ export default function AddClinicAdmin({
     setOpenAddClinicAdmin(false);
     setClinicAdmin({});
     setChecked(false);
-    setUserData({});
+    setUserData({ staff: staffAdminId });
   };
 
   // uploading img
