@@ -14,7 +14,7 @@ import StatsCard from '../../components/cards/StatsCard.Component';
 import PatientTable from '../../components/tables/patient/PatientTable';
 import AddNewPatient from '../../components/popups/patient/AddPatient.Popup';
 import EditClinician from '../../components/popups/clinician/EditClinician.Popup';
-import RightSidebar from '../../components/sidebar/patient/PatientListRightSidebar';
+// import RightSidebar from '../../components/sidebar/patient/PatientListRightSidebar';
 import request from '../../request';
 import Breadcrumbs from '../../components/BreadCrumbs/BreadCrumbs';
 
@@ -121,10 +121,11 @@ export default function Patient() {
             setOpen={setOpenEditClinician}
             setInformation={setInformation}
             bool={bool}
+            activityLog={activityLog}
           />
         </div>
 
-        <Grid className="bgClinicianTable" xl={7.5} lg={7}>
+        <Grid sx={{ width: '80%' }} className="bgClinicianTable" xl={7.5} lg={7}>
           {/* <div className="breadCrumb" style={{ display: 'flex' }}>
             <div
               className="navigationEntities"
@@ -167,9 +168,9 @@ export default function Patient() {
             setOpenAddPatient={setOpenAddPatient}
           />
         </Grid>
-        <div className="rightSide_div">
+        {/* <div className="rightSide_div">
           <RightSidebar logs={activityLog} />
-        </div>
+        </div> */}
         <div className="addBtn">
           <img
             src={addBtn}
