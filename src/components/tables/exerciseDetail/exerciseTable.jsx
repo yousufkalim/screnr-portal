@@ -21,6 +21,7 @@ const StyledTableRow = styled(TableRow)(() => ({
     borderBottom: '1px solid transparent',
   },
 }));
+
 function ExerciseTable({ loading, feedback }) {
   return (
     <div
@@ -87,39 +88,48 @@ function ExerciseTable({ loading, feedback }) {
                   />
                 </TableCell>
               </TableRow>
-            ) : feedback?.length > 0 ? (
-              feedback?.map((item) => (
-                <StyledTableRow key={item} className="tableRow">
-                  {/* <TableCell
-                    align="left"
-                    sx={{ display: 'flex', paddingTop: '12%', paddingLeft: '12%' }}
-                  >
-                    {item?.name.replace(/[0-9_]+/g, ' ').trim()}
-                  </TableCell> */}
-                  <TableCell align="left" className="table_cells" sx={{ paddingLeft: '2.2%' }}>
-                    {item?.value?.feedback ? item?.value?.feedback : 'N/A'}
+            ) : feedback ? (
+              Object?.values(feedback)?.length > 0 ? (
+                Object?.values(feedback)?.map((item) => (
+                  <StyledTableRow key={item} className="tableRow">
+                    {/* <TableCell
+                      align="left"
+                      sx={{ display: 'flex', paddingTop: '12%', paddingLeft: '12%' }}
+                    >
+                      {item?.name.replace(/[0-9_]+/g, ' ').trim()}
+                    </TableCell> */}
+                    <TableCell align="left" className="table_cells" sx={{ paddingLeft: '2.2%' }}>
+                      {item?.movement ? item?.movement : 'N/A'}
+                    </TableCell>
+                    <TableCell align="center" className="table_cells">
+                      {item?.failed_rule ? (
+                        <img
+                          src={Cross}
+                          alt=""
+                          style={{
+                            width: '1.5rem',
+                          }}
+                        />
+                      ) : (
+                        <img
+                          src={Tick}
+                          alt=""
+                          style={{
+                            width: '1.5rem',
+                          }}
+                        />
+                      )}
+                    </TableCell>
+                  </StyledTableRow>
+                ))
+              ) : (
+                <>
+                  <TableCell align="center" />
+                  <TableCell align="left" className="noDataTxt">
+                    No feedback found
                   </TableCell>
-                  <TableCell align="center" className="table_cells">
-                    {item?.value?.failed_rule ? (
-                      <img
-                        src={Cross}
-                        alt=""
-                        style={{
-                          width: '1.5rem',
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={Tick}
-                        alt=""
-                        style={{
-                          width: '1.5rem',
-                        }}
-                      />
-                    )}
-                  </TableCell>
-                </StyledTableRow>
-              ))
+                </>
+              )
             ) : (
               <>
                 <TableCell align="center" />

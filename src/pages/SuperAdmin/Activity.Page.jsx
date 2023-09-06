@@ -48,10 +48,11 @@ export default function Activity() {
       text: 'Last Logoff',
     },
   ];
-  console.log(information, 'information');
+
   const getClinicName = (name) => {
     setBreadcrumb(name);
   };
+
   const handleGetPatientData = async () => {
     await request('get', `/clinicians/getPatientDetail/${patientId}`)
       .then((res) => {
@@ -62,6 +63,7 @@ export default function Activity() {
         toast.error(error?.response?.data?.message);
       });
   };
+
   // const handleGetClinicianData = async () => {
   //   await request('get', `/clinics/getClinician/${information?.id}`)
   //     .then((res) => {
@@ -75,7 +77,6 @@ export default function Activity() {
     if (window.location.pathname === `/clinicians/${clinicianId}/activity`) {
       await request('get', `/logs/${clinicianId}`)
         .then((res) => {
-          console.log('🚀 ~ file: Activity.Page.jsx:65 ~ .then ~ res:', res);
           setActivityLog(res?.data);
         })
         .catch((error) => {

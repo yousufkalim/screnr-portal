@@ -16,6 +16,7 @@ export default function Patient() {
     filter_type: '',
     filter_value: '',
   });
+
   const [filter, setFilter] = useState({
     filterType: 'all',
     clinicNamefilter: '',
