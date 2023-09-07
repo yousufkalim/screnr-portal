@@ -256,8 +256,10 @@
 }
 
 .chartDiv {
-  width: 100%;
-  margin-top: 20px;
+  width: 85%;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #efeded;
 }
 
 @media only screen and (max-width: 1440px) {

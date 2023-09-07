@@ -6,8 +6,8 @@ import TableRow from '@mui/material/TableRow';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
-import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
-import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
+// import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
+// import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 import EditExerciseInfoPopup from '../../popups/prescription/EditExerciseInfo.Popup';
 import MenuBtn from '../../MenuBtn/menuBtn';
 
@@ -122,11 +122,6 @@ export default function AddPrescriptionTable({ prescription, setPrescription }) 
                 </TableCell>
                 <TableCell align="center" className="table_cells">
                   <div className="actionDiv" style={{ display: 'flex', alignItems: 'center' }}>
-                    {row?.type === 'motion' ? (
-                      <MotionCapture className="actionIcon" />
-                    ) : (
-                      <Program className="actionIcon" />
-                    )}
                     {capitalizeFirstLetterOfEachWord(row?.name)}
                   </div>
                 </TableCell>

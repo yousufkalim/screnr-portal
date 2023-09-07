@@ -10,9 +10,9 @@ import Typography from '@mui/material/Typography';
 import DatePicker from 'react-datepicker';
 import dropdown from '../../../assets/icons/dropdownOrange.svg';
 import { ReactComponent as ExpiryDate } from '../../../assets/icons/expiryDate.svg';
-import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
+// import { ReactComponent as MotionCapture } from '../../../assets/icons/motionCapture.svg';
 import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
-import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
+// import { ReactComponent as Program } from '../../../assets/icons/exProgram.svg';
 import { ReactComponent as List } from '../../../assets/icons/list.svg';
 import AddPrescriptionTable from '../../tables/prescription/AddPrescriptionTable';
 import AdjustRange from '../../popups/prescription/AdjustRange.Popup';
@@ -262,11 +262,11 @@ export default function AddPrescription({
               onClick={() => setExerciseType('motion')}
               role="presentation"
             >
-              <div className="image_div">
+              {/* <div className="image_div">
                 <MotionCapture
                   className={exerciseType === 'motion' ? 'iconClicked' : 'choiceIcon'}
                 />
-              </div>
+              </div> */}
               <p className="selectedOpt">Motion capture</p>
             </div>
             <div
@@ -274,9 +274,9 @@ export default function AddPrescription({
               onClick={() => setExerciseType('simple')}
               role="presentation"
             >
-              <div className="image_div">
+              {/* <div className="image_div">
                 <Program className={exerciseType === 'simple' ? 'iconClicked' : 'choiceIcon'} />
-              </div>
+              </div> */}
               <p className="selectedOpt">Custom Exercise</p>
             </div>
           </div>
