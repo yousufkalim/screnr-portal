@@ -69,7 +69,7 @@ export default function ClinicAdminTable({
             <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
               <BackIcon />
             </div>
-            <h1 className="clientTableHead">List of Clinic Adminsxx</h1>
+            <h1 className="clientTableHead">List of Clinic Admins</h1>
           </div>
 
           {/* <FormControlLabel

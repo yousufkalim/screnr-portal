@@ -39,7 +39,7 @@ export default function AddPatientPrescription() {
     body_part: '',
     sets: '',
     reps: '',
-    rest: '',
+    rest: '15s',
     instructions: '',
   });
   const [motionExerciseInfo, setMotionExerciseInfo] = useState({
@@ -48,12 +48,12 @@ export default function AddPatientPrescription() {
     body_part: '',
     sets: '',
     reps: '',
-    rest: '',
+    rest: '15s',
     instructions: '',
-    exercise: 'default',
+    exercise: '',
     screenshot: false,
   });
-
+  console.log({ motionExerciseInfo }, 'motionExerciseInfo');
   const handleMotionExerciseInfo = (name, value) => {
     setMotionExerciseInfo({ ...motionExerciseInfo, [name]: value });
   };
@@ -78,7 +78,7 @@ export default function AddPatientPrescription() {
       body_part: '',
       sets: '',
       reps: '',
-      rest: '',
+      rest: '15s',
       instructions: '',
     });
     setMotionExerciseInfo({
@@ -87,9 +87,9 @@ export default function AddPatientPrescription() {
       body_part: '',
       sets: '',
       reps: '',
-      rest: '',
+      rest: '15s',
       instructions: '',
-      exercise: {},
+      exercise: '',
       screenshot: false,
     });
   };
