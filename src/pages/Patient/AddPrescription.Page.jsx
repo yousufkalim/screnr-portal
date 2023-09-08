@@ -178,6 +178,7 @@ export default function AddPatientPrescription() {
           toast.success('Prescription added successfully');
         })
         .catch((error) => {
+          setDisableBtn(false);
           toast.error(error?.response?.data?.message);
         });
     } else {

@@ -46,12 +46,11 @@ export default function Dashboard() {
 
   const activateUser = (userId) => {
     request('patch', `/staffs/activateClinic/${userId}`)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         getClinicAdmins();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(' ~ file: StaffDashboard.Page.jsx:53 ~ activateUser ~ err:', err);
       });
   };
   useEffect(() => {

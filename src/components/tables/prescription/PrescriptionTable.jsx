@@ -261,8 +261,8 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                   >
                     <div className="exerciseItems">
                       <p className="excerciseItemHeading">Exercise</p>
-                      {mainRow?.sessions[0]?.exercises?.map((item) => {
-                        return <li key={item?.name}>{item?.name}</li>;
+                      {mainRow?.exercise_names?.map((item) => {
+                        return <li key={item}>{item}</li>;
                       })}
                     </div>
                   </TableCell>
