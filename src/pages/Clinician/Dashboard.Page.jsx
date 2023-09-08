@@ -9,8 +9,8 @@ import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/g
 import GreenStats from '../../assets/components/StatsCard/greenStats.svg';
 import { ReactComponent as YellowIcon } from '../../assets/components/StatsCard/yellowIcon.svg';
 import YellowStats from '../../assets/components/StatsCard/yellowStats.svg';
-import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
-import RedStats from '../../assets/components/StatsCard/redStats.svg';
+// import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
+// import RedStats from '../../assets/components/StatsCard/redStats.svg';
 import { ReactComponent as GrayIcon } from '../../assets/components/StatsCard/grayIcon.svg';
 import GrayStats from '../../assets/components/StatsCard/grayStats.svg';
 import request from '../../request';
@@ -74,12 +74,12 @@ export default function ClinicianDashboard() {
       icon2: GrayStats,
     },
 
-    {
-      icon: RedIcon,
-      amount: patientsByClinician?.count?.erroredActivePatient?.count || 0,
-      title: 'Patients with Errors',
-      icon2: RedStats,
-    },
+    // {
+    //   icon: RedIcon,
+    //   amount: patientsByClinician?.count?.erroredActivePatient?.count || 0,
+    //   title: 'Patients with Errors',
+    //   icon2: RedStats,
+    // },
   ];
 
   const addNewPatientPopup = openAddPatient && (

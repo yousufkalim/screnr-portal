@@ -156,7 +156,6 @@ export default function PatientTable({
                 className="table_head"
                 sx={{
                   width: '18%',
-                  '@media (max-width: 1600px)': { width: '34%' },
                 }}
               >
                 Name

@@ -133,10 +133,10 @@ export default function PatientsByCliniciansTable({
               <TableCell
                 align="left"
                 className="table_head"
-                sx={{
-                  width: '20%',
-                  '@media (max-width: 1600px)': { width: '34%' },
-                }}
+                // sx={{
+                //   width: '20%',
+                //   '@media (max-width: 1600px)': { width: '34%' },
+                // }}
               >
                 Name
               </TableCell>
@@ -147,7 +147,7 @@ export default function PatientsByCliniciansTable({
                 Prescription
               </TableCell>
               <TableCell className="table_head" align="center">
-                Completion
+                Date of Last Activity
               </TableCell>
               <TableCell className="table_head" align="center">
                 Performance
