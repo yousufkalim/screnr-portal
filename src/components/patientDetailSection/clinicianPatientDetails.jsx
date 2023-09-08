@@ -134,7 +134,7 @@ function ClinicianPatientDetails({
           }}
           onClick={() => handlePatientProfile(row.id)}
         >
-          {row.completion ? moment(row.completion).format('YYYY-MM-D') : '-'}
+          {row.completion ? moment(row.completion).format('MM/DD/YYYY') : '-'}
         </TableCell>
         <TableCell align="center" onClick={() => handlePatientProfile(row.id)}>
           <span className="linearProgress">{`${row?.performance ?? 0}%`}</span>

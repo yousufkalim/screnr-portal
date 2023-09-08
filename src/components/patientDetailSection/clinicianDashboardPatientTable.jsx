@@ -5,6 +5,7 @@ import TableRow from '@mui/material/TableRow';
 // import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import CircularProgress from '@mui/material/CircularProgress';
 import TableCell from '@mui/material/TableCell';
+import moment from 'moment';
 import { ReactComponent as VisibilityOff } from '../../assets/icons/eyess.svg';
 
 import { ReactComponent as Edit } from '../../assets/components/Table/alert.svg';
@@ -167,7 +168,7 @@ function ClinicianDashboardPatientTable({
           }}
           onClick={() => handlePatientProfile(row.id)}
         >
-          {Math.round(row.completion) ?? '-'}%
+          {row.completion ? moment(row.completion).format('MM/DD/YYYY') : '-'}
         </TableCell>
         <TableCell align="center" onClick={() => handlePatientProfile(row.id)}>
           {/* <span className="linearProgress">{`${row?.performance ?? 0}%`}</span>

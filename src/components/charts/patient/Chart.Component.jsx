@@ -61,8 +61,8 @@ export default function Chart({ logs }) {
       },
     ],
   };
-  const trackedHours = `${logs?.graph?.totalTracked.split(':')[0]} Hours`;
-  const trackedMMinutes = `${logs?.graph?.totalTracked.split(':')[1]} Minutes`;
+  const trackedHours = `${logs?.graph ? logs?.graph?.totalTracked.split(':')[0] : ''} Hours`;
+  const trackedMMinutes = `${logs?.graph ? logs?.graph?.totalTracked.split(':')[1] : ''} Minutes`;
   return (
     <div className="patientListChart">
       <div className="timeChartDiv">

@@ -12,6 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { TablePagination } from '@mui/material';
 import EditPatient from '../../popups/patient/EditPatient.Popup';
 import DeleteModal from '../../popups/general/Delete.Popup';
 import AddPatient from '../../popups/patient/AddPatient.Popup';
@@ -27,6 +28,8 @@ export default function PatientsByCliniciansTable({
   checked,
   handleChangeCheck,
   activateUser,
+  handleChangePage,
+  page,
 }) {
   const navigate = useNavigate();
   const [patient, setPatient] = useState('');
@@ -37,7 +40,6 @@ export default function PatientsByCliniciansTable({
     report: '',
     unReadMsg: '',
   });
-
   const handleReportAndMsgCounter = (patientId) => {
     request('get', `/clinicians/unreadMesasgeAndUncheckedReport/${patientId}`)
       .then((res) => {
@@ -133,10 +135,10 @@ export default function PatientsByCliniciansTable({
               <TableCell
                 align="left"
                 className="table_head"
-                sx={{
-                  width: '20%',
-                  '@media (max-width: 1600px)': { width: '34%' },
-                }}
+                // sx={{
+                //   width: '20%',
+                //   '@media (max-width: 1600px)': { width: '34%' },
+                // }}
               >
                 Name
               </TableCell>
@@ -147,7 +149,7 @@ export default function PatientsByCliniciansTable({
                 Prescription
               </TableCell>
               <TableCell className="table_head" align="center">
-                Completion
+                Date of Last Activity
               </TableCell>
               <TableCell className="table_head" align="center">
                 Performance
@@ -224,6 +226,15 @@ export default function PatientsByCliniciansTable({
           />
         )}
       </TableContainer>
+      <TablePagination
+        sx={{ color: '#919B9B' }}
+        component="div"
+        rowsPerPageOptions={[]}
+        count={patients?.total?.count || 0}
+        rowsPerPage={patients.limit || 10}
+        page={page}
+        onPageChange={handleChangePage}
+      />
     </div>
   );
 }

@@ -204,7 +204,7 @@ function Index({
           }}
           onClick={() => handlePatientProfile(row.id)}
         >
-          {row.completion ? moment(row.completion).format('YYYY-MM-D') : '-'}
+          {row.completion ? moment(row.completion).format('MM/DD/YYYY') : '-'}
         </TableCell>
 
         <TableCell align="center" onClick={() => handlePatientProfile(row.id)}>

@@ -9,8 +9,8 @@ import { ReactComponent as GreenIcon } from '../../assets/components/StatsCard/g
 import GreenStats from '../../assets/components/StatsCard/greenStats.svg';
 import { ReactComponent as YellowIcon } from '../../assets/components/StatsCard/yellowIcon.svg';
 import YellowStats from '../../assets/components/StatsCard/yellowStats.svg';
-import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
-import RedStats from '../../assets/components/StatsCard/redStats.svg';
+// import { ReactComponent as RedIcon } from '../../assets/components/StatsCard/redIcon.svg';
+// import RedStats from '../../assets/components/StatsCard/redStats.svg';
 import { ReactComponent as GrayIcon } from '../../assets/components/StatsCard/grayIcon.svg';
 import GrayStats from '../../assets/components/StatsCard/grayStats.svg';
 import request from '../../request';
@@ -23,6 +23,7 @@ export default function ClinicianDashboard() {
   const [patientsByClinician, setPatientsByClinician] = useState({});
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(true);
+  const [page, setPage] = useState(0);
 
   // const openAddPatientModal = () => setOpenAddPatient(true);
   const handleChangeCheck = () => {
@@ -33,7 +34,10 @@ export default function ClinicianDashboard() {
     try {
       setLoading(true);
 
-      const { data } = await request('get', `/clinicians/dashboard&&active=${checked}`);
+      const { data } = await request(
+        'get',
+        `/clinicians/dashboard/?page=${page}&&active=${checked}`,
+      );
       if (data) {
         setPatientsByClinician(data);
         setLoading(false);
@@ -42,6 +46,11 @@ export default function ClinicianDashboard() {
       setLoading(false);
       toast.error(error?.response?.data?.message);
     }
+  };
+
+  const handleChangePage = async (event, newPage) => {
+    await getPatients(newPage + 1);
+    setPage(newPage);
   };
   const activateUser = (userId) => {
     request('patch', `/clinicians/activatePatient/${userId}`)
@@ -74,12 +83,12 @@ export default function ClinicianDashboard() {
       icon2: GrayStats,
     },
 
-    {
-      icon: RedIcon,
-      amount: patientsByClinician?.count?.erroredActivePatient?.count || 0,
-      title: 'Patients with Errors',
-      icon2: RedStats,
-    },
+    // {
+    //   icon: RedIcon,
+    //   amount: patientsByClinician?.count?.erroredActivePatient?.count || 0,
+    //   title: 'Patients with Errors',
+    //   icon2: RedStats,
+    // },
   ];
 
   const addNewPatientPopup = openAddPatient && (
@@ -93,7 +102,7 @@ export default function ClinicianDashboard() {
   useEffect(() => {
     getPatients();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openAddPatient, checked]);
+  }, [checked]);
 
   return (
     <div className="clinician_dashboard_main_div">
@@ -134,6 +143,8 @@ export default function ClinicianDashboard() {
           checked={checked}
           handleChangeCheck={handleChangeCheck}
           activateUser={activateUser}
+          handleChangePage={handleChangePage}
+          page={page}
         />
       </div>
       <div className="clinician_dashboard_right_div">
