@@ -1,70 +1,32 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import { ReactComponent as Phone } from '../../assets/images/staffScreen/phone.svg';
 import { ReactComponent as Email } from '../../assets/images/staffScreen/email.svg';
 import { ReactComponent as Expiry } from '../../assets/images/staffScreen/expiryDate.svg';
 import { ReactComponent as Activity } from '../../assets/components/TimeCard/activity.svg';
 import edit from '../../assets/icons/sidebarEdit.svg';
 import AvatarComponent from '../Avatar/Avatar.Component';
-import request from '../../request';
+// import request from '../../request';
 import { getMediaUrl } from '../../config';
 import PhoneFormat from '../../utils/PhoneFormat';
 import Chart from '../charts/patient/Chart.Component';
 
-export default function LeftSidebar({
-  getClinicName,
-  id,
-  txt,
-  roleTxt,
-  setOpen,
-  open,
-  setInformation,
-  bool,
-  activityLog,
-}) {
+export default function LeftSidebar({ id, roleTxt, setOpen, open, activityLog, userData }) {
   const { pathname } = window.location;
   const navigate = useNavigate();
   const [activityClicked, setActivityClicked] = useState(false);
-  const [info, setInfo] = useState({});
-
-  const getData = async () => {
-    try {
-      const { data } = await request('get', `/${txt}/${id}`);
-      if (data) {
-        setInfo(data?.user);
-        if (txt.includes('clinics')) {
-          setInformation(data?.user);
-        }
-        if (txt.includes('staff')) {
-          getClinicName(`${data?.user?.userData?.clinic_name}`);
-        } else {
-          getClinicName(`${data?.user?.first_name} ${data?.user?.last_name}`);
-        }
-      }
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bool]);
-
-  const handleEditIconClick = () => {
-    setOpen(!open);
-  };
+  const handleEditIconClick = () => setOpen(!open);
 
   let result = '';
-  if (txt.includes('Clinic')) {
-    result = info?.userData?.clinic_name || '';
-  } else if (txt.includes('clinicians')) {
-    result = info?.userData?.clinic?.userData?.clinic_name || '';
-  } else if (txt.includes('Staff')) {
-    result = info?.id || '';
+  if (userData?.role === 'clinic') {
+    result = userData?.userData?.clinic_name || '';
+  } else if (userData?.role === 'clinician') {
+    result = userData?.userData?.clinic?.userData?.clinic_name || '';
+  } else if (userData?.role === 'staff') {
+    result = userData?.id || '';
   } else {
     result = '';
   }
@@ -83,9 +45,9 @@ export default function LeftSidebar({
                 accept=".png, .jpg, .jpeg"
                 // onChange={handleSelectedFile}
               />
-              {info?.profile_pic ? (
+              {userData?.profile_pic ? (
                 <img
-                  src={getMediaUrl(info?.profile_pic)}
+                  src={getMediaUrl(userData?.profile_pic)}
                   className="pointer"
                   id="selectedImg"
                   style={{
@@ -98,7 +60,7 @@ export default function LeftSidebar({
                 />
               ) : (
                 <AvatarComponent
-                  alt={`${info?.first_name ?? ''} ${info?.last_name ?? ''}`}
+                  alt={`${userData?.first_name ?? ''} ${userData?.last_name ?? ''}`}
                   className="sidebar_avatar"
                 />
               )}
@@ -121,22 +83,25 @@ export default function LeftSidebar({
         </div>
       </div>
       <div className="sideBarInfo">
-        <div className="user_name"> {`${info?.first_name ?? ''} ${info?.last_name ?? ''}`}</div>
-        <div className="staff_id" style={{ display: txt.includes('Clinician') ? 'none' : '' }}>
+        <div className="user_name">
+          {' '}
+          {`${userData?.first_name ?? ''} ${userData?.last_name ?? ''}`}
+        </div>
+        <div className="staff_id" style={{ display: userData?.role === 'clinician' ? 'none' : '' }}>
           {roleTxt}: <span className="staff_id_2">{result}</span>
         </div>
       </div>
       <div className="sidebarSubDiv">
         <div className="user_detail">
           <Phone className="spaceOnRight" />
-          {info?.phone_number ? PhoneFormat(info?.phone_number) : ''}
+          {userData?.phone_number ? PhoneFormat(userData?.phone_number) : ''}
         </div>
         <div className="user_detail">
           <Email className="spaceOnRight" />
-          <div className="xnewww"> {info?.email ?? ''}</div>
+          <div className="xnewww"> {userData?.email ?? ''}</div>
         </div>
       </div>
-      {info?.expiry_date ? (
+      {userData?.expiry_date ? (
         <div className="user_exp_detail">
           <span className="detail_expiry">
             <div className="image_div">
@@ -144,7 +109,7 @@ export default function LeftSidebar({
             </div>
             <p className="spaceRight">Expiration Date </p>
           </span>
-          <p className="spaceRight"> {moment(info?.expiry_date).format('MM-DD-YYYY')}</p>
+          <p className="spaceRight"> {moment(userData?.expiry_date).format('MM-DD-YYYY')}</p>
         </div>
       ) : (
         ''
@@ -156,7 +121,7 @@ export default function LeftSidebar({
             className="activityLeft"
             role="presentation"
             onClick={() => {
-              navigate(`/clinicians/${info?.id}/activity`);
+              navigate(`/clinicians/${userData?.id}/activity`);
               setActivityClicked(true);
             }}
           >
@@ -185,8 +150,6 @@ export default function LeftSidebar({
               <Chart logs={activityLog} />
             </div>
           )}
-          {/* <p className="totalActivity">Total Activity</p> */}
-          {/* <p className="hrsTxt">(129 Hrs)</p> */}
         </>
       ) : (
         ''

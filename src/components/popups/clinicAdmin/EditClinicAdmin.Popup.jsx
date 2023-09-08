@@ -65,8 +65,8 @@ export default function EditClinicAdmin({
   table,
   openEditClinicAdmin,
   setOpenEditClinicAdmin,
-  getClinicAdmins,
   clinicAdminDetails,
+  getClinicianData,
 }) {
   const outlinedInputStyles = useOutlinedInputStyles();
   const [checked, setChecked] = useState(false);
@@ -184,7 +184,7 @@ export default function EditClinicAdmin({
       if (data) {
         toast.success('Clinic Admin updated successfully');
         setOpenEditClinicAdmin(false);
-        getClinicAdmins();
+        getClinicianData();
         handleClose();
         setLoading(false);
       }
@@ -203,7 +203,7 @@ export default function EditClinicAdmin({
       .then(() => {
         toast.success('Clinic Admin Deactivated successfully');
         setOpenEditClinicAdmin(false);
-        getClinicAdmins();
+        getClinicianData();
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message);
