@@ -55,13 +55,10 @@ export default function ClinicAdminTable({
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '95%',
+          maxHeight: '88%',
           overflowX: 'hidden',
           boxShadow: '0',
           width: '73vw',
-          '@media (max-width: 1600px)': {
-            maxHeight: '92%',
-          },
         }}
       >
         <div className="iconAndHeading" id="spaceBetween">
