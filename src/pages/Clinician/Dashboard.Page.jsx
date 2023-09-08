@@ -102,7 +102,7 @@ export default function ClinicianDashboard() {
   useEffect(() => {
     getPatients();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openAddPatient, checked]);
+  }, [checked]);
 
   return (
     <div className="clinician_dashboard_main_div">
