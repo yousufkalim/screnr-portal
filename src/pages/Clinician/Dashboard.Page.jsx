@@ -23,6 +23,7 @@ export default function ClinicianDashboard() {
   const [patientsByClinician, setPatientsByClinician] = useState({});
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(true);
+  const [page, setPage] = useState(0);
 
   // const openAddPatientModal = () => setOpenAddPatient(true);
   const handleChangeCheck = () => {
@@ -33,7 +34,10 @@ export default function ClinicianDashboard() {
     try {
       setLoading(true);
 
-      const { data } = await request('get', `/clinicians/dashboard&&active=${checked}`);
+      const { data } = await request(
+        'get',
+        `/clinicians/dashboard/?page=${page}&&active=${checked}`,
+      );
       if (data) {
         setPatientsByClinician(data);
         setLoading(false);
@@ -42,6 +46,11 @@ export default function ClinicianDashboard() {
       setLoading(false);
       toast.error(error?.response?.data?.message);
     }
+  };
+
+  const handleChangePage = async (event, newPage) => {
+    await getPatients(newPage + 1);
+    setPage(newPage);
   };
   const activateUser = (userId) => {
     request('patch', `/clinicians/activatePatient/${userId}`)
@@ -134,6 +143,8 @@ export default function ClinicianDashboard() {
           checked={checked}
           handleChangeCheck={handleChangeCheck}
           activateUser={activateUser}
+          handleChangePage={handleChangePage}
+          page={page}
         />
       </div>
       <div className="clinician_dashboard_right_div">
