@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState, useEffect, useRef } from 'react';
 import { styled } from '@mui/material/styles';
-import { Table } from '@mui/material';
+import { Table, TablePagination } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -32,6 +32,8 @@ export default function AllClinicAdminTable({
   checked,
   handleChangeCheck,
   activateUser,
+  handleChangePage,
+  page,
 }) {
   const [openEditClinicAdmin, setOpenEditClinicAdmin] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
@@ -228,6 +230,15 @@ export default function AllClinicAdminTable({
           />
         )}
       </TableContainer>
+      <TablePagination
+        sx={{ color: '#919B9B' }}
+        component="div"
+        rowsPerPageOptions={[]}
+        count={clinicAdmins?.total?.count || 0}
+        rowsPerPage={clinicAdmins.limit || 10}
+        page={page}
+        onPageChange={handleChangePage}
+      />
     </div>
   );
 }

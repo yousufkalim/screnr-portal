@@ -12,6 +12,7 @@ import Paper from '@mui/material/Paper';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from 'react-router-dom';
 // import { FormControlLabel, Switch, Typography } from '@mui/material';
+import { TablePagination } from '@mui/material';
 import { ReactComponent as Edit } from '../../../assets/components/Table/alert.svg';
 import EditClinician from '../../popups/clinician/EditClinician.Popup';
 import { getMediaUrl } from '../../../config';
@@ -35,10 +36,13 @@ export default function ClinicianTable({
   handleChangeCheck,
   checked,
   activateUser,
+  page,
+  handleChangePage,
 }) {
   const navigate = useNavigate();
   const [clinician, setClinician] = useState({});
   const [openEditClinican, setOpenEditClinican] = useState(false);
+
   return (
     <div
       style={{ position: 'unset', marginTop: '0' }}
@@ -222,6 +226,15 @@ export default function ClinicianTable({
           />
         )}
       </TableContainer>
+      <TablePagination
+        sx={{ color: '#919B9B' }}
+        component="div"
+        rowsPerPageOptions={[]}
+        count={clinicians?.total?.count || 0}
+        rowsPerPage={clinicians.limit || 10}
+        page={page}
+        onPageChange={handleChangePage}
+      />
     </div>
   );
 }

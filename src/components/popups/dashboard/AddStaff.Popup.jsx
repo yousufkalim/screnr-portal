@@ -111,7 +111,6 @@ export default function AddStaffMember({
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     try {
       e.preventDefault();
       const staffMemberCopy = { ...staffMember };
@@ -133,6 +132,7 @@ export default function AddStaffMember({
       if (emailValidation(staffMemberCopy.email)) {
         return;
       }
+      setLoading(true);
       const { data } = await request('post', '/admins/addStaff', formData);
       if (data) {
         // setStaffMember({ ...staffMemberCopy, id: data?.id });
