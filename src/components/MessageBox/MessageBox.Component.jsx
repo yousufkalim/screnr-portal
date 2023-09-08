@@ -46,7 +46,6 @@ function MessageBox({
   lastKey,
   goBackToProfile,
 }) {
-  console.log('🚀 ~ file: MessageBox.Component.jsx:49 ~ patient:', patient);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [open, setOpen] = useState(false);

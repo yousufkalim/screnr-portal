@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useMemo } from 'react';
 import { Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -14,24 +14,18 @@ import StatsCard from '../../components/cards/StatsCard.Component';
 import PatientTable from '../../components/tables/patient/PatientTable';
 import AddNewPatient from '../../components/popups/patient/AddPatient.Popup';
 import EditClinician from '../../components/popups/clinician/EditClinician.Popup';
-// import RightSidebar from '../../components/sidebar/patient/PatientListRightSidebar';
 import request from '../../request';
 import Breadcrumbs from '../../components/BreadCrumbs/BreadCrumbs';
 
 export default function Patient() {
-  // const navigate = useNavigate();
   const { id } = useParams();
   const [openAddPatient, setOpenAddPatient] = useState(false);
   const [openEditClinician, setOpenEditClinician] = useState(false);
   const [patients, setPatients] = useState({});
-  const [breadcrumb, setBreadcrumb] = useState('');
   const [clinician, setClinician] = useState({});
   const [activityLog, setActivityLog] = useState({});
   const [loading, setLoading] = useState(false);
-  const [information, setInformation] = useState({});
-  const [bool, setBool] = useState(false);
   const [checked, setChecked] = useState(true);
-  const getClinicName = (name) => setBreadcrumb(name);
 
   const getPatients = async (page = 1) => {
     try {
@@ -63,6 +57,7 @@ export default function Patient() {
   const handleChangeCheck = () => {
     setChecked(!checked);
   };
+
   const getClinicians = async () => {
     try {
       const { data } = await request('get', `/clinics/getClinician/${id}`);
@@ -81,26 +76,29 @@ export default function Patient() {
     }
   };
 
-  const cardsData = [
-    {
-      icon: GreenIcon,
-      amount: patients?.count?.completedSession?.count || 0,
-      title: 'Completed Exercises',
-      icon2: GreenStats,
-    },
-    {
-      icon: RedIcon,
-      amount: patients?.count?.erroredActivePatient?.count || 0,
-      title: 'Patients with Errors',
-      icon2: RedStats,
-    },
-    {
-      icon: YellowIcon,
-      amount: patients?.count?.uncheckedSession?.count || 0,
-      title: 'Unchecked Exercises',
-      icon2: YellowStats,
-    },
-  ];
+  const memoizedCardsData = useMemo(
+    () => [
+      {
+        icon: GreenIcon,
+        amount: patients?.count?.completedSession?.count || 0,
+        title: 'Completed Exercises',
+        icon2: GreenStats,
+      },
+      {
+        icon: RedIcon,
+        amount: patients?.count?.erroredActivePatient?.count || 0,
+        title: 'Patients with Errors',
+        icon2: RedStats,
+      },
+      {
+        icon: YellowIcon,
+        amount: patients?.count?.uncheckedSession?.count || 0,
+        title: 'Unchecked Exercises',
+        icon2: YellowStats,
+      },
+    ],
+    [patients],
+  );
 
   useEffect(() => {
     getPatients();
@@ -114,39 +112,20 @@ export default function Patient() {
         <div className="sideBar_div">
           <Sidebar
             id={id}
-            txt="clinics/getClinician"
             roleTxt="Clinic"
-            getClinicName={getClinicName}
             open={openEditClinician}
             setOpen={setOpenEditClinician}
-            setInformation={setInformation}
-            bool={bool}
             activityLog={activityLog}
+            userData={clinician}
           />
         </div>
 
         <Grid sx={{ width: '80%' }} className="bgClinicianTable" xl={7.5} lg={7}>
-          {/* <div className="breadCrumb" style={{ display: 'flex' }}>
-            <div
-              className="navigationEntities"
-              onClick={handleDashboardNavClick}
-              aria-hidden="true"
-            >
-              Dashboard &gt;
-            </div>
-            <div className="navigationEntities" onClick={handleStaffNavClick} aria-hidden="true">
-              Staff &gt;
-            </div>
-            <div className="navigationEntities" onClick={handleClinicNavClick} aria-hidden="true">
-              {breadcrumb} &gt;
-            </div>
-            <div> Doctor &gt;</div>
-          </div> */}
-          <Breadcrumbs ClinicName={breadcrumb} />
+          <Breadcrumbs ClinicName={`${clinician?.first_name} ${clinician?.last_name}`} />
 
           <div className="patientScreenCardsDiv">
             <div style={{ marginBottom: '3%' }} className="cards_div_patient_pg">
-              {cardsData.map((item) => (
+              {memoizedCardsData?.map((item) => (
                 <StatsCard
                   key={item?.title}
                   Icon={item?.icon}
@@ -168,9 +147,6 @@ export default function Patient() {
             setOpenAddPatient={setOpenAddPatient}
           />
         </Grid>
-        {/* <div className="rightSide_div">
-          <RightSidebar logs={activityLog} />
-        </div> */}
         <div className="addBtn">
           <img
             src={addBtn}
@@ -185,7 +161,7 @@ export default function Patient() {
             getPatients={getPatients}
             openAddPatient={openAddPatient}
             setOpenAddPatient={setOpenAddPatient}
-            info={information}
+            info={clinician}
           />
         )}
       </div>
@@ -195,7 +171,6 @@ export default function Patient() {
         setOpenEditClinican={setOpenEditClinician}
         clinicianDetails={clinician}
         getClinicians={getClinicians}
-        setBool={setBool}
       />
     </div>
   );
