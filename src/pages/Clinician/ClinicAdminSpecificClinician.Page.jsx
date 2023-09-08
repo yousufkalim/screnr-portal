@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useMemo } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import addBtn from '../../assets/icons/addBtn.svg';
@@ -22,7 +22,6 @@ export default function ClinicAdmin() {
   const [clinicians, setClinicians] = useState({});
   const [clinicianData, setClinicianData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [breadcrumb, setBreadcrumb] = useState('');
   const [checked, setChecked] = useState(true);
   const { id } = useParams();
 
@@ -54,16 +53,6 @@ export default function ClinicAdmin() {
     }
   };
 
-  const getClinicName = (name) => {
-    setBreadcrumb(name);
-  };
-  // const handleDashboardNavClick = () => {
-  //   navigate('/admin/dashboard');
-  // };
-
-  // const handleStaffNavClick = () => {
-  //   window.history.back();
-  // };
   const handleChangeCheck = () => {
     setChecked(!checked);
   };
@@ -84,30 +73,33 @@ export default function ClinicAdmin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked]);
 
-  const cardsData = [
-    {
-      icon: TotalClinicians,
-      amount: clinicians?.count?.clinicianCount?.count || 0,
-      title: 'Total Clinicians',
-      icon2: Circle,
-      className: 'yellow_circle',
-      link: '',
-    },
-    {
-      icon: Clinician,
-      amount: clinicians?.count?.patient7Days?.count || 0,
-      title: 'New Patients (last 7 days)',
-      icon2: GreenCircle,
-      className: 'green_circle',
-    },
-    {
-      icon: Patients2,
-      amount: clinicians?.count?.patientCount?.count || 0,
-      title: 'Total Active Patients',
-      icon2: BlueCircle,
-      className: 'blue_circle',
-    },
-  ];
+  const memoizedCardsData = useMemo(
+    () => [
+      {
+        icon: TotalClinicians,
+        amount: clinicians?.count?.clinicianCount?.count || 0,
+        title: 'Total Clinicians',
+        icon2: Circle,
+        className: 'yellow_circle',
+        link: '',
+      },
+      {
+        icon: Clinician,
+        amount: clinicians?.count?.patient7Days?.count || 0,
+        title: 'New Patients (last 7 days)',
+        icon2: GreenCircle,
+        className: 'green_circle',
+      },
+      {
+        icon: Patients2,
+        amount: clinicians?.count?.patientCount?.count || 0,
+        title: 'Total Active Patients',
+        icon2: BlueCircle,
+        className: 'blue_circle',
+      },
+    ],
+    [clinicians],
+  );
 
   return (
     <>
@@ -117,9 +109,10 @@ export default function ClinicAdmin() {
             id={id}
             txt="staff/getClinic"
             roleTxt="Clinic"
-            getClinicName={getClinicName}
+            // getClinicName={getClinicName}
             setOpen={setOpenEditClinician}
             open={openEditClinician}
+            userData={clinicianData}
           />
         </div>
         <div style={{ width: '80%', marginLeft: 'auto' }} className="bgClinicianTable">
@@ -136,11 +129,11 @@ export default function ClinicAdmin() {
             </div>
             <div> {breadcrumb} Clinic &gt;</div>
           </div> */}
-          <Breadcrumbs ClinicName={breadcrumb} />
+          <Breadcrumbs ClinicName={clinicianData?.userData?.clinic_name} />
           <div className="main_div" style={{ background: 'rgb(246, 250, 251)', height: '85vh' }}>
             <div className="clinicianScreenCardsDiv">
               <div className="cards_div_clinician_pg">
-                {cardsData.map((item) => (
+                {memoizedCardsData?.map((item) => (
                   <CardWithIcon
                     Icon={item.icon}
                     amount={item.amount}
@@ -184,6 +177,7 @@ export default function ClinicAdmin() {
         openEditClinicAdmin={openEditClinician}
         setOpenEditClinicAdmin={setOpenEditClinician}
         clinicAdminDetails={clinicianData}
+        getClinicianData={getClinicianData}
       />
     </>
   );

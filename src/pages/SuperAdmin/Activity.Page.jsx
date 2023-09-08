@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import GenericSidebar from '../../components/sidebar/GenericLeftSidebar';
@@ -23,35 +23,33 @@ export default function Activity() {
   const [openEditClinicianModal, setOpenEditClinicianModal] = useState(false);
   const [breadcrumb, setBreadcrumb] = useState('');
   const [activityLog, setActivityLog] = useState({});
-  const [information, setInformation] = useState({});
-  const [bool, setBool] = useState(false);
+  const [clinician, setClinician] = useState({});
 
-  const cardsData = [
-    {
-      icon: Login,
-      time: activityLog?.lastLogin,
-      text: 'Last Login',
-    },
-    {
-      icon: LoginCount,
-      time: activityLog?.userSigninCount,
-      text: 'Login count',
-    },
-    {
-      icon: Clock,
-      time: activityLog?.loginHours,
-      text: 'Login Hours',
-    },
-    {
-      icon: Logoff,
-      time: activityLog?.lastLogout,
-      text: 'Last Logoff',
-    },
-  ];
-
-  const getClinicName = (name) => {
-    setBreadcrumb(name);
-  };
+  const memoizedCardsData = useMemo(
+    () => [
+      {
+        icon: Login,
+        time: activityLog?.lastLogin,
+        text: 'Last Login',
+      },
+      {
+        icon: LoginCount,
+        time: activityLog?.userSigninCount,
+        text: 'Login count',
+      },
+      {
+        icon: Clock,
+        time: activityLog?.loginHours,
+        text: 'Login Hours',
+      },
+      {
+        icon: Logoff,
+        time: activityLog?.lastLogout,
+        text: 'Last Logoff',
+      },
+    ],
+    [activityLog],
+  );
 
   const handleGetPatientData = async () => {
     await request('get', `/clinicians/getPatientDetail/${patientId}`)
@@ -93,6 +91,18 @@ export default function Activity() {
     }
   };
 
+  const getClinicians = async () => {
+    try {
+      const { data } = await request('get', `/clinics/getClinician/${clinicianId}`);
+      if (data) {
+        setClinician(data?.user);
+        setBreadcrumb(`${data?.user?.first_name} ${data?.user?.last_name}`);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   const EditPatientPopup = openEditPatientModal && (
     <EditPatient
       openEditPatient={openEditPatientModal}
@@ -103,10 +113,10 @@ export default function Activity() {
   );
   const EditClinicianPopup = openEditClinicianModal && (
     <EditClinician
-      clinicianDetails={information}
+      clinicianDetails={clinician}
       openEditClinican={openEditClinicianModal}
       setOpenEditClinican={setOpenEditClinicianModal}
-      setBool={setBool}
+      getClinicians={getClinicians}
     />
   );
   useEffect(() => {
@@ -114,6 +124,7 @@ export default function Activity() {
       handleGetPatientData();
     }
     handleGetActivityLog();
+    getClinicians();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -132,13 +143,10 @@ export default function Activity() {
           ) : (
             <GenericSidebar
               id={clinicianId}
-              txt="clinics/getClinician"
               roleTxt="Clinic"
-              getClinicName={getClinicName}
               setOpen={setOpenEditClinicianModal}
               open={openEditClinicianModal}
-              setInformation={setInformation}
-              bool={bool}
+              userData={clinician}
             />
           )}
         </div>
@@ -149,7 +157,7 @@ export default function Activity() {
           </div> */}
           <div className="patientScreenCardsDiv">
             <div className="cards_div_patient_pg">
-              {cardsData?.map((item) => (
+              {memoizedCardsData?.map((item) => (
                 <TimeCard
                   Icon={item.icon}
                   time={item.time}

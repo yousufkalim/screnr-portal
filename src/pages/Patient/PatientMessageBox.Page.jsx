@@ -1,13 +1,14 @@
-import { React, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import io from 'socket.io-client';
 import { toast } from 'react-toastify';
 import Sidebar from '../../components/sidebar/patient/PatientSidebar';
 import MessageBox from '../../components/MessageBox/MessageBox.Component';
 import request from '../../request/index';
 import EditPatient from '../../components/popups/patient/EditPatient.Popup';
-import SocketConnection from '../../helper/socket';
 import { Store } from '../../StoreContext';
 import Breadcrumbs from '../../components/BreadCrumbs/BreadCrumbs';
+import { socketURI } from '../../config';
 
 export default function PatientMessageBox() {
   const params = useParams();
@@ -19,87 +20,96 @@ export default function PatientMessageBox() {
   const [clinician, setClinician] = useState({});
   const [allMessages, setAllMessages] = useState([]);
   const [chatId, setChatId] = useState('');
-  const [openEditpatientModal, setOpenEditpatientModal] = useState(false);
-  const [lastKey, setLastKey] = useState({}); // for pagination
+  const [openEditPatientModal, setOpenEditPatientModal] = useState(false);
+  const [lastKey, setLastKey] = useState({});
   const [breadCrumb, setBreadCrumb] = useState('');
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    if (SocketConnection) {
-      SocketConnection.on(`message${clinicianId}`, (data) => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const newSocket = io(socketURI, {
+        extraHeaders: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      newSocket.on('connected', () => {
+        console.log('Socket connection successful');
+      });
+
+      setSocket(newSocket);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on(`message${clinicianId}`, (data) => {
         setAllMessages((prev) => [...prev, data]);
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [SocketConnection]);
+  }, [socket, clinicianId]);
 
   useEffect(() => {
-    if (SocketConnection && chatId) {
-      SocketConnection.emit('read', {
+    if (socket && chatId) {
+      const readMessage = {
         chat: chatId,
         sender: clinicianId,
         receiver: patientId,
-      });
-    }
+      };
 
-    return () => {
-      if (SocketConnection && chatId) {
-        SocketConnection.emit('read', {
-          chat: chatId,
-          sender: clinicianId,
-          receiver: patientId,
-        });
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chatId]);
+      socket.emit('read', readMessage);
+
+      return () => {
+        socket.emit('read', readMessage);
+      };
+    }
+  }, [socket, chatId, clinicianId, patientId]);
 
   const getPatientDataById = async () => {
-    await request('get', `/clinicians/getPatientDetail/${patientId}`)
-      .then((res) => {
-        setPatient(res?.data?.user);
-        setBreadCrumb(`${res?.data?.user?.first_name} ${res?.data?.user?.last_name}`);
-      })
-      .catch((error) => {
-        toast.error(error?.response?.data?.message);
-      });
+    try {
+      const response = await request('get', `/clinicians/getPatientDetail/${patientId}`);
+      const userData = response?.data?.user;
+
+      setPatient(userData);
+      setBreadCrumb(`${userData?.first_name} ${userData?.last_name}`);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   const getClinicianById = async () => {
-    if (user?.role === 'clinician') {
-      await request('get', `/auth/userDetails`)
-        .then((res) => {
-          setClinician(res?.data?.user);
-        })
-        .catch((error) => {
-          toast.error(error?.response?.data?.message);
-        });
-    } else {
-      await request('get', `/clinics/getClinician/${clinicianId}`)
-        .then((res) => {
-          setClinician(res?.data?.user);
-        })
-        .catch((error) => {
-          toast.error(error?.response?.data?.message);
-        });
+    try {
+      const response =
+        user?.role === 'clinician'
+          ? await request('get', `/auth/userDetails`)
+          : await request('get', `/clinics/getClinician/${clinicianId}`);
+
+      setClinician(response?.data?.user);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 
   const chat = async () => {
-    await request('get', `/messages/chatId/${patientId}/${clinicianId}`)
-      .then(async (chatIdRespose) => {
-        setChatId(chatIdRespose?.data?.chatId);
-        await request('get', `/messages/allMessages/${chatIdRespose?.data?.chatId}?limit=50`)
-          .then((allMessagesResponse) => {
-            setAllMessages(allMessagesResponse?.data?.messages.reverse());
-            setLastKey(allMessagesResponse?.data?.lastKey);
-          })
-          .catch((error) => {
-            toast.error(error?.response?.data?.message);
-          });
-      })
-      .catch((error) => {
-        toast.error(error?.response?.data?.message);
-      });
+    try {
+      const chatIdResponse = await request('get', `/messages/chatId/${patientId}/${clinicianId}`);
+      const chatIdData = chatIdResponse?.data?.chatId;
+
+      setChatId(chatIdData);
+
+      const allMessagesResponse = await request(
+        'get',
+        `/messages/allMessages/${chatIdData}?limit=50`,
+      );
+      const reversedMessages = allMessagesResponse?.data?.messages.reverse();
+
+      setAllMessages(reversedMessages);
+      setLastKey(allMessagesResponse?.data?.lastKey);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   useEffect(() => {
@@ -107,20 +117,11 @@ export default function PatientMessageBox() {
     getClinicianById();
     chat();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const EditPatientPopup = openEditpatientModal && (
-    <EditPatient
-      openEditPatient={openEditpatientModal}
-      setOpenEditPatient={setOpenEditpatientModal}
-      patientDetails={patient}
-      getPatients={getPatientDataById}
-    />
-  );
+  }, [patientId, clinicianId]);
 
   const handleSendMessage = (chatID, newMessage, patientID, clinicianID) => {
-    if (SocketConnection) {
-      SocketConnection.emit('message', {
+    if (socket) {
+      socket.emit('message', {
         chat: chatID,
         content: newMessage,
         receiver: patientID,
@@ -128,9 +129,19 @@ export default function PatientMessageBox() {
       });
     }
   };
+
   const goBackToProfile = () => {
     navigate(`/patients/${patientId}/prescription`);
   };
+
+  const EditPatientPopup = openEditPatientModal && (
+    <EditPatient
+      openEditPatient={openEditPatientModal}
+      setOpenEditPatient={setOpenEditPatientModal}
+      patientDetails={patient}
+      getPatients={getPatientDataById}
+    />
+  );
 
   return (
     <div style={{ position: 'fixed' }} className="gridish">
@@ -139,15 +150,12 @@ export default function PatientMessageBox() {
           patientId={patientId}
           patientData={patient}
           selectedClinician={clinicianId}
-          openEditpatientModal={openEditpatientModal}
-          setOpenEditpatientModal={setOpenEditpatientModal}
+          openEditPatientModal={openEditPatientModal}
+          setOpenEditPatientModal={setOpenEditPatientModal}
         />
       </div>
       <div className="bgMsg">
         <Breadcrumbs ClinicName={breadCrumb} />
-        {/* <div className="breadCrumb">
-          Dashboard &gt; Staff &gt; Clinic Admin &gt; Clinician &gt; Patient &gt; Messages &gt;
-        </div> */}
         <div className="bgAddPrescription">
           <MessageBox
             patient={patient}

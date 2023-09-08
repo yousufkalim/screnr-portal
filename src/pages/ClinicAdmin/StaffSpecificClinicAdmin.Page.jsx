@@ -36,9 +36,7 @@ export default function ClinicAdmin() {
   };
 
   const handleDashboardNavClick = () => navigate('/admin/dashboard');
-  const handleChangeCheck = () => {
-    setChecked(!checked);
-  };
+  const handleChangeCheck = () => setChecked(!checked);
 
   const getData = async () => {
     try {
@@ -55,7 +53,7 @@ export default function ClinicAdmin() {
         getClinicAdmins();
       })
       .catch((err) => {
-        console.log(' ~ file: StaffSpecificClinicAdmin.Page.jsx:58 ~ activateUser ~ err:', err);
+        console.log('~ file: StaffSpecificClinicAdmin.Page.jsx:58 ~ activateUser ~ err:', err);
       });
   };
 
@@ -75,6 +73,7 @@ export default function ClinicAdmin() {
             roleTxt="Staff Id"
             open={openEditStaffMember}
             setOpen={setOpenEditStaffMember}
+            userData={staffMember}
           />
         </div>
         <div className="bg">
