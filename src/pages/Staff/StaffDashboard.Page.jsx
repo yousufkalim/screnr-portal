@@ -21,6 +21,7 @@ export default function Dashboard() {
   const [clinicAdmins, setClinicAdmins] = useState({});
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(true);
+  const [page, setPage] = useState(0);
 
   const handleChangeCheck = () => {
     setChecked(!checked);
@@ -29,7 +30,7 @@ export default function Dashboard() {
   const getClinicAdmins = async () => {
     try {
       setLoading(true);
-      const { data } = await request('get', `/staff/dashboard&&active=${checked}`);
+      const { data } = await request('get', `/staff/dashboard/?page=${page}&&active=${checked}`);
       if (data) {
         setClinicAdmins(data);
         setLoading(false);
@@ -39,7 +40,10 @@ export default function Dashboard() {
       toast.error(error?.response?.data?.message);
     }
   };
-
+  const handleChangePage = async (event, newPage) => {
+    await getClinicAdmins(newPage + 1);
+    setPage(newPage);
+  };
   const openAddPatientModal = () => {
     setOpenAddClinicAdmin(true);
   };
@@ -131,6 +135,8 @@ export default function Dashboard() {
           checked={checked}
           handleChangeCheck={handleChangeCheck}
           activateUser={activateUser}
+          page={page}
+          handleChangePage={handleChangePage}
         />
       </div>
       <div className="addBtn2">
