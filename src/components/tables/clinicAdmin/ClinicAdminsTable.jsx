@@ -58,10 +58,9 @@ export default function ClinicAdminTable({
           maxHeight: '95%',
           overflowX: 'hidden',
           boxShadow: '0',
-          width: '77.8vw',
+          width: '73vw',
           '@media (max-width: 1600px)': {
             maxHeight: '92%',
-            width: '73vw',
           },
         }}
       >
@@ -70,7 +69,7 @@ export default function ClinicAdminTable({
             <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
               <BackIcon />
             </div>
-            <h1 className="clientTableHead">List of Clinic Admins</h1>
+            <h1 className="clientTableHead">List of Clinic Adminsxx</h1>
           </div>
 
           {/* <FormControlLabel
@@ -247,7 +246,7 @@ export default function ClinicAdminTable({
         )}
       </TableContainer>
       <TablePagination
-        sx={{ color: '#919B9B' }}
+        sx={{ width: '73vw', color: '#919B9B' }}
         component="div"
         rowsPerPageOptions={[]}
         count={clinicAdmins?.total?.count || 0}
