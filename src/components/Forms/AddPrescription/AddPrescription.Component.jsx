@@ -16,7 +16,7 @@ import { ReactComponent as BackIcon } from '../../../assets/icons/BackIcon.svg';
 import { ReactComponent as List } from '../../../assets/icons/list.svg';
 import AddPrescriptionTable from '../../tables/prescription/AddPrescriptionTable';
 import AdjustRange from '../../popups/prescription/AdjustRange.Popup';
-import { weeks, frequency, rest, bodyParts } from '../../../utils/data';
+import { weeks, frequency, bodyParts } from '../../../utils/data';
 
 const useOutlinedInputStyles = makeStyles({
   textarea: {
@@ -100,7 +100,6 @@ export default function AddPrescription({
     const capitalizedWords = words?.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
     return capitalizedWords?.join(' ');
   }
-
   return (
     <div className="addPrescription">
       <h3
@@ -374,7 +373,7 @@ export default function AddPrescription({
               <div className="sets_div">
                 <FormControl
                   sx={{
-                    width: '32%',
+                    width: '50%',
                     mr: 1.4,
                     '@media (max-width: 1440px)': {
                       width: '100%',
@@ -412,11 +411,10 @@ export default function AddPrescription({
                 </FormControl>
                 <FormControl
                   sx={{
-                    width: '32%',
+                    width: '50%',
                     mr: 1.4,
                     '@media (max-width: 1440px)': {
                       width: '100%',
-                      marginBottom: '24px',
                     },
                   }}
                   variant="outlined"
@@ -448,7 +446,8 @@ export default function AddPrescription({
                     }}
                   />
                 </FormControl>
-                <FormControl
+                {/* To Be Removed Permanently */}
+                {/* <FormControl
                   sx={{
                     width: '32%',
                     mr: 1.4,
@@ -498,7 +497,7 @@ export default function AddPrescription({
                       );
                     })}
                   </Select>
-                </FormControl>
+                </FormControl> */}
               </div>
               <FormControl sx={{ width: '100%', mt: 3, mb: 0 }} variant="outlined">
                 <TextareaAutosize
@@ -671,7 +670,7 @@ export default function AddPrescription({
               <div className="sets_div">
                 <FormControl
                   sx={{
-                    width: '32%',
+                    width: '50%',
                     mr: 1.4,
                     '@media (max-width: 1440px)': {
                       width: '100%',
@@ -709,11 +708,10 @@ export default function AddPrescription({
                 </FormControl>
                 <FormControl
                   sx={{
-                    width: '32%',
+                    width: '50%',
                     mr: 1.4,
                     '@media (max-width: 1440px)': {
                       width: '100%',
-                      marginBottom: '24px',
                     },
                   }}
                   variant="outlined"
@@ -745,7 +743,8 @@ export default function AddPrescription({
                     }}
                   />
                 </FormControl>
-                <FormControl
+                {/* To Be Removed Permanently */}
+                {/* <FormControl
                   sx={{
                     width: '32%',
                     mr: 1.4,
@@ -795,7 +794,7 @@ export default function AddPrescription({
                       );
                     })}
                   </Select>
-                </FormControl>
+                </FormControl> */}
               </div>
               <FormControl sx={{ width: '100%', mt: 3, mb: 0 }} variant="outlined">
                 <TextareaAutosize

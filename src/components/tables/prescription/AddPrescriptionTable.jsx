@@ -106,9 +106,10 @@ export default function AddPrescriptionTable({ prescription, setPrescription }) 
               <TableCell className="table_head" id="prescriptionTableHead" align="center">
                 Reps
               </TableCell>
-              <TableCell className="table_head" id="prescriptionTableHead" align="center">
+              {/* To Be Removed Permanently */}
+              {/* <TableCell className="table_head" id="prescriptionTableHead" align="center">
                 Rest
-              </TableCell>
+              </TableCell> */}
               <TableCell className="table_head" id="prescriptionTableHead" align="center">
                 Action
               </TableCell>
@@ -131,9 +132,10 @@ export default function AddPrescriptionTable({ prescription, setPrescription }) 
                 <TableCell align="center" className="prescription_table_cells">
                   {row?.reps}
                 </TableCell>
-                <TableCell align="center" className="prescription_table_cells">
+                {/* To Be Removed Permanently */}
+                {/* <TableCell align="center" className="prescription_table_cells">
                   {row?.rest}
-                </TableCell>
+                </TableCell> */}
                 <TableCell align="center" className="prescription_table_cells">
                   <MenuBtn
                     row={row}
