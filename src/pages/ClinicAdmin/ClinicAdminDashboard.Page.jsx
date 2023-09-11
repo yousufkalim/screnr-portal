@@ -50,7 +50,6 @@ export default function ClinicAdminDashboard() {
   };
   const openAddPatientModal = () => {
     setOpenAddClinican(true);
-    getClinicians();
   };
   const activateUser = (userId) => {
     request('patch', `/clinic/activateClinician/${userId}`)
