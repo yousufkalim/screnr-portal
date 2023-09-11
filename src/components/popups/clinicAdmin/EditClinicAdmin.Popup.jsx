@@ -287,7 +287,7 @@ export default function EditClinicAdmin({
                   value={userData.clinic_name}
                   onChange={handleUserDataChange}
                   inputProps={{
-                    maxLength: 20,
+                    maxLength: 50,
                   }}
                 />
               </FormControl>

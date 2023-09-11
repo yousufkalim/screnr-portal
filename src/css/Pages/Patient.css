@@ -3,7 +3,7 @@ a {
 }
 
 .patientScreenCardsDiv {
-  width: 97%;
+  width: 98%;
 }
 
 .navigationEntities {
@@ -22,8 +22,8 @@ a {
   flex-direction: row;
   text-align: left;
   justify-content: space-between;
-  margin-top: 4%;
-  margin-left: 3.2%;
+  margin-top: 1%;
+  margin-left: 1.5%;
   gap: 10px;
 }
 
