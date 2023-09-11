@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -35,7 +34,6 @@ function ExerciseDetails({
   });
 
   const [scores, setScores] = useState([]);
-  console.log('🚀 ~ file: ExerciseDetails.jsx:38 ~ scores:', scores);
   const [toggleIcon, setToggleIcon] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
@@ -105,7 +103,8 @@ function ExerciseDetails({
       .split('_')
       .filter((word) => word !== 'angle')
       .map((word, index) => (
-        <React.Fragment key={word}>
+        // eslint-disable-next-line react/no-array-index-key
+        <React.Fragment key={`${word}-${index}`}>
           {index > 0 && ' '}
           {word.charAt(0).toUpperCase() + word.slice(1)}
         </React.Fragment>
@@ -113,38 +112,16 @@ function ExerciseDetails({
     return formattedName;
   };
 
-  // const handleGetScore = (bodyPartName) => {
-  //   const mergedArray = [].concat(
-  //     ...Object.values(
-  //       targetExercise?.rep?.rep_packet?.angles.find((item) => {
-  //         return item?.name === bodyPartName;
-  //       }).value,
-  //     ),
-  //   );
-
-  //   const lowest = Math.min(...mergedArray);
-  //   const highest = Math.max(...mergedArray);
-  //   const minVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.min_val;
-  //   const maxVal = exerciseDetails.angles[bodyPartName.split('_')[0]][bodyPartName]?.max_val;
-  //   const intersectionMin = Math.max(lowest, minVal);
-  //   const intersectionMax = Math.min(highest, maxVal);
-  //   // Calculate the length of the intersection range
-  //   const intersectionLength = Math.max(0, intersectionMax - intersectionMin);
-  //   // Calculate the length of the coverage range
-  //   const coverageRangeLength = highest - lowest;
-  //   // Calculate the coverage percentage
-  //   const coveragePercentage = (intersectionLength / coverageRangeLength) * 100;
-  //   return Math.round(coveragePercentage);
-  // };
-
   const handleSelectedImage = (index) => {
     setSelectedImageIndex(index);
   };
 
   const handleNextImage = () => {
     setSelectedImageIndex((prevIndex) =>
+      // eslint-disable-next-line no-unsafe-optional-chaining
       prevIndex === exercise?.screenshots?.length - 1
-        ? exercise?.screenshots.length - 1
+        ? // eslint-disable-next-line no-unsafe-optional-chaining
+          exercise?.screenshots.length - 1
         : prevIndex + 1,
     );
   };
@@ -294,7 +271,13 @@ function ExerciseDetails({
           </div>
         </div>
         <div className="jointScoreHeading">
-          <p>Joint Score (Lateral View)</p>
+          <p
+            style={{
+              textTransform: 'capitalize',
+            }}
+          >
+            Joint Score ({targetExercise?.rep?.patient_facing} Lateral View)
+          </p>
         </div>
         <div className="jointScoreOuterDiv">
           <div className="score_Bar1">
@@ -342,11 +325,7 @@ function ExerciseDetails({
             </div>
           </div>
           {scores.map((item) => (
-            <ScoreCard
-              bodyPart={jointNames(item?.name[0])}
-              scoreValue={item?.score}
-              key={item?.value}
-            />
+            <ScoreCard bodyPart={jointNames(item?.name[0])} scoreValue={item?.score} key={item} />
           ))}
         </div>
       </div>

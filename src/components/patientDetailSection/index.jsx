@@ -239,7 +239,7 @@ function Index({
                 fontSize: '15px',
               }}
             >
-              {row?.performance ? Math.round(row?.performance) : 0}%
+              {row?.userData?.performance ? Math.round(row?.userData?.performance) : 0}%
             </div>
           </div>
         </TableCell>

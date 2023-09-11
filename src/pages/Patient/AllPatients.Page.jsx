@@ -71,10 +71,10 @@ export default function Patient() {
     }
   };
 
-  const fetchData = async () => {
+  const fetchData = async (page) => {
     try {
       setLoading(true);
-      const url = `${apiUrl}&&active=${checked}`;
+      const url = `${apiUrl}&page=${page || 1}&active=${checked}`;
       const res = await request('put', url, bodyObject);
       if (res?.data) {
         setPatients(res?.data);

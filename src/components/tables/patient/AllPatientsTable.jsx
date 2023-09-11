@@ -165,7 +165,7 @@ export default function PatientTable({
   };
 
   const handleChangePage = async (event, newPage) => {
-    await getPatients(filter.sortBy, search, filter.status, newPage + 1);
+    getPatients(newPage + 1);
     setPage(newPage);
   };
 
