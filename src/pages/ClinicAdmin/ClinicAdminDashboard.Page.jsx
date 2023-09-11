@@ -28,10 +28,12 @@ export default function ClinicAdminDashboard() {
   const [openAddClinican, setOpenAddClinican] = useState(false);
   const [clinicianByClinic, setClinicianByClinic] = useState({});
   const [checked, setChecked] = useState(true);
+  const [page, setPage] = useState(0);
+
   const getClinicians = useCallback(async () => {
     try {
       setLoading(true);
-      const { data } = await request('get', `/clinics/dashboard&&active=${checked}`);
+      const { data } = await request('get', `/clinics/dashboard/?page=${page}&&active=${checked}`);
       if (data) {
         setClinicianByClinic(data);
         setLoading(false);
@@ -41,7 +43,7 @@ export default function ClinicAdminDashboard() {
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
-  }, [checked]);
+  }, [checked, page]);
 
   const handleChangeCheck = () => {
     setChecked(!checked);
@@ -59,6 +61,10 @@ export default function ClinicAdminDashboard() {
       .catch((err) => {
         console.log(err);
       });
+  };
+  const handleChangePage = async (event, newPage) => {
+    await getClinicians(newPage + 1);
+    setPage(newPage);
   };
   const cardsData = [
     {
@@ -169,6 +175,8 @@ export default function ClinicAdminDashboard() {
           handleChangeCheck={handleChangeCheck}
           checked={checked}
           activateUser={activateUser}
+          handleChangePage={handleChangePage}
+          page={page}
         />
       </div>
       <div className="clinician_dashboard_right_div">
