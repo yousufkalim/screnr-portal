@@ -93,7 +93,7 @@ export default function PatientsByCliniciansTable({
         }}
       >
         <div style={{ justifyContent: 'space-between' }} className="iconAndHeading">
-          <h1 className="clientTableHead">List of Patients</h1>
+          <h1 className="clientTableHead">List Of Patients</h1>
           <div style={{ display: 'flex', gap: '5px' }}>
             <div className="button-container">
               <button
