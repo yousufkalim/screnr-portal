@@ -98,7 +98,11 @@ function ExerciseTable({ loading, feedback }) {
                     >
                       {item?.name.replace(/[0-9_]+/g, ' ').trim()}
                     </TableCell> */}
-                    <TableCell align="left" className="table_cells" sx={{ paddingLeft: '2.2%' }}>
+                    <TableCell
+                      align="left"
+                      className="table_cells"
+                      sx={{ paddingLeft: '2.2%', whiteSpace: 'pre' }}
+                    >
                       {item?.movement ? item?.movement : 'N/A'}
                     </TableCell>
                     <TableCell align="center" className="table_cells">

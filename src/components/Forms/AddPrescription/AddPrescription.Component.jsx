@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
-import { FormControl, TextareaAutosize, TextField } from '@mui/material';
+import { CircularProgress, FormControl, TextareaAutosize, TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
@@ -75,6 +75,7 @@ export default function AddPrescription({
   handleGeneratePrescription,
   disableBtn,
   goBackToProfile,
+  loading,
 }) {
   const outlinedInputStyles = useOutlinedInputStyles();
   const [openAdjustRange, setOpenAdjustRange] = useState(false);
@@ -838,6 +839,11 @@ export default function AddPrescription({
               className={validatingGeneratePrescription}
               onClick={() => handleGeneratePrescription()}
             >
+              {loading && (
+                <div style={{ height: 'inherit' }} className="progressContainer">
+                  <CircularProgress className="whiteCircularProgress" size={20} />
+                </div>
+              )}
               Generate Prescription
             </Button>
           </div>

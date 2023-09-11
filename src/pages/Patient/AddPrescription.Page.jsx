@@ -22,6 +22,7 @@ export default function AddPatientPrescription() {
   const [exerciseType, setExerciseType] = useState('motion');
   const [disableBtn, setDisableBtn] = useState(false);
   const [openExtendDate, setOpenExtendDate] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [breadcrumb, setBreadCrumb] = useState('');
   const [selectedStartDate, setSelectedStartDate] = useState('');
   const [prescription, setPrescription] = useState({
@@ -53,7 +54,6 @@ export default function AddPatientPrescription() {
     exercise: '',
     screenshot: false,
   });
-  console.log({ motionExerciseInfo }, 'motionExerciseInfo');
   const handleMotionExerciseInfo = (name, value) => {
     setMotionExerciseInfo({ ...motionExerciseInfo, [name]: value });
   };
@@ -170,19 +170,23 @@ export default function AddPatientPrescription() {
       prescription?.patient &&
       prescription?.start_date
     ) {
+      setLoading(true);
       await request('post', '/clinicians/prescriptions/createPrescription', prescription)
         .then(() => {
           setOpenGeneratePrescription(true);
           handlePrescriptionDetailsReset();
           setDisableBtn(false);
+          setLoading(false);
           toast.success('Prescription added successfully');
         })
         .catch((error) => {
           setDisableBtn(false);
+          setLoading(false);
           toast.error(error?.response?.data?.message);
         });
     } else {
       setDisableBtn(false);
+      setLoading(false);
       toast.error('Please fill all the fields');
     }
   };
@@ -294,6 +298,7 @@ export default function AddPatientPrescription() {
                 handlePrescriptionDetails={handlePrescriptionDetails}
                 handleGeneratePrescription={handleGeneratePrescription}
                 validatingGeneratePrescription={validatingGeneratePrescription}
+                loading={loading}
               />
             </div>
           </div>

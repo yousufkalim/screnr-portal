@@ -456,9 +456,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         }}
                       >
                         <TableCell align="center" className="prescription_head vertical_middle">
-                          {row.status === 'completed'
-                            ? moment(row?.date).format('MM/DD/YYYY')
-                            : '-'}
+                          {moment(row?.date).format('MM/DD/YYYY')}
                         </TableCell>
                         <TableCell align="center" className="prescription_head vertical_middle">
                           {row?.avg_performance ? (
