@@ -461,7 +461,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                             : '-'}
                         </TableCell>
                         <TableCell align="center" className="prescription_head vertical_middle">
-                          {row?.avg_score ? (
+                          {row?.avg_performance ? (
                             <div
                               style={{
                                 display: 'flex',
@@ -472,7 +472,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                               <CircularProgress
                                 variant="determinate"
                                 thickness="6"
-                                value={row?.avg_score}
+                                value={row?.avg_performance}
                                 size={60}
                                 sx={{
                                   color: percentageOfGraph(row),
@@ -487,7 +487,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                                   fontSize: '15px',
                                 }}
                               >
-                                {Math.round(row?.avg_score)}%
+                                {Math.round(row?.avg_performance)}%
                               </div>
                             </div>
                           ) : (
