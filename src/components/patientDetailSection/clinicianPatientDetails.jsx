@@ -137,25 +137,31 @@ function ClinicianPatientDetails({
           {row.completion ? moment(row.completion).format('MM/DD/YYYY') : '-'}
         </TableCell>
         <TableCell align="center" onClick={() => handlePatientProfile(row.id)}>
-          <span className="linearProgress">{`${row?.userData?.performance ?? 0}%`}</span>
-          {row?.userData?.performance <= 30 ? (
-            <RedLinearProgress
-              variant="determinate"
-              value={row?.userData?.performance}
-              thickness="40"
-            />
-          ) : row?.userData?.performance > 30 && row?.userData?.performance <= 79 ? (
-            <YellowLinearProgress
-              variant="determinate"
-              value={row?.userData?.performance}
-              thickness="40"
-            />
+          <span className="linearProgress">{`${
+            row?.userData?.performance ? Math.round(row?.userData?.performance) : 0
+          }%`}</span>
+          {row?.userData?.performance ? (
+            row?.userData?.performance <= 30 ? (
+              <RedLinearProgress
+                variant="determinate"
+                value={row?.userData?.performance}
+                thickness="40"
+              />
+            ) : row?.userData?.performance > 30 && row?.userData?.performance <= 79 ? (
+              <YellowLinearProgress
+                variant="determinate"
+                value={row?.userData?.performance}
+                thickness="40"
+              />
+            ) : (
+              <GreenLinearProgress
+                variant="determinate"
+                value={row?.userData?.performance}
+                thickness="40"
+              />
+            )
           ) : (
-            <GreenLinearProgress
-              variant="determinate"
-              value={row?.userData?.performance}
-              thickness="40"
-            />
+            ''
           )}
         </TableCell>
         <TableCell

@@ -183,10 +183,10 @@ function ClinicianDashboardPatientTable({
             <CircularProgress
               variant="determinate"
               thickness="6"
-              value={row?.performance || 0}
+              value={row?.userData?.performance || 0}
               size={70}
               sx={{
-                color: percentageOfGraph(row),
+                color: percentageOfGraph(row?.userData),
               }}
             />
             <div
