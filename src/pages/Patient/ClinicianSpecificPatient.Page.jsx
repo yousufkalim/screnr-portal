@@ -124,7 +124,7 @@ export default function Patient() {
           <Breadcrumbs ClinicName={`${clinician?.first_name} ${clinician?.last_name}`} />
 
           <div className="patientScreenCardsDiv">
-            <div style={{ marginBottom: '3%' }} className="cards_div_patient_pg">
+            <div style={{ marginBottom: '0.5%' }} className="cards_div_patient_pg">
               {memoizedCardsData?.map((item) => (
                 <StatsCard
                   key={item?.title}

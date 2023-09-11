@@ -4,6 +4,7 @@
   border-radius: 20px;
   width: 32%;
   overflow: hidden;
+  scale: 0.9;
 }
 
 .stats_card_main_div2 {

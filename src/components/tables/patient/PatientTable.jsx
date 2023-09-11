@@ -96,7 +96,7 @@ export default function PatientTable({
         component={Paper}
         sx={{
           borderRadius: '20px',
-          maxHeight: '77%',
+          maxHeight: '88%',
           overflowX: 'hidden',
           boxShadow: '0',
           '@media (max-width: 1850px)': {
