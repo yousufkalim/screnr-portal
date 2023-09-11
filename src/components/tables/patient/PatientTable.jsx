@@ -118,7 +118,7 @@ export default function PatientTable({
             <div className="BackIconDiv" onClick={handleBackIconClick} aria-hidden="true">
               <BackIcon />
             </div>
-            <h1 className="clientTableHead">List of Patients</h1>
+            <h1 className="clientTableHead">List Of Patients</h1>
           </div>
 
           <div className="button-container">

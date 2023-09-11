@@ -87,15 +87,16 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
         toast.error(error?.response?.data?.message);
       });
   };
-  const handleUpdateSessionStatus = (targetSessionId) => {
-    request('get', `/clinicians/sessions/addSessionStatus/${targetSessionId}`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const handleUpdateSessionStatus = (targetSessionId) => {
+  //   request('get', `/clinicians/sessions/addSessionStatus/${targetSessionId}`)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
   const handleSearchLogoClick = (sessionId) => {
     navigate(`/patients/${sessionId}/exercise/exerciseDetails`);
   };
@@ -452,7 +453,7 @@ export default function PrescriptionTable({ patientId, selectedClinicianId }) {
                         key={row?.id}
                         onClick={() => {
                           handleSearchLogoClick(row?.id);
-                          handleUpdateSessionStatus(row?.id);
+                          // handleUpdateSessionStatus(row?.id);
                         }}
                       >
                         <TableCell align="center" className="prescription_head vertical_middle">

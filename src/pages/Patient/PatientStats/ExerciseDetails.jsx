@@ -17,7 +17,7 @@ import { getMediaUrl } from '../../../config';
 import Breadcrumbs from '../../../components/BreadCrumbs/BreadCrumbs';
 
 function ExerciseDetails({
-  session,
+  // session,
   exercise,
   results,
   // exerciseDetails,
@@ -229,9 +229,7 @@ function ExerciseDetails({
               </p>
             </div>
           </div>
-          <div className="excerciseDay">
-            <p>{session?.name}</p>
-          </div>
+          <div className="excerciseDay">{/* <p>{session?.name}</p> */}</div>
         </div>
 
         <div className="excercise_name_heading">
