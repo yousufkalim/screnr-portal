@@ -499,7 +499,8 @@ export default function AddPrescription({
                   </Select>
                 </FormControl> */}
               </div>
-              <FormControl sx={{ width: '100%', mt: 3, mb: 0 }} variant="outlined">
+              {/* Zunaira said to remove the instructions field in motion exercise */}
+              {/* <FormControl sx={{ width: '100%', mt: 3, mb: 0 }} variant="outlined">
                 <TextareaAutosize
                   style={{
                     height: '132px',
@@ -514,7 +515,7 @@ export default function AddPrescription({
                     handleMotionExerciseInfo(e.target.name, e.target.value);
                   }}
                 />
-              </FormControl>
+              </FormControl> */}
               <div className="prescriptionBtns" style={{ marginTop: '1rem' }}>
                 <div className="prescriptions_btns">
                   {/* <Button className="thresholdsBtn" onClick={() => setOpenAdjustRange(true)}>
@@ -806,9 +807,9 @@ export default function AddPrescription({
                   className={outlinedInputStyles.textarea}
                   placeholder="Special instruction"
                   name="instructions"
-                  value={motionExerciseInfo?.instructions}
+                  value={simpleExerciseInfo?.instructions}
                   onChange={(e) => {
-                    handleMotionExerciseInfo(e.target.name, e.target.value);
+                    handleSimpleExerciseInfo(e.target.name, e.target.value);
                   }}
                 />
               </FormControl>

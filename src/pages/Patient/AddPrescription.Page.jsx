@@ -49,11 +49,10 @@ export default function AddPatientPrescription() {
     sets: '',
     reps: '',
     rest: '15s',
-    instructions: '',
+    // instructions: '', /* Zunaira said to remove the instructions field in motion exercise */
     exercise: '',
     screenshot: false,
   });
-  console.log({ motionExerciseInfo }, 'motionExerciseInfo');
   const handleMotionExerciseInfo = (name, value) => {
     setMotionExerciseInfo({ ...motionExerciseInfo, [name]: value });
   };
